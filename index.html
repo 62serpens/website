@@ -3,101 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>62serpens</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000000'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%23ffffff' font-family='VT323, monospace'>62</text></svg>">
+    <title>62serpens - WELCOME 2 DA ZONE</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-
         body {
-            background-color: #000000;
+            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff); /* 1: Gradient overlay */
             color: #ffffff;
-            font-family: 'Great Vibes', cursive;
+            font-family: 'Comic Sans MS', cursive;
             margin: 0;
-            padding: 0;
+            padding: 10px;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow-x: hidden;
+            animation: bgPulse 5s infinite alternate; /* 2: Pulsing background */
+        }
+
+        @keyframes bgPulse {
+            0% { background-color: #000; }
+            100% { background-color: #333; }
         }
 
         .content {
-            text-align: center;
-            padding: 50px;
+            background: rgba(0, 0, 0, 0.9); /* 3: Darker overlay */
+            padding: 15px;
+            border: 4px double #00ff00; /* 4: Double green border */
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            position: relative;
+            box-shadow: 0 0 20px #ff00ff; /* 5: Pink glow */
+            animation: shake 0.1s infinite; /* 6: Shaky effect */
         }
 
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(2px); }
+            100% { transform: translateX(-2px); }
+        }
+
+        /* Top graphic - pixel snake */
+        .graphic-top {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff0000, #00ffff); /* 7: Red to cyan */
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 3px dotted #ffff00; /* 8: Dotted yellow */
+            box-shadow: 0 0 15px #ffff00;
+            animation: bounce 1s infinite; /* 9: Bouncing */
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Title insanity */
         h1 {
-            font-size: 72px; /* Bigger size */
-            margin-bottom: 40px; /* More space below */
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Subtle glow to stand out */
-            transition: color 0.3s ease; /* Smooth purple transition */
+            font-size: 50px;
+            color: #ffff00; /* 10: Yellow default */
+            text-shadow: 3px 3px 0 #ff00ff, -3px -3px 0 #00ff00, 0 0 10px #00ffff; /* 11: Multi-shadow */
+            margin: 50px 0 20px;
+            transition: all 0.3s ease;
+            letter-spacing: 2px; /* 12: Spaced out */
+            animation: blink 0.5s infinite; /* 13: Blinking */
         }
 
         h1:hover {
-            color: rgb(255, 0, 255); /* Purple on hover */
+            color: #ff00ff; /* 14: Purple hover */
+            transform: rotate(5deg); /* 15: Tilt on hover */
+        }
+
+        @keyframes blink {
+            50% { opacity: 0.7; }
+        }
+
+        /* Under construction sign */
+        .under-construction {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 14px;
+            color: #ff0000; /* 16: Red warning */
+            background: #ffff00; /* 17: Yellow BG */
+            padding: 5px;
+            border: 2px solid #000; /* 18: Black border */
+            transform: rotate(-10deg); /* 19: Tilted */
         }
 
         .button-container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            max-width: 100%;
+            gap: 12px; /* 20: Tighter gap */
             align-items: center;
+            position: relative;
         }
 
         .button {
-            background: #ffffff;
-            color: #000;
-            padding: 20px;
-            border-radius: 5px;
+            background: #ff00ff;
+            color: #00ffff; /* 21: Cyan text */
+            padding: 12px 20px;
+            border: 2px solid #ffff00; /* 22: Yellow border */
             text-decoration: none;
-            font-size: 24px;
-            font-weight: bold;
-            display: inline-block;
-            width: fit-content;
-            transition: 0.3s;
+            font-size: 18px;
+            font-family: 'Arial', sans-serif;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px #ff0000; /* 23: Red glow */
+            transition: all 0.2s ease; /* 24: Faster transition */
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Brighter, popping hover colors */
-        .beatstore:hover {
-            background: rgb(255, 50, 50); /* Brighter red */
+        .beatstore { background: rgb(255, 50, 50); }
+        .instagram { background: rgb(255, 80, 200); }
+        .spotify { background: rgb(50, 255, 100); }
+        .soundcloud { background: rgb(255, 120, 60); }
+
+        .button:hover {
+            transform: scale(1.1) rotate(2deg); /* 25: Bigger tilt */
+            box-shadow: 0 0 20px #00ff00; /* 26: Green glow */
+            color: #000; /* 27: Black text on hover */
         }
 
-        .instagram:hover {
-            background: rgb(255, 80, 200); /* Vivid magenta */
+        .beatstore:hover { background: rgb(255, 150, 150); } /* 28: Lighter red */
+        .instagram:hover { background: rgb(255, 200, 255); } /* 29: Lighter magenta */
+        .spotify:hover { background: rgb(150, 255, 150); } /* 30: Lighter green */
+        .soundcloud:hover { background: rgb(255, 200, 150); } /* 31: Lighter orange */
+
+        /* Button decorations */
+        .button::before {
+            content: '★'; /* 32: Star prefix */
+            color: #ffff00;
+            position: absolute;
+            left: 5px;
+            animation: spin 1s infinite linear; /* 33: Spinning star */
         }
 
-        .spotify:hover {
-            background: rgb(50, 255, 100); /* Poppier green */
+        .button::after {
+            content: '☆'; /* 34: Hollow star suffix */
+            color: #00ff00;
+            position: absolute;
+            right: 5px;
+            animation: pulse 0.8s infinite; /* 35: Pulsing */
         }
 
-        .soundcloud:hover {
-            background: rgb(255, 120, 60); /* Neon orange */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
 
-        @media (max-width: 600px) {
+        /* Bottom graphic - spinning "62" */
+        .graphic-bottom {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ff00ff, #00ffff); /* 36: Pink to cyan */
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 3px dashed #ff0000; /* 37: Red dashed */
+            animation: spin 1.5s infinite linear, glow 2s infinite; /* 38: Spin + glow */
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px #ff00ff; }
+            50% { box-shadow: 0 0 20px #00ff00; }
+        }
+
+        /* Side graphics */
+        .graphic-left {
+            width: 40px;
+            height: 100px;
+            background: linear-gradient(#00ff00, #ff0000); /* 39: Green to red */
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 2px solid #ffff00; /* 40: Yellow border */
+            animation: slide 3s infinite; /* 41: Sliding */
+        }
+
+        @keyframes slide {
+            0% { top: 20%; }
+            50% { top: 80%; }
+            100% { top: 20%; }
+        }
+
+        .graphic-right {
+            width: 50px;
+            height: 50px;
+            background: #00ffff; /* 42: Cyan */
+            position: absolute;
+            right: -25px;
+            top: 20%;
+            border-radius: 50%; /* 43: Circle */
+            border: 2px dotted #ff00ff; /* 44: Purple dots */
+            animation: bounce 0.8s infinite; /* 45: Bouncing */
+        }
+
+        /* Random text */
+        .random-text {
+            position: absolute;
+            bottom: 60px;
+            left: 10px;
+            font-size: 12px;
+            color: #00ff00; /* 46: Green */
+            transform: rotate(-20deg); /* 47: Tilted */
+            animation: fade 4s infinite; /* 48: Fading */
+        }
+
+        @keyframes fade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Marquee */
+        .marquee {
+            position: absolute;
+            top: -20px;
+            width: 100%;
+            color: #ff0000; /* 49: Red */
+            font-size: 16px;
+            background: #ffff00; /* 50: Yellow BG */
+            padding: 5px;
+        }
+
+        /* Visitor counter fakeout */
+        .counter {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 14px;
+            color: #00ffff; /* 51: Cyan */
+            background: #000; /* 52: Black BG */
+            padding: 5px;
+            border: 1px solid #ff00ff; /* 53: Purple border */
+        }
+
+        /* Desktop scaling */
+        @media (min-width: 600px) {
             .content {
                 padding: 30px;
+                max-width: 700px;
             }
             h1 {
-                font-size: 48px; /* Adjusted for smaller screens */
+                font-size: 90px;
             }
             .button {
+                font-size: 24px;
+                padding: 15px 30px;
+                max-width: 400px;
+            }
+            .graphic-top {
+                width: 100px;
+                height: 100px;
+                top: -50px;
+            }
+            .graphic-bottom {
+                width: 80px;
+                height: 80px;
+                bottom: -40px;
+            }
+            .graphic-left {
+                width: 60px;
+                height: 150px;
+                left: -30px;
+            }
+            .graphic-right {
+                width: 70px;
+                height: 70px;
+                right: -35px;
+            }
+            .marquee {
                 font-size: 20px;
-                padding: 15px;
             }
         }
     </style>
 </head>
 <body>
     <div class="content">
+        <marquee class="marquee">WELCOME TO 62SERPENS ZONE - ENTER AT UR OWN RISK!!!</marquee> <!-- 54: Marquee -->
+        <div class="graphic-top"></div>
         <h1>62serpens</h1>
         <div class="button-container">
             <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore">Beat Store</a>
             <a href="https://www.instagram.com/62serpens" class="button instagram">Instagram</a>
             <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button spotify">Spotify</a>
-            <a href="https://soundcloud.com/62serpens" class="button soundcloud">SoundCloud</a>
+            <a href="https://www.soundcloud.com/62serpens" class="button soundcloud">SoundCloud</a>
         </div>
+        <div class="graphic-bottom"></div>
+        <div class="graphic-left"></div>
+        <div class="graphic-right"></div>
+        <span class="under-construction">UNDER CONSTRUCTION!!1!</span> <!-- 55: Construction sign -->
+        <span class="random-text">SNAKES RULE</span> <!-- 56: Random text -->
+        <span class="counter">VISITORS: 1337</span> <!-- 57: Fake counter -->
     </div>
 </body>
 </html>
