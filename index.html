@@ -4,20 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>62serpens</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000000'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%23ffffff' font-family='VT323, monospace'>62</text></svg>">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
         body {
-            background-color: #121212;
+            background-color: #000000; /* Solid jet black */
             color: #ffffff;
-            font-family: 'VT323', monospace;
-            text-align: left;
+            font-family: 'Great Vibes', cursive; /* Back to the cool, esoteric cursive */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        .content {
+            text-align: center; /* Center text inside */
             padding: 50px;
         }
 
         h1 {
             font-size: 48px;
             margin-bottom: 30px;
+            color: #ffffff; /* Plain white */
         }
 
         .button-container {
@@ -25,6 +36,7 @@
             flex-direction: column;
             gap: 20px;
             max-width: 100%;
+            align-items: center; /* Center buttons horizontally */
         }
 
         .button {
@@ -41,11 +53,11 @@
         }
 
         .button:hover {
-            background: #cccccc;
+            background: #ff00ff; /* Purple */
         }
 
         @media (max-width: 600px) {
-            body {
+            .content {
                 padding: 30px;
             }
             h1 {
@@ -59,12 +71,14 @@
     </style>
 </head>
 <body>
-    <h1>@62serpens</h1>
-    <div class="button-container">
-        <a href="https://www.beatstars.com/62serpens/tracks" class="button">Beat Store</a>
-        <a href="https://www.instagram.com/62serpens" class="button">Instagram</a>
-        <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button">Spotify</a>
-        <a href="https://soundcloud.com/62serpens" class="button">SoundCloud</a>
+    <div class="content">
+        <h1>@62serpens</h1>
+        <div class="button-container">
+            <a href="https://www.beatstars.com/62serpens/tracks" class="button">Beat Store</a>
+            <a href="https://www.instagram.com/62serpens" class="button">Instagram</a>
+            <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button">Spotify</a>
+            <a href="https://soundcloud.com/62serpens" class="button">SoundCloud</a>
+        </div>
     </div>
 </body>
 </html>
