@@ -9,26 +9,32 @@
         @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
         body {
-            background-color: #000000; /* Solid jet black */
+            background-color: #000000;
             color: #ffffff;
-            font-family: 'Great Vibes', cursive; /* Back to the cool, esoteric cursive */
+            font-family: 'Great Vibes', cursive;
             margin: 0;
             padding: 0;
             min-height: 100vh;
             display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
+            justify-content: center;
+            align-items: center;
         }
 
         .content {
-            text-align: center; /* Center text inside */
+            text-align: center;
             padding: 50px;
         }
 
         h1 {
-            font-size: 48px;
-            margin-bottom: 30px;
-            color: #ffffff; /* Plain white */
+            font-size: 72px; /* Bigger size */
+            margin-bottom: 40px; /* More space below */
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Subtle glow to stand out */
+            transition: color 0.3s ease; /* Smooth purple transition */
+        }
+
+        h1:hover {
+            color: rgb(255, 0, 255); /* Purple on hover */
         }
 
         .button-container {
@@ -36,7 +42,7 @@
             flex-direction: column;
             gap: 20px;
             max-width: 100%;
-            align-items: center; /* Center buttons horizontally */
+            align-items: center;
         }
 
         .button {
@@ -52,8 +58,21 @@
             transition: 0.3s;
         }
 
-        .button:hover {
-            background: #ff00ff; /* Purple */
+        /* Brighter, popping hover colors */
+        .beatstore:hover {
+            background: rgb(255, 50, 50); /* Brighter red */
+        }
+
+        .instagram:hover {
+            background: rgb(255, 80, 200); /* Vivid magenta */
+        }
+
+        .spotify:hover {
+            background: rgb(50, 255, 100); /* Poppier green */
+        }
+
+        .soundcloud:hover {
+            background: rgb(255, 120, 60); /* Neon orange */
         }
 
         @media (max-width: 600px) {
@@ -61,7 +80,7 @@
                 padding: 30px;
             }
             h1 {
-                font-size: 36px;
+                font-size: 48px; /* Adjusted for smaller screens */
             }
             .button {
                 font-size: 20px;
@@ -72,12 +91,12 @@
 </head>
 <body>
     <div class="content">
-        <h1>@62serpens</h1>
+        <h1>62serpens</h1>
         <div class="button-container">
-            <a href="https://www.beatstars.com/62serpens/tracks" class="button">Beat Store</a>
-            <a href="https://www.instagram.com/62serpens" class="button">Instagram</a>
-            <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button">Spotify</a>
-            <a href="https://soundcloud.com/62serpens" class="button">SoundCloud</a>
+            <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore">Beat Store</a>
+            <a href="https://www.instagram.com/62serpens" class="button instagram">Instagram</a>
+            <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button spotify">Spotify</a>
+            <a href="https://soundcloud.com/62serpens" class="button soundcloud">SoundCloud</a>
         </div>
     </div>
 </body>
