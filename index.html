@@ -120,22 +120,24 @@
             position: relative;
             z-index: 1;
         }
+.beatstore { background: rgb(255, 50, 50); }
+.instagram { background: rgb(255, 80, 200); }
+.spotify { 
+    background: rgb(50, 255, 100); 
+    color: #000000; /* Black text for readability */
+}
+.soundcloud { background: rgb(255, 120, 60); }
 
-        .beatstore { background: rgb(255, 50, 50); }
-        .instagram { background: rgb(255, 80, 200); }
-        .spotify { background: rgb(50, 255, 100); }
-        .soundcloud { background: rgb(255, 120, 60); }
+.button:hover {
+    transform: scale(1.1) rotate(2deg); /* 25: Bigger tilt */
+    box-shadow: 0 0 20px #00ff00; /* 26: Green glow */
+    color: #000; /* 27: Black text on hover */
+}
 
-        .button:hover {
-            transform: scale(1.1) rotate(2deg); /* 25: Bigger tilt */
-            box-shadow: 0 0 20px #00ff00; /* 26: Green glow */
-            color: #000; /* 27: Black text on hover */
-        }
-
-        .beatstore:hover { background: rgb(255, 150, 150); } /* 28: Lighter red */
-        .instagram:hover { background: rgb(255, 200, 255); } /* 29: Lighter magenta */
-        .spotify:hover { background: rgb(150, 255, 150); } /* 30: Lighter green */
-        .soundcloud:hover { background: rgb(255, 200, 150); } /* 31: Lighter orange */
+.beatstore:hover { background: rgb(255, 150, 150); } /* 28: Lighter red */
+.instagram:hover { background: rgb(255, 200, 255); } /* 29: Lighter magenta */
+.spotify:hover { background: rgb(150, 255, 150); } /* 30: Lighter green */
+.soundcloud:hover { background: rgb(255, 200, 150); } /* 31: Lighter orange */
 
         /* Button decorations */
         .button::before {
