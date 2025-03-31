@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>62serpens.com</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
-    <link rel="preload" href="https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png" as="image">
+    <!-- Removed preload since we're testing without the image for now -->
     <style>
-        /* Inline critical CSS to prevent white flash */
+        /* Inline critical CSS to force black background immediately */
         html, body {
             background-color: #000 !important;
             margin: 0;
@@ -15,6 +15,10 @@
             height: 100%;
         }
     </style>
+    <!-- Inline script to enforce background before render -->
+    <script>
+        document.documentElement.style.backgroundColor = '#000';
+    </script>
     <style>
         html {
             margin: 0;
@@ -24,7 +28,7 @@
         }
 
         body {
-            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff);
+            background: linear-gradient(45deg, #000, #ff00ff); /* Simplified to gradient only for now */
             background-color: #000; /* Explicit fallback */
             color: #ffffff;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
@@ -50,6 +54,7 @@
             height: 100%;
             background-color: #000; /* Base layer */
             animation: bgPulse 5s infinite alternate;
+            animation-delay: 0.1s; /* Slight delay to prioritize initial render */
             z-index: -1;
         }
 
@@ -436,7 +441,7 @@
             <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!1!</span>
             <span class="random-text">6262626262</span>
             <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
-            <span class="discount-code" id="discountCode">15% OFF BEATSTARS CODE 626262</span>
+            <span class="discount-code" id="discountCode">20% OFF BEATSTARS CODE 626262</span>
         </div>
     </div>
     <script>
@@ -535,7 +540,7 @@
         egg5.addEventListener('click', () => {
             document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
             setTimeout(() => {
-                document.body.style.background = `url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff)`;
+                document.body.style.background = 'linear-gradient(45deg, #000, #ff00ff)';
             }, 1000);
         });
 
