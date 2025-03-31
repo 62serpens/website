@@ -6,6 +6,12 @@
     <title>62serpens.com</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
     <style>
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
         body {
             background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff);
             color: #ffffff;
@@ -46,7 +52,6 @@
             justify-content: space-between;
             box-sizing: border-box;
             z-index: 100;
-            transform-origin: center top; /* Pivot from top center */
         }
 
         .content {
@@ -416,23 +421,25 @@
         <span id="dateTime"></span>
         <span id="visitorCounter">VISITORS: trillions</span>
     </div>
-    <div class="content">
-        <marquee class="marquee">WELCOME TO 62SERPENS ZONE - ENTER AT UR OWN RISK!!!</marquee>
-        <div class="graphic-top" id="egg1"></div>
-        <h1><span class="title-text up" id="titleText">62serpens</span><span class="domain">.com</span></h1>
-        <div class="button-container" id="buttonContainer">
-            <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore">Beat Store</a>
-            <a href="https://www.instagram.com/62serpens" class="button instagram">Instagram</a>
-            <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button spotify">Spotify</a>
-            <a href="https://www.soundcloud.com/62serpens" class="button soundcloud">SoundCloud</a>
+    <div class="content-wrapper">
+        <div class="content">
+            <marquee class="marquee">WELCOME TO 62SERPENS ZONE - ENTER AT UR OWN RISK!!!</marquee>
+            <div class="graphic-top" id="egg1"></div>
+            <h1><span class="title-text up" id="titleText">62serpens</span><span class="domain">.com</span></h1>
+            <div class="button-container" id="buttonContainer">
+                <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore">Beat Store</a>
+                <a href="https://www.instagram.com/62serpens" class="button instagram">Instagram</a>
+                <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button spotify">Spotify</a>
+                <a href="https://www.soundcloud.com/62serpens" class="button soundcloud">SoundCloud</a>
+            </div>
+            <div class="graphic-bottom" id="egg2"></div>
+            <div class="graphic-left" id="egg3"></div>
+            <div class="graphic-right" id="egg4"></div>
+            <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!!</span>
+            <span class="random-text">6262626262</span>
+            <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
+            <span class="discount-code" id="discountCode">15% OFF BEATSTARS CODE 626262</span>
         </div>
-        <div class="graphic-bottom" id="egg2"></div>
-        <div class="graphic-left" id="egg3"></div>
-        <div class="graphic-right" id="egg4"></div>
-        <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!!</span>
-        <span class="random-text">6262626262</span>
-        <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
-        <span class="discount-code" id="discountCode">15% OFF BEATSTARS CODE 626262</span>
     </div>
     <script>
         const titleText = document.getElementById('titleText');
@@ -446,6 +453,7 @@
         const flashText = document.getElementById('flashText');
         const discountCode = document.getElementById('discountCode');
         const dateTime = document.getElementById('dateTime');
+        const contentWrapper = document.querySelector('.content-wrapper');
 
         // Update date and time every second
         function updateDateTime() {
@@ -481,12 +489,11 @@
             }
         });
 
-        // Egg 2: Flips page (status bar stays upright)
+        // Egg 2: Flips content wrapper only
         let isFlipped = false;
         egg2.addEventListener('click', () => {
             isFlipped = !isFlipped;
-            document.body.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
-            document.querySelector('.status-bar').style.transform = isFlipped ? 'rotate(-180deg)' : 'rotate(0deg)';
+            contentWrapper.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
         });
 
         // Egg 3: Slider game
