@@ -64,7 +64,7 @@
             justify-content: space-between;
             box-sizing: border-box;
             z-index: 100;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif; /* Back to original */
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .content-wrapper {
             margin-top: -40px;
@@ -135,7 +135,7 @@
             0% { transform: translate(0); }
             20% { transform: translate(-2px, 2px); color: #ff00ff; }
             40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2x, 2px); color: #00ffff; }
+            60% { transform: translate(2px, 2px); color: #00ffff; }
             80% { transform: translate(2px, -2px); }
             100% { transform: translate(0); }
         }
@@ -347,7 +347,7 @@
             opacity: 0.8;
             pointer-events: none;
             z-index: 5;
-            animation: warp 0.8s linear forwards;
+            animation: warp 2.5s linear forwards; /* Even slower */
         }
         @keyframes warp {
             0% { opacity: 0.8; transform: translate(0, 0) scale(1); }
@@ -367,14 +367,14 @@
         }
         @media (max-width: 599px) {
             body {
-                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                font-family: 'Marker Felt', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
                 font-weight: 400;
             }
             .status-bar {
                 font-size: 12px;
                 padding: 3px;
-                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important; /* Back to original */
+                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .content-wrapper {
@@ -382,17 +382,17 @@
             }
             h1 {
                 font-size: 40px !important;
-                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                font-family: 'Marker Felt', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .title-text {
                 font-size: 40px !important;
-                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                font-family: 'Marker Felt', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .domain {
                 font-size: 28px !important;
-                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                font-family: 'Marker Felt', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .content {
@@ -418,8 +418,8 @@
             .discount-code { font-size: 24px; padding: 10px; }
             .copyright { font-size: 10px; }
             .astral-particle { 
-                width: 6px; /* Smaller for mobile */
-                height: 1px; 
+                width: 6px;
+                height: 1px;
             }
         }
     </style>
@@ -528,9 +528,8 @@
             particle.style.setProperty('--end-y', `${endY}px`);
 
             document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 800);
+            setTimeout(() => particle.remove(), 2500); // Match 2.5s animation
         }
-        // Adjust particle spawn rate based on screen size
         function setParticleRate() {
             clearInterval(particleInterval);
             particleInterval = setInterval(createParticle, window.innerWidth < 600 ? 20 : 10); // 50/sec mobile, 100/sec desktop
