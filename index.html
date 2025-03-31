@@ -92,42 +92,14 @@
             50% { transform: translateX(-50%) translateY(-10px); }
         }
 
-        h1 {
-            font-size: 50px;
-            color: #ffff00;
-            text-shadow: 3px 3px 0 #ff00ff, -3px -3px 0 #00ff00, 0 0 10px #00ffff;
-            margin: 50px 0 20px;
-            letter-spacing: 2px;
+        .title-svg {
+            display: block;
+            margin: 50px auto 20px;
             animation: blink 0.5s infinite;
-            display: inline-flex;
-            align-items: baseline;
-        }
-
-        .title-text {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .title-text.up:hover {
-            color: #ff00ff;
-            transform: rotate(-5deg);
-        }
-
-        .title-text.down:hover {
-            color: #ff00ff;
-            transform: rotate(5deg);
         }
 
         @keyframes blink {
             50% { opacity: 0.7; }
-        }
-
-        .domain {
-            font-size: 50px;
-            color: #ffffff;
-            text-shadow: none;
-            animation: none;
-            transition: none;
         }
 
         .under-construction {
@@ -328,7 +300,7 @@
 
         @media (min-width: 600px) {
             .content { padding: 30px; max-width: 700px; }
-            h1 { font-size: 90px; }
+            .title-svg { width: 400px; height: 100px; }
             .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
             .graphic-top { width: 100px; height: 100px; top: -50px; }
             .graphic-bottom { width: 80px; height: 80px; bottom: -40px; }
@@ -351,20 +323,10 @@
                 font-family: 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
-            h1 {
-                font-size: 40px !important;
-                font-family: 'Comic Sans MS', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
-            .title-text {
-                font-size: 40px !important;
-                font-family: 'Comic Sans MS', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
-            .domain {
-                font-size: 28px !important;
-                font-family: 'Comic Sans MS', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
+            .title-svg {
+                width: 250px;
+                height: 60px;
+                margin: 40px auto 15px;
             }
             .content {
                 margin-top: 30px;
@@ -399,7 +361,28 @@
         <div class="content">
             <marquee class="marquee">WELCOME TO 62SERPENS ZONE - ENTER AT UR OWN RISK!!!</marquee>
             <div class="graphic-top" id="egg1"></div>
-            <h1><span class="title-text up" id="titleText">62serpens</span><span class="domain">.com</span></h1>
+            <svg class="title-svg" id="titleSvg" viewBox="0 0 400 100">
+                <defs>
+                    <style>
+                        @font-face {
+                            font-family: 'Comic Sans MS';
+                            src: url('https://fonts.gstatic.com/s/comicsansms/v12/Jk2nA_5oY0eBSoZ7Y9xT5z5n.woff2') format('woff2');
+                        }
+                    </style>
+                </defs>
+                <text x="0" y="70" font-family="'Comic Sans MS', sans-serif" font-size="70" fill="#ffff00" text-anchor="start" id="titleText" class="title-text up">62serpens</text>
+                <text x="340" y="70" font-family="'Comic Sans MS', sans-serif" font-size="50" fill="#ffffff" text-anchor="end">.com</text>
+                <filter id="shadow">
+                    <feDropShadow dx="3" dy="3" stdDeviation="0" flood-color="#ff00ff"/>
+                    <feDropShadow dx="-3" dy="-3" stdDeviation="0" flood-color="#00ff00"/>
+                    <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#00ffff"/>
+                </filter>
+                <style>
+                    .title-text { transition: all 0.3s ease; cursor: pointer; filter: url(#shadow); }
+                    .title-text.up:hover { fill: #ff00ff; transform: rotate(-5deg); }
+                    .title-text.down:hover { fill: #ff00ff; transform: rotate(5deg); }
+                </style>
+            </svg>
             <div class="button-container" id="buttonContainer">
                 <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore">Beat Store</a>
                 <a href="https://www.instagram.com/62serpens" class="button instagram">Instagram</a>
@@ -409,7 +392,7 @@
             <div class="graphic-bottom" id="egg2"></div>
             <div class="graphic-left" id="egg3"></div>
             <div class="graphic-right" id="egg4"></div>
-            <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!1!</span>
+            <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!!</span>
             <span class="random-text">6262626262</span>
             <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
             <span class="discount-code" id="discountCode">15% OFF BEATSTARS CODE 626262</span>
