@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>62serpens</title>
+    <title>62serpens.com</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
     <style>
         body {
-            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff); /* 1: Gradient overlay */
+            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff);
             color: #ffffff;
             font-family: 'Comic Sans MS', Marker Felt;
             margin: 0;
@@ -17,7 +17,10 @@
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
-            animation: bgPulse 5s infinite alternate; /* 2: Pulsing background */
+            animation: bgPulse 5s infinite alternate;
+            user-select: none;
+            transition: transform 0.5s;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polygon points="12,2 22,22 2,22" fill="%23bf00ff" stroke="none"/></svg>') 12 12, auto;
         }
 
         @keyframes bgPulse {
@@ -26,15 +29,15 @@
         }
 
         .content {
-            background: rgba(0, 0, 0, 0.9); /* 3: Darker overlay */
+            background: rgba(0, 0, 0, 0.9);
             padding: 15px;
-            border: 4px double #00ff00; /* 4: Double green border */
+            border: 4px double #00ff00;
             width: 100%;
             max-width: 400px;
             box-sizing: border-box;
             position: relative;
-            box-shadow: 0 0 20px #ff00ff; /* 5: Pink glow */
-            animation: shake 0.1s infinite; /* 6: Shaky effect */
+            box-shadow: 0 0 20px #ff00ff;
+            animation: shake 0.1s infinite;
         }
 
         @keyframes shake {
@@ -43,18 +46,18 @@
             100% { transform: translateX(-2px); }
         }
 
-        /* Top graphic - pixel snake */
         .graphic-top {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #ff0000, #00ffff); /* 7: Red to cyan */
+            background: linear-gradient(135deg, #ff0000, #00ffff);
             position: absolute;
             top: -40px;
             left: 50%;
             transform: translateX(-50%);
-            border: 3px dotted #ffff00; /* 8: Dotted yellow */
+            border: 3px dotted #ffff00;
             box-shadow: 0 0 15px #ffff00;
-            animation: bounce 1s infinite; /* 9: Bouncing */
+            animation: bounce 1s infinite;
+            cursor: pointer;
         }
 
         @keyframes bounce {
@@ -62,98 +65,115 @@
             50% { transform: translateX(-50%) translateY(-10px); }
         }
 
-        /* Title insanity */
         h1 {
             font-size: 50px;
-            color: #ffff00; /* 10: Yellow default */
-            text-shadow: 3px 3px 0 #ff00ff, -3px -3px 0 #00ff00, 0 0 10px #00ffff; /* 11: Multi-shadow */
+            color: #ffff00;
+            text-shadow: 3px 3px 0 #ff00ff, -3px -3px 0 #00ff00, 0 0 10px #00ffff;
             margin: 50px 0 20px;
-            transition: all 0.3s ease;
-            letter-spacing: 2px; /* 12: Spaced out */
-            animation: blink 0.5s infinite; /* 13: Blinking */
+            letter-spacing: 2px;
+            animation: blink 0.5s infinite;
+            display: inline-flex;
+            align-items: baseline;
         }
 
-        h1:hover {
-            color: #ff00ff; /* 14: Purple hover */
-            transform: rotate(5deg); /* 15: Tilt on hover */
+        .title-text {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .title-text.up:hover {
+            color: #ff00ff;
+            transform: rotate(-5deg);
+        }
+
+        .title-text.down:hover {
+            color: #ff00ff;
+            transform: rotate(5deg);
         }
 
         @keyframes blink {
             50% { opacity: 0.7; }
         }
 
-        /* Under construction sign */
+        .domain {
+            font-size: 50px;
+            color: #ffffff;
+            text-shadow: none;
+            animation: none;
+            transition: none;
+        }
+
         .under-construction {
             position: absolute;
             top: 10px;
             right: 10px;
             font-size: 14px;
-            color: #ff0000; /* 16: Red warning */
-            background: #ffff00; /* 17: Yellow BG */
+            color: #ff0000;
+            background: #ffff00;
             padding: 5px;
-            border: 2px solid #000; /* 18: Black border */
-            transform: rotate(-10deg); /* 19: Tilted */
+            border: 2px solid #000;
+            transform: rotate(-10deg);
+            cursor: pointer;
         }
 
         .button-container {
             display: flex;
             flex-direction: column;
-            gap: 12px; /* 20: Tighter gap */
+            gap: 12px;
             align-items: center;
             position: relative;
         }
 
         .button {
             background: #ff00ff;
-            color: #00ffff; /* 21: Cyan text */
+            color: #00ffff;
             padding: 12px 20px;
-            border: 2px solid #ffff00; /* 22: Yellow border */
+            border: 2px solid #ffff00;
             text-decoration: none;
             font-size: 18px;
             font-family: 'Arial', sans-serif;
             text-transform: uppercase;
-            box-shadow: 0 0 10px #ff0000; /* 23: Red glow */
-            transition: all 0.2s ease; /* 24: Faster transition */
+            box-shadow: 0 0 10px #ff0000;
+            transition: all 0.2s ease;
             width: 100%;
             max-width: 300px;
             text-align: center;
             position: relative;
             z-index: 1;
         }
-.beatstore { background: rgb(255, 50, 50); }
-.instagram { background: rgb(255, 80, 200); }
-.spotify { 
-    background: rgb(50, 255, 100); 
-    color: #000000; /* Black text for readability */
-}
-.soundcloud { background: rgb(255, 120, 60); }
+        .beatstore { background: rgb(255, 50, 50); }
+        .instagram { background: rgb(255, 80, 200); }
+        .spotify { 
+            background: rgb(50, 255, 100); 
+            color: #000000;
+        }
+        .soundcloud { background: rgb(255, 120, 60); }
 
-.button:hover {
-    transform: scale(1.1) rotate(2deg); /* 25: Bigger tilt */
-    box-shadow: 0 0 20px #00ff00; /* 26: Green glow */
-    color: #000; /* 27: Black text on hover */
-}
+        .button:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 0 20px #00ff00;
+            color: #000;
+        }
 
-.beatstore:hover { background: rgb(255, 150, 150); } /* 28: Lighter red */
-.instagram:hover { background: rgb(255, 200, 255); } /* 29: Lighter magenta */
-.spotify:hover { background: rgb(150, 255, 150); } /* 30: Lighter green */
-.soundcloud:hover { background: rgb(255, 200, 150); } /* 31: Lighter orange */
+        .beatstore:hover { background: rgb(255, 150, 150); }
+        .instagram:hover { background: rgb(255, 200, 255); }
+        .spotify:hover { background: rgb(150, 255, 150); }
+        .soundcloud:hover { background: rgb(255, 200, 150); }
 
-        /* Button decorations */
         .button::before {
-            content: '★'; /* 32: Star prefix */
+            content: '★';
             color: #ffff00;
             position: absolute;
             left: 5px;
-            animation: spin 1s infinite linear; /* 33: Spinning star */
+            animation: spin 1s infinite linear;
         }
 
         .button::after {
-            content: '☆'; /* 34: Hollow star suffix */
+            content: '☆';
             color: #00ff00;
             position: absolute;
             right: 5px;
-            animation: pulse 0.8s infinite; /* 35: Pulsing */
+            animation: pulse 0.8s infinite;
         }
 
         @keyframes pulse {
@@ -161,17 +181,17 @@
             50% { transform: scale(1.2); }
         }
 
-        /* Bottom graphic - spinning "62" */
         .graphic-bottom {
             width: 60px;
             height: 60px;
-            background: radial-gradient(circle, #ff00ff, #00ffff); /* 36: Pink to cyan */
+            background: radial-gradient(circle, #ff00ff, #00ffff);
             position: absolute;
             bottom: -30px;
             left: 50%;
             transform: translateX(-50%);
-            border: 3px dashed #ff0000; /* 37: Red dashed */
-            animation: spin 1.5s infinite linear, glow 2s infinite; /* 38: Spin + glow */
+            border: 2px dashed #ff0000;
+            animation: spin 1.5s infinite linear, glow 2s infinite;
+            cursor: pointer;
         }
 
         @keyframes glow {
@@ -179,17 +199,18 @@
             50% { box-shadow: 0 0 20px #00ff00; }
         }
 
-        /* Side graphics */
         .graphic-left {
             width: 40px;
             height: 100px;
-            background: linear-gradient(#00ff00, #ff0000); /* 39: Green to red */
+            background: linear-gradient(#00ff00, #ff0000);
             position: absolute;
             left: -20px;
             top: 50%;
             transform: translateY(-50%);
-            border: 2px solid #ffff00; /* 40: Yellow border */
-            animation: slide 3s infinite; /* 41: Sliding */
+            border: 2px solid #ffff00;
+            animation: slide 6s infinite;
+            cursor: pointer;
+            transition: height 0.2s;
         }
 
         @keyframes slide {
@@ -198,27 +219,35 @@
             100% { top: 20%; }
         }
 
+        @keyframes menuBorderChase {
+            0% { top: -20px; left: 0; }
+            25% { top: -20px; left: calc(100% - 40px); }
+            50% { top: calc(100% - 100px); left: calc(100% - 40px); }
+            75% { top: calc(100% - 100px); left: 0; }
+            100% { top: -20px; left: 0; }
+        }
+
         .graphic-right {
             width: 50px;
             height: 50px;
-            background: #00ffff; /* 42: Cyan */
+            background: #00ffff;
             position: absolute;
             right: -25px;
             top: 20%;
-            border-radius: 50%; /* 43: Circle */
-            border: 2px dotted #ff00ff; /* 44: Purple dots */
-            animation: bounce 0.8s infinite; /* 45: Bouncing */
+            border-radius: 50%;
+            border: 2px dotted #ff00ff;
+            animation: bounce 0.8s infinite;
+            cursor: pointer;
         }
 
-        /* Random text */
         .random-text {
             position: absolute;
             bottom: 60px;
             left: 10px;
             font-size: 12px;
-            color: #00ff00; /* 46: Green */
-            transform: rotate(-20deg); /* 47: Tilted */
-            animation: fade 4s infinite; /* 48: Fading */
+            color: #00ff00;
+            transform: rotate(-20deg);
+            animation: fade 4s infinite;
         }
 
         @keyframes fade {
@@ -226,30 +255,64 @@
             50% { opacity: 0; }
         }
 
-        /* Marquee */
         .marquee {
             position: absolute;
             top: -20px;
             width: 100%;
-            color: #ff0000; /* 49: Red */
+            color: #ff0000;
             font-size: 16px;
-            background: #ffff00; /* 50: Yellow BG */
+            background: #ffff00;
             padding: 5px;
         }
 
-        /* Visitor counter fakeout */
         .counter {
             position: absolute;
             bottom: 10px;
             right: 10px;
             font-size: 14px;
-            color: #00ffff; /* 51: Cyan */
-            background: #000; /* 52: Black BG */
+            color: #00ffff;
+            background: #000;
             padding: 5px;
-            border: 1px solid #ff00ff; /* 53: Purple border */
+            border: 2px solid #ff00ff;
+            cursor: pointer;
         }
 
-        /* Desktop scaling */
+        .chaos-star {
+            position: absolute;
+            color: #ff00ff;
+            font-size: 30px;
+            animation: spin 1s infinite linear;
+            pointer-events: none;
+        }
+
+        .flash-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            color: #00ff00;
+            text-shadow: 0 0 20px #ff00ff;
+            z-index: 100;
+            pointer-events: none;
+            display: none;
+            white-space: nowrap;
+        }
+
+        .discount-code {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            color: #ffff00;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border: 2px solid #ff00ff;
+            display: none;
+            z-index: 10;
+        }
+
         @media (min-width: 600px) {
             .content {
                 padding: 30px;
@@ -286,31 +349,141 @@
             .marquee {
                 font-size: 20px;
             }
+            .flash-text {
+                font-size: 200px;
+            }
+            .discount-code {
+                font-size: 40px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="content">
-        <marquee class="marquee">WELCOME TO 62SERPENS ZONE - ENTER AT UR OWN RISK!!!</marquee> <!-- 54: Marquee -->
-        <div class="graphic-top"></div>
-        <h1>62serpens</h1>
-        <div class="button-container">
+        <marquee class="marquee">WELCOME TO 62SERPENS ZONE - ENTER AT UR OWN RISK!!!</marquee>
+        <div class="graphic-top" id="egg1"></div>
+        <h1><span class="title-text up" id="titleText">62serpens</span><span class="domain">.com</span></h1>
+        <div class="button-container" id="buttonContainer">
             <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore">Beat Store</a>
             <a href="https://www.instagram.com/62serpens" class="button instagram">Instagram</a>
             <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button spotify">Spotify</a>
             <a href="https://www.soundcloud.com/62serpens" class="button soundcloud">SoundCloud</a>
         </div>
-        <div class="graphic-bottom"></div>
-        <div class="graphic-left"></div>
-        <div class="graphic-right"></div>
-        <span class="under-construction">UNDER CONSTRUCTION!!!!</span> <!-- 55: Construction sign -->
-        <span class="random-text">6262626262</span> <!-- 56: Random text -->
-        <span class="counter">VISITORS: trillions</span> <!-- 57: Fake counter -->
+        <div class="graphic-bottom" id="egg2"></div>
+        <div class="graphic-left" id="egg3"></div>
+        <div class="graphic-right" id="egg4"></div>
+        <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!!</span>
+        <span class="random-text">6262626262</span>
+        <span class="counter" id="egg6">VISITORS: trillions</span>
+        <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
+        <span class="discount-code" id="discountCode">20% OFF BEATSTARS CODE 626262</span>
     </div>
     <script>
-  if (window.location.search.includes('fbclid=')) {
-    window.history.replaceState({}, document.title, 'https://62serpens.com/');
-  }
-</script>
+        const titleText = document.getElementById('titleText');
+        const egg1 = document.getElementById('egg1'); // Graphic top
+        const egg2 = document.getElementById('egg2'); // Graphic bottom
+        const egg3 = document.getElementById('egg3'); // Graphic left
+        const egg4 = document.getElementById('egg4'); // Graphic right
+        const egg5 = document.getElementById('egg5'); // Under construction
+        const egg6 = document.getElementById('egg6'); // Counter
+        const buttonContainer = document.getElementById('buttonContainer');
+        const flashText = document.getElementById('flashText');
+        const discountCode = document.getElementById('discountCode');
+
+        // 62serpens tilt toggle
+        titleText.addEventListener('click', () => {
+            if (titleText.classList.contains('up')) {
+                titleText.classList.remove('up');
+                titleText.classList.add('down');
+            } else {
+                titleText.classList.remove('down');
+                titleText.classList.add('up');
+            }
+        });
+
+        // Egg 1: Spawns spinning stars that fade out
+        egg1.addEventListener('click', () => {
+            for (let i = 0; i < 5; i++) {
+                const star = document.createElement('span');
+                star.className = 'chaos-star';
+                star.textContent = '★';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                document.body.appendChild(star);
+                setTimeout(() => star.remove(), 2000);
+            }
+        });
+
+        // Egg 2: Flips the entire page upside down (toggles)
+        let isFlipped = false;
+        egg2.addEventListener('click', () => {
+            isFlipped = !isFlipped;
+            document.body.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
+        });
+
+        // Egg 3: Slider game - idle on left, activates border chase on click
+        let slideSpeed = 4;
+        let clickCount = 0;
+        let sliderHeight = 100;
+        let gameActive = false;
+        egg3.addEventListener('click', () => {
+            clickCount++;
+            if (!gameActive) {
+                gameActive = true; // Activate game on first click
+            }
+            if (gameActive) {
+                slideSpeed = Math.max(1.5, slideSpeed * 0.85); // Speed up by 15%, min 1.5s
+                sliderHeight = Math.max(60, sliderHeight * 0.95); // Shrink height by 5%, min 60px
+                const direction = Math.random() < 0.5 ? '' : 'reverse'; // Random direction
+                egg3.style.height = `${sliderHeight}px`;
+                egg3.style.animation = `menuBorderChase ${slideSpeed}s infinite linear ${direction}`;
+            }
+            if (clickCount >= 6) {
+                discountCode.style.display = 'block';
+                setTimeout(() => discountCode.style.display = 'none', 5000);
+                clickCount = 0;
+                slideSpeed = 4;
+                sliderHeight = 100;
+                gameActive = false; // Reset to idle state
+                egg3.style.height = `${sliderHeight}px`;
+                egg3.style.animation = `slide 6s infinite`;
+            }
+        });
+
+        // Egg 4: Toggles a single secret link
+        let secretLink = null;
+        egg4.addEventListener('click', () => {
+            if (!secretLink) {
+                secretLink = document.createElement('a');
+                secretLink.className = 'button';
+                secretLink.textContent = 'SECRET LINK';
+                secretLink.href = 'https://discord.gg/cCedfQgHVG'; // Customize this
+                secretLink.style.background = '#00ffff';
+                secretLink.style.color = '#ff00ff';
+                buttonContainer.appendChild(secretLink);
+            } else {
+                secretLink.remove();
+                secretLink = null;
+            }
+        });
+
+        // Egg 5: Under construction - changes background color briefly
+        egg5.addEventListener('click', () => {
+            document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
+            setTimeout(() => {
+                document.body.style.background = `url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff)`;
+            }, 1000);
+        });
+
+        // Egg 6: Giant 626262 flash
+        egg6.addEventListener('click', () => {
+            flashText.style.display = 'block';
+            setTimeout(() => flashText.style.display = 'none', 1000);
+        });
+
+        if (window.location.search.includes('fbclid=')) {
+            window.history.replaceState({}, document.title, 'https://62serpens.com/');
+        }
+    </script>
 </body>
 </html>
