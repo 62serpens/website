@@ -6,6 +6,7 @@
     <title>62serpens.com</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
     <link rel="preload" href="https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png" as="image">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
     <style>
         html, body {
             background-color: #000 !important;
@@ -339,8 +340,8 @@
         }
         .astral-particle {
             position: absolute;
-            width: 10px;
-            height: 2px;
+            width: 12px;
+            height: 3px;
             background: #ff00ff;
             border-radius: 50%;
             opacity: 0.8;
@@ -366,14 +367,14 @@
         }
         @media (max-width: 599px) {
             body {
-                font-family: 'Comic Sans MS', sans-serif !important;
+                font-family: 'Chewy', 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
                 font-weight: 400;
             }
             .status-bar {
                 font-size: 12px;
                 padding: 3px;
-                font-family: 'Comic Sans MS', sans-serif !important;
+                font-family: 'Chewy', 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .content-wrapper {
@@ -381,17 +382,17 @@
             }
             h1 {
                 font-size: 40px !important;
-                font-family: 'Comic Sans MS', sans-serif !important;
+                font-family: 'Chewy', 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .title-text {
                 font-size: 40px !important;
-                font-family: 'Comic Sans MS', sans-serif !important;
+                font-family: 'Chewy', 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .domain {
                 font-size: 28px !important;
-                font-family: 'Comic Sans MS', sans-serif !important;
+                font-family: 'Chewy', 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .content {
@@ -416,14 +417,14 @@
             .button-container { z-index: 10; }
             .discount-code { font-size: 24px; padding: 10px; }
             .copyright { font-size: 10px; }
-            .astral-particle { width: 8px; height: 1.5px; }
+            .astral-particle { width: 8px; height: 2px; }
         }
     </style>
 </head>
 <body>
     <div class="status-bar">
         <span id="dateTime"></span>
-        <span id="mouseCoords">X: 0 Y: 0</span>
+        <span id="coordinates"></span>
     </div>
     <div class="content-wrapper">
         <div class="content">
@@ -459,7 +460,7 @@
         const flashText = document.getElementById('flashText');
         const discountCode = document.getElementById('discountCode');
         const dateTime = document.getElementById('dateTime');
-        const mouseCoords = document.getElementById('mouseCoords');
+        const coordinates = document.getElementById('coordinates');
         const contentWrapper = document.querySelector('.content-wrapper');
         const content = document.querySelector('.content');
         const copyright = document.getElementById('copyright');
@@ -473,10 +474,18 @@
         updateDateTime();
         setInterval(updateDateTime, 1000);
 
-        // Mouse Coordinates
-        document.addEventListener('mousemove', (e) => {
-            mouseCoords.textContent = `X: ${e.clientX} Y: ${e.clientY}`;
-        });
+        // Quantum Coordinates
+        function updateCoordinates() {
+            const ranges = [
+                Math.pow(10, Math.random() * 10 - 5), // 0.00001 to 100,000
+                Math.pow(10, Math.random() * 20 - 10) // 0.0000000001 to 10,000,000,000
+            ];
+            const lat = (Math.random() * ranges[Math.floor(Math.random() * 2)] * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
+            const lon = (Math.random() * ranges[Math.floor(Math.random() * 2)] * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
+            coordinates.textContent = `COORDS: ${lat}°N, ${lon}°E`;
+        }
+        updateCoordinates();
+        setInterval(updateCoordinates, 1000);
 
         titleText.addEventListener('click', () => {
             if (titleText.classList.contains('up')) {
@@ -488,20 +497,15 @@
             }
         });
 
-        // Random Glitch Effect for Title
         function triggerGlitch() {
             titleText.classList.add('glitch');
-            setTimeout(() => {
-                titleText.classList.remove('glitch');
-            }, 300);
+            setTimeout(() => titleText.classList.remove('glitch'), 300);
         }
         setInterval(() => {
-            if (Math.random() < 0.1) {
-                triggerGlitch();
-            }
+            if (Math.random() < 0.1) triggerGlitch();
         }, 1000);
 
-        // Warp-Speed Particles (Outward)
+        // Warp-Speed Particles
         function createParticle() {
             const particle = document.createElement('div');
             particle.className = 'astral-particle';
@@ -513,7 +517,7 @@
             particle.style.background = Math.random() < 0.5 ? '#ff00ff' : '#00ffff';
 
             const angle = Math.random() * 2 * Math.PI;
-            const distance = 300 + Math.random() * 200; // 300-500px
+            const distance = 400 + Math.random() * 300;
             const endX = distance * Math.cos(angle);
             const endY = distance * Math.sin(angle);
             particle.style.setProperty('--end-x', `${endX}px`);
@@ -522,7 +526,7 @@
             document.body.appendChild(particle);
             setTimeout(() => particle.remove(), 800);
         }
-        setInterval(createParticle, 20);
+        setInterval(createParticle, 10);
 
         egg1.addEventListener('click', () => {
             for (let i = 0; i < 5; i++) {
