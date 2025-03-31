@@ -6,14 +6,6 @@
     <title>62serpens.com</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
     <style>
-        /* Embed Comic Sans as a fallback */
-        @font-face {
-            font-family: 'Comic Sans MS';
-            src: url('https://fonts.gstatic.com/s/comicsansms/v12/Jk2nA_5oY0eBSoZ7Y9xT5z5n.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
-
         html {
             margin: 0;
             padding: 0;
@@ -168,7 +160,7 @@
             font-size: 18px;
             font-family: 'Arial', sans-serif;
             text-transform: uppercase;
-            box-shadow: 0 0 10px #ff0000;
+            box-shadow: 0 0 10px #ff00ff;
             transition: all 0.2s ease;
             width: 100%;
             max-width: 300px;
@@ -178,10 +170,7 @@
         }
         .beatstore { background: rgb(255, 50, 50); }
         .instagram { background: rgb(255, 80, 200); }
-        .spotify { 
-            background: rgb(50, 255, 100); 
-            color: #000000;
-        }
+        .spotify { background: rgb(50, 255, 100); color: #000000; }
         .soundcloud { background: rgb(255, 120, 60); }
 
         .button:hover {
@@ -338,47 +327,16 @@
         }
 
         @media (min-width: 600px) {
-            .content {
-                padding: 30px;
-                max-width: 700px;
-            }
-            h1 {
-                font-size: 90px;
-            }
-            .button {
-                font-size: 24px;
-                padding: 15px 30px;
-                max-width: 400px;
-            }
-            .graphic-top {
-                width: 100px;
-                height: 100px;
-                top: -50px;
-            }
-            .graphic-bottom {
-                width: 80px;
-                height: 80px;
-                bottom: -40px;
-            }
-            .graphic-left {
-                width: 60px;
-                height: 150px;
-                left: -30px;
-            }
-            .graphic-right {
-                width: 70px;
-                height: 70px;
-                right: -35px;
-            }
-            .marquee {
-                font-size: 20px;
-            }
-            .flash-text {
-                font-size: 200px;
-            }
-            .discount-code {
-                font-size: 40px;
-            }
+            .content { padding: 30px; max-width: 700px; }
+            h1 { font-size: 90px; }
+            .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
+            .graphic-top { width: 100px; height: 100px; top: -50px; }
+            .graphic-bottom { width: 80px; height: 80px; bottom: -40px; }
+            .graphic-left { width: 60px; height: 150px; left: -30px; }
+            .graphic-right { width: 70px; height: 70px; right: -35px; }
+            .marquee { font-size: 20px; }
+            .flash-text { font-size: 200px; }
+            .discount-code { font-size: 40px; }
         }
 
         @media (max-width: 599px) {
@@ -411,52 +369,24 @@
             .content {
                 margin-top: 30px;
                 padding: 15px;
-                max-width: 400px; /* Wider border */
+                max-width: 400px;
                 border-width: 6px;
             }
             .button {
                 font-size: 14px;
                 padding: 8px 15px;
-                max-width: 280px; /* Smaller to fit */
+                max-width: 280px;
             }
             .under-construction {
-                font-size: 14px !important; /* Force size */
+                font-size: 14px !important;
                 padding: 5px !important;
             }
-            .graphic-top {
-                width: 60px;
-                height: 60px;
-                top: -30px;
-            }
-            .graphic-bottom {
-                width: 50px;
-                height: 50px;
-                bottom: -25px;
-            }
-            .graphic-left {
-                width: 30px;
-                height: 80px;
-                left: -15px; /* Back to fader */
-                z-index: 0; /* Behind buttons */
-                animation: slide 6s infinite; /* Vertical fader */
-            }
-            .graphic-right {
-                width: 40px;
-                height: 40px;
-                right: -20px;
-                top: 85%;
-                z-index: 5;
-                pointer-events: auto;
-                padding: 15px;
-                box-sizing: content-box;
-            }
-            .button-container {
-                z-index: 10;
-            }
-            .discount-code {
-                font-size: 24px;
-                padding: 10px;
-            }
+            .graphic-top { width: 60px; height: 60px; top: -30px; }
+            .graphic-bottom { width: 50px; height: 50px; bottom: -25px; }
+            .graphic-left { width: 30px; height: 80px; left: -15px; z-index: 0; }
+            .graphic-right { width: 40px; height: 40px; right: -20px; top: 85%; z-index: 5; padding: 15px; box-sizing: content-box; }
+            .button-container { z-index: 10; }
+            .discount-code { font-size: 24px; padding: 10px; }
         }
     </style>
 </head>
@@ -499,7 +429,6 @@
         const dateTime = document.getElementById('dateTime');
         const contentWrapper = document.querySelector('.content-wrapper');
 
-        // Update date and time every second
         function updateDateTime() {
             const now = new Date();
             const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
@@ -509,7 +438,6 @@
         updateDateTime();
         setInterval(updateDateTime, 1000);
 
-        // 62serpens tilt toggle
         titleText.addEventListener('click', () => {
             if (titleText.classList.contains('up')) {
                 titleText.classList.remove('up');
@@ -520,7 +448,6 @@
             }
         });
 
-        // Egg 1: Spawns spinning stars
         egg1.addEventListener('click', () => {
             for (let i = 0; i < 5; i++) {
                 const star = document.createElement('span');
@@ -533,23 +460,19 @@
             }
         });
 
-        // Egg 2: Flips content wrapper only
         let isFlipped = false;
         egg2.addEventListener('click', () => {
             isFlipped = !isFlipped;
             contentWrapper.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
         });
 
-        // Egg 3: Slider game
         let slideSpeed = 4;
         let clickCount = 0;
         let sliderHeight = 100;
         let gameActive = false;
         egg3.addEventListener('click', () => {
             clickCount++;
-            if (!gameActive) {
-                gameActive = true;
-            }
+            if (!gameActive) gameActive = true;
             if (gameActive) {
                 slideSpeed = Math.max(1.5, slideSpeed * 0.85);
                 sliderHeight = Math.max(60, sliderHeight * 0.95);
@@ -565,11 +488,10 @@
                 sliderHeight = 100;
                 gameActive = false;
                 egg3.style.height = `${sliderHeight}px`;
-                egg3.style.animation = `slide 6s infinite`; /* Vertical reset */
+                egg3.style.animation = `slide 6s infinite`;
             }
         });
 
-        // Egg 4: Secret link toggle
         let secretLink = null;
         egg4.addEventListener('click', () => {
             if (!secretLink) {
@@ -586,7 +508,6 @@
             }
         });
 
-        // Egg 5: Background flash
         egg5.addEventListener('click', () => {
             document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
             setTimeout(() => {
@@ -594,7 +515,6 @@
             }, 1000);
         });
 
-        // Egg 6: Giant 626262 flash
         egg6.addEventListener('click', () => {
             flashText.style.display = 'block';
             setTimeout(() => flashText.style.display = 'none', 1000);
