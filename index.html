@@ -9,7 +9,7 @@
         body {
             background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff);
             color: #ffffff;
-            font-family: 'Comic Sans MS', Marker Felt;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             margin: 0;
             padding: 10px;
             min-height: 100vh;
@@ -23,9 +23,30 @@
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polygon points="12,2 22,22 2,22" fill="%23bf00ff" stroke="none"/></svg>') 12 12, auto;
         }
 
+        @media (pointer: coarse) {
+            body { cursor: default; }
+        }
+
         @keyframes bgPulse {
             0% { background-color: #000; }
             100% { background-color: #333; }
+        }
+
+        .status-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #000;
+            color: #00ffff;
+            font-size: 14px;
+            padding: 5px;
+            border-bottom: 2px solid #ff00ff;
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            z-index: 100;
+            transform-origin: center top; /* Pivot from top center */
         }
 
         .content {
@@ -38,6 +59,7 @@
             position: relative;
             box-shadow: 0 0 20px #ff00ff;
             animation: shake 0.1s infinite;
+            margin-top: 40px;
         }
 
         @keyframes shake {
@@ -211,6 +233,7 @@
             animation: slide 6s infinite;
             cursor: pointer;
             transition: height 0.2s;
+            touch-action: manipulation;
         }
 
         @keyframes slide {
@@ -233,7 +256,7 @@
             background: #00ffff;
             position: absolute;
             right: -25px;
-            top: 20%;
+            top: 40%;
             border-radius: 50%;
             border: 2px dotted #ff00ff;
             animation: bounce 0.8s infinite;
@@ -263,18 +286,6 @@
             font-size: 16px;
             background: #ffff00;
             padding: 5px;
-        }
-
-        .counter {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 14px;
-            color: #00ffff;
-            background: #000;
-            padding: 5px;
-            border: 2px solid #ff00ff;
-            cursor: pointer;
         }
 
         .chaos-star {
@@ -356,9 +367,55 @@
                 font-size: 40px;
             }
         }
+
+        @media (max-width: 599px) {
+            h1 {
+                font-size: 40px;
+            }
+            .button {
+                font-size: 16px;
+                padding: 10px 15px;
+            }
+            .graphic-top {
+                width: 60px;
+                height: 60px;
+                top: -30px;
+            }
+            .graphic-bottom {
+                width: 50px;
+                height: 50px;
+                bottom: -25px;
+            }
+            .graphic-left {
+                width: 30px;
+                height: 80px;
+                left: -15px;
+            }
+            .graphic-right {
+                width: 40px;
+                height: 40px;
+                right: -20px;
+                top: 50%;
+            }
+            .discount-code {
+                font-size: 24px;
+                padding: 10px;
+            }
+            .status-bar {
+                font-size: 12px;
+                padding: 3px;
+            }
+            .content {
+                margin-top: 30px;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="status-bar">
+        <span id="dateTime"></span>
+        <span id="visitorCounter">VISITORS: trillions</span>
+    </div>
     <div class="content">
         <marquee class="marquee">WELCOME TO 62SERPENS ZONE - ENTER AT UR OWN RISK!!!</marquee>
         <div class="graphic-top" id="egg1"></div>
@@ -374,21 +431,31 @@
         <div class="graphic-right" id="egg4"></div>
         <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!!</span>
         <span class="random-text">6262626262</span>
-        <span class="counter" id="egg6">VISITORS: trillions</span>
         <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
         <span class="discount-code" id="discountCode">15% OFF BEATSTARS CODE 626262</span>
     </div>
     <script>
         const titleText = document.getElementById('titleText');
-        const egg1 = document.getElementById('egg1'); // Graphic top
-        const egg2 = document.getElementById('egg2'); // Graphic bottom
-        const egg3 = document.getElementById('egg3'); // Graphic left
-        const egg4 = document.getElementById('egg4'); // Graphic right
-        const egg5 = document.getElementById('egg5'); // Under construction
-        const egg6 = document.getElementById('egg6'); // Counter
+        const egg1 = document.getElementById('egg1');
+        const egg2 = document.getElementById('egg2');
+        const egg3 = document.getElementById('egg3');
+        const egg4 = document.getElementById('egg4');
+        const egg5 = document.getElementById('egg5');
+        const egg6 = document.getElementById('visitorCounter');
         const buttonContainer = document.getElementById('buttonContainer');
         const flashText = document.getElementById('flashText');
         const discountCode = document.getElementById('discountCode');
+        const dateTime = document.getElementById('dateTime');
+
+        // Update date and time every second
+        function updateDateTime() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+            dateTime.textContent = `${dateStr} ${timeStr}`;
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
 
         // 62serpens tilt toggle
         titleText.addEventListener('click', () => {
@@ -401,7 +468,7 @@
             }
         });
 
-        // Egg 1: Spawns spinning stars that fade out
+        // Egg 1: Spawns spinning stars
         egg1.addEventListener('click', () => {
             for (let i = 0; i < 5; i++) {
                 const star = document.createElement('span');
@@ -414,14 +481,15 @@
             }
         });
 
-        // Egg 2: Flips the entire page upside down (toggles)
+        // Egg 2: Flips page (status bar stays upright)
         let isFlipped = false;
         egg2.addEventListener('click', () => {
             isFlipped = !isFlipped;
             document.body.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
+            document.querySelector('.status-bar').style.transform = isFlipped ? 'rotate(-180deg)' : 'rotate(0deg)';
         });
 
-        // Egg 3: Slider game - idle on left, activates border chase on click
+        // Egg 3: Slider game
         let slideSpeed = 4;
         let clickCount = 0;
         let sliderHeight = 100;
@@ -429,12 +497,12 @@
         egg3.addEventListener('click', () => {
             clickCount++;
             if (!gameActive) {
-                gameActive = true; // Activate game on first click
+                gameActive = true;
             }
             if (gameActive) {
-                slideSpeed = Math.max(1.5, slideSpeed * 0.85); // Speed up by 15%, min 1.5s
-                sliderHeight = Math.max(60, sliderHeight * 0.95); // Shrink height by 5%, min 60px
-                const direction = Math.random() < 0.5 ? '' : 'reverse'; // Random direction
+                slideSpeed = Math.max(1.5, slideSpeed * 0.85);
+                sliderHeight = Math.max(60, sliderHeight * 0.95);
+                const direction = Math.random() < 0.5 ? '' : 'reverse';
                 egg3.style.height = `${sliderHeight}px`;
                 egg3.style.animation = `menuBorderChase ${slideSpeed}s infinite linear ${direction}`;
             }
@@ -444,20 +512,20 @@
                 clickCount = 0;
                 slideSpeed = 4;
                 sliderHeight = 100;
-                gameActive = false; // Reset to idle state
+                gameActive = false;
                 egg3.style.height = `${sliderHeight}px`;
                 egg3.style.animation = `slide 6s infinite`;
             }
         });
 
-        // Egg 4: Toggles a single secret link
+        // Egg 4: Secret link toggle
         let secretLink = null;
         egg4.addEventListener('click', () => {
             if (!secretLink) {
                 secretLink = document.createElement('a');
                 secretLink.className = 'button';
                 secretLink.textContent = 'SECRET LINK';
-                secretLink.href = 'https://discord.gg/cCedfQgHVG'; // Customize this
+                secretLink.href = 'https://discord.gg/cCedfQgHVG';
                 secretLink.style.background = '#00ffff';
                 secretLink.style.color = '#ff00ff';
                 buttonContainer.appendChild(secretLink);
@@ -467,7 +535,7 @@
             }
         });
 
-        // Egg 5: Under construction - changes background color briefly
+        // Egg 5: Background flash
         egg5.addEventListener('click', () => {
             document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
             setTimeout(() => {
