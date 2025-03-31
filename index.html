@@ -247,6 +247,14 @@
             100% { top: 20%; }
         }
 
+        @keyframes slideWide {
+            0% { top: 5%; left: -40px; }
+            25% { top: 5%; left: calc(100% + 20px); }
+            50% { top: 95%; left: calc(100% + 20px); }
+            75% { top: 95%; left: -40px; }
+            100% { top: 5%; left: -40px; }
+        }
+
         @keyframes menuBorderChase {
             0% { top: -20px; left: 0; }
             25% { top: -20px; left: calc(100% - 40px); }
@@ -377,6 +385,7 @@
             body {
                 font-family: 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
+                font-weight: 400; /* Force normal weight */
             }
             .status-bar {
                 font-size: 12px;
@@ -386,7 +395,7 @@
             }
             h1 {
                 font-size: 40px !important;
-                display: inline-flex; /* Back to original for alignment */
+                display: inline-flex;
                 align-items: baseline;
                 font-family: 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
@@ -397,19 +406,20 @@
                 -webkit-font-smoothing: antialiased;
             }
             .domain {
-                font-size: 28px !important; /* Smaller than 62serpens */
+                font-size: 28px !important;
                 font-family: 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .content {
                 margin-top: 30px;
-                padding: 10px; /* Tighter padding */
-                max-width: 340px; /* Shrink to fit buttons */
+                padding: 15px;
+                max-width: 360px; /* Wider border */
+                border-width: 6px; /* Thicker border */
             }
             .button {
-                font-size: 14px; /* Smaller text */
-                padding: 8px 15px; /* Tighter padding */
-                max-width: 280px; /* Fit within border */
+                font-size: 14px;
+                padding: 8px 15px;
+                max-width: 300px; /* Fit within wider border */
             }
             .graphic-top {
                 width: 60px;
@@ -424,18 +434,18 @@
             .graphic-left {
                 width: 30px;
                 height: 80px;
-                left: -15px; /* Back to fader position */
-                z-index: 0; /* Behind buttons */
-                animation: slide 6s infinite; /* Original animation */
+                left: -40px; /* Further out */
+                z-index: 10; /* Above buttons */
+                animation: slideWide 6s infinite; /* Wide path */
             }
             .graphic-right {
                 width: 40px;
                 height: 40px;
                 right: -20px;
-                top: 85%; /* Below buttons */
+                top: 85%;
                 z-index: 5;
                 pointer-events: auto;
-                padding: 15px; /* Even bigger tap area */
+                padding: 15px;
                 box-sizing: content-box;
             }
             .button-container {
@@ -553,7 +563,7 @@
                 sliderHeight = 100;
                 gameActive = false;
                 egg3.style.height = `${sliderHeight}px`;
-                egg3.style.animation = `slide 6s infinite`; /* Back to original */
+                egg3.style.animation = `slideWide 6s infinite`; /* Wide path reset */
             }
         });
 
