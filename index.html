@@ -5,37 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>62serpens.com</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
-    <!-- Load Comic Neue from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png" as="image">
     <style>
-        /* Critical CSS to kill white flash */
+        /* Inline critical CSS to prevent white flash */
         html, body {
             background-color: #000 !important;
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
         }
     </style>
-    <script>
-        /* Force black background instantly */
-        document.documentElement.style.backgroundColor = '#000';
-        document.body && (document.body.style.backgroundColor = '#000');
-    </script>
     <style>
         html {
             margin: 0;
             padding: 0;
             height: 100%;
-            background-color: #000;
+            background-color: #000; /* Fallback */
         }
 
         body {
-            background: linear-gradient(45deg, #000, #ff00ff); /* Keeping gradient for now */
-            background-color: #000;
+            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff);
+            background-color: #000; /* Explicit fallback */
             color: #ffffff;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             margin: 0;
             padding: 10px;
             min-height: 100vh;
@@ -49,9 +41,25 @@
             position: relative;
         }
 
-        /* Removed body::before animation to test flash */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000; /* Base layer */
+            animation: bgPulse 5s infinite alternate;
+            z-index: -1;
+        }
+
         @media (pointer: coarse) {
             body { cursor: default; }
+        }
+
+        @keyframes bgPulse {
+            0% { background-color: #000; }
+            100% { background-color: #333; }
         }
 
         .status-bar {
@@ -68,7 +76,6 @@
             justify-content: space-between;
             box-sizing: border-box;
             z-index: 100;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
         }
 
         .content {
@@ -80,8 +87,14 @@
             box-sizing: border-box;
             position: relative;
             box-shadow: 0 0 20px #ff00ff;
+            animation: shake 0.1s infinite;
             margin-top: 40px;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(2px); }
+            100% { transform: translateX(-2px); }
         }
 
         .graphic-top {
@@ -112,13 +125,11 @@
             animation: blink 0.5s infinite;
             display: inline-flex;
             align-items: baseline;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
         }
 
         .title-text {
             transition: all 0.3s ease;
             cursor: pointer;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
         }
 
         .title-text.up:hover {
@@ -141,7 +152,6 @@
             text-shadow: none;
             animation: none;
             transition: none;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
         }
 
         .under-construction {
@@ -155,7 +165,6 @@
             border: 2px solid #000;
             transform: rotate(-10deg);
             cursor: pointer;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
         }
 
         .button-container {
@@ -288,7 +297,6 @@
             color: #00ff00;
             transform: rotate(-20deg);
             animation: fade 4s infinite;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
         }
 
         @keyframes fade {
@@ -304,7 +312,6 @@
             font-size: 16px;
             background: #ffff00;
             padding: 5px;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
         }
 
         .chaos-star {
@@ -313,7 +320,6 @@
             font-size: 30px;
             animation: spin 1s infinite linear;
             pointer-events: none;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
         }
 
         .flash-text {
@@ -328,7 +334,6 @@
             pointer-events: none;
             display: none;
             white-space: nowrap;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
         }
 
         .discount-code {
@@ -343,7 +348,6 @@
             border: 2px solid #ff00ff;
             display: none;
             z-index: 10;
-            font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
         }
 
         @media (min-width: 600px) {
@@ -361,29 +365,29 @@
 
         @media (max-width: 599px) {
             body {
-                font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
+                font-family: 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
                 font-weight: 400;
             }
             .status-bar {
                 font-size: 12px;
                 padding: 3px;
-                font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
+                font-family: 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             h1 {
                 font-size: 40px !important;
-                font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
+                font-family: 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .title-text {
                 font-size: 40px !important;
-                font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
+                font-family: 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .domain {
                 font-size: 28px !important;
-                font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', sans-serif !important;
+                font-family: 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .content {
@@ -432,7 +436,7 @@
             <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!1!</span>
             <span class="random-text">6262626262</span>
             <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
-            <span class="discount-code" id="discountCode">15% OFF BEATSTARS CODE 626262</span>
+            <span class="discount-code" id="discountCode">20% OFF BEATSTARS CODE 626262</span>
         </div>
     </div>
     <script>
@@ -531,7 +535,7 @@
         egg5.addEventListener('click', () => {
             document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
             setTimeout(() => {
-                document.body.style.background = 'linear-gradient(45deg, #000, #ff00ff)';
+                document.body.style.background = `url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff)`;
             }, 1000);
         });
 
