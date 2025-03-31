@@ -67,6 +67,8 @@
         }
         .content-wrapper {
             margin-top: -40px;
+            position: relative;
+            z-index: 10;
         }
         .content {
             background: rgba(0, 0, 0, 0.9);
@@ -327,20 +329,28 @@
             bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
+            font-size: 12px;
+            color: #ffffff;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             z-index: 10;
-            text-align: center;
-            color: #ffffff;
+            white-space: nowrap;
             animation: blink 0.5s infinite;
+            cursor: pointer;
         }
-        .copyright-text {
-            font-size: 12px;
-            margin: 0;
+        .astral-particle {
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            background: #ff00ff;
+            border-radius: 50%;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 5;
+            animation: warp 0.8s linear forwards;
         }
-        .copyright-subtext {
-            font-size: 10px;
-            margin: 2px 0 0 0;
-            display: block;
+        @keyframes warp {
+            0% { opacity: 0.8; transform: translate(0, 0) scale(1); }
+            100% { opacity: 0; transform: translate(var(--end-x), var(--end-y)) scale(2); }
         }
         @media (min-width: 600px) {
             .content { padding: 30px; max-width: 700px; }
@@ -405,15 +415,15 @@
             .graphic-right { width: 40px; height: 40px; right: -20px; top: 85%; z-index: 5; padding: 15px; box-sizing: content-box; }
             .button-container { z-index: 10; }
             .discount-code { font-size: 24px; padding: 10px; }
-            .copyright-text { font-size: 10px; }
-            .copyright-subtext { font-size: 8px; }
+            .copyright { font-size: 10px; }
+            .astral-particle { width: 8px; height: 1.5px; }
         }
     </style>
 </head>
 <body>
     <div class="status-bar">
         <span id="dateTime"></span>
-        <span id="visitorCounter">VISITORS: trillions</span>
+        <span id="mouseCoords">X: 0 Y: 0</span>
     </div>
     <div class="content-wrapper">
         <div class="content">
@@ -435,9 +445,8 @@
             <span class="discount-code" id="discountCode">20% OFF BEATSTARS CODE 626262</span>
         </div>
     </div>
-    <footer class="copyright">
-        <p class="copyright-text">© 62serpens 2025</p>
-        <span class="copyright-subtext">All Rights Reserved (i am astrally protected so dont even think about any funny business)</span>
+    <footer class="copyright" id="copyright">
+        <p>© 62serpens 2025 - All Rights Reserved</p>
     </footer>
     <script>
         const titleText = document.getElementById('titleText');
@@ -446,12 +455,14 @@
         const egg3 = document.getElementById('egg3');
         const egg4 = document.getElementById('egg4');
         const egg5 = document.getElementById('egg5');
-        const egg6 = document.getElementById('visitorCounter');
         const buttonContainer = document.getElementById('buttonContainer');
         const flashText = document.getElementById('flashText');
         const discountCode = document.getElementById('discountCode');
         const dateTime = document.getElementById('dateTime');
+        const mouseCoords = document.getElementById('mouseCoords');
         const contentWrapper = document.querySelector('.content-wrapper');
+        const content = document.querySelector('.content');
+        const copyright = document.getElementById('copyright');
 
         function updateDateTime() {
             const now = new Date();
@@ -461,6 +472,11 @@
         }
         updateDateTime();
         setInterval(updateDateTime, 1000);
+
+        // Mouse Coordinates
+        document.addEventListener('mousemove', (e) => {
+            mouseCoords.textContent = `X: ${e.clientX} Y: ${e.clientY}`;
+        });
 
         titleText.addEventListener('click', () => {
             if (titleText.classList.contains('up')) {
@@ -477,13 +493,36 @@
             titleText.classList.add('glitch');
             setTimeout(() => {
                 titleText.classList.remove('glitch');
-            }, 300); // Glitch lasts 0.3s
+            }, 300);
         }
         setInterval(() => {
-            if (Math.random() < 0.1) { // 10% chance every second
+            if (Math.random() < 0.1) {
                 triggerGlitch();
             }
         }, 1000);
+
+        // Warp-Speed Particles (Outward)
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'astral-particle';
+            const contentRect = content.getBoundingClientRect();
+            const startX = contentRect.left + contentRect.width / 2;
+            const startY = contentRect.top + contentRect.height / 2;
+            particle.style.left = `${startX}px`;
+            particle.style.top = `${startY}px`;
+            particle.style.background = Math.random() < 0.5 ? '#ff00ff' : '#00ffff';
+
+            const angle = Math.random() * 2 * Math.PI;
+            const distance = 300 + Math.random() * 200; // 300-500px
+            const endX = distance * Math.cos(angle);
+            const endY = distance * Math.sin(angle);
+            particle.style.setProperty('--end-x', `${endX}px`);
+            particle.style.setProperty('--end-y', `${endY}px`);
+
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 800);
+        }
+        setInterval(createParticle, 20);
 
         egg1.addEventListener('click', () => {
             for (let i = 0; i < 5; i++) {
@@ -536,6 +575,7 @@
                 secretLink.className = 'button';
                 secretLink.textContent = 'SECRET LINK';
                 secretLink.href = 'https://discord.gg/cCedfQgHVG';
+                secretLink.target = '_blank';
                 secretLink.style.background = '#00ffff';
                 secretLink.style.color = '#ff00ff';
                 buttonContainer.appendChild(secretLink);
@@ -552,7 +592,7 @@
             }, 1000);
         });
 
-        egg6.addEventListener('click', () => {
+        copyright.addEventListener('click', () => {
             flashText.style.display = 'block';
             setTimeout(() => flashText.style.display = 'none', 1000);
         });
