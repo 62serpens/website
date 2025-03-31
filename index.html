@@ -464,3 +464,145 @@
     <div class="status-bar">
         <span id="dateTime"></span>
         <span id="visitorCounter">VISITORS: trillions</span>
+    </div>
+    <div class="content-wrapper">
+        <div class="content">
+            <marquee class="marquee">WELCOME TO 62SERPENS ZONE - ENTER AT UR OWN RISK!!!</marquee>
+            <div class="graphic-top" id="egg1"></div>
+            <h1><span class="title-text up" id="titleText">62serpens</span><span class="domain">.com</span></h1>
+            <div class="button-container" id="buttonContainer">
+                <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore">Beat Store</a>
+                <a href="https://www.instagram.com/62serpens" class="button instagram">Instagram</a>
+                <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button spotify">Spotify</a>
+                <a href="https://www.soundcloud.com/62serpens" class="button soundcloud">SoundCloud</a>
+            </div>
+            <div class="graphic-bottom" id="egg2"></div>
+            <div class="graphic-left" id="egg3"></div>
+            <div class="graphic-right" id="egg4"></div>
+            <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!!</span>
+            <span class="random-text">6262626262</span>
+            <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
+            <span class="discount-code" id="discountCode">15% OFF BEATSTARS CODE 626262</span>
+        </div>
+    </div>
+    <script>
+        const titleText = document.getElementById('titleText');
+        const egg1 = document.getElementById('egg1');
+        const egg2 = document.getElementById('egg2');
+        const egg3 = document.getElementById('egg3');
+        const egg4 = document.getElementById('egg4');
+        const egg5 = document.getElementById('egg5');
+        const egg6 = document.getElementById('visitorCounter');
+        const buttonContainer = document.getElementById('buttonContainer');
+        const flashText = document.getElementById('flashText');
+        const discountCode = document.getElementById('discountCode');
+        const dateTime = document.getElementById('dateTime');
+        const contentWrapper = document.querySelector('.content-wrapper');
+
+        // Update date and time every second
+        function updateDateTime() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+            const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+            dateTime.textContent = `${dateStr} ${timeStr}`;
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        // 62serpens tilt toggle
+        titleText.addEventListener('click', () => {
+            if (titleText.classList.contains('up')) {
+                titleText.classList.remove('up');
+                titleText.classList.add('down');
+            } else {
+                titleText.classList.remove('down');
+                titleText.classList.add('up');
+            }
+        });
+
+        // Egg 1: Spawns spinning stars
+        egg1.addEventListener('click', () => {
+            for (let i = 0; i < 5; i++) {
+                const star = document.createElement('span');
+                star.className = 'chaos-star';
+                star.textContent = '★';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                document.body.appendChild(star);
+                setTimeout(() => star.remove(), 2000);
+            }
+        });
+
+        // Egg 2: Flips content wrapper only
+        let isFlipped = false;
+        egg2.addEventListener('click', () => {
+            isFlipped = !isFlipped;
+            contentWrapper.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
+        });
+
+        // Egg 3: Slider game
+        let slideSpeed = 4;
+        let clickCount = 0;
+        let sliderHeight = 100;
+        let gameActive = false;
+        egg3.addEventListener('click', () => {
+            clickCount++;
+            if (!gameActive) {
+                gameActive = true;
+            }
+            if (gameActive) {
+                slideSpeed = Math.max(1.5, slideSpeed * 0.85);
+                sliderHeight = Math.max(60, sliderHeight * 0.95);
+                const direction = Math.random() < 0.5 ? '' : 'reverse';
+                egg3.style.height = `${sliderHeight}px`;
+                egg3.style.animation = `menuBorderChase ${slideSpeed}s infinite linear ${direction}`;
+            }
+            if (clickCount >= 6) {
+                discountCode.style.display = 'block';
+                setTimeout(() => discountCode.style.display = 'none', 5000);
+                clickCount = 0;
+                slideSpeed = 4;
+                sliderHeight = 100;
+                gameActive = false;
+                egg3.style.height = `${sliderHeight}px`;
+                egg3.style.animation = `slide 6s infinite`; /* Vertical reset */
+            }
+        });
+
+        // Egg 4: Secret link toggle
+        let secretLink = null;
+        egg4.addEventListener('click', () => {
+            if (!secretLink) {
+                secretLink = document.createElement('a');
+                secretLink.className = 'button';
+                secretLink.textContent = 'SECRET LINK';
+                secretLink.href = 'https://discord.gg/cCedfQgHVG';
+                secretLink.style.background = '#00ffff';
+                secretLink.style.color = '#ff00ff';
+                buttonContainer.appendChild(secretLink);
+            } else {
+                secretLink.remove();
+                secretLink = null;
+            }
+        });
+
+        // Egg 5: Background flash
+        egg5.addEventListener('click', () => {
+            document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
+            setTimeout(() => {
+                document.body.style.background = `url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff)`;
+            }, 1000);
+        });
+
+        // Egg 6: Giant 626262 flash
+        egg6.addEventListener('click', () => {
+            flashText.style.display = 'block';
+            setTimeout(() => flashText.style.display = 'none', 1000);
+        });
+
+        if (window.location.search.includes('fbclid=')) {
+            window.history.replaceState({}, document.title, 'https://62serpens.com/');
+        }
+    </script>
+</body>
+</html>
