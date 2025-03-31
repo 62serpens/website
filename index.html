@@ -375,26 +375,31 @@
 
         @media (max-width: 599px) {
             body {
-                font-family: 'Comic Sans MS', sans-serif !important; /* Force Comic Sans */
+                font-family: 'Comic Sans MS', sans-serif !important;
+                -webkit-font-smoothing: antialiased; /* iOS fix */
             }
             .status-bar {
                 font-size: 12px;
                 padding: 3px;
-                font-family: 'Comic Sans MS', sans-serif !important; /* Comic Sans on mobile */
+                font-family: 'Comic Sans MS', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
             }
             h1 {
-                font-size: 40px !important; /* Force consistent size */
-                display: flex; /* Better alignment */
+                font-size: 40px !important;
+                display: flex;
                 align-items: center;
                 font-family: 'Comic Sans MS', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
             }
             .title-text {
-                font-size: inherit !important; /* Match h1 */
+                font-size: 40px !important; /* Explicit for 62serpens */
                 font-family: 'Comic Sans MS', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
             }
             .domain {
-                font-size: inherit !important; /* Match h1 */
+                font-size: 30px !important; /* Smaller for .com */
                 font-family: 'Comic Sans MS', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
             }
             .button {
                 font-size: 16px;
@@ -413,20 +418,27 @@
             .graphic-left {
                 width: 30px;
                 height: 80px;
-                left: -15px;
+                left: -35px; /* Further out */
+                z-index: 10; /* Above buttons */
+                animation: slideOuter 6s infinite; /* New animation */
+            }
+            @keyframes slideOuter {
+                0% { top: 10%; }
+                50% { top: 90%; }
+                100% { top: 10%; }
             }
             .graphic-right {
                 width: 40px;
                 height: 40px;
                 right: -20px;
-                top: 75%; /* Below buttons */
-                z-index: 5; /* Below button-container */
-                pointer-events: auto; /* Tappable */
+                top: 85%; /* Way below buttons */
+                z-index: 5; /* Below buttons */
+                pointer-events: auto;
                 padding: 10px; /* Bigger tap area */
-                box-sizing: content-box; /* Padding outside size */
+                box-sizing: content-box;
             }
             .button-container {
-                z-index: 10; /* Above graphic-right */
+                z-index: 10; /* Above graphics */
             }
             .discount-code {
                 font-size: 24px;
@@ -457,7 +469,7 @@
             <div class="graphic-bottom" id="egg2"></div>
             <div class="graphic-left" id="egg3"></div>
             <div class="graphic-right" id="egg4"></div>
-            <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!1!</span>
+            <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!!</span>
             <span class="random-text">6262626262</span>
             <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
             <span class="discount-code" id="discountCode">15% OFF BEATSTARS CODE 626262</span>
@@ -543,7 +555,7 @@
                 sliderHeight = 100;
                 gameActive = false;
                 egg3.style.height = `${sliderHeight}px`;
-                egg3.style.animation = `slide 6s infinite`;
+                egg3.style.animation = `slideOuter 6s infinite`; /* Reset to new animation */
             }
         });
 
