@@ -344,13 +344,13 @@
             height: 3px;
             background: #ff00ff;
             border-radius: 50%;
-            opacity: 0.8;
+            opacity: 0.3; /* More transparent */
             pointer-events: none;
             z-index: 5;
-            animation: warp 4s linear forwards; /* Super slow */
+            animation: warp 6s linear forwards; /* Lean-slow */
         }
         @keyframes warp {
-            0% { opacity: 0.8; transform: translate(0, 0) scale(1); }
+            0% { opacity: 0.3; transform: translate(0, 0) scale(1); }
             100% { opacity: 0; transform: translate(var(--end-x), var(--end-y)) scale(2); }
         }
         @media (min-width: 600px) {
@@ -528,7 +528,7 @@
             particle.style.setProperty('--end-y', `${endY}px`);
 
             document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 4000); // Match 4s animation
+            setTimeout(() => particle.remove(), 6000); // Match 6s animation
         }
         function setParticleRate() {
             clearInterval(particleInterval);
