@@ -216,7 +216,7 @@
             bottom: -30px;
             left: 50%;
             transform: translateX(-50%);
-            border: 2px dashed #ff0000;
+            border: 2px dashed #ff00ff;
             animation: spin 1.5s infinite linear, glow 2s infinite;
             cursor: pointer;
         }
@@ -376,7 +376,7 @@
         @media (max-width: 599px) {
             body {
                 font-family: 'Comic Sans MS', sans-serif !important;
-                -webkit-font-smoothing: antialiased; /* iOS fix */
+                -webkit-font-smoothing: antialiased;
             }
             .status-bar {
                 font-size: 12px;
@@ -386,24 +386,30 @@
             }
             h1 {
                 font-size: 40px !important;
-                display: flex;
-                align-items: center;
+                display: inline-flex; /* Back to original for alignment */
+                align-items: baseline;
                 font-family: 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .title-text {
-                font-size: 40px !important; /* Explicit for 62serpens */
+                font-size: 40px !important;
                 font-family: 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
             .domain {
-                font-size: 30px !important; /* Smaller for .com */
+                font-size: 28px !important; /* Smaller than 62serpens */
                 font-family: 'Comic Sans MS', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
             }
+            .content {
+                margin-top: 30px;
+                padding: 10px; /* Tighter padding */
+                max-width: 340px; /* Shrink to fit buttons */
+            }
             .button {
-                font-size: 16px;
-                padding: 10px 15px;
+                font-size: 14px; /* Smaller text */
+                padding: 8px 15px; /* Tighter padding */
+                max-width: 280px; /* Fit within border */
             }
             .graphic-top {
                 width: 60px;
@@ -418,23 +424,18 @@
             .graphic-left {
                 width: 30px;
                 height: 80px;
-                left: -35px; /* Further out */
-                z-index: 10; /* Above buttons */
-                animation: slideOuter 6s infinite; /* New animation */
-            }
-            @keyframes slideOuter {
-                0% { top: 10%; }
-                50% { top: 90%; }
-                100% { top: 10%; }
+                left: -15px; /* Back to fader position */
+                z-index: 0; /* Behind buttons */
+                animation: slide 6s infinite; /* Original animation */
             }
             .graphic-right {
                 width: 40px;
                 height: 40px;
                 right: -20px;
-                top: 85%; /* Way below buttons */
-                z-index: 5; /* Below buttons */
+                top: 85%; /* Below buttons */
+                z-index: 5;
                 pointer-events: auto;
-                padding: 10px; /* Bigger tap area */
+                padding: 15px; /* Even bigger tap area */
                 box-sizing: content-box;
             }
             .button-container {
@@ -443,9 +444,6 @@
             .discount-code {
                 font-size: 24px;
                 padding: 10px;
-            }
-            .content {
-                margin-top: 30px;
             }
         }
     </style>
@@ -555,7 +553,7 @@
                 sliderHeight = 100;
                 gameActive = false;
                 egg3.style.height = `${sliderHeight}px`;
-                egg3.style.animation = `slideOuter 6s infinite`; /* Reset to new animation */
+                egg3.style.animation = `slide 6s infinite`; /* Back to original */
             }
         });
 
