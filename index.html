@@ -66,7 +66,7 @@
             z-index: 100;
         }
         .content-wrapper {
-            margin-top: -40px; /* Negative margin to push everything up */
+            margin-top: -40px;
         }
         .content {
             background: rgba(0, 0, 0, 0.9);
@@ -115,6 +115,7 @@
         .title-text {
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
         }
         .title-text.up:hover {
             color: #ff00ff;
@@ -123,6 +124,17 @@
         .title-text.down:hover {
             color: #ff00ff;
             transform: rotate(5deg);
+        }
+        .title-text.glitch {
+            animation: glitch 0.3s linear infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); color: #ff00ff; }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); color: #00ffff; }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
         @keyframes blink {
             50% { opacity: 0.7; }
@@ -347,7 +359,7 @@
                 -webkit-font-smoothing: antialiased;
             }
             .content-wrapper {
-                margin-top: -30px; /* Slightly less shift for mobile to fit */
+                margin-top: -30px;
             }
             h1 {
                 font-size: 40px !important;
@@ -415,7 +427,7 @@
         </div>
     </div>
     <footer class="copyright">
-        <p>© 62serpens 2025 - All Rights Reserved</p>
+        <p>© 62serpens 2025 - All Rights Reserved (i am astrally protected so dont even think about any funny business)</p>
     </footer>
     <script>
         const titleText = document.getElementById('titleText');
@@ -449,6 +461,19 @@
                 titleText.classList.add('up');
             }
         });
+
+        // Random Glitch Effect for Title
+        function triggerGlitch() {
+            titleText.classList.add('glitch');
+            setTimeout(() => {
+                titleText.classList.remove('glitch');
+            }, 300); // Glitch lasts 0.3s
+        }
+        setInterval(() => {
+            if (Math.random() < 0.1) { // 10% chance every second
+                triggerGlitch();
+            }
+        }, 1000);
 
         egg1.addEventListener('click', () => {
             for (let i = 0; i < 5; i++) {
