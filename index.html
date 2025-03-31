@@ -5,16 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>62serpens.com</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
+    <link rel="preload" href="https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png" as="image">
+    <style>
+        /* Inline critical CSS to prevent white flash */
+        html, body {
+            background-color: #000 !important;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+    </style>
     <style>
         html {
             margin: 0;
             padding: 0;
             height: 100%;
-            background-color: #000; /* Kill the white flash */
+            background-color: #000; /* Fallback */
         }
 
         body {
-            /* Background moved to inline style on <body> tag */
+            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff);
+            background-color: #000; /* Explicit fallback */
             color: #ffffff;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             margin: 0;
@@ -24,7 +35,6 @@
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
-            /* Animation moved to ::before */
             user-select: none;
             transition: transform 0.5s;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polygon points="12,2 22,22 2,22" fill="%23bf00ff" stroke="none"/></svg>') 12 12, auto;
@@ -404,7 +414,7 @@
         }
     </style>
 </head>
-<body style="background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff);">
+<body>
     <div class="status-bar">
         <span id="dateTime"></span>
         <span id="visitorCounter">VISITORS: trillions</span>
