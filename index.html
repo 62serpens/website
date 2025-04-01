@@ -207,7 +207,7 @@
             50% { opacity: 0.7; }
         }
         .domain {
-            font-size: 50px; /* Reverted to OG base size */
+            font-size: 50px;
             color: #ffffff;
             text-shadow: none;
             animation: none;
@@ -573,12 +573,88 @@
             text-align: center;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
+        /* Password Popup Styles */
+        .password-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            border: 4px double #ff00ff;
+            padding: 20px;
+            z-index: 300;
+            box-shadow: 0 0 20px #00ffff;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
+            color: #ffff00;
+            width: 300px;
+            max-width: 90vw;
+        }
+        .password-popup.active {
+            display: block;
+        }
+        .password-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 25px;
+            height: 25px;
+            background: #ff0000;
+            color: #ffffff;
+            font-size: 18px;
+            text-align: center;
+            line-height: 25px;
+            border: 2px solid #ffff00;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .password-close:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #ff00ff;
+        }
+        .password-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #333;
+            border: 2px solid #00ff00;
+            color: #00ffff;
+            font-size: 16px;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
+            box-sizing: border-box;
+        }
+        .password-submit {
+            background: #ff00ff;
+            color: #00ffff;
+            padding: 10px;
+            border: 2px solid #ffff00;
+            font-size: 16px;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
+            text-transform: uppercase;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        .password-submit:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00ff00;
+        }
+        @keyframes password-shake {
+            0% { transform: translate(-50%, -50%) translateX(0); }
+            25% { transform: translate(-50%, -50%) translateX(-10px); }
+            50% { transform: translate(-50%, -50%) translateX(10px); }
+            75% { transform: translate(-50%, -50%) translateX(-10px); }
+            100% { transform: translate(-50%, -50%) translateX(0); }
+        }
+        .password-popup.shake {
+            animation: password-shake 0.5s;
+        }
         @media (min-width: 600px) {
             .page-content { padding: 30px; }
             #homePage { padding: 30px; max-width: 700px; }
             #blogPage { max-width: 900px; }
             #galleryPage { max-width: 800px; }
-            h1 { font-size: 90px; } /* Only "62serpens" grows */
+            h1 { font-size: 90px; }
             .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
             .graphic-top { width: 100px; height: 100px; top: -50px; }
             .graphic-bottom { width: 80px; height: 80px; bottom: -40px; }
@@ -674,6 +750,9 @@
             .gallery-placeholder {
                 min-height: 100px;
             }
+            .password-popup {
+                width: 250px;
+            }
         }
     </style>
 </head>
@@ -755,6 +834,12 @@
     <footer class="copyright" id="copyright">
         <p>© 62serpens 2025 - All Rights Reserved</p>
     </footer>
+    <div class="password-popup" id="passwordPopup">
+        <div class="password-close" id="passwordClose">X</div>
+        <p>ENTER PASSWORD LOL</p>
+        <input type="password" class="password-input" id="passwordInput" placeholder="type here...">
+        <button class="password-submit" id="passwordSubmit">SUBMIT</button>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const dateTime = document.getElementById('dateTime');
@@ -781,6 +866,10 @@
             const enlargedPhoto = document.getElementById('enlargedPhoto');
             const galleryClose = document.getElementById('galleryClose');
             const galleryCaption = document.getElementById('galleryCaption');
+            const passwordPopup = document.getElementById('passwordPopup');
+            const passwordInput = document.getElementById('passwordInput');
+            const passwordSubmit = document.getElementById('passwordSubmit');
+            const passwordClose = document.getElementById('passwordClose');
 
             function updateDateTime() {
                 const now = new Date();
@@ -921,6 +1010,16 @@
                 navBar.classList.toggle('visible');
             });
 
+            // Obscure password with ROT13
+            const obscuredPassword = 'cnffjbeqyby'; // "passwordlol" in ROT13
+            function rot13(str) {
+                return str.replace(/[a-zA-Z]/g, function(c) {
+                    return String.fromCharCode((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
+                });
+            }
+            const correctPassword = rot13(obscuredPassword); // Decodes to "passwordlol" at runtime
+            let sessionUnlocked = false;
+
             function showPage(pageId) {
                 pages.forEach(page => page.classList.toggle('active', page.id === pageId));
                 navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('data-page') === pageId));
@@ -928,9 +1027,51 @@
                 window.scrollTo(0, 0);
             }
 
+            function showPasswordPopup(pageId) {
+                targetPage = pageId;
+                passwordPopup.classList.add('active');
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+
+            function hidePasswordPopup() {
+                passwordPopup.classList.remove('active');
+                passwordPopup.classList.remove('shake');
+            }
+
+            let targetPage = null;
             navLinks.forEach(link => {
-                link.addEventListener('click', () => showPage(link.getAttribute('data-page')));
+                link.addEventListener('click', () => {
+                    const pageId = link.getAttribute('data-page');
+                    if (pageId === 'homePage') {
+                        showPage(pageId);
+                    } else if (sessionUnlocked) {
+                        showPage(pageId);
+                    } else {
+                        showPasswordPopup(pageId);
+                    }
+                });
             });
+
+            passwordSubmit.addEventListener('click', () => {
+                if (passwordInput.value === correctPassword) {
+                    sessionUnlocked = true;
+                    hidePasswordPopup();
+                    showPage(targetPage);
+                } else {
+                    passwordPopup.classList.add('shake');
+                    setTimeout(() => passwordPopup.classList.remove('shake'), 500);
+                    passwordInput.value = '';
+                }
+            });
+
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    passwordSubmit.click();
+                }
+            });
+
+            passwordClose.addEventListener('click', hidePasswordPopup);
 
             const blogPosts = {
                 'placeholder': { title: "PLACEHOLDER POST", content: `<div class="blog-date">XX/XX/XXXX</div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.` }
