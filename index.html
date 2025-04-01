@@ -12,7 +12,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden; /* Keep original no-scroll */
+            overflow: hidden;
         }
         html {
             background-color: #000;
@@ -176,11 +176,13 @@
             animation: blink 0.5s infinite;
             display: inline-flex;
             align-items: baseline;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .title-text {
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .title-text.up:hover {
             color: #ff00ff;
@@ -211,6 +213,7 @@
             animation: none;
             transition: none;
             cursor: pointer;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .under-construction {
             position: absolute;
@@ -223,6 +226,7 @@
             border: 2px solid #000;
             transform: rotate(-10deg);
             cursor: pointer;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .button-container {
             display: flex;
@@ -345,6 +349,7 @@
             color: #00ff00;
             transform: rotate(-20deg);
             animation: fade 4s infinite;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         @keyframes fade {
             0%, 100% { opacity: 1; }
@@ -359,6 +364,7 @@
             background: #ffff00;
             padding: 5px;
             box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .chaos-star {
             position: absolute;
@@ -379,6 +385,7 @@
             pointer-events: none;
             display: none;
             white-space: nowrap;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .discount-code {
             position: absolute;
@@ -392,6 +399,7 @@
             border: 2px solid #ff00ff;
             display: none;
             z-index: 10;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .copyright {
             position: fixed;
@@ -426,6 +434,7 @@
             display: flex;
             flex-direction: column;
             width: 100%;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-menu {
             flex: 0 0 auto;
@@ -444,16 +453,19 @@
             text-shadow: 2px 2px 0 #ff00ff;
             text-transform: uppercase;
             margin-bottom: 15px;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-content {
             color: #00ffff;
             font-size: 16px;
             line-height: 1.6;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-date {
             color: #ff00ff;
             font-weight: bold;
             margin-bottom: 10px;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-nav-button {
             background: #ff00ff;
@@ -472,6 +484,7 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-nav-button:hover {
             background: #00ffff;
@@ -486,25 +499,27 @@
         /* Gallery Styles */
         .gallery-container {
             width: 100%;
-            padding: 10px 0;
+            padding: 10px;
             box-sizing: border-box;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, minmax(150px, 1fr)); /* Fixed min size */
             gap: 15px;
             width: 100%;
-            max-width: 700px;
+            max-width: 800px; /* Match #galleryPage */
             margin: 0 auto;
         }
         .gallery-placeholder {
             width: 100%;
-            padding-top: 100%;
+            padding-top: 100%; /* Square aspect ratio */
             border: 2px solid #ffffff;
             background: transparent;
             cursor: pointer;
             position: relative;
             background-size: cover;
+            min-height: 150px; /* Ensure visibility */
         }
         .gallery-placeholder.test {
             background-image: url('https://via.placeholder.com/150/00ff00/ffffff?text=TEST');
@@ -524,6 +539,7 @@
             z-index: 200;
             box-shadow: 0 0 20px #00ffff;
             background-size: cover;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .gallery-close {
             position: absolute;
@@ -539,6 +555,7 @@
             border: 2px solid #ffff00;
             cursor: pointer;
             transition: all 0.2s ease;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .gallery-close:hover {
             transform: scale(1.1);
@@ -554,14 +571,15 @@
             background: rgba(0, 0, 0, 0.7);
             padding: 5px;
             text-align: center;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         @media (min-width: 600px) {
             .page-content { padding: 30px; }
-            #homePage { padding: 30px; max-width: 700px; } /* Homepage desktop charm */
+            #homePage { padding: 30px; max-width: 700px; }
             #blogPage { max-width: 900px; }
             #galleryPage { max-width: 800px; }
             h1 { font-size: 90px; }
-            .domain { font-size: 90px; } /* Larger .com on desktop */
+            .domain { font-size: 90px; }
             .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
             .graphic-top { width: 100px; height: 100px; top: -50px; }
             .graphic-bottom { width: 80px; height: 80px; bottom: -40px; }
@@ -583,24 +601,48 @@
                 -webkit-font-smoothing: antialiased;
                 font-weight: 400;
                 padding: 10px;
-                overflow-x: hidden; /* No horizontal scroll */
+                overflow-x: hidden;
             }
             .status-bar {
                 font-size: 12px;
                 padding: 3px;
+                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
             }
             .nav-bar {
                 top: 20px;
                 width: 90%;
                 padding: 5px;
+                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
             }
-            .nav-link { font-size: 12px; margin: 3px 5px; }
+            .nav-link {
+                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
+            }
             .content-wrapper { margin-top: -30px; }
-            #homePage { margin-top: 15px; padding: 15px; border-width: 6px; } /* Original mobile homepage */
-            h1 { font-size: 40px !important; }
-            .domain { font-size: 28px !important; }
+            #homePage { margin-top: 15px; padding: 15px; border-width: 6px; }
+            h1 {
+                font-size: 40px !important;
+                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
+            }
+            .title-text {
+                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
+            }
+            .domain {
+                font-size: 28px !important;
+                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
+            }
             .button { font-size: 14px; padding: 8px 15px; max-width: 280px; }
-            .under-construction { font-size: 14px !important; padding: 5px !important; }
+            .under-construction {
+                font-size: 14px !important;
+                padding: 5px !important;
+                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
+            }
             .graphic-top { width: 60px; height: 60px; top: -30px; }
             .graphic-bottom { width: 50px; height: 50px; bottom: -25px; }
             .graphic-left { width: 30px; height: 80px; left: -15px; z-index: 0; }
@@ -610,15 +652,29 @@
                 right: -20px;
                 top: 85%;
                 z-index: 5;
-                padding: 15px; /* Larger touch area */
+                padding: 15px;
                 box-sizing: content-box;
             }
             .button-container { z-index: 10; }
-            .discount-code { font-size: 24px; padding: 10px; }
-            .copyright { font-size: 10px; }
+            .discount-code {
+                font-size: 24px;
+                padding: 10px;
+                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
+            }
+            .copyright {
+                font-size: 10px;
+                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
+            }
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
-            .gallery-container { padding: 40px 0 10px; } /* Below nav bar */
-            .gallery-grid { grid-template-columns: repeat(3, 1fr); } /* 3 columns mobile */
+            .gallery-container { padding: 40px 10px 10px; } /* Below nav bar */
+            .gallery-grid {
+                grid-template-columns: repeat(3, minmax(100px, 1fr)); /* Fixed min size mobile */
+            }
+            .gallery-placeholder {
+                min-height: 100px; /* Ensure visibility mobile */
+            }
         }
     </style>
 </head>
