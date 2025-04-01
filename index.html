@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>62serpens.com</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
+    <link rel="icon" type="image/svg+xml" href mainly="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
     <link rel="preload" href="https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png" as="image">
     <style>
         html, body {
@@ -12,7 +12,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow-x: hidden;
+            overflow: hidden; /* Disable scrolling */
         }
         body {
             background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff);
@@ -106,7 +106,7 @@
             z-index: 10;
             width: 100%;
             max-width: 900px;
-            margin-top: 40px;
+            margin-top: -40px; /* Original spacing */
         }
         .page-content {
             background: rgba(0, 0, 0, 0.9);
@@ -122,20 +122,22 @@
         #homePage {
             border: 4px double #00ff00;
             animation: shake 0.1s infinite;
-            max-width: 400px;
-            margin: 0 auto;
+            max-width: 400px; /* Original size */
+            margin: 20px auto 0; /* Original spacing */
         }
         #blogPage {
             border: 4px dashed #ff00ff;
             max-width: 900px;
             overflow-y: auto;
             max-height: calc(100vh - 100px);
+            margin: 0 auto;
         }
         #galleryPage {
             border: 4px dotted #ffff00;
             max-width: 800px;
             overflow-y: auto;
             max-height: calc(100vh - 100px);
+            margin: 0 auto;
         }
         @keyframes shake {
             0% { transform: translateX(0); }
@@ -259,6 +261,7 @@
         .instagram:hover { background: rgb(255, 200, 255); }
         .spotify:hover { background: rgb(150, 255, 150); }
         .soundcloud:hover { background: rgb(255, 200, 150); }
+        .button.secret:hover { background: rgb(150, 255, 255); color: #ff00ff; } /* Fix blue button hover */
         .button::before {
             content: '★';
             color: #ffff00;
@@ -476,11 +479,15 @@
         .gallery-container {
             width: 100%;
             padding: 10px;
+            display: flex;
+            justify-content: center;
         }
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
+            width: 100%;
+            max-width: 700px; /* Center and constrain */
         }
         .gallery-placeholder {
             width: 100%;
@@ -541,19 +548,19 @@
             text-align: center;
         }
         @media (min-width: 600px) {
-            .content-wrapper { margin-top: 50px; }
+            .content-wrapper { margin-top: -40px; } /* Original spacing */
             .page-content { padding: 30px; }
-            #homePage { max-width: 700px; }
-            h1 { font-size: 90px; }
-            .domain { font-size: 90px; }
-            .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
-            .graphic-top { width: 100px; height: 100px; top: -50px; }
-            .graphic-bottom { width: 80px; height: 80px; bottom: -40px; }
-            .graphic-left { width: 60px; height: 150px; left: -30px; }
-            .graphic-right { width: 70px; height: 70px; right: -35px; }
-            .marquee { font-size: 20px; }
-            .flash-text { font-size: 200px; }
-            .discount-code { font-size: 40px; }
+            #homePage { max-width: 400px; padding: 15px; } /* Original size */
+            h1 { font-size: 50px; } /* Original size */
+            .domain { font-size: 50px; } /* Original size */
+            .button { font-size: 18px; padding: 12px 20px; max-width: 300px; } /* Original size */
+            .graphic-top { width: 80px; height: 80px; top: -40px; } /* Original size */
+            .graphic-bottom { width: 60px; height: 60px; bottom: -30px; } /* Original size */
+            .graphic-left { width: 40px; height: 100px; left: -20px; } /* Original size */
+            .graphic-right { width: 50px; height: 50px; right: -25px; } /* Original size */
+            .marquee { font-size: 16px; } /* Original size */
+            .flash-text { font-size: 100px; } /* Original size */
+            .discount-code { font-size: 30px; } /* Original size */
             .blog-container { flex-direction: row; }
             .blog-menu { flex: 0 0 300px; border-right: 4px double #ff00ff; padding-right: 15px; margin-right: 15px; max-height: none; }
             .blog-main { flex: 1; padding: 0; }
@@ -566,23 +573,22 @@
                 font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
                 font-weight: 400;
-                padding: 5px;
+                padding: 10px; /* Original padding */
             }
             .status-bar { font-size: 12px; padding: 3px; }
             .nav-bar { top: 25px; padding: 5px; width: 90%; }
             .nav-link { font-size: 12px; margin: 3px 5px; }
-            .content-wrapper { margin-top: 30px; }
-            #homePage { max-width: 100%; }
-            #blogPage, #galleryPage { max-height: calc(100vh - 80px); }
-            h1 { font-size: 40px !important; margin: 40px 0 15px; }
-            .domain { font-size: 28px !important; }
-            .button { font-size: 14px; padding: 8px 15px; max-width: 280px; }
-            .under-construction { font-size: 12px !important; padding: 3px !important; }
-            .graphic-top { width: 60px; height: 60px; top: -30px; }
-            .graphic-bottom { width: 50px; height: 50px; bottom: -25px; }
-            .graphic-left { width: 30px; height: 80px; left: -15px; }
-            .graphic-right { width: 40px; height: 40px; right: -20px; top: 85%; }
-            .discount-code { font-size: 24px; padding: 10px; }
+            .content-wrapper { margin-top: -30px; } /* Original mobile spacing */
+            #homePage { max-width: 400px; margin-top: 15px; padding: 15px; border-width: 6px; } /* Original mobile size */
+            h1 { font-size: 40px !important; margin: 50px 0 20px; } /* Original mobile size */
+            .domain { font-size: 28px !important; } /* Original mobile size */
+            .button { font-size: 14px; padding: 8px 15px; max-width: 280px; } /* Original mobile size */
+            .under-construction { font-size: 14px !important; padding: 5px !important; } /* Original mobile size */
+            .graphic-top { width: 60px; height: 60px; top: -30px; } /* Original mobile size */
+            .graphic-bottom { width: 50px; height: 50px; bottom: -25px; } /* Original mobile size */
+            .graphic-left { width: 30px; height: 80px; left: -15px; } /* Original mobile size */
+            .graphic-right { width: 40px; height: 40px; right: -20px; top: 85%; padding: 15px; box-sizing: content-box; } /* Original mobile size */
+            .discount-code { font-size: 24px; padding: 10px; } /* Original mobile size */
             .copyright { font-size: 10px; }
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
             .blog-menu { max-height: 200px; }
@@ -623,22 +629,7 @@
         <div class="page-content" id="blogPage">
             <div class="blog-container">
                 <div class="blog-menu">
-                    <div class="blog-nav-button" data-date="2025-03-31">31/03/2025<br>FU!! BEATSTARS SUCKS</div>
-                    <div class="blog-nav-button" data-date="2025-04-01">01/04/2025<br>INTERNET = NEW TV</div>
-                    <div class="blog-nav-button" data-date="2025-04-15">15/04/2025<br>WHY IS EVERYTHING SO DUMB</div>
-                    <div class="blog-nav-button" data-date="2025-05-02">02/05/2025<br>PARK PIC DAY</div>
-                    <div class="blog-nav-button" data-date="2025-06-10">10/06/2025<br>RANT #47: STUFF SUCKS</div>
-                    <div class="blog-nav-button" data-date="2025-07-23">23/07/2025<br>LOL WHATEVER</div>
-                    <div class="blog-nav-button" data-date="2025-08-01">01/08/2025<br>AI IS DUMB AND SO ARE YOU</div>
-                    <div class="blog-nav-button" data-date="2025-09-15">15/09/2025<br>BEATS AND BEANS</div>
-                    <div class="blog-nav-button" data-date="2025-10-31">31/10/2025<br>SPOOKY VIBES ONLY</div>
-                    <div class="blog-nav-button" data-date="2025-11-05">05/11/2025<br>POST-SPOOKY CHAOS</div>
-                    <div class="blog-nav-button" data-date="2025-11-15">15/11/2025<br>BEAT DROP DAY</div>
-                    <div class="blog-nav-button" data-date="2025-12-01">01/12/2025<br>WINTER VIBES SUCK</div>
-                    <div class="blog-nav-button" data-date="2025-12-20">20/12/2025<br>XMAS IS DUMB</div>
-                    <div class="blog-nav-button" data-date="2026-01-10">10/01/2026<br>NEW YEAR NEW RANT</div>
-                    <div class="blog-nav-button" data-date="2026-02-14">14/02/2026<br>LOVE IS FAKE</div>
-                    <div class="blog-nav-button" data-date="2026-03-01">01/03/2026<br>SPRING IS LAME</div>
+                    <div class="blog-nav-button active" data-date="placeholder">XX/XX/XXXX<br>PLACEHOLDER POST</div>
                 </div>
                 <div class="blog-main">
                     <div class="blog-title" id="blogTitle"></div>
@@ -818,7 +809,7 @@
             egg4.addEventListener('click', () => {
                 if (!secretLink) {
                     secretLink = document.createElement('a');
-                    secretLink.className = 'button';
+                    secretLink.className = 'button secret'; /* Added class for hover fix */
                     secretLink.textContent = 'SECRET LINK';
                     secretLink.href = 'https://discord.gg/cCedfQgHVG';
                     secretLink.target = '_blank';
@@ -850,7 +841,7 @@
             function showPage(pageId) {
                 pages.forEach(page => page.classList.toggle('active', page.id === pageId));
                 navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('data-page') === pageId));
-                if (pageId === 'blogPage') updateBlogContent('2025-03-31');
+                if (pageId === 'blogPage') updateBlogContent('placeholder');
                 window.scrollTo(0, 0);
             }
 
@@ -859,22 +850,7 @@
             });
 
             const blogPosts = {
-                '2025-03-31': { title: "FU!! BEATSTARS SUCKS", content: `<div class="blog-date">31/03/2025</div>Yo, BeatStars can shove it. Why are we letting some greedy corp rake in cash while we’re just trying to sling beats?? We need a DAO-type site—community-funded, no suits, no profits, just pure beat chaos.` },
-                '2025-04-01': { title: "INTERNET = NEW TV", content: `<div class="blog-date">01/04/2025</div>Ugh, the internet’s dead, fam. I’m DONE with these cookie-cutter layouts. I want MY OWN digital crib, custom-built, no suits telling me what’s up.` },
-                '2025-04-15': { title: "WHY IS EVERYTHING SO DUMB", content: `<div class="blog-date">15/04/2025</div>Seriously, why does everything suck so bad lately? The internet’s a dumpster fire, people are obsessed with dumb apps, and I’m over here just trying to vibe.` },
-                '2025-05-02': { title: "PARK PIC DAY", content: `<div class="blog-date">02/05/2025</div>Yo, check it—here’s a pic of me at the park. It was a pretty nice day, sun was out, birds were chirping, whatever. [PARK PHOTO GOES HERE]` },
-                '2025-06-10': { title: "RANT #47: STUFF SUCKS", content: `<div class="blog-date">10/06/2025</div>Another day, another rant. Everything’s still trash—big surprise. People out here acting like robots, the internet’s a corporate playground.` },
-                '2025-07-23': { title: "LOL WHATEVER", content: `<div class="blog-date">23/07/2025</div>Honestly, I’m over it. Everything’s a mess, but who cares anymore? LOL, just gonna keep doing my thing.` },
-                '2025-08-01': { title: "AI IS DUMB AND SO ARE YOU", content: `<div class="blog-date">01/08/2025</div>AI’s taking over, and it’s still dumber than a bag of hammers. Why are we hyping this trash? Oh wait, you’re all just as clueless.` },
-                '2025-09-15': { title: "BEATS AND BEANS", content: `<div class="blog-date">15/09/2025</div>Made some beats, ate some beans, living the dream. Internet’s still a cesspool, but at least I’ve got tunes and gas.` },
-                '2025-10-31': { title: "SPOOKY VIBES ONLY", content: `<div class="blog-date">31/10/2025</div>It’s Halloween, losers! Dropping some haunted beats and avoiding all you normies in costumes.` },
-                '2025-11-05': { title: "POST-SPOOKY CHAOS", content: `<div class="blog-date">05/11/2025</div>Halloween’s over, but the chaos lives on. Beats still banging, internet still trash.` },
-                '2025-11-15': { title: "BEAT DROP DAY", content: `<div class="blog-date">15/11/2025</div>Dropped some fire beats today. Y’all sleeping on it, as usual. Wake up!` },
-                '2025-12-01': { title: "WINTER VIBES SUCK", content: `<div class="blog-date">01/12/2025</div>Winter’s here, and it’s as lame as ever. Cold beats, hot rants—deal with it.` },
-                '2025-12-20': { title: "XMAS IS DUMB", content: `<div class="blog-date">20/12/2025</div>Christmas is just corporate garbage with extra glitter. Beats > presents.` },
-                '2026-01-10': { title: "NEW YEAR NEW RANT", content: `<div class="blog-date">10/01/2026</div>New year, same trash internet. Resolutions? Nah, just more beats and chaos.` },
-                '2026-02-14': { title: "LOVE IS FAKE", content: `<div class="blog-date">14/02/2026</div>Valentine’s Day is a scam. Beats don’t cheat—people do.` },
-                '2026-03-01': { title: "SPRING IS LAME", content: `<div class="blog-date">01/03/2026</div>Spring’s here, and it’s still boring. Flowers? Whatever, give me beats.` }
+                'placeholder': { title: "PLACEHOLDER POST", content: `<div class="blog-date">XX/XX/XXXX</div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.` }
             };
 
             function updateBlogContent(date) {
