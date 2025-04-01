@@ -12,9 +12,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-        }
-        html {
-            background-color: #000;
+            overflow-x: hidden;
         }
         body {
             background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff);
@@ -25,8 +23,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
-            overflow-y: hidden;
             user-select: none;
             transition: transform 0.5s;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polygon points="12,2 22,22 2,22" fill="%23bf00ff" stroke="none"/></svg>') 12 12, auto;
@@ -64,31 +60,82 @@
             justify-content: space-between;
             box-sizing: border-box;
             z-index: 100;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         #coordinates {
             cursor: pointer;
             transition: color 0.2s ease;
         }
         #coordinates:hover {
-            color: #ff00ff; /* Visual feedback */
+            color: #ff00ff;
+        }
+        .nav-bar {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            padding: 5px 10px;
+            border: 2px solid #ff00ff;
+            z-index: 110;
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .nav-bar.visible {
+            display: flex;
+        }
+        .nav-link {
+            color: #ffff00;
+            font-size: 14px;
+            text-decoration: none;
+            margin: 5px 10px;
+            padding: 5px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            display: inline-block;
+        }
+        .nav-link:hover {
+            color: #ff00ff;
+        }
+        .nav-link.active {
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
         }
         .content-wrapper {
-            margin-top: -40px;
             position: relative;
             z-index: 10;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 40px;
         }
-        .content {
+        .page-content {
             background: rgba(0, 0, 0, 0.9);
             padding: 15px;
-            border: 4px double #00ff00;
             width: 100%;
-            max-width: 400px;
             box-sizing: border-box;
-            position: relative;
             box-shadow: 0 0 20px #ff00ff;
+            display: none;
+        }
+        .page-content.active {
+            display: block;
+        }
+        #homePage {
+            border: 4px double #00ff00;
             animation: shake 0.1s infinite;
-            margin-top: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        #blogPage {
+            border: 4px dashed #ff00ff;
+            max-width: 900px;
+            overflow-y: auto;
+            max-height: calc(100vh - 100px);
+        }
+        #galleryPage {
+            border: 4px dotted #ffff00;
+            max-width: 800px;
+            overflow-y: auto;
+            max-height: calc(100vh - 100px);
         }
         @keyframes shake {
             0% { transform: translateX(0); }
@@ -121,11 +168,13 @@
             animation: blink 0.5s infinite;
             display: inline-flex;
             align-items: baseline;
+            text-align: center;
+            width: 100%;
+            justify-content: center;
         }
         .title-text {
             transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
         }
         .title-text.up:hover {
             color: #ff00ff;
@@ -154,7 +203,11 @@
             color: #ffffff;
             text-shadow: none;
             animation: none;
-            transition: none;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+        .domain:hover {
+            color: #ff00ff;
         }
         .under-construction {
             position: absolute;
@@ -174,6 +227,7 @@
             gap: 12px;
             align-items: center;
             position: relative;
+            z-index: 10;
         }
         .button {
             background: #ff00ff;
@@ -190,7 +244,7 @@
             max-width: 300px;
             text-align: center;
             position: relative;
-            z-index: 1;
+            display: block;
         }
         .beatstore { background: rgb(255, 50, 50); }
         .instagram { background: rgb(255, 80, 200); }
@@ -222,6 +276,9 @@
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
         }
         .graphic-bottom {
             width: 60px;
@@ -258,13 +315,6 @@
             50% { top: 80%; }
             100% { top: 20%; }
         }
-        @keyframes menuBorderChase {
-            0% { top: -20px; left: 0; }
-            25% { top: -20px; left: calc(100% - 40px); }
-            50% { top: calc(100% - 100px); left: calc(100% - 40px); }
-            75% { top: calc(100% - 100px); left: 0; }
-            100% { top: -20px; left: 0; }
-        }
         .graphic-right {
             width: 50px;
             height: 50px;
@@ -298,6 +348,7 @@
             font-size: 16px;
             background: #ffff00;
             padding: 5px;
+            box-sizing: border-box;
         }
         .chaos-star {
             position: absolute;
@@ -339,7 +390,6 @@
             transform: translateX(-50%);
             font-size: 12px;
             color: #ffffff;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             z-index: 10;
             white-space: nowrap;
             animation: blink 0.5s infinite;
@@ -354,15 +404,148 @@
             opacity: 0.3;
             pointer-events: none;
             z-index: 5;
-            animation: warp 10s linear forwards; /* Slow as hell */
+            animation: warp 10s linear forwards;
         }
         @keyframes warp {
             0% { opacity: 0.3; transform: translate(0, 0) scale(1); }
             100% { opacity: 0; transform: translate(var(--end-x), var(--end-y)) scale(2); }
         }
+        /* Blog Styles */
+        .blog-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .blog-menu {
+            flex: 0 0 auto;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+        .blog-main {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        .blog-title {
+            font-size: 28px;
+            color: #ffff00;
+            text-shadow: 2px 2px 0 #ff00ff;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        .blog-content {
+            color: #00ffff;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .blog-date {
+            color: #ff00ff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .blog-nav-button {
+            background: #ff00ff;
+            color: #00ffff;
+            padding: 8px 10px;
+            border: none;
+            text-decoration: none;
+            font-size: 12px;
+            text-align: left;
+            box-shadow: 0 0 5px #ff00ff;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 8px;
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .blog-nav-button:hover {
+            background: #00ffff;
+            color: #ff00ff;
+            box-shadow: 0 0 10px #00ff00;
+        }
+        .blog-nav-button.active {
+            background: #00ff00;
+            color: #ff00ff;
+            box-shadow: 0 0 10px #ffff00;
+        }
+        /* Gallery Styles */
+        .gallery-container {
+            width: 100%;
+            padding: 10px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .gallery-placeholder {
+            width: 100%;
+            padding-top: 100%;
+            border: 2px solid #ffffff;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            background-size: cover;
+        }
+        .gallery-placeholder.test {
+            background-image: url('https://via.placeholder.com/150/00ff00/ffffff?text=TEST');
+        }
+        .gallery-enlarged {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            max-width: 600px;
+            height: 80vw;
+            max-height: 600px;
+            border: 4px solid #ff00ff;
+            background: #000;
+            z-index: 200;
+            box-shadow: 0 0 20px #00ffff;
+            background-size: cover;
+        }
+        .gallery-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: #ff0000;
+            color: #ffffff;
+            font-size: 20px;
+            text-align: center;
+            line-height: 30px;
+            border: 2px solid #ffff00;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .gallery-close:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #ff00ff;
+        }
+        .gallery-caption {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            color: #ffff00;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px;
+            text-align: center;
+        }
         @media (min-width: 600px) {
-            .content { padding: 30px; max-width: 700px; }
+            .content-wrapper { margin-top: 50px; }
+            .page-content { padding: 30px; }
+            #homePage { max-width: 700px; }
             h1 { font-size: 90px; }
+            .domain { font-size: 90px; }
             .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
             .graphic-top { width: 100px; height: 100px; top: -50px; }
             .graphic-bottom { width: 80px; height: 80px; bottom: -40px; }
@@ -371,64 +554,40 @@
             .marquee { font-size: 20px; }
             .flash-text { font-size: 200px; }
             .discount-code { font-size: 40px; }
+            .blog-container { flex-direction: row; }
+            .blog-menu { flex: 0 0 300px; border-right: 4px double #ff00ff; padding-right: 15px; margin-right: 15px; max-height: none; }
+            .blog-main { flex: 1; padding: 0; }
+            .blog-title { font-size: 36px; }
+            .blog-content { font-size: 18px; }
+            .blog-nav-button { font-size: 14px; padding: 10px 12px; }
         }
         @media (max-width: 599px) {
             body {
                 font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
                 font-weight: 400;
+                padding: 5px;
             }
-            .status-bar {
-                font-size: 12px;
-                padding: 3px;
-                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
-            .content-wrapper {
-                margin-top: -30px;
-            }
-            h1 {
-                font-size: 40px !important;
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
-            .title-text {
-                font-size: 40px !important;
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
-            .domain {
-                font-size: 28px !important;
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
-            .content {
-                margin-top: 15px;
-                padding: 15px;
-                max-width: 400px;
-                border-width: 6px;
-            }
-            .button {
-                font-size: 14px;
-                padding: 8px 15px;
-                max-width: 280px;
-            }
-            .under-construction {
-                font-size: 14px !important;
-                padding: 5px !important;
-            }
+            .status-bar { font-size: 12px; padding: 3px; }
+            .nav-bar { top: 25px; padding: 5px; width: 90%; }
+            .nav-link { font-size: 12px; margin: 3px 5px; }
+            .content-wrapper { margin-top: 30px; }
+            #homePage { max-width: 100%; }
+            #blogPage, #galleryPage { max-height: calc(100vh - 80px); }
+            h1 { font-size: 40px !important; margin: 40px 0 15px; }
+            .domain { font-size: 28px !important; }
+            .button { font-size: 14px; padding: 8px 15px; max-width: 280px; }
+            .under-construction { font-size: 12px !important; padding: 3px !important; }
             .graphic-top { width: 60px; height: 60px; top: -30px; }
             .graphic-bottom { width: 50px; height: 50px; bottom: -25px; }
-            .graphic-left { width: 30px; height: 80px; left: -15px; z-index: 0; }
-            .graphic-right { width: 40px; height: 40px; right: -20px; top: 85%; z-index: 5; padding: 15px; box-sizing: content-box; }
-            .button-container { z-index: 10; }
+            .graphic-left { width: 30px; height: 80px; left: -15px; }
+            .graphic-right { width: 40px; height: 40px; right: -20px; top: 85%; }
             .discount-code { font-size: 24px; padding: 10px; }
             .copyright { font-size: 10px; }
-            .astral-particle { 
-                width: 6px;
-                height: 1px;
-                animation: warp 15s linear forwards; /* Mobile ultra-slow */
-            }
+            .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
+            .blog-menu { max-height: 200px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+            .gallery-enlarged { width: 90vw; height: 90vw; max-height: 400px; }
         }
     </style>
 </head>
@@ -437,12 +596,17 @@
         <span id="dateTime"></span>
         <span id="coordinates"></span>
     </div>
+    <div class="nav-bar">
+        <span class="nav-link active" data-page="homePage">Homepage</span>
+        <span class="nav-link" data-page="blogPage">Blog</span>
+        <span class="nav-link" data-page="galleryPage">Gallery</span>
+    </div>
     <div class="content-wrapper">
-        <div class="content">
+        <div class="page-content active" id="homePage">
             <marquee class="marquee">WELCOME TO 62SERPENS ZONE - ENTER AT UR OWN RISK!!!</marquee>
             <div class="graphic-top" id="egg1"></div>
             <h1><span class="title-text up" id="titleText">62serpens</span><span class="domain">.com</span></h1>
-            <div class="button-container" id="buttonContainer">
+            <div class="button-container">
                 <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore">Beat Store ᯓ★</a>
                 <a href="https://www.instagram.com/62serpens" class="button instagram">Instagram</a>
                 <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button spotify">Spotify</a>
@@ -456,177 +620,292 @@
             <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
             <span class="discount-code" id="discountCode">20% OFF BEATSTARS CODE 626262</span>
         </div>
+        <div class="page-content" id="blogPage">
+            <div class="blog-container">
+                <div class="blog-menu">
+                    <div class="blog-nav-button" data-date="2025-03-31">31/03/2025<br>FU!! BEATSTARS SUCKS</div>
+                    <div class="blog-nav-button" data-date="2025-04-01">01/04/2025<br>INTERNET = NEW TV</div>
+                    <div class="blog-nav-button" data-date="2025-04-15">15/04/2025<br>WHY IS EVERYTHING SO DUMB</div>
+                    <div class="blog-nav-button" data-date="2025-05-02">02/05/2025<br>PARK PIC DAY</div>
+                    <div class="blog-nav-button" data-date="2025-06-10">10/06/2025<br>RANT #47: STUFF SUCKS</div>
+                    <div class="blog-nav-button" data-date="2025-07-23">23/07/2025<br>LOL WHATEVER</div>
+                    <div class="blog-nav-button" data-date="2025-08-01">01/08/2025<br>AI IS DUMB AND SO ARE YOU</div>
+                    <div class="blog-nav-button" data-date="2025-09-15">15/09/2025<br>BEATS AND BEANS</div>
+                    <div class="blog-nav-button" data-date="2025-10-31">31/10/2025<br>SPOOKY VIBES ONLY</div>
+                    <div class="blog-nav-button" data-date="2025-11-05">05/11/2025<br>POST-SPOOKY CHAOS</div>
+                    <div class="blog-nav-button" data-date="2025-11-15">15/11/2025<br>BEAT DROP DAY</div>
+                    <div class="blog-nav-button" data-date="2025-12-01">01/12/2025<br>WINTER VIBES SUCK</div>
+                    <div class="blog-nav-button" data-date="2025-12-20">20/12/2025<br>XMAS IS DUMB</div>
+                    <div class="blog-nav-button" data-date="2026-01-10">10/01/2026<br>NEW YEAR NEW RANT</div>
+                    <div class="blog-nav-button" data-date="2026-02-14">14/02/2026<br>LOVE IS FAKE</div>
+                    <div class="blog-nav-button" data-date="2026-03-01">01/03/2026<br>SPRING IS LAME</div>
+                </div>
+                <div class="blog-main">
+                    <div class="blog-title" id="blogTitle"></div>
+                    <div class="blog-content" id="blogContent"></div>
+                </div>
+            </div>
+        </div>
+        <div class="page-content" id="galleryPage">
+            <div class="gallery-container">
+                <div class="gallery-grid">
+                    <div class="gallery-placeholder test" data-index="1" data-caption="lol this is a test pic"></div>
+                    <div class="gallery-placeholder" data-index="2" data-caption="empty chaos"></div>
+                    <div class="gallery-placeholder" data-index="3" data-caption="nothing here"></div>
+                    <div class="gallery-placeholder" data-index="4" data-caption="what’s this?"></div>
+                    <div class="gallery-placeholder" data-index="5" data-caption="beats in space"></div>
+                    <div class="gallery-placeholder" data-index="6" data-caption="random junk"></div>
+                    <div class="gallery-placeholder" data-index="7" data-caption="park vibes"></div>
+                    <div class="gallery-placeholder" data-index="8" data-caption="neon mess"></div>
+                    <div class="gallery-placeholder" data-index="9" data-caption="idk anymore"></div>
+                    <div class="gallery-placeholder" data-index="10" data-caption="sick of this"></div>
+                    <div class="gallery-placeholder" data-index="11" data-caption="cool stuff"></div>
+                    <div class="gallery-placeholder" data-index="12" data-caption="whatever"></div>
+                    <div class="gallery-placeholder" data-index="13" data-caption="haha nice"></div>
+                    <div class="gallery-placeholder" data-index="14" data-caption="beat drop"></div>
+                    <div class="gallery-placeholder" data-index="15" data-caption="ugh internet"></div>
+                    <div class="gallery-placeholder" data-index="16" data-caption="spooky szn"></div>
+                    <div class="gallery-placeholder" data-index="17" data-caption="raw chaos"></div>
+                    <div class="gallery-placeholder" data-index="18" data-caption="bean life"></div>
+                    <div class="gallery-placeholder" data-index="19" data-caption="AI sucks"></div>
+                    <div class="gallery-placeholder" data-index="20" data-caption="retro vibes"></div>
+                    <div class="gallery-placeholder" data-index="21" data-caption="nope"></div>
+                    <div class="gallery-placeholder" data-index="22" data-caption="yep"></div>
+                    <div class="gallery-placeholder" data-index="23" data-caption="maybe"></div>
+                    <div class="gallery-placeholder" data-index="24" data-caption="donezo"></div>
+                </div>
+            </div>
+            <div class="gallery-enlarged" id="enlargedPhoto">
+                <div class="gallery-close" id="galleryClose">X</div>
+                <div class="gallery-caption" id="galleryCaption"></div>
+            </div>
+        </div>
     </div>
     <footer class="copyright" id="copyright">
         <p>© 62serpens 2025 - All Rights Reserved</p>
     </footer>
     <script>
-        const titleText = document.getElementById('titleText');
-        const egg1 = document.getElementById('egg1');
-        const egg2 = document.getElementById('egg2');
-        const egg3 = document.getElementById('egg3');
-        const egg4 = document.getElementById('egg4');
-        const egg5 = document.getElementById('egg5');
-        const buttonContainer = document.getElementById('buttonContainer');
-        const flashText = document.getElementById('flashText');
-        const discountCode = document.getElementById('discountCode');
-        const dateTime = document.getElementById('dateTime');
-        const coordinates = document.getElementById('coordinates');
-        const contentWrapper = document.querySelector('.content-wrapper');
-        const content = document.querySelector('.content');
-        const copyright = document.getElementById('copyright');
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateTime = document.getElementById('dateTime');
+            const coordinates = document.getElementById('coordinates');
+            const navBar = document.querySelector('.nav-bar');
+            const domain = document.querySelector('.domain');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page-content');
+            const contentWrapper = document.querySelector('.content-wrapper');
+            const titleText = document.getElementById('titleText');
+            const egg1 = document.getElementById('egg1');
+            const egg2 = document.getElementById('egg2');
+            const egg3 = document.getElementById('egg3');
+            const egg4 = document.getElementById('egg4');
+            const egg5 = document.getElementById('egg5');
+            const buttonContainer = document.querySelector('#homePage .button-container');
+            const flashText = document.getElementById('flashText');
+            const discountCode = document.getElementById('discountCode');
+            const copyright = document.getElementById('copyright');
+            const blogTitle = document.getElementById('blogTitle');
+            const blogContent = document.getElementById('blogContent');
+            const blogNavButtons = document.querySelectorAll('.blog-nav-button');
+            const galleryPlaceholders = document.querySelectorAll('.gallery-placeholder');
+            const enlargedPhoto = document.getElementById('enlargedPhoto');
+            const galleryClose = document.getElementById('galleryClose');
+            const galleryCaption = document.getElementById('galleryCaption');
 
-        function updateDateTime() {
-            const now = new Date();
-            const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-            const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
-            dateTime.textContent = `${dateStr} ${timeStr}`;
-        }
-        updateDateTime();
-        setInterval(updateDateTime, 1000);
+            function updateDateTime() {
+                const now = new Date();
+                dateTime.textContent = now.toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+            }
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
 
-        // Quantum Coordinates
-        function updateCoordinates() {
-            const ranges = [
-                Math.pow(10, Math.random() * 10 - 5), // 0.00001 to 100,000
-                Math.pow(10, Math.random() * 20 - 10) // 0.0000000001 to 10,000,000,000
-            ];
-            const lat = (Math.random() * ranges[Math.floor(Math.random() * 2)] * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
-            const lon = (Math.random() * ranges[Math.floor(Math.random() * 2)] * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
-            coordinates.textContent = `COORDS: ${lat}°N, ${lon}°E`;
-        }
-        updateCoordinates();
-        setInterval(updateCoordinates, 1000);
+            function updateCoordinates() {
+                const lat = (Math.random() * 180 - 90).toFixed(2);
+                const lon = (Math.random() * 360 - 180).toFixed(2);
+                coordinates.textContent = `COORDS: ${lat}°N, ${lon}°E`;
+            }
+            updateCoordinates();
+            setInterval(updateCoordinates, 1000);
 
-        titleText.addEventListener('click', () => {
-            if (titleText.classList.contains('up')) {
-                titleText.classList.remove('up');
-                titleText.classList.add('down');
-            } else {
-                titleText.classList.remove('down');
-                titleText.classList.add('up');
+            let particleInterval = null;
+            let particlesActive = false;
+            function createParticle() {
+                const activePage = document.querySelector('.page-content.active');
+                if (!activePage) return;
+                const particle = document.createElement('div');
+                particle.className = 'astral-particle';
+                const rect = activePage.getBoundingClientRect();
+                const startX = rect.left + rect.width / 2;
+                const startY = rect.top + rect.height / 2;
+                particle.style.left = `${startX}px`;
+                particle.style.top = `${startY}px`;
+                particle.style.background = Math.random() < 0.5 ? '#ff00ff' : '#00ffff';
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = 200 + Math.random() * 300;
+                const endX = distance * Math.cos(angle);
+                const endY = distance * Math.sin(angle);
+                particle.style.setProperty('--end-x', `${endX}px`);
+                particle.style.setProperty('--end-y', `${endY}px`);
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), window.innerWidth < 600 ? 15000 : 10000);
+            }
+            function toggleParticles() {
+                if (particlesActive) {
+                    clearInterval(particleInterval);
+                    particlesActive = false;
+                } else {
+                    particleInterval = setInterval(createParticle, window.innerWidth < 600 ? 50 : 20);
+                    particlesActive = true;
+                }
+            }
+            coordinates.addEventListener('click', toggleParticles);
+
+            function triggerGlitch() {
+                titleText.classList.add('glitch');
+                setTimeout(() => titleText.classList.remove('glitch'), 300);
+            }
+            setInterval(() => Math.random() < 0.1 && triggerGlitch(), 1000);
+
+            titleText.addEventListener('click', () => {
+                titleText.classList.toggle('up');
+                titleText.classList.toggle('down');
+            });
+
+            egg1.addEventListener('click', () => {
+                for (let i = 0; i < 5; i++) {
+                    const star = document.createElement('span');
+                    star.className = 'chaos-star';
+                    star.textContent = '★';
+                    star.style.left = `${Math.random() * 100}%`;
+                    star.style.top = `${Math.random() * 100}%`;
+                    document.body.appendChild(star);
+                    setTimeout(() => star.remove(), 2000);
+                }
+            });
+
+            let isFlipped = false;
+            egg2.addEventListener('click', () => {
+                isFlipped = !isFlipped;
+                contentWrapper.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+
+            let slideSpeed = 4;
+            let clickCount = 0;
+            let sliderHeight = 100;
+            let gameActive = false;
+            egg3.addEventListener('click', () => {
+                clickCount++;
+                if (!gameActive) gameActive = true;
+                if (gameActive) {
+                    slideSpeed = Math.max(1.5, slideSpeed * 0.85);
+                    sliderHeight = Math.max(60, sliderHeight * 0.95);
+                    const direction = Math.random() < 0.5 ? '' : 'reverse';
+                    egg3.style.height = `${sliderHeight}px`;
+                    egg3.style.animation = `slide ${slideSpeed}s infinite linear ${direction}`;
+                }
+                if (clickCount >= 6) {
+                    discountCode.style.display = 'block';
+                    setTimeout(() => discountCode.style.display = 'none', 5000);
+                    clickCount = 0;
+                    slideSpeed = 4;
+                    sliderHeight = 100;
+                    gameActive = false;
+                    egg3.style.height = `${sliderHeight}px`;
+                    egg3.style.animation = `slide 6s infinite`;
+                }
+            });
+
+            let secretLink = null;
+            egg4.addEventListener('click', () => {
+                if (!secretLink) {
+                    secretLink = document.createElement('a');
+                    secretLink.className = 'button';
+                    secretLink.textContent = 'SECRET LINK';
+                    secretLink.href = 'https://discord.gg/cCedfQgHVG';
+                    secretLink.target = '_blank';
+                    secretLink.style.background = '#00ffff';
+                    secretLink.style.color = '#ff00ff';
+                    buttonContainer.appendChild(secretLink);
+                } else {
+                    secretLink.remove();
+                    secretLink = null;
+                }
+            });
+
+            egg5.addEventListener('click', () => {
+                document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
+                setTimeout(() => {
+                    document.body.style.background = `url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff)`;
+                }, 1000);
+            });
+
+            copyright.addEventListener('click', () => {
+                flashText.style.display = 'block';
+                setTimeout(() => flashText.style.display = 'none', 1000);
+            });
+
+            domain.addEventListener('click', () => {
+                navBar.classList.toggle('visible');
+            });
+
+            function showPage(pageId) {
+                pages.forEach(page => page.classList.toggle('active', page.id === pageId));
+                navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('data-page') === pageId));
+                if (pageId === 'blogPage') updateBlogContent('2025-03-31');
+                window.scrollTo(0, 0);
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => showPage(link.getAttribute('data-page')));
+            });
+
+            const blogPosts = {
+                '2025-03-31': { title: "FU!! BEATSTARS SUCKS", content: `<div class="blog-date">31/03/2025</div>Yo, BeatStars can shove it. Why are we letting some greedy corp rake in cash while we’re just trying to sling beats?? We need a DAO-type site—community-funded, no suits, no profits, just pure beat chaos.` },
+                '2025-04-01': { title: "INTERNET = NEW TV", content: `<div class="blog-date">01/04/2025</div>Ugh, the internet’s dead, fam. I’m DONE with these cookie-cutter layouts. I want MY OWN digital crib, custom-built, no suits telling me what’s up.` },
+                '2025-04-15': { title: "WHY IS EVERYTHING SO DUMB", content: `<div class="blog-date">15/04/2025</div>Seriously, why does everything suck so bad lately? The internet’s a dumpster fire, people are obsessed with dumb apps, and I’m over here just trying to vibe.` },
+                '2025-05-02': { title: "PARK PIC DAY", content: `<div class="blog-date">02/05/2025</div>Yo, check it—here’s a pic of me at the park. It was a pretty nice day, sun was out, birds were chirping, whatever. [PARK PHOTO GOES HERE]` },
+                '2025-06-10': { title: "RANT #47: STUFF SUCKS", content: `<div class="blog-date">10/06/2025</div>Another day, another rant. Everything’s still trash—big surprise. People out here acting like robots, the internet’s a corporate playground.` },
+                '2025-07-23': { title: "LOL WHATEVER", content: `<div class="blog-date">23/07/2025</div>Honestly, I’m over it. Everything’s a mess, but who cares anymore? LOL, just gonna keep doing my thing.` },
+                '2025-08-01': { title: "AI IS DUMB AND SO ARE YOU", content: `<div class="blog-date">01/08/2025</div>AI’s taking over, and it’s still dumber than a bag of hammers. Why are we hyping this trash? Oh wait, you’re all just as clueless.` },
+                '2025-09-15': { title: "BEATS AND BEANS", content: `<div class="blog-date">15/09/2025</div>Made some beats, ate some beans, living the dream. Internet’s still a cesspool, but at least I’ve got tunes and gas.` },
+                '2025-10-31': { title: "SPOOKY VIBES ONLY", content: `<div class="blog-date">31/10/2025</div>It’s Halloween, losers! Dropping some haunted beats and avoiding all you normies in costumes.` },
+                '2025-11-05': { title: "POST-SPOOKY CHAOS", content: `<div class="blog-date">05/11/2025</div>Halloween’s over, but the chaos lives on. Beats still banging, internet still trash.` },
+                '2025-11-15': { title: "BEAT DROP DAY", content: `<div class="blog-date">15/11/2025</div>Dropped some fire beats today. Y’all sleeping on it, as usual. Wake up!` },
+                '2025-12-01': { title: "WINTER VIBES SUCK", content: `<div class="blog-date">01/12/2025</div>Winter’s here, and it’s as lame as ever. Cold beats, hot rants—deal with it.` },
+                '2025-12-20': { title: "XMAS IS DUMB", content: `<div class="blog-date">20/12/2025</div>Christmas is just corporate garbage with extra glitter. Beats > presents.` },
+                '2026-01-10': { title: "NEW YEAR NEW RANT", content: `<div class="blog-date">10/01/2026</div>New year, same trash internet. Resolutions? Nah, just more beats and chaos.` },
+                '2026-02-14': { title: "LOVE IS FAKE", content: `<div class="blog-date">14/02/2026</div>Valentine’s Day is a scam. Beats don’t cheat—people do.` },
+                '2026-03-01': { title: "SPRING IS LAME", content: `<div class="blog-date">01/03/2026</div>Spring’s here, and it’s still boring. Flowers? Whatever, give me beats.` }
+            };
+
+            function updateBlogContent(date) {
+                const post = blogPosts[date] || { title: "404 - POST NOT FOUND", content: "Oops, this post got lost in the chaos!" };
+                blogTitle.textContent = post.title;
+                blogContent.innerHTML = post.content;
+                blogNavButtons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-date') === date));
+            }
+
+            blogNavButtons.forEach(button => {
+                button.addEventListener('click', () => updateBlogContent(button.getAttribute('data-date')));
+            });
+
+            galleryPlaceholders.forEach(placeholder => {
+                placeholder.addEventListener('click', () => {
+                    enlargedPhoto.style.display = 'block';
+                    enlargedPhoto.style.backgroundImage = placeholder.style.backgroundImage || 'none';
+                    galleryCaption.textContent = placeholder.dataset.caption || 'No caption, lol';
+                });
+            });
+
+            galleryClose.addEventListener('click', () => {
+                enlargedPhoto.style.display = 'none';
+            });
+
+            showPage('homePage');
+
+            if (window.location.search.includes('fbclid=')) {
+                window.history.replaceState({}, document.title, 'https://62serpens.com/');
             }
         });
-
-        function triggerGlitch() {
-            titleText.classList.add('glitch');
-            setTimeout(() => titleText.classList.remove('glitch'), 300);
-        }
-        setInterval(() => {
-            if (Math.random() < 0.1) triggerGlitch();
-        }, 1000);
-
-        // Warp-Speed Particles
-        let particleInterval = null;
-        let particlesActive = false;
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'astral-particle';
-            const contentRect = content.getBoundingClientRect();
-            const startX = contentRect.left + contentRect.width / 2;
-            const startY = contentRect.top + contentRect.height / 2;
-            particle.style.left = `${startX}px`;
-            particle.style.top = `${startY}px`;
-            particle.style.background = Math.random() < 0.5 ? '#ff00ff' : '#00ffff';
-
-            const angle = Math.random() * 2 * Math.PI;
-            const distance = 400 + Math.random() * 300;
-            const endX = distance * Math.cos(angle);
-            const endY = distance * Math.sin(angle);
-            particle.style.setProperty('--end-x', `${endX}px`);
-            particle.style.setProperty('--end-y', `${endY}px`);
-
-            document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), window.innerWidth < 600 ? 15000 : 10000); // 15s mobile, 10s desktop
-        }
-        function toggleParticles() {
-            if (particlesActive) {
-                clearInterval(particleInterval);
-                particleInterval = null;
-                particlesActive = false;
-            } else {
-                particleInterval = setInterval(createParticle, window.innerWidth < 600 ? 20 : 10); // 50/sec mobile, 100/sec desktop
-                particlesActive = true;
-            }
-        }
-        coordinates.addEventListener('click', toggleParticles); // Toggle on click
-
-        egg1.addEventListener('click', () => {
-            for (let i = 0; i < 5; i++) {
-                const star = document.createElement('span');
-                star.className = 'chaos-star';
-                star.textContent = '★';
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                document.body.appendChild(star);
-                setTimeout(() => star.remove(), 2000);
-            }
-        });
-
-        let isFlipped = false;
-        egg2.addEventListener('click', () => {
-            isFlipped = !isFlipped;
-            contentWrapper.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
-        });
-
-        let slideSpeed = 4;
-        let clickCount = 0;
-        let sliderHeight = 100;
-        let gameActive = false;
-        egg3.addEventListener('click', () => {
-            clickCount++;
-            if (!gameActive) gameActive = true;
-            if (gameActive) {
-                slideSpeed = Math.max(1.5, slideSpeed * 0.85);
-                sliderHeight = Math.max(60, sliderHeight * 0.95);
-                const direction = Math.random() < 0.5 ? '' : 'reverse';
-                egg3.style.height = `${sliderHeight}px`;
-                egg3.style.animation = `menuBorderChase ${slideSpeed}s infinite linear ${direction}`;
-            }
-            if (clickCount >= 6) {
-                discountCode.style.display = 'block';
-                setTimeout(() => discountCode.style.display = 'none', 5000);
-                clickCount = 0;
-                slideSpeed = 4;
-                sliderHeight = 100;
-                gameActive = false;
-                egg3.style.height = `${sliderHeight}px`;
-                egg3.style.animation = `slide 6s infinite`;
-            }
-        });
-
-        let secretLink = null;
-        egg4.addEventListener('click', () => {
-            if (!secretLink) {
-                secretLink = document.createElement('a');
-                secretLink.className = 'button';
-                secretLink.textContent = 'SECRET LINK';
-                secretLink.href = 'https://discord.gg/cCedfQgHVG';
-                secretLink.target = '_blank';
-                secretLink.style.background = '#00ffff';
-                secretLink.style.color = '#ff00ff';
-                buttonContainer.appendChild(secretLink);
-            } else {
-                secretLink.remove();
-                secretLink = null;
-            }
-        });
-
-        egg5.addEventListener('click', () => {
-            document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
-            setTimeout(() => {
-                document.body.style.background = `url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff)`;
-            }, 1000);
-        });
-
-        copyright.addEventListener('click', () => {
-            flashText.style.display = 'block';
-            setTimeout(() => flashText.style.display = 'none', 1000);
-        });
-
-        if (window.location.search.includes('fbclid=')) {
-            window.history.replaceState({}, document.title, 'https://62serpens.com/');
-        }
     </script>
 </body>
 </html>
