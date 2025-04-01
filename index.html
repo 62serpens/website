@@ -207,7 +207,7 @@
             50% { opacity: 0.7; }
         }
         .domain {
-            font-size: 50px;
+            font-size: 50px; /* Reverted to OG base size */
             color: #ffffff;
             text-shadow: none;
             animation: none;
@@ -505,21 +505,21 @@
         }
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(4, minmax(150px, 1fr)); /* Fixed min size */
+            grid-template-columns: repeat(4, minmax(150px, 1fr));
             gap: 15px;
             width: 100%;
-            max-width: 800px; /* Match #galleryPage */
+            max-width: 800px;
             margin: 0 auto;
         }
         .gallery-placeholder {
             width: 100%;
-            padding-top: 100%; /* Square aspect ratio */
+            padding-top: 100%;
             border: 2px solid #ffffff;
             background: transparent;
             cursor: pointer;
             position: relative;
             background-size: cover;
-            min-height: 150px; /* Ensure visibility */
+            min-height: 150px;
         }
         .gallery-placeholder.test {
             background-image: url('https://via.placeholder.com/150/00ff00/ffffff?text=TEST');
@@ -578,8 +578,7 @@
             #homePage { padding: 30px; max-width: 700px; }
             #blogPage { max-width: 900px; }
             #galleryPage { max-width: 800px; }
-            h1 { font-size: 90px; }
-            .domain { font-size: 90px; }
+            h1 { font-size: 90px; } /* Only "62serpens" grows */
             .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
             .graphic-top { width: 100px; height: 100px; top: -50px; }
             .graphic-bottom { width: 80px; height: 80px; bottom: -40px; }
@@ -668,12 +667,12 @@
                 -webkit-font-smoothing: antialiased;
             }
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
-            .gallery-container { padding: 40px 10px 10px; } /* Below nav bar */
+            .gallery-container { padding: 40px 10px 10px; }
             .gallery-grid {
-                grid-template-columns: repeat(3, minmax(100px, 1fr)); /* Fixed min size mobile */
+                grid-template-columns: repeat(3, minmax(100px, 1fr));
             }
             .gallery-placeholder {
-                min-height: 100px; /* Ensure visibility mobile */
+                min-height: 100px;
             }
         }
     </style>
