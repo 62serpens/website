@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>62serpens.com</title>
-    <link rel="icon" type="image/svg+xml" href mainly="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
     <link rel="preload" href="https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png" as="image">
     <style>
         html, body {
@@ -12,7 +12,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden; /* Disable scrolling */
+            overflow: hidden;
         }
         body {
             background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff);
@@ -23,6 +23,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow-x: hidden;
+            overflow-y: hidden;
             user-select: none;
             transition: transform 0.5s;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polygon points="12,2 22,22 2,22" fill="%23bf00ff" stroke="none"/></svg>') 12 12, auto;
@@ -60,6 +62,7 @@
             justify-content: space-between;
             box-sizing: border-box;
             z-index: 100;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         #coordinates {
             cursor: pointer;
@@ -92,6 +95,7 @@
             padding: 5px;
             cursor: pointer;
             transition: color 0.2s ease;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             display: inline-block;
         }
         .nav-link:hover {
@@ -102,17 +106,16 @@
             text-shadow: 0 0 5px #00ffff;
         }
         .content-wrapper {
+            margin-top: -40px;
             position: relative;
             z-index: 10;
-            width: 100%;
-            max-width: 900px;
-            margin-top: -40px; /* Original spacing */
         }
         .page-content {
             background: rgba(0, 0, 0, 0.9);
             padding: 15px;
             width: 100%;
             box-sizing: border-box;
+            position: relative;
             box-shadow: 0 0 20px #ff00ff;
             display: none;
         }
@@ -121,9 +124,10 @@
         }
         #homePage {
             border: 4px double #00ff00;
+            width: 100%;
+            max-width: 400px;
             animation: shake 0.1s infinite;
-            max-width: 400px; /* Original size */
-            margin: 20px auto 0; /* Original spacing */
+            margin-top: 20px;
         }
         #blogPage {
             border: 4px dashed #ff00ff;
@@ -170,13 +174,11 @@
             animation: blink 0.5s infinite;
             display: inline-flex;
             align-items: baseline;
-            text-align: center;
-            width: 100%;
-            justify-content: center;
         }
         .title-text {
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
         }
         .title-text.up:hover {
             color: #ff00ff;
@@ -205,11 +207,8 @@
             color: #ffffff;
             text-shadow: none;
             animation: none;
-            transition: color 0.2s ease;
+            transition: none;
             cursor: pointer;
-        }
-        .domain:hover {
-            color: #ff00ff;
         }
         .under-construction {
             position: absolute;
@@ -229,7 +228,6 @@
             gap: 12px;
             align-items: center;
             position: relative;
-            z-index: 10;
         }
         .button {
             background: #ff00ff;
@@ -246,7 +244,7 @@
             max-width: 300px;
             text-align: center;
             position: relative;
-            display: block;
+            z-index: 1;
         }
         .beatstore { background: rgb(255, 50, 50); }
         .instagram { background: rgb(255, 80, 200); }
@@ -261,7 +259,7 @@
         .instagram:hover { background: rgb(255, 200, 255); }
         .spotify:hover { background: rgb(150, 255, 150); }
         .soundcloud:hover { background: rgb(255, 200, 150); }
-        .button.secret:hover { background: rgb(150, 255, 255); color: #ff00ff; } /* Fix blue button hover */
+        .button.secret:hover { background: rgb(150, 255, 255); color: #ff00ff; }
         .button::before {
             content: '★';
             color: #ffff00;
@@ -393,6 +391,7 @@
             transform: translateX(-50%);
             font-size: 12px;
             color: #ffffff;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             z-index: 10;
             white-space: nowrap;
             animation: blink 0.5s infinite;
@@ -478,16 +477,16 @@
         /* Gallery Styles */
         .gallery-container {
             width: 100%;
-            padding: 10px;
-            display: flex;
-            justify-content: center;
+            padding: 10px 0; /* Adjusted padding */
+            box-sizing: border-box;
         }
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
             gap: 15px;
             width: 100%;
-            max-width: 700px; /* Center and constrain */
+            max-width: 700px;
+            margin: 0 auto; /* Centered */
         }
         .gallery-placeholder {
             width: 100%;
@@ -548,52 +547,66 @@
             text-align: center;
         }
         @media (min-width: 600px) {
-            .content-wrapper { margin-top: -40px; } /* Original spacing */
             .page-content { padding: 30px; }
-            #homePage { max-width: 400px; padding: 15px; } /* Original size */
-            h1 { font-size: 50px; } /* Original size */
-            .domain { font-size: 50px; } /* Original size */
-            .button { font-size: 18px; padding: 12px 20px; max-width: 300px; } /* Original size */
-            .graphic-top { width: 80px; height: 80px; top: -40px; } /* Original size */
-            .graphic-bottom { width: 60px; height: 60px; bottom: -30px; } /* Original size */
-            .graphic-left { width: 40px; height: 100px; left: -20px; } /* Original size */
-            .graphic-right { width: 50px; height: 50px; right: -25px; } /* Original size */
-            .marquee { font-size: 16px; } /* Original size */
-            .flash-text { font-size: 100px; } /* Original size */
-            .discount-code { font-size: 30px; } /* Original size */
-            .blog-container { flex-direction: row; }
-            .blog-menu { flex: 0 0 300px; border-right: 4px double #ff00ff; padding-right: 15px; margin-right: 15px; max-height: none; }
-            .blog-main { flex: 1; padding: 0; }
+            #homePage { max-width: 700px; }
+            #blogPage { max-width: 900px; }
+            #galleryPage { max-width: 800px; }
+            .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
+            .graphic-top { width: 100px; height: 100px; top: -50px; }
+            .graphic-bottom { width: 80px; height: 80px; bottom: -40px; }
+            .graphic-left { width: 60px; height: 150px; left: -30px; }
+            .graphic-right { width: 70px; height: 70px; right: -35px; }
+            .marquee { font-size: 20px; }
+            .flash-text { font-size: 200px; }
+            .discount-code { font-size: 40px; }
             .blog-title { font-size: 36px; }
             .blog-content { font-size: 18px; }
             .blog-nav-button { font-size: 14px; padding: 10px 12px; }
+            .blog-container { flex-direction: row; }
+            .blog-menu { flex: 0 0 300px; border-right: 4px double #ff00ff; padding-right: 15px; margin-right: 15px; max-height: none; }
+            .blog-main { flex: 1; padding: 0; }
         }
         @media (max-width: 599px) {
             body {
                 font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
                 font-weight: 400;
-                padding: 10px; /* Original padding */
+                padding: 10px;
+                overflow-x: hidden; /* No horizontal scroll */
             }
-            .status-bar { font-size: 12px; padding: 3px; }
-            .nav-bar { top: 25px; padding: 5px; width: 90%; }
+            .status-bar {
+                font-size: 12px;
+                padding: 3px;
+            }
+            .nav-bar {
+                top: 20px; /* Lowered to avoid overlap */
+                width: 90%;
+                padding: 5px;
+            }
             .nav-link { font-size: 12px; margin: 3px 5px; }
-            .content-wrapper { margin-top: -30px; } /* Original mobile spacing */
-            #homePage { max-width: 400px; margin-top: 15px; padding: 15px; border-width: 6px; } /* Original mobile size */
-            h1 { font-size: 40px !important; margin: 50px 0 20px; } /* Original mobile size */
-            .domain { font-size: 28px !important; } /* Original mobile size */
-            .button { font-size: 14px; padding: 8px 15px; max-width: 280px; } /* Original mobile size */
-            .under-construction { font-size: 14px !important; padding: 5px !important; } /* Original mobile size */
-            .graphic-top { width: 60px; height: 60px; top: -30px; } /* Original mobile size */
-            .graphic-bottom { width: 50px; height: 50px; bottom: -25px; } /* Original mobile size */
-            .graphic-left { width: 30px; height: 80px; left: -15px; } /* Original mobile size */
-            .graphic-right { width: 40px; height: 40px; right: -20px; top: 85%; padding: 15px; box-sizing: content-box; } /* Original mobile size */
-            .discount-code { font-size: 24px; padding: 10px; } /* Original mobile size */
+            .content-wrapper { margin-top: -30px; }
+            #homePage { margin-top: 15px; padding: 15px; border-width: 6px; }
+            h1 { font-size: 40px !important; }
+            .domain { font-size: 28px !important; }
+            .button { font-size: 14px; padding: 8px 15px; max-width: 280px; }
+            .under-construction { font-size: 14px !important; padding: 5px !important; }
+            .graphic-top { width: 60px; height: 60px; top: -30px; }
+            .graphic-bottom { width: 50px; height: 50px; bottom: -25px; }
+            .graphic-left { width: 30px; height: 80px; left: -15px; z-index: 0; }
+            .graphic-right {
+                width: 40px;
+                height: 40px;
+                right: -20px;
+                top: 85%;
+                z-index: 5;
+                padding: 15px; /* Larger touch area */
+                box-sizing: content-box;
+            }
+            .discount-code { font-size: 24px; padding: 10px; }
             .copyright { font-size: 10px; }
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
-            .blog-menu { max-height: 200px; }
-            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
-            .gallery-enlarged { width: 90vw; height: 90vw; max-height: 400px; }
+            .gallery-container { padding: 40px 0 10px; } /* Space below nav bar */
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); } /* 3 columns on mobile */
         }
     </style>
 </head>
@@ -612,7 +625,7 @@
             <marquee class="marquee">WELCOME TO 62SERPENS ZONE - ENTER AT UR OWN RISK!!!</marquee>
             <div class="graphic-top" id="egg1"></div>
             <h1><span class="title-text up" id="titleText">62serpens</span><span class="domain">.com</span></h1>
-            <div class="button-container">
+            <div class="button-container" id="buttonContainer">
                 <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore">Beat Store ᯓ★</a>
                 <a href="https://www.instagram.com/62serpens" class="button instagram">Instagram</a>
                 <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button spotify">Spotify</a>
@@ -690,7 +703,7 @@
             const egg3 = document.getElementById('egg3');
             const egg4 = document.getElementById('egg4');
             const egg5 = document.getElementById('egg5');
-            const buttonContainer = document.querySelector('#homePage .button-container');
+            const buttonContainer = document.getElementById('buttonContainer');
             const flashText = document.getElementById('flashText');
             const discountCode = document.getElementById('discountCode');
             const copyright = document.getElementById('copyright');
@@ -704,14 +717,17 @@
 
             function updateDateTime() {
                 const now = new Date();
-                dateTime.textContent = now.toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+                const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+                const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+                dateTime.textContent = `${dateStr} ${timeStr}`;
             }
             updateDateTime();
             setInterval(updateDateTime, 1000);
 
             function updateCoordinates() {
-                const lat = (Math.random() * 180 - 90).toFixed(2);
-                const lon = (Math.random() * 360 - 180).toFixed(2);
+                const ranges = [Math.pow(10, Math.random() * 10 - 5), Math.pow(10, Math.random() * 20 - 10)];
+                const lat = (Math.random() * ranges[Math.floor(Math.random() * 2)] * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
+                const lon = (Math.random() * ranges[Math.floor(Math.random() * 2)] * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
                 coordinates.textContent = `COORDS: ${lat}°N, ${lon}°E`;
             }
             updateCoordinates();
@@ -720,18 +736,17 @@
             let particleInterval = null;
             let particlesActive = false;
             function createParticle() {
-                const activePage = document.querySelector('.page-content.active');
-                if (!activePage) return;
+                const content = document.querySelector('.page-content.active');
                 const particle = document.createElement('div');
                 particle.className = 'astral-particle';
-                const rect = activePage.getBoundingClientRect();
-                const startX = rect.left + rect.width / 2;
-                const startY = rect.top + rect.height / 2;
+                const contentRect = content.getBoundingClientRect();
+                const startX = contentRect.left + contentRect.width / 2;
+                const startY = contentRect.top + contentRect.height / 2;
                 particle.style.left = `${startX}px`;
                 particle.style.top = `${startY}px`;
                 particle.style.background = Math.random() < 0.5 ? '#ff00ff' : '#00ffff';
                 const angle = Math.random() * 2 * Math.PI;
-                const distance = 200 + Math.random() * 300;
+                const distance = 400 + Math.random() * 300;
                 const endX = distance * Math.cos(angle);
                 const endY = distance * Math.sin(angle);
                 particle.style.setProperty('--end-x', `${endX}px`);
@@ -742,24 +757,32 @@
             function toggleParticles() {
                 if (particlesActive) {
                     clearInterval(particleInterval);
+                    particleInterval = null;
                     particlesActive = false;
                 } else {
-                    particleInterval = setInterval(createParticle, window.innerWidth < 600 ? 50 : 20);
+                    particleInterval = setInterval(createParticle, window.innerWidth < 600 ? 20 : 10);
                     particlesActive = true;
                 }
             }
             coordinates.addEventListener('click', toggleParticles);
 
+            titleText.addEventListener('click', () => {
+                if (titleText.classList.contains('up')) {
+                    titleText.classList.remove('up');
+                    titleText.classList.add('down');
+                } else {
+                    titleText.classList.remove('down');
+                    titleText.classList.add('up');
+                }
+            });
+
             function triggerGlitch() {
                 titleText.classList.add('glitch');
                 setTimeout(() => titleText.classList.remove('glitch'), 300);
             }
-            setInterval(() => Math.random() < 0.1 && triggerGlitch(), 1000);
-
-            titleText.addEventListener('click', () => {
-                titleText.classList.toggle('up');
-                titleText.classList.toggle('down');
-            });
+            setInterval(() => {
+                if (Math.random() < 0.1) triggerGlitch();
+            }, 1000);
 
             egg1.addEventListener('click', () => {
                 for (let i = 0; i < 5; i++) {
@@ -791,7 +814,7 @@
                     sliderHeight = Math.max(60, sliderHeight * 0.95);
                     const direction = Math.random() < 0.5 ? '' : 'reverse';
                     egg3.style.height = `${sliderHeight}px`;
-                    egg3.style.animation = `slide ${slideSpeed}s infinite linear ${direction}`;
+                    egg3.style.animation = `menuBorderChase ${slideSpeed}s infinite linear ${direction}`;
                 }
                 if (clickCount >= 6) {
                     discountCode.style.display = 'block';
@@ -809,7 +832,7 @@
             egg4.addEventListener('click', () => {
                 if (!secretLink) {
                     secretLink = document.createElement('a');
-                    secretLink.className = 'button secret'; /* Added class for hover fix */
+                    secretLink.className = 'button secret';
                     secretLink.textContent = 'SECRET LINK';
                     secretLink.href = 'https://discord.gg/cCedfQgHVG';
                     secretLink.target = '_blank';
@@ -842,7 +865,6 @@
                 pages.forEach(page => page.classList.toggle('active', page.id === pageId));
                 navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('data-page') === pageId));
                 if (pageId === 'blogPage') updateBlogContent('placeholder');
-                window.scrollTo(0, 0);
             }
 
             navLinks.forEach(link => {
