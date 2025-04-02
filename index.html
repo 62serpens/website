@@ -108,7 +108,6 @@
             top: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.9);
             padding: 5px 10px;
             z-index: 110;
             display: none;
@@ -1080,7 +1079,7 @@
                 targetPage = pageId;
                 passwordPopup.classList.add('active');
                 passwordInput.value = '';
-                passwordInput.focus();
+                // Removed passwordInput.focus() to prevent auto-keyboard on mobile
             }
 
             function hidePasswordPopup() {
