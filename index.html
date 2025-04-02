@@ -66,6 +66,7 @@
             box-sizing: border-box;
             z-index: 100;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
+            align-items: center;
         }
         #coordinates {
             cursor: pointer;
@@ -73,6 +74,34 @@
         }
         #coordinates:hover {
             color: #ff00ff;
+        }
+        .mode-buttons {
+            display: flex;
+            gap: 5px;
+            margin-left: 10px;
+        }
+        .mode-button {
+            width: 24px;
+            height: 24px;
+            background: #ff00ff;
+            border: 2px solid #ffff00;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        .mode-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #00ff00;
+        }
+        .invert-button {
+            background: #000;
+        }
+        .invert-button.active {
+            background: #fff;
         }
         .nav-bar {
             position: fixed;
@@ -753,12 +782,26 @@
             .password-popup {
                 width: 250px;
             }
+            .mode-button {
+                width: 20px;
+                height: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="status-bar">
-        <span id="dateTime"></span>
+        <div style="display: flex; align-items: center;">
+            <span id="dateTime"></span>
+            <div class="mode-buttons">
+                <button class="mode-button invert-button" id="invertButton" title="Toggle Invert">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="8" cy="8" r="4" fill="#ff00ff"/>
+                        <path d="M8 0v2M8 14v2M0 8h2M14 8h2M2.34 2.34l1.42 1.42M12.24 12.24l1.42 1.42M2.34 13.66l1.42-1.42M12.24 3.76l1.42-1.42" stroke="#ff00ff" stroke-width="1"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
         <span id="coordinates"></span>
     </div>
     <div class="nav-bar">
@@ -870,6 +913,7 @@
             const passwordInput = document.getElementById('passwordInput');
             const passwordSubmit = document.getElementById('passwordSubmit');
             const passwordClose = document.getElementById('passwordClose');
+            const invertButton = document.getElementById('invertButton');
 
             function updateDateTime() {
                 const now = new Date();
@@ -1010,14 +1054,19 @@
                 navBar.classList.toggle('visible');
             });
 
-            // Obscure password with ROT13
-            const obscuredPassword = 'cnffjbeqyby'; // "passwordlol" in ROT13
+            // Invert Button Functionality
+            invertButton.addEventListener('click', () => {
+                invertButton.classList.toggle('active');
+                document.body.style.filter = invertButton.classList.contains('active') ? 'invert(100%)' : 'none';
+            });
+
+            const obscuredPassword = 'cnffjbeqyby';
             function rot13(str) {
                 return str.replace(/[a-zA-Z]/g, function(c) {
                     return String.fromCharCode((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
                 });
             }
-            const correctPassword = rot13(obscuredPassword); // Decodes to "passwordlol" at runtime
+            const correctPassword = rot13(obscuredPassword);
             let sessionUnlocked = false;
 
             function showPage(pageId) {
