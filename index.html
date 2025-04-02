@@ -18,7 +18,7 @@
             background-color: #000;
         }
         body {
-            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff);
+            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, #000;
             color: #ffffff;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             padding: 10px;
@@ -110,7 +110,6 @@
             transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.9);
             padding: 5px 10px;
-            border: 2px solid #ff00ff;
             z-index: 110;
             display: none;
             flex-wrap: wrap;
@@ -1041,7 +1040,7 @@
             egg5.addEventListener('click', () => {
                 document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
                 setTimeout(() => {
-                    document.body.style.background = `url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, linear-gradient(45deg, #000, #ff00ff)`;
+                    document.body.style.background = `url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, #000`;
                 }, 1000);
             });
 
@@ -1073,6 +1072,7 @@
                 pages.forEach(page => page.classList.toggle('active', page.id === pageId));
                 navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('data-page') === pageId));
                 if (pageId === 'blogPage') updateBlogContent('placeholder');
+                if (pageId === 'homePage') hidePasswordPopup();
                 window.scrollTo(0, 0);
             }
 
@@ -1092,9 +1092,7 @@
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     const pageId = link.getAttribute('data-page');
-                    if (pageId === 'homePage') {
-                        showPage(pageId);
-                    } else if (sessionUnlocked) {
+                    if (pageId === 'homePage' || sessionUnlocked) {
                         showPage(pageId);
                     } else {
                         showPasswordPopup(pageId);
