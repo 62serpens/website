@@ -14,9 +14,7 @@
             height: 100%;
             overflow: hidden;
         }
-        html {
-            background-color: #000;
-        }
+        html { background-color: #000; }
         body {
             background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, #000;
             color: #ffffff;
@@ -44,9 +42,7 @@
             animation: bgPulse 5s infinite alternate;
             z-index: -1;
         }
-        @media (pointer: coarse) {
-            body { cursor: default; }
-        }
+        @media (pointer: coarse) { body { cursor: default; } }
         @keyframes bgPulse {
             0% { background-color: #000; }
             100% { background-color: #333; }
@@ -72,9 +68,7 @@
             cursor: pointer;
             transition: color 0.2s ease;
         }
-        #coordinates:hover {
-            color: #ff00ff;
-        }
+        #coordinates:hover { color: #ff00ff; }
         .mode-buttons {
             display: flex;
             gap: 5px;
@@ -83,7 +77,7 @@
         .mode-button {
             width: 24px;
             height: 24px;
-            background: #ff00ff;
+            background: transparent;
             border: 2px solid #ffff00;
             border-radius: 50%;
             cursor: pointer;
@@ -97,12 +91,8 @@
             transform: scale(1.1);
             box-shadow: 0 0 10px #00ff00;
         }
-        .invert-button {
-            background: #000;
-        }
-        .invert-button.active {
-            background: #fff;
-        }
+        .mode-button.active { background: #00ffff; }
+        .invert-button svg circle { fill: #ff00ff; }
         .nav-bar {
             position: fixed;
             top: 30px;
@@ -114,9 +104,7 @@
             flex-wrap: wrap;
             justify-content: center;
         }
-        .nav-bar.visible {
-            display: flex;
-        }
+        .nav-bar.visible { display: flex; }
         .nav-link {
             color: #ffff00;
             font-size: 14px;
@@ -128,9 +116,7 @@
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             display: inline-block;
         }
-        .nav-link:hover {
-            color: #ff00ff;
-        }
+        .nav-link:hover { color: #ff00ff; }
         .nav-link.active {
             color: #00ffff;
             text-shadow: 0 0 5px #00ffff;
@@ -149,9 +135,7 @@
             box-shadow: 0 0 20px #ff00ff;
             display: none;
         }
-        .page-content.active {
-            display: block;
-        }
+        .page-content.active { display: block; }
         #homePage {
             border: 4px double #00ff00;
             max-width: 400px;
@@ -160,9 +144,9 @@
         }
         #blogPage {
             border: 4px dashed #ff00ff;
-            max-width: 900px;
+            width: 900px;
+            height: 500px;
             overflow-y: auto;
-            max-height: calc(100vh - 100px);
             margin: 0 auto;
         }
         #galleryPage {
@@ -171,6 +155,13 @@
             overflow-y: auto;
             max-height: calc(100vh - 100px);
             margin: 0 auto;
+        }
+        #aboutPage {
+            border: 4px solid #00ffff;
+            max-width: 400px;
+            padding: 15px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.9);
         }
         @keyframes shake {
             0% { transform: translateX(0); }
@@ -209,7 +200,6 @@
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .title-text.up:hover {
             color: #ff00ff;
@@ -230,9 +220,7 @@
             80% { transform: translate(2px, -2px); }
             100% { transform: translate(0); }
         }
-        @keyframes blink {
-            50% { opacity: 0.7; }
-        }
+        @keyframes blink { 50% { opacity: 0.7; } }
         .domain {
             font-size: 50px;
             color: #ffffff;
@@ -311,9 +299,7 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
         }
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
         .graphic-bottom {
             width: 60px;
             height: 60px;
@@ -461,6 +447,7 @@
             display: flex;
             flex-direction: column;
             width: 100%;
+            height: 100%;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-menu {
@@ -473,6 +460,8 @@
             flex: 1;
             padding: 10px;
             overflow-y: auto;
+            white-space: normal;
+            word-wrap: break-word;
         }
         .blog-title {
             font-size: 28px;
@@ -484,14 +473,17 @@
         }
         .blog-content {
             color: #00ffff;
-            font-size: 16px;
+            font-size: 18px;
             line-height: 1.6;
+            white-space: normal;
+            word-wrap: break-word;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-date {
             color: #ff00ff;
             font-weight: bold;
             margin-bottom: 10px;
+            font-size: 16px;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-nav-button {
@@ -600,6 +592,14 @@
             text-align: center;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
+        /* About Styles */
+        .about-content {
+            color: #00ffff;
+            font-size: 16px;
+            line-height: 1.4;
+            padding: 10px;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
+        }
         /* Password Popup Styles */
         .password-popup {
             display: none;
@@ -617,9 +617,7 @@
             width: 300px;
             max-width: 90vw;
         }
-        .password-popup.active {
-            display: block;
-        }
+        .password-popup.active { display: block; }
         .password-close {
             position: absolute;
             top: 5px;
@@ -673,14 +671,13 @@
             75% { transform: translate(-50%, -50%) translateX(-10px); }
             100% { transform: translate(-50%, -50%) translateX(0); }
         }
-        .password-popup.shake {
-            animation: password-shake 0.5s;
-        }
+        .password-popup.shake { animation: password-shake 0.5s; }
         @media (min-width: 600px) {
             .page-content { padding: 30px; }
             #homePage { padding: 30px; max-width: 700px; }
-            #blogPage { max-width: 900px; }
+            #blogPage { width: 900px; height: 500px; }
             #galleryPage { max-width: 800px; }
+            #aboutPage { max-width: 600px; }
             h1 { font-size: 90px; }
             .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
             .graphic-top { width: 100px; height: 100px; top: -50px; }
@@ -691,60 +688,35 @@
             .flash-text { font-size: 200px; }
             .discount-code { font-size: 40px; }
             .blog-container { flex-direction: row; }
-            .blog-menu { flex: 0 0 300px; border-right: 4px double #ff00ff; padding-right: 15px; margin-right: 15px; max-height: none; }
-            .blog-main { flex: 1; padding: 0; }
+            .blog-menu {
+                flex: 0 0 200px;
+                border-right: 4px double #ff00ff;
+                padding-right: 15px;
+                margin-right: 15px;
+                max-height: 460px;
+            }
+            .blog-main { flex: 1; padding: 10px 30px; }
             .blog-title { font-size: 36px; }
             .blog-content { font-size: 18px; }
             .blog-nav-button { font-size: 14px; padding: 10px 12px; }
         }
         @media (max-width: 599px) {
             body {
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-                font-weight: 400;
+                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
                 padding: 10px;
                 overflow-x: hidden;
             }
-            .status-bar {
-                font-size: 12px;
-                padding: 3px;
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
-            .nav-bar {
-                top: 20px;
-                width: 90%;
-                padding: 5px;
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
-            .nav-link {
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
+            .status-bar { font-size: 12px; padding: 3px; }
+            .nav-bar { top: 20px; width: 90%; padding: 5px; }
             .content-wrapper { margin-top: -30px; }
             #homePage { margin-top: 15px; padding: 15px; border-width: 6px; }
-            h1 {
-                font-size: 40px !important;
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
-            .title-text {
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
-            .domain {
-                font-size: 28px !important;
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
+            #blogPage { width: 100%; height: 400px; }
+            #galleryPage { max-height: calc(100vh - 80px); }
+            #aboutPage { padding: 15px; }
+            h1 { font-size: 40px !important; }
+            .domain { font-size: 28px !important; }
             .button { font-size: 14px; padding: 8px 15px; max-width: 280px; }
-            .under-construction {
-                font-size: 14px !important;
-                padding: 5px !important;
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
+            .under-construction { font-size: 14px !important; padding: 5px !important; }
             .graphic-top { width: 60px; height: 60px; top: -30px; }
             .graphic-bottom { width: 50px; height: 50px; bottom: -25px; }
             .graphic-left { width: 30px; height: 80px; left: -15px; z-index: 0; }
@@ -758,32 +730,16 @@
                 box-sizing: content-box;
             }
             .button-container { z-index: 10; }
-            .discount-code {
-                font-size: 24px;
-                padding: 10px;
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
-            .copyright {
-                font-size: 10px;
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
+            .discount-code { font-size: 24px; padding: 10px; }
+            .copyright { font-size: 10px; }
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
             .gallery-container { padding: 40px 10px 10px; }
-            .gallery-grid {
-                grid-template-columns: repeat(3, minmax(100px, 1fr));
-            }
-            .gallery-placeholder {
-                min-height: 100px;
-            }
-            .password-popup {
-                width: 250px;
-            }
-            .mode-button {
-                width: 20px;
-                height: 20px;
-            }
+            .gallery-grid { grid-template-columns: repeat(3, minmax(100px, 1fr)); }
+            .gallery-placeholder { min-height: 100px; }
+            .password-popup { width: 250px; }
+            .mode-button { width: 20px; height: 20px; }
+            .blog-menu { max-height: 200px; }
+            .blog-main { padding: 10px; }
         }
     </style>
 </head>
@@ -798,6 +754,11 @@
                         <path d="M8 0v2M8 14v2M0 8h2M14 8h2M2.34 2.34l1.42 1.42M12.24 12.24l1.42 1.42M2.34 13.66l1.42-1.42M12.24 3.76l1.42-1.42" stroke="#ff00ff" stroke-width="1"/>
                     </svg>
                 </button>
+                <button class="mode-button wallpaper-button" id="wallpaperButton" title="Swap Wallpaper">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="6" y="6" width="12" height="12" stroke="#ff0000" stroke-width="2"/>
+                    </svg>
+                </button>
             </div>
         </div>
         <span id="coordinates"></span>
@@ -806,6 +767,7 @@
         <span class="nav-link active" data-page="homePage">Homepage</span>
         <span class="nav-link" data-page="blogPage">Blog</span>
         <span class="nav-link" data-page="galleryPage">Gallery</span>
+        <span class="nav-link" data-page="aboutPage">About</span>
     </div>
     <div class="content-wrapper">
         <div class="page-content active" id="homePage">
@@ -829,7 +791,11 @@
         <div class="page-content" id="blogPage">
             <div class="blog-container">
                 <div class="blog-menu">
-                    <div class="blog-nav-button active" data-date="placeholder">XX/XX/XXXX<br>PLACEHOLDER POST</div>
+                    <div class="blog-nav-button active" data-date="post1"><span>31/03/2025</span><br>Hello World</div>
+                    <div class="blog-nav-button" data-date="post2"><span>01/04/2025</span><br>The Internet Sucks</div>
+                    <div class="blog-nav-button" data-date="post3"><span>02/04/2025</span><br>Placeholder 1</div>
+                    <div class="blog-nav-button" data-date="post4"><span>03/04/2025</span><br>Placeholder 2</div>
+                    <div class="blog-nav-button" data-date="post5"><span>04/04/2025</span><br>Placeholder 3</div>
                 </div>
                 <div class="blog-main">
                     <div class="blog-title" id="blogTitle"></div>
@@ -869,6 +835,13 @@
             <div class="gallery-enlarged" id="enlargedPhoto">
                 <div class="gallery-close" id="galleryClose">X</div>
                 <div class="gallery-caption" id="galleryCaption"></div>
+            </div>
+        </div>
+        <div class="page-content" id="aboutPage">
+            <h1>About</h1>
+            <div class="about-content">
+                62serpens aka 62 is a Music Producer from Australia.<br><br>
+                He is best known for his work with major artists such as Drake, Playboi Carti, Future, Yeat, Nettspend, Tate Mcrae, Taylor Swift, Ye West, Osamason, Pitbull, Britney Spears, Skrillex, Justin Bieber, Red Hot Chilli Peppers, One Direction and many more.
             </div>
         </div>
     </div>
@@ -912,6 +885,7 @@
             const passwordSubmit = document.getElementById('passwordSubmit');
             const passwordClose = document.getElementById('passwordClose');
             const invertButton = document.getElementById('invertButton');
+            const wallpaperButton = document.getElementById('wallpaperButton');
 
             function updateDateTime() {
                 const now = new Date();
@@ -953,16 +927,17 @@
                 document.body.appendChild(particle);
                 setTimeout(() => particle.remove(), window.innerWidth < 600 ? 15000 : 10000);
             }
-            function toggleParticles() {
+            coordinates.addEventListener('click', () => {
                 if (particlesActive) {
                     clearInterval(particleInterval);
                     particlesActive = false;
+                    coordinates.style.color = '#00ffff';
                 } else {
                     particleInterval = setInterval(createParticle, window.innerWidth < 600 ? 20 : 10);
                     particlesActive = true;
+                    coordinates.style.color = '#ff00ff';
                 }
-            }
-            coordinates.addEventListener('click', toggleParticles);
+            });
 
             titleText.addEventListener('click', () => {
                 titleText.classList.toggle('up');
@@ -1052,10 +1027,21 @@
                 navBar.classList.toggle('visible');
             });
 
-            // Invert Button Functionality
             invertButton.addEventListener('click', () => {
                 invertButton.classList.toggle('active');
                 document.body.style.filter = invertButton.classList.contains('active') ? 'invert(100%)' : 'none';
+            });
+
+            const wallpapers = [
+                "url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, #000",
+                "url('https://www.toptal.com/designers/subtlepatterns/uploads/stardust.png') repeat, #000",
+                "url('https://www.toptal.com/designers/subtlepatterns/uploads/plaid.png') repeat, #000"
+            ];
+            let wallpaperIndex = 0;
+            wallpaperButton.addEventListener('click', () => {
+                wallpaperIndex = (wallpaperIndex + 1) % wallpapers.length;
+                document.body.style.background = wallpapers[wallpaperIndex];
+                wallpaperButton.classList.toggle('active', wallpaperIndex !== 0);
             });
 
             const obscuredPassword = 'cnffjbeqyby';
@@ -1068,10 +1054,14 @@
             let sessionUnlocked = false;
 
             function showPage(pageId) {
-                pages.forEach(page => page.classList.toggle('active', page.id === pageId));
-                navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('data-page') === pageId));
-                if (pageId === 'blogPage') updateBlogContent('placeholder');
-                if (pageId === 'homePage') hidePasswordPopup();
+                if (pageId === 'homePage' || pageId === 'aboutPage' || sessionUnlocked) {
+                    pages.forEach(page => page.classList.toggle('active', page.id === pageId));
+                    navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('data-page') === pageId));
+                    if (pageId === 'blogPage') updateBlogContent('post1');
+                    hidePasswordPopup();
+                } else {
+                    showPasswordPopup(pageId);
+                }
                 window.scrollTo(0, 0);
             }
 
@@ -1079,7 +1069,6 @@
                 targetPage = pageId;
                 passwordPopup.classList.add('active');
                 passwordInput.value = '';
-                // Removed passwordInput.focus() to prevent auto-keyboard on mobile
             }
 
             function hidePasswordPopup() {
@@ -1091,11 +1080,7 @@
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     const pageId = link.getAttribute('data-page');
-                    if (pageId === 'homePage' || sessionUnlocked) {
-                        showPage(pageId);
-                    } else {
-                        showPasswordPopup(pageId);
-                    }
+                    showPage(pageId);
                 });
             });
 
@@ -1112,15 +1097,17 @@
             });
 
             passwordInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    passwordSubmit.click();
-                }
+                if (e.key === 'Enter') passwordSubmit.click();
             });
 
             passwordClose.addEventListener('click', hidePasswordPopup);
 
             const blogPosts = {
-                'placeholder': { title: "PLACEHOLDER POST", content: `<div class="blog-date">XX/XX/XXXX</div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.` }
+                'post1': { title: "Hello World", content: `<div class="blog-date">31/03/2025</div>just setting up my blog lol :)` },
+                'post2': { title: "The Internet Sucks", content: `<div class="blog-date">01/04/2025</div>internet is the new free to air TV. we need to do something about it.` },
+                'post3': { title: "Placeholder 1", content: `<div class="blog-date">02/04/2025</div>Lorem ipsum dolor sit amet.` },
+                'post4': { title: "Placeholder 2", content: `<div class="blog-date">03/04/2025</div>Short post here.` },
+                'post5': { title: "Placeholder 3", content: `<div class="blog-date">04/04/2025</div>Another test post with some text.` }
             };
 
             function updateBlogContent(date) {
@@ -1131,14 +1118,18 @@
             }
 
             blogNavButtons.forEach(button => {
-                button.addEventListener('click', () => updateBlogContent(button.getAttribute('data-date')));
+                button.addEventListener('click', () => {
+                    if (sessionUnlocked) updateBlogContent(button.getAttribute('data-date'));
+                });
             });
 
             galleryPlaceholders.forEach(placeholder => {
                 placeholder.addEventListener('click', () => {
-                    enlargedPhoto.style.display = 'block';
-                    enlargedPhoto.style.backgroundImage = placeholder.style.backgroundImage || 'none';
-                    galleryCaption.textContent = placeholder.dataset.caption || 'No caption, lol';
+                    if (sessionUnlocked) {
+                        enlargedPhoto.style.display = 'block';
+                        enlargedPhoto.style.backgroundImage = placeholder.style.backgroundImage || 'none';
+                        galleryCaption.textContent = placeholder.dataset.caption || 'No caption, lol';
+                    }
                 });
             });
 
