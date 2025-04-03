@@ -153,9 +153,9 @@
         }
         #galleryPage {
             border: 4px dotted #ffff00;
-            max-width: 800px;
+            width: 900px; /* Match blog */
+            height: 500px; /* Match blog */
             overflow-y: auto;
-            max-height: calc(100vh - 100px);
             margin: 0 auto;
             box-shadow: 0 0 20px #ff00ff;
         }
@@ -540,14 +540,14 @@
         .gallery-grid {
             display: flex;
             flex-direction: row;
-            width: 520px;
+            width: 880px; /* 4 × 200px + 3 × 20px gaps */
             overflow-x: hidden;
-            gap: 10px;
+            gap: 20px;
             scroll-behavior: smooth;
         }
         .gallery-placeholder {
-            flex: 0 0 120px;
-            height: 180px;
+            flex: 0 0 200px;
+            height: 300px; /* Bigger to fit new width */
             border: 2px solid #ffffff;
             background: transparent;
             cursor: pointer;
@@ -562,12 +562,12 @@
             pointer-events: none;
         }
         .gallery-nav-button {
-            width: 30px;
+            width: 40px;
             height: 30px;
-            background: #00ffff;
-            color: #ff00ff;
-            border: 2px solid #ffff00;
-            border-radius: 5px;
+            background: #ffff00; /* Yellow */
+            color: #ff00ff; /* Purple */
+            border: 2px solid #ff00ff;
+            border-radius: 15px; /* Oval */
             font-size: 16px;
             text-align: center;
             line-height: 30px;
@@ -714,7 +714,7 @@
             .page-content { padding: 30px; }
             #homePage { padding: 30px; max-width: 700px; }
             #blogPage { width: 900px; height: 500px; }
-            #galleryPage { max-width: 800px; }
+            #galleryPage { width: 900px; height: 500px; }
             #aboutPage { max-width: 600px; }
             h1 { font-size: 90px; }
             .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
@@ -749,7 +749,7 @@
             .content-wrapper { margin-top: -30px; }
             #homePage { margin-top: 15px; padding: 15px; border-width: 6px; }
             #blogPage { width: 100%; height: 400px; }
-            #galleryPage { max-height: calc(100vh - 80px); }
+            #galleryPage { width: 100%; height: 400px; }
             #aboutPage { padding: 15px; margin-top: 15px; }
             h1 { font-size: 40px !important; }
             .domain { font-size: 28px !important; }
@@ -774,7 +774,7 @@
             .gallery-container { padding: 40px 10px 10px; }
             .gallery-grid { width: 100%; gap: 10px; }
             .gallery-placeholder { flex: 0 0 calc(25% - 7.5px); height: 150px; }
-            .gallery-nav-button { width: 30px; height: 30px; font-size: 16px; line-height: 30px; border-radius: 5px; background: #00ffff; color: #ff00ff; }
+            .gallery-nav-button { width: 40px; height: 30px; font-size: 16px; line-height: 30px; border-radius: 15px; background: #ffff00; color: #ff00ff; }
             .password-popup { width: 250px; }
             .mode-button { width: 20px; height: 20px; }
             .blog-container { flex-direction: row; overflow-x: hidden; }
@@ -853,11 +853,11 @@
                     <div class="gallery-placeholder" data-index="1" data-caption="Photo 1" style="background-image: url('https://i.imgur.com/nOCwI1Dm.jpg');" data-full="https://i.imgur.com/nOCwI1D.jpg"></div>
                     <div class="gallery-placeholder" data-index="2" data-caption="Photo 2" style="background-image: url('https://i.imgur.com/8bOh3sGm.jpg');" data-full="https://i.imgur.com/8bOh3sG.jpg"></div>
                     <div class="gallery-placeholder" data-index="3" data-caption="Photo 3" style="background-image: url('https://i.imgur.com/kTsaS8Sm.jpg');" data-full="https://i.imgur.com/kTsaS8S.jpg"></div>
-                    <div class="gallery-placeholder" data-index="4" data-caption="Photo 4" style="background-image: url('https://via.placeholder.com/120x180/00ff00/ffffff?text=4');" data-full="https://via.placeholder.com/600x900/00ff00/ffffff?text=4"></div>
-                    <div class="gallery-placeholder" data-index="5" data-caption="Photo 5" style="background-image: url('https://via.placeholder.com/120x180/ffff00/ffffff?text=5');" data-full="https://via.placeholder.com/600x900/ffff00/ffffff?text=5"></div>
-                    <div class="gallery-placeholder" data-index="6" data-caption="Photo 6" style="background-image: url('https://via.placeholder.com/120x180/0000ff/ffffff?text=6');" data-full="https://via.placeholder.com/600x900/0000ff/ffffff?text=6"></div>
-                    <div class="gallery-placeholder" data-index="7" data-caption="Photo 7" style="background-image: url('https://via.placeholder.com/120x180/ff00ff/ffffff?text=7');" data-full="https://via.placeholder.com/600x900/ff00ff/ffffff?text=7"></div>
-                    <div class="gallery-placeholder" data-index="8" data-caption="Photo 8" style="background-image: url('https://via.placeholder.com/120x180/00ffff/ffffff?text=8');" data-full="https://via.placeholder.com/600x900/00ffff/ffffff?text=8"></div>
+                    <div class="gallery-placeholder" data-index="4" data-caption="Photo 4" style="background-image: url('https://via.placeholder.com/200x300/00ff00/ffffff?text=4');" data-full="https://via.placeholder.com/600x900/00ff00/ffffff?text=4"></div>
+                    <div class="gallery-placeholder" data-index="5" data-caption="Photo 5" style="background-image: url('https://via.placeholder.com/200x300/ffff00/ffffff?text=5');" data-full="https://via.placeholder.com/600x900/ffff00/ffffff?text=5"></div>
+                    <div class="gallery-placeholder" data-index="6" data-caption="Photo 6" style="background-image: url('https://via.placeholder.com/200x300/0000ff/ffffff?text=6');" data-full="https://via.placeholder.com/600x900/0000ff/ffffff?text=6"></div>
+                    <div class="gallery-placeholder" data-index="7" data-caption="Photo 7" style="background-image: url('https://via.placeholder.com/200x300/ff00ff/ffffff?text=7');" data-full="https://via.placeholder.com/600x900/ff00ff/ffffff?text=7"></div>
+                    <div class="gallery-placeholder" data-index="8" data-caption="Photo 8" style="background-image: url('https://via.placeholder.com/200x300/00ffff/ffffff?text=8');" data-full="https://via.placeholder.com/600x900/00ffff/ffffff?text=8"></div>
                 </div>
                 <div class="gallery-nav">
                     <div class="gallery-nav-button" id="galleryLeft">←</div>
@@ -1181,8 +1181,8 @@
                 enlargedPhoto.style.display = 'none';
             });
 
-            const galleryItemWidth = window.innerWidth < 600 ? (window.innerWidth - 30) / 4 : 120;
-            const galleryStep = window.innerWidth < 600 ? (galleryItemWidth + 10) * 4 : 520;
+            const galleryItemWidth = window.innerWidth < 600 ? (window.innerWidth - 30) / 4 : 200;
+            const galleryStep = window.innerWidth < 600 ? (galleryItemWidth + 20) * 4 : 880; /* 4 × 200 + 3 × 20 */
             galleryLeft.addEventListener('click', () => {
                 const newScroll = Math.max(0, galleryGrid.scrollLeft - galleryStep);
                 galleryGrid.scrollTo({ left: newScroll, behavior: 'smooth' });
