@@ -726,7 +726,19 @@
             .blog-nav-button { font-size: 14px; padding: 10px 12px; }
         }
         @media (max-width: 599px) {
-            body { padding: 10px; overflow-x: hidden; }
+            body {
+                padding: 10px;
+                overflow-x: hidden;
+                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+            /* Ensure font applies to all key elements on mobile */
+            html, body, .status-bar, .nav-bar, .nav-link, h1, .title-text, .domain, .under-construction, .discount-code, .copyright, .page-content, .blog-container, .blog-title, .blog-content, .blog-date, .blog-nav-button, .gallery-container, .gallery-nav-button, .gallery-close, .gallery-caption, .about-content, .password-popup, .password-input, .password-submit {
+                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
             .status-bar { font-size: 12px; padding: 3px; }
             .nav-bar { top: 20px; width: 90%; padding: 5px; }
             .content-wrapper { margin-top: -30px; }
@@ -1078,14 +1090,7 @@
                 wallpaperButton.classList.toggle('active', wallpaperIndex !== 0);
             });
 
-            const obscuredPassword = 'n'; // ROT13 offset trick for "1"
-            function rot13(str) {
-                return str.replace(/[a-zA-Z]/g, function(c) {
-                    return String.fromCharCode((c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26);
-                });
-            }
-            const correctPassword = rot13(obscuredPassword).charCodeAt(0) - 12 === 49 ? '1' : 'error'; // "n" -> "a" -> "1"
-
+            const correctPassword = "1"; // Simplified to direct comparison
             let sessionUnlocked = false;
 
             function resetAnimations() {
