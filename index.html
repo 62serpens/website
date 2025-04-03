@@ -373,7 +373,7 @@
             position: absolute;
             top: -20px;
             width: 100%;
-            color: #ff0000;
+            color: #ff00ff;
             font-size: 16px;
             background: #ffff00;
             padding: 5px;
@@ -616,7 +616,7 @@
             bottom: 10px;
             left: 10px;
             right: 10px;
-            color: #ffff00;
+            color: #fbff00;
             font-size: 14px;
             background: rgba(0, 0, 0, 0.7);
             padding: 5px;
@@ -729,15 +729,14 @@
             body {
                 padding: 10px;
                 overflow-x: hidden;
-                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
+                font-weight: 400;
             }
-            /* Ensure font applies to all key elements on mobile */
+            /* Match the original working font stack for mobile */
             html, body, .status-bar, .nav-bar, .nav-link, h1, .title-text, .domain, .under-construction, .discount-code, .copyright, .page-content, .blog-container, .blog-title, .blog-content, .blog-date, .blog-nav-button, .gallery-container, .gallery-nav-button, .gallery-close, .gallery-caption, .about-content, .password-popup, .password-input, .password-submit {
-                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
             }
             .status-bar { font-size: 12px; padding: 3px; }
             .nav-bar { top: 20px; width: 90%; padding: 5px; }
@@ -1090,14 +1089,14 @@
                 wallpaperButton.classList.toggle('active', wallpaperIndex !== 0);
             });
 
-            const correctPassword = "1"; // Simplified to direct comparison
+            const correctPassword = "1";
             let sessionUnlocked = false;
 
             function resetAnimations() {
                 const graphics = [egg1, egg2, egg3, egg4];
                 graphics.forEach(el => {
                     el.style.animation = 'none';
-                    void el.offsetWidth; // Trigger reflow
+                    void el.offsetWidth;
                     if (el === egg1) el.style.animation = 'bounce 1s infinite';
                     if (el === egg2) el.style.animation = 'spin 1.5s infinite linear, glow 2s infinite';
                     if (el === egg3) el.style.animation = 'slide 6s infinite';
