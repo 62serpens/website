@@ -13,12 +13,12 @@
             padding: 0;
             height: 100%;
             overflow: hidden;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         html { background-color: #000; }
         body {
             background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, #000;
             color: #ffffff;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             padding: 10px;
             min-height: 100vh;
             display: flex;
@@ -61,7 +61,6 @@
             justify-content: space-between;
             box-sizing: border-box;
             z-index: 100;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             align-items: center;
         }
         #coordinates {
@@ -113,7 +112,6 @@
             padding: 5px;
             cursor: pointer;
             transition: color 0.2s ease;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             display: inline-block;
         }
         .nav-link:hover { color: #ff00ff; }
@@ -194,7 +192,6 @@
             animation: blink 0.5s infinite;
             display: inline-flex;
             align-items: baseline;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .title-text {
             transition: all 0.3s ease;
@@ -228,7 +225,6 @@
             animation: none;
             transition: none;
             cursor: pointer;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .under-construction {
             position: absolute;
@@ -241,7 +237,6 @@
             border: 2px solid #000;
             transform: rotate(-10deg);
             cursor: pointer;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .button-container {
             display: flex;
@@ -362,7 +357,6 @@
             color: #00ff00;
             transform: rotate(-20deg);
             animation: fade 4s infinite;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         @keyframes fade {
             0%, 100% { opacity: 1; }
@@ -377,7 +371,6 @@
             background: #ffff00;
             padding: 5px;
             box-sizing: border-box;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .chaos-star {
             position: absolute;
@@ -398,7 +391,6 @@
             pointer-events: none;
             display: none;
             white-space: nowrap;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .discount-code {
             position: absolute;
@@ -412,7 +404,6 @@
             border: 2px solid #ff00ff;
             display: none;
             z-index: 10;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .copyright {
             position: fixed;
@@ -421,7 +412,6 @@
             transform: translateX(-50%);
             font-size: 12px;
             color: #ffffff;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             z-index: 10;
             white-space: nowrap;
             animation: blink 0.5s infinite;
@@ -445,20 +435,19 @@
         /* Blog Styles */
         .blog-container {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             width: 100%;
             height: 100%;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-menu {
-            flex: 0 0 auto;
+            flex: 0 0 200px;
             padding: 10px;
             overflow-y: auto;
-            max-height: 300px;
+            max-height: 460px;
         }
         .blog-main {
             flex: 1;
-            padding: 10px;
+            padding: 10px 30px;
             overflow-y: auto;
             white-space: normal;
             word-wrap: break-word;
@@ -469,7 +458,6 @@
             text-shadow: 2px 2px 0 #ff00ff;
             text-transform: uppercase;
             margin-bottom: 15px;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-content {
             color: #00ffff;
@@ -477,14 +465,12 @@
             line-height: 1.6;
             white-space: normal;
             word-wrap: break-word;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-date {
             color: #ff00ff;
             font-weight: bold;
             margin-bottom: 10px;
             font-size: 16px;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-nav-button {
             background: #ff00ff;
@@ -503,7 +489,6 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .blog-nav-button:hover {
             background: #00ffff;
@@ -520,28 +505,56 @@
             width: 100%;
             padding: 10px;
             box-sizing: border-box;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
+            position: relative;
         }
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(150px, 1fr));
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
             gap: 15px;
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
+            scroll-behavior: smooth;
         }
         .gallery-placeholder {
-            width: 100%;
-            padding-top: 100%;
+            flex: 0 0 150px;
+            height: 150px;
             border: 2px solid #ffffff;
             background: transparent;
             cursor: pointer;
             position: relative;
             background-size: cover;
-            min-height: 150px;
         }
         .gallery-placeholder.test {
             background-image: url('https://via.placeholder.com/150/00ff00/ffffff?text=TEST');
+        }
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+        .gallery-nav-button {
+            width: 40px;
+            height: 40px;
+            background: #ff00ff;
+            color: #00ffff;
+            border: 2px solid #ffff00;
+            border-radius: 50%;
+            font-size: 20px;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            pointer-events: all;
+        }
+        .gallery-nav-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #00ff00;
         }
         .gallery-enlarged {
             display: none;
@@ -558,7 +571,6 @@
             z-index: 200;
             box-shadow: 0 0 20px #00ffff;
             background-size: cover;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .gallery-close {
             position: absolute;
@@ -574,7 +586,6 @@
             border: 2px solid #ffff00;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         .gallery-close:hover {
             transform: scale(1.1);
@@ -590,7 +601,6 @@
             background: rgba(0, 0, 0, 0.7);
             padding: 5px;
             text-align: center;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         /* About Styles */
         .about-content {
@@ -598,7 +608,6 @@
             font-size: 16px;
             line-height: 1.4;
             padding: 10px;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
         }
         /* Password Popup Styles */
         .password-popup {
@@ -612,7 +621,6 @@
             padding: 20px;
             z-index: 300;
             box-shadow: 0 0 20px #00ffff;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             color: #ffff00;
             width: 300px;
             max-width: 90vw;
@@ -645,7 +653,6 @@
             border: 2px solid #00ff00;
             color: #00ffff;
             font-size: 16px;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             box-sizing: border-box;
         }
         .password-submit {
@@ -654,7 +661,6 @@
             padding: 10px;
             border: 2px solid #ffff00;
             font-size: 16px;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             text-transform: uppercase;
             cursor: pointer;
             width: 100%;
@@ -687,25 +693,14 @@
             .marquee { font-size: 20px; }
             .flash-text { font-size: 200px; }
             .discount-code { font-size: 40px; }
-            .blog-container { flex-direction: row; }
-            .blog-menu {
-                flex: 0 0 200px;
-                border-right: 4px double #ff00ff;
-                padding-right: 15px;
-                margin-right: 15px;
-                max-height: 460px;
-            }
-            .blog-main { flex: 1; padding: 10px 30px; }
+            .blog-menu { flex: 0 0 200px; max-height: 460px; }
+            .blog-main { padding: 10px 30px; }
             .blog-title { font-size: 36px; }
             .blog-content { font-size: 18px; }
             .blog-nav-button { font-size: 14px; padding: 10px 12px; }
         }
         @media (max-width: 599px) {
-            body {
-                font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
-                padding: 10px;
-                overflow-x: hidden;
-            }
+            body { padding: 10px; overflow-x: hidden; }
             .status-bar { font-size: 12px; padding: 3px; }
             .nav-bar { top: 20px; width: 90%; padding: 5px; }
             .content-wrapper { margin-top: -30px; }
@@ -734,12 +729,18 @@
             .copyright { font-size: 10px; }
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
             .gallery-container { padding: 40px 10px 10px; }
-            .gallery-grid { grid-template-columns: repeat(3, minmax(100px, 1fr)); }
-            .gallery-placeholder { min-height: 100px; }
+            .gallery-grid { gap: 10px; }
+            .gallery-placeholder { flex: 0 0 100px; height: 100px; }
+            .gallery-nav-button { width: 30px; height: 30px; font-size: 16px; line-height: 30px; }
             .password-popup { width: 250px; }
             .mode-button { width: 20px; height: 20px; }
-            .blog-menu { max-height: 200px; }
-            .blog-main { padding: 10px; }
+            .blog-container { flex-direction: row; }
+            .blog-menu { flex: 0 0 120px; max-height: 360px; padding: 5px; }
+            .blog-main { padding: 5px 10px; }
+            .blog-title { font-size: 24px; }
+            .blog-content { font-size: 16px; }
+            .blog-date { font-size: 14px; }
+            .blog-nav-button { font-size: 10px; padding: 6px 8px; }
         }
     </style>
 </head>
@@ -831,6 +832,10 @@
                     <div class="gallery-placeholder" data-index="23" data-caption="maybe"></div>
                     <div class="gallery-placeholder" data-index="24" data-caption="donezo"></div>
                 </div>
+                <div class="gallery-nav">
+                    <div class="gallery-nav-button" id="galleryLeft">←</div>
+                    <div class="gallery-nav-button" id="galleryRight">→</div>
+                </div>
             </div>
             <div class="gallery-enlarged" id="enlargedPhoto">
                 <div class="gallery-close" id="galleryClose">X</div>
@@ -876,7 +881,10 @@
             const blogTitle = document.getElementById('blogTitle');
             const blogContent = document.getElementById('blogContent');
             const blogNavButtons = document.querySelectorAll('.blog-nav-button');
+            const galleryGrid = document.querySelector('.gallery-grid');
             const galleryPlaceholders = document.querySelectorAll('.gallery-placeholder');
+            const galleryLeft = document.getElementById('galleryLeft');
+            const galleryRight = document.getElementById('galleryRight');
             const enlargedPhoto = document.getElementById('enlargedPhoto');
             const galleryClose = document.getElementById('galleryClose');
             const galleryCaption = document.getElementById('galleryCaption');
@@ -1053,11 +1061,24 @@
             const correctPassword = rot13(obscuredPassword);
             let sessionUnlocked = false;
 
+            function resetAnimations() {
+                const graphics = [egg1, egg2, egg3, egg4];
+                graphics.forEach(el => {
+                    el.style.animation = 'none';
+                    void el.offsetWidth; // Trigger reflow
+                    if (el === egg1) el.style.animation = 'bounce 1s infinite';
+                    if (el === egg2) el.style.animation = 'spin 1.5s infinite linear, glow 2s infinite';
+                    if (el === egg3) el.style.animation = 'slide 6s infinite';
+                    if (el === egg4) el.style.animation = 'bounce 0.8s infinite';
+                });
+            }
+
             function showPage(pageId) {
                 if (pageId === 'homePage' || pageId === 'aboutPage' || sessionUnlocked) {
                     pages.forEach(page => page.classList.toggle('active', page.id === pageId));
                     navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('data-page') === pageId));
-                    if (pageId === 'blogPage') updateBlogContent('post1');
+                    if (pageId === 'blogPage' && sessionUnlocked) updateBlogContent('post1');
+                    if (pageId === 'homePage') resetAnimations();
                     hidePasswordPopup();
                 } else {
                     showPasswordPopup(pageId);
@@ -1135,6 +1156,14 @@
 
             galleryClose.addEventListener('click', () => {
                 enlargedPhoto.style.display = 'none';
+            });
+
+            const itemWidth = window.innerWidth < 600 ? 100 : 150;
+            galleryLeft.addEventListener('click', () => {
+                galleryGrid.scrollBy({ left: -itemWidth * 4, behavior: 'smooth' });
+            });
+            galleryRight.addEventListener('click', () => {
+                galleryGrid.scrollBy({ left: itemWidth * 4, behavior: 'smooth' });
             });
 
             showPage('homePage');
