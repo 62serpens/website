@@ -100,11 +100,11 @@
             transform: translateX(-50%);
             padding: 5px 10px;
             z-index: 110;
-            display: flex; /* Visible by default */
+            display: flex;
             flex-wrap: wrap;
             justify-content: center;
         }
-        .nav-bar.hidden { display: none; } /* Toggle to hide */
+        .nav-bar.hidden { display: none; }
         .nav-link {
             color: #ffff00;
             font-size: 14px;
@@ -144,11 +144,12 @@
             margin-top: 20px;
         }
         #blogPage {
-            border: 4px dashed #ff00ff;
+            border: 4px dotted #ffff00;
             width: 900px;
             height: 500px;
             overflow-y: auto;
             margin: 0 auto;
+            box-shadow: 0 0 20px #ff00ff;
         }
         #galleryPage {
             border: 4px dotted #ffff00;
@@ -156,6 +157,7 @@
             overflow-y: auto;
             max-height: calc(100vh - 100px);
             margin: 0 auto;
+            box-shadow: 0 0 20px #ff00ff;
         }
         #aboutPage {
             border: 4px solid #00ffff;
@@ -163,6 +165,7 @@
             padding: 15px;
             text-align: center;
             background: rgba(0, 0, 0, 0.9);
+            margin-top: 20px;
         }
         @keyframes shake {
             0% { transform: translateX(0); }
@@ -450,15 +453,15 @@
             width: 100%;
             height: 100%;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-            overflow-x: hidden; /* No horizontal scrolling */
+            overflow-x: hidden;
         }
         .blog-menu {
             flex: 0 0 200px;
             padding: 10px;
             overflow-y: auto;
-            overflow-x: hidden; /* Vertical only */
+            overflow-x: hidden;
             max-height: 460px;
-            border-right: 2px solid #ff00ff; /* Divider */
+            border-right: 2px solid #ff00ff;
         }
         .blog-main {
             flex: 1;
@@ -493,15 +496,16 @@
         .blog-nav-button {
             background: #ff00ff;
             color: #00ffff;
-            padding: 6px 8px; /* Smaller buttons */
+            padding: 4px 6px;
             border: none;
             text-decoration: none;
-            font-size: 11px; /* Smaller font */
+            font-size: 13px;
             text-align: left;
             box-shadow: 0 0 5px #ff00ff;
             transition: all 0.2s ease;
             cursor: pointer;
             width: 100%;
+            max-width: 180px;
             margin-bottom: 8px;
             display: block;
             overflow: hidden;
@@ -510,7 +514,7 @@
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
         .blog-nav-button span {
-            font-size: 13px; /* Bigger title preview */
+            font-size: 11px;
         }
         .blog-nav-button:hover {
             background: #00ffff;
@@ -536,22 +540,19 @@
         .gallery-grid {
             display: flex;
             flex-direction: row;
-            width: 480px; /* 4 × 120px */
-            overflow-x: hidden; /* No horizontal scroll */
-            gap: 0; /* Tighter spacing */
+            width: 520px;
+            overflow-x: hidden;
+            gap: 10px;
             scroll-behavior: smooth;
         }
         .gallery-placeholder {
-            flex: 0 0 120px; /* 4 fit in 480px */
-            height: 180px; /* Taller, canvas-like */
+            flex: 0 0 120px;
+            height: 180px;
             border: 2px solid #ffffff;
             background: transparent;
             cursor: pointer;
             position: relative;
             background-size: cover;
-        }
-        .gallery-placeholder.test {
-            background-image: url('https://via.placeholder.com/120x180/00ff00/ffffff?text=TEST');
         }
         .gallery-nav {
             margin-top: 10px;
@@ -561,15 +562,15 @@
             pointer-events: none;
         }
         .gallery-nav-button {
-            width: 40px;
-            height: 40px;
-            background: #ff00ff;
-            color: #00ffff;
+            width: 30px;
+            height: 30px;
+            background: #00ffff;
+            color: #ff00ff;
             border: 2px solid #ffff00;
-            border-radius: 50%;
-            font-size: 20px;
+            border-radius: 5px;
+            font-size: 16px;
             text-align: center;
-            line-height: 40px;
+            line-height: 30px;
             cursor: pointer;
             transition: all 0.2s ease;
             pointer-events: all;
@@ -728,8 +729,8 @@
             .blog-main { padding: 10px 30px; }
             .blog-title { font-size: 36px; }
             .blog-content { font-size: 18px; }
-            .blog-nav-button { font-size: 11px; padding: 6px 8px; }
-            .blog-nav-button span { font-size: 13px; }
+            .blog-nav-button { font-size: 13px; padding: 4px 6px; max-width: 180px; }
+            .blog-nav-button span { font-size: 11px; }
         }
         @media (max-width: 599px) {
             body {
@@ -749,7 +750,7 @@
             #homePage { margin-top: 15px; padding: 15px; border-width: 6px; }
             #blogPage { width: 100%; height: 400px; }
             #galleryPage { max-height: calc(100vh - 80px); }
-            #aboutPage { padding: 15px; }
+            #aboutPage { padding: 15px; margin-top: 15px; }
             h1 { font-size: 40px !important; }
             .domain { font-size: 28px !important; }
             .button { font-size: 14px; padding: 8px 15px; max-width: 280px; }
@@ -771,9 +772,9 @@
             .copyright { font-size: 10px; }
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
             .gallery-container { padding: 40px 10px 10px; }
-            .gallery-grid { width: 100%; gap: 0; }
-            .gallery-placeholder { flex: 0 0 50%; height: 150px; } /* 2 images */
-            .gallery-nav-button { width: 30px; height: 30px; font-size: 16px; line-height: 30px; }
+            .gallery-grid { width: 100%; gap: 10px; }
+            .gallery-placeholder { flex: 0 0 calc(25% - 7.5px); height: 150px; }
+            .gallery-nav-button { width: 30px; height: 30px; font-size: 16px; line-height: 30px; border-radius: 5px; background: #00ffff; color: #ff00ff; }
             .password-popup { width: 250px; }
             .mode-button { width: 20px; height: 20px; }
             .blog-container { flex-direction: row; overflow-x: hidden; }
@@ -782,8 +783,8 @@
             .blog-title { font-size: 24px; }
             .blog-content { font-size: 16px; }
             .blog-date { font-size: 14px; }
-            .blog-nav-button { font-size: 10px; padding: 6px 8px; }
-            .blog-nav-button span { font-size: 12px; }
+            .blog-nav-button { font-size: 12px; padding: 4px 6px; max-width: 100px; }
+            .blog-nav-button span { font-size: 10px; }
         }
     </style>
 </head>
@@ -849,14 +850,14 @@
         <div class="page-content" id="galleryPage">
             <div class="gallery-container">
                 <div class="gallery-grid">
-                    <div class="gallery-placeholder" data-index="1" data-caption="Photo 1" style="background-image: url('https://via.placeholder.com/120x180/ff00ff/ffffff?text=1');"></div>
-                    <div class="gallery-placeholder" data-index="2" data-caption="Photo 2" style="background-image: url('https://via.placeholder.com/120x180/00ffff/ffffff?text=2');"></div>
-                    <div class="gallery-placeholder" data-index="3" data-caption="Photo 3" style="background-image: url('https://via.placeholder.com/120x180/ff0000/ffffff?text=3');"></div>
-                    <div class="gallery-placeholder" data-index="4" data-caption="Photo 4" style="background-image: url('https://via.placeholder.com/120x180/00ff00/ffffff?text=4');"></div>
-                    <div class="gallery-placeholder" data-index="5" data-caption="Photo 5" style="background-image: url('https://via.placeholder.com/120x180/ffff00/ffffff?text=5');"></div>
-                    <div class="gallery-placeholder" data-index="6" data-caption="Photo 6" style="background-image: url('https://via.placeholder.com/120x180/0000ff/ffffff?text=6');"></div>
-                    <div class="gallery-placeholder" data-index="7" data-caption="Photo 7" style="background-image: url('https://via.placeholder.com/120x180/ff00ff/ffffff?text=7');"></div>
-                    <div class="gallery-placeholder" data-index="8" data-caption="Photo 8" style="background-image: url('https://via.placeholder.com/120x180/00ffff/ffffff?text=8');"></div>
+                    <div class="gallery-placeholder" data-index="1" data-caption="Photo 1" style="background-image: url('https://i.imgur.com/nOCwI1Dm.jpg');" data-full="https://i.imgur.com/nOCwI1D.jpg"></div>
+                    <div class="gallery-placeholder" data-index="2" data-caption="Photo 2" style="background-image: url('https://i.imgur.com/8bOh3sGm.jpg');" data-full="https://i.imgur.com/8bOh3sG.jpg"></div>
+                    <div class="gallery-placeholder" data-index="3" data-caption="Photo 3" style="background-image: url('https://i.imgur.com/kTsaS8Sm.jpg');" data-full="https://i.imgur.com/kTsaS8S.jpg"></div>
+                    <div class="gallery-placeholder" data-index="4" data-caption="Photo 4" style="background-image: url('https://via.placeholder.com/120x180/00ff00/ffffff?text=4');" data-full="https://via.placeholder.com/600x900/00ff00/ffffff?text=4"></div>
+                    <div class="gallery-placeholder" data-index="5" data-caption="Photo 5" style="background-image: url('https://via.placeholder.com/120x180/ffff00/ffffff?text=5');" data-full="https://via.placeholder.com/600x900/ffff00/ffffff?text=5"></div>
+                    <div class="gallery-placeholder" data-index="6" data-caption="Photo 6" style="background-image: url('https://via.placeholder.com/120x180/0000ff/ffffff?text=6');" data-full="https://via.placeholder.com/600x900/0000ff/ffffff?text=6"></div>
+                    <div class="gallery-placeholder" data-index="7" data-caption="Photo 7" style="background-image: url('https://via.placeholder.com/120x180/ff00ff/ffffff?text=7');" data-full="https://via.placeholder.com/600x900/ff00ff/ffffff?text=7"></div>
+                    <div class="gallery-placeholder" data-index="8" data-caption="Photo 8" style="background-image: url('https://via.placeholder.com/120x180/00ffff/ffffff?text=8');" data-full="https://via.placeholder.com/600x900/00ffff/ffffff?text=8"></div>
                 </div>
                 <div class="gallery-nav">
                     <div class="gallery-nav-button" id="galleryLeft">←</div>
@@ -885,7 +886,7 @@
         <input type="password" class="password-input" id="passwordInput" placeholder="type here...">
         <button class="password-submit" id="passwordSubmit">SUBMIT</button>
     </div>
-    <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span> <!-- Moved to body -->
+    <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const dateTime = document.getElementById('dateTime');
@@ -1111,7 +1112,7 @@
                 targetPage = pageId;
                 passwordPopup.classList.add('active');
                 passwordInput.value = '';
-                if (window.innerWidth >= 600) passwordInput.focus(); // Desktop only
+                if (window.innerWidth >= 600) passwordInput.focus();
             }
 
             function hidePasswordPopup() {
@@ -1170,7 +1171,7 @@
                 placeholder.addEventListener('click', () => {
                     if (sessionUnlocked) {
                         enlargedPhoto.style.display = 'block';
-                        enlargedPhoto.style.backgroundImage = placeholder.style.backgroundImage || 'none';
+                        enlargedPhoto.style.backgroundImage = `url('${placeholder.dataset.full}')`;
                         galleryCaption.textContent = placeholder.dataset.caption || 'No caption, lol';
                     }
                 });
@@ -1180,13 +1181,16 @@
                 enlargedPhoto.style.display = 'none';
             });
 
-            const galleryItemWidth = window.innerWidth < 600 ? window.innerWidth / 2 : 120; // 2 on mobile, 4 on desktop
-            const galleryStep = window.innerWidth < 600 ? galleryItemWidth * 2 : galleryItemWidth * 4;
+            const galleryItemWidth = window.innerWidth < 600 ? (window.innerWidth - 30) / 4 : 120;
+            const galleryStep = window.innerWidth < 600 ? (galleryItemWidth + 10) * 4 : 520;
             galleryLeft.addEventListener('click', () => {
-                galleryGrid.scrollBy({ left: -galleryStep, behavior: 'smooth' });
+                const newScroll = Math.max(0, galleryGrid.scrollLeft - galleryStep);
+                galleryGrid.scrollTo({ left: newScroll, behavior: 'smooth' });
             });
             galleryRight.addEventListener('click', () => {
-                galleryGrid.scrollBy({ left: galleryStep, behavior: 'smooth' });
+                const maxScroll = galleryGrid.scrollWidth - galleryGrid.clientWidth;
+                const newScroll = Math.min(maxScroll, galleryGrid.scrollLeft + galleryStep);
+                galleryGrid.scrollTo({ left: newScroll, behavior: 'smooth' });
             });
 
             showPage('homePage');
