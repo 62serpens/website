@@ -100,11 +100,11 @@
             transform: translateX(-50%);
             padding: 5px 10px;
             z-index: 110;
-            display: none;
+            display: flex; /* Visible by default */
             flex-wrap: wrap;
             justify-content: center;
         }
-        .nav-bar.visible { display: flex; }
+        .nav-bar.hidden { display: none; } /* Toggle to hide */
         .nav-link {
             color: #ffff00;
             font-size: 14px;
@@ -373,7 +373,7 @@
             position: absolute;
             top: -20px;
             width: 100%;
-            color: #ff00ff;
+            color: #ff0000;
             font-size: 16px;
             background: #ffff00;
             padding: 5px;
@@ -450,12 +450,15 @@
             width: 100%;
             height: 100%;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+            overflow-x: hidden; /* No horizontal scrolling */
         }
         .blog-menu {
             flex: 0 0 200px;
             padding: 10px;
             overflow-y: auto;
+            overflow-x: hidden; /* Vertical only */
             max-height: 460px;
+            border-right: 2px solid #ff00ff; /* Divider */
         }
         .blog-main {
             flex: 1;
@@ -490,10 +493,10 @@
         .blog-nav-button {
             background: #ff00ff;
             color: #00ffff;
-            padding: 8px 10px;
+            padding: 6px 8px; /* Smaller buttons */
             border: none;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 11px; /* Smaller font */
             text-align: left;
             box-shadow: 0 0 5px #ff00ff;
             transition: all 0.2s ease;
@@ -505,6 +508,9 @@
             white-space: nowrap;
             text-overflow: ellipsis;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+        }
+        .blog-nav-button span {
+            font-size: 13px; /* Bigger title preview */
         }
         .blog-nav-button:hover {
             background: #00ffff;
@@ -523,20 +529,21 @@
             box-sizing: border-box;
             position: relative;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .gallery-grid {
             display: flex;
             flex-direction: row;
-            overflow-x: auto;
-            gap: 15px;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
+            width: 480px; /* 4 × 120px */
+            overflow-x: hidden; /* No horizontal scroll */
+            gap: 0; /* Tighter spacing */
             scroll-behavior: smooth;
         }
         .gallery-placeholder {
-            flex: 0 0 150px;
-            height: 150px;
+            flex: 0 0 120px; /* 4 fit in 480px */
+            height: 180px; /* Taller, canvas-like */
             border: 2px solid #ffffff;
             background: transparent;
             cursor: pointer;
@@ -544,15 +551,13 @@
             background-size: cover;
         }
         .gallery-placeholder.test {
-            background-image: url('https://via.placeholder.com/150/00ff00/ffffff?text=TEST');
+            background-image: url('https://via.placeholder.com/120x180/00ff00/ffffff?text=TEST');
         }
         .gallery-nav {
-            position: absolute;
-            top: 50%;
-            width: 100%;
+            margin-top: 10px;
             display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
+            gap: 20px;
+            justify-content: center;
             pointer-events: none;
         }
         .gallery-nav-button {
@@ -723,7 +728,8 @@
             .blog-main { padding: 10px 30px; }
             .blog-title { font-size: 36px; }
             .blog-content { font-size: 18px; }
-            .blog-nav-button { font-size: 14px; padding: 10px 12px; }
+            .blog-nav-button { font-size: 11px; padding: 6px 8px; }
+            .blog-nav-button span { font-size: 13px; }
         }
         @media (max-width: 599px) {
             body {
@@ -733,7 +739,6 @@
                 -webkit-font-smoothing: antialiased;
                 font-weight: 400;
             }
-            /* Match the original working font stack for mobile */
             html, body, .status-bar, .nav-bar, .nav-link, h1, .title-text, .domain, .under-construction, .discount-code, .copyright, .page-content, .blog-container, .blog-title, .blog-content, .blog-date, .blog-nav-button, .gallery-container, .gallery-nav-button, .gallery-close, .gallery-caption, .about-content, .password-popup, .password-input, .password-submit {
                 font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
                 -webkit-font-smoothing: antialiased;
@@ -766,18 +771,19 @@
             .copyright { font-size: 10px; }
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
             .gallery-container { padding: 40px 10px 10px; }
-            .gallery-grid { gap: 10px; }
-            .gallery-placeholder { flex: 0 0 100px; height: 100px; }
+            .gallery-grid { width: 100%; gap: 0; }
+            .gallery-placeholder { flex: 0 0 50%; height: 150px; } /* 2 images */
             .gallery-nav-button { width: 30px; height: 30px; font-size: 16px; line-height: 30px; }
             .password-popup { width: 250px; }
             .mode-button { width: 20px; height: 20px; }
-            .blog-container { flex-direction: row; }
-            .blog-menu { flex: 0 0 120px; max-height: 360px; padding: 5px; }
+            .blog-container { flex-direction: row; overflow-x: hidden; }
+            .blog-menu { flex: 0 0 120px; max-height: 360px; padding: 5px; border-right: none; }
             .blog-main { padding: 5px 10px; }
             .blog-title { font-size: 24px; }
             .blog-content { font-size: 16px; }
             .blog-date { font-size: 14px; }
             .blog-nav-button { font-size: 10px; padding: 6px 8px; }
+            .blog-nav-button span { font-size: 12px; }
         }
     </style>
 </head>
@@ -823,7 +829,6 @@
             <div class="graphic-right" id="egg4"></div>
             <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!1!</span>
             <span class="random-text">6262626262</span>
-            <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
             <span class="discount-code" id="discountCode">20% OFF BEATSTARS CODE 626262</span>
         </div>
         <div class="page-content" id="blogPage">
@@ -844,30 +849,14 @@
         <div class="page-content" id="galleryPage">
             <div class="gallery-container">
                 <div class="gallery-grid">
-                    <div class="gallery-placeholder test" data-index="1" data-caption="lol this is a test pic"></div>
-                    <div class="gallery-placeholder" data-index="2" data-caption="empty chaos"></div>
-                    <div class="gallery-placeholder" data-index="3" data-caption="nothing here"></div>
-                    <div class="gallery-placeholder" data-index="4" data-caption="what’s this?"></div>
-                    <div class="gallery-placeholder" data-index="5" data-caption="beats in space"></div>
-                    <div class="gallery-placeholder" data-index="6" data-caption="random junk"></div>
-                    <div class="gallery-placeholder" data-index="7" data-caption="park vibes"></div>
-                    <div class="gallery-placeholder" data-index="8" data-caption="neon mess"></div>
-                    <div class="gallery-placeholder" data-index="9" data-caption="idk anymore"></div>
-                    <div class="gallery-placeholder" data-index="10" data-caption="sick of this"></div>
-                    <div class="gallery-placeholder" data-index="11" data-caption="cool stuff"></div>
-                    <div class="gallery-placeholder" data-index="12" data-caption="whatever"></div>
-                    <div class="gallery-placeholder" data-index="13" data-caption="haha nice"></div>
-                    <div class="gallery-placeholder" data-index="14" data-caption="beat drop"></div>
-                    <div class="gallery-placeholder" data-index="15" data-caption="ugh internet"></div>
-                    <div class="gallery-placeholder" data-index="16" data-caption="spooky szn"></div>
-                    <div class="gallery-placeholder" data-index="17" data-caption="raw chaos"></div>
-                    <div class="gallery-placeholder" data-index="18" data-caption="bean life"></div>
-                    <div class="gallery-placeholder" data-index="19" data-caption="AI sucks"></div>
-                    <div class="gallery-placeholder" data-index="20" data-caption="retro vibes"></div>
-                    <div class="gallery-placeholder" data-index="21" data-caption="nope"></div>
-                    <div class="gallery-placeholder" data-index="22" data-caption="yep"></div>
-                    <div class="gallery-placeholder" data-index="23" data-caption="maybe"></div>
-                    <div class="gallery-placeholder" data-index="24" data-caption="donezo"></div>
+                    <div class="gallery-placeholder" data-index="1" data-caption="Photo 1" style="background-image: url('https://via.placeholder.com/120x180/ff00ff/ffffff?text=1');"></div>
+                    <div class="gallery-placeholder" data-index="2" data-caption="Photo 2" style="background-image: url('https://via.placeholder.com/120x180/00ffff/ffffff?text=2');"></div>
+                    <div class="gallery-placeholder" data-index="3" data-caption="Photo 3" style="background-image: url('https://via.placeholder.com/120x180/ff0000/ffffff?text=3');"></div>
+                    <div class="gallery-placeholder" data-index="4" data-caption="Photo 4" style="background-image: url('https://via.placeholder.com/120x180/00ff00/ffffff?text=4');"></div>
+                    <div class="gallery-placeholder" data-index="5" data-caption="Photo 5" style="background-image: url('https://via.placeholder.com/120x180/ffff00/ffffff?text=5');"></div>
+                    <div class="gallery-placeholder" data-index="6" data-caption="Photo 6" style="background-image: url('https://via.placeholder.com/120x180/0000ff/ffffff?text=6');"></div>
+                    <div class="gallery-placeholder" data-index="7" data-caption="Photo 7" style="background-image: url('https://via.placeholder.com/120x180/ff00ff/ffffff?text=7');"></div>
+                    <div class="gallery-placeholder" data-index="8" data-caption="Photo 8" style="background-image: url('https://via.placeholder.com/120x180/00ffff/ffffff?text=8');"></div>
                 </div>
                 <div class="gallery-nav">
                     <div class="gallery-nav-button" id="galleryLeft">←</div>
@@ -896,6 +885,7 @@
         <input type="password" class="password-input" id="passwordInput" placeholder="type here...">
         <button class="password-submit" id="passwordSubmit">SUBMIT</button>
     </div>
+    <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span> <!-- Moved to body -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const dateTime = document.getElementById('dateTime');
@@ -1069,7 +1059,7 @@
             });
 
             domain.addEventListener('click', () => {
-                navBar.classList.toggle('visible');
+                navBar.classList.toggle('hidden');
             });
 
             invertButton.addEventListener('click', () => {
@@ -1121,6 +1111,7 @@
                 targetPage = pageId;
                 passwordPopup.classList.add('active');
                 passwordInput.value = '';
+                if (window.innerWidth >= 600) passwordInput.focus(); // Desktop only
             }
 
             function hidePasswordPopup() {
@@ -1189,12 +1180,13 @@
                 enlargedPhoto.style.display = 'none';
             });
 
-            const itemWidth = window.innerWidth < 600 ? 100 : 150;
+            const galleryItemWidth = window.innerWidth < 600 ? window.innerWidth / 2 : 120; // 2 on mobile, 4 on desktop
+            const galleryStep = window.innerWidth < 600 ? galleryItemWidth * 2 : galleryItemWidth * 4;
             galleryLeft.addEventListener('click', () => {
-                galleryGrid.scrollBy({ left: -itemWidth * 4, behavior: 'smooth' });
+                galleryGrid.scrollBy({ left: -galleryStep, behavior: 'smooth' });
             });
             galleryRight.addEventListener('click', () => {
-                galleryGrid.scrollBy({ left: itemWidth * 4, behavior: 'smooth' });
+                galleryGrid.scrollBy({ left: galleryStep, behavior: 'smooth' });
             });
 
             showPage('homePage');
