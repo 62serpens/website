@@ -153,9 +153,9 @@
         }
         #galleryPage {
             border: 4px dotted #ffff00;
-            width: 900px; /* Match blog */
-            height: 500px; /* Match blog */
-            overflow-y: auto;
+            width: 900px;
+            height: 500px;
+            overflow: hidden;
             margin: 0 auto;
             box-shadow: 0 0 20px #ff00ff;
         }
@@ -540,19 +540,30 @@
         .gallery-grid {
             display: flex;
             flex-direction: row;
-            width: 880px; /* 4 × 200px + 3 × 20px gaps */
+            width: 860px; /* Adjusted: 4 × 200px + 3 × 20px = 860px */
             overflow-x: hidden;
             gap: 20px;
             scroll-behavior: smooth;
+            justify-content: flex-start;
+            padding: 0 20px; /* Fit within 900px */
         }
         .gallery-placeholder {
             flex: 0 0 200px;
-            height: 300px; /* Bigger to fit new width */
-            border: 2px solid #ffffff;
+            height: 300px;
+            border: 4px double #ff00ff;
+            border-image: linear-gradient(45deg, #ff00ff, #00ffff) 1;
             background: transparent;
             cursor: pointer;
             position: relative;
             background-size: cover;
+            background-position: center;
+            filter: hue-rotate(90deg) brightness(1.2);
+            transition: filter 0.2s ease;
+            will-change: transform; /* Optimize performance */
+        }
+        .gallery-placeholder:hover {
+            filter: hue-rotate(180deg) brightness(1.5);
+            /* Removed transform: scale(1.05) */
         }
         .gallery-nav {
             margin-top: 10px;
@@ -564,10 +575,10 @@
         .gallery-nav-button {
             width: 40px;
             height: 30px;
-            background: #ffff00; /* Yellow */
-            color: #ff00ff; /* Purple */
+            background: #ffff00;
+            color: #ff00ff;
             border: 2px solid #ff00ff;
-            border-radius: 15px; /* Oval */
+            border-radius: 15px;
             font-size: 16px;
             text-align: center;
             line-height: 30px;
@@ -588,14 +599,15 @@
             transform: translate(-50%, -50%);
             width: 80vw;
             max-width: 600px;
-            height: 80vw;
+            height: 80vh;
             max-height: 600px;
             border: 4px solid #ff00ff;
             background: #000;
             z-index: 200;
             box-shadow: 0 0 20px #00ffff;
-            background-size: cover;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
         }
         .gallery-close {
             position: absolute;
@@ -749,7 +761,7 @@
             .content-wrapper { margin-top: -30px; }
             #homePage { margin-top: 15px; padding: 15px; border-width: 6px; }
             #blogPage { width: 100%; height: 400px; }
-            #galleryPage { width: 100%; height: 400px; }
+            #galleryPage { width: 100%; height: 400px; overflow: hidden; }
             #aboutPage { padding: 15px; margin-top: 15px; }
             h1 { font-size: 40px !important; }
             .domain { font-size: 28px !important; }
@@ -771,10 +783,26 @@
             .discount-code { font-size: 24px; padding: 10px; }
             .copyright { font-size: 10px; }
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
-            .gallery-container { padding: 40px 10px 10px; }
-            .gallery-grid { width: 100%; gap: 10px; }
-            .gallery-placeholder { flex: 0 0 calc(25% - 7.5px); height: 150px; }
-            .gallery-nav-button { width: 40px; height: 30px; font-size: 16px; line-height: 30px; border-radius: 15px; background: #ffff00; color: #ff00ff; }
+            .gallery-container { padding: 10px; }
+            .gallery-grid {
+                width: 100%;
+                gap: 10px;
+                padding: 0;
+                justify-content: center;
+            }
+            .gallery-placeholder {
+                flex: 0 0 calc(25% - 10px);
+                height: 150px;
+            }
+            .gallery-nav-button {
+                width: 40px;
+                height: 30px;
+                font-size: 16px;
+                line-height: 30px;
+                border-radius: 15px;
+                background: #ffff00;
+                color: #ff00ff;
+            }
             .password-popup { width: 250px; }
             .mode-button { width: 20px; height: 20px; }
             .blog-container { flex-direction: row; overflow-x: hidden; }
@@ -850,9 +878,9 @@
         <div class="page-content" id="galleryPage">
             <div class="gallery-container">
                 <div class="gallery-grid">
-                    <div class="gallery-placeholder" data-index="1" data-caption="Photo 1" style="background-image: url('https://i.imgur.com/nOCwI1Dm.jpg');" data-full="https://i.imgur.com/nOCwI1D.jpg"></div>
-                    <div class="gallery-placeholder" data-index="2" data-caption="Photo 2" style="background-image: url('https://i.imgur.com/8bOh3sGm.jpg');" data-full="https://i.imgur.com/8bOh3sG.jpg"></div>
-                    <div class="gallery-placeholder" data-index="3" data-caption="Photo 3" style="background-image: url('https://i.imgur.com/kTsaS8Sm.jpg');" data-full="https://i.imgur.com/kTsaS8S.jpg"></div>
+                    <div class="gallery-placeholder" data-index="1" data-caption="Photo 1" style="background-image: url('images/img_001.jpg');" data-full="images/img_001.jpg"></div>
+                    <div class="gallery-placeholder" data-index="2" data-caption="Photo 2" style="background-image: url('images/img_002.jpg');" data-full="images/img_002.jpg"></div>
+                    <div class="gallery-placeholder" data-index="3" data-caption="Photo 3" style="background-image: url('images/img_003.jpg');" data-full="images/img_003.jpg"></div>
                     <div class="gallery-placeholder" data-index="4" data-caption="Photo 4" style="background-image: url('https://via.placeholder.com/200x300/00ff00/ffffff?text=4');" data-full="https://via.placeholder.com/600x900/00ff00/ffffff?text=4"></div>
                     <div class="gallery-placeholder" data-index="5" data-caption="Photo 5" style="background-image: url('https://via.placeholder.com/200x300/ffff00/ffffff?text=5');" data-full="https://via.placeholder.com/600x900/ffff00/ffffff?text=5"></div>
                     <div class="gallery-placeholder" data-index="6" data-caption="Photo 6" style="background-image: url('https://via.placeholder.com/200x300/0000ff/ffffff?text=6');" data-full="https://via.placeholder.com/600x900/0000ff/ffffff?text=6"></div>
@@ -1181,16 +1209,21 @@
                 enlargedPhoto.style.display = 'none';
             });
 
-            const galleryItemWidth = window.innerWidth < 600 ? (window.innerWidth - 30) / 4 : 200;
-            const galleryStep = window.innerWidth < 600 ? (galleryItemWidth + 20) * 4 : 880; /* 4 × 200 + 3 × 20 */
+            const isMobile = window.innerWidth < 600;
+            const itemWidth = isMobile ? (window.innerWidth - 40) / 4 : 200;
+            const gap = isMobile ? 10 : 20;
+            const galleryStep = (itemWidth + gap) * 4;
+            let currentPosition = 0;
+
             galleryLeft.addEventListener('click', () => {
-                const newScroll = Math.max(0, galleryGrid.scrollLeft - galleryStep);
-                galleryGrid.scrollTo({ left: newScroll, behavior: 'smooth' });
+                currentPosition = Math.max(0, currentPosition - galleryStep);
+                galleryGrid.scrollTo({ left: currentPosition, behavior: 'smooth' });
             });
+
             galleryRight.addEventListener('click', () => {
                 const maxScroll = galleryGrid.scrollWidth - galleryGrid.clientWidth;
-                const newScroll = Math.min(maxScroll, galleryGrid.scrollLeft + galleryStep);
-                galleryGrid.scrollTo({ left: newScroll, behavior: 'smooth' });
+                currentPosition = Math.min(maxScroll, currentPosition + galleryStep);
+                galleryGrid.scrollTo({ left: currentPosition, behavior: 'smooth' });
             });
 
             showPage('homePage');
