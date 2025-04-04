@@ -541,6 +541,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            flex-shrink: 0; /* Prevent flex shrinkage */
         }
         .gallery-grid {
             display: flex;
@@ -631,6 +632,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+            z-index: 210; /* Ensure it’s clickable */
         }
         .gallery-close:hover {
             transform: scale(1.1);
@@ -790,7 +792,8 @@
                 padding: 15px;
                 margin: 0;
                 box-shadow: 0 0 20px #ff00ff;
-                min-width: 100%; /* Added to force full width */
+                min-width: 100%; /* Force full width */
+                box-sizing: border-box; /* Ensure padding/border don’t shrink it */
             }
             #aboutPage { 
                 padding: 15px; 
@@ -1288,6 +1291,9 @@
             });
 
             galleryClose.addEventListener('click', () => {
+                enlargedPhoto.style.display = 'none';
+            });
+            galleryClose.addEventListener('touchend', () => { // Add touch support for mobile
                 enlargedPhoto.style.display = 'none';
             });
 
