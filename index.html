@@ -551,14 +551,13 @@
         .gallery-grid {
             display: flex;
             flex-direction: row;
-            width: 1780px; /* Total width for 8 images: (8 × 205px) + (7 × 20px) */
             gap: 20px;
             transition: transform 0.5s ease; /* Smooth swipe transition */
-            padding: 0;
+            padding: 0 4px; /* Add padding to ensure equal gaps on both sides */
             box-sizing: border-box;
         }
         .gallery-placeholder {
-            flex: 0 0 197px; /* Adjusted width to fit 4 images in 880px */
+            flex: 0 0 195px; /* Image width */
             height: 300px;
             border: 4px dotted #ffff00;
             background: #333; /* Fallback color if image fails to load */
@@ -615,11 +614,11 @@
         }
         .gallery-nav-button.disabled {
             opacity: 0.5;
-            cursor: default; /* Changed to default cursor */
+            cursor: default;
         }
         .gallery-nav-button.disabled:hover {
-            transform: none; /* Prevent scaling on hover when disabled */
-            box-shadow: none; /* Remove glow effect on hover when disabled */
+            transform: none;
+            box-shadow: none;
         }
         .gallery-enlarged {
             display: none;
@@ -857,11 +856,11 @@
                 height: 220px; /* Adjusted for mobile */
             }
             .gallery-grid {
-                width: 100% !important;
                 gap: 10px;
+                padding: 0 2px; /* Adjust padding for mobile */
             }
             .gallery-placeholder {
-                flex: 0 0 calc((100% - 30px) / 4); /* 4 images with 3 gaps */
+                flex: 0 0 calc(25% - 10px); /* 4 images with 3 gaps of 10px */
                 height: 200px;
                 border: 4px dotted #ffff00;
             }
@@ -1331,12 +1330,23 @@
             const imagesPerPage = 4;
             const totalPages = Math.ceil(totalImages / imagesPerPage); // 2 pages
             let currentPage = 0;
-            const pageWidth = 880; // Width of 4 images: (4 × 205px) + (3 × 20px)
+
+            // Calculate page width dynamically based on viewport width
+            function calculatePageWidth() {
+                const viewport = document.querySelector('.gallery-viewport');
+                const viewportWidth = viewport.offsetWidth; // Includes padding
+                const usableWidth = viewportWidth - 20; // Subtract 10px padding on each side
+                const imageWidth = 195 + 8; // 195px image + 8px border
+                const gap = 20;
+                const totalImageWidth = imagesPerPage * imageWidth;
+                const totalGapWidth = (imagesPerPage - 1) * gap;
+                return totalImageWidth + totalGapWidth; // Total width for 4 images
+            }
 
             function updateGalleryPosition() {
+                const pageWidth = calculatePageWidth();
                 const offset = -currentPage * pageWidth;
                 galleryGrid.style.transform = `translateX(${offset}px)`;
-                // Update button states
                 galleryLeft.classList.toggle('disabled', currentPage === 0);
                 galleryRight.classList.toggle('disabled', currentPage === totalPages - 1);
             }
@@ -1359,6 +1369,9 @@
             galleryGrid.addEventListener('wheel', (e) => {
                 e.preventDefault();
             });
+
+            // Update gallery position on window resize
+            window.addEventListener('resize', updateGalleryPosition);
 
             updateGalleryPosition(); // Initial position
 
