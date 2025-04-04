@@ -545,12 +545,12 @@
         .gallery-grid {
             display: flex;
             flex-direction: row;
-            width: 860px;
+            width: 900px; /* Matches #galleryPage width */
             overflow-x: hidden;
             gap: 20px;
             scroll-behavior: smooth;
             justify-content: flex-start;
-            padding: 0 20px;
+            padding: 0;
         }
         .gallery-placeholder {
             flex: 0 0 200px;
@@ -788,14 +788,14 @@
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
             .gallery-container { padding: 10px; }
             .gallery-grid {
-                width: 100%;
+                width: 100%; /* Matches #blogPage */
                 gap: 10px;
-                padding: 0 10px;
+                padding: 0;
                 justify-content: flex-start;
             }
             .gallery-placeholder {
-                flex: 0 0 calc(50% - 10px); /* 2 images per row */
-                height: 200px; /* Taller for better visibility */
+                flex: 0 0 calc(33.33% - 10px); /* 3 images per row */
+                height: 150px; /* Adjusted for mobile */
                 border: 4px dotted #ffff00; /* Matches blog */
             }
             .gallery-nav-button {
@@ -992,7 +992,7 @@
             setInterval(updateDateTime, 1000);
 
             function updateCoordinates() {
-                const ranges = [Math.pow(10, Math.random() * 6 - 3), Math.pow(10, Math.random() * 8 - 4)]; // Smaller range
+                const ranges = [100000, 1000]; // Quantum leaps: 100,000 or 1,000
                 const lat = (Math.random() * ranges[Math.floor(Math.random() * 2)] * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
                 const lon = (Math.random() * ranges[Math.floor(Math.random() * 2)] * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
                 coordinates.textContent = `COORDS: ${lat}°N, ${lon}°E`;
@@ -1241,9 +1241,9 @@
             });
 
             const isMobile = window.innerWidth < 600;
-            const itemWidth = isMobile ? (window.innerWidth - 30) / 2 : 200; // 2 items, account for gap and padding
+            const itemWidth = isMobile ? (window.innerWidth - 30) / 3 : 200; // 3 items on mobile, 4 on desktop
             const gap = isMobile ? 10 : 20;
-            const galleryStep = (itemWidth + gap) * (isMobile ? 2 : 4);
+            const galleryStep = isMobile ? (itemWidth + gap) * 3 : (itemWidth + gap) * 4;
             let currentPosition = 0;
 
             galleryLeft.addEventListener('click', () => {
