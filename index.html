@@ -553,7 +553,7 @@
             flex-direction: row;
             gap: 20px;
             transition: transform 0.5s ease; /* Smooth swipe transition */
-            padding: 0 4px; /* Add padding to ensure equal gaps on both sides */
+            padding: 0 4px; /* Ensure equal gaps on both sides */
             box-sizing: border-box;
         }
         .gallery-placeholder {
@@ -860,7 +860,7 @@
                 padding: 0 2px; /* Adjust padding for mobile */
             }
             .gallery-placeholder {
-                flex: 0 0 calc(25% - 10px); /* 4 images with 3 gaps of 10px */
+                flex: 0 0 calc(25% - 8px); /* 4 images with 3 gaps of 10px, adjusted for padding */
                 height: 200px;
                 border: 4px dotted #ffff00;
             }
@@ -1331,16 +1331,15 @@
             const totalPages = Math.ceil(totalImages / imagesPerPage); // 2 pages
             let currentPage = 0;
 
-            // Calculate page width dynamically based on viewport width
             function calculatePageWidth() {
                 const viewport = document.querySelector('.gallery-viewport');
                 const viewportWidth = viewport.offsetWidth; // Includes padding
-                const usableWidth = viewportWidth - 20; // Subtract 10px padding on each side
-                const imageWidth = 195 + 8; // 195px image + 8px border
-                const gap = 20;
-                const totalImageWidth = imagesPerPage * imageWidth;
-                const totalGapWidth = (imagesPerPage - 1) * gap;
-                return totalImageWidth + totalGapWidth; // Total width for 4 images
+                const isMobile = window.innerWidth < 600;
+                const padding = isMobile ? 4 : 8; // 2px each side on mobile, 4px on desktop
+                const usableWidth = viewportWidth - padding; // Subtract padding
+                const gap = isMobile ? 10 : 20;
+                const imageWidth = isMobile ? (usableWidth - (imagesPerPage - 1) * gap) / imagesPerPage : 195 + 8; // 195px + 8px border on desktop
+                return (imageWidth * imagesPerPage) + (gap * (imagesPerPage - 1)); // Total width for 4 images
             }
 
             function updateGalleryPosition() {
