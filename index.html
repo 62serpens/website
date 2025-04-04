@@ -770,9 +770,11 @@
             #blogPage { width: 100%; height: 400px; }
             #galleryPage { 
                 width: 100%; /* Matches blog */
-                height: 400px; /* Matches blog */
+                height: 500px; /* Increased to give more vertical space */
                 overflow: hidden;
-                padding: 15px; /* Increased padding for larger border area */
+                padding: 20px; /* Bigger padding for a larger border area */
+                margin: 0; /* Remove auto margin to stretch fully */
+                box-shadow: 0 0 30px #ff00ff; /* Enhanced shadow for prominence */
             }
             #aboutPage { padding: 15px; margin-top: 15px; }
             h1 { font-size: 40px !important; }
@@ -805,7 +807,7 @@
             }
             .gallery-placeholder {
                 flex: 0 0 calc((100% - 30px) / 4); /* 4 images per row */
-                height: 150px; /* Increased for bigger frames */
+                height: 200px; /* Significantly increased for thicker frames */
                 border: 4px dotted #ffff00;
                 scroll-snap-align: start; /* Snaps to start of each image */
             }
