@@ -768,7 +768,12 @@
             .content-wrapper { margin-top: -30px; }
             #homePage { margin-top: 15px; padding: 15px; border-width: 6px; }
             #blogPage { width: 100%; height: 400px; }
-            #galleryPage { width: 100%; height: 400px; overflow: hidden; }
+            #galleryPage { 
+                width: 100%; /* Matches blog */
+                height: 400px; /* Matches blog */
+                overflow: hidden;
+                padding: 15px; /* Increased padding for larger border area */
+            }
             #aboutPage { padding: 15px; margin-top: 15px; }
             h1 { font-size: 40px !important; }
             .domain { font-size: 28px !important; }
@@ -800,7 +805,7 @@
             }
             .gallery-placeholder {
                 flex: 0 0 calc((100% - 30px) / 4); /* 4 images per row */
-                height: 120px; /* Bigger preview */
+                height: 150px; /* Increased for bigger frames */
                 border: 4px dotted #ffff00;
                 scroll-snap-align: start; /* Snaps to start of each image */
             }
