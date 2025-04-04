@@ -787,9 +787,10 @@
                 height: 500px; 
                 overflow-x: hidden;
                 overflow-y: hidden;
-                padding: 15px; /* Match blog */
+                padding: 15px;
                 margin: 0;
                 box-shadow: 0 0 20px #ff00ff;
+                min-width: 100%; /* Added to force full width */
             }
             #aboutPage { 
                 padding: 15px; 
@@ -824,7 +825,7 @@
                 box-sizing: border-box;
             }
             .gallery-grid {
-                width: 100%; /* Override 880px for mobile */
+                width: 100%;
                 gap: 10px;
                 padding: 0;
                 justify-content: flex-start;
