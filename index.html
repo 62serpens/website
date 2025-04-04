@@ -146,7 +146,7 @@
             border: 4px double #00ff00;
             max-width: 400px;
             animation: shake 0.1s infinite;
-            margin-top: 20px;
+            margin: 20px auto 0;
         }
         #blogPage {
             border: 4px dotted #ffff00;
@@ -170,7 +170,7 @@
             padding: 15px;
             text-align: center;
             background: rgba(0, 0, 0, 0.9);
-            margin-top: 20px;
+            margin: 20px auto 0;
         }
         @keyframes shake {
             0% { transform: translateX(0); }
@@ -545,7 +545,7 @@
         .gallery-grid {
             display: flex;
             flex-direction: row;
-            width: 880px; /* Adjusted to match 4 images + gaps */
+            width: 880px; /* Desktop width */
             overflow-x: hidden;
             gap: 20px;
             scroll-behavior: smooth;
@@ -614,7 +614,7 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            filter: saturate(1.5) brightness(1.2) contrast(1.1); /* Added filter */
+            filter: saturate(1.5) brightness(1.2) contrast(1.1);
         }
         .gallery-close {
             position: absolute;
@@ -766,17 +766,37 @@
             .status-bar { font-size: 12px; padding: 3px; }
             .nav-bar { top: 20px; width: 90%; padding: 5px; }
             .content-wrapper { margin-top: -30px; }
-            #homePage { margin-top: 15px; padding: 15px; border-width: 6px; }
-            #blogPage { width: 100%; height: 400px; }
-            #galleryPage { 
-                width: 100%; /* Matches blog */
-                height: 500px; /* Increased to give more vertical space */
-                overflow: hidden;
-                padding: 20px; /* Bigger padding for a larger border area */
-                margin: 0; /* Remove auto margin to stretch fully */
-                box-shadow: 0 0 30px #ff00ff; /* Enhanced shadow for prominence */
+            #homePage { 
+                margin-top: 15px; 
+                padding: 15px; 
+                border-width: 6px; 
+                max-width: 400px; 
+                margin-left: auto; 
+                margin-right: auto; 
             }
-            #aboutPage { padding: 15px; margin-top: 15px; }
+            #blogPage { 
+                width: 100%; 
+                height: 500px; /* Matches gallery */
+                overflow-y: auto;
+                padding: 15px;
+                margin: 0;
+                box-shadow: 0 0 20px #ff00ff;
+            }
+            #galleryPage { 
+                width: 100%; 
+                height: 500px; 
+                overflow: hidden;
+                padding: 15px;
+                margin: 0;
+                box-shadow: 0 0 20px #ff00ff;
+            }
+            #aboutPage { 
+                padding: 15px; 
+                margin-top: 15px; 
+                max-width: 400px; 
+                margin-left: auto; 
+                margin-right: auto; 
+            }
             h1 { font-size: 40px !important; }
             .domain { font-size: 28px !important; }
             .button { font-size: 14px; padding: 8px 15px; max-width: 280px; }
@@ -797,19 +817,22 @@
             .discount-code { font-size: 24px; padding: 10px; }
             .copyright { font-size: 10px; }
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
-            .gallery-container { padding: 10px; }
-            .gallery-grid {
+            .gallery-container { 
+                padding: 0; /* Maximize grid width */
                 width: 100%;
+            }
+            .gallery-grid {
+                width: 100%; 
                 gap: 10px;
                 padding: 0;
                 justify-content: flex-start;
-                scroll-snap-type: x mandatory; /* Ensures snapping on mobile */
+                scroll-snap-type: x mandatory;
             }
             .gallery-placeholder {
-                flex: 0 0 calc((100% - 30px) / 4); /* 4 images per row */
-                height: 200px; /* Significantly increased for thicker frames */
+                flex: 0 0 calc((100% - 30px) / 4); /* Wider frames */
+                height: 200px;
                 border: 4px dotted #ffff00;
-                scroll-snap-align: start; /* Snaps to start of each image */
+                scroll-snap-align: start;
             }
             .gallery-nav-button {
                 width: 40px;
@@ -821,15 +844,15 @@
                 color: #ff00ff;
             }
             .gallery-enlarged {
-                width: 90vw; /* Larger preview */
+                width: 90vw;
                 height: 90vh;
-                max-width: none; /* Full width on mobile */
-                max-height: none; /* Full height on mobile */
+                max-width: none;
+                max-height: none;
             }
             .password-popup { width: 250px; }
             .mode-button { width: 20px; height: 20px; }
             .blog-container { flex-direction: row; overflow-x: hidden; }
-            .blog-menu { flex: 0 0 120px; max-height: 360px; padding: 5px; border-right: none; }
+            .blog-menu { flex: 0 0 120px; max-height: 460px; padding: 5px; border-right: none; }
             .blog-main { padding: 5px 10px; }
             .blog-title { font-size: 24px; }
             .blog-content { font-size: 16px; }
