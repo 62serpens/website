@@ -785,9 +785,9 @@
             #galleryPage { 
                 width: 100%; 
                 height: 500px; 
-                overflow-x: hidden; /* Changed to hidden for container */
+                overflow-x: hidden;
                 overflow-y: hidden;
-                padding: 0; /* Full width */
+                padding: 15px; /* Match blog */
                 margin: 0;
                 box-shadow: 0 0 20px #ff00ff;
             }
@@ -819,27 +819,27 @@
             .copyright { font-size: 10px; }
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
             .gallery-container { 
-                padding: 0; /* No extra padding */
+                padding: 0; 
                 width: 100%;
                 box-sizing: border-box;
             }
             .gallery-grid {
-                width: 100%; /* Full width of #galleryPage */
+                width: 100%; /* Override 880px for mobile */
                 gap: 10px;
                 padding: 0;
                 justify-content: flex-start;
                 scroll-snap-type: x mandatory;
-                overflow-x: auto; /* Scrolling here */
-                white-space: nowrap; /* Single row */
-                -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
             }
             .gallery-placeholder {
-                flex: 0 0 calc((100% - 30px) / 4); /* 4 items, 3 gaps of 10px */
+                flex: 0 0 calc((100% - 30px) / 4);
                 height: 200px;
                 border: 4px dotted #ffff00;
                 scroll-snap-align: start;
-                display: inline-block; /* Keep in row */
-                min-width: 0; /* Prevent shrinking */
+                display: inline-block;
+                min-width: 0;
             }
             .gallery-nav-button {
                 width: 40px;
