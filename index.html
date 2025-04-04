@@ -544,16 +544,17 @@
         .gallery-grid {
             display: flex;
             flex-direction: row;
-            width: 880px;
+            max-width: 852px; /* Fit 4 × 203px (195px + 8px border) + 3 × 20px gaps */
             overflow-x: hidden;
             gap: 20px;
             scroll-behavior: smooth;
             justify-content: flex-start;
             padding: 0;
             scroll-snap-type: x mandatory;
+            box-sizing: border-box;
         }
         .gallery-placeholder {
-            flex: 0 0 200px;
+            flex: 0 0 195px; /* Reduced from 200px to fit with borders */
             height: 300px;
             border: 4px dotted #ffff00;
             background: transparent;
@@ -750,7 +751,6 @@
             .blog-content { font-size: 18px; }
             .blog-nav-button { font-size: 13px; padding: 4px 6px; max-width: 180px; }
             .blog-nav-button span { font-size: 11px; }
-            .gallery-grid { width: 880px !important; } /* Reset desktop width */
         }
         @media (max-width: 599px) {
             body {
@@ -775,9 +775,9 @@
                 margin-left: auto; 
                 margin-right: auto; 
             }
-            #homePage h1 { /* Homepage mobile tweaks */
-                font-size: 50px !important; /* Bigger font */
-                margin-left: 20px; /* Shift right */
+            #homePage h1 {
+                font-size: 50px !important;
+                margin-left: 20px;
             }
             #blogPage { 
                 width: 100% !important;
@@ -895,7 +895,7 @@
         <span id="coordinates"></span>
     </div>
     <div class="nav-bar">
-        <span class="nav-link active" data-page="homePage">Homepage</span>
+        <span class="nav-link active" data-page="homePage">Home</span>
         <span class="nav-link" data-page="blogPage">Blog</span>
         <span class="nav-link" data-page="galleryPage">Gallery</span>
         <span class="nav-link" data-page="aboutPage">About</span>
@@ -1301,9 +1301,9 @@
             });
 
             const isMobile = window.innerWidth < 600;
-            const itemWidth = isMobile ? (window.innerWidth - 20) / 4 : 200;
+            const itemWidth = isMobile ? (window.innerWidth - 20) / 4 : 195; // 195px for desktop
             const gap = isMobile ? 10 : 20;
-            const galleryStep = (itemWidth + gap) * 4;
+            const galleryStep = isMobile ? (itemWidth + gap) * 4 : 852; // 852px for desktop
             let currentPosition = 0;
 
             galleryLeft.addEventListener('click', () => {
