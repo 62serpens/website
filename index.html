@@ -551,7 +551,7 @@
             scroll-behavior: smooth;
             justify-content: flex-start;
             padding: 0;
-            scroll-snap-type: x mandatory; /* Ensures snapping */
+            scroll-snap-type: x mandatory;
         }
         .gallery-placeholder {
             flex: 0 0 200px;
@@ -565,8 +565,8 @@
             filter: saturate(1.5) brightness(1.2) contrast(1.1);
             transition: filter 0.2s ease;
             will-change: transform;
-            box-sizing: border-box; /* Prevents overflow */
-            scroll-snap-align: start; /* Snaps to start of each image */
+            box-sizing: border-box;
+            scroll-snap-align: start;
         }
         .gallery-placeholder:hover {
             filter: saturate(2) brightness(1.4) contrast(1.2);
@@ -776,7 +776,7 @@
             }
             #blogPage { 
                 width: 100%; 
-                height: 500px; /* Matches gallery */
+                height: 500px;
                 overflow-y: auto;
                 padding: 15px;
                 margin: 0;
@@ -786,7 +786,7 @@
                 width: 100%; 
                 height: 500px; 
                 overflow: hidden;
-                padding: 15px;
+                padding: 0; /* Remove padding to match blog's edge-to-edge */
                 margin: 0;
                 box-shadow: 0 0 20px #ff00ff;
             }
@@ -818,18 +818,19 @@
             .copyright { font-size: 10px; }
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
             .gallery-container { 
-                padding: 0; /* Maximize grid width */
+                padding: 15px; /* Match blog padding */
                 width: 100%;
+                box-sizing: border-box;
             }
             .gallery-grid {
-                width: 100%; 
+                width: 100%; /* Full width of container */
                 gap: 10px;
                 padding: 0;
                 justify-content: flex-start;
                 scroll-snap-type: x mandatory;
             }
             .gallery-placeholder {
-                flex: 0 0 calc((100% - 30px) / 4); /* Wider frames */
+                flex: 0 0 calc((100% - 30px) / 4); /* Adjusted for 3 gaps */
                 height: 200px;
                 border: 4px dotted #ffff00;
                 scroll-snap-align: start;
@@ -1284,7 +1285,7 @@
             });
 
             const isMobile = window.innerWidth < 600;
-            const itemWidth = isMobile ? (window.innerWidth - 30) / 4 : 200; // 4 items on mobile and desktop
+            const itemWidth = isMobile ? (window.innerWidth - 50) / 4 : 200; // Adjusted for 15px padding on each side
             const gap = isMobile ? 10 : 20;
             const galleryStep = (itemWidth + gap) * 4; // Always move 4 items
             let currentPosition = 0;
