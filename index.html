@@ -545,25 +545,28 @@
         .gallery-grid {
             display: flex;
             flex-direction: row;
-            width: 900px; /* Matches #galleryPage width */
+            width: 880px; /* Adjusted to match 4 images + gaps */
             overflow-x: hidden;
             gap: 20px;
             scroll-behavior: smooth;
             justify-content: flex-start;
             padding: 0;
+            scroll-snap-type: x mandatory; /* Ensures snapping */
         }
         .gallery-placeholder {
             flex: 0 0 200px;
             height: 300px;
-            border: 4px dotted #ffff00; /* Matches blog border */
+            border: 4px dotted #ffff00;
             background: transparent;
             cursor: pointer;
             position: relative;
             background-size: cover;
             background-position: center;
-            filter: saturate(1.5) brightness(1.2) contrast(1.1); /* Vibrant colors */
+            filter: saturate(1.5) brightness(1.2) contrast(1.1);
             transition: filter 0.2s ease;
             will-change: transform;
+            box-sizing: border-box; /* Prevents overflow */
+            scroll-snap-align: start; /* Snaps to start of each image */
         }
         .gallery-placeholder:hover {
             filter: saturate(2) brightness(1.4) contrast(1.2);
@@ -611,6 +614,7 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            filter: saturate(1.5) brightness(1.2) contrast(1.1); /* Added filter */
         }
         .gallery-close {
             position: absolute;
@@ -788,15 +792,17 @@
             .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
             .gallery-container { padding: 10px; }
             .gallery-grid {
-                width: 100%; /* Matches #blogPage */
+                width: 100%;
                 gap: 10px;
                 padding: 0;
                 justify-content: flex-start;
+                scroll-snap-type: x mandatory; /* Ensures snapping on mobile */
             }
             .gallery-placeholder {
-                flex: 0 0 calc(33.33% - 10px); /* 3 images per row */
-                height: 150px; /* Adjusted for mobile */
-                border: 4px dotted #ffff00; /* Matches blog */
+                flex: 0 0 calc((100% - 30px) / 4); /* 4 images per row */
+                height: 120px; /* Bigger preview */
+                border: 4px dotted #ffff00;
+                scroll-snap-align: start; /* Snaps to start of each image */
             }
             .gallery-nav-button {
                 width: 40px;
@@ -806,6 +812,12 @@
                 border-radius: 15px;
                 background: #ffff00;
                 color: #ff00ff;
+            }
+            .gallery-enlarged {
+                width: 90vw; /* Larger preview */
+                height: 90vh;
+                max-width: none; /* Full width on mobile */
+                max-height: none; /* Full height on mobile */
             }
             .password-popup { width: 250px; }
             .mode-button { width: 20px; height: 20px; }
@@ -992,9 +1004,10 @@
             setInterval(updateDateTime, 1000);
 
             function updateCoordinates() {
-                const ranges = [100000, 1000]; // Quantum leaps: 100,000 or 1,000
-                const lat = (Math.random() * ranges[Math.floor(Math.random() * 2)] * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
-                const lon = (Math.random() * ranges[Math.floor(Math.random() * 2)] * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
+                const isBigJump = Math.random() < 0.2; // 20% chance of big jump
+                const range = isBigJump ? 1000 : 1; // Big jump up to 1000, small up to 1
+                const lat = (Math.random() * range * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
+                const lon = (Math.random() * range * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
                 coordinates.textContent = `COORDS: ${lat}°N, ${lon}°E`;
             }
             updateCoordinates();
@@ -1241,9 +1254,9 @@
             });
 
             const isMobile = window.innerWidth < 600;
-            const itemWidth = isMobile ? (window.innerWidth - 30) / 3 : 200; // 3 items on mobile, 4 on desktop
+            const itemWidth = isMobile ? (window.innerWidth - 30) / 4 : 200; // 4 items on mobile and desktop
             const gap = isMobile ? 10 : 20;
-            const galleryStep = isMobile ? (itemWidth + gap) * 3 : (itemWidth + gap) * 4;
+            const galleryStep = (itemWidth + gap) * 4; // Always move 4 items
             let currentPosition = 0;
 
             galleryLeft.addEventListener('click', () => {
