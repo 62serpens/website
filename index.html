@@ -541,35 +541,51 @@
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
             display: block;
         }
+        .gallery-viewport {
+            width: 900px; /* Matches #galleryPage width */
+            height: 320px; /* Image height (300px) + padding */
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+        }
         .gallery-grid {
             display: flex;
             flex-direction: row;
-            max-width: 852px; /* Fit 4 × 203px (195px + 8px border) + 3 × 20px gaps */
-            overflow-x: hidden;
+            width: 1780px; /* Total width for 8 images: (8 × 205px) + (7 × 20px) */
             gap: 20px;
-            scroll-behavior: smooth;
-            justify-content: flex-start;
+            transition: transform 0.5s ease; /* Smooth swipe transition */
             padding: 0;
-            scroll-snap-type: x mandatory;
             box-sizing: border-box;
         }
         .gallery-placeholder {
-            flex: 0 0 195px; /* Reduced from 200px to fit with borders */
+            flex: 0 0 197px; /* Adjusted width to fit 4 images in 880px */
             height: 300px;
             border: 4px dotted #ffff00;
-            background: transparent;
+            background: #333; /* Fallback color if image fails to load */
             cursor: pointer;
             position: relative;
             background-size: cover;
             background-position: center;
             filter: saturate(1.5) brightness(1.2) contrast(1.1);
             transition: filter 0.2s ease;
-            will-change: transform;
             box-sizing: border-box;
-            scroll-snap-align: start;
         }
         .gallery-placeholder:hover {
             filter: saturate(2) brightness(1.4) contrast(1.2);
+        }
+        .gallery-placeholder::after {
+            content: 'Image Failed to Load';
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff0000;
+            font-size: 14px;
+            text-align: center;
+        }
+        .gallery-placeholder.failed::after {
+            display: block;
         }
         .gallery-nav {
             margin-top: 10px;
@@ -596,6 +612,14 @@
         .gallery-nav-button:hover {
             transform: scale(1.1);
             box-shadow: 0 0 10px #00ff00;
+        }
+        .gallery-nav-button.disabled {
+            opacity: 0.5;
+            cursor: default; /* Changed to default cursor */
+        }
+        .gallery-nav-button.disabled:hover {
+            transform: none; /* Prevent scaling on hover when disabled */
+            box-shadow: none; /* Remove glow effect on hover when disabled */
         }
         .gallery-enlarged {
             display: none;
@@ -692,7 +716,7 @@
             font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
         .password-close:hover {
-            transform: scale(permanent1.1);
+            transform: scale(1.1);
             box-shadow: 0 0 10px #ff00ff;
         }
         .password-input {
@@ -828,23 +852,18 @@
                 width: 100% !important;
                 box-sizing: border-box;
             }
+            .gallery-viewport {
+                width: 100% !important;
+                height: 220px; /* Adjusted for mobile */
+            }
             .gallery-grid {
                 width: 100% !important;
                 gap: 10px;
-                padding: 0;
-                justify-content: flex-start;
-                scroll-snap-type: x mandatory;
-                overflow-x: auto;
-                white-space: nowrap;
-                -webkit-overflow-scrolling: touch;
             }
             .gallery-placeholder {
-                flex: 0 0 calc((100% - 30px) / 4);
+                flex: 0 0 calc((100% - 30px) / 4); /* 4 images with 3 gaps */
                 height: 200px;
                 border: 4px dotted #ffff00;
-                scroll-snap-align: start;
-                display: inline-block;
-                min-width: 0;
             }
             .gallery-nav-button {
                 width: 40px;
@@ -895,7 +914,7 @@
         <span id="coordinates"></span>
     </div>
     <div class="nav-bar">
-        <span class="nav-link active" data-page="homePage">Home</span>
+        <span class="nav-link active" data-page="homePage">Homepage</span>
         <span class="nav-link" data-page="blogPage">Blog</span>
         <span class="nav-link" data-page="galleryPage">Gallery</span>
         <span class="nav-link" data-page="aboutPage">About</span>
@@ -935,15 +954,17 @@
         </div>
         <div class="page-content" id="galleryPage">
             <div class="gallery-container">
-                <div class="gallery-grid">
-                    <div class="gallery-placeholder" data-index="1" data-caption="Photo 1" style="background-image: url('images/img_001.jpg');" data-full="images/img_001.jpg"></div>
-                    <div class="gallery-placeholder" data-index="2" data-caption="Photo 2" style="background-image: url('images/img_002.jpg');" data-full="images/img_002.jpg"></div>
-                    <div class="gallery-placeholder" data-index="3" data-caption="Photo 3" style="background-image: url('images/img_003.jpg');" data-full="images/img_003.jpg"></div>
-                    <div class="gallery-placeholder" data-index="4" data-caption="Photo 4" style="background-image: url('https://via.placeholder.com/200x300/00ff00/ffffff?text=4');" data-full="https://via.placeholder.com/600x900/00ff00/ffffff?text=4"></div>
-                    <div class="gallery-placeholder" data-index="5" data-caption="Photo 5" style="background-image: url('https://via.placeholder.com/200x300/ffff00/ffffff?text=5');" data-full="https://via.placeholder.com/600x900/ffff00/ffffff?text=5"></div>
-                    <div class="gallery-placeholder" data-index="6" data-caption="Photo 6" style="background-image: url('https://via.placeholder.com/200x300/0000ff/ffffff?text=6');" data-full="https://via.placeholder.com/600x900/0000ff/ffffff?text=6"></div>
-                    <div class="gallery-placeholder" data-index="7" data-caption="Photo 7" style="background-image: url('https://via.placeholder.com/200x300/ff00ff/ffffff?text=7');" data-full="https://via.placeholder.com/600x900/ff00ff/ffffff?text=7"></div>
-                    <div class="gallery-placeholder" data-index="8" data-caption="Photo 8" style="background-image: url('https://via.placeholder.com/200x300/00ffff/ffffff?text=8');" data-full="https://via.placeholder.com/600x900/00ffff/ffffff?text=8"></div>
+                <div class="gallery-viewport">
+                    <div class="gallery-grid">
+                        <div class="gallery-placeholder" data-index="1" data-caption="Photo 1" style="background-image: url('images/img_001.jpg');" data-full="images/img_001.jpg"></div>
+                        <div class="gallery-placeholder" data-index="2" data-caption="Photo 2" style="background-image: url('images/img_002.jpg');" data-full="images/img_002.jpg"></div>
+                        <div class="gallery-placeholder" data-index="3" data-caption="Photo 3" style="background-image: url('images/img_003.jpg');" data-full="images/img_003.jpg"></div>
+                        <div class="gallery-placeholder" data-index="4" data-caption="Photo 4" style="background-image: url('images/img_004.jpg');" data-full="images/img_004.jpg"></div>
+                        <div class="gallery-placeholder" data-index="5" data-caption="Photo 5" style="background-image: url('images/img_005.jpg');" data-full="images/img_005.jpg"></div>
+                        <div class="gallery-placeholder" data-index="6" data-caption="Photo 6" style="background-image: url('images/img_006.jpg');" data-full="images/img_006.jpg"></div>
+                        <div class="gallery-placeholder" data-index="7" data-caption="Photo 7" style="background-image: url('images/img_007.jpg');" data-full="images/img_007.jpg"></div>
+                        <div class="gallery-placeholder" data-index="8" data-caption="Photo 8" style="background-image: url('images/img_008.jpg');" data-full="images/img_008.jpg"></div>
+                    </div>
                 </div>
                 <div class="gallery-nav">
                     <div class="gallery-nav-button" id="galleryLeft">←</div>
@@ -983,7 +1004,7 @@
             let loadedCount = 0;
 
             function preloadImages() {
-                images.forEach(src => {
+                images.forEach((src, index) => {
                     const img = new Image();
                     img.src = src;
                     img.onload = () => {
@@ -993,6 +1014,11 @@
                         }
                     };
                     img.onerror = () => {
+                        console.error(`Failed to load image: ${src}`);
+                        const placeholder = document.querySelector(`.gallery-placeholder[data-index="${index + 1}"]`);
+                        if (placeholder) {
+                            placeholder.classList.add('failed');
+                        }
                         loadedCount++;
                         if (loadedCount === images.length) {
                             document.body.classList.add('loaded');
@@ -1300,22 +1326,41 @@
                 enlargedPhoto.style.display = 'none';
             });
 
-            const isMobile = window.innerWidth < 600;
-            const itemWidth = isMobile ? (window.innerWidth - 20) / 4 : 195; // 195px for desktop
-            const gap = isMobile ? 10 : 20;
-            const galleryStep = isMobile ? (itemWidth + gap) * 4 : 852; // 852px for desktop
-            let currentPosition = 0;
+            // Gallery Swipe Logic
+            const totalImages = galleryPlaceholders.length; // 8 images
+            const imagesPerPage = 4;
+            const totalPages = Math.ceil(totalImages / imagesPerPage); // 2 pages
+            let currentPage = 0;
+            const pageWidth = 880; // Width of 4 images: (4 × 205px) + (3 × 20px)
+
+            function updateGalleryPosition() {
+                const offset = -currentPage * pageWidth;
+                galleryGrid.style.transform = `translateX(${offset}px)`;
+                // Update button states
+                galleryLeft.classList.toggle('disabled', currentPage === 0);
+                galleryRight.classList.toggle('disabled', currentPage === totalPages - 1);
+            }
 
             galleryLeft.addEventListener('click', () => {
-                currentPosition = Math.max(0, currentPosition - galleryStep);
-                galleryGrid.scrollTo({ left: currentPosition, behavior: 'smooth' });
+                if (currentPage > 0) {
+                    currentPage--;
+                    updateGalleryPosition();
+                }
             });
 
             galleryRight.addEventListener('click', () => {
-                const maxScroll = galleryGrid.scrollWidth - galleryGrid.clientWidth;
-                currentPosition = Math.min(maxScroll, currentPosition + galleryStep);
-                galleryGrid.scrollTo({ left: currentPosition, behavior: 'smooth' });
+                if (currentPage < totalPages - 1) {
+                    currentPage++;
+                    updateGalleryPosition();
+                }
             });
+
+            // Disable scroll wheel
+            galleryGrid.addEventListener('wheel', (e) => {
+                e.preventDefault();
+            });
+
+            updateGalleryPosition(); // Initial position
 
             showPage('homePage');
 
