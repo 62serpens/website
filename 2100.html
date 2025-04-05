@@ -9,19 +9,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        .time-machine-controls { display: flex; gap: 5px; }
-        .year-button {
-            background: none;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 1px 5px;
-            font-family: var(--font-main);
-            font-size: 0.75em;
-            cursor: pointer;
-            transition: all var(--transition-fast);
+        .status-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 5px 10px;
+            border-bottom: 2px solid #ff00ff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            font-size: 14px;
+            color: #00ffff;
         }
-        .year-button:hover { background: var(--border-color); color: var(--accent-hover); border-color: var(--accent-color); }
-        .year-button.active { background: var(--accent-color); color: var(--bg-color); }
+        .time-machine-controls {
+            display: flex;
+            gap: 10px;
+        }
+        .year-button {
+            background: transparent;
+            border: 2px solid #ffff00;
+            color: #00ffff;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            font-family: 'Arial', sans-serif;
+        }
+        .year-button:hover {
+            background: #ff00ff;
+            color: #000;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #00ff00;
+        }
+        .year-button.active {
+            background: #00ff00;
+            color: #000;
+            border-color: #ff00ff;
+        }
         :root {
             --bg-color: #040408;
             --text-color: #a0a0b0;
@@ -56,36 +84,6 @@
         a { color: var(--accent-color); text-decoration: none; transition: color var(--transition-fast); }
         a:hover { color: var(--accent-hover); }
         a:visited { color: var(--accent-color); opacity: 0.8; }
-        .main-header {
-            padding: 6px 15px;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            background: var(--bg-color);
-            z-index: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: nowrap;
-            min-height: 35px;
-        }
-        .main-title {
-            font-family: var(--font-main);
-            font-weight: 700;
-            font-size: 1.1em;
-            color: var(--header-color);
-            margin: 0;
-            letter-spacing: 1px;
-            cursor: default;
-            text-shadow: none;
-        }
-        .status-info { display: flex; gap: 12px; font-family: var(--font-main); font-size: 0.8em; color: var(--text-color); opacity: 0.7; align-items: center; white-space: nowrap; }
-        #coordinates { cursor: default; }
-        .header-controls { display: flex; align-items: center; gap: 5px; }
-        .control-button { background: none; border: 1px solid var(--border-color); color: var(--text-color); padding: 1px 5px; font-family: var(--font-main); font-size: 0.75em; cursor: pointer; transition: all var(--transition-fast); border-radius: 0; }
-        .control-button:hover { background: var(--border-color); color: var(--color-white); border-color: var(--accent-color); }
-        .control-button.active { background: var(--accent-color); color: var(--bg-color); border-color: var(--accent-color); }
-        #soundToggle { font-size: 1em; line-height: 1; padding: 0px 4px; }
         .main-content {
             max-width: 720px;
             margin: 0 auto;
@@ -177,8 +175,7 @@
         @media (max-width: 600px) {
             body { font-size: 13px; padding: 40px 5px 5px 5px; }
             .main-content { padding: 20px 8px; }
-            .main-header { padding: 6px 10px; flex-direction: row; }
-            .main-title { font-size: 1.1em; }
+            .status-bar { padding: 6px 10px; flex-direction: row; }
             .status-info { font-size: 0.7em; gap: 8px; }
             .header-controls { gap: 4px; }
             .control-button { font-size: 0.7em; padding: 1px 4px; }
@@ -200,22 +197,14 @@
     </style>
 </head>
 <body>
-    <header class="main-header">
-        <h1 class="main-title">//NODE::62S</h1>
-        <div class="status-info">
-            <span id="dateTime"></span>
-            <div class="time-machine-controls">
-                <button class="year-button" onclick="window.location.href='/2000.html'">2000</button>
-                <button class="year-button active">2100</button>
-            </div>
-            <span id="coordinates"></span>
-            <div class="header-controls">
-                <button class="control-button" id="soundToggle" title="Audio Feed">SND:OFF</button>
-                <button class="control-button" id="invertButton" title="Invert Visual Matrix">INV</button>
-                <button class="control-button" id="wallpaperButton" title="Cycle BG Matrix">BG</button>
-            </div>
+    <div class="status-bar">
+        <span id="dateTime"></span>
+        <div class="time-machine-controls">
+            <button class="year-button" onclick="window.location.href='/2000.html'">2000</button>
+            <button class="year-button active" onclick="window.location.href='/2100.html'">2100</button>
         </div>
-    </header>
+        <span id="coordinates"></span>
+    </div>
     <main class="main-content">
         <section id="linkSection">
             <h2>// PRIMARY ACCESS VECTORS //</h2>
@@ -297,7 +286,6 @@
                 const clickSound = document.getElementById('clickSound');
                 const toggleSoundPlayer = document.getElementById('toggleSoundPlayer');
                 const spotifyLink = document.getElementById('spotifyLink');
-                const mainHeader = document.querySelector('.main-header');
                 const galleryImagesData = [
                     { src: 'images/img_001.jpg', caption: 'DATA_REC_001' },
                     { src: 'images/img_002.jpg', caption: 'VISUAL_LOG_002' },
@@ -337,20 +325,13 @@
                 };
                 const preloadInitialImages = () => {};
                 const updateDateTime = () => {
-                    const n = new Date;
-                    try {
-                        const o = { timeZone: "Australia/Hobart", hour12: !1, hour: "2-digit", minute: "2-digit", second: "2-digit" };
-                        const t = n.toLocaleTimeString("en-AU", o);
-                        dateTime && (dateTime.textContent = `LST_${t}`);
-                    } catch (o) {
-                        const t = n.toLocaleTimeString("en-US", { hour12: !1 });
-                        dateTime && (dateTime.textContent = `${t}`);
-                    }
+                    const now = new Date();
+                    dateTime.textContent = now.toLocaleString('en-AU', { timeZone: 'Australia/Hobart' });
                 };
                 const updateCoordinates = () => {
-                    const t = (Math.random() * .002 - .001).toFixed(6);
-                    const e = (Math.random() * .002 - .001).toFixed(6);
-                    coordinates && (coordinates.textContent = `FLX:${t}/${e}`);
+                    const lat = (Math.random() * 2 - 1).toFixed(2);
+                    const lon = (Math.random() * 2 - 1).toFixed(2);
+                    coordinates.textContent = `COORDS: ${lat}°N, ${lon}°E`;
                 };
                 const updateTicker = () => {
                     if (tickerText) {
@@ -377,7 +358,7 @@
                     if (isOpening) {
                         if (sectionId === 'blogSection' && blogPostList && blogPostList.children.length <= 1) buildBlogMenu();
                         if (sectionId === 'gallerySection' && galleryGridContainer && galleryGridContainer.children.length <= 1) buildGallery();
-                        const headerHeight = mainHeader ? mainHeader.offsetHeight : 40;
+                        const headerHeight = 40; // Fixed status bar height
                         const elementTop = sectionElement.getBoundingClientRect().top + window.scrollY - headerHeight - 10;
                         window.scrollTo({ top: elementTop, behavior: 'smooth' });
                     } else {
@@ -385,7 +366,7 @@
                     }
                 };
                 const closeSection = (sectionId) => {
-                    const sectionElement = document.getElementById(sectionId);
+                    const sectionElement = document.getElementByrectId(sectionId);
                     const buttonElement = document.querySelector(`.toggle-button[data-section="${sectionId}"]`);
                     if (sectionElement) sectionElement.classList.remove('visible');
                     if (buttonElement) buttonElement.classList.remove('active');
@@ -471,7 +452,7 @@
                 };
                 if (coordinates) coordinates.addEventListener('click', () => { playSound(clickSound); });
                 if (invertButton) invertButton.addEventListener('click', handleInvertClick);
-                if (wallpaperButton) wallpaperButton.addEventListener('click', handleWallpaperClick);
+                if (wallpaperButton) invertButton.addEventListener('click', handleWallpaperClick);
                 if (soundToggle) soundToggle.addEventListener('click', toggleSound);
                 if (galleryLightboxClose) galleryLightboxClose.addEventListener('click', () => { playSound(clickSound); closeLightbox(); });
                 if (galleryLightbox) galleryLightbox.addEventListener('click', (e) => { if (e.target === galleryLightbox) { closeLightbox(); } });
@@ -487,7 +468,7 @@
                 updateDateTime();
                 setInterval(updateDateTime, 1000);
                 updateCoordinates();
-                setInterval(updateCoordinates, 2800);
+                setInterval(updateCoordinates, 1000);
                 setInterval(updateTicker, 7500);
                 if (soundToggle) soundToggle.textContent = soundEnabled ? '[SND:ON]' : '[SND:OFF]';
                 updateSpotifyLink();
