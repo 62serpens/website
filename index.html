@@ -9,81 +9,98 @@
     <link rel="preload" href="images/img_001.jpg" as="image">
     <link rel="preload" href="images/img_002.jpg" as="image">
     <link rel="preload" href="images/img_003.jpg" as="image">
+    <link rel="preload" href="images/img_004.jpg" as="image">
+    <link rel="preload" href="images/img_005.jpg" as="image">
+    <link rel="preload" href="images/img_006.jpg" as="image">
+    <link rel="preload" href="images/img_007.jpg" as="image">
+    <link rel="preload" href="images/img_008.jpg" as="image">
     <style>
+        :root {
+            --color-black: #000;
+            --color-white: #fff;
+            --color-magenta: #ff00ff;
+            --color-cyan: #00ffff;
+            --color-yellow: #ffff00;
+            --color-green: #00ff00;
+            --color-red: #ff0000;
+            --color-dark-grey: #333;
+        }
+
         html, body {
-            background-color: #000 !important;
             margin: 0;
             padding: 0;
-            height: 100%;
-            overflow: hidden;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+            background-color: var(--color-black);
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+            color: var(--color-white);
         }
-        html { background-color: #000; }
+
         body {
-            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, #000;
-            color: #ffffff;
+            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, var(--color-black);
             padding: 10px;
             min-height: 100vh;
             display: none;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            overflow-y: hidden;
             user-select: none;
-            transition: transform 0.5s;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polygon points="12,2 22,22 2,22" fill="%23bf00ff" stroke="none"/></svg>') 12 12, auto;
             position: relative;
+            transition: transform 0.5s;
         }
-        body.loaded { display: flex; }
+
+        body.loaded { display: block; }
+
         body::before {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #000;
+            background-color: var(--color-black);
             animation: bgPulse 5s infinite alternate;
             z-index: -1;
         }
+
         @media (pointer: coarse) { body { cursor: default; } }
-        @keyframes bgPulse {
-            0% { background-color: #000; }
-            100% { background-color: #333; }
-        }
+
+        @keyframes bgPulse { 0% { background-color: var(--color-black); } 100% { background-color: #333; } }
+
         .status-bar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: #000;
-            color: #00ffff;
+            background: var(--color-black);
+            color: var(--color-cyan);
             font-size: 14px;
             padding: 5px;
-            border-bottom: 2px solid #ff00ff;
+            border-bottom: 2px solid var(--color-magenta);
             display: flex;
             justify-content: space-between;
+            align-items: center;
             box-sizing: border-box;
             z-index: 100;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-            align-items: center;
         }
+
         #coordinates {
             cursor: pointer;
             transition: color 0.2s ease;
             white-space: nowrap;
         }
-        #coordinates:hover { color: #ff00ff; }
+
+        #coordinates:hover { color: var(--color-magenta); }
+
         .mode-buttons {
             display: flex;
             gap: 5px;
             margin-left: 10px;
         }
+
         .mode-button {
             width: 24px;
             height: 24px;
             background: transparent;
-            border: 2px solid #ffff00;
+            border: 2px solid var(--color-yellow);
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -92,422 +109,438 @@
             justify-content: center;
             padding: 0;
         }
-        .mode-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px #00ff00;
-        }
-        .mode-button.active { background: #00ffff; }
-        .invert-button svg circle { fill: #ff00ff; }
+
+        .mode-button:hover { transform: scale(1.1); box-shadow: 0 0 10px var(--color-green); }
+        .mode-button.active { background: var(--color-cyan); }
+        .invert-button svg circle { fill: var(--color-magenta); }
+
         .nav-bar {
             position: fixed;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 5px 10px;
+            top: 50px;
+            left: 10px;
+            padding: 10px;
             z-index: 110;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--color-magenta);
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--color-magenta);
         }
+
         .nav-bar.hidden { display: none; }
+
         .nav-link {
-            color: #ffff00;
+            color: var(--color-yellow);
             font-size: 14px;
             text-decoration: none;
-            margin: 5px 10px;
-            padding: 5px;
+            padding: 5px 10px;
             cursor: pointer;
-            transition: color 0.2s ease;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-            display: inline-block;
+            transition: all 0.2s ease;
+            text-align: left;
         }
-        .nav-link:hover { color: #ff00ff; }
+
+        .nav-link:hover {
+            color: var(--color-magenta);
+            background: rgba(255, 0, 255, 0.2);
+            border-radius: 5px;
+        }
+
         .nav-link.active {
-            color: #00ffff;
-            text-shadow: 0 0 5px #00ffff;
+            color: var(--color-cyan);
+            text-shadow: 0 0 5px var(--color-cyan);
+            background: rgba(0, 255, 255, 0.2);
+            border-radius: 5px;
         }
+
         .content-wrapper {
-            margin-top: -40px;
-            position: relative;
+            margin-top: 50px;
+            margin-left: 120px;
+            margin-bottom: 40px;
+            padding: 10px;
+            width: calc(100% - 140px);
+            box-sizing: border-box;
             z-index: 10;
-            width: 100%;
         }
+
         .page-content {
             background: rgba(0, 0, 0, 0.9);
             padding: 15px;
-            width: 100%;
-            box-sizing: border-box;
+            margin-bottom: 40px;
+            box-shadow: 0 0 20px var(--color-magenta);
             position: relative;
-            box-shadow: 0 0 20px #ff00ff;
-            display: none;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+            box-sizing: border-box;
         }
-        .page-content.active { display: block; }
+
         #homePage {
-            border: 4px double #00ff00;
-            max-width: 400px;
+            border: 4px double var(--color-green);
+            max-width: 700px;
             animation: shake 0.1s infinite;
-            margin: 20px auto 0;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
         }
+
         #blogPage {
-            border: 4px dotted #ffff00;
+            border: 4px dotted var(--color-yellow);
             width: 900px;
-            height: 500px;
-            overflow-y: auto;
-            margin: 0 auto;
-            box-shadow: 0 0 20px #ff00ff;
-        }
-        #galleryPage {
-            border: 4px dotted #ffff00;
-            width: 900px;
+            max-width: 95%;
             height: 500px;
             overflow: hidden;
-            margin: 0 auto;
-            box-shadow: 0 0 20px #ff00ff;
+            display: flex;
+            margin-left: auto;
+            margin-right: auto;
         }
+
+        #galleryPage {
+            border: 4px dotted var(--color-yellow);
+            width: 900px;
+            max-width: 95%;
+            height: 500px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         #aboutPage {
-            border: 4px solid #00ffff;
-            max-width: 400px;
+            border: 4px solid var(--color-cyan);
+            max-width: 600px;
             padding: 15px;
             text-align: center;
-            background: rgba(0, 0, 0, 0.9);
-            margin: 20px auto 0;
+            margin-left: auto;
+            margin-right: auto;
         }
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(2px); }
-            100% { transform: translateX(-2px); }
+
+        #signupSection {
+            border: 4px dashed var(--color-red);
+            max-width: 700px;
+            padding: 20px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            background: rgba(0, 0, 0, 0.95);
         }
+
+        @keyframes shake { 0% { transform: translateX(0); } 50% { transform: translateX(2px); } 100% { transform: translateX(-2px); } }
+
         .graphic-top {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, #ff0000, #00ffff);
+            background: linear-gradient(135deg, var(--color-red), var(--color-cyan));
             position: absolute;
             top: -40px;
             left: 50%;
             transform: translateX(-50%);
-            border: 3px dotted #ffff00;
-            box-shadow: 0 0 15px #ffff00;
+            border: 3px dotted var(--color-yellow);
+            box-shadow: 0 0 15px var(--color-yellow);
             animation: bounce 1s infinite;
             cursor: pointer;
+            z-index: 15;
         }
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
-        }
+
+        @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-10px); } }
+
         h1 {
             font-size: 50px;
-            color: #ffff00;
-            text-shadow: 3px 3px 0 #ff00ff, -3px -3px 0 #00ff00, 0 0 10px #00ffff;
-            margin: 50px 0 20px;
+            color: var(--color-yellow);
+            text-shadow: 3px 3px 0 var(--color-magenta), -3px -3px 0 var(--color-green), 0 0 10px var(--color-cyan);
+            margin: 20px 0;
             letter-spacing: 2px;
             animation: blink 0.5s infinite;
             display: inline-flex;
             align-items: baseline;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
+
         .title-text {
             transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
         }
-        .title-text.up:hover {
-            color: #ff00ff;
-            transform: rotate(-5deg);
-        }
-        .title-text.down:hover {
-            color: #ff00ff;
-            transform: rotate(5deg);
-        }
-        .title-text.glitch {
-            animation: glitch 0.3s linear infinite;
-        }
+
+        .title-text.up:hover { color: var(--color-magenta); transform: rotate(-5deg); }
+        .title-text.down:hover { color: var(--color-magenta); transform: rotate(5deg); }
+        .title-text.glitch { animation: glitch 0.3s linear infinite; }
+
         @keyframes glitch {
             0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); color: #ff00ff; }
+            20% { transform: translate(-2px, 2px); color: var(--color-magenta); }
             40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); color: #00ffff; }
+            60% { transform: translate(2px, 2px); color: var(--color-cyan); }
             80% { transform: translate(2px, -2px); }
             100% { transform: translate(0); }
         }
+
         @keyframes blink { 50% { opacity: 0.7; } }
+
         .domain {
             font-size: 50px;
-            color: #ffffff;
+            color: var(--color-white);
             text-shadow: none;
             animation: none;
-            transition: none;
             cursor: pointer;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
+
         .under-construction {
             position: absolute;
             top: 10px;
             right: 10px;
             font-size: 14px;
-            color: #ff0000;
-            background: #ffff00;
+            color: var(--color-red);
+            background: var(--color-yellow);
             padding: 5px;
-            border: 2px solid #000;
+            border: 2px solid var(--color-black);
             transform: rotate(-10deg);
             cursor: pointer;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+            z-index: 15;
         }
+
         .button-container {
             display: flex;
             flex-direction: column;
             gap: 12px;
             align-items: center;
+            margin-top: 20px;
             position: relative;
         }
+
         .button {
-            background: #ff00ff;
-            color: #00ffff;
+            background: var(--color-magenta);
+            color: var(--color-cyan);
             padding: 12px 20px;
-            border: 2px solid #ffff00;
+            border: 2px solid var(--color-yellow);
             text-decoration: none;
             font-size: 18px;
-            font-family: 'Arial', sans-serif !important;
+            font-family: 'Arial', sans-serif;
             text-transform: uppercase;
-            box-shadow: 0 0 10px #ff00ff;
+            box-shadow: 0 0 10px var(--color-magenta);
             transition: all 0.2s ease;
             width: 100%;
             max-width: 300px;
             text-align: center;
             position: relative;
-            z-index: 1;
+            animation: pulseButton 2s infinite;
         }
+
+        @keyframes pulseButton { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px var(--color-magenta); } 50% { transform: scale(1.05); box-shadow: 0 0 20px var(--color-green); } }
+
         .beatstore { background: rgb(255, 50, 50); }
         .instagram { background: rgb(255, 80, 200); }
-        .spotify { background: rgb(50, 255, 100); color: #000000; }
+        .spotify { background: rgb(50, 255, 100); color: var(--color-black); }
         .soundcloud { background: rgb(255, 120, 60); }
-        .button:hover {
-            transform: scale(1.1) rotate(2deg);
-            box-shadow: 0 0 20px #00ff00;
-            color: #000;
-        }
+
+        .button:hover { transform: scale(1.1) rotate(2deg); box-shadow: 0 0 20px var(--color-green); color: var(--color-black); }
         .beatstore:hover { background: rgb(255, 150, 150); }
         .instagram:hover { background: rgb(255, 200, 255); }
         .spotify:hover { background: rgb(150, 255, 150); }
         .soundcloud:hover { background: rgb(255, 200, 150); }
-        .button.secret:hover { background: rgb(150, 255, 255); color: #ff00ff; }
-        .button::before {
-            content: '★';
-            color: #ffff00;
-            position: absolute;
-            left: 5px;
-            animation: spin 1s infinite linear;
-        }
-        .button::after {
-            content: '☆';
-            color: #00ff00;
-            position: absolute;
-            right: 5px;
-            animation: pulse 0.8s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
+        .button.secret:hover { background: rgb(150, 255, 255); color: var(--color-magenta); }
+
+        .button::before { content: '★'; color: var(--color-yellow); position: absolute; left: 5px; animation: spin 1s infinite linear; }
+        .button::after { content: '☆'; color: var(--color-green); position: absolute; right: 5px; animation: pulse 0.8s infinite; }
+
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
         @keyframes spin { 100% { transform: rotate(360deg); } }
+
         .graphic-bottom {
             width: 60px;
             height: 60px;
-            background: radial-gradient(circle, #ff00ff, #00ffff);
+            background: radial-gradient(circle, var(--color-magenta), var(--color-cyan));
             position: absolute;
             bottom: -30px;
             left: 50%;
             transform: translateX(-50%);
-            border: 2px dashed #ff00ff;
+            border: 2px dashed var(--color-magenta);
             animation: spin 1.5s infinite linear, glow 2s infinite;
             cursor: pointer;
+            z-index: 15;
         }
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 10px #ff00ff; }
-            50% { box-shadow: 0 0 20px #00ff00; }
-        }
+
+        @keyframes glow { 0%, 100% { box-shadow: 0 0 10px var(--color-magenta); } 50% { box-shadow: 0 0 20px var(--color-green); } }
+
         .graphic-left {
             width: 40px;
             height: 100px;
-            background: linear-gradient(#00ff00, #ff0000);
+            background: linear-gradient(var(--color-green), var(--color-red));
             position: absolute;
             left: -20px;
             top: 50%;
             transform: translateY(-50%);
-            border: 2px solid #ffff00;
+            border: 2px solid var(--color-yellow);
             animation: slide 6s infinite;
             cursor: pointer;
             transition: height 0.2s;
-            touch-action: manipulation;
+            z-index: 15;
         }
-        @keyframes slide {
-            0% { top: 20%; }
-            50% { top: 80%; }
-            100% { top: 20%; }
-        }
-        @keyframes menuBorderChase {
-            0% { top: -20px; left: 0; }
-            25% { top: -20px; left: calc(100% - 40px); }
-            50% { top: calc(100% - 100px); left: calc(100% - 40px); }
-            75% { top: calc(100% - 100px); left: 0; }
-            100% { top: -20px; left: 0; }
-        }
+
+        @keyframes slide { 0% { top: 20%; } 50% { top: 80%; } 100% { top: 20%; } }
+
         .graphic-right {
             width: 50px;
             height: 50px;
-            background: #00ffff;
+            background: var(--color-cyan);
             position: absolute;
             right: -25px;
             top: 40%;
             border-radius: 50%;
-            border: 2px dotted #ff00ff;
+            border: 2px dotted var(--color-magenta);
             animation: bounce 0.8s infinite;
             cursor: pointer;
+            z-index: 15;
         }
+
         .random-text {
             position: absolute;
             bottom: 60px;
             left: 10px;
             font-size: 12px;
-            color: #00ff00;
+            color: var(--color-green);
             transform: rotate(-20deg);
             animation: fade 4s infinite;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+            z-index: 5;
         }
-        @keyframes fade {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
+
+        @keyframes fade { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
         .marquee {
             position: absolute;
-            top: -20px;
+            top: 0;
+            left: 0;
             width: 100%;
-            color: #ff0000;
+            color: var(--color-red);
             font-size: 16px;
-            background: #ffff00;
+            background: var(--color-yellow);
             padding: 5px;
             box-sizing: border-box;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+            z-index: 15;
         }
+
         .chaos-star {
             position: absolute;
-            color: #ff00ff;
+            color: var(--color-magenta);
             font-size: 30px;
             animation: spin 1s infinite linear;
             pointer-events: none;
+            z-index: 500;
         }
+
         .flash-text {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 100px;
-            color: #00ff00;
-            text-shadow: 0 0 20px #ff00ff;
-            z-index: 100;
+            color: var(--color-green);
+            text-shadow: 0 0 20px var(--color-magenta);
+            z-index: 1000;
             pointer-events: none;
             display: none;
             white-space: nowrap;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
+
         .discount-code {
             position: absolute;
             bottom: 80px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 30px;
-            color: #ffff00;
+            color: var(--color-yellow);
             background: rgba(0, 0, 0, 0.8);
             padding: 15px;
-            border: 2px solid #ff00ff;
+            border: 2px solid var(--color-magenta);
             display: none;
-            z-index: 10;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+            z-index: 20;
         }
+
         .copyright {
             position: fixed;
             bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 12px;
-            color: #ffffff;
-            z-index: 10;
+            color: var(--color-white);
+            z-index: 100;
             white-space: nowrap;
             animation: blink 0.5s infinite;
             cursor: pointer;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
+
         .astral-particle {
-            position: absolute;
+            position: fixed;
             width: 12px;
             height: 3px;
-            background: #ff00ff;
+            background: var(--color-magenta);
             border-radius: 50%;
             opacity: 0.3;
             pointer-events: none;
             z-index: 5;
             animation: warp 10s linear forwards;
         }
-        @keyframes warp {
-            0% { opacity: 0.3; transform: translate(0, 0) scale(1); }
-            100% { opacity: 0; transform: translate(var(--end-x), var(--end-y)) scale(2); }
-        }
+
+        @keyframes warp { 0% { opacity: 0.3; transform: translate(0, 0) scale(1); } 100% { opacity: 0; transform: translate(var(--end-x), var(--end-y)) scale(2); } }
+
         /* Blog Styles */
         .blog-container {
             display: flex;
             flex-direction: row;
             width: 100%;
             height: 100%;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-            overflow-x: hidden;
+            overflow: hidden;
         }
+
         .blog-menu {
             flex: 0 0 200px;
             padding: 10px;
             overflow-y: auto;
             overflow-x: hidden;
-            max-height: 460px;
-            border-right: 2px solid #ff00ff;
+            max-height: 100%;
+            border-right: 2px solid var(--color-magenta);
         }
+
         .blog-main {
             flex: 1;
             padding: 10px 30px;
             overflow-y: auto;
             white-space: normal;
             word-wrap: break-word;
+            max-height: 100%;
         }
+
         .blog-title {
             font-size: 28px;
-            color: #ffff00;
-            text-shadow: 2px 2px 0 #ff00ff;
+            color: var(--color-yellow);
+            text-shadow: 2px 2px 0 var(--color-magenta);
             text-transform: uppercase;
             margin-bottom: 15px;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
+
         .blog-content {
-            color: #00ffff;
+            color: var(--color-cyan);
             font-size: 18px;
             line-height: 1.6;
             white-space: normal;
             word-wrap: break-word;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
+
         .blog-date {
-            color: #ff00ff;
+            color: var(--color-magenta);
             font-weight: bold;
             margin-bottom: 10px;
             font-size: 16px;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
+
         .blog-nav-button {
-            background: #ff00ff;
-            color: #00ffff;
+            background: var(--color-magenta);
+            color: var(--color-cyan);
             padding: 4px 6px;
             border: none;
             text-decoration: none;
             font-size: 13px;
             text-align: left;
-            box-shadow: 0 0 5px #ff00ff;
+            box-shadow: 0 0 5px var(--color-magenta);
             transition: all 0.2s ease;
             cursor: pointer;
             width: 100%;
@@ -517,249 +550,206 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
-        .blog-nav-button span {
-            font-size: 11px;
-        }
-        .blog-nav-button:hover {
-            background: #00ffff;
-            color: #ff00ff;
-            box-shadow: 0 0 10px #00ff00;
-        }
-        .blog-nav-button.active {
-            background: #00ff00;
-            color: #ff00ff;
-            box-shadow: 0 0 10px #ffff00;
-        }
+
+        .blog-nav-button span { font-size: 11px; }
+        .blog-nav-button:hover { background: var(--color-cyan); color: var(--color-magenta); box-shadow: 0 0 10px var(--color-green); }
+        .blog-nav-button.active { background: var(--color-green); color: var(--color-magenta); box-shadow: 0 0 10px var(--color-yellow); }
+
         /* Gallery Styles */
         .gallery-container {
             width: 100%;
             padding: 10px;
             box-sizing: border-box;
-            position: relative;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            justify-content: center;
         }
+
         .gallery-viewport {
-            width: 900px; /* Matches #galleryPage width */
-            height: 320px; /* Image height (300px) + padding */
+            max-width: 100%;
+            height: 320px;
             overflow: hidden;
             margin: 0 auto;
             position: relative;
+            width: calc(195px * 4 + 20px * 3 + 8px);
         }
+
         .gallery-grid {
             display: flex;
             flex-direction: row;
             gap: 20px;
-            transition: transform 0.5s ease; /* Smooth swipe transition */
-            padding: 0 4px; /* Ensure equal gaps on both sides */
+            transition: transform 0.5s ease;
+            padding: 0 4px;
             box-sizing: border-box;
+            height: 100%;
         }
+
         .gallery-placeholder {
-            flex: 0 0 195px; /* Image width */
+            flex: 0 0 195px;
             height: 300px;
-            border: 4px dotted #ffff00;
-            background: #333; /* Fallback color if image fails to load */
+            border: 4px dotted var(--color-yellow);
+            background: var(--color-dark-grey);
             cursor: pointer;
             position: relative;
-            background-size: cover;
+            background-size: contain;
+            background-repeat: no-repeat;
             background-position: center;
             filter: saturate(1.5) brightness(1.2) contrast(1.1);
             transition: filter 0.2s ease;
             box-sizing: border-box;
         }
-        .gallery-placeholder:hover {
-            filter: saturate(2) brightness(1.4) contrast(1.2);
-        }
-        .gallery-placeholder::after {
-            content: 'Image Failed to Load';
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #ff0000;
-            font-size: 14px;
-            text-align: center;
-        }
-        .gallery-placeholder.failed::after {
-            display: block;
-        }
+
+        .gallery-placeholder:hover { filter: saturate(2) brightness(1.4) contrast(1.2); }
+        .gallery-placeholder::after { content: 'Image Failed'; display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--color-red); font-size: 14px; text-align: center; }
+        .gallery-placeholder.failed::after { display: block; }
+
         .gallery-nav {
             margin-top: 10px;
             display: flex;
             gap: 20px;
             justify-content: center;
-            pointer-events: none;
         }
+
         .gallery-nav-button {
             width: 40px;
             height: 30px;
-            background: #ffff00;
-            color: #ff00ff;
-            border: 2px solid #ff00ff;
+            background: var(--color-yellow);
+            color: var(--color-magenta);
+            border: 2px solid var(--color-magenta);
             border-radius: 15px;
             font-size: 16px;
             text-align: center;
             line-height: 30px;
             cursor: pointer;
             transition: all 0.2s ease;
-            pointer-events: all;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
-        .gallery-nav-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px #00ff00;
-        }
-        .gallery-nav-button.disabled {
-            opacity: 0.5;
-            cursor: default;
-        }
-        .gallery-nav-button.disabled:hover {
-            transform: none;
-            box-shadow: none;
-        }
+
+        .gallery-nav-button:hover { transform: scale(1.1); box-shadow: 0 0 10px var(--color-green); }
+        .gallery-nav-button.disabled { opacity: 0.5; cursor: default; }
+        .gallery-nav-button.disabled:hover { transform: none; box-shadow: none; }
+
         .gallery-enlarged {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80vw;
-            max-width: 600px;
-            height: 80vh;
-            max-height: 600px;
-            border: 4px solid #ff00ff;
-            background: #000;
+            width: auto;
+            height: auto;
+            max-width: 80vw;
+            max-height: 80vh;
+            border: 4px solid var(--color-magenta);
+            background: var(--color-black);
             z-index: 200;
-            box-shadow: 0 0 20px #00ffff;
+            box-shadow: 0 0 20px var(--color-cyan);
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             filter: saturate(1.5) brightness(1.2) contrast(1.1);
+            box-sizing: border-box;
         }
+
         .gallery-close {
             position: absolute;
             top: 10px;
             right: 10px;
             width: 30px;
             height: 30px;
-            background: #ff0000;
-            color: #ffffff;
+            background: var(--color-red);
+            color: var(--color-white);
             font-size: 20px;
             text-align: center;
             line-height: 30px;
-            border: 2px solid #ffff00;
+            border: 2px solid var(--color-yellow);
             cursor: pointer;
             transition: all 0.2s ease;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
             z-index: 210;
         }
-        .gallery-close:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px #ff00ff;
-        }
+
+        .gallery-close:hover { transform: scale(1.1); box-shadow: 0 0 10px var(--color-magenta); }
+
         .gallery-caption {
             position: absolute;
             bottom: 10px;
             left: 10px;
             right: 10px;
-            color: #fbff00;
+            color: var(--color-yellow);
             font-size: 14px;
             background: rgba(0, 0, 0, 0.7);
             padding: 5px;
             text-align: center;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
+
         /* About Styles */
         .about-content {
-            color: #00ffff;
+            color: var(--color-cyan);
             font-size: 16px;
             line-height: 1.4;
             padding: 10px;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
         }
-        /* Password Popup Styles */
-        .password-popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
-            border: 4px double #ff00ff;
-            padding: 20px;
-            z-index: 300;
-            box-shadow: 0 0 20px #00ffff;
-            color: #ffff00;
-            width: 300px;
-            max-width: 90vw;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+
+        /* Signup Section Styles */
+        .signup-title {
+            font-size: 28px;
+            color: var(--color-cyan);
+            text-shadow: 2px 2px 0 var(--color-magenta);
+            margin-bottom: 15px;
+            animation: blink 0.5s infinite;
         }
-        .password-popup.active { display: block; }
-        .password-close {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            width: 25px;
-            height: 25px;
-            background: #ff0000;
-            color: #ffffff;
-            font-size: 18px;
-            text-align: center;
-            line-height: 25px;
-            border: 2px solid #ffff00;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-        }
-        .password-close:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px #ff00ff;
-        }
-        .password-input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            background: #333;
-            border: 2px solid #00ff00;
-            color: #00ffff;
+
+        .signup-text {
+            color: var(--color-yellow);
             font-size: 16px;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
+            margin-bottom: 20px;
+        }
+
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .signup-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            background: var(--color-dark-grey);
+            border: 2px solid var(--color-green);
+            color: var(--color-cyan);
+            font-size: 16px;
             box-sizing: border-box;
         }
-        .password-submit {
-            background: #ff00ff;
-            color: #00ffff;
-            padding: 10px;
-            border: 2px solid #ffff00;
+
+        .signup-button {
+            background: var(--color-magenta);
+            color: var(--color-cyan);
+            padding: 10px 20px;
+            border: 2px solid var(--color-yellow);
             font-size: 16px;
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif !important;
             text-transform: uppercase;
             cursor: pointer;
-            width: 100%;
             transition: all 0.2s ease;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
         }
-        .password-submit:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #00ff00;
-        }
-        @keyframes password-shake {
-            0% { transform: translate(-50%, -50%) translateX(0); }
-            25% { transform: translate(-50%, -50%) translateX(-10px); }
-            50% { transform: translate(-50%, -50%) translateX(10px); }
-            75% { transform: translate(-50%, -50%) translateX(-10px); }
-            100% { transform: translate(-50%, -50%) translateX(0); }
-        }
-        .password-popup.shake { animation: password-shake 0.5s; }
+
+        .signup-button:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--color-green); }
+
+        /* Desktop Overrides */
         @media (min-width: 600px) {
-            .page-content { padding: 30px; }
-            #homePage { padding: 30px; max-width: 700px; }
+            #homePage { max-width: 700px; padding: 30px; }
             #blogPage { width: 900px; height: 500px; }
             #galleryPage { width: 900px; height: 500px; }
-            #aboutPage { max-width: 600px; }
+            .gallery-viewport { width: calc(195px * 4 + 20px * 3 + 8px); }
+            #aboutPage { max-width: 600px; padding: 30px; }
+            #signupSection { max-width: 700px; padding: 30px; }
             h1 { font-size: 90px; }
+            .domain { font-size: 90px; }
             .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
             .graphic-top { width: 100px; height: 100px; top: -50px; }
             .graphic-bottom { width: 80px; height: 80px; bottom: -40px; }
@@ -768,127 +758,64 @@
             .marquee { font-size: 20px; }
             .flash-text { font-size: 200px; }
             .discount-code { font-size: 40px; }
-            .blog-menu { flex: 0 0 200px; max-height: 460px; }
+            .blog-menu { flex: 0 0 200px; }
             .blog-main { padding: 10px 30px; }
             .blog-title { font-size: 36px; }
             .blog-content { font-size: 18px; }
+            .blog-date { font-size: 16px; }
             .blog-nav-button { font-size: 13px; padding: 4px 6px; max-width: 180px; }
             .blog-nav-button span { font-size: 11px; }
+            .astral-particle { animation-duration: 10s; }
+            .signup-title { font-size: 36px; }
+            .signup-text { font-size: 18px; }
         }
+
+        /* Mobile Overrides */
         @media (max-width: 599px) {
-            body {
-                padding: 10px;
-                overflow-x: hidden;
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-                font-weight: 400;
-            }
-            html, body, .status-bar, .nav-bar, .nav-link, h1, .title-text, .domain, .under-construction, .discount-code, .copyright, .page-content, .blog-container, .blog-title, .blog-content, .blog-date, .blog-nav-button, .gallery-container, .gallery-nav-button, .gallery-close, .gallery-caption, .about-content, .password-popup, .password-input, .password-submit {
-                font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif !important;
-                -webkit-font-smoothing: antialiased;
-            }
+            body { padding: 5px; font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif; -webkit-font-smoothing: antialiased; font-weight: 400; }
             .status-bar { font-size: 12px; padding: 3px; }
-            .nav-bar { top: 20px; width: 90%; padding: 5px; }
-            .content-wrapper { margin-top: -30px; }
-            #homePage { 
-                margin-top: 15px; 
-                padding: 15px; 
-                border-width: 6px; 
-                max-width: 400px; 
-                margin-left: auto; 
-                margin-right: auto; 
-            }
-            #homePage h1 {
-                font-size: 50px !important;
-                margin-left: 20px;
-            }
-            #blogPage { 
-                width: 100% !important;
-                height: 500px;
-                overflow-y: auto;
-                padding: 15px;
-                margin: 0;
-                box-shadow: 0 0 20px #ff00ff;
-            }
-            #galleryPage { 
-                width: 100% !important;
-                height: 500px; 
-                overflow-x: hidden;
-                overflow-y: hidden;
-                padding: 15px;
-                margin: 0;
-                box-shadow: 0 0 20px #ff00ff;
-            }
-            #aboutPage { 
-                padding: 15px; 
-                margin-top: 15px; 
-                max-width: 400px; 
-                margin-left: auto; 
-                margin-right: auto; 
-            }
-            h1 { font-size: 40px !important; }
-            .domain { font-size: 28px !important; }
-            .button { font-size: 14px; padding: 8px 15px; max-width: 280px; }
-            .under-construction { font-size: 14px !important; padding: 5px !important; }
-            .graphic-top { width: 60px; height: 60px; top: -30px; }
-            .graphic-bottom { width: 50px; height: 50px; bottom: -25px; }
-            .graphic-left { width: 30px; height: 80px; left: -15px; z-index: 0; }
-            .graphic-right {
-                width: 40px;
-                height: 40px;
-                right: -20px;
-                top: 85%;
-                z-index: 5;
-                padding: 15px;
-                box-sizing: content-box;
-            }
+            .nav-bar { top: 40px; left: 5px; padding: 5px; width: 80px; gap: 5px; }
+            .nav-link { font-size: 12px; padding: 3px 5px; }
+            .content-wrapper { margin-top: 40px; margin-left: 90px; width: calc(100% - 100px); padding: 5px; }
+            .page-content { padding: 10px; margin-bottom: 20px; }
+            #homePage { padding: 15px; border-width: 3px; max-width: 95%; }
+            #blogPage, #galleryPage { width: 98%; height: auto; max-height: none; padding: 10px; border-width: 3px; box-shadow: 0 0 10px var(--color-magenta); }
+            #galleryPage { justify-content: flex-start; }
+            #aboutPage { padding: 15px; max-width: 95%; border-width: 3px; }
+            #signupSection { padding: 15px; max-width: 95%; border-width: 3px; }
+            h1 { font-size: 36px; }
+            .domain { font-size: 36px; }
+            .button { font-size: 14px; padding: 8px 15px; max-width: 90%; }
+            .under-construction { font-size: 11px; padding: 3px; }
+            .graphic-top { width: 50px; height: 50px; top: -25px; }
+            .graphic-bottom { width: 40px; height: 40px; bottom: -20px; }
+            .graphic-left { width: 30px; height: 80px; left: -15px; }
+            .graphic-right { width: 30px; height: 30px; right: -15px; top: 85%; padding: 0; box-sizing: border-box; }
             .button-container { z-index: 10; }
-            .discount-code { font-size: 24px; padding: 10px; }
+            .discount-code { font-size: 18px; padding: 8px; }
             .copyright { font-size: 10px; }
-            .astral-particle { width: 6px; height: 1px; animation: warp 15s linear forwards; }
-            .gallery-container { 
-                padding: 0; 
-                width: 100% !important;
-                box-sizing: border-box;
-            }
-            .gallery-viewport {
-                width: 100% !important;
-                height: 220px; /* Adjusted for mobile */
-            }
-            .gallery-grid {
-                gap: 10px;
-                padding: 0 2px; /* Adjust padding for mobile */
-            }
-            .gallery-placeholder {
-                flex: 0 0 calc(25% - 8px); /* 4 images with 3 gaps of 10px, adjusted for padding */
-                height: 200px;
-                border: 4px dotted #ffff00;
-            }
-            .gallery-nav-button {
-                width: 40px;
-                height: 30px;
-                font-size: 16px;
-                line-height: 30px;
-                border-radius: 15px;
-                background: #ffff00;
-                color: #ff00ff;
-            }
-            .gallery-enlarged {
-                width: 90vw;
-                height: 90vh;
-                max-width: none;
-                max-height: none;
-            }
-            .password-popup { width: 250px; }
+            .astral-particle { width: 6px; height: 1px; animation-duration: 15s; }
+            .gallery-container { padding: 5px; }
+            .gallery-viewport { width: 100%; height: 220px; overflow-x: auto; -webkit-overflow-scrolling: touch; overflow-y: hidden; }
+            .gallery-grid { gap: 10px; padding: 0 5px; width: max-content; transform: none !important; }
+            .gallery-placeholder { flex: 0 0 160px; height: 180px; border-width: 3px; }
+            .gallery-nav { display: none; }
+            .gallery-enlarged { max-width: 90vw; max-height: 75vh; }
+            .gallery-close { top: 5px; right: 5px; width: 25px; height: 25px; line-height: 25px; font-size: 18px; }
+            .gallery-caption { font-size: 12px; bottom: 5px; left: 5px; right: 5px; }
             .mode-button { width: 20px; height: 20px; }
-            .blog-container { flex-direction: row; overflow-x: hidden; }
-            .blog-menu { flex: 0 0 120px; max-height: 460px; padding: 5px; border-right: none; }
-            .blog-main { padding: 5px 10px; }
-            .blog-title { font-size: 24px; }
-            .blog-content { font-size: 16px; }
-            .blog-date { font-size: 14px; }
-            .blog-nav-button { font-size: 12px; padding: 4px 6px; max-width: 100px; }
-            .blog-nav-button span { font-size: 10px; }
+            .blog-container { flex-direction: column; }
+            .blog-menu { flex: 0 0 auto; max-height: 150px; padding: 5px; border-right: none; border-bottom: 2px solid var(--color-magenta); width: 100%; overflow-x: auto; overflow-y: auto; display: flex; flex-direction: row; gap: 8px; }
+            .blog-main { padding: 10px; max-height: calc(100% - 160px); }
+            .blog-title { font-size: 20px; }
+            .blog-content { font-size: 14px; }
+            .blog-date { font-size: 12px; }
+            .blog-nav-button { font-size: 11px; padding: 4px 6px; max-width: none; width: auto; margin-bottom: 0; flex-shrink: 0; }
+            .blog-nav-button span { font-size: 9px; }
+            .signup-title { font-size: 20px; }
+            .signup-text { font-size: 14px; }
+            .signup-input { font-size: 14px; }
+            .signup-button { font-size: 14px; padding: 8px 15px; }
         }
     </style>
 </head>
@@ -917,17 +844,18 @@
         <span class="nav-link" data-page="blogPage">Blog</span>
         <span class="nav-link" data-page="galleryPage">Gallery</span>
         <span class="nav-link" data-page="aboutPage">About</span>
+        <span class="nav-link" data-page="signupSection">Signup</span>
     </div>
     <div class="content-wrapper">
-        <div class="page-content active" id="homePage">
+        <div class="page-content" id="homePage">
             <marquee class="marquee">WELCOME TO 62SERPENS ZONE - ENTER AT UR OWN RISK!!!</marquee>
             <div class="graphic-top" id="egg1"></div>
             <h1><span class="title-text up" id="titleText">62serpens</span><span class="domain">.com</span></h1>
             <div class="button-container" id="buttonContainer">
-                <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore">Beat Store ᯓ★</a>
-                <a href="https://www.instagram.com/62serpens" class="button instagram">Instagram</a>
-                <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button spotify">Spotify</a>
-                <a href="https://www.soundcloud.com/62serpens" class="button soundcloud">SoundCloud ☁︎☁︎☁︎</a>
+                <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore" target="_blank">Beat Store ᯓ★</a>
+                <a href="https://www.instagram.com/62serpens" class="button instagram" target="_blank">Instagram</a>
+                <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button spotify" target="_blank">Spotify</a>
+                <a href="https://www.soundcloud.com/62serpens" class="button soundcloud" target="_blank">SoundCloud ☁︎☁︎☁︎</a>
             </div>
             <div class="graphic-bottom" id="egg2"></div>
             <div class="graphic-left" id="egg3"></div>
@@ -938,13 +866,7 @@
         </div>
         <div class="page-content" id="blogPage">
             <div class="blog-container">
-                <div class="blog-menu">
-                    <div class="blog-nav-button active" data-date="post1"><span>31/03/2025</span><br>Hello World</div>
-                    <div class="blog-nav-button" data-date="post2"><span>01/04/2025</span><br>The Internet Sucks</div>
-                    <div class="blog-nav-button" data-date="post3"><span>02/04/2025</span><br>Placeholder 1</div>
-                    <div class="blog-nav-button" data-date="post4"><span>03/04/2025</span><br>Placeholder 2</div>
-                    <div class="blog-nav-button" data-date="post5"><span>04/04/2025</span><br>Placeholder 3</div>
-                </div>
+                <div class="blog-menu"></div>
                 <div class="blog-main">
                     <div class="blog-title" id="blogTitle"></div>
                     <div class="blog-content" id="blogContent"></div>
@@ -954,16 +876,7 @@
         <div class="page-content" id="galleryPage">
             <div class="gallery-container">
                 <div class="gallery-viewport">
-                    <div class="gallery-grid">
-                        <div class="gallery-placeholder" data-index="1" data-caption="Photo 1" style="background-image: url('images/img_001.jpg');" data-full="images/img_001.jpg"></div>
-                        <div class="gallery-placeholder" data-index="2" data-caption="Photo 2" style="background-image: url('images/img_002.jpg');" data-full="images/img_002.jpg"></div>
-                        <div class="gallery-placeholder" data-index="3" data-caption="Photo 3" style="background-image: url('images/img_003.jpg');" data-full="images/img_003.jpg"></div>
-                        <div class="gallery-placeholder" data-index="4" data-caption="Photo 4" style="background-image: url('images/img_004.jpg');" data-full="images/img_004.jpg"></div>
-                        <div class="gallery-placeholder" data-index="5" data-caption="Photo 5" style="background-image: url('images/img_005.jpg');" data-full="images/img_005.jpg"></div>
-                        <div class="gallery-placeholder" data-index="6" data-caption="Photo 6" style="background-image: url('images/img_006.jpg');" data-full="images/img_006.jpg"></div>
-                        <div class="gallery-placeholder" data-index="7" data-caption="Photo 7" style="background-image: url('images/img_007.jpg');" data-full="images/img_007.jpg"></div>
-                        <div class="gallery-placeholder" data-index="8" data-caption="Photo 8" style="background-image: url('images/img_008.jpg');" data-full="images/img_008.jpg"></div>
-                    </div>
+                    <div class="gallery-grid"></div>
                 </div>
                 <div class="gallery-nav">
                     <div class="gallery-nav-button" id="galleryLeft">←</div>
@@ -982,51 +895,21 @@
                 He is best known for his work with major artists such as Drake, Playboi Carti, Future, Yeat, Nettspend, Tate Mcrae, Taylor Swift, Ye West, Osamason, Pitbull, Britney Spears, Skrillex, Justin Bieber, Red Hot Chilli Peppers, One Direction and many more.
             </div>
         </div>
+        <div class="page-content" id="signupSection">
+            <h1 class="signup-title">JOIN THE 62 ZONE</h1>
+            <p class="signup-text">Drop ur email for beats, updates, and chaos!</p>
+            <form class="signup-form" id="signupForm" onsubmit="handleSignup(event)">
+                <input type="email" class="signup-input" id="emailInput" placeholder="ur email here..." required>
+                <button type="submit" class="signup-button">SUBMIT</button>
+            </form>
+        </div>
     </div>
     <footer class="copyright" id="copyright">
         <p>© 62serpens 2025 - All Rights Reserved</p>
     </footer>
-    <div class="password-popup" id="passwordPopup">
-        <div class="password-close" id="passwordClose">X</div>
-        <p>ENTER PASSWORD LOL</p>
-        <input type="password" class="password-input" id="passwordInput" placeholder="type here...">
-        <button class="password-submit" id="passwordSubmit">SUBMIT</button>
-    </div>
     <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const images = [
-                'images/img_001.jpg',
-                'images/img_002.jpg',
-                'images/img_003.jpg'
-            ];
-            let loadedCount = 0;
-
-            function preloadImages() {
-                images.forEach((src, index) => {
-                    const img = new Image();
-                    img.src = src;
-                    img.onload = () => {
-                        loadedCount++;
-                        if (loadedCount === images.length) {
-                            document.body.classList.add('loaded');
-                        }
-                    };
-                    img.onerror = () => {
-                        console.error(`Failed to load image: ${src}`);
-                        const placeholder = document.querySelector(`.gallery-placeholder[data-index="${index + 1}"]`);
-                        if (placeholder) {
-                            placeholder.classList.add('failed');
-                        }
-                        loadedCount++;
-                        if (loadedCount === images.length) {
-                            document.body.classList.add('loaded');
-                        }
-                    };
-                });
-            }
-            preloadImages();
-
             const dateTime = document.getElementById('dateTime');
             const coordinates = document.getElementById('coordinates');
             const navBar = document.querySelector('.nav-bar');
@@ -1044,57 +927,131 @@
             const flashText = document.getElementById('flashText');
             const discountCode = document.getElementById('discountCode');
             const copyright = document.getElementById('copyright');
+            const blogMenu = document.querySelector('#blogPage .blog-menu');
             const blogTitle = document.getElementById('blogTitle');
             const blogContent = document.getElementById('blogContent');
-            const blogNavButtons = document.querySelectorAll('.blog-nav-button');
-            const galleryGrid = document.querySelector('.gallery-grid');
-            const galleryPlaceholders = document.querySelectorAll('.gallery-placeholder');
+            const galleryGrid = document.querySelector('#galleryPage .gallery-grid');
             const galleryLeft = document.getElementById('galleryLeft');
             const galleryRight = document.getElementById('galleryRight');
             const enlargedPhoto = document.getElementById('enlargedPhoto');
             const galleryClose = document.getElementById('galleryClose');
             const galleryCaption = document.getElementById('galleryCaption');
-            const passwordPopup = document.getElementById('passwordPopup');
-            const passwordInput = document.getElementById('passwordInput');
-            const passwordSubmit = document.getElementById('passwordSubmit');
-            const passwordClose = document.getElementById('passwordClose');
+            const galleryViewport = document.querySelector('#galleryPage .gallery-viewport');
+            const signupForm = document.getElementById('signupForm');
+            const emailInput = document.getElementById('emailInput');
             const invertButton = document.getElementById('invertButton');
             const wallpaperButton = document.getElementById('wallpaperButton');
 
+            const galleryImagesData = [
+                { src: 'images/img_001.jpg', caption: 'Photo 1' },
+                { src: 'images/img_002.jpg', caption: 'Photo 2' },
+                { src: 'images/img_003.jpg', caption: 'Photo 3' },
+                { src: 'images/img_004.jpg', caption: 'Photo 4' },
+                { src: 'images/img_005.jpg', caption: 'Photo 5' },
+                { src: 'images/img_006.jpg', caption: 'Photo 6' },
+                { src: 'images/img_007.jpg', caption: 'Photo 7' },
+                { src: 'images/img_008.jpg', caption: 'Photo 8' }
+            ];
+            const blogPosts = {
+                'post1': { date: "31/03/2025", title: "Hello World", content: `just setting up my blog lol :)` },
+                'post2': { date: "01/04/2025", title: "The Internet Sucks", content: `internet is the new free to air TV. we need to do something about it.` },
+                'post3': { date: "02/04/2025", title: "Placeholder 1", content: `Lorem ipsum dolor sit amet.` },
+                'post4': { date: "03/04/2025", title: "Placeholder 2", content: `Short post here.` },
+                'post5': { date: "04/04/2025", title: "Placeholder 3", content: `Another test post with some text.` }
+            };
+            const wallpapers = [
+                "url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, #000",
+                "url('https://www.toptal.com/designers/subtlepatterns/uploads/stardust.png') repeat, #000",
+                "url('https://www.toptal.com/designers/subtlepatterns/uploads/plaid.png') repeat, #000"
+            ];
+
+            let initialImagesToLoad = 3;
+            let particleInterval = null;
+            let particlesActive = false;
+            let isFlipped = false;
+            let slideSpeed = 6;
+            let clickCount = 0;
+            let sliderHeight = 100;
+            let gameActive = false;
+            let secretLink = null;
+            let wallpaperIndex = 0;
+            let galleryCurrentPage = 0;
+            const galleryImagesPerPage = 4;
+            const galleryTotalPages = Math.ceil(galleryImagesData.length / galleryImagesPerPage);
+
+            function preloadInitialImages() {
+                const initialSources = galleryImagesData.slice(0, initialImagesToLoad).map(item => item.src);
+                const defaultWallpaperUrl = wallpapers[0].match(/url\(['"]?(.*?)['"]?\)/);
+                if (defaultWallpaperUrl && defaultWallpaperUrl[1]) initialSources.push(defaultWallpaperUrl[1]);
+
+                let loadedCount = 0;
+                const totalToLoad = initialSources.length;
+
+                if (totalToLoad === 0) {
+                    document.body.classList.add('loaded');
+                    preloadRemainingImages();
+                    return;
+                }
+
+                initialSources.forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = () => {
+                        loadedCount++;
+                        if (loadedCount >= totalToLoad && !document.body.classList.contains('loaded')) {
+                            document.body.classList.add('loaded');
+                            preloadRemainingImages();
+                        }
+                    };
+                    img.onerror = () => {
+                        console.error(`Failed to preload: ${src}`);
+                        loadedCount++;
+                        if (loadedCount >= totalToLoad && !document.body.classList.contains('loaded')) {
+                            document.body.classList.add('loaded');
+                            preloadRemainingImages();
+                        }
+                    };
+                });
+            }
+
+            function preloadRemainingImages() {
+                galleryImagesData.slice(initialImagesToLoad).forEach((item, index) => {
+                    const img = new Image();
+                    img.src = item.src;
+                    img.onerror = () => {
+                        console.error(`Failed background load: ${item.src}`);
+                        const placeholder = document.querySelector(`.gallery-placeholder[data-index="${initialImagesToLoad + index + 1}"]`);
+                        if (placeholder) placeholder.classList.add('failed');
+                    };
+                });
+            }
+
             function updateDateTime() {
                 const now = new Date();
-                const dateStr = now.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-                const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
-                dateTime.textContent = `${dateStr} ${timeStr}`;
+                const dateStr = now.toLocaleDateString('en-AU', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'Australia/Hobart' });
+                const timeStr = now.toLocaleTimeString('en-AU', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Australia/Hobart' });
+                if (dateTime) dateTime.textContent = `${dateStr} ${timeStr} AEST`;
             }
-            updateDateTime();
-            setInterval(updateDateTime, 1000);
 
             function updateCoordinates() {
                 const isBigJump = Math.random() < 0.2;
                 const range = isBigJump ? 1000 : 1;
                 const lat = (Math.random() * range * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
                 const lon = (Math.random() * range * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
-                coordinates.textContent = `COORDS: ${lat}°N, ${lon}°E`;
+                if (coordinates) coordinates.textContent = `COORDS: ${lat}°N, ${lon}°E`;
             }
-            updateCoordinates();
-            setInterval(updateCoordinates, 1000);
 
-            let particleInterval = null;
-            let particlesActive = false;
             function createParticle() {
-                const activePage = document.querySelector('.page-content.active');
-                if (!activePage) return;
+                if (!particlesActive) return;
                 const particle = document.createElement('div');
                 particle.className = 'astral-particle';
-                const rect = activePage.getBoundingClientRect();
-                const startX = rect.left + rect.width / 2;
-                const startY = rect.top + rect.height / 2;
+                const startX = window.innerWidth / 2;
+                const startY = window.innerHeight / 2;
                 particle.style.left = `${startX}px`;
                 particle.style.top = `${startY}px`;
                 particle.style.background = Math.random() < 0.5 ? '#ff00ff' : '#00ffff';
                 const angle = Math.random() * 2 * Math.PI;
-                const distance = 400 + Math.random() * 300;
+                const distance = (Math.min(window.innerWidth, window.innerHeight) / 2) + Math.random() * 200;
                 const endX = distance * Math.cos(angle);
                 const endY = distance * Math.sin(angle);
                 particle.style.setProperty('--end-x', `${endX}px`);
@@ -1102,30 +1059,110 @@
                 document.body.appendChild(particle);
                 setTimeout(() => particle.remove(), window.innerWidth < 600 ? 15000 : 10000);
             }
-            coordinates.addEventListener('click', () => {
+
+            function toggleParticles() {
                 if (particlesActive) {
                     clearInterval(particleInterval);
                     particlesActive = false;
-                    coordinates.style.color = '#00ffff';
+                    if (coordinates) coordinates.style.color = '#00ffff';
+                    document.querySelectorAll('.astral-particle').forEach(p => p.remove());
                 } else {
-                    particleInterval = setInterval(createParticle, window.innerWidth < 600 ? 20 : 10);
+                    particleInterval = setInterval(createParticle, window.innerWidth < 600 ? 100 : 50);
                     particlesActive = true;
-                    coordinates.style.color = '#ff00ff';
+                    if (coordinates) coordinates.style.color = '#ff00ff';
                 }
-            });
-
-            titleText.addEventListener('click', () => {
-                titleText.classList.toggle('up');
-                titleText.classList.toggle('down');
-            });
+            }
 
             function triggerGlitch() {
-                titleText.classList.add('glitch');
-                setTimeout(() => titleText.classList.remove('glitch'), 300);
+                if (titleText) {
+                    titleText.classList.add('glitch');
+                    setTimeout(() => titleText.classList.remove('glitch'), 300);
+                }
             }
-            setInterval(() => Math.random() < 0.1 && triggerGlitch(), 1000);
 
-            egg1.addEventListener('click', () => {
+            function buildBlogMenu() {
+                if (!blogMenu) return;
+                blogMenu.innerHTML = '';
+                Object.keys(blogPosts).forEach(key => {
+                    const post = blogPosts[key];
+                    const button = document.createElement('div');
+                    button.className = 'blog-nav-button';
+                    button.setAttribute('data-date', key);
+                    button.innerHTML = `<span>${post.date}</span><br>${post.title}`;
+                    button.addEventListener('click', () => updateBlogContent(key));
+                    blogMenu.appendChild(button);
+                });
+            }
+
+            function updateBlogContent(postKey) {
+                const post = blogPosts[postKey];
+                if (!post || !blogTitle || !blogContent) return;
+                blogTitle.textContent = post.title;
+                blogContent.innerHTML = `<div class="blog-date">${post.date}</div>${post.content}`;
+                document.querySelectorAll('.blog-nav-button').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-date') === postKey));
+                const blogMain = document.querySelector('#blogPage .blog-main');
+                if (blogMain) blogMain.scrollTop = 0;
+            }
+
+            function buildGallery() {
+                if (!galleryGrid) return;
+                galleryGrid.innerHTML = '';
+                galleryImagesData.forEach((item, index) => {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'gallery-placeholder';
+                    placeholder.setAttribute('data-index', index + 1);
+                    placeholder.setAttribute('data-caption', item.caption);
+                    placeholder.style.backgroundImage = `url('${item.src}')`;
+                    placeholder.setAttribute('data-full', item.src);
+                    placeholder.addEventListener('click', () => {
+                        if (enlargedPhoto) enlargedPhoto.style.display = 'block';
+                        if (enlargedPhoto) enlargedPhoto.style.backgroundImage = `url('${item.src}')`;
+                        if (galleryCaption) galleryCaption.textContent = item.caption || 'No caption';
+                    });
+                    galleryGrid.appendChild(placeholder);
+                });
+            }
+
+            function closeGalleryPopup() {
+                if (enlargedPhoto) enlargedPhoto.style.display = 'none';
+            }
+
+            function calculateGalleryPageWidth() {
+                const placeholderWidth = 195;
+                const border = 8;
+                const gap = 20;
+                return (placeholderWidth + border) * galleryImagesPerPage + gap * (galleryImagesPerPage - 1);
+            }
+
+            function updateGalleryPosition() {
+                if (window.innerWidth >= 600 && galleryGrid && galleryViewport) {
+                    galleryViewport.style.overflowX = 'hidden';
+                    const pageWidth = calculateGalleryPageWidth();
+                    const offset = -galleryCurrentPage * pageWidth;
+                    galleryGrid.style.transform = `translateX(${offset}px)`;
+                } else if (galleryGrid && galleryViewport) {
+                    galleryGrid.style.transform = 'none';
+                    galleryViewport.style.overflowX = 'auto';
+                }
+                updateGalleryNavButtons();
+            }
+
+            function updateGalleryNavButtons() {
+                if (galleryLeft) galleryLeft.classList.toggle('disabled', galleryCurrentPage === 0);
+                if (galleryRight) galleryRight.classList.toggle('disabled', galleryCurrentPage >= galleryTotalPages - 1);
+            }
+
+            function handleSignup(event) {
+                event.preventDefault();
+                const email = emailInput.value.trim();
+                if (email) {
+                    console.log(`Email submitted: ${email}`); // Placeholder for actual submission logic
+                    alert('Thx 4 signing up! Ur in the 62 Zone now!');
+                    emailInput.value = '';
+                }
+            }
+
+            function handleEgg1Click() {
                 for (let i = 0; i < 5; i++) {
                     const star = document.createElement('span');
                     star.className = 'chaos-star';
@@ -1135,42 +1172,38 @@
                     document.body.appendChild(star);
                     setTimeout(() => star.remove(), 2000);
                 }
-            });
+            }
 
-            let isFlipped = false;
-            egg2.addEventListener('click', () => {
+            function handleEgg2Click() {
                 isFlipped = !isFlipped;
-                contentWrapper.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
-            });
+                if (contentWrapper) contentWrapper.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
 
-            let slideSpeed = 4;
-            let clickCount = 0;
-            let sliderHeight = 100;
-            let gameActive = false;
-            egg3.addEventListener('click', () => {
+            function handleEgg3Click() {
                 clickCount++;
                 if (!gameActive) gameActive = true;
-                if (gameActive) {
+                if (gameActive && egg3) {
                     slideSpeed = Math.max(1.5, slideSpeed * 0.85);
                     sliderHeight = Math.max(60, sliderHeight * 0.95);
                     const direction = Math.random() < 0.5 ? '' : 'reverse';
                     egg3.style.height = `${sliderHeight}px`;
-                    egg3.style.animation = `menuBorderChase ${slideSpeed}s infinite linear ${direction}`;
+                    egg3.style.animation = `slide ${slideSpeed}s infinite linear ${direction}`;
                 }
                 if (clickCount >= 6) {
-                    discountCode.style.display = 'block';
-                    setTimeout(() => discountCode.style.display = 'none', 5000);
+                    if (discountCode) discountCode.style.display = 'block';
+                    setTimeout(() => { if (discountCode) discountCode.style.display = 'none'; }, 5000);
                     clickCount = 0;
-                    slideSpeed = 4;
+                    slideSpeed = 6;
                     sliderHeight = 100;
                     gameActive = false;
-                    egg3.style.height = `${sliderHeight}px`;
-                    egg3.style.animation = `slide 6s infinite`;
+                    if (egg3) {
+                        egg3.style.height = `${sliderHeight}px`;
+                        egg3.style.animation = `slide 6s infinite`;
+                    }
                 }
-            });
+            }
 
-            let secretLink = null;
-            egg4.addEventListener('click', () => {
+            function handleEgg4Click() {
                 if (!secretLink) {
                     secretLink = document.createElement('a');
                     secretLink.className = 'button secret';
@@ -1179,205 +1212,103 @@
                     secretLink.target = '_blank';
                     secretLink.style.background = '#00ffff';
                     secretLink.style.color = '#ff00ff';
-                    buttonContainer.appendChild(secretLink);
+                    if (buttonContainer) buttonContainer.appendChild(secretLink);
                 } else {
                     secretLink.remove();
                     secretLink = null;
                 }
-            });
+            }
 
-            egg5.addEventListener('click', () => {
+            function handleEgg5Click() {
+                const originalBg = document.body.style.background;
                 document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
-                setTimeout(() => {
-                    document.body.style.background = `url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, #000`;
-                }, 1000);
-            });
+                setTimeout(() => { document.body.style.background = originalBg; }, 1000);
+            }
 
-            copyright.addEventListener('click', () => {
-                flashText.style.display = 'block';
-                setTimeout(() => flashText.style.display = 'none', 1000);
-            });
+            function handleCopyrightClick() {
+                if (flashText) flashText.style.display = 'block';
+                setTimeout(() => { if (flashText) flashText.style.display = 'none'; }, 1000);
+            }
 
-            domain.addEventListener('click', () => {
-                navBar.classList.toggle('hidden');
-            });
+            function handleDomainClick() {
+                if (navBar) navBar.classList.toggle('hidden');
+            }
 
-            invertButton.addEventListener('click', () => {
-                invertButton.classList.toggle('active');
+            function handleInvertClick() {
+                if (invertButton) invertButton.classList.toggle('active');
                 document.body.style.filter = invertButton.classList.contains('active') ? 'invert(100%)' : 'none';
-            });
+            }
 
-            const wallpapers = [
-                "url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, #000",
-                "url('https://www.toptal.com/designers/subtlepatterns/uploads/stardust.png') repeat, #000",
-                "url('https://www.toptal.com/designers/subtlepatterns/uploads/plaid.png') repeat, #000"
-            ];
-            let wallpaperIndex = 0;
-            wallpaperButton.addEventListener('click', () => {
+            function handleWallpaperClick() {
                 wallpaperIndex = (wallpaperIndex + 1) % wallpapers.length;
                 document.body.style.background = wallpapers[wallpaperIndex];
-                wallpaperButton.classList.toggle('active', wallpaperIndex !== 0);
-            });
-
-            const correctPassword = "1";
-            let sessionUnlocked = false;
-
-            function resetAnimations() {
-                const graphics = [egg1, egg2, egg3, egg4];
-                graphics.forEach(el => {
-                    el.style.animation = 'none';
-                    void el.offsetWidth;
-                    if (el === egg1) el.style.animation = 'bounce 1s infinite';
-                    if (el === egg2) el.style.animation = 'spin 1.5s infinite linear, glow 2s infinite';
-                    if (el === egg3) el.style.animation = 'slide 6s infinite';
-                    if (el === egg4) el.style.animation = 'bounce 0.8s infinite';
-                });
+                if (wallpaperButton) wallpaperButton.classList.toggle('active', wallpaperIndex !== 0);
             }
 
-            function showPage(pageId) {
-                if (pageId === 'homePage' || pageId === 'aboutPage' || sessionUnlocked) {
-                    pages.forEach(page => page.classList.toggle('active', page.id === pageId));
-                    navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('data-page') === pageId));
-                    if (pageId === 'blogPage' && sessionUnlocked) updateBlogContent('post1');
-                    if (pageId === 'homePage') resetAnimations();
-                    hidePasswordPopup();
-                } else {
-                    showPasswordPopup(pageId);
-                }
-                window.scrollTo(0, 0);
-            }
-
-            function showPasswordPopup(pageId) {
-                targetPage = pageId;
-                passwordPopup.classList.add('active');
-                passwordInput.value = '';
-                if (window.innerWidth >= 600) passwordInput.focus();
-            }
-
-            function hidePasswordPopup() {
-                passwordPopup.classList.remove('active');
-                passwordPopup.classList.remove('shake');
-            }
-
-            let targetPage = null;
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     const pageId = link.getAttribute('data-page');
-                    showPage(pageId);
-                });
-            });
-
-            passwordSubmit.addEventListener('click', () => {
-                if (passwordInput.value === correctPassword) {
-                    sessionUnlocked = true;
-                    hidePasswordPopup();
-                    showPage(targetPage);
-                } else {
-                    passwordPopup.classList.add('shake');
-                    setTimeout(() => passwordPopup.classList.remove('shake'), 500);
-                    passwordInput.value = '';
-                }
-            });
-
-            passwordInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') passwordSubmit.click();
-            });
-
-            passwordClose.addEventListener('click', hidePasswordPopup);
-
-            const blogPosts = {
-                'post1': { title: "Hello World", content: `<div class="blog-date">31/03/2025</div>just setting up my blog lol :)` },
-                'post2': { title: "The Internet Sucks", content: `<div class="blog-date">01/04/2025</div>internet is the new free to air TV. we need to do something about it.` },
-                'post3': { title: "Placeholder 1", content: `<div class="blog-date">02/04/2025</div>Lorem ipsum dolor sit amet.` },
-                'post4': { title: "Placeholder 2", content: `<div class="blog-date">03/04/2025</div>Short post here.` },
-                'post5': { title: "Placeholder 3", content: `<div class="blog-date">04/04/2025</div>Another test post with some text.` }
-            };
-
-            function updateBlogContent(date) {
-                const post = blogPosts[date] || { title: "404 - POST NOT FOUND", content: "Oops, this post got lost in the chaos!" };
-                blogTitle.textContent = post.title;
-                blogContent.innerHTML = post.content;
-                blogNavButtons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-date') === date));
-            }
-
-            blogNavButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    if (sessionUnlocked) updateBlogContent(button.getAttribute('data-date'));
-                });
-            });
-
-            galleryPlaceholders.forEach(placeholder => {
-                placeholder.addEventListener('click', () => {
-                    if (sessionUnlocked) {
-                        enlargedPhoto.style.display = 'block';
-                        enlargedPhoto.style.backgroundImage = `url('${placeholder.dataset.full}')`;
-                        galleryCaption.textContent = placeholder.dataset.caption || 'No caption, lol';
+                    const section = document.getElementById(pageId);
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
                     }
                 });
             });
 
-            galleryClose.addEventListener('click', (e) => {
-                e.preventDefault();
-                enlargedPhoto.style.display = 'none';
-            });
-            galleryClose.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                enlargedPhoto.style.display = 'none';
-            });
-
-            // Gallery Swipe Logic
-            const totalImages = galleryPlaceholders.length; // 8 images
-            const imagesPerPage = 4;
-            const totalPages = Math.ceil(totalImages / imagesPerPage); // 2 pages
-            let currentPage = 0;
-
-            function calculatePageWidth() {
-                const viewport = document.querySelector('.gallery-viewport');
-                const viewportWidth = viewport.offsetWidth; // Includes padding
-                const isMobile = window.innerWidth < 600;
-                const padding = isMobile ? 4 : 8; // 2px each side on mobile, 4px on desktop
-                const usableWidth = viewportWidth - padding; // Subtract padding
-                const gap = isMobile ? 10 : 20;
-                const imageWidth = isMobile ? (usableWidth - (imagesPerPage - 1) * gap) / imagesPerPage : 195 + 8; // 195px + 8px border on desktop
-                return (imageWidth * imagesPerPage) + (gap * (imagesPerPage - 1)); // Total width for 4 images
-            }
-
-            function updateGalleryPosition() {
-                const pageWidth = calculatePageWidth();
-                const offset = -currentPage * pageWidth;
-                galleryGrid.style.transform = `translateX(${offset}px)`;
-                galleryLeft.classList.toggle('disabled', currentPage === 0);
-                galleryRight.classList.toggle('disabled', currentPage === totalPages - 1);
-            }
-
-            galleryLeft.addEventListener('click', () => {
-                if (currentPage > 0) {
-                    currentPage--;
+            if (coordinates) coordinates.addEventListener('click', toggleParticles);
+            if (titleText) titleText.addEventListener('click', () => titleText.classList.toggle('up') && titleText.classList.toggle('down'));
+            if (egg1) egg1.addEventListener('click', handleEgg1Click);
+            if (egg2) egg2.addEventListener('click', handleEgg2Click);
+            if (egg3) egg3.addEventListener('click', handleEgg3Click);
+            if (egg4) egg4.addEventListener('click', handleEgg4Click);
+            if (egg5) egg5.addEventListener('click', handleEgg5Click);
+            if (copyright) copyright.addEventListener('click', handleCopyrightClick);
+            if (domain) domain.addEventListener('click', handleDomainClick);
+            if (invertButton) invertButton.addEventListener('click', handleInvertClick);
+            if (wallpaperButton) wallpaperButton.addEventListener('click', handleWallpaperClick);
+            if (galleryLeft) galleryLeft.addEventListener('click', () => {
+                if (window.innerWidth >= 600 && galleryCurrentPage > 0) {
+                    galleryCurrentPage--;
                     updateGalleryPosition();
                 }
             });
-
-            galleryRight.addEventListener('click', () => {
-                if (currentPage < totalPages - 1) {
-                    currentPage++;
+            if (galleryRight) galleryRight.addEventListener('click', () => {
+                if (window.innerWidth >= 600 && galleryCurrentPage < galleryTotalPages - 1) {
+                    galleryCurrentPage++;
                     updateGalleryPosition();
                 }
             });
+            if (galleryClose) {
+                galleryClose.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); closeGalleryPopup(); });
+                galleryClose.addEventListener('touchend', (e) => { e.preventDefault(); e.stopPropagation(); closeGalleryPopup(); });
+            }
+            if (galleryViewport) galleryViewport.addEventListener('wheel', (e) => { if (window.innerWidth >= 600) e.preventDefault(); }, { passive: false });
+            if (signupForm) signupForm.addEventListener('submit', handleSignup);
 
-            // Disable scroll wheel
-            galleryGrid.addEventListener('wheel', (e) => {
-                e.preventDefault();
-            });
-
-            // Update gallery position on window resize
             window.addEventListener('resize', updateGalleryPosition);
 
-            updateGalleryPosition(); // Initial position
+            preloadInitialImages();
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+            updateCoordinates();
+            setInterval(updateCoordinates, 1000);
+            setInterval(() => { if (Math.random() < 0.1) triggerGlitch(); }, 1000);
 
-            showPage('homePage');
+            buildBlogMenu();
+            buildGallery();
+            updateGalleryPosition();
+
+            const firstPostKey = Object.keys(blogPosts)[0];
+            if (firstPostKey) updateBlogContent(firstPostKey);
 
             if (window.location.search.includes('fbclid=')) {
-                window.history.replaceState({}, document.title, 'https://62serpens.com/');
+                const url = new URL(window.location.href);
+                if (url.searchParams.has('fbclid')) {
+                    url.searchParams.delete('fbclid');
+                    window.history.replaceState({}, document.title, url.toString());
+                }
             }
         });
     </script>
