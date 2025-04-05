@@ -1,712 +1,686 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2639
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 NotoSansBatak-Regular;
-}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
-{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\deftab720
-\pard\pardeftab720\partightenfactor0
-
-\f0\fs26\fsmilli13333 \cf0 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 <!DOCTYPE html>\
-<html lang="en">\
-<head>\
-    <meta charset="UTF-8">\
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">\
-    <title>62serpens.com - 2000</title>\
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">\
-    <link rel="preload" href="https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png" as="image">\
-    <link rel="preload" href="images/img_001.jpg" as="image">\
-    <link rel="preload" href="images/img_002.jpg" as="image">\
-    <link rel="preload" href="images/img_003.jpg" as="image">\
-    <link rel="preload" href="images/img_004.jpg" as="image">\
-    <link rel="preload" href="images/img_005.jpg" as="image">\
-    <link rel="preload" href="images/img_006.jpg" as="image">\
-    <link rel="preload" href="images/img_007.jpg" as="image">\
-    <link rel="preload" href="images/img_008.jpg" as="image">\
-    <style>\
-        .status-bar \{\
-            position: fixed;\
-            top: 0;\
-            left: 0;\
-            width: 100%;\
-            background: #000;\
-            color: #00ffff;\
-            font-size: 14px;\
-            padding: 5px;\
-            border-bottom: 2px solid #ff00ff;\
-            display: flex;\
-            justify-content: space-between;\
-            align-items: center;\
-            box-sizing: border-box;\
-            z-index: 100;\
-        \}\
-        .time-machine-controls \{ display: flex; gap: 5px; \}\
-        .year-button \{\
-            background: transparent;\
-            border: 2px solid #ffff00;\
-            color: #00ffff;\
-            padding: 2px 8px;\
-            font-size: 12px;\
-            cursor: pointer;\
-            transition: all 0.2s ease;\
-            text-transform: uppercase;\
-        \}\
-        .year-button:hover \{ transform: scale(1.1); box-shadow: 0 0 10px #00ff00; \}\
-        .year-button.active \{ background: #ff00ff; color: #fff; \}\
-        :root \{\
-            --color-bg: #000;\
-            --color-text: #fff;\
-            --color-magenta: #ff00ff;\
-            --color-cyan: #00ffff;\
-            --color-yellow: #ffff00;\
-            --color-green: #00ff00;\
-            --color-red: #ff0000;\
-            --color-dark-grey: #333;\
-        \}\
-        html, body \{\
-            margin: 0;\
-            padding: 0;\
-            background-color: var(--color-bg);\
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;\
-            overflow-x: hidden;\
-            overflow-y: auto;\
-            color: var(--color-text);\
-        \}\
-        body \{\
-            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, var(--color-bg);\
-            padding: 10px;\
-            min-height: 100vh;\
-            display: none;\
-            user-select: none;\
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polygon points="12,2 22,22 2,22" fill="%23bf00ff" stroke="none"/></svg>') 12 12, auto;\
-            position: relative;\
-            transition: transform 0.5s;\
-        \}\
-        body.loaded \{ display: block; \}\
-        body::before \{\
-            content: '';\
-            position: fixed;\
-            top: 0;\
-            left: 0;\
-            width: 100%;\
-            height: 100%;\
-            background-color: var(--color-bg);\
-            animation: bgPulse 5s infinite alternate;\
-            z-index: -1;\
-        \}\
-        @media (pointer: coarse) \{ body \{ cursor: default; \} \}\
-        @keyframes bgPulse \{ 0% \{ background-color: var(--color-bg); \} 100% \{ background-color: #333; \} \}\
-        #coordinates \{ cursor: pointer; transition: color 0.2s ease; white-space: nowrap; \}\
-        #coordinates:hover \{ color: var(--color-magenta); \}\
-        .mode-buttons \{ display: flex; gap: 5px; margin-left: 10px; \}\
-        .mode-button \{ width: 24px; height: 24px; background: transparent; border: 2px solid var(--color-yellow); border-radius: 50%; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; padding: 0; \}\
-        .mode-button:hover \{ transform: scale(1.1); box-shadow: 0 0 10px var(--color-green); \}\
-        .mode-button.active \{ background: var(--color-cyan); \}\
-        .invert-button svg circle \{ fill: var(--color-magenta); \}\
-        .nav-bar \{ position: fixed; top: 50px; left: 10px; padding: 10px; z-index: 110; display: flex; flex-direction: column; gap: 10px; background: rgba(0, 0, 0, 0.8); border: 2px solid var(--color-magenta); border-radius: 10px; box-shadow: 0 0 10px var(--color-magenta); display: none; \}\
-        .nav-link \{ color: var(--color-yellow); font-size: 14px; text-decoration: none; padding: 5px 10px; cursor: pointer; transition: all 0.2s ease; text-align: left; \}\
-        .nav-link:hover \{ color: var(--color-magenta); background: rgba(255, 0, 255, 0.2); border-radius: 5px; \}\
-        .nav-link.active \{ color: var(--color-cyan); text-shadow: 0 0 5px var(--color-cyan); background: rgba(0, 255, 255, 0.2); border-radius: 5px; \}\
-        .content-wrapper \{ margin-top: 40px; margin-bottom: 40px; padding: 10px; width: 100%; box-sizing: border-box; z-index: 10; \}\
-        .page-content \{ background: rgba(0, 0, 0, 0.9); padding: 15px; margin-bottom: 40px; box-shadow: 0 0 20px var(--color-magenta); position: relative; box-sizing: border-box; scroll-margin-top: 50px; \}\
-        .section-heading \{ font-size: 36px; color: var(--color-yellow); text-shadow: 2px 2px 0 var(--color-magenta); margin: 0 0 20px 0; text-align: center; animation: blink 0.5s infinite; \}\
-        #homePage \{ border: 4px double var(--color-green); max-width: 700px; animation: shake 0.1s infinite; text-align: center; margin-left: auto; margin-right: auto; \}\
-        #blogPage \{ border: 4px dotted var(--color-yellow); width: 900px; max-width: 95%; height: 500px; overflow: hidden; display: flex; margin-left: auto; margin-right: auto; \}\
-        #galleryPage \{ border: 4px dotted var(--color-yellow); width: 900px; max-width: 95%; height: 500px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-left: auto; margin-right: auto; \}\
-        #aboutPage \{ border: 4px solid var(--color-cyan); max-width: 600px; padding: 15px; text-align: center; margin-left: auto; margin-right: auto; \}\
-        #signupSection \{ border: 4px dashed var(--color-red); max-width: 700px; padding: 20px; text-align: center; margin-left: auto; margin-right: auto; background: rgba(0, 0, 0, 0.95); \}\
-        @keyframes shake \{ 0% \{ transform: translateX(0); \} 50% \{ transform: translateX(2px); \} 100% \{ transform: translateX(-2px); \} \}\
-        .graphic-top \{ width: 80px; height: 80px; background: linear-gradient(135deg, var(--color-red), var(--color-cyan)); position: absolute; top: -40px; left: 50%; transform: translateX(-50%); border: 3px dotted var(--color-yellow); box-shadow: 0 0 15px var(--color-yellow); animation: bounce 1s infinite; cursor: pointer; z-index: 15; \}\
-        @keyframes bounce \{ 0%, 100% \{ transform: translateX(-50%) translateY(0); \} 50% \{ transform: translateX(-50%) translateY(-10px); \} \}\
-        h1 \{ font-size: 50px; color: var(--color-yellow); text-shadow: 3px 3px 0 var(--color-magenta), -3px -3px 0 var(--color-green), 0 0 10px var(--color-cyan); margin: 20px 0; letter-spacing: 2px; animation: blink 0.5s infinite; display: inline-flex; align-items: baseline; \}\
-        .title-text \{ transition: all 0.3s ease; cursor: pointer; \}\
-        .title-text.up:hover \{ color: var(--color-magenta); transform: rotate(-5deg); \}\
-        .title-text.down:hover \{ color: var(--color-magenta); transform: rotate(5deg); \}\
-        .title-text.glitch \{ animation: glitch 0.3s linear infinite; \}\
-        @keyframes glitch \{ 0% \{ transform: translate(0); \} 20% \{ transform: translate(-2px, 2px); color: var(--color-magenta); \} 40% \{ transform: translate(-2px, -2px); \} 60% \{ transform: translate(2px, 2px); color: var(--color-cyan); \} 80% \{ transform: translate(2px, -2px); \} 100% \{ transform: translate(0); \} \}\
-        @keyframes blink \{ 50% \{ opacity: 0.7; \} \}\
-        .domain \{ font-size: 50px; color: var(--color-text); text-shadow: none; animation: none; cursor: pointer; \}\
-        .under-construction \{ position: absolute; top: 10px; right: 10px; font-size: 14px; color: var(--color-red); background: var(--color-yellow); padding: 5px; border: 2px solid var(--color-bg); transform: rotate(-10deg); cursor: pointer; z-index: 15; \}\
-        .button-container \{ display: flex; flex-direction: column; gap: 12px; align-items: center; margin-top: 20px; position: relative; \}\
-        .button \{ background: var(--color-magenta); color: var(--color-cyan); padding: 12px 20px; border: 2px solid var(--color-yellow); text-decoration: none; font-size: 18px; font-family: 'Arial', sans-serif; text-transform: uppercase; box-shadow: 0 0 10px var(--color-magenta); transition: all 0.2s ease; width: 100%; max-width: 300px; text-align: center; position: relative; animation: pulseButton 2s infinite; \}\
-        @keyframes pulseButton \{ 0%, 100% \{ transform: scale(1); box-shadow: 0 0 10px var(--color-magenta); \} 50% \{ transform: scale(1.05); box-shadow: 0 0 20px var(--color-green); \} \}\
-        .beatstore \{ background: rgb(255, 50, 50); \}\
-        .instagram \{ background: rgb(255, 80, 200); \}\
-        .spotify \{ background: rgb(50, 255, 100); color: var(--color-bg); \}\
-        .soundcloud \{ background: rgb(255, 120, 60); \}\
-        .button:hover \{ transform: scale(1.1) rotate(2deg); box-shadow: 0 0 20px var(--color-green); color: var(--color-bg); \}\
-        .beatstore:hover \{ background: rgb(255, 150, 150); \}\
-        .instagram:hover \{ background: rgb(255, 200, 255); \}\
-        .spotify:hover \{ background: rgb(150, 255, 150); \}\
-        .soundcloud:hover \{ background: rgb(255, 200, 150); \}\
-        .button.secret:hover \{ background: rgb(150, 255, 255); color: var(--color-magenta); \}\
-        .button::before \{ content: '
-\f1 \uc0\u9733 
-\f0 '; color: var(--color-yellow); position: absolute; left: 5px; animation: spin 1s infinite linear; \}\
-        .button::after \{ content: '
-\f1 \uc0\u9734 
-\f0 '; color: var(--color-green); position: absolute; right: 5px; animation: pulse 0.8s infinite; \}\
-        @keyframes pulse \{ 0%, 100% \{ transform: scale(1); \} 50% \{ transform: scale(1.2); \} \}\
-        @keyframes spin \{ 100% \{ transform: rotate(360deg); \} \}\
-        .graphic-bottom \{ width: 60px; height: 60px; background: radial-gradient(circle, var(--color-magenta), var(--color-cyan)); position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); border: 2px dashed var(--color-magenta); animation: spin 1.5s infinite linear, glow 2s infinite; cursor: pointer; z-index: 15; \}\
-        @keyframes glow \{ 0%, 100% \{ box-shadow: 0 0 10px var(--color-magenta); \} 50% \{ box-shadow: 0 0 20px var(--color-green); \} \}\
-        .graphic-left \{ width: 40px; height: 100px; background: linear-gradient(var(--color-green), var(--color-red)); position: fixed; left: 20px; top: var(--chaser-top, 50%); transform: translateY(-50%); border: 2px solid var(--color-yellow); animation: slideFull 6s infinite; cursor: pointer; transition: height 0.2s; z-index: 15; \}\
-        @keyframes slideFull \{ 0% \{ top: 10%; \} 50% \{ top: 90%; \} 100% \{ top: 10%; \} \}\
-        .graphic-right \{ width: 50px; height: 50px; background: var(--color-cyan); position: absolute; right: -25px; top: 40%; border-radius: 50%; border: 2px dotted var(--color-magenta); animation: bounce 0.8s infinite; cursor: pointer; z-index: 15; \}\
-        .random-text \{ position: absolute; bottom: 60px; left: 10px; font-size: 12px; color: var(--color-green); transform: rotate(-20deg); animation: fade 4s infinite; z-index: 5; \}\
-        @keyframes fade \{ 0%, 100% \{ opacity: 1; \} 50% \{ opacity: 0; \} \}\
-        .marquee \{ position: absolute; top: 0; left: 0; width: 100%; color: var(--color-red); font-size: 16px; background: var(--color-yellow); padding: 5px; box-sizing: border-box; z-index: 15; \}\
-        .chaos-star \{ position: absolute; color: var(--color-magenta); font-size: 30px; animation: spin 1s infinite linear; pointer-events: none; z-index: 500; \}\
-        .flash-text \{ position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 100px; color: var(--color-green); text-shadow: 0 0 20px var(--color-magenta); z-index: 1000; pointer-events: none; display: none; white-space: nowrap; \}\
-        .discount-code \{ position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); font-size: 30px; color: var(--color-yellow); background: rgba(0, 0, 0, 0.8); padding: 15px; border: 2px solid var(--color-magenta); display: none; z-index: 20; \}\
-        .copyright \{ position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--color-text); z-index: 100; white-space: nowrap; animation: blink 0.5s infinite; cursor: pointer; \}\
-        .astral-particle \{ position: fixed; width: 12px; height: 3px; background: var(--color-magenta); border-radius: 50%; opacity: 0.3; pointer-events: none; z-index: 5; animation: warp 10s linear forwards; \}\
-        @keyframes warp \{ 0% \{ opacity: 0.3; transform: translate(0, 0) scale(1); \} 100% \{ opacity: 0; transform: translate(var(--end-x), var(--end-y)) scale(2); \} \}\
-        .blog-container \{ display: flex; flex-direction: row; width: 100%; height: 100%; overflow: hidden; \}\
-        .blog-menu \{ flex: 0 0 200px; padding: 10px; overflow-y: auto; overflow-x: hidden; max-height: 100%; border-right: 2px solid var(--color-magenta); \}\
-        .blog-main \{ flex: 1; padding: 10px 30px; overflow-y: auto; white-space: normal; word-wrap: break-word; max-height: 100%; \}\
-        .blog-title \{ font-size: 28px; color: var(--color-yellow); text-shadow: 2px 2px 0 var(--color-magenta); text-transform: uppercase; margin-bottom: 15px; \}\
-        .blog-content \{ color: var(--color-cyan); font-size: 18px; line-height: 1.6; white-space: normal; word-wrap: break-word; \}\
-        .blog-date \{ color: var(--color-magenta); font-weight: bold; margin-bottom: 10px; font-size: 16px; \}\
-        .blog-nav-button \{ background: var(--color-magenta); color: var(--color-cyan); padding: 4px 6px; border: none; text-decoration: none; font-size: 13px; text-align: left; box-shadow: 0 0 5px var(--color-magenta); transition: all 0.2s ease; cursor: pointer; width: 100%; max-width: 180px; margin-bottom: 8px; display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; \}\
-        .blog-nav-button span \{ font-size: 11px; \}\
-        .blog-nav-button:hover \{ background: var(--color-cyan); color: var(--color-magenta); box-shadow: 0 0 10px var(--color-green); \}\
-        .blog-nav-button.active \{ background: var(--color-green); color: var(--color-magenta); box-shadow: 0 0 10px var(--color-yellow); \}\
-        .gallery-container \{ width: 100%; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: center; \}\
-        .gallery-viewport \{ max-width: 100%; height: 320px; overflow: hidden; margin: 0 auto; position: relative; width: calc(195px * 4 + 20px * 3 + 8px); \}\
-        .gallery-grid \{ display: flex; flex-direction: row; gap: 20px; transition: transform 0.5s ease; padding: 0 4px; box-sizing: border-box; height: 100%; \}\
-        .gallery-placeholder \{ flex: 0 0 195px; height: 300px; border: 4px dotted var(--color-yellow); background: var(--color-dark-grey); cursor: pointer; position: relative; background-size: contain; background-repeat: no-repeat; background-position: center; filter: saturate(1.5) brightness(1.2) contrast(1.1); transition: filter 0.2s ease; box-sizing: border-box; \}\
-        .gallery-placeholder:hover \{ filter: saturate(2) brightness(1.4) contrast(1.2); \}\
-        .gallery-placeholder::after \{ content: 'Image Failed'; display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--color-red); font-size: 14px; text-align: center; \}\
-        .gallery-placeholder.failed::after \{ display: block; \}\
-        .gallery-nav \{ margin-top: 10px; display: flex; gap: 20px; justify-content: center; \}\
-        .gallery-nav-button \{ width: 40px; height: 30px; background: var(--color-yellow); color: var(--color-magenta); border: 2px solid var(--color-magenta); border-radius: 15px; font-size: 16px; text-align: center; line-height: 30px; cursor: pointer; transition: all 0.2s ease; \}\
-        .gallery-nav-button:hover \{ transform: scale(1.1); box-shadow: 0 0 10px var(--color-green); \}\
-        .gallery-nav-button.disabled \{ opacity: 0.5; cursor: default; \}\
-        .gallery-nav-button.disabled:hover \{ transform: none; box-shadow: none; \}\
-        .gallery-enlarged \{ display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: auto; height: auto; max-width: 80vw; max-height: 80vh; border: 4px solid var(--color-magenta); background: var(--color-bg); z-index: 200; box-shadow: 0 0 20px var(--color-cyan); background-size: contain; background-repeat: no-repeat; background-position: center; filter: saturate(1.5) brightness(1.2) contrast(1.1); box-sizing: border-box; \}\
-        .gallery-close \{ position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; background: var(--color-red); color: var(--color-text); font-size: 20px; text-align: center; line-height: 30px; border: 2px solid var(--color-yellow); cursor: pointer; transition: all 0.2s ease; z-index: 210; \}\
-        .gallery-close:hover \{ transform: scale(1.1); box-shadow: 0 0 10px var(--color-magenta); \}\
-        .gallery-caption \{ position: absolute; bottom: 10px; left: 10px; right: 10px; color: var(--color-yellow); font-size: 14px; background: rgba(0, 0, 0, 0.7); padding: 5px; text-align: center; \}\
-        .about-content \{ color: var(--color-cyan); font-size: 16px; line-height: 1.4; padding: 10px; \}\
-        .signup-title \{ font-size: 28px; color: var(--color-cyan); text-shadow: 2px 2px 0 var(--color-magenta); margin-bottom: 15px; animation: blink 0.5s infinite; \}\
-        .signup-text \{ color: var(--color-yellow); font-size: 16px; margin-bottom: 20px; \}\
-        .signup-form \{ display: flex; flex-direction: column; gap: 10px; align-items: center; \}\
-        .signup-input \{ width: 100%; max-width: 300px; padding: 10px; background: var(--color-dark-grey); border: 2px solid var(--color-green); color: var(--color-cyan); font-size: 16px; box-sizing: border-box; \}\
-        .signup-button \{ background: var(--color-magenta); color: var(--color-cyan); padding: 10px 20px; border: 2px solid var(--color-yellow); font-size: 16px; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease; width: 100%; max-width: 300px; text-align: center; \}\
-        .signup-button:hover \{ transform: scale(1.05); box-shadow: 0 0 15px var(--color-green); \}\
-        @media (min-width: 600px) \{\
-            #homePage \{ max-width: 700px; padding: 30px; \}\
-            #blogPage \{ width: 900px; height: 500px; \}\
-            #galleryPage \{ width: 900px; height: 500px; \}\
-            .gallery-viewport \{ width: calc(195px * 4 + 20px * 3 + 8px); \}\
-            #aboutPage \{ max-width: 600px; padding: 30px; \}\
-            #signupSection \{ max-width: 700px; padding: 30px; \}\
-            h1 \{ font-size: 90px; \}\
-            .domain \{ font-size: 90px; \}\
-            .button \{ font-size: 24px; padding: 15px 30px; max-width: 400px; \}\
-            .graphic-top \{ width: 100px; height: 100px; top: -50px; \}\
-            .graphic-bottom \{ width: 80px; height: 80px; bottom: -40px; \}\
-            .graphic-left \{ width: 60px; height: 150px; left: 30px; \}\
-            .graphic-right \{ width: 70px; height: 70px; right: -35px; \}\
-            .marquee \{ font-size: 20px; \}\
-            .section-heading \{ font-size: 48px; \}\
-            .signup-title \{ font-size: 36px; \}\
-            .signup-text \{ font-size: 18px; \}\
-        \}\
-        @media (max-width: 599px) \{\
-            body \{ padding: 5px; font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif; -webkit-font-smoothing: antialiased; font-weight: 400; \}\
-            .status-bar \{ font-size: 12px; padding: 3px; \}\
-            .content-wrapper \{ margin-top: 30px; margin-left: 0; width: 100%; padding: 5px; \}\
-            .page-content \{ padding: 10px; margin-bottom: 20px; \}\
-            #homePage \{ padding: 15px; border-width: 3px; max-width: 95%; \}\
-            #blogPage, #galleryPage \{ width: 98%; height: auto; max-height: none; padding: 10px; border-width: 3px; box-shadow: 0 0 10px var(--color-magenta); \}\
-            #galleryPage \{ justify-content: flex-start; \}\
-            #aboutPage \{ padding: 15px; max-width: 95%; border-width: 3px; \}\
-            #signupSection \{ padding: 15px; max-width: 95%; border-width: 3px; \}\
-            h1 \{ font-size: 36px; \}\
-            .domain \{ font-size: 36px; \}\
-            .button \{ font-size: 14px; padding: 8px 15px; max-width: 90%; \}\
-            .under-construction \{ font-size: 11px; padding: 3px; \}\
-            .graphic-top \{ width: 50px; height: 50px; top: -25px; \}\
-            .graphic-bottom \{ width: 40px; height: 40px; bottom: -20px; \}\
-            .graphic-left \{ width: 30px; height: 80px; left: 10px; \}\
-            .graphic-right \{ width: 30px; height: 30px; right: -15px; top: 85%; padding: 0; box-sizing: border-box; \}\
-            .marquee \{ font-size: 14px; \}\
-            .section-heading \{ font-size: 28px; \}\
-            .signup-title \{ font-size: 20px; \}\
-            .signup-text \{ font-size: 14px; \}\
-            .signup-input \{ font-size: 14px; \}\
-            .signup-button \{ font-size: 14px; padding: 8px 15px; \}\
-        \}\
-    </style>\
-</head>\
-<body>\
-    <div class="status-bar">\
-        <div style="display: flex; align-items: center;">\
-            <span id="dateTime"></span>\
-            <div class="mode-buttons">\
-                <button class="mode-button invert-button" id="invertButton" title="Toggle Invert">\
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">\
-                        <circle cx="8" cy="8" r="4" fill="#ff00ff"/>\
-                        <path d="M8 0v2M8 14v2M0 8h2M14 8h2M2.34 2.34l1.42 1.42M12.24 12.24l1.42 1.42M2.34 13.66l1.42-1.42M12.24 3.76l1.42-1.42" stroke="#ff00ff" stroke-width="1"/>\
-                    </svg>\
-                </button>\
-                <button class="mode-button wallpaper-button" id="wallpaperButton" title="Swap Wallpaper">\
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">\
-                        <rect x="6" y="6" width="12" height="12" stroke="#ff0000" stroke-width="2"/>\
-                    </svg>\
-                </button>\
-            </div>\
-        </div>\
-        <div class="time-machine-controls">\
-            <button class="year-button active">2000</button>\
-            <button class="year-button" onclick="window.location.href='/2100.html'">2100</button>\
-        </div>\
-        <span id="coordinates"></span>\
-    </div>\
-    <div class="nav-bar">\
-        <span class="nav-link active" data-page="homePage">Homepage</span>\
-        <span class="nav-link" data-page="blogPage">Blog</span>\
-        <span class="nav-link" data-page="galleryPage">Gallery</span>\
-        <span class="nav-link" data-page="aboutPage">About</span>\
-        <span class="nav-link" data-page="signupSection">Signup</span>\
-    </div>\
-    <div class="content-wrapper">\
-        <div class="page-content" id="homePage">\
-            <h2 class="section-heading">Home</h2>\
-            <marquee class="marquee">WELCOME TO 62SERPENS ZONE - EARLY 2000s VIBES!!!</marquee>\
-            <div class="graphic-top" id="egg1"></div>\
-            <h1><span class="title-text up" id="titleText">62serpens</span><span class="domain">.com</span></h1>\
-            <div class="button-container" id="buttonContainer">\
-                <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore" target="_blank">Beat Store 
-\f2 \uc0\u7123 
-\f1 \uc0\u9733 
-\f0 </a>\
-                <a href="https://www.instagram.com/62serpens" class="button instagram" target="_blank">Instagram</a>\
-                <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button spotify" target="_blank">Spotify</a>\
-                <a href="https://www.soundcloud.com/62serpens" class="button soundcloud" target="_blank">SoundCloud 
-\f1 \uc0\u9729 \u65038 \u9729 \u65038 \u9729 \u65038 
-\f0 </a>\
-            </div>\
-            <div class="graphic-bottom" id="egg2"></div>\
-            <div class="graphic-right" id="egg4"></div>\
-            <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!1!</span>\
-            <span class="random-text">6262626262</span>\
-            <span class="discount-code" id="discountCode">20% OFF BEATSTARS CODE 626262</span>\
-        </div>\
-        <div class="page-content" id="blogPage">\
-            <h2 class="section-heading">Blog</h2>\
-            <div class="blog-container">\
-                <div class="blog-menu"></div>\
-                <div class="blog-main">\
-                    <div class="blog-title" id="blogTitle"></div>\
-                    <div class="blog-content" id="blogContent"></div>\
-                </div>\
-            </div>\
-        </div>\
-        <div class="page-content" id="galleryPage">\
-            <h2 class="section-heading">Gallery</h2>\
-            <div class="gallery-container">\
-                <div class="gallery-viewport">\
-                    <div class="gallery-grid"></div>\
-                </div>\
-                <div class="gallery-nav">\
-                    <div class="gallery-nav-button" id="galleryLeft">
-\f1 \uc0\u8592 
-\f0 </div>\
-                    <div class="gallery-nav-button" id="galleryRight">
-\f1 \uc0\u8594 
-\f0 </div>\
-                </div>\
-            </div>\
-            <div class="gallery-enlarged" id="enlargedPhoto">\
-                <div class="gallery-close" id="galleryClose">X</div>\
-                <div class="gallery-caption" id="galleryCaption"></div>\
-            </div>\
-        </div>\
-        <div class="page-content" id="aboutPage">\
-            <h2 class="section-heading">About</h2>\
-            <div class="about-content">\
-                62serpens aka 62 is a Music Producer from Australia.<br><br>\
-                He is best known for his work with major artists such as Drake, Playboi Carti, Future, Yeat, Nettspend, Tate Mcrae, Taylor Swift, Ye West, Osamason, Pitbull, Britney Spears, Skrillex, Justin Bieber, Red Hot Chilli Peppers, One Direction and many more.\
-            </div>\
-        </div>\
-        <div class="page-content" id="signupSection">\
-            <h2 class="section-heading">Signup</h2>\
-            <p class="signup-text">Drop ur email for beats, updates, and chaos!</p>\
-            <form class="signup-form" id="signupForm" onsubmit="handleSignup(event)">\
-                <input type="email" class="signup-input" id="emailInput" placeholder="ur email here..." required>\
-                <button type="submit" class="signup-button">SUBMIT</button>\
-            </form>\
-        </div>\
-    </div>\
-    <div class="graphic-left" id="egg3"></div>\
-    <footer class="copyright" id="copyright">\
-        <p>\'a9 62serpens 2025 - All Rights Reserved</p>\
-    </footer>\
-    <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>\
-    <script>\
-        document.addEventListener('DOMContentLoaded', () => \{\
-            const dateTime = document.getElementById('dateTime');\
-            const coordinates = document.getElementById('coordinates');\
-            const navBar = document.querySelector('.nav-bar');\
-            const domain = document.querySelector('.domain');\
-            const titleText = document.getElementById('titleText');\
-            const egg1 = document.getElementById('egg1');\
-            const egg2 = document.getElementById('egg2');\
-            const egg3 = document.getElementById('egg3');\
-            const egg4 = document.getElementById('egg4');\
-            const egg5 = document.getElementById('egg5');\
-            const buttonContainer = document.getElementById('buttonContainer');\
-            const flashText = document.getElementById('flashText');\
-            const discountCode = document.getElementById('discountCode');\
-            const copyright = document.getElementById('copyright');\
-            const blogMenu = document.querySelector('#blogPage .blog-menu');\
-            const blogTitle = document.getElementById('blogTitle');\
-            const blogContent = document.getElementById('blogContent');\
-            const galleryGrid = document.querySelector('#galleryPage .gallery-grid');\
-            const galleryLeft = document.getElementById('galleryLeft');\
-            const galleryRight = document.getElementById('galleryRight');\
-            const enlargedPhoto = document.getElementById('enlargedPhoto');\
-            const galleryClose = document.getElementById('galleryClose');\
-            const galleryCaption = document.getElementById('galleryCaption');\
-            const galleryViewport = document.querySelector('#galleryPage .gallery-viewport');\
-            const signupForm = document.getElementById('signupForm');\
-            const emailInput = document.getElementById('emailInput');\
-            const invertButton = document.getElementById('invertButton');\
-            const wallpaperButton = document.getElementById('wallpaperButton');\
-            const galleryImagesData = [\
-                \{ src: 'images/img_001.jpg', caption: 'Photo 1' \},\
-                \{ src: 'images/img_002.jpg', caption: 'Photo 2' \},\
-                \{ src: 'images/img_003.jpg', caption: 'Photo 3' \},\
-                \{ src: 'images/img_004.jpg', caption: 'Photo 4' \},\
-                \{ src: 'images/img_005.jpg', caption: 'Photo 5' \},\
-                \{ src: 'images/img_006.jpg', caption: 'Photo 6' \},\
-                \{ src: 'images/img_007.jpg', caption: 'Photo 7' \},\
-                \{ src: 'images/img_008.jpg', caption: 'Photo 8' \}\
-            ];\
-            const blogPosts = \{\
-                'post1': \{ date: "31/03/2025", title: "Hello World", content: `just setting up my blog lol :)` \},\
-                'post2': \{ date: "01/04/2025", title: "The Internet Sucks", content: `internet is the new free to air TV. we need to do something about it.` \},\
-                'post3': \{ date: "02/04/2025", title: "Placeholder 1", content: `Lorem ipsum dolor sit amet.` \},\
-                'post4': \{ date: "03/04/2025", title: "Placeholder 2", content: `Short post here.` \},\
-                'post5': \{ date: "04/04/2025", title: "Placeholder 3", content: `Another test post with some text.` \}\
-            \};\
-            const wallpapers = [\
-                "url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, #000",\
-                "url('https://www.toptal.com/designers/subtlepatterns/uploads/stardust.png') repeat, #000",\
-                "url('https://www.toptal.com/designers/subtlepatterns/uploads/plaid.png') repeat, #000"\
-            ];\
-            let initialImagesToLoad = 3;\
-            let particleInterval = null;\
-            let particlesActive = false;\
-            let isFlipped = false;\
-            let slideSpeed = 6;\
-            let clickCount = 0;\
-            let sliderHeight = 100;\
-            let gameActive = false;\
-            let secretLink = null;\
-            let wallpaperIndex = 0;\
-            let galleryCurrentPage = 0;\
-            const galleryImagesPerPage = 4;\
-            const galleryTotalPages = Math.ceil(galleryImagesData.length / galleryImagesPerPage);\
-            function preloadInitialImages() \{\
-                const initialSources = galleryImagesData.slice(0, initialImagesToLoad).map(item => item.src);\
-                const defaultWallpaperUrl = wallpapers[0].match(/url\\(['"]?(.*?)['"]?\\)/);\
-                if (defaultWallpaperUrl && defaultWallpaperUrl[1]) initialSources.push(defaultWallpaperUrl[1]);\
-                let loadedCount = 0;\
-                const totalToLoad = initialSources.length;\
-                if (totalToLoad === 0) \{\
-                    document.body.classList.add('loaded');\
-                    preloadRemainingImages();\
-                    return;\
-                \}\
-                initialSources.forEach(src => \{\
-                    const img = new Image();\
-                    img.src = src;\
-                    img.onload = () => \{\
-                        loadedCount++;\
-                        if (loadedCount >= totalToLoad && !document.body.classList.contains('loaded')) \{\
-                            document.body.classList.add('loaded');\
-                            preloadRemainingImages();\
-                        \}\
-                    \};\
-                    img.onerror = () => \{\
-                        console.error(`Failed to preload: $\{src\}`);\
-                        loadedCount++;\
-                        if (loadedCount >= totalToLoad && !document.body.classList.contains('loaded')) \{\
-                            document.body.classList.add('loaded');\
-                            preloadRemainingImages();\
-                        \}\
-                    \};\
-                \});\
-            \}\
-            function preloadRemainingImages() \{\
-                galleryImagesData.slice(initialImagesToLoad).forEach((item, index) => \{\
-                    const img = new Image();\
-                    img.src = item.src;\
-                    img.onerror = () => \{\
-                        console.error(`Failed background load: $\{item.src\}`);\
-                        const placeholder = document.querySelector(`.gallery-placeholder[data-index="$\{initialImagesToLoad + index + 1\}"]`);\
-                        if (placeholder) placeholder.classList.add('failed');\
-                    \};\
-                \});\
-            \}\
-            function updateDateTime() \{\
-                const now = new Date();\
-                const dateStr = now.toLocaleDateString('en-AU', \{ year: 'numeric', month: 'short', day: 'numeric', timeZone: 'Australia/Hobart' \});\
-                const timeStr = now.toLocaleTimeString('en-AU', \{ hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Australia/Hobart' \});\
-                if (dateTime) dateTime.textContent = `$\{dateStr\} $\{timeStr\} AEST`;\
-            \}\
-            function updateCoordinates() \{\
-                const isBigJump = Math.random() < 0.2;\
-                const range = isBigJump ? 1000 : 1;\
-                const lat = (Math.random() * range * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);\
-                const lon = (Math.random() * range * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);\
-                if (coordinates) coordinates.textContent = `COORDS: $\{lat\}\'b0N, $\{lon\}\'b0E`;\
-            \}\
-            function createParticle() \{\
-                if (!particlesActive) return;\
-                const particle = document.createElement('div');\
-                particle.className = 'astral-particle';\
-                const startX = window.innerWidth / 2;\
-                const startY = window.scrollY + window.innerHeight / 2;\
-                particle.style.left = `$\{startX\}px`;\
-                particle.style.top = `$\{startY\}px`;\
-                particle.style.background = Math.random() < 0.5 ? '#ff00ff' : '#00ffff';\
-                const angle = Math.random() * 2 * Math.PI;\
-                const distance = (Math.min(window.innerWidth, window.innerHeight) / 2) + Math.random() * 200;\
-                const endX = distance * Math.cos(angle);\
-                const endY = distance * Math.sin(angle);\
-                particle.style.setProperty('--end-x', `$\{endX\}px`);\
-                particle.style.setProperty('--end-y', `$\{endY\}px`);\
-                document.body.appendChild(particle);\
-                setTimeout(() => particle.remove(), window.innerWidth < 600 ? 15000 : 10000);\
-            \}\
-            function toggleParticles() \{\
-                if (particlesActive) \{\
-                    clearInterval(particleInterval);\
-                    particlesActive = false;\
-                    if (coordinates) coordinates.style.color = '#00ffff';\
-                    document.querySelectorAll('.astral-particle').forEach(p => p.remove());\
-                \} else \{\
-                    particleInterval = setInterval(createParticle, window.innerWidth < 600 ? 100 : 50);\
-                    particlesActive = true;\
-                    if (coordinates) coordinates.style.color = '#ff00ff';\
-                \}\
-            \}\
-            function triggerGlitch() \{\
-                if (titleText) \{\
-                    titleText.classList.add('glitch');\
-                    setTimeout(() => titleText.classList.remove('glitch'), 300);\
-                \}\
-            \}\
-            function buildBlogMenu() \{\
-                if (!blogMenu) return;\
-                blogMenu.innerHTML = '';\
-                Object.keys(blogPosts).forEach(key => \{\
-                    const post = blogPosts[key];\
-                    const button = document.createElement('div');\
-                    button.className = 'blog-nav-button';\
-                    button.setAttribute('data-date', key);\
-                    button.innerHTML = `<span>$\{post.date\}</span><br>$\{post.title\}`;\
-                    button.addEventListener('click', () => updateBlogContent(key));\
-                    blogMenu.appendChild(button);\
-                \});\
-            \}\
-            function updateBlogContent(postKey) \{\
-                const post = blogPosts[postKey];\
-                if (!post || !blogTitle || !blogContent) return;\
-                blogTitle.textContent = post.title;\
-                blogContent.innerHTML = `<div class="blog-date">$\{post.date\}</div>$\{post.content\}`;\
-                document.querySelectorAll('.blog-nav-button').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-date') === postKey));\
-                const blogMain = document.querySelector('#blogPage .blog-main');\
-                if (blogMain) blogMain.scrollTop = 0;\
-            \}\
-            function buildGallery() \{\
-                if (!galleryGrid) return;\
-                galleryGrid.innerHTML = '';\
-                galleryImagesData.forEach((item, index) => \{\
-                    const placeholder = document.createElement('div');\
-                    placeholder.className = 'gallery-placeholder';\
-                    placeholder.setAttribute('data-index', index + 1);\
-                    placeholder.setAttribute('data-caption', item.caption);\
-                    placeholder.style.backgroundImage = `url('$\{item.src\}')`;\
-                    placeholder.setAttribute('data-full', item.src);\
-                    placeholder.addEventListener('click', () => \{\
-                        if (enlargedPhoto) enlargedPhoto.style.display = 'block';\
-                        if (enlargedPhoto) enlargedPhoto.style.backgroundImage = `url('$\{item.src\}')`;\
-                        if (galleryCaption) galleryCaption.textContent = item.caption || 'No caption';\
-                    \});\
-                    galleryGrid.appendChild(placeholder);\
-                \});\
-            \}\
-            function closeGalleryPopup() \{\
-                if (enlargedPhoto) enlargedPhoto.style.display = 'none';\
-            \}\
-            function calculateGalleryPageWidth() \{\
-                const placeholderWidth = 195;\
-                const border = 8;\
-                const gap = 20;\
-                return (placeholderWidth + border) * galleryImagesPerPage + gap * (galleryImagesPerPage - 1);\
-            \}\
-            function updateGalleryPosition() \{\
-                if (window.innerWidth >= 600 && galleryGrid && galleryViewport) \{\
-                    galleryViewport.style.overflowX = 'hidden';\
-                    const pageWidth = calculateGalleryPageWidth();\
-                    const offset = -galleryCurrentPage * pageWidth;\
-                    galleryGrid.style.transform = `translateX($\{offset\}px)`;\
-                \} else if (galleryGrid && galleryViewport) \{\
-                    galleryGrid.style.transform = 'none';\
-                    galleryViewport.style.overflowX = 'auto';\
-                \}\
-                updateGalleryNavButtons();\
-            \}\
-            function updateGalleryNavButtons() \{\
-                if (galleryLeft) galleryLeft.classList.toggle('disabled', galleryCurrentPage === 0);\
-                if (galleryRight) galleryRight.classList.toggle('disabled', galleryCurrentPage >= galleryTotalPages - 1);\
-            \}\
-            function handleSignup(event) \{\
-                event.preventDefault();\
-                const email = emailInput.value.trim();\
-                if (email) \{\
-                    console.log(`Email submitted: $\{email\}`);\
-                    alert('Thx 4 signing up! Ur in the 62 Zone now!');\
-                    emailInput.value = '';\
-                \}\
-            \}\
-            function handleEgg1Click() \{\
-                for (let i = 0; i < 5; i++) \{\
-                    const star = document.createElement('span');\
-                    star.className = 'chaos-star';\
-                    star.textContent = '
-\f1 \uc0\u9733 
-\f0 ';\
-                    star.style.left = `$\{Math.random() * 100\}%`;\
-                    star.style.top = `$\{Math.random() * 100\}%`;\
-                    document.body.appendChild(star);\
-                    setTimeout(() => star.remove(), 2000);\
-                \}\
-            \}\
-            function handleEgg2Click() \{\
-                isFlipped = !isFlipped;\
-                const contentWrapper = document.querySelector('.content-wrapper');\
-                if (contentWrapper) contentWrapper.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';\
-            \}\
-            function handleEgg3Click() \{\
-                clickCount++;\
-                if (!gameActive) gameActive = true;\
-                if (gameActive && egg3) \{\
-                    slideSpeed = Math.max(1.5, slideSpeed * 0.85);\
-                    sliderHeight = Math.max(60, sliderHeight * 0.95);\
-                    const direction = Math.random() < 0.5 ? '' : 'reverse';\
-                    egg3.style.height = `$\{sliderHeight\}px`;\
-                    egg3.style.animation = `slideFull $\{slideSpeed\}s infinite linear $\{direction\}`;\
-                \}\
-                if (clickCount >= 6) \{\
-                    if (discountCode) discountCode.style.display = 'block';\
-                    setTimeout(() => \{ if (discountCode) discountCode.style.display = 'none'; \}, 5000);\
-                    clickCount = 0;\
-                    slideSpeed = 6;\
-                    sliderHeight = 100;\
-                    gameActive = false;\
-                    if (egg3) \{\
-                        egg3.style.height = `$\{sliderHeight\}px`;\
-                        egg3.style.animation = `slideFull 6s infinite`;\
-                    \}\
-                \}\
-            \}\
-            function handleEgg4Click() \{\
-                if (!secretLink) \{\
-                    secretLink = document.createElement('a');\
-                    secretLink.className = 'button secret';\
-                    secretLink.textContent = 'SECRET LINK';\
-                    secretLink.href = 'https://discord.gg/cCedfQgHVG';\
-                    secretLink.target = '_blank';\
-                    secretLink.style.background = '#00ffff';\
-                    secretLink.style.color = '#ff00ff';\
-                    if (buttonContainer) buttonContainer.appendChild(secretLink);\
-                \} else \{\
-                    secretLink.remove();\
-                    secretLink = null;\
-                \}\
-            \}\
-            function handleEgg5Click() \{\
-                const originalBg = document.body.style.background;\
-                document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';\
-                setTimeout(() => \{ document.body.style.background = originalBg; \}, 1000);\
-            \}\
-            function handleCopyrightClick() \{\
-                if (flashText) flashText.style.display = 'block';\
-                setTimeout(() => \{ if (flashText) flashText.style.display = 'none'; \}, 1000);\
-            \}\
-            function handleDomainClick() \{\
-                if (navBar) navBar.classList.toggle('hidden');\
-            \}\
-            function handleInvertClick() \{\
-                if (invertButton) invertButton.classList.toggle('active');\
-                document.body.style.filter = invertButton.classList.contains('active') ? 'invert(100%)' : 'none';\
-            \}\
-            function handleWallpaperClick() \{\
-                wallpaperIndex = (wallpaperIndex + 1) % wallpapers.length;\
-                document.body.style.background = wallpapers[wallpaperIndex];\
-                if (wallpaperButton) wallpaperButton.classList.toggle('active', wallpaperIndex !== 0);\
-            \}\
-            if (coordinates) coordinates.addEventListener('click', toggleParticles);\
-            if (titleText) titleText.addEventListener('click', () => titleText.classList.toggle('up') && titleText.classList.toggle('down'));\
-            if (egg1) egg1.addEventListener('click', handleEgg1Click);\
-            if (egg2) egg2.addEventListener('click', handleEgg2Click);\
-            if (egg3) egg3.addEventListener('click', handleEgg3Click);\
-            if (egg4) egg4.addEventListener('click', handleEgg4Click);\
-            if (egg5) egg5.addEventListener('click', handleEgg5Click);\
-            if (copyright) copyright.addEventListener('click', handleCopyrightClick);\
-            if (domain) domain.addEventListener('click', handleDomainClick);\
-            if (invertButton) invertButton.addEventListener('click', handleInvertClick);\
-            if (wallpaperButton) wallpaperButton.addEventListener('click', handleWallpaperClick);\
-            if (galleryLeft) galleryLeft.addEventListener('click', () => \{\
-                if (window.innerWidth >= 600 && galleryCurrentPage > 0) \{\
-                    galleryCurrentPage--;\
-                    updateGalleryPosition();\
-                \}\
-            \});\
-            if (galleryRight) galleryRight.addEventListener('click', () => \{\
-                if (window.innerWidth >= 600 && galleryCurrentPage < galleryTotalPages - 1) \{\
-                    galleryCurrentPage++;\
-                    updateGalleryPosition();\
-                \}\
-            \});\
-            if (galleryClose) \{\
-                galleryClose.addEventListener('click', (e) => \{ e.preventDefault(); e.stopPropagation(); closeGalleryPopup(); \});\
-                galleryClose.addEventListener('touchend', (e) => \{ e.preventDefault(); e.stopPropagation(); closeGalleryPopup(); \});\
-            \}\
-            if (galleryViewport) galleryViewport.addEventListener('wheel', (e) => \{ if (window.innerWidth >= 600) e.preventDefault(); \}, \{ passive: false \});\
-            if (signupForm) signupForm.addEventListener('submit', handleSignup);\
-            window.addEventListener('resize', updateGalleryPosition);\
-            window.addEventListener('scroll', () => \{\
-                if (particlesActive) createParticle();\
-            \});\
-            preloadInitialImages();\
-            updateDateTime();\
-            setInterval(updateDateTime, 1000);\
-            updateCoordinates();\
-            setInterval(updateCoordinates, 1000);\
-            setInterval(() => \{ if (Math.random() < 0.1) triggerGlitch(); \}, 1000);\
-            buildBlogMenu();\
-            buildGallery();\
-            updateGalleryPosition();\
-            const firstPostKey = Object.keys(blogPosts)[0];\
-            if (firstPostKey) updateBlogContent(firstPostKey);\
-            if (window.location.search.includes('fbclid=')) \{\
-                const url = new URL(window.location.href);\
-                if (url.searchParams.has('fbclid')) \{\
-                    url.searchParams.delete('fbclid');\
-                    window.history.replaceState(\{\}, document.title, url.toString());\
-                \}\
-            \}\
-        \});\
-    </script>\
-</body>\
-</html>\
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>62serpens.com - 2000</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23ff00ff'/><text x='50%' y='50%' font-size='20' text-anchor='middle' dy='.3em' fill='%2300ffff' font-family='VT323, monospace'>62</text></svg>">
+    <link rel="preload" href="https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png" as="image">
+    <link rel="preload" href="images/img_001.jpg" as="image">
+    <link rel="preload" href="images/img_002.jpg" as="image">
+    <link rel="preload" href="images/img_003.jpg" as="image">
+    <link rel="preload" href="images/img_004.jpg" as="image">
+    <link rel="preload" href="images/img_005.jpg" as="image">
+    <link rel="preload" href="images/img_006.jpg" as="image">
+    <link rel="preload" href="images/img_007.jpg" as="image">
+    <link rel="preload" href="images/img_008.jpg" as="image">
+    <style>
+        .status-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #000;
+            color: #00ffff;
+            font-size: 14px;
+            padding: 5px;
+            border-bottom: 2px solid #ff00ff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            z-index: 100;
+        }
+        .time-machine-controls { display: flex; gap: 5px; }
+        .year-button {
+            background: transparent;
+            border: 2px solid #ffff00;
+            color: #00ffff;
+            padding: 2px 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+        .year-button:hover { transform: scale(1.1); box-shadow: 0 0 10px #00ff00; }
+        .year-button.active { background: #ff00ff; color: #fff; }
+        :root {
+            --color-bg: #000;
+            --color-text: #fff;
+            --color-magenta: #ff00ff;
+            --color-cyan: #00ffff;
+            --color-yellow: #ffff00;
+            --color-green: #00ff00;
+            --color-red: #ff0000;
+            --color-dark-grey: #333;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-bg);
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+            color: var(--color-text);
+        }
+        body {
+            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, var(--color-bg);
+            padding: 10px;
+            min-height: 100vh;
+            display: none;
+            user-select: none;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><polygon points="12,2 22,22 2,22" fill="%23bf00ff" stroke="none"/></svg>') 12 12, auto;
+            position: relative;
+            transition: transform 0.5s;
+        }
+        body.loaded { display: block; }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-bg);
+            animation: bgPulse 5s infinite alternate;
+            z-index: -1;
+        }
+        @media (pointer: coarse) { body { cursor: default; } }
+        @keyframes bgPulse { 0% { background-color: var(--color-bg); } 100% { background-color: #333; } }
+        #coordinates { cursor: pointer; transition: color 0.2s ease; white-space: nowrap; }
+        #coordinates:hover { color: var(--color-magenta); }
+        .mode-buttons { display: flex; gap: 5px; margin-left: 10px; }
+        .mode-button { width: 24px; height: 24px; background: transparent; border: 2px solid var(--color-yellow); border-radius: 50%; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; padding: 0; }
+        .mode-button:hover { transform: scale(1.1); box-shadow: 0 0 10px var(--color-green); }
+        .mode-button.active { background: var(--color-cyan); }
+        .invert-button svg circle { fill: var(--color-magenta); }
+        .nav-bar { position: fixed; top: 50px; left: 10px; padding: 10px; z-index: 110; display: flex; flex-direction: column; gap: 10px; background: rgba(0, 0, 0, 0.8); border: 2px solid var(--color-magenta); border-radius: 10px; box-shadow: 0 0 10px var(--color-magenta); display: none; }
+        .nav-link { color: var(--color-yellow); font-size: 14px; text-decoration: none; padding: 5px 10px; cursor: pointer; transition: all 0.2s ease; text-align: left; }
+        .nav-link:hover { color: var(--color-magenta); background: rgba(255, 0, 255, 0.2); border-radius: 5px; }
+        .nav-link.active { color: var(--color-cyan); text-shadow: 0 0 5px var(--color-cyan); background: rgba(0, 255, 255, 0.2); border-radius: 5px; }
+        .content-wrapper { margin-top: 40px; margin-bottom: 40px; padding: 10px; width: 100%; box-sizing: border-box; z-index: 10; }
+        .page-content { background: rgba(0, 0, 0, 0.9); padding: 15px; margin-bottom: 40px; box-shadow: 0 0 20px var(--color-magenta); position: relative; box-sizing: border-box; scroll-margin-top: 50px; }
+        .section-heading { font-size: 36px; color: var(--color-yellow); text-shadow: 2px 2px 0 var(--color-magenta); margin: 0 0 20px 0; text-align: center; animation: blink 0.5s infinite; }
+        #homePage { border: 4px double var(--color-green); max-width: 700px; animation: shake 0.1s infinite; text-align: center; margin-left: auto; margin-right: auto; }
+        #blogPage { border: 4px dotted var(--color-yellow); width: 900px; max-width: 95%; height: 500px; overflow: hidden; display: flex; margin-left: auto; margin-right: auto; }
+        #galleryPage { border: 4px dotted var(--color-yellow); width: 900px; max-width: 95%; height: 500px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-left: auto; margin-right: auto; }
+        #aboutPage { border: 4px solid var(--color-cyan); max-width: 600px; padding: 15px; text-align: center; margin-left: auto; margin-right: auto; }
+        #signupSection { border: 4px dashed var(--color-red); max-width: 700px; padding: 20px; text-align: center; margin-left: auto; margin-right: auto; background: rgba(0, 0, 0, 0.95); }
+        @keyframes shake { 0% { transform: translateX(0); } 50% { transform: translateX(2px); } 100% { transform: translateX(-2px); } }
+        .graphic-top { width: 80px; height: 80px; background: linear-gradient(135deg, var(--color-red), var(--color-cyan)); position: absolute; top: -40px; left: 50%; transform: translateX(-50%); border: 3px dotted var(--color-yellow); box-shadow: 0 0 15px var(--color-yellow); animation: bounce 1s infinite; cursor: pointer; z-index: 15; }
+        @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-10px); } }
+        h1 { font-size: 50px; color: var(--color-yellow); text-shadow: 3px 3px 0 var(--color-magenta), -3px -3px 0 var(--color-green), 0 0 10px var(--color-cyan); margin: 20px 0; letter-spacing: 2px; animation: blink 0.5s infinite; display: inline-flex; align-items: baseline; }
+        .title-text { transition: all 0.3s ease; cursor: pointer; }
+        .title-text.up:hover { color: var(--color-magenta); transform: rotate(-5deg); }
+        .title-text.down:hover { color: var(--color-magenta); transform: rotate(5deg); }
+        .title-text.glitch { animation: glitch 0.3s linear infinite; }
+        @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); color: var(--color-magenta); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); color: var(--color-cyan); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
+        @keyframes blink { 50% { opacity: 0.7; } }
+        .domain { font-size: 50px; color: var(--color-text); text-shadow: none; animation: none; cursor: pointer; }
+        .under-construction { position: absolute; top: 10px; right: 10px; font-size: 14px; color: var(--color-red); background: var(--color-yellow); padding: 5px; border: 2px solid var(--color-bg); transform: rotate(-10deg); cursor: pointer; z-index: 15; }
+        .button-container { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-top: 20px; position: relative; }
+        .button { background: var(--color-magenta); color: var(--color-cyan); padding: 12px 20px; border: 2px solid var(--color-yellow); text-decoration: none; font-size: 18px; font-family: 'Arial', sans-serif; text-transform: uppercase; box-shadow: 0 0 10px var(--color-magenta); transition: all 0.2s ease; width: 100%; max-width: 300px; text-align: center; position: relative; animation: pulseButton 2s infinite; }
+        @keyframes pulseButton { 0%, 100% { transform: scale(1); box-shadow: 0 0 10px var(--color-magenta); } 50% { transform: scale(1.05); box-shadow: 0 0 20px var(--color-green); } }
+        .beatstore { background: rgb(255, 50, 50); }
+        .instagram { background: rgb(255, 80, 200); }
+        .spotify { background: rgb(50, 255, 100); color: var(--color-bg); }
+        .soundcloud { background: rgb(255, 120, 60); }
+        .button:hover { transform: scale(1.1) rotate(2deg); box-shadow: 0 0 20px var(--color-green); color: var(--color-bg); }
+        .beatstore:hover { background: rgb(255, 150, 150); }
+        .instagram:hover { background: rgb(255, 200, 255); }
+        .spotify:hover { background: rgb(150, 255, 150); }
+        .soundcloud:hover { background: rgb(255, 200, 150); }
+        .button.secret:hover { background: rgb(150, 255, 255); color: var(--color-magenta); }
+        .button::before { content: '★'; color: var(--color-yellow); position: absolute; left: 5px; animation: spin 1s infinite linear; }
+        .button::after { content: '☆'; color: var(--color-green); position: absolute; right: 5px; animation: pulse 0.8s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .graphic-bottom { width: 60px; height: 60px; background: radial-gradient(circle, var(--color-magenta), var(--color-cyan)); position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); border: 2px dashed var(--color-magenta); animation: spin 1.5s infinite linear, glow 2s infinite; cursor: pointer; z-index: 15; }
+        @keyframes glow { 0%, 100% { box-shadow: 0 0 10px var(--color-magenta); } 50% { box-shadow: 0 0 20px var(--color-green); } }
+        .graphic-left { width: 40px; height: 100px; background: linear-gradient(var(--color-green), var(--color-red)); position: fixed; left: 20px; top: var(--chaser-top, 50%); transform: translateY(-50%); border: 2px solid var(--color-yellow); animation: slideFull 6s infinite; cursor: pointer; transition: height 0.2s; z-index: 15; }
+        @keyframes slideFull { 0% { top: 10%; } 50% { top: 90%; } 100% { top: 10%; } }
+        .graphic-right { width: 50px; height: 50px; background: var(--color-cyan); position: absolute; right: -25px; top: 40%; border-radius: 50%; border: 2px dotted var(--color-magenta); animation: bounce 0.8s infinite; cursor: pointer; z-index: 15; }
+        .random-text { position: absolute; bottom: 60px; left: 10px; font-size: 12px; color: var(--color-green); transform: rotate(-20deg); animation: fade 4s infinite; z-index: 5; }
+        @keyframes fade { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .marquee { position: absolute; top: 0; left: 0; width: 100%; color: var(--color-red); font-size: 16px; background: var(--color-yellow); padding: 5px; box-sizing: border-box; z-index: 15; }
+        .chaos-star { position: absolute; color: var(--color-magenta); font-size: 30px; animation: spin 1s infinite linear; pointer-events: none; z-index: 500; }
+        .flash-text { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 100px; color: var(--color-green); text-shadow: 0 0 20px var(--color-magenta); z-index: 1000; pointer-events: none; display: none; white-space: nowrap; }
+        .discount-code { position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); font-size: 30px; color: var(--color-yellow); background: rgba(0, 0, 0, 0.8); padding: 15px; border: 2px solid var(--color-magenta); display: none; z-index: 20; }
+        .copyright { position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 12px; color: var(--color-text); z-index: 100; white-space: nowrap; animation: blink 0.5s infinite; cursor: pointer; }
+        .astral-particle { position: fixed; width: 12px; height: 3px; background: var(--color-magenta); border-radius: 50%; opacity: 0.3; pointer-events: none; z-index: 5; animation: warp 10s linear forwards; }
+        @keyframes warp { 0% { opacity: 0.3; transform: translate(0, 0) scale(1); } 100% { opacity: 0; transform: translate(var(--end-x), var(--end-y)) scale(2); } }
+        .blog-container { display: flex; flex-direction: row; width: 100%; height: 100%; overflow: hidden; }
+        .blog-menu { flex: 0 0 200px; padding: 10px; overflow-y: auto; overflow-x: hidden; max-height: 100%; border-right: 2px solid var(--color-magenta); }
+        .blog-main { flex: 1; padding: 10px 30px; overflow-y: auto; white-space: normal; word-wrap: break-word; max-height: 100%; }
+        .blog-title { font-size: 28px; color: var(--color-yellow); text-shadow: 2px 2px 0 var(--color-magenta); text-transform: uppercase; margin-bottom: 15px; }
+        .blog-content { color: var(--color-cyan); font-size: 18px; line-height: 1.6; white-space: normal; word-wrap: break-word; }
+        .blog-date { color: var(--color-magenta); font-weight: bold; margin-bottom: 10px; font-size: 16px; }
+        .blog-nav-button { background: var(--color-magenta); color: var(--color-cyan); padding: 4px 6px; border: none; text-decoration: none; font-size: 13px; text-align: left; box-shadow: 0 0 5px var(--color-magenta); transition: all 0.2s ease; cursor: pointer; width: 100%; max-width: 180px; margin-bottom: 8px; display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .blog-nav-button span { font-size: 11px; }
+        .blog-nav-button:hover { background: var(--color-cyan); color: var(--color-magenta); box-shadow: 0 0 10px var(--color-green); }
+        .blog-nav-button.active { background: var(--color-green); color: var(--color-magenta); box-shadow: 0 0 10px var(--color-yellow); }
+        .gallery-container { width: 100%; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: center; }
+        .gallery-viewport { max-width: 100%; height: 320px; overflow: hidden; margin: 0 auto; position: relative; width: calc(195px * 4 + 20px * 3 + 8px); }
+        .gallery-grid { display: flex; flex-direction: row; gap: 20px; transition: transform 0.5s ease; padding: 0 4px; box-sizing: border-box; height: 100%; }
+        .gallery-placeholder { flex: 0 0 195px; height: 300px; border: 4px dotted var(--color-yellow); background: var(--color-dark-grey); cursor: pointer; position: relative; background-size: contain; background-repeat: no-repeat; background-position: center; filter: saturate(1.5) brightness(1.2) contrast(1.1); transition: filter 0.2s ease; box-sizing: border-box; }
+        .gallery-placeholder:hover { filter: saturate(2) brightness(1.4) contrast(1.2); }
+        .gallery-placeholder::after { content: 'Image Failed'; display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--color-red); font-size: 14px; text-align: center; }
+        .gallery-placeholder.failed::after { display: block; }
+        .gallery-nav { margin-top: 10px; display: flex; gap: 20px; justify-content: center; }
+        .gallery-nav-button { width: 40px; height: 30px; background: var(--color-yellow); color: var(--color-magenta); border: 2px solid var(--color-magenta); border-radius: 15px; font-size: 16px; text-align: center; line-height: 30px; cursor: pointer; transition: all 0.2s ease; }
+        .gallery-nav-button:hover { transform: scale(1.1); box-shadow: 0 0 10px var(--color-green); }
+        .gallery-nav-button.disabled { opacity: 0.5; cursor: default; }
+        .gallery-nav-button.disabled:hover { transform: none; box-shadow: none; }
+        .gallery-enlarged { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: auto; height: auto; max-width: 80vw; max-height: 80vh; border: 4px solid var(--color-magenta); background: var(--color-bg); z-index: 200; box-shadow: 0 0 20px var(--color-cyan); background-size: contain; background-repeat: no-repeat; background-position: center; filter: saturate(1.5) brightness(1.2) contrast(1.1); box-sizing: border-box; }
+        .gallery-close { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; background: var(--color-red); color: var(--color-text); font-size: 20px; text-align: center; line-height: 30px; border: 2px solid var(--color-yellow); cursor: pointer; transition: all 0.2s ease; z-index: 210; }
+        .gallery-close:hover { transform: scale(1.1); box-shadow: 0 0 10px var(--color-magenta); }
+        .gallery-caption { position: absolute; bottom: 10px; left: 10px; right: 10px; color: var(--color-yellow); font-size: 14px; background: rgba(0, 0, 0, 0.7); padding: 5px; text-align: center; }
+        .about-content { color: var(--color-cyan); font-size: 16px; line-height: 1.4; padding: 10px; }
+        .signup-title { font-size: 28px; color: var(--color-cyan); text-shadow: 2px 2px 0 var(--color-magenta); margin-bottom: 15px; animation: blink 0.5s infinite; }
+        .signup-text { color: var(--color-yellow); font-size: 16px; margin-bottom: 20px; }
+        .signup-form { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        .signup-input { width: 100%; max-width: 300px; padding: 10px; background: var(--color-dark-grey); border: 2px solid var(--color-green); color: var(--color-cyan); font-size: 16px; box-sizing: border-box; }
+        .signup-button { background: var(--color-magenta); color: var(--color-cyan); padding: 10px 20px; border: 2px solid var(--color-yellow); font-size: 16px; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease; width: 100%; max-width: 300px; text-align: center; }
+        .signup-button:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--color-green); }
+        @media (min-width: 600px) {
+            #homePage { max-width: 700px; padding: 30px; }
+            #blogPage { width: 900px; height: 500px; }
+            #galleryPage { width: 900px; height: 500px; }
+            .gallery-viewport { width: calc(195px * 4 + 20px * 3 + 8px); }
+            #aboutPage { max-width: 600px; padding: 30px; }
+            #signupSection { max-width: 700px; padding: 30px; }
+            h1 { font-size: 90px; }
+            .domain { font-size: 90px; }
+            .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
+            .graphic-top { width: 100px; height: 100px; top: -50px; }
+            .graphic-bottom { width: 80px; height: 80px; bottom: -40px; }
+            .graphic-left { width: 60px; height: 150px; left: 30px; }
+            .graphic-right { width: 70px; height: 70px; right: -35px; }
+            .marquee { font-size: 20px; }
+            .section-heading { font-size: 48px; }
+            .signup-title { font-size: 36px; }
+            .signup-text { font-size: 18px; }
+        }
+        @media (max-width: 599px) {
+            body { padding: 5px; font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif; -webkit-font-smoothing: antialiased; font-weight: 400; }
+            .status-bar { font-size: 12px; padding: 3px; }
+            .content-wrapper { margin-top: 30px; margin-left: 0; width: 100%; padding: 5px; }
+            .page-content { padding: 10px; margin-bottom: 20px; }
+            #homePage { padding: 15px; border-width: 3px; max-width: 95%; }
+            #blogPage, #galleryPage { width: 98%; height: auto; max-height: none; padding: 10px; border-width: 3px; box-shadow: 0 0 10px var(--color-magenta); }
+            #galleryPage { justify-content: flex-start; }
+            #aboutPage { padding: 15px; max-width: 95%; border-width: 3px; }
+            #signupSection { padding: 15px; max-width: 95%; border-width: 3px; }
+            h1 { font-size: 36px; }
+            .domain { font-size: 36px; }
+            .button { font-size: 14px; padding: 8px 15px; max-width: 90%; }
+            .under-construction { font-size: 11px; padding: 3px; }
+            .graphic-top { width: 50px; height: 50px; top: -25px; }
+            .graphic-bottom { width: 40px; height: 40px; bottom: -20px; }
+            .graphic-left { width: 30px; height: 80px; left: 10px; }
+            .graphic-right { width: 30px; height: 30px; right: -15px; top: 85%; padding: 0; box-sizing: border-box; }
+            .marquee { font-size: 14px; }
+            .section-heading { font-size: 28px; }
+            .signup-title { font-size: 20px; }
+            .signup-text { font-size: 14px; }
+            .signup-input { font-size: 14px; }
+            .signup-button { font-size: 14px; padding: 8px 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="status-bar">
+        <div style="display: flex; align-items: center;">
+            <span id="dateTime"></span>
+            <div class="mode-buttons">
+                <button class="mode-button invert-button" id="invertButton" title="Toggle Invert">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="8" cy="8" r="4" fill="#ff00ff"/>
+                        <path d="M8 0v2M8 14v2M0 8h2M14 8h2M2.34 2.34l1.42 1.42M12.24 12.24l1.42 1.42M2.34 13.66l1.42-1.42M12.24 3.76l1.42-1.42" stroke="#ff00ff" stroke-width="1"/>
+                    </svg>
+                </button>
+                <button class="mode-button wallpaper-button" id="wallpaperButton" title="Swap Wallpaper">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="6" y="6" width="12" height="12" stroke="#ff0000" stroke-width="2"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="time-machine-controls">
+            <button class="year-button active">2000</button>
+            <button class="year-button" onclick="window.location.href='/2100.html'">2100</button>
+        </div>
+        <span id="coordinates"></span>
+    </div>
+    <div class="nav-bar">
+        <span class="nav-link active" data-page="homePage">Homepage</span>
+        <span class="nav-link" data-page="blogPage">Blog</span>
+        <span class="nav-link" data-page="galleryPage">Gallery</span>
+        <span class="nav-link" data-page="aboutPage">About</span>
+        <span class="nav-link" data-page="signupSection">Signup</span>
+    </div>
+    <div class="content-wrapper">
+        <div class="page-content" id="homePage">
+            <h2 class="section-heading">Home</h2>
+            <marquee class="marquee">WELCOME TO 62SERPENS ZONE - EARLY 2000s VIBES!!!</marquee>
+            <div class="graphic-top" id="egg1"></div>
+            <h1><span class="title-text up" id="titleText">62serpens</span><span class="domain">.com</span></h1>
+            <div class="button-container" id="buttonContainer">
+                <a href="https://www.beatstars.com/62serpens/tracks" class="button beatstore" target="_blank">Beat Store ᯓ★</a>
+                <a href="https://www.instagram.com/62serpens" class="button instagram" target="_blank">Instagram</a>
+                <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg" class="button spotify" target="_blank">Spotify</a>
+                <a href="https://www.soundcloud.com/62serpens" class="button soundcloud" target="_blank">SoundCloud ☁︎☁︎☁︎</a>
+            </div>
+            <div class="graphic-bottom" id="egg2"></div>
+            <div class="graphic-right" id="egg4"></div>
+            <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!1!</span>
+            <span class="random-text">6262626262</span>
+            <span class="discount-code" id="discountCode">20% OFF BEATSTARS CODE 626262</span>
+        </div>
+        <div class="page-content" id="blogPage">
+            <h2 class="section-heading">Blog</h2>
+            <div class="blog-container">
+                <div class="blog-menu"></div>
+                <div class="blog-main">
+                    <div class="blog-title" id="blogTitle"></div>
+                    <div class="blog-content" id="blogContent"></div>
+                </div>
+            </div>
+        </div>
+        <div class="page-content" id="galleryPage">
+            <h2 class="section-heading">Gallery</h2>
+            <div class="gallery-container">
+                <div class="gallery-viewport">
+                    <div class="gallery-grid"></div>
+                </div>
+                <div class="gallery-nav">
+                    <div class="gallery-nav-button" id="galleryLeft">←</div>
+                    <div class="gallery-nav-button" id="galleryRight">→</div>
+                </div>
+            </div>
+            <div class="gallery-enlarged" id="enlargedPhoto">
+                <div class="gallery-close" id="galleryClose">X</div>
+                <div class="gallery-caption" id="galleryCaption"></div>
+            </div>
+        </div>
+        <div class="page-content" id="aboutPage">
+            <h2 class="section-heading">About</h2>
+            <div class="about-content">
+                62serpens aka 62 is a Music Producer from Australia.<br><br>
+                He is best known for his work with major artists such as Drake, Playboi Carti, Future, Yeat, Nettspend, Tate Mcrae, Taylor Swift, Ye West, Osamason, Pitbull, Britney Spears, Skrillex, Justin Bieber, Red Hot Chilli Peppers, One Direction and many more.
+            </div>
+        </div>
+        <div class="page-content" id="signupSection">
+            <h2 class="section-heading">Signup</h2>
+            <p class="signup-text">Drop ur email for beats, updates, and chaos!</p>
+            <form class="signup-form" id="signupForm" onsubmit="handleSignup(event)">
+                <input type="email" class="signup-input" id="emailInput" placeholder="ur email here..." required>
+                <button type="submit" class="signup-button">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+    <div class="graphic-left" id="egg3"></div>
+    <footer class="copyright" id="copyright">
+        <p>© 62serpens 2025 - All Rights Reserved</p>
+    </footer>
+    <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateTime = document.getElementById('dateTime');
+            const coordinates = document.getElementById('coordinates');
+            const navBar = document.querySelector('.nav-bar');
+            const domain = document.querySelector('.domain');
+            const titleText = document.getElementById('titleText');
+            const egg1 = document.getElementById('egg1');
+            const egg2 = document.getElementById('egg2');
+            const egg3 = document.getElementById('egg3');
+            const egg4 = document.getElementById('egg4');
+            const egg5 = document.getElementById('egg5');
+            const buttonContainer = document.getElementById('buttonContainer');
+            const flashText = document.getElementById('flashText');
+            const discountCode = document.getElementById('discountCode');
+            const copyright = document.getElementById('copyright');
+            const blogMenu = document.querySelector('#blogPage .blog-menu');
+            const blogTitle = document.getElementById('blogTitle');
+            const blogContent = document.getElementById('blogContent');
+            const galleryGrid = document.querySelector('#galleryPage .gallery-grid');
+            const galleryLeft = document.getElementById('galleryLeft');
+            const galleryRight = document.getElementById('galleryRight');
+            const enlargedPhoto = document.getElementById('enlargedPhoto');
+            const galleryClose = document.getElementById('galleryClose');
+            const galleryCaption = document.getElementById('galleryCaption');
+            const galleryViewport = document.querySelector('#galleryPage .gallery-viewport');
+            const signupForm = document.getElementById('signupForm');
+            const emailInput = document.getElementById('emailInput');
+            const invertButton = document.getElementById('invertButton');
+            const wallpaperButton = document.getElementById('wallpaperButton');
+            const galleryImagesData = [
+                { src: 'images/img_001.jpg', caption: 'Photo 1' },
+                { src: 'images/img_002.jpg', caption: 'Photo 2' },
+                { src: 'images/img_003.jpg', caption: 'Photo 3' },
+                { src: 'images/img_004.jpg', caption: 'Photo 4' },
+                { src: 'images/img_005.jpg', caption: 'Photo 5' },
+                { src: 'images/img_006.jpg', caption: 'Photo 6' },
+                { src: 'images/img_007.jpg', caption: 'Photo 7' },
+                { src: 'images/img_008.jpg', caption: 'Photo 8' }
+            ];
+            const blogPosts = {
+                'post1': { date: "31/03/2025", title: "Hello World", content: `just setting up my blog lol :)` },
+                'post2': { date: "01/04/2025", title: "The Internet Sucks", content: `internet is the new free to air TV. we need to do something about it.` },
+                'post3': { date: "02/04/2025", title: "Placeholder 1", content: `Lorem ipsum dolor sit amet.` },
+                'post4': { date: "03/04/2025", title: "Placeholder 2", content: `Short post here.` },
+                'post5': { date: "04/04/2025", title: "Placeholder 3", content: `Another test post with some text.` }
+            };
+            const wallpapers = [
+                "url('https://www.toptal.com/designers/subtlepatterns/uploads/dark_mosaic.png') repeat, #000",
+                "url('https://www.toptal.com/designers/subtlepatterns/uploads/stardust.png') repeat, #000",
+                "url('https://www.toptal.com/designers/subtlepatterns/uploads/plaid.png') repeat, #000"
+            ];
+            let initialImagesToLoad = 3;
+            let particleInterval = null;
+            let particlesActive = false;
+            let isFlipped = false;
+            let slideSpeed = 6;
+            let clickCount = 0;
+            let sliderHeight = 100;
+            let gameActive = false;
+            let secretLink = null;
+            let wallpaperIndex = 0;
+            let galleryCurrentPage = 0;
+            const galleryImagesPerPage = 4;
+            const galleryTotalPages = Math.ceil(galleryImagesData.length / galleryImagesPerPage);
+            function preloadInitialImages() {
+                const initialSources = galleryImagesData.slice(0, initialImagesToLoad).map(item => item.src);
+                const defaultWallpaperUrl = wallpapers[0].match(/url\(['"]?(.*?)['"]?\)/);
+                if (defaultWallpaperUrl && defaultWallpaperUrl[1]) initialSources.push(defaultWallpaperUrl[1]);
+                let loadedCount = 0;
+                const totalToLoad = initialSources.length;
+                if (totalToLoad === 0) {
+                    document.body.classList.add('loaded');
+                    preloadRemainingImages();
+                    return;
+                }
+                initialSources.forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = () => {
+                        loadedCount++;
+                        if (loadedCount >= totalToLoad && !document.body.classList.contains('loaded')) {
+                            document.body.classList.add('loaded');
+                            preloadRemainingImages();
+                        }
+                    };
+                    img.onerror = () => {
+                        console.error(`Failed to preload: ${src}`);
+                        loadedCount++;
+                        if (loadedCount >= totalToLoad && !document.body.classList.contains('loaded')) {
+                            document.body.classList.add('loaded');
+                            preloadRemainingImages();
+                        }
+                    };
+                });
+            }
+            function preloadRemainingImages() {
+                galleryImagesData.slice(initialImagesToLoad).forEach((item, index) => {
+                    const img = new Image();
+                    img.src = item.src;
+                    img.onerror = () => {
+                        console.error(`Failed background load: ${item.src}`);
+                        const placeholder = document.querySelector(`.gallery-placeholder[data-index="${initialImagesToLoad + index + 1}"]`);
+                        if (placeholder) placeholder.classList.add('failed');
+                    };
+                });
+            }
+            function updateDateTime() {
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-AU', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'Australia/Hobart' });
+                const timeStr = now.toLocaleTimeString('en-AU', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Australia/Hobart' });
+                if (dateTime) dateTime.textContent = `${dateStr} ${timeStr} AEST`;
+            }
+            function updateCoordinates() {
+                const isBigJump = Math.random() < 0.2;
+                const range = isBigJump ? 1000 : 1;
+                const lat = (Math.random() * range * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
+                const lon = (Math.random() * range * (Math.random() < 0.5 ? 1 : -1)).toFixed(2);
+                if (coordinates) coordinates.textContent = `COORDS: ${lat}°N, ${lon}°E`;
+            }
+            function createParticle() {
+                if (!particlesActive) return;
+                const particle = document.createElement('div');
+                particle.className = 'astral-particle';
+                const startX = window.innerWidth / 2;
+                const startY = window.scrollY + window.innerHeight / 2;
+                particle.style.left = `${startX}px`;
+                particle.style.top = `${startY}px`;
+                particle.style.background = Math.random() < 0.5 ? '#ff00ff' : '#00ffff';
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = (Math.min(window.innerWidth, window.innerHeight) / 2) + Math.random() * 200;
+                const endX = distance * Math.cos(angle);
+                const endY = distance * Math.sin(angle);
+                particle.style.setProperty('--end-x', `${endX}px`);
+                particle.style.setProperty('--end-y', `${endY}px`);
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), window.innerWidth < 600 ? 15000 : 10000);
+            }
+            function toggleParticles() {
+                if (particlesActive) {
+                    clearInterval(particleInterval);
+                    particlesActive = false;
+                    if (coordinates) coordinates.style.color = '#00ffff';
+                    document.querySelectorAll('.astral-particle').forEach(p => p.remove());
+                } else {
+                    particleInterval = setInterval(createParticle, window.innerWidth < 600 ? 100 : 50);
+                    particlesActive = true;
+                    if (coordinates) coordinates.style.color = '#ff00ff';
+                }
+            }
+            function triggerGlitch() {
+                if (titleText) {
+                    titleText.classList.add('glitch');
+                    setTimeout(() => titleText.classList.remove('glitch'), 300);
+                }
+            }
+            function buildBlogMenu() {
+                if (!blogMenu) return;
+                blogMenu.innerHTML = '';
+                Object.keys(blogPosts).forEach(key => {
+                    const post = blogPosts[key];
+                    const button = document.createElement('div');
+                    button.className = 'blog-nav-button';
+                    button.setAttribute('data-date', key);
+                    button.innerHTML = `<span>${post.date}</span><br>${post.title}`;
+                    button.addEventListener('click', () => updateBlogContent(key));
+                    blogMenu.appendChild(button);
+                });
+            }
+            function updateBlogContent(postKey) {
+                const post = blogPosts[postKey];
+                if (!post || !blogTitle || !blogContent) return;
+                blogTitle.textContent = post.title;
+                blogContent.innerHTML = `<div class="blog-date">${post.date}</div>${post.content}`;
+                document.querySelectorAll('.blog-nav-button').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-date') === postKey));
+                const blogMain = document.querySelector('#blogPage .blog-main');
+                if (blogMain) blogMain.scrollTop = 0;
+            }
+            function buildGallery() {
+                if (!galleryGrid) return;
+                galleryGrid.innerHTML = '';
+                galleryImagesData.forEach((item, index) => {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'gallery-placeholder';
+                    placeholder.setAttribute('data-index', index + 1);
+                    placeholder.setAttribute('data-caption', item.caption);
+                    placeholder.style.backgroundImage = `url('${item.src}')`;
+                    placeholder.setAttribute('data-full', item.src);
+                    placeholder.addEventListener('click', () => {
+                        if (enlargedPhoto) enlargedPhoto.style.display = 'block';
+                        if (enlargedPhoto) enlargedPhoto.style.backgroundImage = `url('${item.src}')`;
+                        if (galleryCaption) galleryCaption.textContent = item.caption || 'No caption';
+                    });
+                    galleryGrid.appendChild(placeholder);
+                });
+            }
+            function closeGalleryPopup() {
+                if (enlargedPhoto) enlargedPhoto.style.display = 'none';
+            }
+            function calculateGalleryPageWidth() {
+                const placeholderWidth = 195;
+                const border = 8;
+                const gap = 20;
+                return (placeholderWidth + border) * galleryImagesPerPage + gap * (galleryImagesPerPage - 1);
+            }
+            function updateGalleryPosition() {
+                if (window.innerWidth >= 600 && galleryGrid && galleryViewport) {
+                    galleryViewport.style.overflowX = 'hidden';
+                    const pageWidth = calculateGalleryPageWidth();
+                    const offset = -galleryCurrentPage * pageWidth;
+                    galleryGrid.style.transform = `translateX(${offset}px)`;
+                } else if (galleryGrid && galleryViewport) {
+                    galleryGrid.style.transform = 'none';
+                    galleryViewport.style.overflowX = 'auto';
+                }
+                updateGalleryNavButtons();
+            }
+            function updateGalleryNavButtons() {
+                if (galleryLeft) galleryLeft.classList.toggle('disabled', galleryCurrentPage === 0);
+                if (galleryRight) galleryRight.classList.toggle('disabled', galleryCurrentPage >= galleryTotalPages - 1);
+            }
+            function handleSignup(event) {
+                event.preventDefault();
+                const email = emailInput.value.trim();
+                if (email) {
+                    console.log(`Email submitted: ${email}`);
+                    alert('Thx 4 signing up! Ur in the 62 Zone now!');
+                    emailInput.value = '';
+                }
+            }
+            function handleEgg1Click() {
+                for (let i = 0; i < 5; i++) {
+                    const star = document.createElement('span');
+                    star.className = 'chaos-star';
+                    star.textContent = '★';
+                    star.style.left = `${Math.random() * 100}%`;
+                    star.style.top = `${Math.random() * 100}%`;
+                    document.body.appendChild(star);
+                    setTimeout(() => star.remove(), 2000);
+                }
+            }
+            function handleEgg2Click() {
+                isFlipped = !isFlipped;
+                const contentWrapper = document.querySelector('.content-wrapper');
+                if (contentWrapper) contentWrapper.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
+            function handleEgg3Click() {
+                clickCount++;
+                if (!gameActive) gameActive = true;
+                if (gameActive && egg3) {
+                    slideSpeed = Math.max(1.5, slideSpeed * 0.85);
+                    sliderHeight = Math.max(60, sliderHeight * 0.95);
+                    const direction = Math.random() < 0.5 ? '' : 'reverse';
+                    egg3.style.height = `${sliderHeight}px`;
+                    egg3.style.animation = `slideFull ${slideSpeed}s infinite linear ${direction}`;
+                }
+                if (clickCount >= 6) {
+                    if (discountCode) discountCode.style.display = 'block';
+                    setTimeout(() => { if (discountCode) discountCode.style.display = 'none'; }, 5000);
+                    clickCount = 0;
+                    slideSpeed = 6;
+                    sliderHeight = 100;
+                    gameActive = false;
+                    if (egg3) {
+                        egg3.style.height = `${sliderHeight}px`;
+                        egg3.style.animation = `slideFull 6s infinite`;
+                    }
+                }
+            }
+            function handleEgg4Click() {
+                if (!secretLink) {
+                    secretLink = document.createElement('a');
+                    secretLink.className = 'button secret';
+                    secretLink.textContent = 'SECRET LINK';
+                    secretLink.href = 'https://discord.gg/cCedfQgHVG';
+                    secretLink.target = '_blank';
+                    secretLink.style.background = '#00ffff';
+                    secretLink.style.color = '#ff00ff';
+                    if (buttonContainer) buttonContainer.appendChild(secretLink);
+                } else {
+                    secretLink.remove();
+                    secretLink = null;
+                }
+            }
+            function handleEgg5Click() {
+                const originalBg = document.body.style.background;
+                document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
+                setTimeout(() => { document.body.style.background = originalBg; }, 1000);
+            }
+            function handleCopyrightClick() {
+                if (flashText) flashText.style.display = 'block';
+                setTimeout(() => { if (flashText) flashText.style.display = 'none'; }, 1000);
+            }
+            function handleDomainClick() {
+                if (navBar) navBar.classList.toggle('hidden');
+            }
+            function handleInvertClick() {
+                if (invertButton) invertButton.classList.toggle('active');
+                document.body.style.filter = invertButton.classList.contains('active') ? 'invert(100%)' : 'none';
+            }
+            function handleWallpaperClick() {
+                wallpaperIndex = (wallpaperIndex + 1) % wallpapers.length;
+                document.body.style.background = wallpapers[wallpaperIndex];
+                if (wallpaperButton) wallpaperButton.classList.toggle('active', wallpaperIndex !== 0);
+            }
+            if (coordinates) coordinates.addEventListener('click', toggleParticles);
+            if (titleText) titleText.addEventListener('click', () => titleText.classList.toggle('up') && titleText.classList.toggle('down'));
+            if (egg1) egg1.addEventListener('click', handleEgg1Click);
+            if (egg2) egg2.addEventListener('click', handleEgg2Click);
+            if (egg3) egg3.addEventListener('click', handleEgg3Click);
+            if (egg4) egg4.addEventListener('click', handleEgg4Click);
+            if (egg5) egg5.addEventListener('click', handleEgg5Click);
+            if (copyright) copyright.addEventListener('click', handleCopyrightClick);
+            if (domain) domain.addEventListener('click', handleDomainClick);
+            if (invertButton) invertButton.addEventListener('click', handleInvertClick);
+            if (wallpaperButton) wallpaperButton.addEventListener('click', handleWallpaperClick);
+            if (galleryLeft) galleryLeft.addEventListener('click', () => {
+                if (window.innerWidth >= 600 && galleryCurrentPage > 0) {
+                    galleryCurrentPage--;
+                    updateGalleryPosition();
+                }
+            });
+            if (galleryRight) galleryRight.addEventListener('click', () => {
+                if (window.innerWidth >= 600 && galleryCurrentPage < galleryTotalPages - 1) {
+                    galleryCurrentPage++;
+                    updateGalleryPosition();
+                }
+            });
+            if (galleryClose) {
+                galleryClose.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); closeGalleryPopup(); });
+                galleryClose.addEventListener('touchend', (e) => { e.preventDefault(); e.stopPropagation(); closeGalleryPopup(); });
+            }
+            if (galleryViewport) galleryViewport.addEventListener('wheel', (e) => { if (window.innerWidth >= 600) e.preventDefault(); }, { passive: false });
+            if (signupForm) signupForm.addEventListener('submit', handleSignup);
+            window.addEventListener('resize', updateGalleryPosition);
+            window.addEventListener('scroll', () => {
+                if (particlesActive) createParticle();
+            });
+            preloadInitialImages();
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+            updateCoordinates();
+            setInterval(updateCoordinates, 1000);
+            setInterval(() => { if (Math.random() < 0.1) triggerGlitch(); }, 1000);
+            buildBlogMenu();
+            buildGallery();
+            updateGalleryPosition();
+            const firstPostKey = Object.keys(blogPosts)[0];
+            if (firstPostKey) updateBlogContent(firstPostKey);
+            if (window.location.search.includes('fbclid=')) {
+                const url = new URL(window.location.href);
+                if (url.searchParams.has('fbclid')) {
+                    url.searchParams.delete('fbclid');
+                    window.history.replaceState({}, document.title, url.toString());
+                }
+            }
+        });
+    </script>
+</body>
+</html>
