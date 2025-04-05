@@ -60,7 +60,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             min-height: 35px;
         }
         .main-title {
@@ -73,8 +73,18 @@
             cursor: default;
             text-shadow: none;
         }
-        .status-info { display: flex; gap: 12px; font-family: var(--font-main); font-size: 0.8em; color: var(--text-color); opacity: 0.7; align-items: center; white-space: nowrap; }
-        #coordinates { cursor: default; }
+        .status-info {
+            display: flex;
+            gap: 12px;
+            font-family: var(--font-main);
+            font-size: 0.8em;
+            color: var(--text-color);
+            opacity: 0.7;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 100%;
+        }
+        #coordinates { cursor: default; white-space: nowrap; }
         .header-controls { display: flex; align-items: center; gap: 5px; }
         .control-button { background: none; border: 1px solid var(--border-color); color: var(--text-color); padding: 1px 5px; font-family: var(--font-main); font-size: 0.75em; cursor: pointer; transition: all var(--transition-fast); border-radius: 0; }
         .control-button:hover { background: var(--border-color); color: var(--color-white); border-color: var(--accent-color); }
@@ -174,8 +184,8 @@
         @media (max-width: 600px) {
             body { font-size: 13px; padding: 40px 5px 5px 5px; }
             .main-content { padding: 20px 8px; }
-            .main-header { padding: 6px 10px; flex-direction: row; }
-            .status-info { font-size: 0.7em; gap: 8px; }
+            .main-header { padding: 6px 10px; flex-direction: column; align-items: flex-start; gap: 5px; }
+            .status-info { font-size: 0.7em; gap: 8px; flex-direction: column; align-items: flex-start; }
             .header-controls { gap: 4px; }
             .control-button { font-size: 0.7em; padding: 1px 4px; }
             .link-grid { grid-template-columns: 1fr; gap: 5px; padding: 0; margin: 20px auto; }
@@ -337,9 +347,9 @@
                     dateTime.textContent = now.toLocaleString('en-AU', { timeZone: 'Australia/Hobart' });
                 };
                 const updateCoordinates = () => {
-                    const lat = (Math.random() * 2 - 1).toFixed(2);
-                    const lon = (Math.random() * 2 - 1).toFixed(2);
-                    coordinates.textContent = `COORDS: ${lat}°N, ${lon}°E`;
+                    const lat = (Math.random() * 2 - 1).toFixed(1);
+                    const lon = (Math.random() * 2 - 1).toFixed(1);
+                    coordinates.textContent = `C: ${lat}N, ${lon}E`;
                 };
                 const updateTicker = () => {
                     if (tickerText) {
