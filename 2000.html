@@ -20,42 +20,29 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 5px 10px;
+            background: #000;
+            color: #00ffff;
+            font-size: 14px;
+            padding: 5px;
             border-bottom: 2px solid #ff00ff;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-sizing: border-box;
             z-index: 100;
-            font-size: 14px;
-            color: #00ffff;
         }
-        .time-machine-controls {
-            display: flex;
-            gap: 10px;
-        }
-        .year-button {
+        .hub-link {
             background: transparent;
             border: 2px solid #ffff00;
             color: #00ffff;
-            padding: 5px 10px;
+            padding: 2px 8px;
             font-size: 12px;
             cursor: pointer;
             transition: all 0.2s ease;
             text-transform: uppercase;
-            font-family: 'Arial', sans-serif;
+            text-decoration: none;
         }
-        .year-button:hover {
-            background: #ff00ff;
-            color: #000;
-            transform: scale(1.1);
-            box-shadow: 0 0 10px #00ff00;
-        }
-        .year-button.active {
-            background: #00ff00;
-            color: #000;
-            border-color: #ff00ff;
-        }
+        .hub-link:hover { transform: scale(1.1); box-shadow: 0 0 10px #00ff00; }
         :root {
             --color-bg: #000;
             --color-text: #fff;
@@ -243,11 +230,20 @@
 <body>
     <div class="status-bar">
         <span id="dateTime"></span>
-        <div class="time-machine-controls">
-            <button class="year-button active" onclick="window.location.href='/2000.html'">2000</button>
-            <button class="year-button" onclick="window.location.href='/2100.html'">2100</button>
+        <div class="mode-buttons">
+            <button class="mode-button invert-button" id="invertButton" title="Toggle Invert">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="8" cy="8" r="4" fill="#ff00ff"/>
+                    <path d="M8 0v2M8 14v2M0 8h2M14 8h2M2.34 2.34l1.42 1.42M12.24 12.24l1.42 1.42M2.34 13.66l1.42-1.42M12.24 3.76l1.42-1.42" stroke="#ff00ff" stroke-width="1"/>
+                </svg>
+            </button>
+            <button class="mode-button wallpaper-button" id="wallpaperButton" title="Swap Wallpaper">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="6" width="12" height="12" stroke="#ff0000" stroke-width="2"/>
+                </svg>
+            </button>
         </div>
-        <span id="coordinates"></span>
+        <a href="/index.html" class="hub-link">Back to Hub</a>
     </div>
     <div class="nav-bar">
         <span class="nav-link active" data-page="homePage">Homepage</span>
