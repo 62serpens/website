@@ -93,12 +93,13 @@
         .mode-button:hover { transform: scale(1.1); box-shadow: 0 0 10px var(--color-green); }
         .mode-button.active { background: var(--color-cyan); }
         .invert-button svg circle { fill: var(--color-magenta); }
-        .nav-bar { position: fixed; top: 50px; left: 10px; padding: 10px; z-index: 110; display: flex; flex-direction: column; gap: 10px; background: rgba(0, 0, 0, 0.8); border: 2px solid var(--color-magenta); border-radius: 10px; box-shadow: 0 0 10px var(--color-magenta); display: none; }
+        .nav-bar { position: fixed; top: 50px; left: 10px; padding: 10px; z-index: 110; display: flex; flex-direction: column; gap: 10px; background: rgba(0, 0, 0, 0.8); border: 2px solid var(--color-magenta); border-radius: 10px; box-shadow: 0 0 10px var(--color-magenta); }
         .nav-link { color: var(--color-yellow); font-size: 14px; text-decoration: none; padding: 5px 10px; cursor: pointer; transition: all 0.2s ease; text-align: left; }
         .nav-link:hover { color: var(--color-magenta); background: rgba(255, 0, 255, 0.2); border-radius: 5px; }
         .nav-link.active { color: var(--color-cyan); text-shadow: 0 0 5px var(--color-cyan); background: rgba(0, 255, 255, 0.2); border-radius: 5px; }
         .content-wrapper { margin-top: 40px; margin-bottom: 40px; padding: 10px; width: 100%; box-sizing: border-box; z-index: 10; }
-        .page-content { background: rgba(0, 0, 0, 0.9); padding: 15px; margin-bottom: 40px; box-shadow: 0 0 20px var(--color-magenta); position: relative; box-sizing: border-box; scroll-margin-top: 50px; }
+        .page-content { background: rgba(0, 0, 0, 0.9); padding: 15px; margin-bottom: 40px; box-shadow: 0 0 20px var(--color-magenta); position: relative; box-sizing: border-box; scroll-margin-top: 50px; display: none; }
+        .page-content.visible { display: block; }
         .section-heading { font-size: 36px; color: var(--color-yellow); text-shadow: 2px 2px 0 var(--color-magenta); margin: 0 0 20px 0; text-align: center; animation: blink 0.5s infinite; }
         #homePage { border: 4px double var(--color-green); max-width: 700px; animation: shake 0.1s infinite; text-align: center; margin-left: auto; margin-right: auto; }
         #blogPage { border: 4px dotted var(--color-yellow); width: 900px; max-width: 95%; height: 500px; overflow: hidden; display: flex; margin-left: auto; margin-right: auto; }
@@ -253,7 +254,7 @@
         <span class="nav-link" data-page="signupSection">Signup</span>
     </div>
     <div class="content-wrapper">
-        <div class="page-content" id="homePage">
+        <div class="page-content visible" id="homePage">
             <h2 class="section-heading">Home</h2>
             <marquee class="marquee">WELCOME TO 62SERPENS ZONE - EARLY 2000s VIBES!!!</marquee>
             <div class="graphic-top" id="egg1"></div>
@@ -347,6 +348,8 @@
             const emailInput = document.getElementById('emailInput');
             const invertButton = document.getElementById('invertButton');
             const wallpaperButton = document.getElementById('wallpaperButton');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageContents = document.querySelectorAll('.page-content');
             const galleryImagesData = [
                 { src: 'images/img_001.jpg', caption: 'Photo 1' },
                 { src: 'images/img_002.jpg', caption: 'Photo 2' },
@@ -382,6 +385,7 @@
             let galleryCurrentPage = 0;
             const galleryImagesPerPage = 4;
             const galleryTotalPages = Math.ceil(galleryImagesData.length / galleryImagesPerPage);
+
             function preloadInitialImages() {
                 const initialSources = galleryImagesData.slice(0, initialImagesToLoad).map(item => item.src);
                 const defaultWallpaperUrl = wallpapers[0].match(/url\(['"]?(.*?)['"]?\)/);
@@ -481,6 +485,8 @@
                     button.addEventListener('click', () => updateBlogContent(key));
                     blogMenu.appendChild(button);
                 });
+                const firstPostKey = Object.keys(blogPosts)[0];
+                if (firstPostKey) updateBlogContent(firstPostKey);
             }
             function updateBlogContent(postKey) {
                 const post = blogPosts[postKey];
@@ -505,6 +511,12 @@
                         if (enlargedPhoto) enlargedPhoto.style.display = 'block';
                         if (enlargedPhoto) enlargedPhoto.style.backgroundImage = `url('${item.src}')`;
                         if (galleryCaption) galleryCaption.textContent = item.caption || 'No caption';
+                        const imgCheck = new Image();
+                        imgCheck.src = item.src;
+                        imgCheck.onerror = () => {
+                            placeholder.classList.add('failed');
+                            if (galleryCaption) galleryCaption.textContent = 'Image Failed';
+                        };
                     });
                     galleryGrid.appendChild(placeholder);
                 });
@@ -618,6 +630,14 @@
                 document.body.style.background = wallpapers[wallpaperIndex];
                 if (wallpaperButton) wallpaperButton.classList.toggle('active', wallpaperIndex !== 0);
             }
+            function togglePage(pageId) {
+                pageContents.forEach(page => {
+                    page.classList.toggle('visible', page.id === pageId);
+                });
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('data-page') === pageId);
+                });
+            }
             if (coordinates) coordinates.addEventListener('click', toggleParticles);
             if (titleText) titleText.addEventListener('click', () => titleText.classList.toggle('up') && titleText.classList.toggle('down'));
             if (egg1) egg1.addEventListener('click', handleEgg1Click);
@@ -647,6 +667,9 @@
             }
             if (galleryViewport) galleryViewport.addEventListener('wheel', (e) => { if (window.innerWidth >= 600) e.preventDefault(); }, { passive: false });
             if (signupForm) signupForm.addEventListener('submit', handleSignup);
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => togglePage(link.getAttribute('data-page')));
+            });
             window.addEventListener('resize', updateGalleryPosition);
             window.addEventListener('scroll', () => {
                 if (particlesActive) createParticle();
@@ -660,8 +683,6 @@
             buildBlogMenu();
             buildGallery();
             updateGalleryPosition();
-            const firstPostKey = Object.keys(blogPosts)[0];
-            if (firstPostKey) updateBlogContent(firstPostKey);
             if (window.location.search.includes('fbclid=')) {
                 const url = new URL(window.location.href);
                 if (url.searchParams.has('fbclid')) {
