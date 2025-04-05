@@ -127,9 +127,8 @@
             border: 2px solid var(--color-magenta);
             border-radius: 10px;
             box-shadow: 0 0 10px var(--color-magenta);
+            display: none; /* Hidden by default */
         }
-
-        .nav-bar.hidden { display: none; }
 
         .nav-link {
             color: var(--color-yellow);
@@ -155,11 +154,10 @@
         }
 
         .content-wrapper {
-            margin-top: 50px;
-            margin-left: 120px;
+            margin-top: 40px;
             margin-bottom: 40px;
             padding: 10px;
-            width: calc(100% - 140px);
+            width: 100%;
             box-sizing: border-box;
             z-index: 10;
         }
@@ -171,6 +169,16 @@
             box-shadow: 0 0 20px var(--color-magenta);
             position: relative;
             box-sizing: border-box;
+            scroll-margin-top: 50px; /* Offset for fixed status bar */
+        }
+
+        .section-heading {
+            font-size: 36px;
+            color: var(--color-yellow);
+            text-shadow: 2px 2px 0 var(--color-magenta);
+            margin: 0 0 20px 0;
+            text-align: center;
+            animation: blink 0.5s infinite;
         }
 
         #homePage {
@@ -365,18 +373,18 @@
             width: 40px;
             height: 100px;
             background: linear-gradient(var(--color-green), var(--color-red));
-            position: absolute;
-            left: -20px;
-            top: 50%;
+            position: fixed; /* Changed to fixed for full-page movement */
+            left: 20px;
+            top: var(--chaser-top, 50%);
             transform: translateY(-50%);
             border: 2px solid var(--color-yellow);
-            animation: slide 6s infinite;
+            animation: slideFull 6s infinite;
             cursor: pointer;
             transition: height 0.2s;
             z-index: 15;
         }
 
-        @keyframes slide { 0% { top: 20%; } 50% { top: 80%; } 100% { top: 20%; } }
+        @keyframes slideFull { 0% { top: 10%; } 50% { top: 90%; } 100% { top: 10%; } }
 
         .graphic-right {
             width: 50px;
@@ -753,7 +761,7 @@
             .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
             .graphic-top { width: 100px; height: 100px; top: -50px; }
             .graphic-bottom { width: 80px; height: 80px; bottom: -40px; }
-            .graphic-left { width: 60px; height: 150px; left: -30px; }
+            .graphic-left { width: 60px; height: 150px; left: 30px; }
             .graphic-right { width: 70px; height: 70px; right: -35px; }
             .marquee { font-size: 20px; }
             .flash-text { font-size: 200px; }
@@ -766,6 +774,7 @@
             .blog-nav-button { font-size: 13px; padding: 4px 6px; max-width: 180px; }
             .blog-nav-button span { font-size: 11px; }
             .astral-particle { animation-duration: 10s; }
+            .section-heading { font-size: 48px; }
             .signup-title { font-size: 36px; }
             .signup-text { font-size: 18px; }
         }
@@ -774,9 +783,7 @@
         @media (max-width: 599px) {
             body { padding: 5px; font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif; -webkit-font-smoothing: antialiased; font-weight: 400; }
             .status-bar { font-size: 12px; padding: 3px; }
-            .nav-bar { top: 40px; left: 5px; padding: 5px; width: 80px; gap: 5px; }
-            .nav-link { font-size: 12px; padding: 3px 5px; }
-            .content-wrapper { margin-top: 40px; margin-left: 90px; width: calc(100% - 100px); padding: 5px; }
+            .content-wrapper { margin-top: 30px; margin-left: 0; width: 100%; padding: 5px; }
             .page-content { padding: 10px; margin-bottom: 20px; }
             #homePage { padding: 15px; border-width: 3px; max-width: 95%; }
             #blogPage, #galleryPage { width: 98%; height: auto; max-height: none; padding: 10px; border-width: 3px; box-shadow: 0 0 10px var(--color-magenta); }
@@ -789,7 +796,7 @@
             .under-construction { font-size: 11px; padding: 3px; }
             .graphic-top { width: 50px; height: 50px; top: -25px; }
             .graphic-bottom { width: 40px; height: 40px; bottom: -20px; }
-            .graphic-left { width: 30px; height: 80px; left: -15px; }
+            .graphic-left { width: 30px; height: 80px; left: 10px; }
             .graphic-right { width: 30px; height: 30px; right: -15px; top: 85%; padding: 0; box-sizing: border-box; }
             .button-container { z-index: 10; }
             .discount-code { font-size: 18px; padding: 8px; }
@@ -812,6 +819,7 @@
             .blog-date { font-size: 12px; }
             .blog-nav-button { font-size: 11px; padding: 4px 6px; max-width: none; width: auto; margin-bottom: 0; flex-shrink: 0; }
             .blog-nav-button span { font-size: 9px; }
+            .section-heading { font-size: 28px; }
             .signup-title { font-size: 20px; }
             .signup-text { font-size: 14px; }
             .signup-input { font-size: 14px; }
@@ -848,6 +856,7 @@
     </div>
     <div class="content-wrapper">
         <div class="page-content" id="homePage">
+            <h2 class="section-heading">Home</h2>
             <marquee class="marquee">WELCOME TO 62SERPENS ZONE - ENTER AT UR OWN RISK!!!</marquee>
             <div class="graphic-top" id="egg1"></div>
             <h1><span class="title-text up" id="titleText">62serpens</span><span class="domain">.com</span></h1>
@@ -858,13 +867,13 @@
                 <a href="https://www.soundcloud.com/62serpens" class="button soundcloud" target="_blank">SoundCloud ☁︎☁︎☁︎</a>
             </div>
             <div class="graphic-bottom" id="egg2"></div>
-            <div class="graphic-left" id="egg3"></div>
             <div class="graphic-right" id="egg4"></div>
             <span class="under-construction" id="egg5">UNDER CONSTRUCTION!!!1!</span>
             <span class="random-text">6262626262</span>
             <span class="discount-code" id="discountCode">20% OFF BEATSTARS CODE 626262</span>
         </div>
         <div class="page-content" id="blogPage">
+            <h2 class="section-heading">Blog</h2>
             <div class="blog-container">
                 <div class="blog-menu"></div>
                 <div class="blog-main">
@@ -874,6 +883,7 @@
             </div>
         </div>
         <div class="page-content" id="galleryPage">
+            <h2 class="section-heading">Gallery</h2>
             <div class="gallery-container">
                 <div class="gallery-viewport">
                     <div class="gallery-grid"></div>
@@ -889,14 +899,14 @@
             </div>
         </div>
         <div class="page-content" id="aboutPage">
-            <h1>About</h1>
+            <h2 class="section-heading">About</h2>
             <div class="about-content">
                 62serpens aka 62 is a Music Producer from Australia.<br><br>
                 He is best known for his work with major artists such as Drake, Playboi Carti, Future, Yeat, Nettspend, Tate Mcrae, Taylor Swift, Ye West, Osamason, Pitbull, Britney Spears, Skrillex, Justin Bieber, Red Hot Chilli Peppers, One Direction and many more.
             </div>
         </div>
         <div class="page-content" id="signupSection">
-            <h1 class="signup-title">JOIN THE 62 ZONE</h1>
+            <h2 class="section-heading">Signup</h2>
             <p class="signup-text">Drop ur email for beats, updates, and chaos!</p>
             <form class="signup-form" id="signupForm" onsubmit="handleSignup(event)">
                 <input type="email" class="signup-input" id="emailInput" placeholder="ur email here..." required>
@@ -904,6 +914,7 @@
             </form>
         </div>
     </div>
+    <div class="graphic-left" id="egg3"></div> <!-- Moved outside content-wrapper for full-page scope -->
     <footer class="copyright" id="copyright">
         <p>© 62serpens 2025 - All Rights Reserved</p>
     </footer>
@@ -1046,7 +1057,7 @@
                 const particle = document.createElement('div');
                 particle.className = 'astral-particle';
                 const startX = window.innerWidth / 2;
-                const startY = window.innerHeight / 2;
+                const startY = window.scrollY + window.innerHeight / 2; // Center based on viewport
                 particle.style.left = `${startX}px`;
                 particle.style.top = `${startY}px`;
                 particle.style.background = Math.random() < 0.5 ? '#ff00ff' : '#00ffff';
@@ -1156,7 +1167,7 @@
                 event.preventDefault();
                 const email = emailInput.value.trim();
                 if (email) {
-                    console.log(`Email submitted: ${email}`); // Placeholder for actual submission logic
+                    console.log(`Email submitted: ${email}`);
                     alert('Thx 4 signing up! Ur in the 62 Zone now!');
                     emailInput.value = '';
                 }
@@ -1187,7 +1198,7 @@
                     sliderHeight = Math.max(60, sliderHeight * 0.95);
                     const direction = Math.random() < 0.5 ? '' : 'reverse';
                     egg3.style.height = `${sliderHeight}px`;
-                    egg3.style.animation = `slide ${slideSpeed}s infinite linear ${direction}`;
+                    egg3.style.animation = `slideFull ${slideSpeed}s infinite linear ${direction}`;
                 }
                 if (clickCount >= 6) {
                     if (discountCode) discountCode.style.display = 'block';
@@ -1198,7 +1209,7 @@
                     gameActive = false;
                     if (egg3) {
                         egg3.style.height = `${sliderHeight}px`;
-                        egg3.style.animation = `slide 6s infinite`;
+                        egg3.style.animation = `slideFull 6s infinite`;
                     }
                 }
             }
@@ -1245,18 +1256,6 @@
                 if (wallpaperButton) wallpaperButton.classList.toggle('active', wallpaperIndex !== 0);
             }
 
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    const pageId = link.getAttribute('data-page');
-                    const section = document.getElementById(pageId);
-                    if (section) {
-                        section.scrollIntoView({ behavior: 'smooth' });
-                        navLinks.forEach(l => l.classList.remove('active'));
-                        link.classList.add('active');
-                    }
-                });
-            });
-
             if (coordinates) coordinates.addEventListener('click', toggleParticles);
             if (titleText) titleText.addEventListener('click', () => titleText.classList.toggle('up') && titleText.classList.toggle('down'));
             if (egg1) egg1.addEventListener('click', handleEgg1Click);
@@ -1288,6 +1287,9 @@
             if (signupForm) signupForm.addEventListener('submit', handleSignup);
 
             window.addEventListener('resize', updateGalleryPosition);
+            window.addEventListener('scroll', () => {
+                if (particlesActive) createParticle(); // Spawn particles on scroll for flow
+            });
 
             preloadInitialImages();
             updateDateTime();
