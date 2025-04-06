@@ -43,11 +43,11 @@
         /* --- Module Specific Styles --- */
         .module-container {
             width: 100%;
-            max-width: 800px; /* Allow slightly wider for visualizer */
+            max-width: 800px;
             border: 1px solid var(--border-color);
             padding: 20px;
             margin-bottom: 20px;
-            background-color: rgba(0,0,0, 0.2); /* Slight background tint */
+            background-color: rgba(0,0,0, 0.2);
         }
 
         .module-header {
@@ -58,10 +58,10 @@
         }
 
         #visualizerCanvas {
-            display: block; /* Make canvas block level */
-            width: 100%; /* Full width of container */
-            height: 250px; /* Fixed height for the visualizer */
-            background-color: #080810; /* Darker background for canvas */
+            display: block;
+            width: 100%;
+            height: 250px;
+            background-color: #080810;
             border: 1px solid var(--border-color);
             margin-bottom: 20px;
         }
@@ -70,7 +70,7 @@
             display: flex;
             gap: 15px;
             margin-bottom: 20px;
-            justify-content: center; /* Center controls */
+            justify-content: center;
         }
 
         .control-button {
@@ -87,7 +87,7 @@
             transition: all var(--transition-fast);
         }
 
-        .control-button:hover {
+        .control-button:hover:not(:disabled) { /* Only hover when not disabled */
             background-color: var(--accent-color);
             color: var(--bg-color);
             box-shadow: 0 0 10px var(--accent-color);
@@ -99,20 +99,17 @@
             cursor: not-allowed;
             opacity: 0.5;
         }
-         .control-button:disabled:hover {
-             background-color: transparent;
-             box-shadow: none;
-         }
+        /* No hover effect needed for disabled */
 
         #statusMessage {
             font-size: 0.85em;
             text-align: center;
-            min-height: 1.5em; /* Prevent layout shifts */
+            min-height: 1.5em;
             opacity: 0.7;
         }
 
         .back-link {
-             display: inline-block; /* Allow margin */
+             display: inline-block;
              margin-top: 20px;
              font-size: 0.9em;
              color: var(--accent-color);
@@ -127,7 +124,6 @@
             background-color: var(--border-color);
         }
 
-        /* Basic responsive for smaller screens */
         @media (max-width: 600px) {
             body { padding: 15px; }
             .module-container { padding: 15px; }
@@ -147,124 +143,115 @@
         <canvas id="visualizerCanvas"></canvas>
 
         <div class="controls">
-            <button id="playButton" class="control-button" disabled>INITIATE</button>
+             <button id="playButton" class="control-button">INITIATE</button>
             <button id="pauseButton" class="control-button" disabled>SUSPEND</button>
-            </div>
+        </div>
 
-        <div id="statusMessage">STATUS :: AWAITING AUDIO DATA...</div>
-    </div>
+        <div id="statusMessage">STATUS :: AWAITING INITIALIZATION...</div> </div>
 
     <a href="index.html" class="back-link">&lt;&lt; RETURN TO NODE_62S INTERFACE</a>
 
     <script>
         // --- Configuration ---
-        // IMPORTANT: Place your audio file here and make sure the path/name matches!
         const audioFilePath = 'audio/analyzer_beat.mp3';
-        const fftSize = 1024; // Must be power of 2 (e.g., 256, 512, 1024, 2048) - affects detail/performance
+        const fftSize = 1024;
 
         // --- DOM Elements ---
         const canvas = document.getElementById('visualizerCanvas');
         const ctx = canvas.getContext('2d');
         const playButton = document.getElementById('playButton');
         const pauseButton = document.getElementById('pauseButton');
-        // const stopButton = document.getElementById('stopButton'); // Stop requires more complex handling
         const statusMessage = document.getElementById('statusMessage');
 
         // --- Web Audio API Setup ---
         let audioContext;
         let analyser;
-        let sourceNode; // Stores the buffer source
-        let audioBuffer; // Stores the decoded audio data
+        let sourceNode;
+        let audioBuffer;
         let isPlaying = false;
         let isPaused = false;
+        let audioInitialized = false; // Flag to track if context/buffer is ready
 
-        // Function to setup Audio Context (needs user interaction like a click)
-        function setupAudioContext() {
-            if (audioContext) return; // Already created
+        // Function to initialize Audio Context and load buffer
+        async function initializeAudio() {
+            if (audioInitialized) return; // Don't re-initialize
+
+            // Disable button immediately on click, update status
+            playButton.disabled = true;
+            statusMessage.textContent = "STATUS :: INITIALIZING AUDIO CONTEXT...";
 
             try {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-                // Create AnalyserNode
+                // Prevent context from suspending immediately
+                 if (audioContext.state === 'suspended') {
+                    await audioContext.resume();
+                 }
+
+
                 analyser = audioContext.createAnalyser();
                 analyser.fftSize = fftSize;
-                analyser.smoothingTimeConstant = 0.85; // Adjust smoothness (0 to 1)
+                analyser.smoothingTimeConstant = 0.85;
 
-                // Load the audio file
                 statusMessage.textContent = "STATUS :: FETCHING AUDIO DATA...";
-                fetch(audioFilePath)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status} - Could not fetch ${audioFilePath}`);
-                        }
-                        return response.arrayBuffer();
-                    })
-                    .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
-                    .then(decodedBuffer => {
-                        audioBuffer = decodedBuffer; // Store buffer
-                        statusMessage.textContent = "STATUS :: AUDIO DATA READY // STATE: IDLE";
-                        playButton.disabled = false; // Enable play button
-                        console.log("Audio loaded successfully");
-                    })
-                    .catch(error => {
-                        console.error("Error loading/decoding audio:", error);
-                        statusMessage.textContent = `ERROR :: ${error.message}`;
-                        statusMessage.style.color = 'var(--error-color)';
-                    });
+                const response = await fetch(audioFilePath);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status} - Could not fetch ${audioFilePath}`);
+                }
+                const arrayBuffer = await response.arrayBuffer();
+                audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
 
-            } catch (e) {
-                 console.error("Web Audio API is not supported by this browser.", e);
-                 statusMessage.textContent = "ERROR :: WEB AUDIO API NOT SUPPORTED";
-                 statusMessage.style.color = 'var(--error-color)';
-                 playButton.disabled = true;
-                 pauseButton.disabled = true;
+                audioInitialized = true; // Mark as ready
+                statusMessage.textContent = "STATUS :: AUDIO DATA READY // STATE: IDLE";
+                playButton.disabled = false; // Re-enable play button now that audio is loaded
+                playButton.textContent = "PLAY"; // Change button text
+                console.log("Audio initialized and loaded successfully");
+
+            } catch (error) {
+                console.error("Error initializing/loading audio:", error);
+                statusMessage.textContent = `ERROR :: ${error.message}`;
+                statusMessage.style.color = 'var(--error-color)';
+                // Keep play button disabled on critical error
             }
         }
 
-         // Function to start playing
+         // Function to start/resume playing
          function playAudio() {
             if (!audioContext || !audioBuffer || isPlaying) return;
 
-             // If paused, just resume context
              if (isPaused) {
                  audioContext.resume().then(() => {
                      isPlaying = true;
                      isPaused = false;
                      statusMessage.textContent = "STATUS :: AUDIO STREAM ACTIVE";
-                     playButton.disabled = true;
+                     playButton.disabled = true; // Playing, so disable play
                      pauseButton.disabled = false;
-                     requestAnimationFrame(drawVisualizer); // Resume drawing
+                     requestAnimationFrame(drawVisualizer);
                  });
                  return;
              }
 
-            // Create a new source node each time play is pressed (required)
+            // Create a new source node each time play starts from beginning
             sourceNode = audioContext.createBufferSource();
             sourceNode.buffer = audioBuffer;
-
-            // Connect nodes: Source -> Analyser -> Destination (Speakers)
             sourceNode.connect(analyser);
             analyser.connect(audioContext.destination);
 
-            sourceNode.start(0); // Start playback
+            sourceNode.start(0);
             isPlaying = true;
             isPaused = false;
             statusMessage.textContent = "STATUS :: AUDIO STREAM ACTIVE";
-            playButton.disabled = true; // Disable Play, Enable Pause
+            playButton.disabled = true;
             pauseButton.disabled = false;
 
-             // Handle buffer ending
             sourceNode.onended = () => {
                 isPlaying = false;
-                isPaused = false; // Ensure not marked as paused
-                playButton.disabled = false;
+                isPaused = false;
+                playButton.disabled = false; // Re-enable play when ended
                 pauseButton.disabled = true;
                 statusMessage.textContent = "STATUS :: AUDIO STREAM ENDED // STATE: IDLE";
-                // Optionally clear canvas or leave last frame
-                // ctx.clearRect(0, 0, canvas.width, canvas.height);
             };
 
-            // Start visualization loop
             drawVisualizer();
          }
 
@@ -275,97 +262,64 @@
                  isPlaying = false;
                  isPaused = true;
                  statusMessage.textContent = "STATUS :: AUDIO STREAM SUSPENDED";
-                 playButton.disabled = false; // Enable play (resume)
+                 playButton.disabled = false; // Re-enable play (to resume)
                  pauseButton.disabled = true;
-                 // The requestAnimationFrame loop will pause automatically
              });
          }
 
-         /* // Stop requires creating new source node to replay
-         function stopAudio() {
-            if (!sourceNode || !isPlaying) return;
-            sourceNode.stop(0); // Stops playback
-            // Note: sourceNode cannot be reused after stopping
-            isPlaying = false;
-            isPaused = false;
-            playButton.disabled = false;
-            pauseButton.disabled = true;
-            stopButton.disabled = true;
-            statusMessage.textContent = "STATUS :: AUDIO STREAM TERMINATED // STATE: IDLE";
-         }
-         */
-
         // --- Visualization Drawing ---
-        const bufferLength = analyser.frequencyBinCount; // == fftSize / 2
-        const dataArray = new Uint8Array(bufferLength); // Array for frequency data
+        const bufferLength = analyser ? analyser.frequencyBinCount : fftSize / 2; // Use analyser if ready
+        const dataArray = new Uint8Array(bufferLength);
 
-        // Set canvas dimensions (important for drawing correctly)
-        canvas.width = canvas.clientWidth * window.devicePixelRatio; // Handle HiDPI/Retina
+        // Set canvas dimensions
+        canvas.width = canvas.clientWidth * window.devicePixelRatio;
         canvas.height = canvas.clientHeight * window.devicePixelRatio;
-        ctx.scale(window.devicePixelRatio, window.devicePixelRatio); // Scale context
-
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
         function drawVisualizer() {
-            if (!isPlaying) return; // Stop drawing if not playing
+            if (!isPlaying) {
+                 // Optionally clear or draw idle state when not playing
+                 // ctx.fillStyle = '#080810';
+                 // ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+                 return; // Stop drawing if not playing
+            }
 
-            // Loop the drawing function
             requestAnimationFrame(drawVisualizer);
-
-            // Get frequency data
             analyser.getByteFrequencyData(dataArray);
 
-            // Clear the canvas
-            ctx.fillStyle = '#080810'; // Background color matching canvas CSS
-            ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight); // Use clientWidth/Height for drawing bounds
+            ctx.fillStyle = '#080810';
+            ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
 
-            // --- Draw Spectrum Bars ---
-            const barWidth = (canvas.clientWidth / bufferLength) * 1.5; // Width of each bar (adjust multiplier for spacing)
+            const barWidth = (canvas.clientWidth / bufferLength) * 1.5;
             let barHeight;
-            let x = 0; // Starting x position
-
-            ctx.fillStyle = 'rgba(0, 191, 255, 0.8)'; // Accent color with some transparency
+            let x = 0;
+            ctx.fillStyle = 'rgba(0, 191, 255, 0.8)'; // Use theme accent color
 
             for (let i = 0; i < bufferLength; i++) {
-                barHeight = dataArray[i] * (canvas.clientHeight / 255); // Scale bar height (0-255 value)
-
-                // Draw the bar (from bottom up)
-                ctx.fillRect(
-                    x,                  // x position
-                    canvas.clientHeight - barHeight, // y position (top of bar)
-                    barWidth,           // width
-                    barHeight           // height
-                );
-
-                // Move to the next bar position
-                x += barWidth + 1; // Add 1 for spacing between bars
+                barHeight = dataArray[i] * (canvas.clientHeight / 255);
+                ctx.fillRect(x, canvas.clientHeight - barHeight, barWidth, barHeight);
+                x += barWidth + 1;
             }
         }
 
         // --- Event Listeners ---
-        // Need user interaction to start AudioContext
         playButton.addEventListener('click', () => {
-            if (!audioContext) {
-                setupAudioContext(); // Setup context on first click
-                // Need a slight delay or wait for buffer to load before playing
-                // The loading code now enables the button when ready.
-            }
-             // Check again if buffer is ready before playing
-            if(audioBuffer){
-                playAudio();
+            if (!audioInitialized) {
+                initializeAudio(); // Initialize on first click
             } else {
-                statusMessage.textContent = "STATUS :: AUDIO DATA NOT YET READY...";
+                playAudio(); // Play/Resume on subsequent clicks
             }
         });
         pauseButton.addEventListener('click', pauseAudio);
-        // stopButton.addEventListener('click', stopAudio);
 
-         // Handle canvas resizing (optional but good practice)
          window.addEventListener('resize', () => {
             canvas.width = canvas.clientWidth * window.devicePixelRatio;
             canvas.height = canvas.clientHeight * window.devicePixelRatio;
             ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
          });
 
+        // Initial Status Update (optional, more accurate than HTML default)
+        statusMessage.textContent = "STATUS :: SYSTEM STANDBY // PRESS INITIATE";
 
     </script>
 
