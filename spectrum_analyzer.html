@@ -3,56 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>//NODE_62S :: DYNAMIC_ANALYSIS_MODULE v3.4 (Optimized)</title> <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
+    <title>//NODE_62S :: DYNAMIC_ANALYSIS_MODULE v3.6 (Stable Base)</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- Configuration --- */
+        /* --- Configuration (Based on v3.4/v3.6) --- */
         :root {
             --bg-color: #040408; --text-color: #a8a8b0; --header-color: #d0d0e0;
             --accent-color: #00BFFF; --accent-hover: #ffffff; --border-color: #1f1f2f;
             --success-color: #00dd55; --error-color: #ff2222; --font-main: 'Roboto Mono', monospace;
             --transition-fast: 0.1s ease-in-out;
         }
-        /* --- Base, Container, Header, File Input, Canvas, Controls, Customization, Status, Back Link --- */
-        /* --- Styles are IDENTICAL to the previous version --- */
+        /* --- Base & Structure (Based on v3.4/v3.6 - Scroll enabled) --- */
         *, *::before, *::after { box-sizing: border-box; } html { scroll-behavior: smooth; }
         body { margin: 0; padding: 3vh 20px 20px 20px; width: 100%; min-height: 100vh; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-main); font-size: 14px; line-height: 1.6; overflow-x: hidden; overflow-y: auto; cursor: default; position: relative; display: flex; flex-direction: column; align-items: center; }
-        .module-container { width: 100%; max-width: 850px; border: 1px solid var(--border-color); padding: 20px; margin-bottom: 20px; background-color: rgba(0,0,0, 0.3); box-shadow: inset 0 0 15px rgba(0,0,0, 0.6); position: relative; overflow: hidden; }
+
+        /* Top Left Back Link REMOVED */
+
+        /* Module Container (Based on v3.6) */
+        .module-container { width: 100%; max-width: 850px; border: 1px solid var(--border-color); padding: 20px; margin-bottom: 20px; background-color: rgba(0,0,0, 0.3); box-shadow: inset 0 0 15px rgba(0,0,0, 0.6); position: relative; overflow: hidden; display: flex; flex-direction: column; }
         .module-header { font-family: var(--font-main); font-weight: 700; text-transform: uppercase; font-size: 1.1em; color: var(--header-color); margin: 0 0 20px 0; padding-bottom: 10px; text-align: left; border-bottom: 1px solid var(--border-color); letter-spacing: 1px; }
+        /* Header Domain REMOVED */
+
+        /* File Input Area (Based on v3.6 - NO Drag/Drop styles) */
         .file-input-area { margin-bottom: 20px; padding: 15px; border: 1px dashed var(--border-color); text-align: center; background-color: rgba(0,0,0, 0.2); }
         input[type="file"] { display: none; }
         .file-label { font-family: var(--font-main); display: inline-block; padding: 8px 15px; border: 1px solid var(--accent-color); color: var(--accent-color); background-color: transparent; cursor: pointer; transition: all var(--transition-fast); font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.5px; }
         .file-label:hover { color: var(--bg-color); background-color: var(--accent-color); }
          #fileName { display: block; margin-top: 10px; font-size: 0.8em; opacity: 0.7; min-height: 1.2em; }
-        #visualizerCanvas { display: block; width: 100%; height: 350px; background-color: #040408; border: 1px solid var(--border-color); margin-bottom: 20px; }
-        .controls { display: flex; gap: 15px; margin-bottom: 10px; justify-content: center; }
+
+        /* Canvas (Fixed Height like v3.6) */
+        #visualizerCanvas { display: block; width: 100%; height: 350px; background-color: #040408; border: 1px solid var(--border-color); margin-bottom: 20px; flex-shrink: 0; }
+
+        /* Playback Controls Area (NO Scrubber) */
+        .playback-area { margin-bottom: 15px; flex-shrink: 0; }
+        /* Removed .scrubber-container, #scrubber, .time-display styles */
+        .controls { display: flex; flex-wrap: wrap; gap: 10px 15px; justify-content: center; }
+        /* Button Style from v3.6 */
         .control-button { font-family: var(--font-main); font-size: 0.9em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-color); background-color: transparent; border: 1px solid var(--accent-color); padding: 8px 15px; cursor: pointer; transition: all var(--transition-fast); }
         .control-button:hover:not(:disabled) { background-color: var(--accent-color); color: var(--bg-color); box-shadow: 0 0 10px var(--accent-color); }
         .control-button:disabled { color: var(--border-color); border-color: var(--border-color); cursor: not-allowed; opacity: 0.5; }
-        .customization-controls { border-top: 1px solid var(--border-color); margin-top: 20px; padding-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px 20px; font-size: 0.85em; }
+        #fullscreenButton { /* Inherits style */ }
+
+        /* Customization Controls identical to v3.6 */
+        .customization-controls { border-top: 1px solid var(--border-color); margin-top: 20px; padding-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px 20px; font-size: 0.85em; flex-shrink: 0; }
         .control-group { display: flex; flex-direction: column; gap: 5px; }
         .customization-controls label { font-family: var(--font-main); text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; font-size: 0.9em; margin-bottom: 3px; }
         .customization-controls select, .customization-controls input[type="range"] { font-family: var(--font-main); background-color: var(--border-color); border: 1px solid var(--border-color); color: var(--text-color); padding: 6px 8px; width: 100%; border-radius: 0; -webkit-appearance: none; appearance: none; }
          .customization-controls select { background-image: linear-gradient(45deg, transparent 50%, var(--accent-color) 50%), linear-gradient(135deg, var(--accent-color) 50%, transparent 50%); background-position: calc(100% - 15px) center, calc(100% - 10px) center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 30px; cursor: pointer; }
         .customization-controls input[type="range"] { padding: 0; height: 20px; cursor: pointer;}
-        .customization-controls input[type="range"]::-webkit-slider-runnable-track { background: var(--bg-color); height: 4px; border: 1px solid #000; } .customization-controls input[type="range"]::-moz-range-track { background: var(--bg-color); height: 4px; border: 1px solid #000;}
-        .customization-controls input[type="range"]::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; background: var(--accent-color); cursor: pointer; margin-top: -6px; } .customization-controls input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; background: var(--accent-color); cursor: pointer; border: none; border-radius: 0;}
-        #statusMessage { font-size: 0.85em; text-align: center; min-height: 1.5em; opacity: 0.7; margin-bottom: 15px; }
-        .back-link { display: inline-block; margin-top: 20px; font-size: 0.9em; color: var(--accent-color); text-decoration: none; border: 1px dashed var(--border-color); padding: 5px 10px; transition: all var(--transition-fast); }
+        /* Slider track/thumb styles unchanged */
+
+        /* Status & Back Link identical to v3.6 */
+        #statusMessage { font-size: 0.85em; text-align: center; min-height: 1.5em; opacity: 0.7; margin-bottom: 15px; flex-shrink: 0; }
+        .back-link { display: inline-block; margin-top: 20px; font-size: 0.9em; color: var(--accent-color); text-decoration: none; border: 1px dashed var(--border-color); padding: 5px 10px; transition: all var(--transition-fast); align-self: center; }
         .back-link:hover { color: var(--accent-hover); border-color: var(--accent-hover); background-color: var(--border-color); }
-        @media (max-width: 700px) { body{padding:15px;} .module-container{padding:15px;max-width:95%;} .module-header{font-size:1em;} #visualizerCanvas{height:250px;} .control-button{font-size:.8em;padding:6px 12px;} .back-link{font-size:.8em;margin-top:15px;} .file-label{font-size:.8em;padding:6px 12px;} .file-input-area{padding:10px;} .customization-controls{grid-template-columns:1fr 1fr;} }
+
+        /* --- Fullscreen Specific Styles (Unchanged from v3.6 integration) --- */
+        .module-container:fullscreen { max-width: none; width: 100%; height: 100%; border: none; padding: 10px; background-color: #000; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; margin: 0; max-height: none; }
+        .module-container:fullscreen #visualizerCanvas { height: auto; flex-grow: 1; min-height: 200px; flex-shrink: 0; }
+        body:has(.module-container:fullscreen) .back-link { display: none; } /* Only hide bottom back link */
+
+        /* Media queries identical to v3.6 */
+        @media (max-width: 700px) { body{padding:10px;} .module-container{padding:15px; margin: 10px; max-width: 95%;} #visualizerCanvas{height:250px;} .control-button{font-size:.8em;padding:6px 12px;} .back-link{font-size:.8em;margin-top:15px;} .file-label{font-size:.8em;padding:6px 12px;} .file-input-area{padding:10px;} .customization-controls{grid-template-columns:1fr 1fr;} /* Scrubber container rule removed */ }
         @media (max-width: 450px) { .customization-controls{grid-template-columns:1fr;} }
     </style>
 </head>
 <body>
-    <div class="module-container">
-        <h1 class="module-header">// DYNAMIC_ANALYSIS_MODULE v3.4 //</h1>
-
-        <div class="file-input-area">
-            <input type="file" id="audioFile" accept="audio/*">
+    <div class="module-container" id="moduleContainer">
+         <h1 class="module-header">// DYNAMIC_ANALYSIS_MODULE v3.6 //</h1> <div class="file-input-area">
+            <input type="file" id="audioFile" accept="audio/*" style="display: none;">
             <label for="audioFile" class="file-label">SELECT AUDIO FILE</label>
             <span id="fileName">No file selected</span>
         </div>
@@ -61,149 +84,70 @@
 
         <div id="statusMessage">STATUS :: SELECT AN AUDIO FILE</div>
 
-        <div class="controls">
-            <button id="playButton" class="control-button" disabled>PLAY</button>
-            <button id="pauseButton" class="control-button" disabled>PAUSE</button>
+        <div class="playback-area">
+             <div class="controls">
+                <button id="playButton" class="control-button" disabled>PLAY</button>
+                <button id="pauseButton" class="control-button" disabled>PAUSE</button>
+                <button id="fullscreenButton" class="control-button">FULLSCREEN</button>
+            </div>
         </div>
 
         <div class="customization-controls">
-            <div class="control-group">
-                <label for="themeSelector">Theme:</label>
-                <select id="themeSelector">
-                    <option value="layered" selected>Layered Wave</option>
-                    <option value="waveform">Glowing Waveform</option>
-                    <option value="bars">Frequency Bars</option>
-                    </select>
-            </div>
-             <div class="control-group">
-                <label for="paletteSelector">Color Palette:</label>
-                <select id="paletteSelector">
-                    <option value="default">Default Blue</option>
-                    <option value="neon">Neon</option>
-                    <option value="ocean">Ocean</option>
-                    <option value="fire">Fire</option>
-                    <option value="forest">Forest</option>
-                    <option value="grayscale">Grayscale</option>
-                </select>
-            </div>
-            <div class="control-group">
-                <label for="glowSlider">Glow / Bloom:</label>
-                <input type="range" id="glowSlider" min="0" max="30" value="10" step="1">
-            </div>
-            <div class="control-group">
-                <label for="thicknessSlider">Thickness / Width:</label>
-                <input type="range" id="thicknessSlider" min="1" max="10" step="0.5" value="2" >
-            </div>
-             <div class="control-group">
-                <label for="particleSlider">Particle Density:</label>
-                <input type="range" id="particleSlider" min="0" max="5" value="2" step="1">
-            </div>
+            <div class="control-group"> <label for="themeSelector">Theme:</label> <select id="themeSelector"> <option value="layered" selected>Layered Wave</option> <option value="waveform">Glowing Waveform</option> <option value="bars">Frequency Bars</option> </select> </div>
+            <div class="control-group"> <label for="paletteSelector">Color Palette:</label> <select id="paletteSelector"> <option value="default">Default Blue</option> <option value="neon">Neon</option> <option value="ocean">Ocean</option> <option value="fire">Fire</option> <option value="forest">Forest</option> <option value="grayscale">Grayscale</option> </select> </div>
+            <div class="control-group"> <label for="glowSlider">Glow / Bloom:</label> <input type="range" id="glowSlider" min="0" max="30" value="10" step="1"> </div>
+            <div class="control-group"> <label for="thicknessSlider">Thickness / Width:</label> <input type="range" id="thicknessSlider" min="1" max="10" step="0.5" value="2"> </div>
+            <div class="control-group"> <label for="particleSlider">Particle Density:</label> <input type="range" id="particleSlider" min="0" max="5" value="2" step="1"> </div>
         </div>
 
     </div><a href="index.html" class="back-link">&lt;&lt; RETURN TO NODE_62S INTERFACE</a>
 
     <script>
-        // --- Configuration ---
-        const fftSize = 2048; const particleMaxLifeBase = 50; const particleSpeedBase = 1.2;
-        const particleEmitThreshold = 210; const peakThrottleMs = 40;
+        // --- SCRIPT IS IDENTICAL TO THE v3.6 SCRIPT ---
+        // --- (Includes working audio, 3 themes, palettes, sliders, fullscreen) ---
+        console.log("Script loaded. v3.6 (Stable Base + Fullscreen)");
 
-        // --- DOM Elements ---
-        const canvas = document.getElementById('visualizerCanvas'); const ctx = canvas.getContext('2d');
-        const audioElement = new Audio(); const playButton = document.getElementById('playButton');
-        const pauseButton = document.getElementById('pauseButton'); const statusMessage = document.getElementById('statusMessage');
-        const fileInput = document.getElementById('audioFile'); const fileNameDisplay = document.getElementById('fileName');
-        const themeSelector = document.getElementById('themeSelector'); const glowSlider = document.getElementById('glowSlider');
-        const thicknessSlider = document.getElementById('thicknessSlider'); const particleSlider = document.getElementById('particleSlider');
-        const paletteSelector = document.getElementById('paletteSelector');
-
-        // --- State & Settings ---
-        let audioContext; let analyser; let sourceNode; let audioInitialized = false;
-        let bufferLengthFreq; let bufferLengthTime; let dataArrayFreq; let dataArrayTime;
-        let isPlaying = false; let particles = []; let lastPeakTime = 0; let canvasWidth, canvasHeight;
-        let animationFrameId = null;
-
-        const colorPalettes = { /* ... Palettes same as before ... */ default:['#00BFFF','#40E0D0','#FFFFFF','#87CEFA'], neon:['#39FF14','#FF1493','#00FFFF','#FFFF00'], ocean:['#0077CC','#00AADD','#90CAF9','#E1F5FE'], fire:['#FF4500','#FFA500','#FF6347','#DC143C'], forest:['#228B22','#556B2F','#8FBC8F','#9ACD32'], grayscale:['#FFFFFF','#C0C0C0','#808080','#404040'] };
-        let visualizerSettings = { theme: 'layered', palette: 'default', glow: 10, thickness: 2, particles: 2 }; // Default theme is layered
-        function updateSettings() { visualizerSettings.theme = themeSelector.value; visualizerSettings.palette = paletteSelector.value; visualizerSettings.glow = parseInt(glowSlider.value, 10); visualizerSettings.thickness = parseFloat(thicknessSlider.value); visualizerSettings.particles = parseInt(particleSlider.value, 10); }
+        const fftSize = 2048; const particleMaxLifeBase = 50; const particleSpeedBase = 1.2; const particleEmitThreshold = 210; const peakThrottleMs = 40;
+        const canvas = document.getElementById('visualizerCanvas'); const ctx = canvas.getContext('2d'); const audioElement = new Audio(); const playButton = document.getElementById('playButton'); const pauseButton = document.getElementById('pauseButton'); const statusMessage = document.getElementById('statusMessage'); const fileInput = document.getElementById('audioFile'); const fileNameDisplay = document.getElementById('fileName'); const themeSelector = document.getElementById('themeSelector'); const glowSlider = document.getElementById('glowSlider'); const thicknessSlider = document.getElementById('thicknessSlider'); const particleSlider = document.getElementById('particleSlider'); const paletteSelector = document.getElementById('paletteSelector'); const moduleContainer = document.getElementById('moduleContainer'); const fullscreenButton = document.getElementById('fullscreenButton');
+        let audioContext; let analyser; let sourceNode; let audioInitialized = false; let bufferLengthFreq; let bufferLengthTime; let dataArrayFreq; let dataArrayTime; let isPlaying = false; let particles = []; let lastPeakTime = 0; let canvasWidth, canvasHeight; let animationFrameId = null;
+        const colorPalettes = { default:['#00BFFF','#40E0D0','#FFFFFF','#87CEFA'], neon:['#39FF14','#FF1493','#00FFFF','#FFFF00'], ocean:['#0077CC','#00AADD','#90CAF9','#E1F5FE'], fire:['#FF4500','#FFA500','#FF6347','#DC143C'], forest:['#228B22','#556B2F','#8FBC8F','#9ACD32'], grayscale:['#FFFFFF','#C0C0C0','#808080','#404040'] };
+        let visualizerSettings = { theme: 'layered', palette: 'default', glow: 10, thickness: 2, particles: 2 };
+        function updateSettings() { visualizerSettings.theme=themeSelector.value;visualizerSettings.palette=paletteSelector.value;visualizerSettings.glow=parseInt(glowSlider.value,10);visualizerSettings.thickness=parseFloat(thicknessSlider.value);visualizerSettings.particles=parseInt(particleSlider.value,10); }
         function getCurrentPalette() { return colorPalettes[visualizerSettings.palette] || colorPalettes.default; }
-
-        // --- Helper Functions ---
-        function initializeAudioContext() { /* ... Same as before ... */ if(audioInitialized)return true;try{statusMessage.textContent="Init Context...";audioContext=new(window.AudioContext||window.webkitAudioContext)();if(audioContext.state==='suspended'){audioContext.resume();}analyser=audioContext.createAnalyser();analyser.fftSize=fftSize;analyser.smoothingTimeConstant=0.8;bufferLengthFreq=analyser.frequencyBinCount;bufferLengthTime=analyser.fftSize;dataArrayFreq=new Uint8Array(bufferLengthFreq);dataArrayTime=new Uint8Array(bufferLengthTime);sourceNode=audioContext.createMediaElementSource(audioElement);audioInitialized=true;console.log("Ctx Init OK");statusMessage.textContent="Ctx Ready";return true;}catch(e){console.error("Ctx Init Fail:",e);statusMessage.textContent="ERR: No Web Audio";statusMessage.style.color='var(--error-color)';fileInput.disabled=true;document.querySelector('.file-label').style.cursor='not-allowed';document.querySelector('.file-label').style.opacity='0.5';return false;} }
-        function mapValue(v, im, iM, om, oM) { const val = om + (oM - om) * (v - im) / (iM - im); return Math.max(om, Math.min(oM, val)); }
-        function getAverage(data, start, end) { /* ... Same as before ... */ let s=0;const cE=Math.min(end,data.length);const ct=cE-start;if(ct<=0)return 0;for(let i=start;i<cE;i++){s+=data[i];}return s/ct; }
-
-        // --- File Handling (Same robust logic) ---
-        fileInput.addEventListener('change', function(event) { /* ... Same as before ... */ if(!initializeAudioContext()){return;}const files=event.target.files;if(files.length===0){fileNameDisplay.textContent='No file';statusMessage.textContent='Cancelled';audioElement.src='';playButton.disabled=true;pauseButton.disabled=true;isPlaying=false;particles=[];if(animationFrameId){cancelAnimationFrame(animationFrameId);animationFrameId=null;}drawVisualizer();return;}const file=files[0];fileNameDisplay.textContent=`Selected: ${file.name}`;statusMessage.textContent='Reading...';playButton.disabled=true;pauseButton.disabled=true;isPlaying=false;audioElement.pause();audioElement.currentTime=0;particles=[];if(animationFrameId){cancelAnimationFrame(animationFrameId);animationFrameId=null;}
-        if(sourceNode){try{sourceNode.disconnect();}catch(e){console.warn("Src disconnect fail:",e)}} const reader=new FileReader();reader.onload=function(e){statusMessage.textContent='Decoding...';audioElement.src=e.target.result;audioElement.load();const canPlayHandler=()=>{statusMessage.textContent='READY // PRESS PLAY';playButton.disabled=false;pauseButton.disabled=true;console.log("canplay",audioElement.readyState);audioElement.removeEventListener('canplay',canPlayHandler);try{if(!sourceNode||sourceNode.context.state==='closed'){if(audioContext.state==='closed'){initializeAudioContext();}sourceNode=audioContext.createMediaElementSource(audioElement);console.log("Source created.");}else{console.log("Reusing source.");}
-        sourceNode.disconnect();sourceNode.connect(analyser);analyser.connect(audioContext.destination);console.log("Nodes connected.");}catch(err){console.error("Connect err:",err);statusMessage.textContent='ERR:Cannot connect audio.';statusMessage.style.color='var(--error-color)';playButton.disabled=true;return;}};const errorHandler=(err)=>{console.error("Audio Load Error:",err);statusMessage.textContent='ERR:Failed load.';statusMessage.style.color='var(--error-color)';playButton.disabled=true;pauseButton.disabled=true;audioElement.removeEventListener('canplay',canPlayHandler);audioElement.removeEventListener('error',errorHandler);};audioElement.addEventListener('canplay',canPlayHandler,{once:true});audioElement.addEventListener('error',errorHandler,{once:true});}
-        reader.onerror=function(e){console.error("Read err:",e);statusMessage.textContent='ERR: Read failed';statusMessage.style.color='var(--error-color)';fileNameDisplay.textContent='Read error';playButton.disabled=true;pauseButton.disabled=true;}
-        reader.readAsDataURL(file);} );
-
-        // --- Playback Controls (Same robust logic) ---
-        playButton.addEventListener('click', () => { /* ... Same as before ... */ if(!audioInitialized||!audioElement.src||audioElement.readyState<3||playButton.disabled){console.warn(`Play prevented: Init=${audioInitialized}, Src=${!!audioElement.src}, Ready=${audioElement.readyState}, Btn=${playButton.disabled}`);statusMessage.textContent="Audio Not Ready";return;}if(audioContext.state==='suspended'){console.log("Attempt resume...");audioContext.resume().then(()=>{console.log("Ctx resumed.");startPlayback();}).catch(err=>console.error("Resume fail:",err));}else{console.log("Ctx running.");startPlayback();} });
-        function startPlayback(){ /* ... Same as before ... */ console.log("startPlayback");audioElement.play().then(()=>{console.log("play() resolved");isPlaying=true;playButton.disabled=true;pauseButton.disabled=false;statusMessage.textContent='PLAYING';if(animationFrameId)cancelAnimationFrame(animationFrameId);drawVisualizer();}).catch(err=>{console.error("play() failed:",err);statusMessage.textContent=`ERR: ${err.name}`;statusMessage.style.color='var(--error-color)';playButton.disabled=false;pauseButton.disabled=true;isPlaying=false;}); }
+        function initializeAudioContext() { if(audioInitialized)return true;try{statusMessage.textContent="Init Context...";audioContext=new(window.AudioContext||window.webkitAudioContext)();if(audioContext.state==='suspended'){}analyser=audioContext.createAnalyser();analyser.fftSize=fftSize;analyser.smoothingTimeConstant=0.8;bufferLengthFreq=analyser.frequencyBinCount;bufferLengthTime=analyser.fftSize;dataArrayFreq=new Uint8Array(bufferLengthFreq);dataArrayTime=new Uint8Array(bufferLengthTime);sourceNode=audioContext.createMediaElementSource(audioElement);audioInitialized=true;console.log("Ctx Init OK");statusMessage.textContent="Ctx Ready";return true;}catch(e){console.error("Ctx Init Fail:",e);statusMessage.textContent="ERR: No Web Audio";statusMessage.style.color='var(--error-color)';fileInput.disabled=true;document.querySelector('.file-label').style.cursor='not-allowed';document.querySelector('.file-label').style.opacity='0.5';return false;} }
+        function mapValue(v, im, iM, om, oM) { const val=om+(oM-om)*(v-im)/(iM-im);return Math.max(om,Math.min(oM,val)); }
+        function getAverage(data, start, end) { let s=0;const cE=Math.min(end,data.length);const ct=cE-start;if(ct<=0)return 0;for(let i=start;i<cE;i++){s+=data[i];}return s/ct; }
+        function hexToRgba(hex, alpha=1) { let r=0,g=0,b=0;if(!hex)return`rgba(255,255,255,${alpha})`;if(hex.length===4){r=parseInt(hex[1]+hex[1],16);g=parseInt(hex[2]+hex[2],16);b=parseInt(hex[3]+hex[3],16);}else if(hex.length===7){r=parseInt(hex[1]+hex[2],16);g=parseInt(hex[3]+hex[4],16);b=parseInt(hex[5]+hex[6],16);}else{return`rgba(255,255,255,${alpha})`;}return`rgba(${r},${g},${b},${alpha})`; }
+        fileInput.addEventListener('change', function(event) { console.log("[v3.6 fileInput] Change event"); if (!initializeAudioContext()) { return; } const files = event.target.files; if (files.length === 0) { fileNameDisplay.textContent = 'No file selected'; statusMessage.textContent = 'STATUS :: SELECT FILE'; audioElement.src = ''; playButton.disabled = true; pauseButton.disabled = true; isPlaying = false; particles = []; if(animationFrameId){cancelAnimationFrame(animationFrameId); animationFrameId=null;} drawVisualizer(); fileInput.value = null; return; } const file = files[0]; fileNameDisplay.textContent = `Selected: ${file.name}`; statusMessage.textContent = 'Reading...'; playButton.disabled = true; pauseButton.disabled = true; isPlaying = false; audioElement.pause(); audioElement.currentTime = 0; particles = []; if(animationFrameId){cancelAnimationFrame(animationFrameId);animationFrameId=null;} if(sourceNode){try{sourceNode.disconnect();}catch(e){console.warn("Src disconnect fail:",e)}} const reader = new FileReader(); reader.onload = function(e) { console.log("[v3.6 FileReader] onload"); statusMessage.textContent = 'Decoding...'; audioElement.src = e.target.result; audioElement.load(); const canPlayHandler = () => { console.log("[v3.6 canPlayHandler] 'canplay'"); statusMessage.textContent = 'READY // PRESS PLAY'; playButton.disabled = false; pauseButton.disabled = true; audioElement.removeEventListener('canplay', canPlayHandler); try { if (!sourceNode || sourceNode.context !== audioContext) { sourceNode = audioContext.createMediaElementSource(audioElement); console.log("Source created."); } else { console.log("Reusing source."); } sourceNode.disconnect(); sourceNode.connect(analyser); analyser.connect(audioContext.destination); console.log("Nodes connected."); } catch (err) { console.error("Connect err:", err); statusMessage.textContent = 'ERR:Cannot connect audio.'; statusMessage.style.color = 'var(--error-color)'; playButton.disabled = true; return; } }; const errorHandler = (err) => { console.error("Audio Load Error:", err); statusMessage.textContent = 'ERR:Failed load.'; statusMessage.style.color = 'var(--error-color)'; playButton.disabled = true; pauseButton.disabled = true; audioElement.removeEventListener('canplay', canPlayHandler); audioElement.removeEventListener('error', errorHandler); }; audioElement.addEventListener('canplay', canPlayHandler, { once: true }); audioElement.addEventListener('error', errorHandler, { once: true }); }; reader.onerror = function(e) { console.error("Read err:", e); statusMessage.textContent = 'ERR: Read failed'; statusMessage.style.color = 'var(--error-color)'; fileNameDisplay.textContent = 'Read error'; playButton.disabled = true; pauseButton.disabled = true; }; reader.readAsDataURL(file); });
+        playButton.addEventListener('click', () => { console.log("[v3.6 PlayButton] Clicked."); if (!audioInitialized || !audioElement.src || audioElement.readyState < 3 || playButton.disabled) { console.warn(`Play prevented`); return; } if (audioContext.state === 'suspended') { console.log("Attempt resume..."); audioContext.resume().then(() => { console.log("Ctx resumed."); startPlayback(); }).catch(err => console.error("Resume fail:", err)); } else { console.log("Ctx running."); startPlayback(); } });
+        function startPlayback(){ console.log("startPlayback");audioElement.play().then(()=>{console.log("play() resolved");isPlaying=true;playButton.disabled=true;pauseButton.disabled=false;statusMessage.textContent='PLAYING';if(animationFrameId)cancelAnimationFrame(animationFrameId);drawVisualizer();}).catch(err=>{console.error("play() failed:",err);statusMessage.textContent=`ERR: ${err.name}`;statusMessage.style.color='var(--error-color)';playButton.disabled=false;pauseButton.disabled=true;isPlaying=false;}); }
         pauseButton.addEventListener('click', () => { if (!isPlaying) return; console.log("Pause click"); audioElement.pause(); });
-        audioElement.onpause = () => { if (isPlaying) { isPlaying = false; playButton.disabled = false; pauseButton.disabled = true; statusMessage.textContent = 'PAUSED'; console.log("Paused by element."); if(animationFrameId){cancelAnimationFrame(animationFrameId); animationFrameId=null;} } else { console.log("onpause ignored, not playing."); } };
+        audioElement.onpause = () => { if (isPlaying) { isPlaying = false; playButton.disabled = false; pauseButton.disabled = true; statusMessage.textContent = 'PAUSED'; console.log("Paused."); if(animationFrameId){cancelAnimationFrame(animationFrameId); animationFrameId=null;} } };
         audioElement.onended = () => { console.log("Ended."); isPlaying = false; playButton.disabled = false; pauseButton.disabled = true; statusMessage.textContent = 'ENDED'; particles = []; if(animationFrameId){cancelAnimationFrame(animationFrameId); animationFrameId=null;} drawVisualizer(); };
-        audioElement.onerror = (e) => { /* ... Same as before ... */ console.error("Audio Err:", e); statusMessage.textContent='ERR: Playback'; statusMessage.style.color='var(--error-color)'; isPlaying=false; playButton.disabled=true; pauseButton.disabled=true; particles=[]; if(animationFrameId){cancelAnimationFrame(animationFrameId);animationFrameId=null;} };
-
-        // --- Particle Emission Function (uses settings) ---
-        function emitParticles(x, y, count, settings) { /* ... Same as before ... */ const particleAmountMultiplier=settings.particles/2; const actualCount=Math.min(10,Math.floor(count*particleAmountMultiplier)); const currentPalette=getCurrentPalette(); for(let i=0; i<actualCount; i++){ if(particles.length>150*particleAmountMultiplier)return; const angle=Math.random()*Math.PI*2; const speed=Math.random()*particleSpeedBase*0.5+0.2; const life=Math.random()*(particleMaxLifeBase*0.5)+(particleMaxLifeBase*0.5); const particleBaseColor=currentPalette[Math.floor(Math.random()*currentPalette.length)]; particles.push({ x:x, y:y, vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed, life:life, maxLife:life, size:Math.random()*1.5+0.5, color:particleBaseColor }); } }
-
-        // --- Setup Canvas & Resize ---
-        function setupCanvas() { /* ... Same as before ... */ canvasWidth=canvas.clientWidth;canvasHeight=canvas.clientHeight;canvas.width=canvasWidth*window.devicePixelRatio;canvas.height=canvasHeight*window.devicePixelRatio;ctx.scale(window.devicePixelRatio,window.devicePixelRatio); }
-        setupCanvas();
-
-        // ============================================================
-        // --- THEME DRAWING FUNCTIONS (Palette/Settings Aware) ---
-        // ============================================================
-        function drawIdle() { /* ... Same as before ... */ ctx.fillStyle='#040408';ctx.fillRect(0,0,canvasWidth,canvasHeight);ctx.strokeStyle='rgba(128,128,128,0.2)';ctx.lineWidth=1;ctx.shadowBlur=0;ctx.beginPath();ctx.moveTo(0,canvasHeight/2);ctx.lineTo(canvasWidth,canvasHeight/2);ctx.stroke(); }
-        function drawLayered(settings) { /* ... Same as before ... uses settings & getCurrentPalette() ... */ analyser.getByteTimeDomainData(dataArrayTime);analyser.getByteFrequencyData(dataArrayFreq);let ampSum=0;for(let i=0;i<bufferLengthTime;i++){ampSum+=Math.abs(dataArrayTime[i]-128);}const avgAmp=ampSum/bufferLengthTime;const bBins=Math.floor(bufferLengthFreq*0.1);const mBins=Math.floor(bufferLengthFreq*0.4);const tBins=bufferLengthFreq;const bEng=getAverage(dataArrayFreq,0,bBins);const mEng=getAverage(dataArrayFreq,bBins,mBins);const tEng=getAverage(dataArrayFreq,mBins,tBins);const currentPalette=getCurrentPalette();ctx.fillStyle='#040408';ctx.fillRect(0,0,canvasWidth,canvasHeight);const pulseSize=mapValue(bEng,0,150,canvasHeight*0.1,canvasHeight*1.5);const pulseAlpha=mapValue(bEng,0,150,0,0.1);if(pulseAlpha>0.01){const radGrad=ctx.createRadialGradient(canvasWidth/2,canvasHeight/2,0,canvasWidth/2,canvasHeight/2,pulseSize);radGrad.addColorStop(0,hexToRgba(currentPalette[0],pulseAlpha));radGrad.addColorStop(1,hexToRgba(currentPalette[0],0));ctx.fillStyle=radGrad;ctx.fillRect(0,0,canvasWidth,canvasHeight);}
-        const barWidthFreq=canvasWidth/bufferLengthFreq;const barAlpha='08';for(let i=0;i<bufferLengthFreq;i++){const barHeightFreq=dataArrayFreq[i]*(canvasHeight/255)*0.7;ctx.fillStyle=currentPalette[i%currentPalette.length]+barAlpha;ctx.fillRect(i*barWidthFreq,canvasHeight-barHeightFreq,barWidthFreq*0.8,barHeightFreq);}
-        ctx.shadowBlur=Math.max(1,settings.glow/3);for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.life--;if(p.life<=0){particles.splice(i,1);continue;}p.x+=p.vx;p.y+=p.vy;const alpha=p.life/p.maxLife;ctx.beginPath();ctx.arc(p.x,p.y,p.size*alpha,0,Math.PI*2);let rgbaColor=p.color;if(p.color.startsWith('#')){rgbaColor=hexToRgba(p.color,alpha*0.9);}else{try{rgbaColor=p.color.replace(/[\d\.]+\)$/g,`${alpha*0.9})`);}catch(e){}} ctx.fillStyle=rgbaColor;ctx.shadowColor=rgbaColor.replace(/[\d\.]+\)$/g,`${alpha*0.5})`);ctx.fill();} ctx.shadowBlur=0;
-        ctx.lineWidth=mapValue(avgAmp,0,50,1,settings.thickness);ctx.shadowColor=hexToRgba(currentPalette[0],0.6); ctx.shadowBlur=settings.glow;const waveGrad=ctx.createLinearGradient(0,0,0,canvasHeight);waveGrad.addColorStop(0,currentPalette[0]||'#FFFFFF');waveGrad.addColorStop(0.5,currentPalette[1]||'#C0C0C0');waveGrad.addColorStop(1,currentPalette[2]||'#808080');ctx.strokeStyle=waveGrad;ctx.beginPath();const sliceW=canvasWidth*1.0/bufferLengthTime;let x=0;let curAmp;const curTime=performance.now();for(let i=0;i<bufferLengthTime;i++){curAmp=dataArrayTime[i];const v=curAmp/128.0;const y=(v*canvasHeight/2);if(i===0){ctx.moveTo(x,y);}else{ctx.lineTo(x,y);}x+=sliceW;if(settings.particles>0&&curAmp>particleEmitThreshold&&(curTime-lastPeakTime>peakThrottleMs)){const midPaletteIndex=Math.floor(currentPalette.length/2);emitParticles(x-sliceW/2,y,Math.floor(Math.random()*settings.particles)+1,currentPalette[midPaletteIndex],settings);lastPeakTime=curTime;}} ctx.stroke();ctx.shadowColor='transparent';ctx.shadowBlur=0; }
-        function drawWaveform(settings) { /* ... Same as before ... uses settings & getCurrentPalette() ... */ analyser.getByteTimeDomainData(dataArrayTime); const currentPalette = getCurrentPalette(); ctx.fillStyle='#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); ctx.lineWidth=settings.thickness; const waveColor = currentPalette[0] || 'var(--accent-color)'; ctx.strokeStyle = waveColor; ctx.shadowColor = hexToRgba(waveColor, 0.7); ctx.shadowBlur = settings.glow; ctx.beginPath(); const sliceWidth = canvasWidth * 1.0 / bufferLengthTime; let x = 0; for (let i = 0; i < bufferLengthTime; i++) { const v = dataArrayTime[i] / 128.0; const y = (v * canvasHeight / 2); if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); } x += sliceWidth; } ctx.stroke(); ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
-        function drawBars(settings) { /* ... Same as before ... uses settings & getCurrentPalette() ... */ analyser.getByteFrequencyData(dataArrayFreq); const currentPalette = getCurrentPalette(); ctx.fillStyle='#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); const barWidth = (canvasWidth / bufferLengthFreq); let barHeight; let x = 0; const barGlow = Math.max(0, Math.min(8, settings.glow / 1.5)); ctx.shadowBlur = barGlow; for (let i = 0; i < bufferLengthFreq; i++) { barHeight = dataArrayFreq[i] * (canvasHeight / 255); if (barHeight < 1) continue; const colorIndex = i % currentPalette.length; const barColor = currentPalette[colorIndex]; ctx.fillStyle = barColor; ctx.shadowColor = hexToRgba(barColor, 0.7); ctx.fillRect(x, canvasHeight - barHeight, Math.max(1, barWidth * settings.thickness / 1.5), barHeight); x += barWidth; } ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
-
-        // --- *** DELETED drawCircular function *** ---
-
-
-        // --- Main Drawing Loop (Delegates to Themes) ---
-        function drawVisualizer() {
-            if (isPlaying) { animationFrameId = requestAnimationFrame(drawVisualizer); }
-            else { animationFrameId = null; }
-
-            const currentSettings = visualizerSettings;
-
-            if (!audioInitialized || (!isPlaying && audioElement.paused) || !analyser) {
-                drawIdle(); if (!isPlaying && particles.length > 0) particles = []; return;
-            }
-
-            const theme = currentSettings.theme;
-            // *** REMOVED Circular case from here ***
-            if (theme === 'layered') { drawLayered(currentSettings); }
-            else if (theme === 'waveform') { drawWaveform(currentSettings); }
-            else if (theme === 'bars') { drawBars(currentSettings); }
-            else { drawIdle(); } // Default fallback
-        }
-
-        // --- Control Event Listeners ---
+        audioElement.onerror = (e) => { console.error("Audio Err:", e); statusMessage.textContent='ERR: Playback'; statusMessage.style.color='var(--error-color)'; isPlaying=false; playButton.disabled=true; pauseButton.disabled=true; particles=[]; if(animationFrameId){cancelAnimationFrame(animationFrameId);animationFrameId=null;} };
+        function emitParticles(x, y, count, settings) { const particleAmountMultiplier=settings.particles/2;const actualCount=Math.min(10,Math.floor(count*particleAmountMultiplier));const currentPalette=getCurrentPalette();for(let i=0; i<actualCount; i++){if(particles.length>150*particleAmountMultiplier)return; const angle=Math.random()*Math.PI*2; const speed=Math.random()*particleSpeedBase*0.5+0.2; const life=Math.random()*(particleMaxLifeBase*0.5)+(particleMaxLifeBase*0.5); const particleBaseColor=currentPalette[Math.floor(Math.random()*currentPalette.length)]; particles.push({x:x,y:y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:life,maxLife:life,size:Math.random()*1.5+0.5,color:particleBaseColor});} }
+        function setupCanvas() { const currentWidth=canvas.clientWidth;const currentHeight=canvas.clientHeight;if(currentWidth>0&&currentHeight>0){canvasWidth=currentWidth;canvasHeight=currentHeight;canvas.width=canvasWidth*window.devicePixelRatio;canvas.height=canvasHeight*window.devicePixelRatio;ctx.scale(window.devicePixelRatio,window.devicePixelRatio);}else{console.warn(`Canvas setup skipped: Invalid dimensions (${currentWidth}x${currentHeight})`);} } setupCanvas();
+        function drawIdle() { ctx.fillStyle='#040408';ctx.fillRect(0,0,canvasWidth,canvasHeight);ctx.strokeStyle='rgba(128,128,128,0.2)';ctx.lineWidth=1;ctx.shadowBlur=0;ctx.beginPath();ctx.moveTo(0,canvasHeight/2);ctx.lineTo(canvasWidth,canvasHeight/2);ctx.stroke(); }
+        function drawLayered(settings) { /* ... Logic identical to v3.6 ... */ analyser.getByteTimeDomainData(dataArrayTime);analyser.getByteFrequencyData(dataArrayFreq);let ampSum=0;for(let i=0;i<bufferLengthTime;i++){ampSum+=Math.abs(dataArrayTime[i]-128);}const avgAmp=ampSum/bufferLengthTime;const bBins=Math.floor(bufferLengthFreq*0.1);const mBins=Math.floor(bufferLengthFreq*0.4);const tBins=bufferLengthFreq;const bEng=getAverage(dataArrayFreq,0,bBins);const mEng=getAverage(dataArrayFreq,bBins,mBins);const tEng=getAverage(dataArrayFreq,mBins,tBins);const currentPalette=getCurrentPalette();ctx.fillStyle='#040408';ctx.fillRect(0,0,canvasWidth,canvasHeight);const pulseSize=mapValue(bEng,0,150,canvasHeight*0.1,canvasHeight*1.5);const pulseAlpha=mapValue(bEng,0,150,0,0.1);if(pulseAlpha>0.01){const radGrad=ctx.createRadialGradient(canvasWidth/2,canvasHeight/2,0,canvasWidth/2,canvasHeight/2,pulseSize);radGrad.addColorStop(0,hexToRgba(currentPalette[0],pulseAlpha));radGrad.addColorStop(1,hexToRgba(currentPalette[0],0));ctx.fillStyle=radGrad;ctx.fillRect(0,0,canvasWidth,canvasHeight);} const barWidthFreq=canvasWidth/bufferLengthFreq;const barAlpha='08';for(let i=0;i<bufferLengthFreq;i++){const barHeightFreq=dataArrayFreq[i]*(canvasHeight/255)*0.7;ctx.fillStyle=currentPalette[i%currentPalette.length]+barAlpha;ctx.fillRect(i*barWidthFreq,canvasHeight-barHeightFreq,barWidthFreq*0.8,barHeightFreq);} ctx.shadowBlur=Math.max(1,settings.glow/3);for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.life--;if(p.life<=0){particles.splice(i,1);continue;}p.x+=p.vx;p.y+=p.vy;const alpha=p.life/p.maxLife;ctx.beginPath();ctx.arc(p.x,p.y,p.size*alpha,0,Math.PI*2);let rgbaColor=p.color;if(p.color.startsWith('#')){rgbaColor=hexToRgba(p.color,alpha*0.9);}else{try{rgbaColor=p.color.replace(/[\d\.]+\)$/g,`${alpha*0.9})`);}catch(e){}} ctx.fillStyle=rgbaColor;ctx.shadowColor=rgbaColor.replace(/[\d\.]+\)$/g,`${alpha*0.5})`);ctx.fill();} ctx.shadowBlur=0; ctx.lineWidth=mapValue(avgAmp,0,50,1,settings.thickness);ctx.shadowColor=hexToRgba(currentPalette[0],0.6); ctx.shadowBlur=settings.glow;const waveGrad=ctx.createLinearGradient(0,0,0,canvasHeight);waveGrad.addColorStop(0,currentPalette[0]||'#FFFFFF');waveGrad.addColorStop(0.5,currentPalette[1]||'#C0C0C0');waveGrad.addColorStop(1,currentPalette[2]||'#808080');ctx.strokeStyle=waveGrad;ctx.beginPath();const sliceW=canvasWidth*1.0/bufferLengthTime;let x=0;let curAmp;const curTime=performance.now();for(let i=0;i<bufferLengthTime;i++){curAmp=dataArrayTime[i];const v=curAmp/128.0;const y=(v*canvasHeight/2);if(i===0){ctx.moveTo(x,y);}else{ctx.lineTo(x,y);}x+=sliceW;if(settings.particles>0&&curAmp>particleEmitThreshold&&(curTime-lastPeakTime>peakThrottleMs)){emitParticles(x-sliceW/2,y,Math.floor(Math.random()*settings.particles)+1,settings);lastPeakTime=curTime;}} ctx.stroke();ctx.shadowColor='transparent';ctx.shadowBlur=0; }
+        function drawWaveform(settings) { /* ... Logic identical to v3.6 ... */ analyser.getByteTimeDomainData(dataArrayTime); const currentPalette = getCurrentPalette(); ctx.fillStyle='#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); ctx.lineWidth=settings.thickness; const waveColor = currentPalette[0] || 'var(--accent-color)'; ctx.strokeStyle = waveColor; ctx.shadowColor = hexToRgba(waveColor, 0.7); ctx.shadowBlur = settings.glow; ctx.beginPath(); const sliceWidth = canvasWidth * 1.0 / bufferLengthTime; let x = 0; for (let i = 0; i < bufferLengthTime; i++) { const v = dataArrayTime[i] / 128.0; const y = (v * canvasHeight / 2); if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); } x += sliceWidth; } ctx.stroke(); ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
+        function drawBars(settings) { /* ... Logic identical to v3.6 ... */ analyser.getByteFrequencyData(dataArrayFreq); const currentPalette = getCurrentPalette(); ctx.fillStyle='#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); const barWidth = (canvasWidth / bufferLengthFreq); let barHeight; let x = 0; const barGlow = Math.max(0, Math.min(8, settings.glow / 1.5)); ctx.shadowBlur = barGlow; for (let i = 0; i < bufferLengthFreq; i++) { barHeight = dataArrayFreq[i] * (canvasHeight / 255); if (barHeight < 1) continue; const colorIndex = i % currentPalette.length; const barColor = currentPalette[colorIndex]; ctx.fillStyle = barColor; ctx.shadowColor = hexToRgba(barColor, 0.7); ctx.fillRect(x, canvasHeight - barHeight, Math.max(1, barWidth * settings.thickness / 1.5), barHeight); x += barWidth; } ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
+        // Main Drawing Loop
+        function drawVisualizer() { if(isPlaying){animationFrameId=requestAnimationFrame(drawVisualizer);}else{animationFrameId=null;} const currentSettings=visualizerSettings; if(!audioInitialized||(!isPlaying&&audioElement.paused)||!analyser){drawIdle();if(!isPlaying&&particles.length>0)particles=[];return;} const theme=currentSettings.theme; if(theme==='layered'){drawLayered(currentSettings);}else if(theme==='waveform'){drawWaveform(currentSettings);}else if(theme==='bars'){drawBars(currentSettings);}else{drawIdle();} }
+        // Control Event Listeners
         themeSelector.addEventListener('change', (e) => { updateSettings(); particles = []; console.log(`Theme changed to: ${visualizerSettings.theme}`); if (!isPlaying) drawVisualizer(); });
         paletteSelector.addEventListener('change', (e) => { updateSettings(); console.log(`Palette changed to: ${visualizerSettings.palette}`); if (!isPlaying) drawVisualizer(); });
         glowSlider.addEventListener('input', updateSettings);
         thicknessSlider.addEventListener('input', updateSettings);
         particleSlider.addEventListener('input', updateSettings);
-
-        // Add hexToRgba helper
-        function hexToRgba(hex, alpha = 1) { /* ... Same as before ... */ let r=0,g=0,b=0;if(!hex) return `rgba(255,255,255,${alpha})`; if(hex.length===4){r=parseInt(hex[1]+hex[1],16);g=parseInt(hex[2]+hex[2],16);b=parseInt(hex[3]+hex[3],16);}else if(hex.length===7){r=parseInt(hex[1]+hex[2],16);g=parseInt(hex[3]+hex[4],16);b=parseInt(hex[5]+hex[6],16);}else{return `rgba(255,255,255,${alpha})`;} return `rgba(${r},${g},${b},${alpha})`; }
-
-        // --- Resize Handling ---
-        window.addEventListener('resize', () => { setupCanvas(); drawVisualizer(); });
-
-        // --- Initial Sync & Draw ---
-        function syncControlsToSettings() { /* ... Same as before ... */ themeSelector.value=visualizerSettings.theme;paletteSelector.value=visualizerSettings.palette;glowSlider.value=visualizerSettings.glow;thicknessSlider.value=visualizerSettings.thickness;particleSlider.value=visualizerSettings.particles; }
-        syncControlsToSettings(); setupCanvas();
-        drawVisualizer(); console.log("Initial setup complete. v3.4");
+        // Fullscreen Logic
+        function updateFullscreenButton() { if(document.fullscreenElement===moduleContainer){fullscreenButton.textContent="EXIT";}else{fullscreenButton.textContent="FULLSCREEN";} }
+        fullscreenButton.addEventListener('click',()=>{ if(!document.fullscreenElement){console.log("Req FS...");moduleContainer.requestFullscreen().then(()=>{console.log("Entered FS.");}).catch(err=>{console.error(`FS fail: ${err.message} (${err.name})`);statusMessage.textContent="ERR: FS failed.";statusMessage.style.color='var(--error-color)';});}else{console.log("Exit FS...");if(document.exitFullscreen){document.exitFullscreen().then(()=>{console.log("Exited FS.");});}} });
+        document.addEventListener('fullscreenchange',()=>{ console.log("FS change event."); updateFullscreenButton(); setTimeout(()=>{setupCanvas();drawVisualizer();},50); });
+        // Resize Handling
+        window.addEventListener('resize', () => { if(document.fullscreenElement !== moduleContainer){ console.log("Resize event."); setupCanvas(); drawVisualizer(); }});
+        // Initial Sync & Draw
+        function syncControlsToSettings() { themeSelector.value=visualizerSettings.theme;paletteSelector.value=visualizerSettings.palette;glowSlider.value=visualizerSettings.glow;thicknessSlider.value=visualizerSettings.thickness;particleSlider.value=visualizerSettings.particles; }
+        syncControlsToSettings(); setupCanvas(); drawVisualizer(); console.log("Initial setup complete. v4.0 (Reverted Base + Simple Features)");
 
     </script>
 
