@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>//NODE_62S :: AUDIO_MODULES</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Configuration (Copied from index.html for consistency) --- */
+        :root {
+            --bg-color: #040408;
+            --text-color: #a8a8b0;
+            --header-color: #d0d0e0;
+            --accent-color: #00BFFF; /* Electric Blue */
+            --accent-hover: #ffffff;
+            --border-color: #1f1f2f;
+            --font-main: 'Roboto Mono', monospace;
+            --transition-fast: 0.1s ease-in-out;
+        }
+
+        /* --- Base & Structure (Minimal) --- */
+        *, *::before, *::after { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 25px 15px; /* Decent padding for mobile */
+            min-height: 100vh;
+            background-color: var(--bg-color); color: var(--text-color);
+            font-family: var(--font-main); font-size: 14px; line-height: 1.6;
+        }
+
+        /* --- Headings (Themed) --- */
+        h1, h2 {
+            font-family: var(--font-main); font-weight: 700; text-transform: uppercase;
+            color: var(--header-color); margin: 0 0 25px 0; padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color); letter-spacing: 1px;
+        }
+        h1 { font-size: 1.2em; }
+        h2 { font-size: 1em; margin-bottom: 15px; border-bottom: none; } /* Removed border for simplicity */
+
+        /* --- Submodule List (Adapted from index.html #launchAreaSection) --- */
+        .submodule-list {
+            list-style: none; /* Removes default bullet points */
+            padding-left: 5px; /* Small indent */
+            margin: 0 0 30px 0;
+        }
+        .submodule-list li {
+            margin-bottom: 10px; /* Spacing between items */
+        }
+        .submodule-list a {
+            font-family: var(--font-main); font-size: 0.95em;
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color var(--transition-fast), padding-left var(--transition-fast); /* Added padding transition */
+            display: block; /* Makes the link take full width for easier tapping */
+        }
+        .submodule-list a:hover {
+            color: var(--accent-hover);
+            padding-left: 10px; /* Indent text slightly on hover */
+        }
+
+        /* --- Back Link --- */
+        .back-link {
+            margin-top: 20px;
+            display: inline-block;
+            color: var(--accent-color);
+            font-size: 0.9em;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        .back-link:hover { color: var(--accent-hover); }
+
+        /* --- Mobile Adjustments (Minimal needed, structure is simple) --- */
+         @media (max-width: 600px) {
+            body { font-size: 13px; padding: 20px 10px; }
+            h1 { font-size: 1.1em; }
+            h2 { font-size: 0.9em; }
+            .submodule-list a { font-size: 0.9em; }
+            .back-link { font-size: 0.85em; }
+         }
+    </style>
+</head>
+<body>
+
+    <h1>// AUDIO_PROCESSING_SUITE //</h1>
+    <h2>// SELECT_SUBMODULE //</h2>
+
+    <ul class="submodule-list">
+        <li><a href="spectrum_analyzer.html" target="_self">> MODULE::SPECTRUM_ANALYZER [Status: Active]</a></li>
+        <li><a href="oneshotgenerator.html" target="_self">> MODULE::ONESHOT_GENERATOR [Status: Active]</a></li>
+        </ul>
+
+    <a href="index.html" class="back-link">&lt;&lt; RETURN_TO_NODE_ROOT</a>
+
+</body>
+</html>
