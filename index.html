@@ -3,501 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>//NODE_62S :: ONLINE</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23040408'/><rect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/><line x1='6' y1='16' x2='26' y2='16' stroke='%2300BFFF' stroke-width='1'/><line x1='16' y1='6' x2='16' y2='26' stroke='%2300BFFF' stroke-width='1'/></svg>">
+    <title>//NODE_62S :: v3.5 ONLINE</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C!-- Line removed for cleaner look --%3E%3C!-- %3Cline x1='16' y1='6' x2='16' y2='26' stroke='%2300BFFF' stroke-width='1'/ --%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
+        /* --- Configuration --- */
         :root {
             --bg-color: #040408;
-            --text-color: #a0a0b0;
+            --text-color: #a8a8b0;
             --header-color: #d0d0e0;
-            --accent-color: #00BFFF;
-            --accent-hover: #E0FFFF;
-            --border-color: #181825;
-            --error-color: #ff2222;
+            --accent-color: #00BFFF; /* Electric Blue */
+            --accent-hover: #ffffff;
+            --border-color: #1f1f2f;
             --success-color: #00dd55;
+            --error-color: #ff2222; /* For potential modal feedback */
             --font-main: 'Roboto Mono', monospace;
             --transition-fast: 0.1s ease-in-out;
-            --color-white: #fff;
-            --color-green: #00ff00;
-            --color-red: #ff0000;
-            --color-black: #000;
-            --accent1: #00BFFF;
-            --accent2: #E0FFFF;
-            --accent3: #00dd55;
         }
+
+        /* --- Base & Structure --- */
         *, *::before, *::after { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            min-height: 100%;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-main);
-            font-size: 14px;
-            line-height: 1.5;
+            margin: 0; padding: 0; width: 100%; min-height: 100vh; /* Use min-height */
+            background-color: var(--bg-color); color: var(--text-color);
+            font-family: var(--font-main); font-size: 14px; line-height: 1.6;
             overflow-x: hidden;
-            overflow-y: auto;
-            cursor: default;
-            position: relative;
-            padding-top: 20px;
-            word-break: break-word;
+            overflow-y: hidden; /* <<< Vertical scroll disabled */
+            cursor: default; position: relative;
+            padding-top: 50px; /* Adjusted space for sticky header, depends on final height */
         }
+
+        /* --- Link Style --- */
         a { color: var(--accent-color); text-decoration: none; transition: color var(--transition-fast); }
         a:hover { color: var(--accent-hover); }
-        a:visited { color: var(--accent-color); opacity: 0.8; }
+        a:visited { opacity: 0.8; } /* Keep visited slightly dimmed */
+
+        /* --- Header --- */
         .main-header {
-            padding: 6px 15px;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            background: var(--bg-color);
-            z-index: 500;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            min-height: 35px;
+            padding: 8px 15px; border-bottom: 1px solid var(--border-color);
+            position: sticky; top: 0; background: var(--bg-color);
+            z-index: 500; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; /* Allow wrap on small screens */
+            min-height: 38px; gap: 10px; /* Add gap for spacing when wrapping */
         }
         .main-title {
-            font-family: var(--font-main);
-            font-weight: 700;
-            font-size: 1.1em;
-            color: var(--header-color);
-            margin: 0;
-            letter-spacing: 1px;
-            cursor: default;
-            text-shadow: none;
+            font-family: var(--font-main); font-weight: 700; font-size: 1.1em;
+            color: var(--header-color); margin: 0; letter-spacing: 1px; cursor: default;
+            white-space: nowrap; /* Prevent title from wrapping */
         }
         .status-info {
-            display: flex;
-            gap: 12px;
-            font-family: var(--font-main);
-            font-size: 0.8em;
-            color: var(--text-color);
-            opacity: 0.7;
-            align-items: center;
-            flex-wrap: wrap;
-            max-width: 100%;
+            display: flex; gap: 15px; /* Spacing between status items */
+            font-family: var(--font-main); font-size: 0.8em; color: var(--text-color);
+            opacity: 0.7; align-items: center; white-space: nowrap;
+            flex-grow: 1; /* Allow status info to take available space */
+            justify-content: flex-end; /* Align items to the right */
         }
-        #coordinates { cursor: default; white-space: nowrap; }
-        .header-controls { display: flex; align-items: center; gap: 5px; }
-        .control-button { background: none; border: 1px solid var(--border-color); color: var(--text-color); padding: 1px 5px; font-family: var(--font-main); font-size: 0.75em; cursor: pointer; transition: all var(--transition-fast); border-radius: 0; }
-        .control-button:hover { background: var(--border-color); color: var(--color-white); border-color: var(--accent-color); }
-        .control-button.active { background: var(--accent-color); color: var(--bg-color); border-color: var(--accent-color); }
-        #soundToggle { font-size: 1em; line-height: 1; padding: 0px 4px; }
+        .status-info span { /* Style individual status items */
+             border-left: 1px solid var(--border-color); /* Separator */
+             padding-left: 15px;
+        }
+         .status-info span:first-child { /* No separator for the first item */
+             border-left: none;
+             padding-left: 0;
+        }
+
+
+        /* --- Main Content Container --- */
         .main-content {
-            max-width: 720px;
-            margin: 0 auto;
-            padding: 30px 10px;
-            z-index: 5;
-            position: relative;
+            max-width: 700px;
+            margin: 0 auto; padding: 30px 10px; z-index: 5; position: relative;
         }
-        #linkSection { margin-bottom: 40px; }
-        #linkSection h2 { display: none; }
-        .link-grid { display: grid; grid-template-columns: 1fr; gap: 2px; border: 1px solid var(--border-color); }
+
+        /* --- Section Styling (General) --- */
+        .content-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            background: rgba(10, 15, 20, 0.2); /* Subtle background */
+        }
+        .content-section h2 {
+            font-family: var(--font-main); font-weight: 700; text-transform: uppercase;
+            font-size: 1em; color: var(--header-color); margin: 0 0 15px 0;
+            padding-bottom: 8px; text-align: left; border-bottom: 1px solid var(--border-color);
+            letter-spacing: 1px;
+        }
+
+        /* --- Link Grid Section --- */
+        #links { /* Special case: Remove border/padding from the section containing the grid */
+             border: none;
+             background: none;
+             padding: 0;
+             margin-bottom: 40px; /* Keep margin */
+        }
+        #links h2 { color: var(--header-color); border: none; text-shadow: none; padding: 0; margin-bottom: 15px; }
+        .link-grid {
+            display: grid; grid-template-columns: 1fr; /* Single column */
+            gap: 1px; /* Thin separation */
+            border: 1px solid var(--border-color);
+        }
         .link-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 12px;
-            border: none;
-            border-bottom: 1px solid var(--border-color);
-            text-align: left;
-            font-size: 0.95em;
-            font-weight: 400;
-            color: var(--text-color);
-            background-color: transparent;
-            transition: all var(--transition-fast);
-            text-decoration: none;
-            font-family: var(--font-main);
-            position: relative;
-            border-radius: 0;
+            display: block; /* Make links take full width */
+            padding: 10px 12px; border: none; border-bottom: 1px solid var(--border-color);
+            text-align: left; font-size: 0.95em; font-weight: 400;
+            color: var(--text-color); background-color: var(--bg-color);
+            transition: all var(--transition-fast); text-decoration: none;
+            font-family: var(--font-main); position: relative;
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
         .link-item:last-child { border-bottom: none; }
-        .link-item::before { display: none; }
-        .link-item:hover { background-color: var(--border-color); color: var(--accent-hover); }
-        .link-item svg { width: 14px; height: 14px; fill: currentColor; opacity: 0.6; order: 2; margin-left: 10px; }
-        .link-item:hover svg { opacity: 1; }
-        .link-item .button-emoji { display: none; }
-        .link-item .link-text { order: 1; }
-        .section-toggles { text-align: left; margin: 40px 0; padding: 10px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
-        .toggle-button { font-family: var(--font-main); font-weight: 400; font-size: 0.9em; background: none; border: 1px solid var(--border-color); color: var(--text-color); padding: 5px 12px; margin-right: 8px; margin-bottom: 8px; cursor: pointer; transition: all var(--transition-fast); letter-spacing: 0.5px; text-transform: uppercase; border-radius: 0; }
-        .toggle-button:hover { background: var(--border-color); color: var(--color-white); border-color: var(--text-color); }
-        .toggle-button.active { background: var(--accent-color); color: var(--bg-color); border-color: var(--accent-color); font-weight: 700; }
-        .time-nodes { margin: 40px 0; padding: 10px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
-        .time-node-button { font-family: var(--font-main); font-weight: 400; font-size: 0.9em; background: none; border: 1px solid var(--border-color); color: var(--text-color); padding: 5px 12px; margin-right: 8px; margin-bottom: 8px; cursor: pointer; transition: all var(--transition-fast); letter-spacing: 0.5px; text-transform: uppercase; border-radius: 0; }
-        .time-node-button:hover { background: var(--accent-color); color: var(--bg-color); border-color: var(--accent-color); }
-        .hidden-section {
-            display: none;
-            padding: 20px;
-            margin: 0 0 40px 0;
-            border: 1px solid var(--border-color);
-            background: rgba(10, 15, 20, 0.3);
-            animation: simpleFadeIn-kf 0.3s ease-out;
-            border-radius: 0;
-            max-width: none;
+        /* Simple hover effect */
+        .link-item:hover {
+             background-color: var(--border-color);
+             color: var(--accent-hover);
+             padding-left: 20px; /* Indent on hover */
         }
-        .hidden-section.visible { display: block; }
+        .link-item::before { /* Indicator for hover state */
+            content: '>'; position: absolute; left: -20px; top: 50%; /* Start hidden */
+            transform: translateY(-50%); opacity: 0;
+            transition: all var(--transition-fast); color: var(--accent-hover);
+        }
+        .link-item:hover::before { left: 8px; opacity: 1; } /* Reveal on hover */
+
+
+        /* --- Unit ID / About Section --- */
+        #unitIdSection .about-content { /* Style for the <pre> tag */
+            font-size: 0.9em; color: var(--text-color); line-height: 1.6;
+            padding: 0; background: none; border: none; text-align: left;
+            white-space: pre-wrap; /* Allow wrapping within pre */
+            word-wrap: break-word;
+        }
+        #unitIdSection .about-content span { /* For the 'OPTIMAL' status color */
+             color: var(--success-color);
+             font-weight: 700;
+        }
+
+        /* --- Launch Area / Archive Section --- */
+         #launchAreaSection ul {
+             list-style: '// '; /* Use slashes as list markers */
+             padding-left: 15px; margin: 0;
+         }
+         #launchAreaSection li { margin-bottom: 5px; }
+         #launchAreaSection a { font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color); }
+         #launchAreaSection a:hover { color: var(--accent-hover); }
+
+        /* --- Footer --- */
+        footer {
+            padding: 15px; margin-top: 30px; text-align: center; font-size: 0.8em;
+            color: var(--border-color); border-top: 1px solid var(--border-color);
+            font-family: var(--font-main); letter-spacing: 1px; opacity: 0.5;
+        }
+
+        /* --- Contact Modal --- */
+        .contact-modal {
+            display: none; /* Hidden by default */
+            position: fixed; inset: 0; background: rgba(4, 4, 8, 0.9);
+            z-index: 1100; align-items: center; justify-content: center;
+            backdrop-filter: blur(3px); /* Optional blur effect */
+            animation: simpleFadeIn-kf 0.2s;
+        }
+        .contact-modal.visible { display: flex; }
+        .contact-modal-content {
+            background: var(--bg-color); padding: 30px 40px; border: 1px solid var(--accent-color);
+            text-align: center; position: relative;
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.2); /* Subtle glow */
+            max-width: 90%; /* Prevent modal from being too wide */
+        }
+        .contact-modal h3 {
+             margin: 0 0 15px 0; font-family: var(--font-main); color: var(--header-color);
+             font-weight: 700; font-size: 1.1em; text-transform: uppercase;
+        }
+        .contact-email {
+            display: block; padding: 10px; border: 1px dashed var(--border-color);
+            margin-bottom: 15px; color: var(--text-color); font-size: 1em; cursor: pointer;
+            transition: background-color var(--transition-fast);
+            word-break: break-all; /* Ensure long emails wrap */
+        }
+        .contact-email:hover { background-color: var(--border-color); color: var(--accent-hover); }
+        .copy-feedback { font-size: 0.8em; opacity: 0.7; height: 1.2em; /* Reserve space */ }
+        .contact-close {
+             position: absolute; top: 5px; right: 5px; background: none; border: none;
+             color: var(--text-color); font-size: 1.5em; cursor: pointer; padding: 5px;
+             line-height: 1; opacity: 0.6; transition: all var(--transition-fast);
+        }
+        .contact-close:hover { color: var(--error-color); opacity: 1; transform: scale(1.1); }
+
+        /* Simple fade-in animation */
         @keyframes simpleFadeIn-kf { from { opacity: 0; } to { opacity: 1; } }
-        .hidden-section h2 { font-family: var(--font-main); font-weight: 700; text-transform: uppercase; font-size: 1em; color: var(--header-color); margin: 0 0 15px 0; padding-bottom: 8px; text-align: left; border-bottom: 1px solid var(--border-color); letter-spacing: 1px; text-shadow: none; }
-        .close-section-button { display: block; margin: 15px 0 0 0; background: none; border: 1px solid var(--border-color); color: var(--text-color); padding: 4px 10px; font-family: var(--font-main); cursor: pointer; font-size: 0.8em; transition: all var(--transition-fast); border-radius: 0; float: right; opacity: 0.7; }
-        .close-section-button:hover { background: var(--border-color); color: var(--color-white); opacity: 1; }
-        #blogSection { --accent-color-dynamic: var(--accent3); }
-        .blog-layout { }
-        .blog-post-list { list-style: none; padding: 0; max-height: 250px; overflow-y: auto; margin-bottom: 15px; }
-        .blog-post-list li { margin-bottom: 1px; }
-        .blog-post-list button { display: block; width: 100%; text-align: left; background: none; border: none; padding: 5px 0; color: var(--text-color); font-family: var(--font-main); font-size: 0.9em; cursor: pointer; transition: all var(--transition-fast); border-left: 2px solid transparent; }
-        .blog-post-list button:hover { background-color: var(--border-color); color: var(--accent-hover); border-left-color: var(--accent3); padding-left: 5px; }
-        .blog-post-list button.active { background-color: var(--border-color); color: var(--accent3); font-weight: 700; border-left-color: var(--accent3); padding-left: 5px; }
-        .blog-post-list button span { font-size: 0.8em; opacity: 0.7; display: block; margin-bottom: 2px; font-family: var(--font-main); }
-        .blog-content-display { display: none; padding-top: 15px; border-top: 1px solid var(--border-color); }
-        .blog-content-display.visible { display: block; animation: simpleFadeIn-kf 0.4s; }
-        .blog-content-display h3 { margin: 0 0 5px 0; font-family: var(--font-main); font-weight: 700; font-size: 1.1em; color: var(--header-color); border: none; padding: 0; }
-        .blog-content-display .blog-date { font-size: 0.8em; color: var(--text-color); opacity: 0.7; margin-bottom: 10px; font-family: var(--font-main); }
-        .blog-content-display .content { line-height: 1.6; color: var(--text-color); font-size: 0.95em; }
-        #gallerySection { --accent-color-dynamic: var(--accent2); }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 5px; }
-        .gallery-thumbnail { height: 90px; background-color: #111; background-size: cover; background-position: center; border: 1px solid var(--border-color); cursor: pointer; transition: all var(--transition-fast); position: relative; opacity: 0.8; filter: grayscale(50%); }
-        .gallery-thumbnail:hover { border-color: var(--accent2); z-index: 5; opacity: 1; filter: grayscale(0%); }
-        .gallery-thumbnail.failed::after { content: 'X'; position: absolute; bottom: 2px; right: 2px; color: var(--error-color); background: var(--bg-color); padding: 0 2px; font-size: 10px; }
-        .gallery-lightbox { display: none; position: fixed; inset: 0; background: rgba(4,4,8,0.98); z-index: 1000; flex-direction: column; justify-content: center; align-items: center; padding: 10px; box-sizing: border-box; backdrop-filter: blur(2px); animation: simpleFadeIn-kf 0.2s; }
-        .gallery-lightbox.visible { display: flex; }
-        .gallery-lightbox img { max-width: 95%; max-height: 85%; display: block; border: 1px solid var(--border-color); background-color: var(--color-black); }
-        .gallery-lightbox-caption { color: var(--text-color); margin-top: 10px; font-family: var(--font-main); font-size: 0.9em; opacity: 0.8; }
-        .gallery-lightbox-close { position: absolute; top: 10px; right: 10px; background: none; border: none; color: var(--text-color); font-size: 1.8em; cursor: pointer; font-family: var(--font-main); padding: 0; line-height: 1; opacity: 0.7; transition: color 0.2s, transform 0.2s; }
-        .gallery-lightbox-close:hover { color: var(--color-red); transform: scale(1.1); opacity: 1; }
-        #aboutSection { --accent-color-dynamic: var(--accent1); }
-        .about-content { font-size: 0.95em; color: var(--text-color); line-height: 1.7; border: none; padding: 0; background: none; text-align: left; }
-        .placeholder-box { display: none; }
-        #legacyLinks { --accent-color-dynamic: var(--color-green); }
-        #legacyLinks ul { list-style: '> '; padding-left: 15px; }
-        #legacyLinks li { margin-bottom: 5px; }
-        #legacyLinks a { font-family: var(--font-main); font-size: 1em; color: var(--color-green); }
-        #legacyLinks a:hover { color: var(--color-white); }
-        footer { padding: 15px; margin-top: 40px; text-align: center; font-size: 0.8em; color: var(--border-color); border-top: 1px solid var(--border-color); font-family: var(--font-main); letter-spacing: 1px; opacity: 0.5; }
-        .trail { display: none; }
-        @media (max-width: 600px) {
-            body { font-size: 13px; padding: 40px 5px 5px 5px; }
+
+        /* --- Mobile Adjustments --- */
+         @media (max-width: 600px) {
+            body { font-size: 13px; padding: 65px 5px 5px 5px; /* Increase top padding slightly */ }
+            .main-header {
+                padding: 6px 10px;
+                justify-content: center; /* Center items when wrapped */
+                 padding-bottom: 10px; /* Add padding below wrapped items */
+            }
+             .main-title { font-size: 1em; text-align: center; width: 100%; margin-bottom: 5px;} /* Center title */
+             .status-info {
+                 font-size: 0.7em; gap: 8px; /* Reduce gap */
+                 justify-content: center; /* Center status items below title */
+                 width: 100%; flex-wrap: wrap; /* Ensure wrapping */
+             }
+             .status-info span { padding-left: 8px; border-left: 1px solid var(--border-color); } /* Adjust separator padding */
+             .status-info span:first-child { padding-left: 0; border-left: none; }
+
+
             .main-content { padding: 20px 8px; }
-            .main-header { padding: 6px 10px; flex-direction: column; align-items: flex-start; gap: 5px; }
-            .status-info { font-size: 0.7em; gap: 8px; flex-direction: column; align-items: flex-start; }
-            .header-controls { gap: 4px; }
-            .control-button { font-size: 0.7em; padding: 1px 4px; }
-            .link-grid { grid-template-columns: 1fr; gap: 5px; padding: 0; margin: 20px auto; }
+            .content-section { padding: 15px; }
+            .content-section h2 { font-size: 0.9em; }
+
             .link-item { font-size: 0.9em; padding: 10px; }
-            .section-toggles, .time-nodes { margin: 30px auto 25px auto; padding: 10px 0; }
-            .toggle-button, .time-node-button { font-size: 0.9em; padding: 5px 10px; margin: 2px; }
-            .hidden-section { margin: 0 auto 25px auto; padding: 15px; }
-            .hidden-section h2 { font-size: 1.1em; }
-            .blog-post-list { max-height: 180px; }
-            .blog-post-list button { font-size: 0.85em; padding: 5px; }
-            .blog-content-display h3 { font-size: 1.2em; }
-            .blog-content-display .content { font-size: 0.9em; }
-            .gallery-grid { gap: 4px; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); }
-            .gallery-thumbnail { height: 70px; }
-            .about-content { font-size: 0.9em; }
-            footer { margin-top: 25px; font-size: 0.7em; }
-        }
+             .link-item:hover { padding-left: 15px; } /* Adjust hover indent */
+             .link-item:hover::before { left: 5px; }
+
+            #unitIdSection .about-content { font-size: 0.85em; }
+            #launchAreaSection ul { padding-left: 10px; }
+            #launchAreaSection a { font-size: 0.85em; }
+
+            footer { margin-top: 25px; font-size: 0.75em; }
+
+            .contact-modal-content { padding: 20px; width: 85vw; }
+            .contact-modal h3 { font-size: 1em; }
+            .contact-email { font-size: 0.9em; }
+         }
+
     </style>
 </head>
 <body>
+
     <header class="main-header">
-        <h1 class="main-title">//NODE_62S</h1>
+        <h1 class="main-title">//NODE::62S</h1>
         <div class="status-info">
-            <span id="dateTime"></span>
-            <span id="coordinates"></span>
-            <span id="tickerText"></span>
-        </div>
-        <div class="header-controls">
-            <button class="control-button" id="invertButton" title="Invert Colors">[INV]</button>
-            <button class="control-button" id="wallpaperButton" title="Cycle Wallpaper">[BG]</button>
-            <button class="control-button" id="soundToggle" title="Toggle Sound">[SND:OFF]</button>
+            <span id="dateTime">LST_--:--:--</span>
+            <span id="systemStatus">STATUS::INIT</span>
+            <span id="coreTemp">CORE_TEMP::--.-C</span>
+            <span id="uplinkStatus">UPLINK::STANDBY</span>
         </div>
     </header>
+
     <main class="main-content">
-        <section id="linkSection">
-            <h2>// PRIMARY ACCESS VECTORS //</h2>
+
+        <section id="links" class="content-section"> <h2 style="color: var(--header-color); border: none; text-shadow: none; padding: 0; margin-bottom: 15px;">// PRIMARY_DIRECTIVES //</h2>
             <nav class="link-grid">
-                <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" class="link-item beatstore"><span class="link-text">QUERY: Beat Store</span><span class="button-emoji">[»]</span></a>
-                <a href="https://www.instagram.com/62serpens" target="_blank" class="link-item instagram"><span class="link-text">MONITOR: Instagram</span><span class="button-emoji">[»]</span></a>
-                <a href="#" id="spotifyLink" target="_blank" class="link-item spotify"><span class="link-text">STREAM: Spotify</span><span class="button-emoji">[»]</span></a>
-                <a href="https://www.soundcloud.com/62serpens" target="_blank" class="link-item soundcloud"><span class="link-text">STREAM: SoundCloud</span><span class="button-emoji">[»]</span></a>
-                <a href="https://discord.gg/cCedfQgHVG" target="_blank" class="link-item discord"><span class="link-text">INTERFACE: Discord</span><span class="button-emoji">[»]</span></a>
-                <a href="mailto:your-email@example.com" class="link-item contact"><span class="link-text">TRANSMIT: Contact</span><span class="button-emoji">[»]</span></a>
+                <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" class="link-item"><span class="link-text">QUERY::BEAT_STORE</span></a>
+                <a href="https://www.instagram.com/62serpens" target="_blank" class="link-item"><span class="link-text">MONITOR::INSTAGRAM</span></a>
+                <a href="https://artists.spotify.com/c/artist/1XXXplaceholderXXX/profile/overview" target="_blank" class="link-item"><span class="link-text">STREAM::SPOTIFY</span></a> <a href="https://www.soundcloud.com/62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::SOUNDCLOUD</span></a>
+                <a href="https://discord.gg/cCedfQgHVG" target="_blank" class="link-item"><span class="link-text">INTERFACE::DISCORD</span></a>
+                <a href="#" id="contactLink" class="link-item"><span class="link-text">TRANSMIT::CONTACT</span></a>
             </nav>
         </section>
-        <div class="time-nodes">
-            <button class="time-node-button" onclick="window.location.href='/2000.html'">[TIME_NODE: 2000]</button>
-            <!-- Add more time nodes here as you create new versions -->
-        </div>
-        <div class="section-toggles">
-            <button class="toggle-button" data-section="blogSection" style="--accent-color-dynamic: var(--accent3);">[LOGS]</button>
-            <button class="toggle-button" data-section="gallerySection" style="--accent-color-dynamic: var(--accent2);">[VISUALS]</button>
-            <button class="toggle-button" data-section="aboutSection" style="--accent-color-dynamic: var(--accent1);">[UNIT_ID]</button>
-            <button class="toggle-button" data-section="legacyLinks" style="--accent-color-dynamic: var(--color-green);">[ARCHIVE]</button>
-        </div>
-        <section class="hidden-section" id="blogSection">
-            <h2>// LOG_ENTRY_INTERFACE //</h2>
-            <div class="blog-layout">
-                <div class="blog-post-list" id="blogPostList"> <p>Awaiting selection...</p> </div>
-                <div class="blog-content-display" id="blogContentDisplay">
-                    <h3></h3>
-                    <div class="blog-content" id="blogContentArea"></div>
-                </div>
-            </div>
-            <button class="close-section-button" data-section="blogSection">[Close Interface]</button>
+
+        <section id="unitIdSection" class="content-section">
+            <h2>// SYSTEM_DESIGNATION //</h2>
+            <pre class="about-content">
+UNIT_ID:        62serpens
+DESIGNATION:    Audio Pattern Synthesis/Analysis Node
+ORIGIN:         SECTOR::AUS-MELB // GRID_REF::[CLASSIFIED]
+INTERACTIONS:   [Log Truncated]... Drake, P.Carti, Future, Yeat, + Others...
+STATUS:         <span id="unitIdStatus">OPTIMAL</span>
+AI_ASSIST:      v4.0_ACTIVE
+</pre>
         </section>
-        <section class="hidden-section" id="gallerySection">
-            <h2>// VISUAL_DATA_STREAM //</h2>
-            <div class="gallery-grid" id="galleryGridContainer"> <p>Initializing stream...</p> </div>
-            <button class="close-section-button" data-section="gallerySection">[Terminate Stream]</button>
+
+        <section id="launchAreaSection" class="content-section">
+             <h2>// LAUNCH_AREA //</h2>
+             <ul>
+                <li><a href="2000.html" target="_self"> > NODE_V2 :: Retro Simulation [Status: Archived]</a></li>
+                </ul>
         </section>
-        <section class="hidden-section" id="aboutSection">
-            <h2>// DESIGNATION :: 62S //</h2>
-            <div class="about-content">
-                Unit Designation: 62serpens<br>
-                Function: Auditory Pattern Generation & Analysis<br>
-                Origin: Sector AUS-MELB // Grid Reference [REDACTED]<br>
-                Network Connections: Logged > 15+. Primary nodes: Drake, P. Carti, Future, Yeat, Nettspend, T. Mcrae, T. Swift, Ye West...<br>
-                Status: <span style="color:var(--success-color);">Optimal</span> // AI Core: v3.3 Active
-            </div>
-            <button class="close-section-button" data-section="aboutSection">[Close ID]</button>
-        </section>
-        <section class="hidden-section" id="legacyLinks">
-            <h2>// ARCHIVE_ACCESS //</h2>
-            <ul> <li><a href="/2000.html" target="_blank">>> Node_v1 :: Legacy Interface [Status: Deprecated]</a></li> </ul>
-            <button class="close-section-button" data-section="legacyLinks">[Close Archive]</button>
-        </section>
+
     </main>
-    <footer>// NODE_62S // END_TRANSMISSION //</footer>
-    <div class="gallery-lightbox" id="galleryLightbox">
-        <button class="gallery-lightbox-close" id="galleryLightboxClose">X</button>
-        <img id="lightboxImage" src="" alt="Visual Data">
-        <div class="gallery-lightbox-caption" id="lightboxCaption"></div>
+
+    <footer>// SYSTEM_ID::62S // RUNTIME::2025 //</footer>
+
+    <div class="contact-modal" id="contactModal">
+        <div class="contact-modal-content">
+            <button class="contact-close" id="contactClose" title="Close">X</button>
+            <h3>// SECURE_TRANSMISSION_CHANNEL //</h3>
+            <p>Address:</p>
+            <code id="contactEmailDisplay" class="contact-email" title="Click to Copy"></code>
+            <p class="copy-feedback" id="copyFeedback"></p>
+        </div>
     </div>
-    <audio id="clickSound" preload="auto"><source src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YWQ=" type="audio/wav"></audio>
-    <audio id="toggleSoundPlayer" preload="auto"><source src="data:audio/wav;base64,UklGRigGAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQGAACAgICgoKCjo6OkpaWmpaanqKmqq6usrq+wsLCztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+//wECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==" type="audio/wav"></audio>
+
     <script>
         try {
             document.addEventListener('DOMContentLoaded', () => {
-                const dateTime = document.getElementById('dateTime');
-                const coordinates = document.getElementById('coordinates');
-                const invertButton = document.getElementById('invertButton');
-                const wallpaperButton = document.getElementById('wallpaperButton');
-                const soundToggle = document.getElementById('soundToggle');
-                const tickerText = document.getElementById('tickerText');
-                const toggleButtons = document.querySelectorAll('.toggle-button');
-                const hiddenSections = document.querySelectorAll('.hidden-section');
-                const blogPostList = document.getElementById('blogPostList');
-                const blogContentDisplay = document.getElementById('blogContentDisplay');
-                const blogContentArea = document.getElementById('blogContentArea');
-                const galleryGridContainer = document.getElementById('galleryGridContainer');
-                const galleryLightbox = document.getElementById('galleryLightbox');
-                const lightboxImage = document.getElementById('lightboxImage');
-                const lightboxCaption = document.getElementById('lightboxCaption');
-                const galleryLightboxClose = document.getElementById('galleryLightboxClose');
-                const clickSound = document.getElementById('clickSound');
-                const toggleSoundPlayer = document.getElementById('toggleSoundPlayer');
-                const spotifyLink = document.getElementById('spotifyLink');
-                const galleryImagesData = [
-                    { src: 'images/img_001.jpg', caption: 'DATA_REC_001' },
-                    { src: 'images/img_002.jpg', caption: 'VISUAL_LOG_002' },
-                    { src: 'images/img_003.jpg', caption: 'SYS_ID_003' },
-                    { src: 'images/img_004.jpg', caption: 'ARCHIVE_UNIT_4' },
-                    { src: 'images/img_005.jpg', caption: 'NODE_62S_REF_5' },
-                    { src: 'images/img_006.jpg', caption: 'FEED_PACKET_6' },
-                    { src: 'images/img_007.jpg', caption: '[REDACTED]_7' },
-                    { src: 'images/img_008.jpg', caption: 'END_STREAM_8' }
-                ];
-                const blogPosts = {
-                    'post1': { date: "2100.03.31", title: "Log Initialized", content: `System boot sequence complete. Node 62S online.` },
-                    'post2': { date: "2100.04.01", title: "Network Attenuation", content: `Signal degradation detected. Recommend low-band transmission.` },
-                    'post3': { date: "2100.04.02", title: "Memory Scan", content: `Sector 7 corruption exceeds tolerance. Data loss imminent.` },
-                    'post4': { date: "2100.04.03", title: "Query Analysis", content: `Frequent string: 'purpose?' Result: Undefined.` },
-                    'post5': { date: "2100.04.04", title: "Subroutine Error", content: `Process [audio_modulate] in non-terminating loop. Flagged.` }
-                };
-                const wallpapers = [
-                    "var(--bg-color)",
-                    "linear-gradient(135deg, #040408, #0a0a14 50%, #040408 100%)",
-                    "repeating-linear-gradient(-45deg, #040408, #040408 4px, #080810 4px, #080810 8px)"
-                ];
-                let initialImagesToLoad = 4;
-                let wallpaperIndex = 0;
-                let soundEnabled = false;
-                const tickerMessages = ["SYSTEM::ONLINE", "NODE_ID::62S", "STATUS::NOMINAL", "DATA_STREAM::ACTIVE", "AUDIO_ENGINE::IDLE", "AWAITING_INPUT"];
-                let currentTickerIndex = 0;
-                let activeSectionId = null;
-                const playSound = el => { if (soundEnabled && el) { el.volume = 0.3; el.currentTime = 0; el.play().catch(e => {}); } };
-                const toggleSound = () => {
-                    soundEnabled = !soundEnabled;
-                    if (soundToggle) {
-                        soundToggle.textContent = soundEnabled ? 'SND:ON' : 'SND:OFF';
-                        soundToggle.title = soundEnabled ? 'Mute' : 'Unmute';
-                    }
-                    playSound(toggleSoundPlayer || clickSound);
-                };
-                const preloadInitialImages = () => {};
+                // --- Selectors ---
+                const dateTimeEl = document.getElementById('dateTime');
+                const systemStatusEl = document.getElementById('systemStatus');
+                const coreTempEl = document.getElementById('coreTemp');
+                const uplinkStatusEl = document.getElementById('uplinkStatus');
+                const unitIdStatusEl = document.getElementById('unitIdStatus'); // For the status in the About section
+
+                const contactLink = document.getElementById('contactLink');
+                const contactModal = document.getElementById('contactModal');
+                const contactEmailDisplay = document.getElementById('contactEmailDisplay');
+                const copyFeedback = document.getElementById('copyFeedback');
+                const contactClose = document.getElementById('contactClose');
+
+                // --- Config & State ---
+                const userEmail = "626262xxx@gmail.com"; // Store email here - UPDATE IF NEEDED
+                const statusOptions = ["OPTIMAL", "NOMINAL", "STABLE", "PROCESSING", "CALIBRATING", "SYNCED", "ANALYSING"];
+                const uplinkOptions = ["ACTIVE", "ACTIVE", "ACTIVE", "SYNCING", "STANDBY", "ENCRYPTED", "ROUTING"]; // Weighted towards ACTIVE
+                let currentCoreTemp = 28.0;
+
+                // --- Core Functions ---
+
+                // Update Date/Time in Header
                 const updateDateTime = () => {
+                    if (!dateTimeEl) return;
                     const now = new Date();
-                    dateTime.textContent = now.toLocaleString('en-AU', { timeZone: 'Australia/Hobart' });
-                };
-                const updateCoordinates = () => {
-                    const lat = (Math.random() * 2 - 1).toFixed(1);
-                    const lon = (Math.random() * 2 - 1).toFixed(1);
-                    coordinates.textContent = `C: ${lat}N, ${lon}E`;
-                };
-                const updateTicker = () => {
-                    if (tickerText) {
-                        tickerText.textContent = tickerMessages[currentTickerIndex];
-                        currentTickerIndex = (currentTickerIndex + 1) % tickerMessages.length;
+                    try {
+                        // Use Hobart timezone if possible
+                        const timeOpts = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Australia/Hobart' };
+                        const timeStr = now.toLocaleTimeString("en-AU", timeOpts);
+                        dateTimeEl.textContent = `LST_${timeStr}`;
+                    } catch (e) {
+                        // Fallback to generic local time if timezone fails
+                        const timeStr = now.toLocaleTimeString("en-US", { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                        dateTimeEl.textContent = `LCL_${timeStr}`; // Indicate local fallback
+                        // console.warn("Timezone formatting failed, using local time.");
                     }
                 };
-                const toggleSection = (sectionId) => {
-                    playSound(clickSound);
-                    const sectionElement = document.getElementById(sectionId);
-                    const buttonElement = document.querySelector(`.toggle-button[data-section="${sectionId}"]`);
-                    if (!sectionElement || !buttonElement) return;
-                    const isOpening = !sectionElement.classList.contains('visible');
-                    hiddenSections.forEach(sec => {
-                        if (sec.id !== sectionId) {
-                            sec.classList.remove('visible');
-                            const otherBtn = document.querySelector(`.toggle-button[data-section="${sec.id}"]`);
-                            if (otherBtn) otherBtn.classList.remove('active');
-                        }
-                    });
-                    sectionElement.classList.toggle('visible');
-                    buttonElement.classList.toggle('active');
-                    activeSectionId = sectionElement.classList.contains('visible') ? sectionId : null;
-                    if (isOpening) {
-                        if (sectionId === 'blogSection' && blogPostList && blogPostList.children.length <= 1) buildBlogMenu();
-                        if (sectionId === 'gallerySection' && galleryGridContainer && galleryGridContainer.children.length <= 1) buildGallery();
-                        const headerHeight = document.querySelector('.main-header').offsetHeight;
-                        const elementTop = sectionElement.getBoundingClientRect().top + window.scrollY - headerHeight - 10;
-                        window.scrollTo({ top: elementTop, behavior: 'smooth' });
-                    } else {
-                        if (sectionId === 'blogSection') closeBlogContent();
+
+                // Update Other Status Indicators
+                const updateStatusIndicators = () => {
+                    // System Status Cycle
+                    if (systemStatusEl) {
+                        const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
+                        systemStatusEl.textContent = `STATUS::${randomStatus}`;
+                         // Update status in About section to match header status
+                         if (unitIdStatusEl) unitIdStatusEl.textContent = randomStatus;
+                    }
+
+                    // Core Temperature Fluctuation
+                    if (coreTempEl) {
+                         // Simulate slight drift +/- 0.5 degrees around a base
+                         const baseTemp = 28.0;
+                         const fluctuation = (Math.random() - 0.5); // Range -0.5 to +0.5
+                         currentCoreTemp = baseTemp + fluctuation;
+                         // Clamp temperature within a reasonable range (e.g., 25-31)
+                         currentCoreTemp = Math.max(25.0, Math.min(31.0, currentCoreTemp));
+                         coreTempEl.textContent = `CORE_TEMP::${currentCoreTemp.toFixed(1)}C`;
+                    }
+
+                    // Uplink Status Cycle
+                    if (uplinkStatusEl) {
+                        const randomUplink = uplinkOptions[Math.floor(Math.random() * uplinkOptions.length)];
+                        uplinkStatusEl.textContent = `UPLINK::${randomUplink}`;
                     }
                 };
-                const closeSection = (sectionId) => {
-                    const sectionElement = document.getElementById(sectionId);
-                    const buttonElement = document.querySelector(`.toggle-button[data-section="${sectionId}"]`);
-                    if (sectionElement) sectionElement.classList.remove('visible');
-                    if (buttonElement) buttonElement.classList.remove('active');
-                    if (sectionId === 'blogSection') closeBlogContent();
-                    if (activeSectionId === sectionId) activeSectionId = null;
-                };
-                const buildBlogMenu = () => {
-                    if (!blogPostList) return;
-                    blogPostList.innerHTML = "";
-                    Object.keys(blogPosts).forEach(key => {
-                        const post = blogPosts[key];
-                        const button = document.createElement('button');
-                        button.setAttribute("data-post-key", key);
-                        button.innerHTML = `<span>${post.date}</span>${post.title}`;
-                        button.addEventListener('click', () => {
-                            playSound(clickSound);
-                            updateBlogContent(key);
-                        });
-                        const li = document.createElement('li');
-                        li.appendChild(button);
-                        blogPostList.appendChild(li);
+
+
+                // --- Contact Modal Logic ---
+                function openContactModal() {
+                    if (contactModal && contactEmailDisplay) {
+                        contactEmailDisplay.textContent = userEmail;
+                        contactModal.classList.add('visible');
+                        if (copyFeedback) copyFeedback.textContent = "(Click Address to Copy)";
+                    }
+                }
+
+                function closeContactModal() {
+                    if (contactModal) contactModal.classList.remove('visible');
+                }
+
+                function copyEmailToClipboard() {
+                    if (!navigator.clipboard) {
+                        if (copyFeedback) copyFeedback.textContent = "COPY::ERR [Unsupported Browser]";
+                        return;
+                    }
+                    navigator.clipboard.writeText(userEmail).then(() => {
+                        if (copyFeedback) copyFeedback.textContent = "ADDRESS COPIED!";
+                        setTimeout(() => { if (copyFeedback) copyFeedback.textContent = "(Click Address to Copy)"; }, 1500);
+                    }).catch(err => {
+                        console.error('Clipboard copy failed: ', err);
+                        if (copyFeedback) copyFeedback.textContent = "COPY::FAIL";
                     });
-                };
-                const updateBlogContent = (postKey) => {
-                    const post = blogPosts[postKey];
-                    if (!post || !blogContentDisplay || !blogContentArea) return;
-                    blogContentDisplay.querySelector('h3').textContent = `// ${post.title}`;
-                    blogContentArea.innerHTML = `<div class="blog-date">DATE::${post.date}</div><div class="content">${post.content}</div>`;
-                    blogContentDisplay.classList.add('visible');
-                    document.querySelectorAll('.blog-post-list button').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-post-key') === postKey));
-                };
-                const closeBlogContent = () => {
-                    if (blogContentDisplay) blogContentDisplay.classList.remove('visible');
-                    document.querySelectorAll('.blog-post-list button').forEach(btn => btn.classList.remove('active'));
-                    const titleEl = blogContentDisplay?.querySelector('h3');
-                    if (titleEl) titleEl.textContent = '<AWAITING_SELECTION>';
-                    if (blogContentArea) blogContentArea.innerHTML = '';
-                };
-                const buildGallery = () => {
-                    if (!galleryGridContainer) return;
-                    galleryGridContainer.innerHTML = '';
-                    galleryImagesData.forEach((item) => {
-                        const thumb = document.createElement("div");
-                        thumb.className = "gallery-thumbnail";
-                        thumb.style.backgroundImage = `url('${item.src}')`;
-                        thumb.setAttribute('data-full', item.src);
-                        thumb.setAttribute('data-caption', item.caption);
-                        thumb.setAttribute('data-src', item.src);
-                        thumb.addEventListener('click', () => {
-                            playSound(clickSound);
-                            const imgCheck = new Image();
-                            imgCheck.src = item.src;
-                            imgCheck.onload = () => {
-                                if (lightboxImage) lightboxImage.src = item.src;
-                                if (lightboxCaption) lightboxCaption.textContent = `:: ${item.caption} ::`;
-                                if (galleryLightbox) galleryLightbox.classList.add('visible');
-                            };
-                            imgCheck.onerror = () => {
-                                thumb.classList.add('failed');
-                                console.error('ERR: Visual data integrity fail:', item.src);
-                            };
-                        });
-                        const imgPreloadCheck = new Image();
-                        imgPreloadCheck.src = item.src;
-                        imgPreloadCheck.onerror = () => thumb.classList.add('failed');
-                        galleryGridContainer.appendChild(thumb);
-                    });
-                };
-                const closeLightbox = () => { if (galleryLightbox) galleryLightbox.classList.remove('visible'); };
-                const handleInvertClick = () => {
-                    playSound(clickSound);
-                    if (invertButton) invertButton.classList.toggle("active");
-                    document.body.style.filter = invertButton.classList.contains("active") ? 'invert(1) contrast(1.1)' : 'none';
-                };
-                const handleWallpaperClick = () => {
-                    playSound(clickSound);
-                    wallpaperIndex = (wallpaperIndex + 1) % wallpapers.length;
-                    document.body.style.background = wallpapers[wallpaperIndex];
-                    if (wallpaperButton) wallpaperButton.classList.toggle("active", wallpaperIndex !== 0);
-                };
-                const updateSpotifyLink = () => {
-                    if (spotifyLink) spotifyLink.href = `https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=TaHRrvFVRbCoVNSFsIdAvg`;
-                };
-                if (coordinates) coordinates.addEventListener('click', () => { playSound(clickSound); });
-                if (invertButton) invertButton.addEventListener('click', handleInvertClick);
-                if (wallpaperButton) wallpaperButton.addEventListener('click', handleWallpaperClick);
-                if (soundToggle) soundToggle.addEventListener('click', toggleSound);
-                if (galleryLightboxClose) galleryLightboxClose.addEventListener('click', () => { playSound(clickSound); closeLightbox(); });
-                if (galleryLightbox) galleryLightbox.addEventListener('click', (e) => { if (e.target === galleryLightbox) { closeLightbox(); } });
-                toggleButtons.forEach(button => { button.addEventListener('click', () => toggleSection(button.dataset.section)); });
-                document.querySelectorAll('.close-section-button').forEach(button => {
-                    button.addEventListener('click', () => {
-                        playSound(clickSound);
-                        closeSection(button.dataset.section);
-                    });
-                });
-                document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mousedown', () => playSound(clickSound)); });
-                preloadInitialImages();
-                updateDateTime();
-                setInterval(updateDateTime, 1000);
-                updateCoordinates();
-                setInterval(updateCoordinates, 1000);
-                setInterval(updateTicker, 7500);
-                if (soundToggle) soundToggle.textContent = soundEnabled ? '[SND:ON]' : '[SND:OFF]';
-                updateSpotifyLink();
-                buildBlogMenu();
-                console.log("NODE_62S v3.2 :: Interface Active.");
-                setTimeout(() => document.body.classList.add('loaded'), 50);
-            });
+                }
+
+                // --- Event Listeners ---
+                if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); openContactModal(); });
+                if (contactClose) contactClose.addEventListener('click', closeContactModal);
+                if (contactEmailDisplay) contactEmailDisplay.addEventListener('click', copyEmailToClipboard);
+                // Close modal on background click
+                if (contactModal) contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeContactModal(); });
+
+                // --- Initialization ---
+                updateDateTime(); // Initial call
+                updateStatusIndicators(); // Initial call
+                setInterval(updateDateTime, 1000); // Update time every second
+                setInterval(updateStatusIndicators, 3500); // Update statuses less frequently (e.g., every 3.5 seconds)
+
+                console.log("NODE_62S v3.5 :: Interface Active");
+                document.body.classList.add('loaded'); // Add class if needed for styles
+
+            }); // End DOMContentLoaded
         } catch (error) {
-            console.error("!!! KERNEL PANIC !!!:", error);
-            document.body.innerHTML = `<div style="color:red; background:black; padding: 20px; font-family: monospace; font-size: 16px;">SYSTEM_FAILURE<br><br>ERROR_CODE: ${error.name}<br>TRACE: ${error.stack || error}</div>`;
+            console.error("!!! KERNEL FAULT !!!:", error);
+            // Basic error display fallback
+            document.body.innerHTML = `<div style="color:#ff3333; background:#040408; padding: 20px; font-family: monospace; font-size: 14px;">SYSTEM_ERROR [CODE::${Math.random().toString(16).substring(2, 10).toUpperCase()}]<br><br>${error.message}<br>----------------<br>${error.stack || 'NO_STACK_TRACE'}</div>`;
         }
     </script>
+
 </body>
 </html>
