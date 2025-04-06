@@ -204,16 +204,15 @@
                    flex-wrap: wrap; /* Allow status items to wrap if needed */
                }
                 .status-info span {
-                    padding-left: 6px; /* Match reduced gap */
-                    min-width: 75px; /* <<< Adjusted min-width for mobile stability */
-                    border-left: 1px solid var(--border-color);
+                     padding-left: 6px; /* Match reduced gap */
+                     min-width: 75px; /* <<< Adjusted min-width for mobile stability */
+                     border-left: 1px solid var(--border-color);
                 }
                 .status-info span:first-child {
-                    padding-left: 0;
-                    border-left: none;
-                     min-width: 85px; /* Time needs slightly more */
+                     padding-left: 0;
+                     border-left: none;
+                      min-width: 85px; /* Time needs slightly more */
                 }
-
 
              .main-content { padding: 20px 8px; }
              .content-section { padding: 15px; margin-bottom: 25px; }
@@ -241,7 +240,7 @@
     <header class="main-header">
         <h1 class="main-title">//NODE::62S</h1>
         <div class="status-info">
-            <span id="dateTime">LST_--:--:--</span>
+            <span id="dateTime" title="Local Timezone: Australia/Hobart">LST_--:--:--</span>
             <span id="systemStatus">STATUS::INIT</span>
             <span id="coreTemp">CORE_TEMP::--.-C</span>
             <span id="uplinkStatus">UPLINK::STANDBY</span>
@@ -261,15 +260,15 @@
         </section>
 
         <section id="launchAreaSection" class="content-section">
-              <h2>// LAUNCH_AREA //</h2>
-              <ul>
-                   <li><a href="2000.html" target="_self"> > NODE_V2 :: Retro Simulation [Status: Archived]</a></li>
-                   <li><a href="b.html" target="_self"> > MODULE::BLACKJACK_SIM [Status: Active]</a></li> </ul>
+             <h2>// SUBMODULE_DEPLOYMENT //</h2>
+             <ul>
+                  <li><a href="2000.html" target="_self"> > NODE_V2 :: Retro Simulation [Status: Archived]</a></li>
+                  <li><a href="b.html" target="_self"> > MODULE::BLACKJACK_SIM [Status: Active]</a></li> </ul>
         </section>
 
         <section id="unitIdSection" class="content-section">
-            <h2>// SYSTEM_DESIGNATION //</h2>
-            <pre class="about-content">
+             <h2>// SYSTEM_DESIGNATION //</h2>
+             <pre class="about-content">
 UNIT_ID:     62serpens
 DESIGNATION: Audio Pattern Synthesis/Analysis Node
 ORIGIN:      SECTOR::∞ // GRID_REF::[REDACTED]
@@ -310,8 +309,10 @@ AI_ASSIST:   v4.0_ACTIVE
 
                 // --- Config & State ---
                 const userEmail = "626262xxx@gmail.com"; // Store email here - UPDATE IF NEEDED
+                // --- Using original JS statuses from this version ---
                 const statusOptions = ["OPTIMAL", "NOMINAL", "STABLE", "PROCESSING", "CALIBRATING", "SYNCED", "ANALYSING", "IDLE"];
                 const uplinkOptions = ["ACTIVE", "ACTIVE", "ACTIVE", "SYNCING", "STANDBY", "ENCRYPTED", "ROUTING", "SECURE_TUNNEL"];
+                // --- End original JS statuses ---
                 let currentCoreTemp = 28.0;
 
                 // --- Core Functions ---
@@ -322,12 +323,13 @@ AI_ASSIST:   v4.0_ACTIVE
                     const now = new Date();
                     try {
                         // Use Hobart (AEST/AEDT) time specifically. Adjust 'Australia/Hobart' if a different AU timezone is needed.
-                        const timeOpts = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Australia/Hobart' };
+                        const location = "Australia/Hobart"; // Explicitly set timezone
+                        const timeOpts = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: location };
                         const timeStr = now.toLocaleTimeString("en-AU", timeOpts);
                         dateTimeEl.textContent = `LST_${timeStr}`;
                     } catch (e) {
                         // Fallback to generic local time if timezone fails
-                         console.warn("Timezone formatting failed, using local fallback.", e);
+                         console.warn(`Timezone formatting for ${location} failed. Using local fallback. Error: ${e.message}`);
                         const timeStr = now.toLocaleTimeString("en-US", { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
                         dateTimeEl.textContent = `LCL_${timeStr}`; // Indicate Local Fallback
                     }
