@@ -70,7 +70,7 @@
              border-left: none;
              padding-left: 0;
              min-width: 100px; /* Allow slightly more for time */
-         }
+        }
 
         /* --- Main Content Container --- */
         .main-content {
@@ -131,10 +131,32 @@
         #unitIdSection .about-content span { color: var(--success-color); font-weight: 700; }
 
         /* --- Launch Area / Archive Section --- */
-         #launchAreaSection ul { list-style: '// '; padding-left: 15px; margin: 0; }
+         #launchAreaSection ul { list-style: '// '; padding-left: 15px; margin: 0; } /* Style remains for list when shown */
          #launchAreaSection li { margin-bottom: 5px; }
          #launchAreaSection a { font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color); }
          #launchAreaSection a:hover { color: var(--accent-hover); }
+
+        /* --- Access Button Style (NEW) --- */
+        .access-button {
+            display: block; /* Or inline-block */
+            margin-bottom: 15px; /* Space below button */
+            padding: 8px 15px;
+            font-family: var(--font-main);
+            font-size: 0.9em;
+            color: var(--bg-color); /* Dark text on light button */
+            background-color: var(--accent-color); /* Use accent color for background */
+            border: 1px solid var(--accent-color);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-fast);
+            text-align: center;
+        }
+        .access-button:hover {
+            background-color: var(--accent-hover);
+            color: var(--bg-color);
+             border-color: var(--accent-hover);
+        }
 
         /* --- Footer --- */
         footer {
@@ -195,24 +217,24 @@
                    width: 100%; /* Take full width */
                    text-align: left; /* <<< Align title left */
                    margin-bottom: 5px; /* Space below title when wrapped */
-               }
-               .status-info {
+             }
+              .status-info {
                    font-size: 0.7em;
                    gap: 6px; /* Further reduce gap */
                    width: 100%; /* Take full width when wrapped */
                    justify-content: flex-start; /* <<< Align status items left */
                    flex-wrap: wrap; /* Allow status items to wrap if needed */
+             }
+               .status-info span {
+                    padding-left: 6px; /* Match reduced gap */
+                    min-width: 75px; /* <<< Adjusted min-width for mobile stability */
+                    border-left: 1px solid var(--border-color);
                }
-                .status-info span {
-                     padding-left: 6px; /* Match reduced gap */
-                     min-width: 75px; /* <<< Adjusted min-width for mobile stability */
-                     border-left: 1px solid var(--border-color);
-                }
-                .status-info span:first-child {
-                     padding-left: 0;
-                     border-left: none;
-                      min-width: 85px; /* Time needs slightly more */
-                }
+               .status-info span:first-child {
+                    padding-left: 0;
+                    border-left: none;
+                     min-width: 85px; /* Time needs slightly more */
+               }
 
              .main-content { padding: 20px 8px; }
              .content-section { padding: 15px; margin-bottom: 25px; }
@@ -223,8 +245,10 @@
               .link-item:hover::before { left: 5px; }
 
              #unitIdSection .about-content { font-size: 0.85em; }
-             #launchAreaSection ul { padding-left: 10px; }
+             #launchAreaSection ul { padding-left: 10px; } /* Adjust list padding */
              #launchAreaSection a { font-size: 0.85em; }
+             .access-button { font-size: 0.85em; padding: 6px 12px;} /* Adjust button */
+
 
              footer { margin-top: 20px; font-size: 0.75em; }
 
@@ -253,21 +277,25 @@
              <h2 class="section-heading">// PRIMARY_DIRECTIVES //</h2> <nav class="link-grid">
                  <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" class="link-item"><span class="link-text">QUERY::BEAT_STORE</span></a>
                  <a href="https://www.instagram.com/62serpens" target="_blank" class="link-item"><span class="link-text">MONITOR::INSTAGRAM</span></a>
-                 <a href="https://artists.spotify.com/c/artist/1XXXplaceholderXXX/profile/overview" target="_blank" class="link-item"><span class="link-text">STREAM::SPOTIFY</span></a> <a href="https://www.soundcloud.com/62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::SOUNDCLOUD</span></a>
+                 <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" class="link-item"><span class="link-text">STREAM::SPOTIFY</span></a> <a href="https://www.soundcloud.com/62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::SOUNDCLOUD</span></a>
                  <a href="https://discord.gg/cCedfQgHVG" target="_blank" class="link-item"><span class="link-text">INTERFACE::DISCORD</span></a>
                  <a href="#" id="contactLink" class="link-item"><span class="link-text">TRANSMIT::CONTACT</span></a>
              </nav>
         </section>
 
        <section id="launchAreaSection" class="content-section">
-         <h2>// SUBMODULE_DEPLOYMENT //</h2>
-         <ul>
-             <li><a href="2000.html" target="_self"> > NODE_2000 :: Retro Simulation [Status: Active]</a></li>
-             <li><a href="b.html" target="_self"> > MODULE::BLACKJACK_SIM [Status: Active]</a></li>
-             <li><a href="audio_tools.html" target="_self"> > MODULE::AUDIO_PROCESSING_SUITE [Status: Active]</a></li>  </ul>
-         </section>
+           <h2>// SUBMODULE_DEPLOYMENT //</h2>
 
-        <section id="unitIdSection" class="content-section">
+           <button id="submoduleAccessButton" class="access-button">REQUEST_ACCESS::SUBMODULES</button>
+
+           <ul id="submoduleList" style="display: none;">
+               <li><a href="2000.html" target="_self"> > NODE_V2 :: Retro Simulation [Status: Archived]</a></li> <li><a href="b.html" target="_self"> > MODULE::BLACKJACK_SIM [Status: Active]</a></li>
+               <li><a href="audio_tools.html" target="_self"> > MODULE::AUDIO_PROCESSING_SUITE [Status: Active]</a></li>
+           </ul>
+           <p id="accessDeniedMsg" style="color: var(--error-color); display: none; font-size: 0.9em;">ACCESS::DENIED // INVALID_CODE</p>
+
+       </section>
+       <section id="unitIdSection" class="content-section">
              <h2>// SYSTEM_DESIGNATION //</h2>
              <pre class="about-content">
 UNIT_ID:     62serpens
@@ -295,7 +323,7 @@ AI_ASSIST:   v4.0_ACTIVE
     <script>
         try {
             document.addEventListener('DOMContentLoaded', () => {
-                // --- Selectors ---
+                // --- Selectors (Existing) ---
                 const dateTimeEl = document.getElementById('dateTime');
                 const systemStatusEl = document.getElementById('systemStatus');
                 const coreTempEl = document.getElementById('coreTemp');
@@ -308,31 +336,27 @@ AI_ASSIST:   v4.0_ACTIVE
                 const copyFeedback = document.getElementById('copyFeedback');
                 const contactClose = document.getElementById('contactClose');
 
-                // --- Config & State ---
+                // --- Config & State (Existing) ---
                 const userEmail = "626262xxx@gmail.com"; // Store email here - UPDATE IF NEEDED
-                // --- Using original JS statuses from this version ---
                 const statusOptions = ["OPTIMAL", "NOMINAL", "STABLE", "PROCESSING", "CALIBRATING", "SYNCED", "ANALYSING", "IDLE"];
                 const uplinkOptions = ["ACTIVE", "ACTIVE", "ACTIVE", "SYNCING", "STANDBY", "ENCRYPTED", "ROUTING", "SECURE_TUNNEL"];
-                // --- End original JS statuses ---
                 let currentCoreTemp = 28.0;
 
-                // --- Core Functions ---
+                // --- Core Functions (Existing) ---
 
                 // Update Date/Time in Header
                 const updateDateTime = () => {
                     if (!dateTimeEl) return;
                     const now = new Date();
                     try {
-                        // Use Hobart (AEST/AEDT) time specifically. Adjust 'Australia/Hobart' if a different AU timezone is needed.
-                        const location = "Australia/Hobart"; // Explicitly set timezone
+                        const location = "Australia/Hobart";
                         const timeOpts = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: location };
                         const timeStr = now.toLocaleTimeString("en-AU", timeOpts);
                         dateTimeEl.textContent = `LST_${timeStr}`;
                     } catch (e) {
-                        // Fallback to generic local time if timezone fails
                          console.warn(`Timezone formatting for ${location} failed. Using local fallback. Error: ${e.message}`);
                         const timeStr = now.toLocaleTimeString("en-US", { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                        dateTimeEl.textContent = `LCL_${timeStr}`; // Indicate Local Fallback
+                        dateTimeEl.textContent = `LCL_${timeStr}`;
                     }
                 };
 
@@ -342,14 +366,14 @@ AI_ASSIST:   v4.0_ACTIVE
                     if (systemStatusEl) {
                         const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
                         systemStatusEl.textContent = `STATUS::${randomStatus}`;
-                         if (unitIdStatusEl) unitIdStatusEl.textContent = randomStatus; // Update status in Unit ID section too
+                         if (unitIdStatusEl) unitIdStatusEl.textContent = randomStatus;
                     }
 
                     if (coreTempEl) {
                          const baseTemp = 28.0;
-                         const fluctuation = (Math.random() - 0.5); // Range -0.5 to +0.5
+                         const fluctuation = (Math.random() - 0.5);
                          currentCoreTemp = baseTemp + fluctuation;
-                         currentCoreTemp = Math.max(25.0, Math.min(31.0, currentCoreTemp)); // Clamp range
+                         currentCoreTemp = Math.max(25.0, Math.min(31.0, currentCoreTemp));
                          coreTempEl.textContent = `CORE_TEMP::${currentCoreTemp.toFixed(1)}C`;
                     }
 
@@ -359,7 +383,7 @@ AI_ASSIST:   v4.0_ACTIVE
                     }
                 };
 
-                // --- Contact Modal Logic ---
+                // --- Contact Modal Logic (Existing) ---
                 function openContactModal() {
                     if (contactModal && contactEmailDisplay) {
                         contactEmailDisplay.textContent = userEmail;
@@ -386,13 +410,50 @@ AI_ASSIST:   v4.0_ACTIVE
                     });
                 }
 
-                // --- Event Listeners ---
+                // --- Event Listeners (Existing) ---
                 if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); openContactModal(); });
                 if (contactClose) contactClose.addEventListener('click', closeContactModal);
                 if (contactEmailDisplay) contactEmailDisplay.addEventListener('click', copyEmailToClipboard);
                 if (contactModal) contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeContactModal(); });
 
-                // --- Initialization ---
+
+                // --- Password Gate Logic for Submodules (NEW) ---
+                const accessButton = document.getElementById('submoduleAccessButton');
+                const submoduleList = document.getElementById('submoduleList');
+                const accessDeniedMsg = document.getElementById('accessDeniedMsg'); // Get the error message element
+
+                if (accessButton && submoduleList) {
+                    accessButton.addEventListener('click', function() {
+                        // Clear any previous error message
+                        if(accessDeniedMsg) accessDeniedMsg.style.display = 'none';
+
+                        const enteredPassword = prompt("ACCESS_CODE::REQUIRED");
+
+                        // Check if the user entered something and it's the correct password
+                        if (enteredPassword === "1") {
+                            // Correct password
+                            submoduleList.style.display = 'block'; // Show the list
+                            accessButton.style.display = 'none'; // Hide the button
+                            if(accessDeniedMsg) accessDeniedMsg.style.display = 'none'; // Ensure error is hidden
+                            console.log("SUBMODULE_ACCESS::GRANTED");
+                        } else if (enteredPassword !== null) {
+                            // Incorrect password (and user didn't click Cancel)
+                            console.warn("SUBMODULE_ACCESS::DENIED - Invalid Code Entered");
+                            if(accessDeniedMsg) accessDeniedMsg.style.display = 'block'; // Show error message
+                            // Optional: Alert as well/instead
+                            // alert("ACCESS::DENIED // INVALID_CODE");
+                        } else {
+                             // User clicked Cancel on the prompt
+                             console.log("SUBMODULE_ACCESS::CANCELLED");
+                        }
+                    });
+                } else {
+                    console.error("Password gate elements not found (button or list).");
+                }
+                // --- End Password Gate Logic ---
+
+
+                // --- Initialization (Existing) ---
                 updateDateTime();
                 updateStatusIndicators();
                 setInterval(updateDateTime, 1000);
