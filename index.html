@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>//NODE_62S :: v3.5 ONLINE</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C!-- Line removed for cleaner look --%3E%3C!-- %3Cline x1='16' y1='6' x2='16' y2='26' stroke='%2300BFFF' stroke-width='1'/ --%3E%3C/svg%3E">
+    <title>//NODE_62S :: v3.6 ONLINE</title> <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -19,7 +18,7 @@
             --accent-hover: #ffffff;
             --border-color: #1f1f2f;
             --success-color: #00dd55;
-            --error-color: #ff2222; /* For potential modal feedback */
+            --error-color: #ff2222;
             --font-main: 'Roboto Mono', monospace;
             --transition-fast: 0.1s ease-in-out;
         }
@@ -28,61 +27,64 @@
         *, *::before, *::after { box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
-            margin: 0; padding: 0; width: 100%; min-height: 100vh; /* Use min-height */
+            margin: 0; padding: 0; width: 100%; min-height: 100vh;
             background-color: var(--bg-color); color: var(--text-color);
             font-family: var(--font-main); font-size: 14px; line-height: 1.6;
             overflow-x: hidden;
-            overflow-y: hidden; /* <<< Vertical scroll disabled */
+            overflow-y: hidden; /* <<< Vertical scroll DISABLED by default (Desktop) */
             cursor: default; position: relative;
-            padding-top: 50px; /* Adjusted space for sticky header, depends on final height */
+            padding-top: 45px; /* Adjusted based on header height test */
         }
 
         /* --- Link Style --- */
         a { color: var(--accent-color); text-decoration: none; transition: color var(--transition-fast); }
         a:hover { color: var(--accent-hover); }
-        a:visited { opacity: 0.8; } /* Keep visited slightly dimmed */
+        a:visited { opacity: 0.8; }
 
         /* --- Header --- */
         .main-header {
             padding: 8px 15px; border-bottom: 1px solid var(--border-color);
             position: sticky; top: 0; background: var(--bg-color);
-            z-index: 500; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; /* Allow wrap on small screens */
-            min-height: 38px; gap: 10px; /* Add gap for spacing when wrapping */
+            z-index: 500; display: flex; justify-content: space-between; align-items: center;
+            min-height: 38px; gap: 15px; /* Ensure gap between title and status */
         }
         .main-title {
             font-family: var(--font-main); font-weight: 700; font-size: 1.1em;
             color: var(--header-color); margin: 0; letter-spacing: 1px; cursor: default;
-            white-space: nowrap; /* Prevent title from wrapping */
+            white-space: nowrap; flex-shrink: 0; /* Prevent shrinking */
         }
         .status-info {
-            display: flex; gap: 15px; /* Spacing between status items */
+            display: flex; gap: 12px; /* Slightly reduced gap */
             font-family: var(--font-main); font-size: 0.8em; color: var(--text-color);
             opacity: 0.7; align-items: center; white-space: nowrap;
-            flex-grow: 1; /* Allow status info to take available space */
-            justify-content: flex-end; /* Align items to the right */
+            overflow: hidden; /* Hide potential overflow if min-width isn't enough */
         }
-        .status-info span { /* Style individual status items */
-             border-left: 1px solid var(--border-color); /* Separator */
-             padding-left: 15px;
+        .status-info span {
+             border-left: 1px solid var(--border-color);
+             padding-left: 12px; /* Match gap */
+             display: inline-block; /* Needed for min-width */
+             min-width: 95px; /* <<< Fixed width to prevent jumping */
+             text-align: left; /* Ensure text starts left */
         }
-         .status-info span:first-child { /* No separator for the first item */
+         .status-info span:first-child {
              border-left: none;
              padding-left: 0;
+             min-width: 100px; /* Allow slightly more for time */
         }
-
 
         /* --- Main Content Container --- */
         .main-content {
             max-width: 700px;
-            margin: 0 auto; padding: 30px 10px; z-index: 5; position: relative;
+            margin: 0 auto; padding: 25px 10px; /* Slightly reduced padding */
+            z-index: 5; position: relative;
         }
 
         /* --- Section Styling (General) --- */
         .content-section {
-            margin-bottom: 40px;
-            padding: 20px;
+            margin-bottom: 30px; /* Slightly reduced margin */
+            padding: 18px; /* Slightly reduced padding */
             border: 1px solid var(--border-color);
-            background: rgba(10, 15, 20, 0.2); /* Subtle background */
+            background: none; /* <<< Removed subtle background */
         }
         .content-section h2 {
             font-family: var(--font-main); font-weight: 700; text-transform: uppercase;
@@ -92,21 +94,16 @@
         }
 
         /* --- Link Grid Section --- */
-        #links { /* Special case: Remove border/padding from the section containing the grid */
-             border: none;
-             background: none;
-             padding: 0;
-             margin-bottom: 40px; /* Keep margin */
+        #links {
+             border: none; padding: 0; margin-bottom: 30px;
         }
-        #links h2 { color: var(--header-color); border: none; text-shadow: none; padding: 0; margin-bottom: 15px; }
+        #links h2 { border: none; padding: 0; margin-bottom: 15px; }
         .link-grid {
-            display: grid; grid-template-columns: 1fr; /* Single column */
-            gap: 1px; /* Thin separation */
-            border: 1px solid var(--border-color);
+            display: grid; grid-template-columns: 1fr;
+            gap: 1px; border: 1px solid var(--border-color);
         }
         .link-item {
-            display: block; /* Make links take full width */
-            padding: 10px 12px; border: none; border-bottom: 1px solid var(--border-color);
+            display: block; padding: 10px 12px; border: none; border-bottom: 1px solid var(--border-color);
             text-align: left; font-size: 0.95em; font-weight: 400;
             color: var(--text-color); background-color: var(--bg-color);
             transition: all var(--transition-fast); text-decoration: none;
@@ -114,62 +111,50 @@
             text-transform: uppercase; letter-spacing: 0.5px;
         }
         .link-item:last-child { border-bottom: none; }
-        /* Simple hover effect */
         .link-item:hover {
-             background-color: var(--border-color);
-             color: var(--accent-hover);
-             padding-left: 20px; /* Indent on hover */
+             background-color: var(--border-color); color: var(--accent-hover);
+             padding-left: 20px;
         }
-        .link-item::before { /* Indicator for hover state */
-            content: '>'; position: absolute; left: -20px; top: 50%; /* Start hidden */
+        .link-item::before {
+            content: '>'; position: absolute; left: -20px; top: 50%;
             transform: translateY(-50%); opacity: 0;
             transition: all var(--transition-fast); color: var(--accent-hover);
         }
-        .link-item:hover::before { left: 8px; opacity: 1; } /* Reveal on hover */
-
+        .link-item:hover::before { left: 8px; opacity: 1; }
 
         /* --- Unit ID / About Section --- */
-        #unitIdSection .about-content { /* Style for the <pre> tag */
+        #unitIdSection .about-content {
             font-size: 0.9em; color: var(--text-color); line-height: 1.6;
             padding: 0; background: none; border: none; text-align: left;
-            white-space: pre-wrap; /* Allow wrapping within pre */
-            word-wrap: break-word;
+            white-space: pre-wrap; word-wrap: break-word;
         }
-        #unitIdSection .about-content span { /* For the 'OPTIMAL' status color */
-             color: var(--success-color);
-             font-weight: 700;
-        }
+        #unitIdSection .about-content span { color: var(--success-color); font-weight: 700; }
 
         /* --- Launch Area / Archive Section --- */
-         #launchAreaSection ul {
-             list-style: '// '; /* Use slashes as list markers */
-             padding-left: 15px; margin: 0;
-         }
+         #launchAreaSection ul { list-style: '// '; padding-left: 15px; margin: 0; }
          #launchAreaSection li { margin-bottom: 5px; }
          #launchAreaSection a { font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color); }
          #launchAreaSection a:hover { color: var(--accent-hover); }
 
         /* --- Footer --- */
         footer {
-            padding: 15px; margin-top: 30px; text-align: center; font-size: 0.8em;
+            padding: 15px; margin-top: 25px; /* Reduced margin */
+            text-align: center; font-size: 0.8em;
             color: var(--border-color); border-top: 1px solid var(--border-color);
             font-family: var(--font-main); letter-spacing: 1px; opacity: 0.5;
         }
 
         /* --- Contact Modal --- */
         .contact-modal {
-            display: none; /* Hidden by default */
-            position: fixed; inset: 0; background: rgba(4, 4, 8, 0.9);
+            display: none; position: fixed; inset: 0; background: rgba(4, 4, 8, 0.9);
             z-index: 1100; align-items: center; justify-content: center;
-            backdrop-filter: blur(3px); /* Optional blur effect */
-            animation: simpleFadeIn-kf 0.2s;
+            backdrop-filter: blur(3px); animation: simpleFadeIn-kf 0.2s;
         }
         .contact-modal.visible { display: flex; }
         .contact-modal-content {
             background: var(--bg-color); padding: 30px 40px; border: 1px solid var(--accent-color);
             text-align: center; position: relative;
-            box-shadow: 0 0 25px rgba(0, 191, 255, 0.2); /* Subtle glow */
-            max-width: 90%; /* Prevent modal from being too wide */
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.2); max-width: 90%;
         }
         .contact-modal h3 {
              margin: 0 0 15px 0; font-family: var(--font-main); color: var(--header-color);
@@ -178,11 +163,10 @@
         .contact-email {
             display: block; padding: 10px; border: 1px dashed var(--border-color);
             margin-bottom: 15px; color: var(--text-color); font-size: 1em; cursor: pointer;
-            transition: background-color var(--transition-fast);
-            word-break: break-all; /* Ensure long emails wrap */
+            transition: background-color var(--transition-fast); word-break: break-all;
         }
         .contact-email:hover { background-color: var(--border-color); color: var(--accent-hover); }
-        .copy-feedback { font-size: 0.8em; opacity: 0.7; height: 1.2em; /* Reserve space */ }
+        .copy-feedback { font-size: 0.8em; opacity: 0.7; height: 1.2em; }
         .contact-close {
              position: absolute; top: 5px; right: 5px; background: none; border: none;
              color: var(--text-color); font-size: 1.5em; cursor: pointer; padding: 5px;
@@ -195,35 +179,55 @@
 
         /* --- Mobile Adjustments --- */
          @media (max-width: 600px) {
-            body { font-size: 13px; padding: 65px 5px 5px 5px; /* Increase top padding slightly */ }
+            body {
+                font-size: 13px;
+                padding: 50px 5px 5px 5px; /* Adjusted top padding */
+                overflow-y: auto; /* <<< Scroll ENABLED ONLY for mobile */
+            }
             .main-header {
                 padding: 6px 10px;
-                justify-content: center; /* Center items when wrapped */
-                 padding-bottom: 10px; /* Add padding below wrapped items */
+                flex-wrap: wrap; /* Allow wrapping */
+                justify-content: flex-start; /* Align items to start */
+                 padding-bottom: 8px; /* Space below wrapped items */
             }
-             .main-title { font-size: 1em; text-align: center; width: 100%; margin-bottom: 5px;} /* Center title */
+             .main-title {
+                 font-size: 1em;
+                 width: 100%; /* Take full width */
+                 text-align: left; /* <<< Align title left */
+                 margin-bottom: 5px; /* Space below title when wrapped */
+            }
              .status-info {
-                 font-size: 0.7em; gap: 8px; /* Reduce gap */
-                 justify-content: center; /* Center status items below title */
-                 width: 100%; flex-wrap: wrap; /* Ensure wrapping */
+                 font-size: 0.7em;
+                 gap: 6px; /* Further reduce gap */
+                 width: 100%; /* Take full width when wrapped */
+                 justify-content: flex-start; /* <<< Align status items left */
+                 flex-wrap: wrap; /* Allow status items to wrap if needed */
              }
-             .status-info span { padding-left: 8px; border-left: 1px solid var(--border-color); } /* Adjust separator padding */
-             .status-info span:first-child { padding-left: 0; border-left: none; }
+              .status-info span {
+                   padding-left: 6px; /* Match reduced gap */
+                   min-width: 75px; /* <<< Adjusted min-width for mobile stability */
+                   border-left: 1px solid var(--border-color);
+              }
+              .status-info span:first-child {
+                  padding-left: 0;
+                  border-left: none;
+                   min-width: 85px; /* Time needs slightly more */
+             }
 
 
             .main-content { padding: 20px 8px; }
-            .content-section { padding: 15px; }
+            .content-section { padding: 15px; margin-bottom: 25px; }
             .content-section h2 { font-size: 0.9em; }
 
             .link-item { font-size: 0.9em; padding: 10px; }
-             .link-item:hover { padding-left: 15px; } /* Adjust hover indent */
+             .link-item:hover { padding-left: 15px; }
              .link-item:hover::before { left: 5px; }
 
             #unitIdSection .about-content { font-size: 0.85em; }
             #launchAreaSection ul { padding-left: 10px; }
             #launchAreaSection a { font-size: 0.85em; }
 
-            footer { margin-top: 25px; font-size: 0.75em; }
+            footer { margin-top: 20px; font-size: 0.75em; }
 
             .contact-modal-content { padding: 20px; width: 85vw; }
             .contact-modal h3 { font-size: 1em; }
@@ -246,8 +250,8 @@
 
     <main class="main-content">
 
-        <section id="links" class="content-section"> <h2 style="color: var(--header-color); border: none; text-shadow: none; padding: 0; margin-bottom: 15px;">// PRIMARY_DIRECTIVES //</h2>
-            <nav class="link-grid">
+        <section id="links" class="content-section">
+             <h2 class="section-heading">// PRIMARY_DIRECTIVES //</h2> <nav class="link-grid">
                 <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" class="link-item"><span class="link-text">QUERY::BEAT_STORE</span></a>
                 <a href="https://www.instagram.com/62serpens" target="_blank" class="link-item"><span class="link-text">MONITOR::INSTAGRAM</span></a>
                 <a href="https://artists.spotify.com/c/artist/1XXXplaceholderXXX/profile/overview" target="_blank" class="link-item"><span class="link-text">STREAM::SPOTIFY</span></a> <a href="https://www.soundcloud.com/62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::SOUNDCLOUD</span></a>
@@ -307,8 +311,8 @@ AI_ASSIST:      v4.0_ACTIVE
 
                 // --- Config & State ---
                 const userEmail = "626262xxx@gmail.com"; // Store email here - UPDATE IF NEEDED
-                const statusOptions = ["OPTIMAL", "NOMINAL", "STABLE", "PROCESSING", "CALIBRATING", "SYNCED", "ANALYSING"];
-                const uplinkOptions = ["ACTIVE", "ACTIVE", "ACTIVE", "SYNCING", "STANDBY", "ENCRYPTED", "ROUTING"]; // Weighted towards ACTIVE
+                const statusOptions = ["OPTIMAL", "NOMINAL", "STABLE", "PROCESSING", "CALIBRATING", "SYNCED", "ANALYSING", "IDLE"];
+                const uplinkOptions = ["ACTIVE", "ACTIVE", "ACTIVE", "SYNCING", "STANDBY", "ENCRYPTED", "ROUTING", "SECURE_TUNNEL"];
                 let currentCoreTemp = 28.0;
 
                 // --- Core Functions ---
@@ -318,46 +322,36 @@ AI_ASSIST:      v4.0_ACTIVE
                     if (!dateTimeEl) return;
                     const now = new Date();
                     try {
-                        // Use Hobart timezone if possible
                         const timeOpts = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Australia/Hobart' };
                         const timeStr = now.toLocaleTimeString("en-AU", timeOpts);
                         dateTimeEl.textContent = `LST_${timeStr}`;
                     } catch (e) {
-                        // Fallback to generic local time if timezone fails
                         const timeStr = now.toLocaleTimeString("en-US", { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                        dateTimeEl.textContent = `LCL_${timeStr}`; // Indicate local fallback
-                        // console.warn("Timezone formatting failed, using local time.");
+                        dateTimeEl.textContent = `LCL_${timeStr}`;
                     }
                 };
 
                 // Update Other Status Indicators
                 const updateStatusIndicators = () => {
-                    // System Status Cycle
                     if (systemStatusEl) {
                         const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
                         systemStatusEl.textContent = `STATUS::${randomStatus}`;
-                         // Update status in About section to match header status
                          if (unitIdStatusEl) unitIdStatusEl.textContent = randomStatus;
                     }
 
-                    // Core Temperature Fluctuation
                     if (coreTempEl) {
-                         // Simulate slight drift +/- 0.5 degrees around a base
                          const baseTemp = 28.0;
                          const fluctuation = (Math.random() - 0.5); // Range -0.5 to +0.5
                          currentCoreTemp = baseTemp + fluctuation;
-                         // Clamp temperature within a reasonable range (e.g., 25-31)
-                         currentCoreTemp = Math.max(25.0, Math.min(31.0, currentCoreTemp));
+                         currentCoreTemp = Math.max(25.0, Math.min(31.0, currentCoreTemp)); // Clamp range
                          coreTempEl.textContent = `CORE_TEMP::${currentCoreTemp.toFixed(1)}C`;
                     }
 
-                    // Uplink Status Cycle
                     if (uplinkStatusEl) {
                         const randomUplink = uplinkOptions[Math.floor(Math.random() * uplinkOptions.length)];
                         uplinkStatusEl.textContent = `UPLINK::${randomUplink}`;
                     }
                 };
-
 
                 // --- Contact Modal Logic ---
                 function openContactModal() {
@@ -390,22 +384,20 @@ AI_ASSIST:      v4.0_ACTIVE
                 if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); openContactModal(); });
                 if (contactClose) contactClose.addEventListener('click', closeContactModal);
                 if (contactEmailDisplay) contactEmailDisplay.addEventListener('click', copyEmailToClipboard);
-                // Close modal on background click
                 if (contactModal) contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeContactModal(); });
 
                 // --- Initialization ---
-                updateDateTime(); // Initial call
-                updateStatusIndicators(); // Initial call
-                setInterval(updateDateTime, 1000); // Update time every second
-                setInterval(updateStatusIndicators, 3500); // Update statuses less frequently (e.g., every 3.5 seconds)
+                updateDateTime();
+                updateStatusIndicators();
+                setInterval(updateDateTime, 1000);
+                setInterval(updateStatusIndicators, 3000); // Update statuses every 3 seconds
 
-                console.log("NODE_62S v3.5 :: Interface Active");
-                document.body.classList.add('loaded'); // Add class if needed for styles
+                console.log("NODE_62S v3.6 :: Interface Active");
+                document.body.classList.add('loaded');
 
             }); // End DOMContentLoaded
         } catch (error) {
             console.error("!!! KERNEL FAULT !!!:", error);
-            // Basic error display fallback
             document.body.innerHTML = `<div style="color:#ff3333; background:#040408; padding: 20px; font-family: monospace; font-size: 14px;">SYSTEM_ERROR [CODE::${Math.random().toString(16).substring(2, 10).toUpperCase()}]<br><br>${error.message}<br>----------------<br>${error.stack || 'NO_STACK_TRACE'}</div>`;
         }
     </script>
