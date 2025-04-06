@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>//NODE_62S :: SPECTRUM_ANALYSIS_MODULE</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Configuration (Matching Main Page) --- */
+        :root {
+            --bg-color: #040408;
+            --text-color: #a8a8b0;
+            --header-color: #d0d0e0;
+            --accent-color: #00BFFF; /* Electric Blue */
+            --accent-hover: #ffffff;
+            --border-color: #1f1f2f;
+            --success-color: #00dd55;
+            --error-color: #ff2222;
+            --font-main: 'Roboto Mono', monospace;
+            --transition-fast: 0.1s ease-in-out;
+        }
+
+        /* --- Base & Structure --- */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0; padding: 0; width: 100%; min-height: 100vh;
+            background-color: var(--bg-color); color: var(--text-color);
+            font-family: var(--font-main); font-size: 14px; line-height: 1.6;
+            overflow-x: hidden;
+            overflow-y: auto; /* Allow scrolling if content overflows */
+            cursor: default; position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
+            padding: 20px;
+        }
+
+        /* --- Module Specific Styles --- */
+        .module-container {
+            width: 100%;
+            max-width: 800px; /* Allow slightly wider for visualizer */
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: rgba(0,0,0, 0.2); /* Slight background tint */
+        }
+
+        .module-header {
+            font-family: var(--font-main); font-weight: 700; text-transform: uppercase;
+            font-size: 1.1em; color: var(--header-color); margin: 0 0 20px 0;
+            padding-bottom: 10px; text-align: left; border-bottom: 1px solid var(--border-color);
+            letter-spacing: 1px;
+        }
+
+        #visualizerCanvas {
+            display: block; /* Make canvas block level */
+            width: 100%; /* Full width of container */
+            height: 250px; /* Fixed height for the visualizer */
+            background-color: #080810; /* Darker background for canvas */
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center; /* Center controls */
+        }
+
+        .control-button {
+            font-family: var(--font-main);
+            font-size: 0.9em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .control-button:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .control-button:disabled {
+            color: var(--border-color);
+            border-color: var(--border-color);
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+         .control-button:disabled:hover {
+             background-color: transparent;
+             box-shadow: none;
+         }
+
+        #statusMessage {
+            font-size: 0.85em;
+            text-align: center;
+            min-height: 1.5em; /* Prevent layout shifts */
+            opacity: 0.7;
+        }
+
+        .back-link {
+             display: inline-block; /* Allow margin */
+             margin-top: 20px;
+             font-size: 0.9em;
+             color: var(--accent-color);
+             text-decoration: none;
+             border: 1px dashed var(--border-color);
+             padding: 5px 10px;
+             transition: all var(--transition-fast);
+        }
+        .back-link:hover {
+            color: var(--accent-hover);
+            border-color: var(--accent-hover);
+            background-color: var(--border-color);
+        }
+
+        /* Basic responsive for smaller screens */
+        @media (max-width: 600px) {
+            body { padding: 15px; }
+            .module-container { padding: 15px; }
+            .module-header { font-size: 1em; }
+            #visualizerCanvas { height: 200px; }
+            .control-button { font-size: 0.8em; padding: 6px 12px; }
+            .back-link { font-size: 0.8em; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="module-container">
+        <h1 class="module-header">// SPECTRUM_ANALYSIS_MODULE //</h1>
+
+        <canvas id="visualizerCanvas"></canvas>
+
+        <div class="controls">
+            <button id="playButton" class="control-button" disabled>INITIATE</button>
+            <button id="pauseButton" class="control-button" disabled>SUSPEND</button>
+            </div>
+
+        <div id="statusMessage">STATUS :: AWAITING AUDIO DATA...</div>
+    </div>
+
+    <a href="index.html" class="back-link">&lt;&lt; RETURN TO NODE_62S INTERFACE</a>
+
+    <script>
+        // --- Configuration ---
+        // IMPORTANT: Place your audio file here and make sure the path/name matches!
+        const audioFilePath = 'audio/analyzer_beat.mp3';
+        const fftSize = 1024; // Must be power of 2 (e.g., 256, 512, 1024, 2048) - affects detail/performance
+
+        // --- DOM Elements ---
+        const canvas = document.getElementById('visualizerCanvas');
+        const ctx = canvas.getContext('2d');
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+        // const stopButton = document.getElementById('stopButton'); // Stop requires more complex handling
+        const statusMessage = document.getElementById('statusMessage');
+
+        // --- Web Audio API Setup ---
+        let audioContext;
+        let analyser;
+        let sourceNode; // Stores the buffer source
+        let audioBuffer; // Stores the decoded audio data
+        let isPlaying = false;
+        let isPaused = false;
+
+        // Function to setup Audio Context (needs user interaction like a click)
+        function setupAudioContext() {
+            if (audioContext) return; // Already created
+
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+                // Create AnalyserNode
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = fftSize;
+                analyser.smoothingTimeConstant = 0.85; // Adjust smoothness (0 to 1)
+
+                // Load the audio file
+                statusMessage.textContent = "STATUS :: FETCHING AUDIO DATA...";
+                fetch(audioFilePath)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status} - Could not fetch ${audioFilePath}`);
+                        }
+                        return response.arrayBuffer();
+                    })
+                    .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
+                    .then(decodedBuffer => {
+                        audioBuffer = decodedBuffer; // Store buffer
+                        statusMessage.textContent = "STATUS :: AUDIO DATA READY // STATE: IDLE";
+                        playButton.disabled = false; // Enable play button
+                        console.log("Audio loaded successfully");
+                    })
+                    .catch(error => {
+                        console.error("Error loading/decoding audio:", error);
+                        statusMessage.textContent = `ERROR :: ${error.message}`;
+                        statusMessage.style.color = 'var(--error-color)';
+                    });
+
+            } catch (e) {
+                 console.error("Web Audio API is not supported by this browser.", e);
+                 statusMessage.textContent = "ERROR :: WEB AUDIO API NOT SUPPORTED";
+                 statusMessage.style.color = 'var(--error-color)';
+                 playButton.disabled = true;
+                 pauseButton.disabled = true;
+            }
+        }
+
+         // Function to start playing
+         function playAudio() {
+            if (!audioContext || !audioBuffer || isPlaying) return;
+
+             // If paused, just resume context
+             if (isPaused) {
+                 audioContext.resume().then(() => {
+                     isPlaying = true;
+                     isPaused = false;
+                     statusMessage.textContent = "STATUS :: AUDIO STREAM ACTIVE";
+                     playButton.disabled = true;
+                     pauseButton.disabled = false;
+                     requestAnimationFrame(drawVisualizer); // Resume drawing
+                 });
+                 return;
+             }
+
+            // Create a new source node each time play is pressed (required)
+            sourceNode = audioContext.createBufferSource();
+            sourceNode.buffer = audioBuffer;
+
+            // Connect nodes: Source -> Analyser -> Destination (Speakers)
+            sourceNode.connect(analyser);
+            analyser.connect(audioContext.destination);
+
+            sourceNode.start(0); // Start playback
+            isPlaying = true;
+            isPaused = false;
+            statusMessage.textContent = "STATUS :: AUDIO STREAM ACTIVE";
+            playButton.disabled = true; // Disable Play, Enable Pause
+            pauseButton.disabled = false;
+
+             // Handle buffer ending
+            sourceNode.onended = () => {
+                isPlaying = false;
+                isPaused = false; // Ensure not marked as paused
+                playButton.disabled = false;
+                pauseButton.disabled = true;
+                statusMessage.textContent = "STATUS :: AUDIO STREAM ENDED // STATE: IDLE";
+                // Optionally clear canvas or leave last frame
+                // ctx.clearRect(0, 0, canvas.width, canvas.height);
+            };
+
+            // Start visualization loop
+            drawVisualizer();
+         }
+
+         // Function to pause
+         function pauseAudio() {
+             if (!audioContext || !isPlaying || isPaused) return;
+             audioContext.suspend().then(() => {
+                 isPlaying = false;
+                 isPaused = true;
+                 statusMessage.textContent = "STATUS :: AUDIO STREAM SUSPENDED";
+                 playButton.disabled = false; // Enable play (resume)
+                 pauseButton.disabled = true;
+                 // The requestAnimationFrame loop will pause automatically
+             });
+         }
+
+         /* // Stop requires creating new source node to replay
+         function stopAudio() {
+            if (!sourceNode || !isPlaying) return;
+            sourceNode.stop(0); // Stops playback
+            // Note: sourceNode cannot be reused after stopping
+            isPlaying = false;
+            isPaused = false;
+            playButton.disabled = false;
+            pauseButton.disabled = true;
+            stopButton.disabled = true;
+            statusMessage.textContent = "STATUS :: AUDIO STREAM TERMINATED // STATE: IDLE";
+         }
+         */
+
+        // --- Visualization Drawing ---
+        const bufferLength = analyser.frequencyBinCount; // == fftSize / 2
+        const dataArray = new Uint8Array(bufferLength); // Array for frequency data
+
+        // Set canvas dimensions (important for drawing correctly)
+        canvas.width = canvas.clientWidth * window.devicePixelRatio; // Handle HiDPI/Retina
+        canvas.height = canvas.clientHeight * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio); // Scale context
+
+
+        function drawVisualizer() {
+            if (!isPlaying) return; // Stop drawing if not playing
+
+            // Loop the drawing function
+            requestAnimationFrame(drawVisualizer);
+
+            // Get frequency data
+            analyser.getByteFrequencyData(dataArray);
+
+            // Clear the canvas
+            ctx.fillStyle = '#080810'; // Background color matching canvas CSS
+            ctx.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight); // Use clientWidth/Height for drawing bounds
+
+            // --- Draw Spectrum Bars ---
+            const barWidth = (canvas.clientWidth / bufferLength) * 1.5; // Width of each bar (adjust multiplier for spacing)
+            let barHeight;
+            let x = 0; // Starting x position
+
+            ctx.fillStyle = 'rgba(0, 191, 255, 0.8)'; // Accent color with some transparency
+
+            for (let i = 0; i < bufferLength; i++) {
+                barHeight = dataArray[i] * (canvas.clientHeight / 255); // Scale bar height (0-255 value)
+
+                // Draw the bar (from bottom up)
+                ctx.fillRect(
+                    x,                  // x position
+                    canvas.clientHeight - barHeight, // y position (top of bar)
+                    barWidth,           // width
+                    barHeight           // height
+                );
+
+                // Move to the next bar position
+                x += barWidth + 1; // Add 1 for spacing between bars
+            }
+        }
+
+        // --- Event Listeners ---
+        // Need user interaction to start AudioContext
+        playButton.addEventListener('click', () => {
+            if (!audioContext) {
+                setupAudioContext(); // Setup context on first click
+                // Need a slight delay or wait for buffer to load before playing
+                // The loading code now enables the button when ready.
+            }
+             // Check again if buffer is ready before playing
+            if(audioBuffer){
+                playAudio();
+            } else {
+                statusMessage.textContent = "STATUS :: AUDIO DATA NOT YET READY...";
+            }
+        });
+        pauseButton.addEventListener('click', pauseAudio);
+        // stopButton.addEventListener('click', stopAudio);
+
+         // Handle canvas resizing (optional but good practice)
+         window.addEventListener('resize', () => {
+            canvas.width = canvas.clientWidth * window.devicePixelRatio;
+            canvas.height = canvas.clientHeight * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+         });
+
+
+    </script>
+
+</body>
+</html>
