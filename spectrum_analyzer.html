@@ -3,44 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>//NODE_62S :: DYNAMIC_ANALYSIS_MODULE v3.6 (Stable Base)</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
+    <title>//NODE_62S :: DYNAMIC_ANALYSIS_MODULE v4.1 (Header/Link Add)</title> <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- Configuration (Based on v3.4/v3.6) --- */
+        /* --- Configuration (Based on v3.6) --- */
         :root {
             --bg-color: #040408; --text-color: #a8a8b0; --header-color: #d0d0e0;
             --accent-color: #00BFFF; --accent-hover: #ffffff; --border-color: #1f1f2f;
             --success-color: #00dd55; --error-color: #ff2222; --font-main: 'Roboto Mono', monospace;
             --transition-fast: 0.1s ease-in-out;
         }
-        /* --- Base & Structure (Based on v3.4/v3.6 - Scroll enabled) --- */
+        /* --- Base & Structure (Based on v3.6 - Scroll enabled) --- */
         *, *::before, *::after { box-sizing: border-box; } html { scroll-behavior: smooth; }
         body { margin: 0; padding: 3vh 20px 20px 20px; width: 100%; min-height: 100vh; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-main); font-size: 14px; line-height: 1.6; overflow-x: hidden; overflow-y: auto; cursor: default; position: relative; display: flex; flex-direction: column; align-items: center; }
 
-        /* Top Left Back Link REMOVED */
+        /* --- NEW: Top Left Back Link --- */
+        #topLeftBackLink {
+            position: fixed; /* Fix position */
+            top: 10px;
+            left: 10px;
+            font-size: 0.85em;
+            color: var(--text-color);
+            text-decoration: none;
+            border: 1px dashed var(--border-color);
+            padding: 4px 8px;
+            background-color: rgba(4, 4, 8, 0.7); /* Semi-transparent bg */
+            z-index: 1200; /* Ensure it's above other content */
+            transition: all var(--transition-fast);
+            opacity: 0.6; /* Slightly faded */
+        }
+        #topLeftBackLink:hover {
+             opacity: 1;
+             color: var(--accent-hover);
+             border-color: var(--accent-hover);
+             background-color: var(--border-color);
+         }
 
         /* Module Container (Based on v3.6) */
         .module-container { width: 100%; max-width: 850px; border: 1px solid var(--border-color); padding: 20px; margin-bottom: 20px; background-color: rgba(0,0,0, 0.3); box-shadow: inset 0 0 15px rgba(0,0,0, 0.6); position: relative; overflow: hidden; display: flex; flex-direction: column; }
         .module-header { font-family: var(--font-main); font-weight: 700; text-transform: uppercase; font-size: 1.1em; color: var(--header-color); margin: 0 0 20px 0; padding-bottom: 10px; text-align: left; border-bottom: 1px solid var(--border-color); letter-spacing: 1px; }
-        /* Header Domain REMOVED */
+        /* --- NEW: Span for domain --- */
+        .header-domain {
+             opacity: 0.6;
+             font-size: 0.85em;
+             margin-left: 15px;
+             font-weight: 400; /* Lighter weight */
+        }
 
-        /* File Input Area (Based on v3.6 - NO Drag/Drop styles) */
+        /* File Input Area (Based on v3.6) */
         .file-input-area { margin-bottom: 20px; padding: 15px; border: 1px dashed var(--border-color); text-align: center; background-color: rgba(0,0,0, 0.2); }
         input[type="file"] { display: none; }
         .file-label { font-family: var(--font-main); display: inline-block; padding: 8px 15px; border: 1px solid var(--accent-color); color: var(--accent-color); background-color: transparent; cursor: pointer; transition: all var(--transition-fast); font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.5px; }
         .file-label:hover { color: var(--bg-color); background-color: var(--accent-color); }
-         #fileName { display: block; margin-top: 10px; font-size: 0.8em; opacity: 0.7; min-height: 1.2em; }
+        #fileName { display: block; margin-top: 10px; font-size: 0.8em; opacity: 0.7; min-height: 1.2em; }
 
         /* Canvas (Fixed Height like v3.6) */
         #visualizerCanvas { display: block; width: 100%; height: 350px; background-color: #040408; border: 1px solid var(--border-color); margin-bottom: 20px; flex-shrink: 0; }
 
         /* Playback Controls Area (NO Scrubber) */
         .playback-area { margin-bottom: 15px; flex-shrink: 0; }
-        /* Removed .scrubber-container, #scrubber, .time-display styles */
         .controls { display: flex; flex-wrap: wrap; gap: 10px 15px; justify-content: center; }
         /* Button Style from v3.6 */
         .control-button { font-family: var(--font-main); font-size: 0.9em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-color); background-color: transparent; border: 1px solid var(--accent-color); padding: 8px 15px; cursor: pointer; transition: all var(--transition-fast); }
@@ -62,19 +86,27 @@
         .back-link { display: inline-block; margin-top: 20px; font-size: 0.9em; color: var(--accent-color); text-decoration: none; border: 1px dashed var(--border-color); padding: 5px 10px; transition: all var(--transition-fast); align-self: center; }
         .back-link:hover { color: var(--accent-hover); border-color: var(--accent-hover); background-color: var(--border-color); }
 
-        /* --- Fullscreen Specific Styles (Unchanged from v3.6 integration) --- */
+        /* --- Fullscreen Specific Styles (UPDATED to hide BOTH back links) --- */
         .module-container:fullscreen { max-width: none; width: 100%; height: 100%; border: none; padding: 10px; background-color: #000; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; margin: 0; max-height: none; }
         .module-container:fullscreen #visualizerCanvas { height: auto; flex-grow: 1; min-height: 200px; flex-shrink: 0; }
-        body:has(.module-container:fullscreen) .back-link { display: none; } /* Only hide bottom back link */
+        /* Updated rule to hide both links */
+        body:has(.module-container:fullscreen) .back-link,
+        body:has(.module-container:fullscreen) #topLeftBackLink {
+             display: none;
+        }
 
         /* Media queries identical to v3.6 */
-        @media (max-width: 700px) { body{padding:10px;} .module-container{padding:15px; margin: 10px; max-width: 95%;} #visualizerCanvas{height:250px;} .control-button{font-size:.8em;padding:6px 12px;} .back-link{font-size:.8em;margin-top:15px;} .file-label{font-size:.8em;padding:6px 12px;} .file-input-area{padding:10px;} .customization-controls{grid-template-columns:1fr 1fr;} /* Scrubber container rule removed */ }
+        @media (max-width: 700px) { body{padding:10px;} .module-container{padding:15px; margin: 10px; max-width: 95%;} #visualizerCanvas{height:250px;} .control-button{font-size:.8em;padding:6px 12px;} .back-link{font-size:.8em;margin-top:15px;} .file-label{font-size:.8em;padding:6px 12px;} .file-input-area{padding:10px;} .customization-controls{grid-template-columns:1fr 1fr;} }
         @media (max-width: 450px) { .customization-controls{grid-template-columns:1fr;} }
     </style>
 </head>
 <body>
+    <a href="index.html" class="back-link" id="topLeftBackLink">&lt;&lt; NODE_62S</a>
+
     <div class="module-container" id="moduleContainer">
-         <h1 class="module-header">// DYNAMIC_ANALYSIS_MODULE v3.6 //</h1> <div class="file-input-area">
+         <h1 class="module-header">// DYNAMIC_ANALYSIS_MODULE v4.1 //<span class="header-domain">// 62serpens.com</span></h1>
+
+        <div class="file-input-area">
             <input type="file" id="audioFile" accept="audio/*" style="display: none;">
             <label for="audioFile" class="file-label">SELECT AUDIO FILE</label>
             <span id="fileName">No file selected</span>
@@ -93,19 +125,19 @@
         </div>
 
         <div class="customization-controls">
-            <div class="control-group"> <label for="themeSelector">Theme:</label> <select id="themeSelector"> <option value="layered" selected>Layered Wave</option> <option value="waveform">Glowing Waveform</option> <option value="bars">Frequency Bars</option> </select> </div>
-            <div class="control-group"> <label for="paletteSelector">Color Palette:</label> <select id="paletteSelector"> <option value="default">Default Blue</option> <option value="neon">Neon</option> <option value="ocean">Ocean</option> <option value="fire">Fire</option> <option value="forest">Forest</option> <option value="grayscale">Grayscale</option> </select> </div>
-            <div class="control-group"> <label for="glowSlider">Glow / Bloom:</label> <input type="range" id="glowSlider" min="0" max="30" value="10" step="1"> </div>
-            <div class="control-group"> <label for="thicknessSlider">Thickness / Width:</label> <input type="range" id="thicknessSlider" min="1" max="10" step="0.5" value="2"> </div>
-            <div class="control-group"> <label for="particleSlider">Particle Density:</label> <input type="range" id="particleSlider" min="0" max="5" value="2" step="1"> </div>
+             <div class="control-group"> <label for="themeSelector">Theme:</label> <select id="themeSelector"> <option value="layered" selected>Layered Wave</option> <option value="waveform">Glowing Waveform</option> <option value="bars">Frequency Bars</option> </select> </div>
+             <div class="control-group"> <label for="paletteSelector">Color Palette:</label> <select id="paletteSelector"> <option value="default">Default Blue</option> <option value="neon">Neon</option> <option value="ocean">Ocean</option> <option value="fire">Fire</option> <option value="forest">Forest</option> <option value="grayscale">Grayscale</option> </select> </div>
+             <div class="control-group"> <label for="glowSlider">Glow / Bloom:</label> <input type="range" id="glowSlider" min="0" max="30" value="10" step="1"> </div>
+             <div class="control-group"> <label for="thicknessSlider">Thickness / Width:</label> <input type="range" id="thicknessSlider" min="1" max="10" step="0.5" value="2"> </div>
+             <div class="control-group"> <label for="particleSlider">Particle Density:</label> <input type="range" id="particleSlider" min="0" max="5" value="2" step="1"> </div>
         </div>
 
     </div><a href="index.html" class="back-link">&lt;&lt; RETURN TO NODE_62S INTERFACE</a>
 
     <script>
         // --- SCRIPT IS IDENTICAL TO THE v3.6 SCRIPT ---
-        // --- (Includes working audio, 3 themes, palettes, sliders, fullscreen) ---
-        console.log("Script loaded. v3.6 (Stable Base + Fullscreen)");
+        // --- NO JavaScript changes were made in this version ---
+        console.log("Script loaded. v4.1 (Header/Link Added)"); // Updated Log only
 
         const fftSize = 2048; const particleMaxLifeBase = 50; const particleSpeedBase = 1.2; const particleEmitThreshold = 210; const peakThrottleMs = 40;
         const canvas = document.getElementById('visualizerCanvas'); const ctx = canvas.getContext('2d'); const audioElement = new Audio(); const playButton = document.getElementById('playButton'); const pauseButton = document.getElementById('pauseButton'); const statusMessage = document.getElementById('statusMessage'); const fileInput = document.getElementById('audioFile'); const fileNameDisplay = document.getElementById('fileName'); const themeSelector = document.getElementById('themeSelector'); const glowSlider = document.getElementById('glowSlider'); const thicknessSlider = document.getElementById('thicknessSlider'); const particleSlider = document.getElementById('particleSlider'); const paletteSelector = document.getElementById('paletteSelector'); const moduleContainer = document.getElementById('moduleContainer'); const fullscreenButton = document.getElementById('fullscreenButton');
@@ -131,23 +163,15 @@
         function drawLayered(settings) { /* ... Logic identical to v3.6 ... */ analyser.getByteTimeDomainData(dataArrayTime);analyser.getByteFrequencyData(dataArrayFreq);let ampSum=0;for(let i=0;i<bufferLengthTime;i++){ampSum+=Math.abs(dataArrayTime[i]-128);}const avgAmp=ampSum/bufferLengthTime;const bBins=Math.floor(bufferLengthFreq*0.1);const mBins=Math.floor(bufferLengthFreq*0.4);const tBins=bufferLengthFreq;const bEng=getAverage(dataArrayFreq,0,bBins);const mEng=getAverage(dataArrayFreq,bBins,mBins);const tEng=getAverage(dataArrayFreq,mBins,tBins);const currentPalette=getCurrentPalette();ctx.fillStyle='#040408';ctx.fillRect(0,0,canvasWidth,canvasHeight);const pulseSize=mapValue(bEng,0,150,canvasHeight*0.1,canvasHeight*1.5);const pulseAlpha=mapValue(bEng,0,150,0,0.1);if(pulseAlpha>0.01){const radGrad=ctx.createRadialGradient(canvasWidth/2,canvasHeight/2,0,canvasWidth/2,canvasHeight/2,pulseSize);radGrad.addColorStop(0,hexToRgba(currentPalette[0],pulseAlpha));radGrad.addColorStop(1,hexToRgba(currentPalette[0],0));ctx.fillStyle=radGrad;ctx.fillRect(0,0,canvasWidth,canvasHeight);} const barWidthFreq=canvasWidth/bufferLengthFreq;const barAlpha='08';for(let i=0;i<bufferLengthFreq;i++){const barHeightFreq=dataArrayFreq[i]*(canvasHeight/255)*0.7;ctx.fillStyle=currentPalette[i%currentPalette.length]+barAlpha;ctx.fillRect(i*barWidthFreq,canvasHeight-barHeightFreq,barWidthFreq*0.8,barHeightFreq);} ctx.shadowBlur=Math.max(1,settings.glow/3);for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.life--;if(p.life<=0){particles.splice(i,1);continue;}p.x+=p.vx;p.y+=p.vy;const alpha=p.life/p.maxLife;ctx.beginPath();ctx.arc(p.x,p.y,p.size*alpha,0,Math.PI*2);let rgbaColor=p.color;if(p.color.startsWith('#')){rgbaColor=hexToRgba(p.color,alpha*0.9);}else{try{rgbaColor=p.color.replace(/[\d\.]+\)$/g,`${alpha*0.9})`);}catch(e){}} ctx.fillStyle=rgbaColor;ctx.shadowColor=rgbaColor.replace(/[\d\.]+\)$/g,`${alpha*0.5})`);ctx.fill();} ctx.shadowBlur=0; ctx.lineWidth=mapValue(avgAmp,0,50,1,settings.thickness);ctx.shadowColor=hexToRgba(currentPalette[0],0.6); ctx.shadowBlur=settings.glow;const waveGrad=ctx.createLinearGradient(0,0,0,canvasHeight);waveGrad.addColorStop(0,currentPalette[0]||'#FFFFFF');waveGrad.addColorStop(0.5,currentPalette[1]||'#C0C0C0');waveGrad.addColorStop(1,currentPalette[2]||'#808080');ctx.strokeStyle=waveGrad;ctx.beginPath();const sliceW=canvasWidth*1.0/bufferLengthTime;let x=0;let curAmp;const curTime=performance.now();for(let i=0;i<bufferLengthTime;i++){curAmp=dataArrayTime[i];const v=curAmp/128.0;const y=(v*canvasHeight/2);if(i===0){ctx.moveTo(x,y);}else{ctx.lineTo(x,y);}x+=sliceW;if(settings.particles>0&&curAmp>particleEmitThreshold&&(curTime-lastPeakTime>peakThrottleMs)){emitParticles(x-sliceW/2,y,Math.floor(Math.random()*settings.particles)+1,settings);lastPeakTime=curTime;}} ctx.stroke();ctx.shadowColor='transparent';ctx.shadowBlur=0; }
         function drawWaveform(settings) { /* ... Logic identical to v3.6 ... */ analyser.getByteTimeDomainData(dataArrayTime); const currentPalette = getCurrentPalette(); ctx.fillStyle='#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); ctx.lineWidth=settings.thickness; const waveColor = currentPalette[0] || 'var(--accent-color)'; ctx.strokeStyle = waveColor; ctx.shadowColor = hexToRgba(waveColor, 0.7); ctx.shadowBlur = settings.glow; ctx.beginPath(); const sliceWidth = canvasWidth * 1.0 / bufferLengthTime; let x = 0; for (let i = 0; i < bufferLengthTime; i++) { const v = dataArrayTime[i] / 128.0; const y = (v * canvasHeight / 2); if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); } x += sliceWidth; } ctx.stroke(); ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
         function drawBars(settings) { /* ... Logic identical to v3.6 ... */ analyser.getByteFrequencyData(dataArrayFreq); const currentPalette = getCurrentPalette(); ctx.fillStyle='#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); const barWidth = (canvasWidth / bufferLengthFreq); let barHeight; let x = 0; const barGlow = Math.max(0, Math.min(8, settings.glow / 1.5)); ctx.shadowBlur = barGlow; for (let i = 0; i < bufferLengthFreq; i++) { barHeight = dataArrayFreq[i] * (canvasHeight / 255); if (barHeight < 1) continue; const colorIndex = i % currentPalette.length; const barColor = currentPalette[colorIndex]; ctx.fillStyle = barColor; ctx.shadowColor = hexToRgba(barColor, 0.7); ctx.fillRect(x, canvasHeight - barHeight, Math.max(1, barWidth * settings.thickness / 1.5), barHeight); x += barWidth; } ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
-        // Main Drawing Loop
         function drawVisualizer() { if(isPlaying){animationFrameId=requestAnimationFrame(drawVisualizer);}else{animationFrameId=null;} const currentSettings=visualizerSettings; if(!audioInitialized||(!isPlaying&&audioElement.paused)||!analyser){drawIdle();if(!isPlaying&&particles.length>0)particles=[];return;} const theme=currentSettings.theme; if(theme==='layered'){drawLayered(currentSettings);}else if(theme==='waveform'){drawWaveform(currentSettings);}else if(theme==='bars'){drawBars(currentSettings);}else{drawIdle();} }
-        // Control Event Listeners
         themeSelector.addEventListener('change', (e) => { updateSettings(); particles = []; console.log(`Theme changed to: ${visualizerSettings.theme}`); if (!isPlaying) drawVisualizer(); });
         paletteSelector.addEventListener('change', (e) => { updateSettings(); console.log(`Palette changed to: ${visualizerSettings.palette}`); if (!isPlaying) drawVisualizer(); });
         glowSlider.addEventListener('input', updateSettings);
         thicknessSlider.addEventListener('input', updateSettings);
         particleSlider.addEventListener('input', updateSettings);
-        // Fullscreen Logic
-        function updateFullscreenButton() { if(document.fullscreenElement===moduleContainer){fullscreenButton.textContent="EXIT";}else{fullscreenButton.textContent="FULLSCREEN";} }
-        fullscreenButton.addEventListener('click',()=>{ if(!document.fullscreenElement){console.log("Req FS...");moduleContainer.requestFullscreen().then(()=>{console.log("Entered FS.");}).catch(err=>{console.error(`FS fail: ${err.message} (${err.name})`);statusMessage.textContent="ERR: FS failed.";statusMessage.style.color='var(--error-color)';});}else{console.log("Exit FS...");if(document.exitFullscreen){document.exitFullscreen().then(()=>{console.log("Exited FS.");});}} });
-        document.addEventListener('fullscreenchange',()=>{ console.log("FS change event."); updateFullscreenButton(); setTimeout(()=>{setupCanvas();drawVisualizer();},50); });
-        // Resize Handling
+        function updateFullscreenButton() { if(document.fullscreenElement===moduleContainer){fullscreenButton.textContent="EXIT";}else{fullscreenButton.textContent="FULLSCREEN";} } fullscreenButton.addEventListener('click',()=>{ if(!document.fullscreenElement){console.log("Req FS...");moduleContainer.requestFullscreen().then(()=>{console.log("Entered FS.");}).catch(err=>{console.error(`FS fail: ${err.message} (${err.name})`);statusMessage.textContent="ERR: FS failed.";statusMessage.style.color='var(--error-color)';});}else{console.log("Exit FS...");if(document.exitFullscreen){document.exitFullscreen().then(()=>{console.log("Exited FS.");});}} }); document.addEventListener('fullscreenchange',()=>{ console.log("FS change event."); updateFullscreenButton(); setTimeout(()=>{setupCanvas();drawVisualizer();},50); });
         window.addEventListener('resize', () => { if(document.fullscreenElement !== moduleContainer){ console.log("Resize event."); setupCanvas(); drawVisualizer(); }});
-        // Initial Sync & Draw
-        function syncControlsToSettings() { themeSelector.value=visualizerSettings.theme;paletteSelector.value=visualizerSettings.palette;glowSlider.value=visualizerSettings.glow;thicknessSlider.value=visualizerSettings.thickness;particleSlider.value=visualizerSettings.particles; }
-        syncControlsToSettings(); setupCanvas(); drawVisualizer(); console.log("Initial setup complete. v4.0 (Reverted Base + Simple Features)");
+        function syncControlsToSettings() { themeSelector.value=visualizerSettings.theme;paletteSelector.value=visualizerSettings.palette;glowSlider.value=visualizerSettings.glow;thicknessSlider.value=visualizerSettings.thickness;particleSlider.value=visualizerSettings.particles; } syncControlsToSettings(); setupCanvas(); drawVisualizer(); console.log("Initial setup complete. v4.0 (Stable Base + Cancel Fix)"); // Renamed for clarity
 
     </script>
 
