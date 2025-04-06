@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>//NODE_62S :: DYNAMIC_ANALYSIS_MODULE v4.1 (Header/Link Add)</title> <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
+    <title>//NODE_62S :: DYNAMIC_ANALYSIS_MODULE v4.2 (Mobile Fixes)</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -20,158 +21,618 @@
         *, *::before, *::after { box-sizing: border-box; } html { scroll-behavior: smooth; }
         body { margin: 0; padding: 3vh 20px 20px 20px; width: 100%; min-height: 100vh; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-main); font-size: 14px; line-height: 1.6; overflow-x: hidden; overflow-y: auto; cursor: default; position: relative; display: flex; flex-direction: column; align-items: center; }
 
-        /* --- NEW: Top Left Back Link --- */
+        /* --- Top Left Back Link --- */
         #topLeftBackLink {
-            position: fixed; /* Fix position */
-            top: 10px;
-            left: 10px;
-            font-size: 0.85em;
-            color: var(--text-color);
-            text-decoration: none;
-            border: 1px dashed var(--border-color);
-            padding: 4px 8px;
-            background-color: rgba(4, 4, 8, 0.7); /* Semi-transparent bg */
-            z-index: 1200; /* Ensure it's above other content */
-            transition: all var(--transition-fast);
-            opacity: 0.6; /* Slightly faded */
+            position: fixed; top: 10px; left: 10px; font-size: 0.85em;
+            color: var(--text-color); text-decoration: none; border: 1px dashed var(--border-color);
+            padding: 4px 8px; background-color: rgba(4, 4, 8, 0.7);
+            z-index: 1200; transition: all var(--transition-fast); opacity: 0.6;
         }
         #topLeftBackLink:hover {
-             opacity: 1;
-             color: var(--accent-hover);
-             border-color: var(--accent-hover);
-             background-color: var(--border-color);
-         }
-
-        /* Module Container (Based on v3.6) */
-        .module-container { width: 100%; max-width: 850px; border: 1px solid var(--border-color); padding: 20px; margin-bottom: 20px; background-color: rgba(0,0,0, 0.3); box-shadow: inset 0 0 15px rgba(0,0,0, 0.6); position: relative; overflow: hidden; display: flex; flex-direction: column; }
-        .module-header { font-family: var(--font-main); font-weight: 700; text-transform: uppercase; font-size: 1.1em; color: var(--header-color); margin: 0 0 20px 0; padding-bottom: 10px; text-align: left; border-bottom: 1px solid var(--border-color); letter-spacing: 1px; }
-        /* --- NEW: Span for domain --- */
-        .header-domain {
-             opacity: 0.6;
-             font-size: 0.85em;
-             margin-left: 15px;
-             font-weight: 400; /* Lighter weight */
+            opacity: 1; color: var(--accent-hover); border-color: var(--accent-hover);
+            background-color: var(--border-color);
         }
 
-        /* File Input Area (Based on v3.6) */
+        /* Module Container */
+        .module-container { width: 100%; max-width: 850px; border: 1px solid var(--border-color); padding: 20px; margin-bottom: 20px; background-color: rgba(0,0,0, 0.3); box-shadow: inset 0 0 15px rgba(0,0,0, 0.6); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        .module-header { font-family: var(--font-main); font-weight: 700; text-transform: uppercase; font-size: 1.1em; color: var(--header-color); margin: 0 0 20px 0; padding-bottom: 10px; text-align: left; border-bottom: 1px solid var(--border-color); letter-spacing: 1px; }
+        .header-domain { opacity: 0.6; font-size: 0.85em; margin-left: 15px; font-weight: 400; }
+
+        /* File Input Area */
         .file-input-area { margin-bottom: 20px; padding: 15px; border: 1px dashed var(--border-color); text-align: center; background-color: rgba(0,0,0, 0.2); }
         input[type="file"] { display: none; }
         .file-label { font-family: var(--font-main); display: inline-block; padding: 8px 15px; border: 1px solid var(--accent-color); color: var(--accent-color); background-color: transparent; cursor: pointer; transition: all var(--transition-fast); font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.5px; }
         .file-label:hover { color: var(--bg-color); background-color: var(--accent-color); }
         #fileName { display: block; margin-top: 10px; font-size: 0.8em; opacity: 0.7; min-height: 1.2em; }
 
-        /* Canvas (Fixed Height like v3.6) */
+        /* Canvas */
         #visualizerCanvas { display: block; width: 100%; height: 350px; background-color: #040408; border: 1px solid var(--border-color); margin-bottom: 20px; flex-shrink: 0; }
 
-        /* Playback Controls Area (NO Scrubber) */
+        /* Playback Controls Area */
         .playback-area { margin-bottom: 15px; flex-shrink: 0; }
         .controls { display: flex; flex-wrap: wrap; gap: 10px 15px; justify-content: center; }
-        /* Button Style from v3.6 */
         .control-button { font-family: var(--font-main); font-size: 0.9em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-color); background-color: transparent; border: 1px solid var(--accent-color); padding: 8px 15px; cursor: pointer; transition: all var(--transition-fast); }
         .control-button:hover:not(:disabled) { background-color: var(--accent-color); color: var(--bg-color); box-shadow: 0 0 10px var(--accent-color); }
         .control-button:disabled { color: var(--border-color); border-color: var(--border-color); cursor: not-allowed; opacity: 0.5; }
         #fullscreenButton { /* Inherits style */ }
 
-        /* Customization Controls identical to v3.6 */
+        /* Customization Controls */
         .customization-controls { border-top: 1px solid var(--border-color); margin-top: 20px; padding-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px 20px; font-size: 0.85em; flex-shrink: 0; }
         .control-group { display: flex; flex-direction: column; gap: 5px; }
         .customization-controls label { font-family: var(--font-main); text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; font-size: 0.9em; margin-bottom: 3px; }
         .customization-controls select, .customization-controls input[type="range"] { font-family: var(--font-main); background-color: var(--border-color); border: 1px solid var(--border-color); color: var(--text-color); padding: 6px 8px; width: 100%; border-radius: 0; -webkit-appearance: none; appearance: none; }
-         .customization-controls select { background-image: linear-gradient(45deg, transparent 50%, var(--accent-color) 50%), linear-gradient(135deg, var(--accent-color) 50%, transparent 50%); background-position: calc(100% - 15px) center, calc(100% - 10px) center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 30px; cursor: pointer; }
+        .customization-controls select { background-image: linear-gradient(45deg, transparent 50%, var(--accent-color) 50%), linear-gradient(135deg, var(--accent-color) 50%, transparent 50%); background-position: calc(100% - 15px) center, calc(100% - 10px) center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 30px; cursor: pointer; }
         .customization-controls input[type="range"] { padding: 0; height: 20px; cursor: pointer;}
         /* Slider track/thumb styles unchanged */
 
-        /* Status & Back Link identical to v3.6 */
-        #statusMessage { font-size: 0.85em; text-align: center; min-height: 1.5em; opacity: 0.7; margin-bottom: 15px; flex-shrink: 0; }
+        /* Status & Back Link */
+        #statusMessage { font-size: 0.85em; text-align: center; min-height: 1.5em; opacity: 0.7; margin-bottom: 15px; flex-shrink: 0; color: var(--text-color); /* Ensure default color */ }
         .back-link { display: inline-block; margin-top: 20px; font-size: 0.9em; color: var(--accent-color); text-decoration: none; border: 1px dashed var(--border-color); padding: 5px 10px; transition: all var(--transition-fast); align-self: center; }
         .back-link:hover { color: var(--accent-hover); border-color: var(--accent-hover); background-color: var(--border-color); }
 
-        /* --- Fullscreen Specific Styles (UPDATED to hide BOTH back links) --- */
-        .module-container:fullscreen { max-width: none; width: 100%; height: 100%; border: none; padding: 10px; background-color: #000; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; margin: 0; max-height: none; }
-        .module-container:fullscreen #visualizerCanvas { height: auto; flex-grow: 1; min-height: 200px; flex-shrink: 0; }
-        /* Updated rule to hide both links */
+        /* --- Fullscreen Specific Styles --- */
+        .module-container:fullscreen {
+            max-width: none; width: 100%; height: 100%; border: none;
+            padding: 10px; background-color: #000; display: flex;
+            flex-direction: column; justify-content: flex-start;
+            overflow-y: auto; margin: 0; max-height: none;
+        }
+        .module-container:fullscreen #visualizerCanvas {
+            height: auto; /* Allow flexible height */
+            flex-grow: 1; /* Take available space */
+            min-height: 200px; /* Ensure minimum visible height */
+            flex-shrink: 0;
+        }
+        /* Hide both back links when fullscreen is active */
         body:has(.module-container:fullscreen) .back-link,
         body:has(.module-container:fullscreen) #topLeftBackLink {
              display: none;
         }
+        /* Add vendor prefixed versions for broader compatibility with the :fullscreen pseudo-class */
+        .module-container:-webkit-full-screen { /* Safari, older Chrome */
+            max-width: none; width: 100%; height: 100%; border: none; padding: 10px; background-color: #000; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; margin: 0; max-height: none;
+        }
+        .module-container:-webkit-full-screen #visualizerCanvas { height: auto; flex-grow: 1; min-height: 200px; flex-shrink: 0; }
+         body:has(.module-container:-webkit-full-screen) .back-link,
+         body:has(.module-container:-webkit-full-screen) #topLeftBackLink { display: none; }
 
-        /* Media queries identical to v3.6 */
-        @media (max-width: 700px) { body{padding:10px;} .module-container{padding:15px; margin: 10px; max-width: 95%;} #visualizerCanvas{height:250px;} .control-button{font-size:.8em;padding:6px 12px;} .back-link{font-size:.8em;margin-top:15px;} .file-label{font-size:.8em;padding:6px 12px;} .file-input-area{padding:10px;} .customization-controls{grid-template-columns:1fr 1fr;} }
-        @media (max-width: 450px) { .customization-controls{grid-template-columns:1fr;} }
+         .module-container:-moz-full-screen { /* Firefox */
+            max-width: none; width: 100%; height: 100%; border: none; padding: 10px; background-color: #000; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; margin: 0; max-height: none;
+        }
+        .module-container:-moz-full-screen #visualizerCanvas { height: auto; flex-grow: 1; min-height: 200px; flex-shrink: 0; }
+         body:has(.module-container:-moz-full-screen) .back-link,
+         body:has(.module-container:-moz-full-screen) #topLeftBackLink { display: none; }
+
+         .module-container:-ms-fullscreen { /* IE 11 */
+            max-width: none; width: 100%; height: 100%; border: none; padding: 10px; background-color: #000; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; margin: 0; max-height: none;
+         }
+         .module-container:-ms-fullscreen #visualizerCanvas { height: auto; flex-grow: 1; min-height: 200px; flex-shrink: 0; }
+         body:has(.module-container:-ms-fullscreen) .back-link,
+         body:has(.module-container:-ms-fullscreen) #topLeftBackLink { display: none; }
+
+
+        /* Media queries */
+        @media (max-width: 700px) {
+            body{padding:10px;}
+            .module-container{padding:15px; margin: 10px auto; max-width: 95%;} /* Centered margin */
+            #visualizerCanvas{height:250px;}
+            .control-button{font-size:.8em;padding:6px 12px;}
+            .back-link{font-size:.8em;margin-top:15px;}
+            .file-label{font-size:.8em;padding:6px 12px;}
+            .file-input-area{padding:10px;}
+            .customization-controls{grid-template-columns:1fr 1fr;}
+        }
+        @media (max-width: 450px) {
+            .customization-controls{grid-template-columns:1fr;}
+            #visualizerCanvas { height: 200px; } /* Further reduce canvas height */
+            .module-header { font-size: 1em; }
+        }
     </style>
 </head>
 <body>
     <a href="index.html" class="back-link" id="topLeftBackLink">&lt;&lt; NODE_62S</a>
 
     <div class="module-container" id="moduleContainer">
-         <h1 class="module-header">// DYNAMIC_ANALYSIS_MODULE v4.1 //<span class="header-domain">// 62serpens.com</span></h1>
+         <h1 class="module-header">// DYNAMIC_ANALYSIS_MODULE v4.2 //<span class="header-domain">// 62serpens.com</span></h1>
 
-        <div class="file-input-area">
-            <input type="file" id="audioFile" accept="audio/*" style="display: none;">
-            <label for="audioFile" class="file-label">SELECT AUDIO FILE</label>
-            <span id="fileName">No file selected</span>
-        </div>
+         <div class="file-input-area">
+             <input type="file" id="audioFile" accept="audio/mpeg, audio/wav, audio/ogg, audio/aac, audio/flac, audio/x-m4a, audio/*" style="display: none;">
+             <label for="audioFile" class="file-label">SELECT AUDIO FILE</label>
+             <span id="fileName">No file selected</span>
+         </div>
 
-        <canvas id="visualizerCanvas"></canvas>
+         <canvas id="visualizerCanvas"></canvas>
 
-        <div id="statusMessage">STATUS :: SELECT AN AUDIO FILE</div>
+         <div id="statusMessage">STATUS :: SELECT AN AUDIO FILE</div>
 
-        <div class="playback-area">
-             <div class="controls">
-                <button id="playButton" class="control-button" disabled>PLAY</button>
-                <button id="pauseButton" class="control-button" disabled>PAUSE</button>
-                <button id="fullscreenButton" class="control-button">FULLSCREEN</button>
-            </div>
-        </div>
+         <div class="playback-area">
+              <div class="controls">
+                  <button id="playButton" class="control-button" disabled>PLAY</button>
+                  <button id="pauseButton" class="control-button" disabled>PAUSE</button>
+                  <button id="fullscreenButton" class="control-button">FULLSCREEN</button>
+              </div>
+         </div>
 
-        <div class="customization-controls">
-             <div class="control-group"> <label for="themeSelector">Theme:</label> <select id="themeSelector"> <option value="layered" selected>Layered Wave</option> <option value="waveform">Glowing Waveform</option> <option value="bars">Frequency Bars</option> </select> </div>
-             <div class="control-group"> <label for="paletteSelector">Color Palette:</label> <select id="paletteSelector"> <option value="default">Default Blue</option> <option value="neon">Neon</option> <option value="ocean">Ocean</option> <option value="fire">Fire</option> <option value="forest">Forest</option> <option value="grayscale">Grayscale</option> </select> </div>
-             <div class="control-group"> <label for="glowSlider">Glow / Bloom:</label> <input type="range" id="glowSlider" min="0" max="30" value="10" step="1"> </div>
-             <div class="control-group"> <label for="thicknessSlider">Thickness / Width:</label> <input type="range" id="thicknessSlider" min="1" max="10" step="0.5" value="2"> </div>
-             <div class="control-group"> <label for="particleSlider">Particle Density:</label> <input type="range" id="particleSlider" min="0" max="5" value="2" step="1"> </div>
-        </div>
+         <div class="customization-controls">
+              <div class="control-group"> <label for="themeSelector">Theme:</label> <select id="themeSelector"> <option value="layered" selected>Layered Wave</option> <option value="waveform">Glowing Waveform</option> <option value="bars">Frequency Bars</option> </select> </div>
+              <div class="control-group"> <label for="paletteSelector">Color Palette:</label> <select id="paletteSelector"> <option value="default">Default Blue</option> <option value="neon">Neon</option> <option value="ocean">Ocean</option> <option value="fire">Fire</option> <option value="forest">Forest</option> <option value="grayscale">Grayscale</option> </select> </div>
+              <div class="control-group"> <label for="glowSlider">Glow / Bloom:</label> <input type="range" id="glowSlider" min="0" max="30" value="10" step="1"> </div>
+              <div class="control-group"> <label for="thicknessSlider">Thickness / Width:</label> <input type="range" id="thicknessSlider" min="1" max="10" step="0.5" value="2"> </div>
+              <div class="control-group"> <label for="particleSlider">Particle Density:</label> <input type="range" id="particleSlider" min="0" max="5" value="2" step="1"> </div>
+         </div>
 
     </div><a href="index.html" class="back-link">&lt;&lt; RETURN TO NODE_62S INTERFACE</a>
 
     <script>
-        // --- SCRIPT IS IDENTICAL TO THE v3.6 SCRIPT ---
-        // --- NO JavaScript changes were made in this version ---
-        console.log("Script loaded. v4.1 (Header/Link Added)"); // Updated Log only
+        console.log("Script loaded. v4.2 (Mobile Fixes)");
 
+        // --- Core Visualizer Variables & Constants (Unchanged) ---
         const fftSize = 2048; const particleMaxLifeBase = 50; const particleSpeedBase = 1.2; const particleEmitThreshold = 210; const peakThrottleMs = 40;
         const canvas = document.getElementById('visualizerCanvas'); const ctx = canvas.getContext('2d'); const audioElement = new Audio(); const playButton = document.getElementById('playButton'); const pauseButton = document.getElementById('pauseButton'); const statusMessage = document.getElementById('statusMessage'); const fileInput = document.getElementById('audioFile'); const fileNameDisplay = document.getElementById('fileName'); const themeSelector = document.getElementById('themeSelector'); const glowSlider = document.getElementById('glowSlider'); const thicknessSlider = document.getElementById('thicknessSlider'); const particleSlider = document.getElementById('particleSlider'); const paletteSelector = document.getElementById('paletteSelector'); const moduleContainer = document.getElementById('moduleContainer'); const fullscreenButton = document.getElementById('fullscreenButton');
         let audioContext; let analyser; let sourceNode; let audioInitialized = false; let bufferLengthFreq; let bufferLengthTime; let dataArrayFreq; let dataArrayTime; let isPlaying = false; let particles = []; let lastPeakTime = 0; let canvasWidth, canvasHeight; let animationFrameId = null;
         const colorPalettes = { default:['#00BFFF','#40E0D0','#FFFFFF','#87CEFA'], neon:['#39FF14','#FF1493','#00FFFF','#FFFF00'], ocean:['#0077CC','#00AADD','#90CAF9','#E1F5FE'], fire:['#FF4500','#FFA500','#FF6347','#DC143C'], forest:['#228B22','#556B2F','#8FBC8F','#9ACD32'], grayscale:['#FFFFFF','#C0C0C0','#808080','#404040'] };
         let visualizerSettings = { theme: 'layered', palette: 'default', glow: 10, thickness: 2, particles: 2 };
+
+        // --- Helper Functions (Unchanged) ---
         function updateSettings() { visualizerSettings.theme=themeSelector.value;visualizerSettings.palette=paletteSelector.value;visualizerSettings.glow=parseInt(glowSlider.value,10);visualizerSettings.thickness=parseFloat(thicknessSlider.value);visualizerSettings.particles=parseInt(particleSlider.value,10); }
         function getCurrentPalette() { return colorPalettes[visualizerSettings.palette] || colorPalettes.default; }
-        function initializeAudioContext() { if(audioInitialized)return true;try{statusMessage.textContent="Init Context...";audioContext=new(window.AudioContext||window.webkitAudioContext)();if(audioContext.state==='suspended'){}analyser=audioContext.createAnalyser();analyser.fftSize=fftSize;analyser.smoothingTimeConstant=0.8;bufferLengthFreq=analyser.frequencyBinCount;bufferLengthTime=analyser.fftSize;dataArrayFreq=new Uint8Array(bufferLengthFreq);dataArrayTime=new Uint8Array(bufferLengthTime);sourceNode=audioContext.createMediaElementSource(audioElement);audioInitialized=true;console.log("Ctx Init OK");statusMessage.textContent="Ctx Ready";return true;}catch(e){console.error("Ctx Init Fail:",e);statusMessage.textContent="ERR: No Web Audio";statusMessage.style.color='var(--error-color)';fileInput.disabled=true;document.querySelector('.file-label').style.cursor='not-allowed';document.querySelector('.file-label').style.opacity='0.5';return false;} }
         function mapValue(v, im, iM, om, oM) { const val=om+(oM-om)*(v-im)/(iM-im);return Math.max(om,Math.min(oM,val)); }
         function getAverage(data, start, end) { let s=0;const cE=Math.min(end,data.length);const ct=cE-start;if(ct<=0)return 0;for(let i=start;i<cE;i++){s+=data[i];}return s/ct; }
         function hexToRgba(hex, alpha=1) { let r=0,g=0,b=0;if(!hex)return`rgba(255,255,255,${alpha})`;if(hex.length===4){r=parseInt(hex[1]+hex[1],16);g=parseInt(hex[2]+hex[2],16);b=parseInt(hex[3]+hex[3],16);}else if(hex.length===7){r=parseInt(hex[1]+hex[2],16);g=parseInt(hex[3]+hex[4],16);b=parseInt(hex[5]+hex[6],16);}else{return`rgba(255,255,255,${alpha})`;}return`rgba(${r},${g},${b},${alpha})`; }
-        fileInput.addEventListener('change', function(event) { console.log("[v3.6 fileInput] Change event"); if (!initializeAudioContext()) { return; } const files = event.target.files; if (files.length === 0) { fileNameDisplay.textContent = 'No file selected'; statusMessage.textContent = 'STATUS :: SELECT FILE'; audioElement.src = ''; playButton.disabled = true; pauseButton.disabled = true; isPlaying = false; particles = []; if(animationFrameId){cancelAnimationFrame(animationFrameId); animationFrameId=null;} drawVisualizer(); fileInput.value = null; return; } const file = files[0]; fileNameDisplay.textContent = `Selected: ${file.name}`; statusMessage.textContent = 'Reading...'; playButton.disabled = true; pauseButton.disabled = true; isPlaying = false; audioElement.pause(); audioElement.currentTime = 0; particles = []; if(animationFrameId){cancelAnimationFrame(animationFrameId);animationFrameId=null;} if(sourceNode){try{sourceNode.disconnect();}catch(e){console.warn("Src disconnect fail:",e)}} const reader = new FileReader(); reader.onload = function(e) { console.log("[v3.6 FileReader] onload"); statusMessage.textContent = 'Decoding...'; audioElement.src = e.target.result; audioElement.load(); const canPlayHandler = () => { console.log("[v3.6 canPlayHandler] 'canplay'"); statusMessage.textContent = 'READY // PRESS PLAY'; playButton.disabled = false; pauseButton.disabled = true; audioElement.removeEventListener('canplay', canPlayHandler); try { if (!sourceNode || sourceNode.context !== audioContext) { sourceNode = audioContext.createMediaElementSource(audioElement); console.log("Source created."); } else { console.log("Reusing source."); } sourceNode.disconnect(); sourceNode.connect(analyser); analyser.connect(audioContext.destination); console.log("Nodes connected."); } catch (err) { console.error("Connect err:", err); statusMessage.textContent = 'ERR:Cannot connect audio.'; statusMessage.style.color = 'var(--error-color)'; playButton.disabled = true; return; } }; const errorHandler = (err) => { console.error("Audio Load Error:", err); statusMessage.textContent = 'ERR:Failed load.'; statusMessage.style.color = 'var(--error-color)'; playButton.disabled = true; pauseButton.disabled = true; audioElement.removeEventListener('canplay', canPlayHandler); audioElement.removeEventListener('error', errorHandler); }; audioElement.addEventListener('canplay', canPlayHandler, { once: true }); audioElement.addEventListener('error', errorHandler, { once: true }); }; reader.onerror = function(e) { console.error("Read err:", e); statusMessage.textContent = 'ERR: Read failed'; statusMessage.style.color = 'var(--error-color)'; fileNameDisplay.textContent = 'Read error'; playButton.disabled = true; pauseButton.disabled = true; }; reader.readAsDataURL(file); });
-        playButton.addEventListener('click', () => { console.log("[v3.6 PlayButton] Clicked."); if (!audioInitialized || !audioElement.src || audioElement.readyState < 3 || playButton.disabled) { console.warn(`Play prevented`); return; } if (audioContext.state === 'suspended') { console.log("Attempt resume..."); audioContext.resume().then(() => { console.log("Ctx resumed."); startPlayback(); }).catch(err => console.error("Resume fail:", err)); } else { console.log("Ctx running."); startPlayback(); } });
-        function startPlayback(){ console.log("startPlayback");audioElement.play().then(()=>{console.log("play() resolved");isPlaying=true;playButton.disabled=true;pauseButton.disabled=false;statusMessage.textContent='PLAYING';if(animationFrameId)cancelAnimationFrame(animationFrameId);drawVisualizer();}).catch(err=>{console.error("play() failed:",err);statusMessage.textContent=`ERR: ${err.name}`;statusMessage.style.color='var(--error-color)';playButton.disabled=false;pauseButton.disabled=true;isPlaying=false;}); }
-        pauseButton.addEventListener('click', () => { if (!isPlaying) return; console.log("Pause click"); audioElement.pause(); });
-        audioElement.onpause = () => { if (isPlaying) { isPlaying = false; playButton.disabled = false; pauseButton.disabled = true; statusMessage.textContent = 'PAUSED'; console.log("Paused."); if(animationFrameId){cancelAnimationFrame(animationFrameId); animationFrameId=null;} } };
-        audioElement.onended = () => { console.log("Ended."); isPlaying = false; playButton.disabled = false; pauseButton.disabled = true; statusMessage.textContent = 'ENDED'; particles = []; if(animationFrameId){cancelAnimationFrame(animationFrameId); animationFrameId=null;} drawVisualizer(); };
-        audioElement.onerror = (e) => { console.error("Audio Err:", e); statusMessage.textContent='ERR: Playback'; statusMessage.style.color='var(--error-color)'; isPlaying=false; playButton.disabled=true; pauseButton.disabled=true; particles=[]; if(animationFrameId){cancelAnimationFrame(animationFrameId);animationFrameId=null;} };
-        function emitParticles(x, y, count, settings) { const particleAmountMultiplier=settings.particles/2;const actualCount=Math.min(10,Math.floor(count*particleAmountMultiplier));const currentPalette=getCurrentPalette();for(let i=0; i<actualCount; i++){if(particles.length>150*particleAmountMultiplier)return; const angle=Math.random()*Math.PI*2; const speed=Math.random()*particleSpeedBase*0.5+0.2; const life=Math.random()*(particleMaxLifeBase*0.5)+(particleMaxLifeBase*0.5); const particleBaseColor=currentPalette[Math.floor(Math.random()*currentPalette.length)]; particles.push({x:x,y:y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:life,maxLife:life,size:Math.random()*1.5+0.5,color:particleBaseColor});} }
-        function setupCanvas() { const currentWidth=canvas.clientWidth;const currentHeight=canvas.clientHeight;if(currentWidth>0&&currentHeight>0){canvasWidth=currentWidth;canvasHeight=currentHeight;canvas.width=canvasWidth*window.devicePixelRatio;canvas.height=canvasHeight*window.devicePixelRatio;ctx.scale(window.devicePixelRatio,window.devicePixelRatio);}else{console.warn(`Canvas setup skipped: Invalid dimensions (${currentWidth}x${currentHeight})`);} } setupCanvas();
-        function drawIdle() { ctx.fillStyle='#040408';ctx.fillRect(0,0,canvasWidth,canvasHeight);ctx.strokeStyle='rgba(128,128,128,0.2)';ctx.lineWidth=1;ctx.shadowBlur=0;ctx.beginPath();ctx.moveTo(0,canvasHeight/2);ctx.lineTo(canvasWidth,canvasHeight/2);ctx.stroke(); }
-        function drawLayered(settings) { /* ... Logic identical to v3.6 ... */ analyser.getByteTimeDomainData(dataArrayTime);analyser.getByteFrequencyData(dataArrayFreq);let ampSum=0;for(let i=0;i<bufferLengthTime;i++){ampSum+=Math.abs(dataArrayTime[i]-128);}const avgAmp=ampSum/bufferLengthTime;const bBins=Math.floor(bufferLengthFreq*0.1);const mBins=Math.floor(bufferLengthFreq*0.4);const tBins=bufferLengthFreq;const bEng=getAverage(dataArrayFreq,0,bBins);const mEng=getAverage(dataArrayFreq,bBins,mBins);const tEng=getAverage(dataArrayFreq,mBins,tBins);const currentPalette=getCurrentPalette();ctx.fillStyle='#040408';ctx.fillRect(0,0,canvasWidth,canvasHeight);const pulseSize=mapValue(bEng,0,150,canvasHeight*0.1,canvasHeight*1.5);const pulseAlpha=mapValue(bEng,0,150,0,0.1);if(pulseAlpha>0.01){const radGrad=ctx.createRadialGradient(canvasWidth/2,canvasHeight/2,0,canvasWidth/2,canvasHeight/2,pulseSize);radGrad.addColorStop(0,hexToRgba(currentPalette[0],pulseAlpha));radGrad.addColorStop(1,hexToRgba(currentPalette[0],0));ctx.fillStyle=radGrad;ctx.fillRect(0,0,canvasWidth,canvasHeight);} const barWidthFreq=canvasWidth/bufferLengthFreq;const barAlpha='08';for(let i=0;i<bufferLengthFreq;i++){const barHeightFreq=dataArrayFreq[i]*(canvasHeight/255)*0.7;ctx.fillStyle=currentPalette[i%currentPalette.length]+barAlpha;ctx.fillRect(i*barWidthFreq,canvasHeight-barHeightFreq,barWidthFreq*0.8,barHeightFreq);} ctx.shadowBlur=Math.max(1,settings.glow/3);for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.life--;if(p.life<=0){particles.splice(i,1);continue;}p.x+=p.vx;p.y+=p.vy;const alpha=p.life/p.maxLife;ctx.beginPath();ctx.arc(p.x,p.y,p.size*alpha,0,Math.PI*2);let rgbaColor=p.color;if(p.color.startsWith('#')){rgbaColor=hexToRgba(p.color,alpha*0.9);}else{try{rgbaColor=p.color.replace(/[\d\.]+\)$/g,`${alpha*0.9})`);}catch(e){}} ctx.fillStyle=rgbaColor;ctx.shadowColor=rgbaColor.replace(/[\d\.]+\)$/g,`${alpha*0.5})`);ctx.fill();} ctx.shadowBlur=0; ctx.lineWidth=mapValue(avgAmp,0,50,1,settings.thickness);ctx.shadowColor=hexToRgba(currentPalette[0],0.6); ctx.shadowBlur=settings.glow;const waveGrad=ctx.createLinearGradient(0,0,0,canvasHeight);waveGrad.addColorStop(0,currentPalette[0]||'#FFFFFF');waveGrad.addColorStop(0.5,currentPalette[1]||'#C0C0C0');waveGrad.addColorStop(1,currentPalette[2]||'#808080');ctx.strokeStyle=waveGrad;ctx.beginPath();const sliceW=canvasWidth*1.0/bufferLengthTime;let x=0;let curAmp;const curTime=performance.now();for(let i=0;i<bufferLengthTime;i++){curAmp=dataArrayTime[i];const v=curAmp/128.0;const y=(v*canvasHeight/2);if(i===0){ctx.moveTo(x,y);}else{ctx.lineTo(x,y);}x+=sliceW;if(settings.particles>0&&curAmp>particleEmitThreshold&&(curTime-lastPeakTime>peakThrottleMs)){emitParticles(x-sliceW/2,y,Math.floor(Math.random()*settings.particles)+1,settings);lastPeakTime=curTime;}} ctx.stroke();ctx.shadowColor='transparent';ctx.shadowBlur=0; }
-        function drawWaveform(settings) { /* ... Logic identical to v3.6 ... */ analyser.getByteTimeDomainData(dataArrayTime); const currentPalette = getCurrentPalette(); ctx.fillStyle='#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); ctx.lineWidth=settings.thickness; const waveColor = currentPalette[0] || 'var(--accent-color)'; ctx.strokeStyle = waveColor; ctx.shadowColor = hexToRgba(waveColor, 0.7); ctx.shadowBlur = settings.glow; ctx.beginPath(); const sliceWidth = canvasWidth * 1.0 / bufferLengthTime; let x = 0; for (let i = 0; i < bufferLengthTime; i++) { const v = dataArrayTime[i] / 128.0; const y = (v * canvasHeight / 2); if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); } x += sliceWidth; } ctx.stroke(); ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
-        function drawBars(settings) { /* ... Logic identical to v3.6 ... */ analyser.getByteFrequencyData(dataArrayFreq); const currentPalette = getCurrentPalette(); ctx.fillStyle='#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); const barWidth = (canvasWidth / bufferLengthFreq); let barHeight; let x = 0; const barGlow = Math.max(0, Math.min(8, settings.glow / 1.5)); ctx.shadowBlur = barGlow; for (let i = 0; i < bufferLengthFreq; i++) { barHeight = dataArrayFreq[i] * (canvasHeight / 255); if (barHeight < 1) continue; const colorIndex = i % currentPalette.length; const barColor = currentPalette[colorIndex]; ctx.fillStyle = barColor; ctx.shadowColor = hexToRgba(barColor, 0.7); ctx.fillRect(x, canvasHeight - barHeight, Math.max(1, barWidth * settings.thickness / 1.5), barHeight); x += barWidth; } ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
-        function drawVisualizer() { if(isPlaying){animationFrameId=requestAnimationFrame(drawVisualizer);}else{animationFrameId=null;} const currentSettings=visualizerSettings; if(!audioInitialized||(!isPlaying&&audioElement.paused)||!analyser){drawIdle();if(!isPlaying&&particles.length>0)particles=[];return;} const theme=currentSettings.theme; if(theme==='layered'){drawLayered(currentSettings);}else if(theme==='waveform'){drawWaveform(currentSettings);}else if(theme==='bars'){drawBars(currentSettings);}else{drawIdle();} }
+
+        // --- Audio Initialization (Unchanged, robust error handling) ---
+        function initializeAudioContext() {
+            if(audioInitialized) return true;
+            try{
+                statusMessage.textContent = "Init Context...";
+                statusMessage.style.color = 'var(--text-color)'; // Reset color
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                // Resume if suspended (often needed after user interaction)
+                if (audioContext.state === 'suspended') {
+                     audioContext.resume();
+                }
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = fftSize;
+                analyser.smoothingTimeConstant = 0.8;
+                bufferLengthFreq = analyser.frequencyBinCount;
+                bufferLengthTime = analyser.fftSize;
+                dataArrayFreq = new Uint8Array(bufferLengthFreq);
+                dataArrayTime = new Uint8Array(bufferLengthTime);
+                // Source node created later when file loads
+                audioInitialized = true;
+                console.log("AudioContext Initialized OK");
+                statusMessage.textContent = "Ctx Ready";
+                return true;
+            } catch(e) {
+                console.error("AudioContext Initialization Failed:", e);
+                statusMessage.textContent = "ERR: Web Audio API Not Supported";
+                statusMessage.style.color = 'var(--error-color)';
+                fileInput.disabled = true;
+                document.querySelector('.file-label').style.cursor = 'not-allowed';
+                document.querySelector('.file-label').style.opacity = '0.5';
+                playButton.disabled = true;
+                pauseButton.disabled = true;
+                fullscreenButton.disabled = true; // Disable FS if audio fails
+                return false;
+            }
+        }
+
+        // --- File Handling (Unchanged, relies on modified 'accept' attribute) ---
+        fileInput.addEventListener('change', function(event) {
+            console.log("File input 'change' event");
+            if (!initializeAudioContext()) { return; } // Ensure context is ready
+
+            const files = event.target.files;
+            if (files.length === 0) {
+                fileNameDisplay.textContent = 'No file selected';
+                statusMessage.textContent = 'STATUS :: SELECT FILE';
+                statusMessage.style.color = 'var(--text-color)';
+                audioElement.src = '';
+                playButton.disabled = true; pauseButton.disabled = true; isPlaying = false;
+                particles = [];
+                if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+                drawVisualizer(); // Draw idle state
+                fileInput.value = null; // Allow re-selecting same file
+                return;
+            }
+
+            const file = files[0];
+            fileNameDisplay.textContent = `Selected: ${file.name}`;
+            statusMessage.textContent = 'Reading file...';
+            statusMessage.style.color = 'var(--text-color)';
+            playButton.disabled = true; pauseButton.disabled = true; isPlaying = false;
+            audioElement.pause(); audioElement.currentTime = 0;
+            particles = [];
+            if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+            // Disconnect previous source if exists
+            if(sourceNode){ try { sourceNode.disconnect(); } catch(e){ console.warn("Source node disconnect warning:", e); } }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                console.log("FileReader 'onload'");
+                statusMessage.textContent = 'Decoding audio data...';
+                audioElement.src = e.target.result;
+                audioElement.load(); // Important: load the new source
+
+                const canPlayHandler = () => {
+                    console.log("Audio 'canplay' event");
+                    statusMessage.textContent = 'READY // PRESS PLAY';
+                    playButton.disabled = false;
+                    pauseButton.disabled = true;
+                    audioElement.removeEventListener('canplay', canPlayHandler); // Clean up listener
+
+                    // Re-create source node and connect graph
+                    try {
+                        // Always create a new source node for the new file
+                        sourceNode = audioContext.createMediaElementSource(audioElement);
+                        console.log("New MediaElementSource created.");
+                        sourceNode.connect(analyser);
+                        analyser.connect(audioContext.destination);
+                        console.log("Audio nodes connected.");
+                    } catch (err) {
+                        console.error("Error connecting audio nodes:", err);
+                        statusMessage.textContent = 'ERR: Cannot connect audio.';
+                        statusMessage.style.color = 'var(--error-color)';
+                        playButton.disabled = true;
+                        return;
+                    }
+                };
+
+                const errorHandler = (err) => {
+                    console.error("Audio Load Error:", err, audioElement.error);
+                    statusMessage.textContent = `ERR: Failed to load audio (${audioElement.error?.code || 'unknown'})`;
+                    statusMessage.style.color = 'var(--error-color)';
+                    playButton.disabled = true; pauseButton.disabled = true;
+                    audioElement.removeEventListener('canplay', canPlayHandler);
+                    audioElement.removeEventListener('error', errorHandler);
+                };
+
+                // Use {once: true} for cleaner listener management
+                audioElement.addEventListener('canplay', canPlayHandler, { once: true });
+                audioElement.addEventListener('error', errorHandler, { once: true });
+            };
+
+            reader.onerror = function(e) {
+                console.error("FileReader Error:", e);
+                statusMessage.textContent = 'ERR: Failed to read file';
+                statusMessage.style.color = 'var(--error-color)';
+                fileNameDisplay.textContent = 'File read error';
+                playButton.disabled = true; pauseButton.disabled = true;
+            };
+
+            reader.readAsDataURL(file); // Read file content
+        });
+
+        // --- Playback Controls (Unchanged logic, depends on successful file load) ---
+        playButton.addEventListener('click', () => {
+            console.log("Play button clicked.");
+            // Additional check for audioContext readiness
+            if (!audioInitialized || !audioElement.src || audioElement.readyState < 3 /*HAVE_FUTURE_DATA*/ || playButton.disabled) {
+                 console.warn(`Play prevented. Initialized: ${audioInitialized}, Src: ${!!audioElement.src}, ReadyState: ${audioElement.readyState}, Button Disabled: ${playButton.disabled}`);
+                 statusMessage.textContent = 'ERR: Audio not ready.';
+                 statusMessage.style.color = 'var(--error-color)';
+                 return;
+            }
+
+            // Resume context if needed (important for user interaction requirement)
+            if (audioContext.state === 'suspended') {
+                console.log("AudioContext suspended, attempting resume...");
+                audioContext.resume().then(() => {
+                    console.log("AudioContext resumed successfully.");
+                    startPlayback();
+                }).catch(err => {
+                    console.error("AudioContext resume failed:", err);
+                    statusMessage.textContent = 'ERR: Failed to resume audio context.';
+                    statusMessage.style.color = 'var(--error-color)';
+                 });
+            } else {
+                 startPlayback();
+            }
+        });
+
+        function startPlayback(){
+            console.log("Attempting audioElement.play()");
+            audioElement.play().then(() => {
+                 console.log("audioElement.play() successful");
+                 isPlaying = true;
+                 playButton.disabled = true;
+                 pauseButton.disabled = false;
+                 statusMessage.textContent = 'PLAYING';
+                 statusMessage.style.color = 'var(--text-color)'; // Reset color
+                 if(animationFrameId) cancelAnimationFrame(animationFrameId); // Stop previous frame if any
+                 drawVisualizer(); // Start animation loop
+            }).catch(err => {
+                 console.error("audioElement.play() failed:", err);
+                 statusMessage.textContent = `ERR: Playback failed (${err.name})`;
+                 statusMessage.style.color = 'var(--error-color)';
+                 playButton.disabled = false; // Allow retry? Maybe disable if critical error.
+                 pauseButton.disabled = true;
+                 isPlaying = false;
+            });
+        }
+
+        pauseButton.addEventListener('click', () => {
+            if (!isPlaying) return;
+            console.log("Pause button clicked");
+            audioElement.pause(); // Triggers the 'onpause' handler
+        });
+
+        audioElement.onpause = () => {
+            // Only update state if it was genuinely playing (avoids issues on initial load/seek)
+            if (isPlaying) {
+                isPlaying = false;
+                playButton.disabled = false;
+                pauseButton.disabled = true;
+                statusMessage.textContent = 'PAUSED';
+                console.log("Audio paused.");
+                if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+                // Optional: Keep drawing the last frame or switch to idle? Current code stops drawing.
+            }
+        };
+
+        audioElement.onended = () => {
+            console.log("Audio ended.");
+            isPlaying = false;
+            playButton.disabled = false; // Allow replay
+            pauseButton.disabled = true;
+            statusMessage.textContent = 'ENDED // SELECT FILE OR PLAY AGAIN';
+            particles = []; // Clear particles on end
+            if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+            drawVisualizer(); // Draw idle state
+            audioElement.currentTime = 0; // Reset position for replay
+        };
+
+        // General audio element error (covers more than just load)
+        audioElement.onerror = (e) => {
+            // Avoid duplicate error messages if already handled by load error
+            if (statusMessage.textContent.startsWith('ERR: Failed to load')) return;
+
+            console.error("Audio Element Error:", e, audioElement.error);
+            statusMessage.textContent = `ERR: Audio Playback (${audioElement.error?.message || 'unknown'})`;
+            statusMessage.style.color = 'var(--error-color)';
+            isPlaying = false;
+            playButton.disabled = true; // Likely unrecoverable error
+            pauseButton.disabled = true;
+            particles = [];
+            if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
+            drawVisualizer(); // Draw idle state
+        };
+
+        // --- Particle Emission (Unchanged) ---
+        function emitParticles(x, y, count, settings) {
+            const particleAmountMultiplier = settings.particles / 2; // Scale particle count
+            const actualCount = Math.min(10, Math.floor(count * particleAmountMultiplier)); // Limit burst size
+            const currentPalette = getCurrentPalette();
+
+            for (let i = 0; i < actualCount; i++) {
+                if (particles.length > 150 * particleAmountMultiplier) return; // Limit total particles
+
+                const angle = Math.random() * Math.PI * 2;
+                const speed = (Math.random() * particleSpeedBase * 0.5) + 0.2; // Random speed
+                const life = Math.random() * (particleMaxLifeBase * 0.5) + (particleMaxLifeBase * 0.5); // Random lifespan
+                const particleBaseColor = currentPalette[Math.floor(Math.random() * currentPalette.length)]; // Random color from palette
+
+                particles.push({
+                    x: x, y: y,
+                    vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+                    life: life, maxLife: life,
+                    size: Math.random() * 1.5 + 0.5, // Random size
+                    color: particleBaseColor
+                });
+            }
+        }
+
+        // --- Canvas Setup & Drawing (Unchanged logic, but setupCanvas called more often) ---
+        function setupCanvas() {
+            const currentWidth = canvas.clientWidth;
+            const currentHeight = canvas.clientHeight;
+
+            // Ensure canvas has valid dimensions before setting width/height
+            if (currentWidth > 0 && currentHeight > 0) {
+                 // Adjust for device pixel ratio for sharpness on high-DPI screens
+                const dpr = window.devicePixelRatio || 1;
+                if (canvas.width !== currentWidth * dpr || canvas.height !== currentHeight * dpr) {
+                    canvasWidth = currentWidth; // Store logical width/height
+                    canvasHeight = currentHeight;
+                    canvas.width = canvasWidth * dpr;
+                    canvas.height = canvasHeight * dpr;
+                    ctx.scale(dpr, dpr); // Scale context to match logical size
+                    console.log(`Canvas resized to: ${canvasWidth}x${canvasHeight} (Logical), ${canvas.width}x${canvas.height} (Physical), DPR: ${dpr}`);
+                }
+            } else {
+                console.warn(`Canvas setup skipped: Invalid dimensions (${currentWidth}x${currentHeight})`);
+            }
+        }
+
+        function drawIdle() {
+             ctx.fillStyle = '#040408'; // Match background
+             ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+             // Optional: Draw a subtle line or message
+             ctx.strokeStyle = 'rgba(128, 128, 128, 0.2)';
+             ctx.lineWidth = 1;
+             ctx.shadowBlur = 0;
+             ctx.beginPath();
+             ctx.moveTo(0, canvasHeight / 2);
+             ctx.lineTo(canvasWidth, canvasHeight / 2);
+             ctx.stroke();
+        }
+
+        // drawLayered, drawWaveform, drawBars functions remain identical to previous versions...
+         function drawLayered(settings) { analyser.getByteTimeDomainData(dataArrayTime);analyser.getByteFrequencyData(dataArrayFreq);let ampSum=0;for(let i=0;i<bufferLengthTime;i++){ampSum+=Math.abs(dataArrayTime[i]-128);}const avgAmp=ampSum/bufferLengthTime;const bBins=Math.floor(bufferLengthFreq*0.1);const mBins=Math.floor(bufferLengthFreq*0.4);const tBins=bufferLengthFreq;const bEng=getAverage(dataArrayFreq,0,bBins);const mEng=getAverage(dataArrayFreq,bBins,mBins);const tEng=getAverage(dataArrayFreq,mBins,tBins);const currentPalette=getCurrentPalette();ctx.fillStyle='#040408';ctx.fillRect(0,0,canvasWidth,canvasHeight);const pulseSize=mapValue(bEng,0,150,canvasHeight*0.1,canvasHeight*1.5);const pulseAlpha=mapValue(bEng,0,150,0,0.1);if(pulseAlpha>0.01){const radGrad=ctx.createRadialGradient(canvasWidth/2,canvasHeight/2,0,canvasWidth/2,canvasHeight/2,pulseSize);radGrad.addColorStop(0,hexToRgba(currentPalette[0],pulseAlpha));radGrad.addColorStop(1,hexToRgba(currentPalette[0],0));ctx.fillStyle=radGrad;ctx.fillRect(0,0,canvasWidth,canvasHeight);} const barWidthFreq=canvasWidth/bufferLengthFreq;const barAlpha='08';for(let i=0;i<bufferLengthFreq;i++){const barHeightFreq=dataArrayFreq[i]*(canvasHeight/255)*0.7;ctx.fillStyle=currentPalette[i%currentPalette.length]+barAlpha;ctx.fillRect(i*barWidthFreq,canvasHeight-barHeightFreq,barWidthFreq*0.8,barHeightFreq);} ctx.shadowBlur=Math.max(1,settings.glow/3);for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.life--;if(p.life<=0){particles.splice(i,1);continue;}p.x+=p.vx;p.y+=p.vy;const alpha=p.life/p.maxLife;ctx.beginPath();ctx.arc(p.x,p.y,p.size*alpha,0,Math.PI*2);let rgbaColor=p.color;if(p.color.startsWith('#')){rgbaColor=hexToRgba(p.color,alpha*0.9);}else{try{rgbaColor=p.color.replace(/[\d\.]+\)$/g,`${alpha*0.9})`);}catch(e){}} ctx.fillStyle=rgbaColor;ctx.shadowColor=rgbaColor.replace(/[\d\.]+\)$/g,`${alpha*0.5})`);ctx.fill();} ctx.shadowBlur=0; ctx.lineWidth=mapValue(avgAmp,0,50,1,settings.thickness);ctx.shadowColor=hexToRgba(currentPalette[0],0.6); ctx.shadowBlur=settings.glow;const waveGrad=ctx.createLinearGradient(0,0,0,canvasHeight);waveGrad.addColorStop(0,currentPalette[0]||'#FFFFFF');waveGrad.addColorStop(0.5,currentPalette[1]||'#C0C0C0');waveGrad.addColorStop(1,currentPalette[2]||'#808080');ctx.strokeStyle=waveGrad;ctx.beginPath();const sliceW=canvasWidth*1.0/bufferLengthTime;let x=0;let curAmp;const curTime=performance.now();for(let i=0;i<bufferLengthTime;i++){curAmp=dataArrayTime[i];const v=curAmp/128.0;const y=(v*canvasHeight/2);if(i===0){ctx.moveTo(x,y);}else{ctx.lineTo(x,y);}x+=sliceW;if(settings.particles>0&&curAmp>particleEmitThreshold&&(curTime-lastPeakTime>peakThrottleMs)){emitParticles(x-sliceW/2,y,Math.floor(Math.random()*settings.particles)+1,settings);lastPeakTime=curTime;}} ctx.stroke();ctx.shadowColor='transparent';ctx.shadowBlur=0; }
+         function drawWaveform(settings) { analyser.getByteTimeDomainData(dataArrayTime); const currentPalette = getCurrentPalette(); ctx.fillStyle='#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); ctx.lineWidth=settings.thickness; const waveColor = currentPalette[0] || 'var(--accent-color)'; ctx.strokeStyle = waveColor; ctx.shadowColor = hexToRgba(waveColor, 0.7); ctx.shadowBlur = settings.glow; ctx.beginPath(); const sliceWidth = canvasWidth * 1.0 / bufferLengthTime; let x = 0; for (let i = 0; i < bufferLengthTime; i++) { const v = dataArrayTime[i] / 128.0; const y = (v * canvasHeight / 2); if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); } x += sliceWidth; } ctx.stroke(); ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
+         function drawBars(settings) { analyser.getByteFrequencyData(dataArrayFreq); const currentPalette = getCurrentPalette(); ctx.fillStyle='#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); const barWidth = (canvasWidth / bufferLengthFreq); let barHeight; let x = 0; const barGlow = Math.max(0, Math.min(8, settings.glow / 1.5)); ctx.shadowBlur = barGlow; for (let i = 0; i < bufferLengthFreq; i++) { barHeight = dataArrayFreq[i] * (canvasHeight / 255); if (barHeight < 1) continue; const colorIndex = i % currentPalette.length; const barColor = currentPalette[colorIndex]; ctx.fillStyle = barColor; ctx.shadowColor = hexToRgba(barColor, 0.7); ctx.fillRect(x, canvasHeight - barHeight, Math.max(1, barWidth * settings.thickness / 1.5), barHeight); x += barWidth; } ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
+
+        function drawVisualizer() {
+            // Only request next frame if playing
+            if (isPlaying) {
+                animationFrameId = requestAnimationFrame(drawVisualizer);
+            } else {
+                animationFrameId = null; // Ensure it's null when stopped/paused
+            }
+
+            const currentSettings = visualizerSettings;
+
+            // Check if audio is ready and playing
+            if (!audioInitialized || !isPlaying || !analyser) {
+                // If not playing but particles exist, update them until they fade
+                if (particles.length > 0) {
+                    // Simplified idle draw for particle updates
+                    ctx.fillStyle='#040408'; ctx.fillRect(0,0,canvasWidth,canvasHeight);
+                    ctx.shadowBlur=Math.max(1,currentSettings.glow/3); // Apply glow to particles
+                    for(let i=particles.length-1;i>=0;i--){ const p=particles[i];p.life--; if(p.life<=0){particles.splice(i,1); continue;} p.x+=p.vx;p.y+=p.vy; const alpha=p.life/p.maxLife; ctx.beginPath();ctx.arc(p.x,p.y,p.size*alpha,0,Math.PI*2); let rgbaColor=p.color; if(p.color.startsWith('#')){rgbaColor=hexToRgba(p.color,alpha*0.9);}else{try{rgbaColor=p.color.replace(/[\d\.]+\)$/g,`${alpha*0.9})`);}catch(e){}} ctx.fillStyle=rgbaColor;ctx.shadowColor=rgbaColor.replace(/[\d\.]+\)$/g,`${alpha*0.5})`);ctx.fill(); }
+                    ctx.shadowBlur=0; // Reset glow
+                    requestAnimationFrame(drawVisualizer); // Keep updating particles
+                } else {
+                     drawIdle(); // Draw completely idle state if no audio and no particles
+                }
+                return; // Don't proceed to main drawing logic
+            }
+
+            // Select and call the appropriate drawing function based on theme
+            const theme = currentSettings.theme;
+            if (theme === 'layered') {
+                drawLayered(currentSettings);
+            } else if (theme === 'waveform') {
+                drawWaveform(currentSettings);
+            } else if (theme === 'bars') {
+                drawBars(currentSettings);
+            } else {
+                // Fallback if theme is unknown
+                drawIdle();
+            }
+        }
+
+        // --- UI Control Listeners (Unchanged logic) ---
         themeSelector.addEventListener('change', (e) => { updateSettings(); particles = []; console.log(`Theme changed to: ${visualizerSettings.theme}`); if (!isPlaying) drawVisualizer(); });
         paletteSelector.addEventListener('change', (e) => { updateSettings(); console.log(`Palette changed to: ${visualizerSettings.palette}`); if (!isPlaying) drawVisualizer(); });
         glowSlider.addEventListener('input', updateSettings);
         thicknessSlider.addEventListener('input', updateSettings);
         particleSlider.addEventListener('input', updateSettings);
-        function updateFullscreenButton() { if(document.fullscreenElement===moduleContainer){fullscreenButton.textContent="EXIT";}else{fullscreenButton.textContent="FULLSCREEN";} } fullscreenButton.addEventListener('click',()=>{ if(!document.fullscreenElement){console.log("Req FS...");moduleContainer.requestFullscreen().then(()=>{console.log("Entered FS.");}).catch(err=>{console.error(`FS fail: ${err.message} (${err.name})`);statusMessage.textContent="ERR: FS failed.";statusMessage.style.color='var(--error-color)';});}else{console.log("Exit FS...");if(document.exitFullscreen){document.exitFullscreen().then(()=>{console.log("Exited FS.");});}} }); document.addEventListener('fullscreenchange',()=>{ console.log("FS change event."); updateFullscreenButton(); setTimeout(()=>{setupCanvas();drawVisualizer();},50); });
-        window.addEventListener('resize', () => { if(document.fullscreenElement !== moduleContainer){ console.log("Resize event."); setupCanvas(); drawVisualizer(); }});
-        function syncControlsToSettings() { themeSelector.value=visualizerSettings.theme;paletteSelector.value=visualizerSettings.palette;glowSlider.value=visualizerSettings.glow;thicknessSlider.value=visualizerSettings.thickness;particleSlider.value=visualizerSettings.particles; } syncControlsToSettings(); setupCanvas(); drawVisualizer(); console.log("Initial setup complete. v4.0 (Stable Base + Cancel Fix)"); // Renamed for clarity
+
+        // --- ** REVISED Fullscreen Logic ** ---
+        function updateFullscreenButton() {
+             // Check standard fullscreen element across common implementations
+             const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+             const isFullscreen = fullscreenElement === moduleContainer;
+
+             if (isFullscreen) {
+                 fullscreenButton.textContent = "EXIT";
+                 console.log("updateFullscreenButton: Now fullscreen.");
+             } else {
+                 fullscreenButton.textContent = "FULLSCREEN";
+                 console.log("updateFullscreenButton: Not fullscreen.");
+             }
+             // Check if fullscreen is potentially supported at all before enabling/disabling
+             const fsEnabledElement = moduleContainer.requestFullscreen || moduleContainer.webkitRequestFullscreen || moduleContainer.mozRequestFullScreen || moduleContainer.msRequestFullscreen;
+             fullscreenButton.disabled = !fsEnabledElement && !isFullscreen; // Disable only if not supported AND not currently fullscreen
+        }
+
+        fullscreenButton.addEventListener('click', () => {
+            const elem = moduleContainer;
+            const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+
+            if (!fullscreenElement) {
+                // --- Attempt to enter fullscreen ---
+                console.log("Requesting Fullscreen...");
+                statusMessage.textContent = 'Requesting Fullscreen...';
+                statusMessage.style.color = 'var(--text-color)';
+
+                let requestMethod = elem.requestFullscreen || elem.webkitRequestFullscreen || elem.mozRequestFullScreen || elem.msRequestFullscreen;
+
+                if (requestMethod) {
+                    // Bind the method to the element before calling
+                    requestMethod.call(elem).then(() => {
+                        console.log("Entered Fullscreen successfully via API promise.");
+                        // Status update often better handled by the 'fullscreenchange' event
+                    }).catch(err => {
+                        console.error(`Fullscreen request failed: ${err.message} (${err.name})`);
+                        statusMessage.textContent = `ERR: Fullscreen failed (${err.name}). May not be supported on this device/browser for this element.`;
+                        statusMessage.style.color = 'var(--error-color)';
+                        updateFullscreenButton(); // Ensure button text resets if FS failed
+                    });
+                } else {
+                    console.error("Fullscreen API is not supported by this browser or for this element.");
+                    statusMessage.textContent = 'ERR: Fullscreen not supported on this device/browser.';
+                    statusMessage.style.color = 'var(--error-color)';
+                    fullscreenButton.disabled = true; // Disable if definitely not supported
+                    fullscreenButton.textContent = "N/A";
+                }
+
+            } else {
+                // --- Attempt to exit fullscreen ---
+                console.log("Exiting Fullscreen...");
+                statusMessage.textContent = 'Exiting Fullscreen...';
+                statusMessage.style.color = 'var(--text-color)';
+
+                let exitMethod = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+
+                if (exitMethod) {
+                     // Bind the method to the document before calling
+                     exitMethod.call(document).then(() => {
+                        console.log("Exited Fullscreen successfully via API promise.");
+                        // Status update handled by fullscreenchange event
+                     }).catch(err => {
+                         console.error(`Exit Fullscreen failed: ${err.message} (${err.name})`);
+                         statusMessage.textContent = `ERR: Could not exit fullscreen (${err.name}).`;
+                         statusMessage.style.color = 'var(--error-color)';
+                         updateFullscreenButton(); // Ensure button state is correct
+                     });
+                } else {
+                     console.error("Exit Fullscreen API is not supported.");
+                     statusMessage.textContent = 'ERR: Cannot exit fullscreen programmatically.';
+                     statusMessage.style.color = 'var(--error-color)';
+                     // Button state should still be updated by fullscreenchange event if exited manually
+                }
+            }
+        });
+
+        // --- Event Listener for Fullscreen Change (More Reliable) ---
+        // This event fires AFTER the browser has switched modes
+        function handleFullscreenChange() {
+            const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+            console.log("Fullscreen change event detected. Element:", fullscreenElement);
+            updateFullscreenButton(); // Update button text (EXIT/FULLSCREEN)
+
+            // Use a small delay for browser rendering adjustments & canvas resize
+            setTimeout(() => {
+                console.log("Resizing canvas after fullscreen change.");
+                setupCanvas(); // Recalculate canvas size based on new container dimensions
+                drawVisualizer(); // Redraw content in the new size
+            }, 100); // 100ms delay often helps ensure layout is stable
+        }
+
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange); // Safari/Chrome
+        document.addEventListener('mozfullscreenchange', handleFullscreenChange); // Firefox
+        document.addEventListener('MSFullscreenChange', handleFullscreenChange); // IE11
+
+        // --- Window Resize Listener (Unchanged) ---
+        window.addEventListener('resize', () => {
+             // Avoid redundant resize/redraw if triggered by fullscreen change which has its own handler
+             const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+            if (!fullscreenElement) {
+                console.log("Window resize event detected (not fullscreen).");
+                setupCanvas();
+                drawVisualizer();
+            } else {
+                 console.log("Window resize event skipped (currently fullscreen).");
+            }
+        });
+
+        // --- Initial Setup ---
+        function syncControlsToSettings() {
+            themeSelector.value = visualizerSettings.theme;
+            paletteSelector.value = visualizerSettings.palette;
+            glowSlider.value = visualizerSettings.glow;
+            thicknessSlider.value = visualizerSettings.thickness;
+            particleSlider.value = visualizerSettings.particles;
+        }
+
+        syncControlsToSettings(); // Set initial control values
+        setupCanvas(); // Initial canvas setup
+        updateFullscreenButton(); // Set initial fullscreen button state/text
+        drawVisualizer(); // Draw initial idle state
+        console.log("Initial setup complete. v4.2");
 
     </script>
 
