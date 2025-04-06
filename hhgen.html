@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>// MODULE::HI-HAT_SEQUENCER_62S //</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #040408;
+            --text-color: #a8a8b0;
+            --header-color: #d0d0e0;
+            --accent-color: #00BFFF;
+            --accent-hover: #ffffff;
+            --border-color: #1f1f2f;
+            --success-color: #00dd55;
+            --input-bg-color: #0a0a10;
+            --button-bg-color: #101018;
+            --font-main: 'Roboto Mono', monospace;
+            --base-font-size: 14px;
+            --header-font-size: 18px;
+            --label-font-size: 12px;
+            --button-font-size: 13px;
+            --preview-font-size: 12px;
+            --letter-spacing-tight: 0.5px;
+            --letter-spacing-wide: 1.5px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            font-size: var(--base-font-size);
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align to top */
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            background-color: rgba(10, 10, 16, 0.5); /* Slightly darker inner background */
+        }
+
+        h1 {
+            color: var(--header-color);
+            font-size: var(--header-font-size);
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: var(--letter-spacing-wide);
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+
+        .section-title {
+            color: var(--accent-color);
+            font-size: var(--label-font-size);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wide);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .control-section,
+        .action-section,
+        .preview-section {
+            border: 1px solid var(--border-color);
+            padding: 18px;
+            margin-bottom: 25px;
+            background-color: var(--bg-color); /* Match outer background for sections */
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        label {
+            color: var(--text-color);
+            font-size: var(--label-font-size);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-tight);
+            margin-bottom: 3px; /* Spacing between label and input */
+        }
+
+        input[type="number"],
+        input[type="range"],
+        select {
+            background-color: var(--input-bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 10px;
+            font-family: var(--font-main);
+            font-size: var(--base-font-size);
+            width: 100%;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input[type="number"]:focus,
+        input[type="range"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 5px rgba(0, 191, 255, 0.3);
+        }
+
+        /* Minimal range slider styling */
+        input[type="range"] {
+            padding: 0; /* Remove padding for range */
+            cursor: pointer;
+             height: 8px; /* Example height */
+            -webkit-appearance: none; /* Override default look */
+            appearance: none;
+            background: var(--input-bg-color); /* Track background */
+            border-radius: 0; /* Sharp corners */
+             border: 1px solid var(--border-color);
+        }
+
+         input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px; /* Thumb width */
+            height: 20px; /* Thumb height */
+            background: var(--accent-color); /* Thumb color */
+            cursor: pointer;
+            border-radius: 0; /* Sharp corners */
+            border: 1px solid var(--border-color);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 12px;
+            height: 20px;
+            background: var(--accent-color);
+            cursor: pointer;
+             border-radius: 0;
+             border: 1px solid var(--border-color);
+        }
+
+
+        select {
+            appearance: none; /* Remove default arrow */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%23a8a8b0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Basic arrow */
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px 16px;
+            padding-right: 35px; /* Space for arrow */
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: var(--button-bg-color);
+            color: var(--accent-color);
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            font-family: var(--font-main);
+            font-size: var(--button-font-size);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wide);
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            text-align: center;
+        }
+
+        button:hover {
+            background-color: var(--accent-color);
+            color: var(--accent-hover);
+            border-color: var(--accent-color);
+        }
+
+        button:active {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        button:disabled {
+            background-color: #1a1a20;
+            color: #555;
+            border-color: var(--border-color);
+            cursor: not-allowed;
+        }
+
+        button.success {
+            color: var(--success-color);
+        }
+        button.success:hover {
+            background-color: var(--success-color);
+            color: var(--accent-hover);
+             border-color: var(--success-color);
+        }
+
+        .value-display {
+            font-size: var(--label-font-size);
+            color: var(--accent-color);
+            margin-left: 8px;
+        }
+
+        #pattern-preview {
+            background-color: var(--input-bg-color);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            font-family: var(--font-main);
+            font-size: var(--preview-font-size);
+            color: var(--text-color);
+            white-space: pre; /* Preserve formatting */
+            overflow-x: auto; /* Add scroll if needed */
+            min-height: 80px; /* Ensure it has some height */
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>// MODULE::HI-HAT_SEQUENCER_62S //</h1>
+
+        <div class="control-section">
+            <div class="section-title">// CORE_PARAMETERS //</div>
+            <div class="control-grid">
+                <div class="control-group">
+                    <label for="bpm">BPM::</label>
+                    <input type="number" id="bpm" name="bpm" min="40" max="300" value="120">
+                </div>
+                <div class="control-group">
+                    <label for="pattern-length">LENGTH::</label>
+                    <select id="pattern-length" name="pattern-length">
+                        <option value="1" selected>1 BAR</option>
+                        <option value="2">2 BARS</option>
+                        <option value="4">4 BARS</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="base-subdivision">SUBDIVISION::</label>
+                    <select id="base-subdivision" name="base-subdivision">
+                        <option value="1/8">1/8</option>
+                        <option value="1/16" selected>1/16</option>
+                        <option value="1/16T">1/16 TRIPLET</option>
+                        <option value="1/32">1/32</option>
+                    </select>
+                </div>
+                 <div class="control-group">
+                    <label for="swing-factor">SWING:: <span id="swing-value" class="value-display">0%</span></label>
+                    <input type="range" id="swing-factor" name="swing-factor" min="0" max="75" value="0" step="1">
+                </div>
+                 <div class="control-group">
+                    <label for="velocity-variation">VELOCITY_VAR:: <span id="velocity-var-value" class="value-display">30%</span></label>
+                    <input type="range" id="velocity-variation" name="velocity-variation" min="0" max="100" value="30" step="1">
+                </div>
+            </div>
+        </div>
+
+         <div class="control-section">
+             <div class="section-title">// ROLL_&_FILL_LOGIC //</div>
+             <div class="control-grid">
+                <div class="control-group">
+                    <label for="roll-probability">ROLL_PROB:: <span id="roll-prob-value" class="value-display">20%</span></label>
+                    <input type="range" id="roll-probability" name="roll-probability" min="0" max="100" value="20" step="1">
+                </div>
+                <div class="control-group">
+                    <label for="roll-rate">ROLL_RATE::</label>
+                    <select id="roll-rate" name="roll-rate">
+                        <option value="1/16">1/16</option>
+                        <option value="1/32" selected>1/32</option>
+                        <option value="1/32T">1/32 TRIPLET</option>
+                        <option value="1/64">1/64</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="open-hat-placement">OPEN_HAT_LOGIC::</label>
+                    <select id="open-hat-placement" name="open-hat-placement">
+                        <option value="NONE">NONE</option>
+                        <option value="OFFBEAT_1/4" selected>OFFBEAT_1/4</option>
+                        <option value="END_OF_BAR">END_OF_BAR</option>
+                        <option value="END_OF_2BARS">END_OF_2BARS</option>
+                         <option value="SYNC_RANDOM">SYNC_RANDOM</option>
+                        <option value="SPARSE_RANDOM">SPARSE_RANDOM</option>
+                    </select>
+                </div>
+                 <div class="control-group">
+                    <label for="pattern-complexity">COMPLEXITY:: <span id="complexity-value" class="value-display">50%</span></label>
+                    <input type="range" id="pattern-complexity" name="pattern-complexity" min="0" max="100" value="50" step="1">
+                    </div>
+            </div>
+        </div>
+
+        <div class="action-section">
+            <div class="section-title">// EXECUTION_SEQUENCE //</div>
+            <div class="action-buttons">
+                <button id="initiate-button">INITIATE_SEQUENCE</button>
+                <button id="variation-subtle-button" disabled>VARIATION_SUBTLE (10%)</button>
+                <button id="variation-extreme-button" disabled>VARIATION_EXTREME (30%)</button>
+                <button id="preview-button" disabled>PREVIEW_PATTERN</button>
+                <button id="export-button" class="success" disabled>EXPORT_MIDI</button>
+            </div>
+        </div>
+
+        <div class="preview-section">
+             <div class="section-title">// PATTERN_VISUALIZATION //</div>
+            <pre id="pattern-preview">[...] Pattern not generated yet. Press INITIATE_SEQUENCE.</pre>
+        </div>
+    </div>
+
+    <script>
+        // --- Constants ---
+        const MIDI_CLOSED_HAT = 42; // F#1
+        const MIDI_OPEN_HAT = 46;   // A#1
+        const TICKS_PER_QUARTER_NOTE = 480; // Standard resolution
+
+        // --- DOM Elements ---
+        const bpmInput = document.getElementById('bpm');
+        const patternLengthSelect = document.getElementById('pattern-length');
+        const baseSubdivisionSelect = document.getElementById('base-subdivision');
+        const rollProbabilityInput = document.getElementById('roll-probability');
+        const rollRateSelect = document.getElementById('roll-rate');
+        const swingFactorInput = document.getElementById('swing-factor');
+        const openHatPlacementSelect = document.getElementById('open-hat-placement');
+        const velocityVariationInput = document.getElementById('velocity-variation');
+        const patternComplexityInput = document.getElementById('pattern-complexity');
+
+        const initiateButton = document.getElementById('initiate-button');
+        const variationSubtleButton = document.getElementById('variation-subtle-button');
+        const variationExtremeButton = document.getElementById('variation-extreme-button');
+        const previewButton = document.getElementById('preview-button');
+        const exportButton = document.getElementById('export-button');
+
+        const patternPreview = document.getElementById('pattern-preview');
+
+        // Value Displays
+        const rollProbValue = document.getElementById('roll-prob-value');
+        const swingValue = document.getElementById('swing-value');
+        const velocityVarValue = document.getElementById('velocity-var-value');
+        const complexityValue = document.getElementById('complexity-value');
+
+        // --- State ---
+        let currentPattern = []; // Array of { time: beats, note: midiNote, velocity: 0-127, duration: beats }
+        let audioCtx = null;
+        let isPlayingPreview = false;
+        let previewSchedulerIds = []; // To stop playback
+
+        // --- Helper Functions ---
+
+        // Get subdivision info (steps per beat, step duration in beats)
+        function getSubdivisionInfo(subdivisionStr) {
+            switch (subdivisionStr) {
+                case '1/8': return { stepsPerBeat: 2, stepDuration: 0.5 };
+                case '1/16': return { stepsPerBeat: 4, stepDuration: 0.25 };
+                case '1/16T': return { stepsPerBeat: 6, stepDuration: 1/6 }; // Triplet
+                case '1/32': return { stepsPerBeat: 8, stepDuration: 0.125 };
+                default: return { stepsPerBeat: 4, stepDuration: 0.25 }; // Default to 1/16
+            }
+        }
+
+        function getRollRateInfo(rollRateStr) {
+             switch (rollRateStr) {
+                case '1/16': return { stepsPerBeat: 4, stepDuration: 0.25 };
+                case '1/32': return { stepsPerBeat: 8, stepDuration: 0.125 };
+                case '1/32T': return { stepsPerBeat: 12, stepDuration: 1/12 }; // Triplet
+                case '1/64': return { stepsPerBeat: 16, stepDuration: 0.0625 };
+                default: return { stepsPerBeat: 8, stepDuration: 0.125 }; // Default to 1/32
+            }
+        }
+
+        // Get current parameter values from UI
+        function getParams() {
+            return {
+                bpm: parseInt(bpmInput.value, 10) || 120,
+                patternLengthBars: parseInt(patternLengthSelect.value, 10) || 1,
+                baseSubdivision: baseSubdivisionSelect.value,
+                rollProbability: parseInt(rollProbabilityInput.value, 10) / 100.0,
+                rollRate: rollRateSelect.value,
+                swingFactor: parseInt(swingFactorInput.value, 10) / 100.0,
+                openHatPlacement: openHatPlacementSelect.value,
+                velocityVariation: parseInt(velocityVariationInput.value, 10) / 100.0,
+                patternComplexity: parseInt(patternComplexityInput.value, 10) / 100.0,
+            };
+        }
+
+         // Update UI displays for range inputs
+        function updateRangeDisplays() {
+            rollProbValue.textContent = `${rollProbabilityInput.value}%`;
+            swingValue.textContent = `${swingFactorInput.value}%`;
+            velocityVarValue.textContent = `${velocityVariationInput.value}%`;
+            complexityValue.textContent = `${patternComplexityInput.value}%`;
+        }
+
+
+        // --- Pattern Generation Logic ---
+        function generatePattern(params) {
+            const pattern = [];
+            const totalBeats = params.patternLengthBars * 4;
+            const baseSub = getSubdivisionInfo(params.baseSubdivision);
+            const baseStepsPerBar = baseSub.stepsPerBeat * 4;
+            const totalBaseSteps = baseStepsPerBar * params.patternLengthBars;
+
+            // Base velocity (can be adjusted)
+            const baseVelocity = 90;
+            const openHatVelocity = 110;
+            const rollVelocityStart = 75; // Rolls might start softer
+
+            // Closed Hat Duration (short)
+            const closedHatDuration = 1 / 32; // In beats
+            const openHatDuration = 1/8; // Longer
+
+            const notesToPlace = []; // Temporary store {time: beats, note: midi, velocity: int, duration: beats}
+
+            // 1. Generate Base Pattern (Closed Hats + Potential Rests)
+            for (let step = 0; step < totalBaseSteps; step++) {
+                const beatInPattern = step * baseSub.stepDuration;
+                const beatInBar = beatInPattern % 4;
+                const stepInBeat = Math.round((beatInPattern % 1) / baseSub.stepDuration); // 0-indexed step within the beat
+                const barNum = Math.floor(beatInPattern / 4);
+
+                let noteTime = beatInPattern;
+
+                // Apply Swing
+                if (params.swingFactor > 0 && baseSub.stepsPerBeat >= 4) { // Only swing 16ths or faster
+                    // Typically swing the 2nd and 4th 16th note (or equivalent)
+                     const swingThresholdStep = baseSub.stepsPerBeat / 2; // e.g., step 2 and 4 for 1/16ths
+                     const swingAmountBeats = baseSub.stepDuration * params.swingFactor * (2/3); // Swing delays up to 2/3 of the next step's position
+
+                     if (stepInBeat > 0 && stepInBeat % 2 !== 0) { // Apply to odd steps (2nd, 4th, 6th, etc.) after the first
+                        noteTime += swingAmountBeats;
+                    }
+                }
+
+                // Determine if this step gets a note, roll, or rest
+                 const isRoll = Math.random() < params.rollProbability;
+                 // Complexity influences rests - higher complexity = fewer rests initially
+                 const isRest = Math.random() > (0.85 + params.patternComplexity * 0.15);
+
+
+                 if (isRoll) {
+                     const rollInfo = getRollRateInfo(params.rollRate);
+                     const rollStepDuration = rollInfo.stepDuration;
+                     // How many roll notes fit in the original base step duration?
+                     const numRollNotes = Math.max(2, Math.floor(baseSub.stepDuration / rollStepDuration));
+
+                     for (let i = 0; i < numRollNotes; i++) {
+                         const rollNoteTime = noteTime + i * rollStepDuration;
+                         if (rollNoteTime >= totalBeats) break; // Don't exceed pattern length
+
+                         let velocity = rollVelocityStart - i * 2; // Simple velocity ramp down
+                          // Apply global velocity variation
+                         velocity = velocity * (1 - params.velocityVariation / 2 + Math.random() * params.velocityVariation);
+                         velocity = Math.max(1, Math.min(127, Math.round(velocity)));
+
+                         notesToPlace.push({
+                             time: rollNoteTime,
+                             note: MIDI_CLOSED_HAT,
+                             velocity: velocity,
+                             duration: rollStepDuration * 0.8 // Shorter duration for rolls
+                         });
+                     }
+                 } else if (!isRest) {
+                      let velocity = baseVelocity;
+                      // Apply velocity variation
+                      velocity = velocity * (1 - params.velocityVariation / 2 + Math.random() * params.velocityVariation);
+                      velocity = Math.max(1, Math.min(127, Math.round(velocity)));
+
+                     notesToPlace.push({
+                         time: noteTime,
+                         note: MIDI_CLOSED_HAT,
+                         velocity: velocity,
+                         duration: closedHatDuration
+                     });
+                 }
+                 // Else: Rest - do nothing
+            }
+
+            // 2. Place Open Hats (potentially replacing closed hats)
+            const openHatLogic = params.openHatPlacement;
+            const stepsPerBeatForOpenHat = 4; // Assume open hats align nicely with 1/16th grid usually
+
+            for (let beat = 0; beat < totalBeats; beat++) {
+                const barNum = Math.floor(beat / 4);
+                const beatInBar = beat % 4;
+
+                let placeOpenHat = false;
+                let openHatTime = -1;
+
+                switch (openHatLogic) {
+                    case "OFFBEAT_1/4": // Place on the '+' of each beat
+                        if (beatInBar === Math.floor(beatInBar)) { // Check if it's near an integer beat
+                             openHatTime = beat + 0.5; // Place on the '+'
+                             placeOpenHat = openHatTime < totalBeats;
+                        }
+                        break;
+                    case "END_OF_BAR":
+                        // Place near the end, e.g., on the last 1/8th or 1/16th
+                        if (beatInBar >= 3.75 && beatInBar < 4) {
+                            openHatTime = Math.floor(beat / 4) * 4 + 3.75; // Place on the last 16th
+                            placeOpenHat = true;
+                        }
+                         break;
+                    case "END_OF_2BARS":
+                        if (barNum % 2 === 1) { // Only on odd bars (end of 2nd bar)
+                            if (beatInBar >= 3.75 && beatInBar < 4) {
+                                openHatTime = Math.floor(beat / 4) * 4 + 3.75;
+                                placeOpenHat = true;
+                             }
+                        }
+                        break;
+                     case "SYNC_RANDOM": // Random placement, but tends towards syncopated spots
+                        if (Math.random() < (0.1 + params.patternComplexity * 0.2)) {
+                             // Favor offbeats or end of bars
+                             const randChoice = Math.random();
+                             if (randChoice < 0.6) { // Offbeat
+                                openHatTime = Math.floor(beat) + (Math.random() < 0.5 ? 0.5 : 0.75); // e or a
+                             } else { // Near end of bar
+                                openHatTime = Math.floor(beat / 4) * 4 + (3 + Math.random()); // Somewhere in last beat
+                                openHatTime = Math.min(totalBeats - 0.01, openHatTime); // Ensure within bounds
+                             }
+                            placeOpenHat = openHatTime < totalBeats && openHatTime >= 0;
+                         }
+                        break;
+                    case "SPARSE_RANDOM": // Less frequent random placement
+                        if (Math.random() < (0.05 + params.patternComplexity * 0.1)) {
+                            openHatTime = Math.random() * totalBeats;
+                            placeOpenHat = true;
+                        }
+                        break;
+                    case "NONE":
+                    default:
+                        break; // Do nothing
+                }
+
+                 if (placeOpenHat && openHatTime >= 0) {
+                     // Quantize time slightly to avoid floating point issues when comparing
+                     const quantizedOpenHatTime = Math.round(openHatTime * 1000) / 1000;
+
+                    // Remove any closed hat/roll near this time
+                     const timeTolerance = 0.01; // Small tolerance for comparison
+                     let removedExisting = false;
+                     for(let i = notesToPlace.length - 1; i >= 0; i--) {
+                         const existingNoteTime = Math.round(notesToPlace[i].time * 1000) / 1000;
+                         if (Math.abs(existingNoteTime - quantizedOpenHatTime) < timeTolerance) {
+                             notesToPlace.splice(i, 1);
+                             removedExisting = true;
+                             // break; // Remove only one if overlapping perfectly - or allow multiple removals if roll? For now, just one.
+                         }
+                     }
+
+                     // Add the open hat note
+                     let velocity = openHatVelocity;
+                      velocity = velocity * (1 - params.velocityVariation / 2 + Math.random() * params.velocityVariation);
+                      velocity = Math.max(1, Math.min(127, Math.round(velocity)));
+
+                     notesToPlace.push({
+                         time: quantizedOpenHatTime, // Use quantized time
+                         note: MIDI_OPEN_HAT,
+                         velocity: velocity,
+                         duration: openHatDuration
+                     });
+                 }
+            }
+
+            // 3. Sort by time and filter out duplicates just in case
+            notesToPlace.sort((a, b) => a.time - b.time);
+
+            // Final filter for exact time duplicates (can happen with quantization/rolls) - keep first encountered
+             const finalPattern = [];
+             const timesSeen = new Set();
+             for (const note of notesToPlace) {
+                 const quantizedTime = Math.round(note.time * 10000) / 10000; // Higher precision for filtering
+                 if (!timesSeen.has(quantizedTime)) {
+                     finalPattern.push(note);
+                     timesSeen.add(quantizedTime);
+                 }
+                 // Optional: Decide priority if duplicate (e.g., keep Open Hat over Closed)
+             }
+
+
+            return finalPattern; // Return the final sorted array
+        }
+
+
+        // --- Pattern Visualization ---
+        function updatePatternPreview(pattern, params) {
+            if (!pattern || pattern.length === 0) {
+                patternPreview.textContent = "[...] No pattern data generated.";
+                return;
+            }
+
+            const totalBeats = params.patternLengthBars * 4;
+            // Use a fine grid for display, e.g., 1/32 notes
+            const stepsPerBeatPreview = 8; // 1/32 grid
+            const totalStepsPreview = totalBeats * stepsPerBeatPreview;
+            const stepDurationPreview = 1.0 / stepsPerBeatPreview;
+
+            let output = "";
+            const barLines = params.patternLengthBars > 1 ? 4 * stepsPerBeatPreview : -1; // Add bar lines if > 1 bar
+
+            for (let bar = 0; bar < params.patternLengthBars; bar++) {
+                 output += `BAR ${bar + 1}:\n|`;
+                 const barStartTime = bar * 4;
+                 const barEndTime = (bar + 1) * 4;
+
+                 let stepOutput = "";
+                 for (let step = 0; step < 4 * stepsPerBeatPreview; step++) {
+                     const currentTime = barStartTime + step * stepDurationPreview;
+                     const nextTime = currentTime + stepDurationPreview;
+                     let symbol = '-'; // Default: rest
+
+                      // Find note(s) starting in this step's time window
+                      for (const note of pattern) {
+                          // Allow a small tolerance for floating point
+                          if (note.time >= currentTime - 0.001 && note.time < nextTime - 0.001) {
+                              if (note.note === MIDI_OPEN_HAT) {
+                                  symbol = 'O'; // Open Hat
+                              } else if (note.note === MIDI_CLOSED_HAT) {
+                                   // Check if it's part of a roll (faster than 1/16) - crude check
+                                   const isRollNote = pattern.some(n =>
+                                       n.note === MIDI_CLOSED_HAT &&
+                                       n.time > note.time &&
+                                       n.time < note.time + getSubdivisionInfo('1/16').stepDuration && // Faster than 16th?
+                                       n.time < nextTime // Ensure it's close
+                                   );
+                                   symbol = isRollNote ? 'r' : 'x'; // Roll or Closed Hat
+                              }
+                              break; // Take the first note found in the interval
+                          }
+                      }
+                      stepOutput += symbol;
+                       // Add beat markers
+                       if ((step + 1) % stepsPerBeatPreview === 0 && step < 4 * stepsPerBeatPreview -1) {
+                           stepOutput += "|"; // Beat divider
+                       } else if ((step+1) % (stepsPerBeatPreview / 2) === 0){
+                           stepOutput += "."; // Half-beat marker
+                       }
+                 }
+                 output += stepOutput + "|\n";
+            }
+
+            patternPreview.textContent = output;
+        }
+
+
+        // --- MIDI File Generation ---
+        function patternToMidi(pattern, bpm) {
+            const headerChunkId = [0x4d, 0x54, 0x68, 0x64]; // MThd
+            const headerChunkLength = [0x00, 0x00, 0x00, 0x06]; // 6 bytes
+            const formatType = [0x00, 0x00]; // Format 0 (single track)
+            const numTracks = [0x00, 0x01]; // One track
+            const ticksPerQuarter = toBytes(TICKS_PER_QUARTER_NOTE, 2); // Ticks per quarter note
+
+            const trackChunkId = [0x4d, 0x54, 0x72, 0x6b]; // MTrk
+
+            const midiEvents = []; // Array to hold raw MIDI event bytes
+
+            // --- Helper: Encode Variable Length Quantity (for delta times) ---
+            function encodeVariableLength(value) {
+                let buffer = value & 0x7F;
+                const bytes = [];
+                while ((value >>= 7) > 0) {
+                    buffer <<= 8;
+                    buffer |= ((value & 0x7F) | 0x80);
+                }
+                while (true) {
+                    bytes.push(buffer & 0xFF);
+                    if (buffer & 0x80) {
+                        buffer >>= 8;
+                    } else {
+                        break;
+                    }
+                }
+                return bytes.reverse();
+            }
+
+            // --- Helper: Convert number to Big Endian byte array ---
+             function toBytes(number, length) {
+                const bytes = [];
+                for (let i = 0; i < length; i++) {
+                    bytes.push((number >> (8 * (length - 1 - i))) & 0xFF);
+                }
+                return bytes;
+            }
+
+            // --- Add Meta Events ---
+            // Tempo Event (microseconds per quarter note)
+            const microSecondsPerQuarter = Math.round(60000000 / bpm);
+            midiEvents.push(...encodeVariableLength(0)); // Delta time 0
+            midiEvents.push(0xFF, 0x51, 0x03); // Meta event, Set Tempo, Length 3
+            midiEvents.push(...toBytes(microSecondsPerQuarter, 3));
+
+            // Time Signature Event (Optional but good practice: 4/4)
+             midiEvents.push(...encodeVariableLength(0)); // Delta time 0
+             midiEvents.push(0xFF, 0x58, 0x04); // Meta event, Time Signature, Length 4
+             midiEvents.push(0x04, 0x02, 0x18, 0x08); // 4/4 time, 24 MIDI clocks/qtr, 8 32nd notes/qtr
+
+            // --- Process Notes ---
+            let lastEventTimeTicks = 0;
+            const noteEvents = []; // Store {timeTicks: number, type: 'on'|'off', note: number, velocity: number}
+
+             pattern.forEach(note => {
+                const noteTimeTicks = Math.round(note.time * TICKS_PER_QUARTER_NOTE);
+                const noteOffTimeTicks = Math.round((note.time + note.duration) * TICKS_PER_QUARTER_NOTE);
+
+                // Add Note On event
+                 noteEvents.push({ timeTicks: noteTimeTicks, type: 'on', note: note.note, velocity: note.velocity });
+                 // Add Note Off event (as Note On with velocity 0 - common for drums)
+                 noteEvents.push({ timeTicks: noteOffTimeTicks, type: 'off', note: note.note, velocity: 0 });
+            });
+
+             // Sort all events by time
+             noteEvents.sort((a, b) => a.timeTicks - b.timeTicks);
+
+             // Convert sorted events to MIDI bytes with delta times
+            noteEvents.forEach(event => {
+                const deltaTimeTicks = event.timeTicks - lastEventTimeTicks;
+                midiEvents.push(...encodeVariableLength(deltaTimeTicks));
+
+                 if (event.type === 'on') {
+                     midiEvents.push(0x99); // Note On on Channel 10 (0x90 | 0x09)
+                     midiEvents.push(event.note);
+                     midiEvents.push(event.velocity);
+                 } else { // 'off'
+                     midiEvents.push(0x89); // Note Off on Channel 10 (0x80 | 0x09) - OR use 0x99 with vel 0
+                    // midiEvents.push(0x99); // Using Note On Vel 0 for Note Off
+                     midiEvents.push(event.note);
+                     midiEvents.push(0x00); // Velocity 0 for Note Off
+                 }
+                lastEventTimeTicks = event.timeTicks;
+            });
+
+
+            // --- Add End of Track Event ---
+            midiEvents.push(...encodeVariableLength(0)); // Delta time 0
+            midiEvents.push(0xFF, 0x2F, 0x00); // Meta event, End of Track, Length 0
+
+            // --- Assemble File ---
+            const trackChunkLength = toBytes(midiEvents.length, 4); // Calculate track chunk length
+
+            const midiData = new Uint8Array([
+                ...headerChunkId,
+                ...headerChunkLength,
+                ...formatType,
+                ...numTracks,
+                ...ticksPerQuarter,
+                ...trackChunkId,
+                ...trackChunkLength,
+                ...midiEvents
+            ]);
+
+            return new Blob([midiData], { type: 'audio/midi' });
+        }
+
+
+        // --- Audio Preview (Optional but Recommended) ---
+        function initAudio() {
+            if (!audioCtx) {
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                } catch (e) {
+                    console.error("Web Audio API is not supported in this browser.", e);
+                    alert("Audio preview requires a modern browser with Web Audio API support.");
+                    previewButton.disabled = true;
+                }
+            }
+             // Resume context on user interaction if needed
+             if (audioCtx && audioCtx.state === 'suspended') {
+                 audioCtx.resume();
+             }
+        }
+
+        function stopPreview() {
+             if (!audioCtx) return;
+             isPlayingPreview = false;
+             previewSchedulerIds.forEach(timeoutId => clearTimeout(timeoutId)); // Clear scheduled timeouts
+             previewSchedulerIds = [];
+              // Optionally stop any currently sounding nodes if needed (more complex)
+             console.log("Audio preview stopped.");
+        }
+
+        function playPreview() {
+            if (!audioCtx || !currentPattern || currentPattern.length === 0) return;
+            if (isPlayingPreview) {
+                stopPreview(); // Stop current playback if playing
+            }
+             initAudio(); // Ensure context is running
+             if (!audioCtx) return; // Exit if context failed
+
+            const params = getParams();
+            const bpm = params.bpm;
+            const secondsPerBeat = 60.0 / bpm;
+            const startTime = audioCtx.currentTime + 0.1; // Start slightly ahead
+
+            isPlayingPreview = true;
+            previewSchedulerIds = []; // Reset scheduler IDs
+
+            console.log(`Starting preview at ${bpm} BPM...`);
+
+            currentPattern.forEach(note => {
+                const noteStartTime = startTime + note.time * secondsPerBeat;
+                const noteEndTime = noteStartTime + note.duration * secondsPerBeat; // Use duration for release
+
+                 // Schedule the sound using setTimeout for simplicity here
+                 // For precise timing, schedule AudioParam changes or BufferSource start/stop directly
+                 const delay = (noteStartTime - audioCtx.currentTime) * 1000; // Delay in ms
+
+                 if (delay >= 0) {
+                     const timeoutId = setTimeout(() => {
+                         if (!isPlayingPreview) return; // Check if playback was stopped
+
+                         // Simple click/noise sound generation
+                         const gain = audioCtx.createGain();
+                         gain.connect(audioCtx.destination);
+                         gain.gain.setValueAtTime(0.5, audioCtx.currentTime); // Start volume
+
+                         if (note.note === MIDI_OPEN_HAT) {
+                              // Longer noise burst for open hat
+                             const bufferSize = audioCtx.sampleRate * 0.1; // 100ms noise
+                             const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                             const output = noiseBuffer.getChannelData(0);
+                             for (let i = 0; i < bufferSize; i++) {
+                                 output[i] = Math.random() * 2 - 1; // White noise
+                             }
+                             const noiseSource = audioCtx.createBufferSource();
+                             noiseSource.buffer = noiseBuffer;
+                              noiseSource.connect(gain);
+                              gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.09); // Faster decay
+                              noiseSource.start(audioCtx.currentTime);
+                              noiseSource.stop(audioCtx.currentTime + 0.1);
+                         } else {
+                             // Short click/blip for closed hat/roll
+                             const osc = audioCtx.createOscillator();
+                             osc.type = 'triangle'; // Triangle wave for a blip
+                             osc.frequency.setValueAtTime(600, audioCtx.currentTime); // Higher pitch
+                             osc.connect(gain);
+                             gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05); // Very short decay
+                             osc.start(audioCtx.currentTime);
+                             osc.stop(audioCtx.currentTime + 0.05);
+                         }
+
+                     }, delay);
+                     previewSchedulerIds.push(timeoutId);
+                 }
+            });
+
+             // Add a final timeout to reset the isPlaying flag
+            const lastNote = currentPattern[currentPattern.length - 1];
+            if (lastNote) {
+                const endTime = startTime + (lastNote.time + lastNote.duration) * secondsPerBeat;
+                const endDelay = (endTime - audioCtx.currentTime) * 1000;
+                 if(endDelay >= 0) {
+                     const endTimeoutId = setTimeout(() => {
+                         isPlayingPreview = false;
+                         console.log("Preview finished.");
+                     }, endDelay + 100); // Add slight buffer
+                      previewSchedulerIds.push(endTimeoutId);
+                 } else {
+                    isPlayingPreview = false; // Already past end time
+                 }
+            } else {
+                 isPlayingPreview = false; // No notes, stop immediately
+            }
+        }
+
+
+        // --- Variation Logic ---
+        function varyParams(params, factor) {
+            const newParams = { ...params }; // Copy existing params
+
+             // Helper to nudge numeric value
+             function nudgeValue(current, min, max, rangeFactor) {
+                 const range = max - min;
+                 const change = (Math.random() * 2 - 1) * range * rangeFactor; // Random +/- change
+                 return Math.max(min, Math.min(max, Math.round(current + change))); // Clamp within bounds
+             }
+
+             // Helper to maybe change select option
+            function maybeChangeSelect(currentValue, options, changeProb) {
+                if (Math.random() < changeProb) {
+                    const otherOptions = options.filter(opt => opt !== currentValue);
+                    if (otherOptions.length > 0) {
+                        return otherOptions[Math.floor(Math.random() * otherOptions.length)];
+                    }
+                }
+                return currentValue;
+            }
+
+            // Nudge numerical parameters
+            newParams.bpm = nudgeValue(params.bpm, 40, 300, factor);
+            // Don't vary length for now, could be disruptive
+            // newParams.patternLengthBars = nudgeValue(params.patternLengthBars, 1, 4, factor * 0.5); // Less variation here
+            newParams.rollProbability = Math.max(0, Math.min(1, params.rollProbability + (Math.random() * 2 - 1) * (factor * 1.5))); // 0-1 range
+            newParams.swingFactor = Math.max(0, Math.min(0.75, params.swingFactor + (Math.random() * 2 - 1) * (factor * 1.2))); // 0-0.75 range
+             newParams.velocityVariation = Math.max(0, Math.min(1, params.velocityVariation + (Math.random() * 2 - 1) * factor)); // 0-1 range
+             newParams.patternComplexity = Math.max(0, Math.min(1, params.patternComplexity + (Math.random() * 2 - 1) * factor)); // 0-1 range
+
+
+             // Maybe change select options
+            const changeProbabilitySelect = factor * 1.5; // Higher chance to change selects
+
+             const subdivisionOptions = Array.from(baseSubdivisionSelect.options).map(opt => opt.value);
+             newParams.baseSubdivision = maybeChangeSelect(params.baseSubdivision, subdivisionOptions, changeProbabilitySelect);
+
+             const rollRateOptions = Array.from(rollRateSelect.options).map(opt => opt.value);
+             newParams.rollRate = maybeChangeSelect(params.rollRate, rollRateOptions, changeProbabilitySelect);
+
+             const openHatOptions = Array.from(openHatPlacementSelect.options).map(opt => opt.value);
+             newParams.openHatPlacement = maybeChangeSelect(params.openHatPlacement, openHatOptions, changeProbabilitySelect);
+
+
+             // Update UI to reflect nudged values (important!)
+            bpmInput.value = newParams.bpm;
+             patternLengthSelect.value = newParams.patternLengthBars; // Keep length variation commented out for now
+             baseSubdivisionSelect.value = newParams.baseSubdivision;
+             rollProbabilityInput.value = Math.round(newParams.rollProbability * 100);
+             rollRateSelect.value = newParams.rollRate;
+             swingFactorInput.value = Math.round(newParams.swingFactor * 100);
+             openHatPlacementSelect.value = newParams.openHatPlacement;
+             velocityVariationInput.value = Math.round(newParams.velocityVariation * 100);
+             patternComplexityInput.value = Math.round(newParams.patternComplexity * 100);
+
+             updateRangeDisplays(); // Update % display
+
+             return newParams;
+        }
+
+        // --- Event Handlers ---
+        function handleInitiate() {
+             stopPreview(); // Stop audio if playing
+             const params = getParams();
+             currentPattern = generatePattern(params);
+             updatePatternPreview(currentPattern, params);
+             enableActionButtons();
+        }
+
+        function handleVariation(factor) {
+            stopPreview();
+            const currentParams = getParams();
+            const variedParams = varyParams(currentParams, factor);
+             currentPattern = generatePattern(variedParams);
+             updatePatternPreview(currentPattern, variedParams);
+             // Buttons remain enabled
+        }
+
+        function handlePreview() {
+            if (isPlayingPreview) {
+                stopPreview();
+                 previewButton.textContent = "PREVIEW_PATTERN"; // Reset button text
+            } else {
+                 initAudio(); // Ensure audio context is ready on user interaction
+                 if(audioCtx) {
+                     playPreview();
+                     if(isPlayingPreview) {
+                          previewButton.textContent = "STOP_PREVIEW"; // Change text while playing
+                     }
+                 }
+            }
+        }
+
+        function handleExport() {
+            stopPreview();
+            if (!currentPattern || currentPattern.length === 0) {
+                alert("No pattern generated to export.");
+                return;
+            }
+            const params = getParams();
+            const midiBlob = patternToMidi(currentPattern, params.bpm);
+
+            // Create filename
+             const date = new Date();
+             const timestamp = `${date.getFullYear()}${(date.getMonth()+1).toString().padStart(2, '0')}${date.getDate().toString().padStart(2, '0')}_${date.getHours().toString().padStart(2, '0')}${date.getMinutes().toString().padStart(2, '0')}${date.getSeconds().toString().padStart(2, '0')}`;
+             const filename = `HH_SEQUENCE_${params.bpm}BPM_${timestamp}_62S.mid`;
+
+            // Trigger download
+            const url = URL.createObjectURL(midiBlob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function enableActionButtons() {
+            variationSubtleButton.disabled = false;
+            variationExtremeButton.disabled = false;
+            previewButton.disabled = false;
+            exportButton.disabled = false;
+        }
+
+        // --- Initialization ---
+        initiateButton.addEventListener('click', handleInitiate);
+        variationSubtleButton.addEventListener('click', () => handleVariation(0.10)); // 10% variation
+        variationExtremeButton.addEventListener('click', () => handleVariation(0.30)); // 30% variation
+        previewButton.addEventListener('click', handlePreview);
+        exportButton.addEventListener('click', handleExport);
+
+         // Add listeners to update range value displays
+         rollProbabilityInput.addEventListener('input', updateRangeDisplays);
+         swingFactorInput.addEventListener('input', updateRangeDisplays);
+         velocityVariationInput.addEventListener('input', updateRangeDisplays);
+         patternComplexityInput.addEventListener('input', updateRangeDisplays);
+
+         // Initial display update for ranges
+         updateRangeDisplays();
+
+         // Optional: Generate an initial pattern on load? Or keep it empty.
+         // handleInitiate(); // Uncomment to generate a pattern on load
+         console.log("// MODULE::HI-HAT_SEQUENCER_62S // Initialized.");
+
+    </script>
+</body>
+</html>
