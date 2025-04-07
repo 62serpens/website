@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>//NODE_62S :: MODULE_THEREMIN</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Configuration (Copied from your index.html) --- */
+        :root {
+            --bg-color: #040408;
+            --text-color: #a8a8b0;
+            --header-color: #d0d0e0;
+            --accent-color: #00BFFF; /* Electric Blue */
+            --accent-hover: #ffffff;
+            --border-color: #1f1f2f;
+            --success-color: #00dd55; /* Added for button state */
+            --error-color: #ff2222; /* Added for button state */
+            --font-main: 'Roboto Mono', monospace;
+            --transition-fast: 0.1s ease-in-out;
+        }
+
+        /* --- Base & Structure (Minimal) --- */
+        *, *::before, *::after { box-sizing: border-box; }
+        body {
+            margin: 0; padding: 25px 15px;
+            min-height: 100vh;
+            background-color: var(--bg-color); color: var(--text-color);
+            font-family: var(--font-main); font-size: 14px; line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
+        }
+
+        /* --- Headings (Themed) --- */
+        h1 {
+            font-family: var(--font-main); font-weight: 700; text-transform: uppercase;
+            color: var(--header-color); margin: 0 0 20px 0; padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color); letter-spacing: 1px;
+            font-size: 1.2em;
+            text-align: center;
+            width: 100%;
+            max-width: 500px; /* Limit width */
+        }
+         p.instructions {
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            max-width: 500px;
+             text-align: center;
+             opacity: 0.8;
+        }
+
+        /* --- Theremin Control Area --- */
+        #theremin-box {
+            width: 90%;
+            max-width: 500px; /* Max size */
+            height: 300px;
+            border: 2px solid var(--border-color);
+            margin-bottom: 20px;
+            cursor: crosshair;
+            position: relative; /* Needed for potential future visual feedback */
+            background-color: #101018; /* Slightly different background */
+             user-select: none; /* Prevent text selection */
+        }
+        #theremin-box:hover {
+            border-color: var(--accent-color);
+        }
+
+        /* --- Control Button --- */
+         .control-button {
+            padding: 10px 20px;
+            font-family: var(--font-main);
+            font-size: 1em;
+            color: var(--bg-color);
+            background-color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-fast);
+            margin-bottom: 20px;
+        }
+        .control-button:hover {
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+         .control-button.active { /* Style when sound is ON */
+            background-color: var(--success-color);
+             border-color: var(--success-color);
+             color: var(--bg-color);
+        }
+
+        /* --- Back Link --- */
+        .back-link {
+            margin-top: 20px;
+            display: inline-block;
+            color: var(--accent-color);
+            font-size: 0.9em;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        .back-link:hover { color: var(--accent-hover); }
+
+         /* --- Mobile Adjustments --- */
+         @media (max-width: 600px) {
+            body { font-size: 13px; padding: 20px 10px; }
+            h1 { font-size: 1.1em; }
+             #theremin-box { height: 250px; }
+            .control-button { font-size: 0.9em; padding: 8px 15px;}
+            .back-link { font-size: 0.85em; }
+         }
+    </style>
+</head>
+<body>
+
+    <h1>// MODULE::THEREMIN_INTERFACE //</h1>
+    <p class="instructions">
+        Click "ACTIVATE_SOUND". Move mouse inside the box below.<br>
+        Left-Right controls Pitch. Bottom-Top controls Volume.
+    </p>
+
+    <div id="theremin-box"></div>
+
+    <button id="toggleButton" class="control-button">ACTIVATE_SOUND</button>
+
+    <a href="audio_tools.html" class="back-link">&lt;&lt; RETURN_TO_AUDIO_SUITE</a>
+
+    <script>
+        // All JavaScript is now inside this script tag
+
+        const thereminBox = document.getElementById('theremin-box');
+        const toggleButton = document.getElementById('toggleButton');
+
+        let audioContext;
+        let oscillator;
+        let gainNode;
+        let isPlaying = false;
+
+        // Function to initialize the Web Audio components
+        function setupAudio() {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            oscillator = audioContext.createOscillator();
+            gainNode = audioContext.createGain();
+
+            oscillator.type = 'sine'; // Waveform type
+            oscillator.frequency.setValueAtTime(220, audioContext.currentTime); // Start frequency (A3)
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime); // Start with volume 0
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            oscillator.start(); // Start oscillator silently
+             console.log("Audio Context Initialized. Oscillator Started.");
+        }
+
+        // Function to start the sound output (needs AudioContext resumed)
+        function startSound() {
+            if (!audioContext) {
+                setupAudio(); // Setup on first start
+            }
+            // Resume context if needed (required after user interaction)
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            // We don't need to restart the oscillator, just control the gain
+            isPlaying = true;
+            toggleButton.textContent = "DEACTIVATE_SOUND";
+            toggleButton.classList.add('active');
+             console.log("Sound Activated.");
+             // Set initial gain based on potential mouse position (or zero if needed)
+             // gainNode.gain.setValueAtTime(0.01, audioContext.currentTime); // Start at low volume
+        }
+
+        // Function to stop the sound output
+        function stopSound() {
+            if (isPlaying && gainNode) {
+                // Fade gain to 0 quickly to avoid clicks
+                 gainNode.gain.cancelScheduledValues(audioContext.currentTime);
+                 gainNode.gain.setTargetAtTime(0, audioContext.currentTime, 0.01); // Fast ramp down
+            }
+            isPlaying = false;
+            toggleButton.textContent = "ACTIVATE_SOUND";
+            toggleButton.classList.remove('active');
+             console.log("Sound Deactivated.");
+        }
+
+        // Event listener for the Start/Stop button
+        toggleButton.addEventListener('click', () => {
+            if (!isPlaying) {
+                startSound();
+            } else {
+                stopSound();
+            }
+        });
+
+        // Event listener for mouse movement within the theremin box
+        thereminBox.addEventListener('mousemove', (event) => {
+            if (!isPlaying || !audioContext) return; // Only work if sound is active
+
+            const rect = thereminBox.getBoundingClientRect();
+            const x = event.clientX - rect.left; // Mouse X position within the box
+            const y = event.clientY - rect.top;  // Mouse Y position within the box
+
+            // Map X position (0 to box width) to frequency (e.g., 100Hz to 1500Hz)
+            const minFreq = 100;
+            const maxFreq = 1500;
+            const freqRange = maxFreq - minFreq;
+            // Use exponential scaling for frequency to feel more musical
+             const freq = minFreq * Math.pow(2, (x / rect.width) * Math.log2(maxFreq / minFreq));
+             //const freq = minFreq + (x / rect.width) * freqRange; // Linear scaling (alternative)
+
+
+            // Map Y position (0 to box height, but inverted) to gain (e.g., 0 to 0.5)
+            // Higher Y means lower on screen -> louder volume
+            const maxGain = 0.5; // Max volume (0.5 to prevent clipping)
+            const gain = (1 - (y / rect.height)) * maxGain;
+
+            // Update oscillator frequency and gain node value smoothly
+            if (oscillator && gainNode) {
+                 const now = audioContext.currentTime;
+                 // Smooth parameter changes to avoid clicks/zipper noise
+                oscillator.frequency.setTargetAtTime(freq, now, 0.01); // Smooth frequency change
+                gainNode.gain.setTargetAtTime(gain, now, 0.01);    // Smooth gain change
+            }
+             // console.log(`Freq: ${freq.toFixed(2)}, Gain: ${gain.toFixed(2)}`); // For debugging
+        });
+
+         // Optional: Stop sound if mouse leaves the box while playing
+         thereminBox.addEventListener('mouseleave', () => {
+             if (isPlaying && gainNode) {
+                  // Fade gain to 0 quickly
+                  gainNode.gain.cancelScheduledValues(audioContext.currentTime);
+                  gainNode.gain.setTargetAtTime(0, audioContext.currentTime, 0.02);
+             }
+         });
+
+         // Optional: When mouse re-enters, reset gain based on Y pos IF playing
+         thereminBox.addEventListener('mouseenter', (event) => {
+             if (isPlaying && gainNode) {
+                 const rect = thereminBox.getBoundingClientRect();
+                 const y = event.clientY - rect.top;
+                 const maxGain = 0.5;
+                 const gain = (1 - (y / rect.height)) * maxGain;
+                 gainNode.gain.setTargetAtTime(gain, audioContext.currentTime, 0.01);
+             }
+         });
+
+
+        console.log("Theremin Module Initialized.");
+
+    </script>
+
+</body>
+</html>
