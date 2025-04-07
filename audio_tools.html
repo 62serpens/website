@@ -50,15 +50,22 @@
         }
         .submodule-list a {
             font-family: var(--font-main); font-size: 0.95em;
-            color: var(--accent-color);
+            color: var(--accent-color); /* <<< Unvisited Link Color */
             text-decoration: none;
-            transition: color var(--transition-fast), padding-left var(--transition-fast); /* Added padding transition */
+            transition: color var(--transition-fast), padding-left var(--transition-fast);
             display: block; /* Makes the link take full width for easier tapping */
         }
         .submodule-list a:hover {
-            color: var(--accent-hover);
+            color: var(--accent-hover); /* <<< Hover Color */
             padding-left: 10px; /* Indent text slightly on hover */
         }
+        /* --- ADDED RULE FOR VISITED LINKS --- */
+        .submodule-list a:visited {
+            color: var(--accent-color); /* <<< Visited Link Color (Same as unvisited) */
+            /* opacity: 0.85; */ /* Optional: Slightly fade visited links */
+        }
+        /* --- END ADDED RULE --- */
+
 
         /* --- Back Link --- */
         .back-link {
@@ -89,9 +96,8 @@
     <ul class="submodule-list">
         <li><a href="spectrum_analyzer.html" target="_self">> MODULE::SPECTRUM_ANALYZER [Status: Active]</a></li>
         <li><a href="oneshotgenerator.html" target="_self">> MODULE::ONESHOT_GENERATOR [Status: Active]</a></li>
-        <li><a href="hhgen.html" target="_self">> MODULE::HH_GENERATOR [Status: Active]</a></li> </ul>
-    <li><a href="theremin_module.html" target="_self">> MODULE::THEREMIN_INTERFACE [Status: Active]</a></li>
-</ul>
+        <li><a href="hhgen.html" target="_self">> MODULE::HH_GENERATOR [Status: Active]</a></li>
+        <li><a href="theremin_module.html" target="_self">> MODULE::THEREMIN_INTERFACE [Status: Active]</a></li> </ul>
     <a href="index.html" class="back-link">&lt;&lt; RETURN_TO_NODE_ROOT</a>
 
 </body>
