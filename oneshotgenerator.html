@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Your existing CSS remains unchanged */
         :root {
             --bg-color: #040408;
             --text-color: #a8a8b0;
@@ -30,7 +29,7 @@
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0;}
         html { scroll-behavior: smooth; }
-        body { margin: 0; padding: 0; width: 100%; min-height: 100vh; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-main); font-size: 14px; line-height: 1.6; display: flex; justify-content: center; align-items: flex-start; padding: 2rem; cursor: default; overflow-y: hidden; position: relative; }
+        body { margin: 0; padding: 0; width: 100%; min-height: 100vh; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-main); font-size: 14px; line-height: 1.6; display: flex; justify-content: center; align-items: flex-start; padding: 2rem; cursor: default; overflow-y: hidden; }
         .container { background: none; border: 1px solid var(--border-color); padding: 20px; max-width: 750px; width: 100%; display: flex; flex-direction: column; gap: 20px; }
         h1 { font-family: var(--font-main); font-weight: 700; text-transform: uppercase; font-size: 1.2em; color: var(--header-color); margin: 0 0 10px 0; padding-bottom: 8px; text-align: left; border-bottom: 1px solid var(--border-color); letter-spacing: 1px; }
         .control-group { border: 1px solid var(--border-color); padding: 15px; display: flex; flex-direction: column; gap: 12px; }
@@ -39,7 +38,7 @@
         select { font-family: var(--font-main); font-size: 0.95em; padding: 10px 12px; border-radius: 0; border: 1px solid var(--border-color); background-color: var(--input-bg-color); color: var(--text-color); cursor: pointer; transition: border-color var(--transition-fast); appearance: none; -webkit-appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%2220%22 height%3D%2220%22 fill%3D%22%23a8a8b0%22%3E%3Cpath d%3D%22M5 8l5 5 5-5z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 0.7rem center; background-size: 1em; padding-right: 2.5em; }
         select:focus { outline: none; border-color: var(--accent-color); }
         .button-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
-        .output-button-grid { display: flex; flex-direction: column; gap: 12px; } /* Adjusted for vertical layout */
+        .output-button-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
         button { font-family: var(--font-main); font-size: 0.9em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 15px; border-radius: 0; border: 1px solid var(--border-color); background-color: var(--button-bg-color); color: var(--text-color); cursor: pointer; text-align: center; transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast); }
         button:not(:disabled):hover { color: var(--accent-hover); background-color: var(--border-color); border-color: var(--accent-color); }
         button:not(:disabled):active { background-color: var(--accent-color); color: var(--bg-color); border-color: var(--accent-hover); }
@@ -52,14 +51,10 @@
         #btn-render { border-color: var(--accent-color); color: var(--accent-color); } #btn-render:not(:disabled):hover { background-color: var(--accent-color); color: var(--bg-color); border-color: var(--accent-hover); } #btn-render:not(:disabled):active { background-color: var(--accent-hover); color: var(--bg-color); border-color: var(--accent-color); }
         #filename-preview-container { font-family: var(--font-main); font-size: 0.9em; background-color: var(--input-bg-color); padding: 10px 15px; border: 1px dashed var(--border-color); color: var(--text-color); text-align: center; word-break: break-all; min-height: 41px; display: flex; align-items: center; justify-content: center; transition: border-color var(--transition-fast), border-style var(--transition-fast); } #filename-preview-container.active { border-color: var(--accent-color); border-style: solid; } #filename-preview { color: var(--header-color); font-weight: 700; }
         .keyboard-hint { font-size: 0.85em; color: var(--text-color); text-align: center; margin-top: 1rem; padding: 12px; border: 1px dashed var(--border-color); background-color: var(--input-bg-color); line-height: 1.5; } .keyboard-hint code { background-color: var(--border-color); padding: 0.1em 0.4em; margin: 0 0.1em; border-radius: 0; font-family: var(--font-main); color: var(--accent-color); font-weight: 700; }
-        #audio-unlock-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); color: var(--accent-color); display: flex; align-items: center; justify-content: center; z-index: 1000; font-size: 1.2em; text-transform: uppercase; } /* Added for mobile audio unlock */
-        @media (max-width: 700px) { body{font-size:13px;padding:1rem;} .container{padding:15px;gap:15px;} h1{font-size:1.1em;} .control-group{padding:15px;gap:12px;} select{font-size:.9em;padding:9px 10px;padding-right:2.3em;} button{font-size:.85em;padding:9px 12px;} .button-grid, .output-button-grid{gap:10px;} #filename-preview-container{font-size:.85em;padding:9px 12px;min-height:38px;} .keyboard-hint{font-size:.8em;padding:10px;} } @media (max-width: 480px) { .button-grid { grid-template-columns: 1fr; } .output-button-grid { gap: 10px; } } /* Adjusted media query for output-button-grid */
+        @media (max-width: 700px) { body{font-size:13px;padding:1rem;} .container{padding:15px;gap:15px;} h1{font-size:1.1em;} .control-group{padding:15px;gap:12px;} select{font-size:.9em;padding:9px 10px;padding-right:2.3em;} button{font-size:.85em;padding:9px 12px;} .button-grid, .output-button-grid{gap:10px;} #filename-preview-container{font-size:.85em;padding:9px 12px;min-height:38px;} .keyboard-hint{font-size:.8em;padding:10px;} } @media (max-width: 480px) { .button-grid, .output-button-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <!-- Mobile Audio Unlock Overlay -->
-    <div id="audio-unlock-overlay">Tap to Enable Audio</div>
-
     <div class="container">
         <h1>// MODULE::ONE-SHOT_SYNTH [62serpens.com] //</h1>
 
@@ -84,23 +79,23 @@
         </div>
 
         <div class="control-group">
-            <label class="group-label">PARAMETER_VARIATION</label>
-            <div class="button-grid">
-                <button id="btn-variation5" disabled>VARIATION 5%</button>
-                <button id="btn-variation10" disabled>VARIATION 10%</button>
-                <button id="btn-variation25" disabled>VARIATION 25%</button>
-            </div>
+             <label class="group-label">PARAMETER_VARIATION</label>
+             <div class="button-grid">
+                 <button id="btn-variation5" disabled>VARIATION 5%</button>
+                 <button id="btn-variation10" disabled>VARIATION 10%</button>
+                 <button id="btn-variation25" disabled>VARIATION 25%</button>
+             </div>
         </div>
 
         <div class="control-group">
-            <label class="group-label">OUTPUT_CONFIGURATION</label>
-            <div class="output-button-grid">
-                <button id="btn-new-name" disabled>RANDOM NAME</button>
-                <div id="filename-preview-container">
-                    <span id="filename-preview">(Awaiting Parameter Generation...)</span>
-                </div>
-                <button id="btn-render" disabled>RENDER WAV @ C3</button>
-            </div>
+             <label class="group-label">OUTPUT_CONFIGURATION</label>
+             <div id="filename-preview-container">
+                 <span id="filename-preview">(Awaiting Parameter Generation...)</span>
+             </div>
+             <div class="output-button-grid">
+                 <button id="btn-render" disabled>RENDER WAV @ C3</button>
+                 <button id="btn-new-name" disabled>RANDOM NAME</button>
+             </div>
         </div>
 
         <div class="keyboard-hint">
@@ -125,7 +120,6 @@
         const btnRender = document.getElementById('btn-render');
         const filenamePreview = document.getElementById('filename-preview');
         const filenamePreviewContainer = document.getElementById('filename-preview-container');
-        const audioUnlockOverlay = document.getElementById('audio-unlock-overlay');
 
         // === Audio Context & State ===
         let audioCtx = null;
@@ -175,7 +169,7 @@
             if (audioCtx.state === 'suspended') {
                 try {
                     await audioCtx.resume();
-                    console.log("AudioContext::RESUMED | State:", audioCtx.state);
+                    console.log("AudioContext::RESUMED");
                     isAudioContextStarted = true;
                 } catch (e) {
                     console.error("ERROR::AudioContext_RESUME_FAILED", e);
@@ -183,8 +177,6 @@
                 }
             } else if (audioCtx.state === 'running') {
                 isAudioContextStarted = true;
-            } else {
-                console.log("AudioContext::STATE_UNEXPECTED | State:", audioCtx.state);
             }
             return isAudioContextStarted;
         }
@@ -196,8 +188,10 @@
             const now = audioCtx.currentTime;
             const is808 = params.soundType === '808';
 
+            // Dynamic fade-out time for 808s, extended for smoother decay
             const fadeOutTime = is808 ? Math.max(0.5, params.ampEnv.decay + params.ampEnv.release * 0.8) : MONO_FADE_OUT_TIME;
 
+            // Monophonic Cutoff
             if (currentPlayingNode) {
                 console.log(`Applying cutoff (${fadeOutTime.toFixed(3)}s ramp) to previous node at ${now.toFixed(4)}`);
                 currentPlayingNode.gain.cancelScheduledValues(now);
@@ -205,6 +199,7 @@
                 currentPlayingNode.gain.linearRampToValueAtTime(0, now + fadeOutTime);
             }
 
+            // Create Base Nodes
             const noteMasterGain = audioCtx.createGain();
             noteMasterGain.connect(audioCtx.destination);
             currentPlayingNode = noteMasterGain;
@@ -223,6 +218,7 @@
             let transientGain = null;
             let preEffectMix = audioCtx.createGain();
 
+            // Apply Core Parameters
             osc1.type = params.osc1.type;
             osc2.type = params.osc2.type;
             const baseFreq = midiToFreq(midiNote);
@@ -330,6 +326,7 @@
             finalStageInput.connect(noteMasterGain);
             noteMasterGain.gain.setValueAtTime(params.masterGain, now);
 
+            // Schedule Envelopes with Improved 808 Handling
             const { attack: filtAtk, decay: filtDec, sustain: filtSus, release: filtRel } = params.filterEnv;
             const filterEnvNode = audioCtx.createGain();
             filterEnvNode.gain.setValueAtTime(0, now);
@@ -351,6 +348,7 @@
             ampEnvGain.gain.exponentialRampToValueAtTime(0.0001, releaseStartTime + extendedRelease);
             filterEnvNode.gain.setTargetAtTime(0.0, releaseStartTime, filtRel / 3 + 0.001);
 
+            // Start Oscillators & Transient
             lfo.start(now);
             osc1.start(now);
             osc2.start(now);
@@ -358,6 +356,7 @@
                 transientNoise.start(now);
             }
 
+            // Schedule Cleanup with Extra Buffer
             const totalDuration = releaseStartTime + extendedRelease + (is808 ? 0.8 : 0.1);
             osc1.stop(totalDuration);
             osc2.stop(totalDuration);
@@ -369,132 +368,132 @@
 
         // === Parameter Generation ===
         function generateRandomParams(soundType) {
-            const params = { soundType: soundType };
-            params.masterGain = randomInRange(0.6, 0.8);
-            params.osc1 = { gain: randomInRange(0.5, 1.0), fineTune: 0 };
-            params.osc2 = { gain: randomInRange(0.0, 0.7), fineTune: 0, pitchOffset: 0 };
-            const totalGain = params.osc1.gain + params.osc2.gain;
-            if (totalGain > 1.1) { params.osc1.gain /= totalGain / 1.1; params.osc2.gain /= totalGain / 1.1; }
-            params.filter = { type: 'lowpass', Q: 1, envAmount: 0, cutoff: 5000 };
-            params.filterEnv = { attack: 0.05, decay: 0.3, sustain: 0.1, release: 0.5 };
-            params.ampEnv = { attack: 0.01, decay: 0.2, sustain: 0.5, release: 0.3 };
-            params.lfo = { type: 'sine', rate: 5, pitchMod: 0, filterMod: 0 };
-            params.effects = {
-                drive: { amount: randomInRange(0, 0.5), mix: randomInRange(0, 0.6) },
-                delay: { time: randomInRange(0.05, 0.6), feedback: randomInRange(0.1, 0.6), mix: randomInRange(0, 0.5) },
-                compressor: { enabled: Math.random() > 0.3, threshold: randomInRange(-40, -12), ratio: randomInRange(2, 16), attack: randomInRange(0.001, 0.03), release: randomInRange(0.1, 0.5) }
-            };
+             const params = { soundType: soundType };
+             params.masterGain = randomInRange(0.6, 0.8);
+             params.osc1 = { gain: randomInRange(0.5, 1.0), fineTune: 0 };
+             params.osc2 = { gain: randomInRange(0.0, 0.7), fineTune: 0, pitchOffset: 0 };
+             const totalGain = params.osc1.gain + params.osc2.gain;
+             if (totalGain > 1.1) { params.osc1.gain /= totalGain / 1.1; params.osc2.gain /= totalGain / 1.1; }
+             params.filter = { type: 'lowpass', Q: 1, envAmount: 0, cutoff: 5000 };
+             params.filterEnv = { attack: 0.05, decay: 0.3, sustain: 0.1, release: 0.5 };
+             params.ampEnv = { attack: 0.01, decay: 0.2, sustain: 0.5, release: 0.3 };
+             params.lfo = { type: 'sine', rate: 5, pitchMod: 0, filterMod: 0 };
+             params.effects = {
+                 drive: { amount: randomInRange(0, 0.5), mix: randomInRange(0, 0.6) },
+                 delay: { time: randomInRange(0.05, 0.6), feedback: randomInRange(0.1, 0.6), mix: randomInRange(0, 0.5) },
+                 compressor: { enabled: Math.random() > 0.3, threshold: randomInRange(-40, -12), ratio: randomInRange(2, 16), attack: randomInRange(0.001, 0.03), release: randomInRange(0.1, 0.5) }
+             };
 
-            switch (soundType) {
-                case '808':
-                    params.baseMIDINote = BASE_NOTE_C2;
-                    params.osc1.type = 'sine';
-                    params.osc1.fineTune = randomInRange(-10, 10);
-                    params.osc2.type = randomElement(['sine', 'triangle']);
-                    params.osc2.pitchOffset = randomElement([0, 12]);
-                    params.osc2.fineTune = randomInRange(-15, 15);
-                    params.osc2.gain *= 0.2;
-                    params.pitchEnvAmount = randomInRange(0.3, 0.9);
-                    params.pitchEnvDecay = randomInRange(0.05, 0.3);
-                    params.transientAmount = randomInRange(0.1, 0.8);
-                    params.transientDecay = randomInRange(0.005, 0.04);
-                    params.ampEnv = { attack: randomInRange(0.001, 0.005), decay: randomInRange(0.5, 1.5), sustain: 0.001, release: randomInRange(0.5, 3.0) };
-                    params.filter.type = 'lowpass';
-                    params.filter.cutoff = randomInRange(50, 800);
-                    params.filter.Q = randomInRange(0.5, 3.0);
-                    params.filter.envAmount = randomInRange(-100, 100);
-                    params.filterEnv = { attack: 0.01, decay: 0.05, sustain: 0.1, release: 0.1 };
-                    params.lfo.pitchMod = randomInRange(0, 3);
-                    params.effects.drive.amount = randomInRange(0.1, 1.0);
-                    params.effects.drive.mix = randomInRange(0.2, 0.8);
-                    params.effects.delay.mix = 0;
-                    params.effects.compressor.enabled = true;
-                    params.effects.compressor.threshold = randomInRange(-24, -12);
-                    params.effects.compressor.ratio = randomInRange(4, 10);
-                    params.effects.compressor.attack = randomInRange(0.001, 0.01);
-                    params.effects.compressor.release = randomInRange(0.05, 0.15);
-                    params.masterGain = randomInRange(0.75, 0.95);
-                    break;
-                case 'Lead Synth':
-                    params.baseMIDINote = BASE_NOTE_C4;
-                    params.osc1.type = randomElement(['sawtooth', 'square']);
-                    params.osc1.fineTune = randomInRange(-5, 5);
-                    params.osc2.type = randomElement(WAVEFORMS);
-                    params.osc2.pitchOffset = randomElement([-12, 0, 7, 12]);
-                    params.osc2.fineTune = randomInRange(-25, 25);
-                    params.ampEnv = { attack: randomInRange(0.005, 0.1), decay: randomInRange(0.1, 0.4), sustain: randomInRange(0.3, 0.8), release: randomInRange(0.1, 0.5) };
-                    params.filter.type = randomElement(['lowpass', 'lowpass', 'bandpass']);
-                    params.filter.cutoff = randomInRange(500, 9000);
-                    params.filter.Q = randomInRange(1, 10);
-                    params.filter.envAmount = randomInRange(-5000, 6000);
-                    params.filterEnv = { attack: randomInRange(0.01, 0.3), decay: randomInRange(0.1, 0.6), sustain: randomInRange(0.1, 0.7), release: randomInRange(0.2, 0.8) };
-                    params.lfo.rate = randomInRange(2, 10);
-                    if (Math.random() > 0.4) params.lfo.pitchMod = randomInRange(5, 30);
-                    if (Math.random() > 0.4) params.lfo.filterMod = randomInRange(200, 3000);
-                    params.effects.delay.mix = randomInRange(0, 0.6);
-                    params.effects.compressor.enabled = Math.random() > 0.5;
-                    break;
-                case 'Pluck Synth':
-                    params.baseMIDINote = BASE_NOTE_C4;
-                    params.osc1.type = randomElement(['triangle', 'sine', 'square']);
-                    params.osc1.fineTune = randomInRange(-10, 10);
-                    params.osc2.type = randomElement(WAVEFORMS);
-                    params.osc2.pitchOffset = randomElement([0, 7, 12, 19, 24]);
-                    params.osc2.fineTune = randomInRange(-15, 15);
-                    params.ampEnv = { attack: randomInRange(0.001, 0.02), decay: randomInRange(0.05, 0.3), sustain: 0.0001, release: randomInRange(0.05, 0.2) };
-                    params.filter.type = 'lowpass';
-                    params.filter.cutoff = randomInRange(1000, 10000);
-                    params.filter.Q = randomInRange(0.8, 5);
-                    params.filter.envAmount = randomInRange(1000, 7000);
-                    params.filterEnv = { attack: randomInRange(0.001, 0.05), decay: randomInRange(0.05, 0.4), sustain: 0.0001, release: randomInRange(0.1, 0.3) };
-                    params.lfo.pitchMod = 0;
-                    params.lfo.filterMod = 0;
-                    params.effects.delay.time = randomInRange(0.1, 0.5);
-                    params.effects.delay.feedback = randomInRange(0.2, 0.7);
-                    params.effects.delay.mix = randomInRange(0.2, 0.7);
-                    params.effects.compressor.enabled = Math.random() > 0.6;
-                    break;
-                case 'Pad Synth':
-                    params.baseMIDINote = BASE_NOTE_C4;
-                    params.osc1.type = randomElement(['sawtooth', 'triangle', 'sine']);
-                    params.osc1.fineTune = randomInRange(-7, 7);
-                    params.osc2.type = randomElement(WAVEFORMS);
-                    params.osc2.pitchOffset = randomElement([-12, 0, 7, 12]);
-                    params.osc2.fineTune = randomInRange(-40, 40);
-                    params.ampEnv = { attack: randomInRange(0.4, 2.5), decay: randomInRange(0.5, 2.5), sustain: randomInRange(0.4, 0.8), release: randomInRange(1.0, 6.0) };
-                    params.filter.type = randomElement(['lowpass', 'lowpass', 'bandpass']);
-                    params.filter.cutoff = randomInRange(300, 7000);
-                    params.filter.Q = randomInRange(0.7, 7);
-                    params.filter.envAmount = randomInRange(-4000, 4000);
-                    params.filterEnv = { attack: randomInRange(0.5, 3.5), decay: randomInRange(0.5, 3.0), sustain: randomInRange(0.2, 0.7), release: randomInRange(1.5, 6.0) };
-                    params.lfo.rate = randomInRange(0.05, 4.0);
-                    if (Math.random() > 0.3) params.lfo.pitchMod = randomInRange(2, 15);
-                    if (Math.random() > 0.4) params.lfo.filterMod = randomInRange(100, 2500);
-                    params.effects.delay.mix = randomInRange(0.1, 0.6);
-                    params.effects.compressor.enabled = Math.random() > 0.4;
-                    if (params.effects.compressor.enabled) { params.effects.compressor.release = randomInRange(0.1, 1.5); }
-                    break;
-                case 'Key Synth':
-                    params.baseMIDINote = BASE_NOTE_C4;
-                    params.osc1.type = randomElement(['sine', 'triangle', 'square']);
-                    params.osc1.fineTune = randomInRange(-5, 5);
-                    params.osc2.type = randomElement(WAVEFORMS);
-                    params.osc2.pitchOffset = randomElement([0, 12, 19, 24]);
-                    params.osc2.fineTune = randomInRange(-10, 10);
-                    params.ampEnv = { attack: randomInRange(0.005, 0.05), decay: randomInRange(0.1, 0.6), sustain: randomInRange(0.1, 0.7), release: randomInRange(0.1, 1.2) };
-                    params.filter.type = randomElement(['lowpass', 'lowpass', 'bandpass']);
-                    params.filter.cutoff = randomInRange(800, 8000);
-                    params.filter.Q = randomInRange(0.8, 5);
-                    params.filter.envAmount = randomInRange(-2000, 2500);
-                    params.filterEnv = { attack: randomInRange(0.01, 0.1), decay: randomInRange(0.1, 0.7), sustain: randomInRange(0.1, 0.6), release: randomInRange(0.2, 1.5) };
-                    params.lfo.rate = randomInRange(3, 8);
-                    if (Math.random() > 0.6) params.lfo.pitchMod = randomInRange(2, 10);
-                    params.effects.compressor.enabled = Math.random() > 0.5;
-                    break;
-            }
-            params.osc1.pitchMIDIBase = params.baseMIDINote;
-            console.log("Generated Params:", JSON.parse(JSON.stringify(params)));
-            return params;
+             switch (soundType) {
+                   case '808':
+                         params.baseMIDINote = BASE_NOTE_C2;
+                         params.osc1.type = 'sine';
+                         params.osc1.fineTune = randomInRange(-10, 10);
+                         params.osc2.type = randomElement(['sine', 'triangle']);
+                         params.osc2.pitchOffset = randomElement([0, 12]);
+                         params.osc2.fineTune = randomInRange(-15, 15);
+                         params.osc2.gain *= 0.2;
+                         params.pitchEnvAmount = randomInRange(0.3, 0.9);
+                         params.pitchEnvDecay = randomInRange(0.05, 0.3);
+                         params.transientAmount = randomInRange(0.1, 0.8);
+                         params.transientDecay = randomInRange(0.005, 0.04);
+                         params.ampEnv = { attack: randomInRange(0.001, 0.005), decay: randomInRange(0.5, 1.5), sustain: 0.001, release: randomInRange(0.5, 3.0) };
+                         params.filter.type = 'lowpass';
+                         params.filter.cutoff = randomInRange(50, 800);
+                         params.filter.Q = randomInRange(0.5, 3.0);
+                         params.filter.envAmount = randomInRange(-100, 100);
+                         params.filterEnv = { attack: 0.01, decay: 0.05, sustain: 0.1, release: 0.1 };
+                         params.lfo.pitchMod = randomInRange(0, 3);
+                         params.effects.drive.amount = randomInRange(0.1, 1.0);
+                         params.effects.drive.mix = randomInRange(0.2, 0.8);
+                         params.effects.delay.mix = 0;
+                         params.effects.compressor.enabled = true;
+                         params.effects.compressor.threshold = randomInRange(-24, -12);
+                         params.effects.compressor.ratio = randomInRange(4, 10);
+                         params.effects.compressor.attack = randomInRange(0.001, 0.01);
+                         params.effects.compressor.release = randomInRange(0.05, 0.15);
+                         params.masterGain = randomInRange(0.75, 0.95);
+                         break;
+                   case 'Lead Synth':
+                         params.baseMIDINote = BASE_NOTE_C4;
+                         params.osc1.type = randomElement(['sawtooth', 'square']);
+                         params.osc1.fineTune = randomInRange(-5, 5);
+                         params.osc2.type = randomElement(WAVEFORMS);
+                         params.osc2.pitchOffset = randomElement([-12, 0, 7, 12]);
+                         params.osc2.fineTune = randomInRange(-25, 25);
+                         params.ampEnv = { attack: randomInRange(0.005, 0.1), decay: randomInRange(0.1, 0.4), sustain: randomInRange(0.3, 0.8), release: randomInRange(0.1, 0.5) };
+                         params.filter.type = randomElement(['lowpass', 'lowpass', 'bandpass']);
+                         params.filter.cutoff = randomInRange(500, 9000);
+                         params.filter.Q = randomInRange(1, 10);
+                         params.filter.envAmount = randomInRange(-5000, 6000);
+                         params.filterEnv = { attack: randomInRange(0.01, 0.3), decay: randomInRange(0.1, 0.6), sustain: randomInRange(0.1, 0.7), release: randomInRange(0.2, 0.8) };
+                         params.lfo.rate = randomInRange(2, 10);
+                         if (Math.random() > 0.4) params.lfo.pitchMod = randomInRange(5, 30);
+                         if (Math.random() > 0.4) params.lfo.filterMod = randomInRange(200, 3000);
+                         params.effects.delay.mix = randomInRange(0, 0.6);
+                         params.effects.compressor.enabled = Math.random() > 0.5;
+                         break;
+                   case 'Pluck Synth':
+                         params.baseMIDINote = BASE_NOTE_C4;
+                         params.osc1.type = randomElement(['triangle', 'sine', 'square']);
+                         params.osc1.fineTune = randomInRange(-10, 10);
+                         params.osc2.type = randomElement(WAVEFORMS);
+                         params.osc2.pitchOffset = randomElement([0, 7, 12, 19, 24]);
+                         params.osc2.fineTune = randomInRange(-15, 15);
+                         params.ampEnv = { attack: randomInRange(0.001, 0.02), decay: randomInRange(0.05, 0.3), sustain: 0.0001, release: randomInRange(0.05, 0.2) };
+                         params.filter.type = 'lowpass';
+                         params.filter.cutoff = randomInRange(1000, 10000);
+                         params.filter.Q = randomInRange(0.8, 5);
+                         params.filter.envAmount = randomInRange(1000, 7000);
+                         params.filterEnv = { attack: randomInRange(0.001, 0.05), decay: randomInRange(0.05, 0.4), sustain: 0.0001, release: randomInRange(0.1, 0.3) };
+                         params.lfo.pitchMod = 0;
+                         params.lfo.filterMod = 0;
+                         params.effects.delay.time = randomInRange(0.1, 0.5);
+                         params.effects.delay.feedback = randomInRange(0.2, 0.7);
+                         params.effects.delay.mix = randomInRange(0.2, 0.7);
+                         params.effects.compressor.enabled = Math.random() > 0.6;
+                         break;
+                   case 'Pad Synth':
+                         params.baseMIDINote = BASE_NOTE_C4;
+                         params.osc1.type = randomElement(['sawtooth', 'triangle', 'sine']);
+                         params.osc1.fineTune = randomInRange(-7, 7);
+                         params.osc2.type = randomElement(WAVEFORMS);
+                         params.osc2.pitchOffset = randomElement([-12, 0, 7, 12]);
+                         params.osc2.fineTune = randomInRange(-40, 40);
+                         params.ampEnv = { attack: randomInRange(0.4, 2.5), decay: randomInRange(0.5, 2.5), sustain: randomInRange(0.4, 0.8), release: randomInRange(1.0, 6.0) };
+                         params.filter.type = randomElement(['lowpass', 'lowpass', 'bandpass']);
+                         params.filter.cutoff = randomInRange(300, 7000);
+                         params.filter.Q = randomInRange(0.7, 7);
+                         params.filter.envAmount = randomInRange(-4000, 4000);
+                         params.filterEnv = { attack: randomInRange(0.5, 3.5), decay: randomInRange(0.5, 3.0), sustain: randomInRange(0.2, 0.7), release: randomInRange(1.5, 6.0) };
+                         params.lfo.rate = randomInRange(0.05, 4.0);
+                         if (Math.random() > 0.3) params.lfo.pitchMod = randomInRange(2, 15);
+                         if (Math.random() > 0.4) params.lfo.filterMod = randomInRange(100, 2500);
+                         params.effects.delay.mix = randomInRange(0.1, 0.6);
+                         params.effects.compressor.enabled = Math.random() > 0.4;
+                         if (params.effects.compressor.enabled) { params.effects.compressor.release = randomInRange(0.1, 1.5); }
+                         break;
+                   case 'Key Synth':
+                         params.baseMIDINote = BASE_NOTE_C4;
+                         params.osc1.type = randomElement(['sine', 'triangle', 'square']);
+                         params.osc1.fineTune = randomInRange(-5, 5);
+                         params.osc2.type = randomElement(WAVEFORMS);
+                         params.osc2.pitchOffset = randomElement([0, 12, 19, 24]);
+                         params.osc2.fineTune = randomInRange(-10, 10);
+                         params.ampEnv = { attack: randomInRange(0.005, 0.05), decay: randomInRange(0.1, 0.6), sustain: randomInRange(0.1, 0.7), release: randomInRange(0.1, 1.2) };
+                         params.filter.type = randomElement(['lowpass', 'lowpass', 'bandpass']);
+                         params.filter.cutoff = randomInRange(800, 8000);
+                         params.filter.Q = randomInRange(0.8, 5);
+                         params.filter.envAmount = randomInRange(-2000, 2500);
+                         params.filterEnv = { attack: randomInRange(0.01, 0.1), decay: randomInRange(0.1, 0.7), sustain: randomInRange(0.1, 0.6), release: randomInRange(0.2, 1.5) };
+                         params.lfo.rate = randomInRange(3, 8);
+                         if (Math.random() > 0.6) params.lfo.pitchMod = randomInRange(2, 10);
+                         params.effects.compressor.enabled = Math.random() > 0.5;
+                         break;
+             }
+             params.osc1.pitchMIDIBase = params.baseMIDINote;
+             console.log("Generated Params:", JSON.parse(JSON.stringify(params)));
+             return params;
         }
 
         function generateVariationParams(baseParams, factor) {
@@ -524,7 +523,7 @@
             newParams.filterEnv.attack = vary(newParams.filterEnv.attack, 0.001, 5.0, factor);
             newParams.filterEnv.decay = vary(newParams.filterEnv.decay, 0.01, 5.0, factor);
             newParams.filterEnv.sustain = vary(newParams.filterEnv.sustain, 0.0001, 1.0, factor);
-            newParams.filterEnv.release = vary(newParamsură.filterEnv.release, 0.01, 8.0, factor);
+            newParams.filterEnv.release = vary(newParams.filterEnv.release, 0.01, 8.0, factor);
             newParams.filter.cutoff = varyLog(newParams.filter.cutoff, 20, 20000, factor);
             newParams.filter.Q = vary(newParams.filter.Q, 0.1, 20, factor);
             newParams.filter.envAmount = vary(newParams.filter.envAmount, -8000, 8000, factor);
@@ -556,33 +555,33 @@
 
         // === UI Update Functions ===
         function updateUI() {
-            const soundLoaded = currentParams !== null;
-            const undoAvailable = previousParams !== null;
-            btnVariation5.disabled = !soundLoaded;
-            btnVariation10.disabled = !soundLoaded;
-            btnVariation25.disabled = !soundLoaded;
-            btnPlay.disabled = !soundLoaded;
-            btnNewName.disabled = !soundLoaded;
-            btnRender.disabled = !soundLoaded;
-            btnUndo.disabled = !undoAvailable;
-            if (soundLoaded) {
-                btnRender.textContent = 'RENDER WAV @ C3';
-                updateFilenamePreview();
-                filenamePreviewContainer.classList.add('active');
-            } else {
-                filenamePreview.textContent = '(Awaiting Parameter Generation...)';
-                btnRender.textContent = 'RENDER WAV @ C3';
-                filenamePreviewContainer.classList.remove('active');
-            }
+             const soundLoaded = currentParams !== null;
+             const undoAvailable = previousParams !== null;
+             btnVariation5.disabled = !soundLoaded;
+             btnVariation10.disabled = !soundLoaded;
+             btnVariation25.disabled = !soundLoaded;
+             btnPlay.disabled = !soundLoaded;
+             btnNewName.disabled = !soundLoaded;
+             btnRender.disabled = !soundLoaded;
+             btnUndo.disabled = !undoAvailable;
+             if (soundLoaded) {
+                 btnRender.textContent = 'RENDER WAV @ C3';
+                 updateFilenamePreview();
+                 filenamePreviewContainer.classList.add('active');
+             } else {
+                 filenamePreview.textContent = '(Awaiting Parameter Generation...)';
+                 btnRender.textContent = 'RENDER WAV @ C3';
+                 filenamePreviewContainer.classList.remove('active');
+             }
         }
         function updateFilenamePreview() {
-            if (!currentParams) return;
-            let typeStr = currentParams.soundType;
-            if (typeStr === '808') { typeStr = '808'; } else if (typeStr === 'Lead Synth') { typeStr = 'Lead'; } else if (typeStr === 'Pluck Synth') { typeStr = 'Pluck'; } else if (typeStr === 'Pad Synth') { typeStr = 'Pad'; } else if (typeStr === 'Key Synth') { typeStr = 'Key'; }
-            typeStr = typeStr.toUpperCase();
-            const wordStr = currentFilenameWord.toUpperCase();
-            const filename = `${typeStr} ★ ${wordStr} [62serpens.com].wav`;
-            filenamePreview.textContent = filename;
+             if (!currentParams) return;
+             let typeStr = currentParams.soundType;
+             if (typeStr === '808') { typeStr = '808'; } else if (typeStr === 'Lead Synth') { typeStr = 'Lead'; } else if (typeStr === 'Pluck Synth') { typeStr = 'Pluck'; } else if (typeStr === 'Pad Synth') { typeStr = 'Pad'; } else if (typeStr === 'Key Synth') { typeStr = 'Key'; }
+             typeStr = typeStr.toUpperCase();
+             const wordStr = currentFilenameWord.toUpperCase();
+             const filename = `${typeStr} ★ ${wordStr} [62serpens.com].wav`;
+             filenamePreview.textContent = filename;
         }
         function setNewFilenameWord() {
             currentFilenameWord = randomElement(FILENAME_WORDS);
@@ -590,12 +589,9 @@
         }
 
         // === Event Handlers ===
-        async function handleRandomize() {
+        function handleRandomize() {
             if (!initAudioContext()) return;
-            if (!await resumeAudioContext()) {
-                console.warn("AudioContext failed to resume");
-                return;
-            }
+            resumeAudioContext();
             const selectedType = soundTypeSelect.value;
             const newParams = generateRandomParams(selectedType);
             if (newParams) {
@@ -609,8 +605,8 @@
         function handleVariation5() { handleVariation(0.05); }
         function handleVariation10() { handleVariation(0.10); }
         function handleVariation25() { handleVariation(0.25); }
-        async function handleVariation(factor) {
-            if (!currentParams || !await resumeAudioContext()) return;
+        function handleVariation(factor) {
+            if (!currentParams || !resumeAudioContext()) return;
             const variedParams = generateVariationParams(currentParams, factor);
             if (variedParams) {
                 previousParams = JSON.parse(JSON.stringify(currentParams));
@@ -619,28 +615,28 @@
                 playSound(currentParams, currentParams.baseMIDINote);
             }
         }
-        async function handleUndo() {
-            if (previousParams && await resumeAudioContext()) {
+        function handleUndo() {
+            if (previousParams && resumeAudioContext()) {
                 currentParams = previousParams;
                 previousParams = null;
                 updateUI();
                 playSound(currentParams, currentParams.baseMIDINote);
             }
         }
-        async function handlePlayBase() {
-            if (!currentParams || !await resumeAudioContext()) return;
+        function handlePlayBase() {
+            if (!currentParams || !resumeAudioContext()) return;
             playSound(currentParams, currentParams.baseMIDINote);
         }
         function handleNewName() {
             if (!currentParams) return;
             setNewFilenameWord();
         }
-        async function handleKeyDown(event) {
+        function handleKeyDown(event) {
             if (event.metaKey || event.ctrlKey || event.altKey) { return; }
             const activeElement = document.activeElement;
             if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'SELECT' || activeElement.tagName === 'TEXTAREA')) { return; }
-            if (!currentParams || !await resumeAudioContext()) {
-                if (!isAudioContextStarted) { await resumeAudioContext(); }
+            if (!currentParams || !resumeAudioContext()) {
+                if (!isAudioContextStarted) { resumeAudioContext(); }
                 return;
             }
             const semitoneOffset = KEY_MAP[event.code];
@@ -691,7 +687,7 @@
         }
 
         async function handleRender() {
-            if (!currentParams || !await resumeAudioContext()) return;
+            if (!currentParams || !resumeAudioContext()) return;
             const originalButtonText = btnRender.textContent;
             btnRender.disabled = true;
             btnPlay.disabled = true;
@@ -904,18 +900,6 @@
 
         // === Initialization ===
         document.addEventListener('DOMContentLoaded', () => {
-            // Mobile audio unlock
-            if (/Mobi|Android/i.test(navigator.userAgent)) {
-                audioUnlockOverlay.addEventListener('click', async () => {
-                    if (await resumeAudioContext()) {
-                        audioUnlockOverlay.style.display = 'none';
-                        console.log("Mobile audio unlocked");
-                    }
-                });
-            } else {
-                audioUnlockOverlay.style.display = 'none'; // Hide on desktop
-            }
-
             btnRandomize.addEventListener('click', handleRandomize);
             btnVariation5.addEventListener('click', handleVariation5);
             btnVariation10.addEventListener('click', handleVariation10);
