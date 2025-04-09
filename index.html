@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>//NODE_62S :: v3.6 ONLINE</title> <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
+    <title>//NODE_62S :: v3.6 ONLINE</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%23bf00ff' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -14,10 +15,10 @@
             --bg-color: #040408;
             --text-color: #a8a8b0;
             --header-color: #d0d0e0;
-            --accent-color: #00BFFF; /* Electric Blue */
+            --accent-color: #bf00ff; /* Changed to your purple */
             --accent-hover: #ffffff;
             --border-color: #1f1f2f;
-            --success-color: #00dd55;
+            --success-color: #00b7a8; /* Adjusted to teal to complement purple */
             --error-color: #ff2222;
             --font-main: 'Roboto Mono', monospace;
             --transition-fast: 0.1s ease-in-out;
@@ -136,7 +137,7 @@
          #launchAreaSection a { font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color); }
          #launchAreaSection a:hover { color: var(--accent-hover); }
 
-        /* --- Access Button Style (NEW) --- */
+        /* --- Access Button Style --- */
         .access-button {
             display: block; /* Or inline-block */
             margin-bottom: 15px; /* Space below button */
@@ -144,7 +145,7 @@
             font-family: var(--font-main);
             font-size: 0.9em;
             color: var(--bg-color); /* Dark text on light button */
-            background-color: var(--accent-color); /* Use accent color for background */
+            background-color: var(--accent-color); /* Now purple */
             border: 1px solid var(--accent-color);
             cursor: pointer;
             text-transform: uppercase;
@@ -176,7 +177,7 @@
         .contact-modal-content {
             background: var(--bg-color); padding: 30px 40px; border: 1px solid var(--accent-color);
             text-align: center; position: relative;
-            box-shadow: 0 0 25px rgba(0, 191, 255, 0.2); max-width: 90%;
+            box-shadow: 0 0 25px rgba(191, 0, 255, 0.2); max-width: 90%;
         }
         .contact-modal h3 {
              margin: 0 0 15px 0; font-family: var(--font-main); color: var(--header-color);
@@ -249,7 +250,6 @@
              #launchAreaSection a { font-size: 0.85em; }
              .access-button { font-size: 0.85em; padding: 6px 12px;} /* Adjust button */
 
-
              footer { margin-top: 20px; font-size: 0.75em; }
 
              .contact-modal-content { padding: 20px; width: 85vw; }
@@ -291,7 +291,6 @@
            <ul id="submoduleList" style="display: none;">
                <li><a href="2000.html" target="_self"> > NODE_V2 :: Retro Simulation [Status: Archived]</a></li> <li><a href="b.html" target="_self"> > MODULE::BLACKJACK_SIM [Status: Active]</a></li>
                <li><a href="audio_tools.html" target="_self"> > MODULE::AUDIO_PROCESSING_SUITE [Status: Active]</a></li>
-               
            </ul>
            <p id="accessDeniedMsg" style="color: var(--error-color); display: none; font-size: 0.9em;">ACCESS::DENIED // INVALID_CODE</p>
 
@@ -324,7 +323,7 @@ AI_ASSIST:   v4.0_ACTIVE
     <script>
         try {
             document.addEventListener('DOMContentLoaded', () => {
-                // --- Selectors (Existing) ---
+                // --- Selectors ---
                 const dateTimeEl = document.getElementById('dateTime');
                 const systemStatusEl = document.getElementById('systemStatus');
                 const coreTempEl = document.getElementById('coreTemp');
@@ -337,13 +336,13 @@ AI_ASSIST:   v4.0_ACTIVE
                 const copyFeedback = document.getElementById('copyFeedback');
                 const contactClose = document.getElementById('contactClose');
 
-                // --- Config & State (Existing) ---
+                // --- Config & State ---
                 const userEmail = "626262xxx@gmail.com"; // Store email here - UPDATE IF NEEDED
                 const statusOptions = ["OPTIMAL", "NOMINAL", "STABLE", "PROCESSING", "CALIBRATING", "SYNCED", "ANALYSING", "IDLE"];
                 const uplinkOptions = ["ACTIVE", "ACTIVE", "ACTIVE", "SYNCING", "STANDBY", "ENCRYPTED", "ROUTING", "SECURE_TUNNEL"];
                 let currentCoreTemp = 28.0;
 
-                // --- Core Functions (Existing) ---
+                // --- Core Functions ---
 
                 // Update Date/Time in Header
                 const updateDateTime = () => {
@@ -360,7 +359,6 @@ AI_ASSIST:   v4.0_ACTIVE
                         dateTimeEl.textContent = `LCL_${timeStr}`;
                     }
                 };
-
 
                 // Update Other Status Indicators
                 const updateStatusIndicators = () => {
@@ -384,7 +382,7 @@ AI_ASSIST:   v4.0_ACTIVE
                     }
                 };
 
-                // --- Contact Modal Logic (Existing) ---
+                // --- Contact Modal Logic ---
                 function openContactModal() {
                     if (contactModal && contactEmailDisplay) {
                         contactEmailDisplay.textContent = userEmail;
@@ -411,14 +409,13 @@ AI_ASSIST:   v4.0_ACTIVE
                     });
                 }
 
-                // --- Event Listeners (Existing) ---
+                // --- Event Listeners ---
                 if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); openContactModal(); });
                 if (contactClose) contactClose.addEventListener('click', closeContactModal);
                 if (contactEmailDisplay) contactEmailDisplay.addEventListener('click', copyEmailToClipboard);
                 if (contactModal) contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeContactModal(); });
 
-
-                // --- Password Gate Logic for Submodules (NEW) ---
+                // --- Password Gate Logic for Submodules ---
                 const accessButton = document.getElementById('submoduleAccessButton');
                 const submoduleList = document.getElementById('submoduleList');
                 const accessDeniedMsg = document.getElementById('accessDeniedMsg'); // Get the error message element
@@ -441,8 +438,6 @@ AI_ASSIST:   v4.0_ACTIVE
                             // Incorrect password (and user didn't click Cancel)
                             console.warn("SUBMODULE_ACCESS::DENIED - Invalid Code Entered");
                             if(accessDeniedMsg) accessDeniedMsg.style.display = 'block'; // Show error message
-                            // Optional: Alert as well/instead
-                            // alert("ACCESS::DENIED // INVALID_CODE");
                         } else {
                              // User clicked Cancel on the prompt
                              console.log("SUBMODULE_ACCESS::CANCELLED");
@@ -451,10 +446,8 @@ AI_ASSIST:   v4.0_ACTIVE
                 } else {
                     console.error("Password gate elements not found (button or list).");
                 }
-                // --- End Password Gate Logic ---
 
-
-                // --- Initialization (Existing) ---
+                // --- Initialization ---
                 updateDateTime();
                 updateStatusIndicators();
                 setInterval(updateDateTime, 1000);
