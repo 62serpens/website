@@ -158,9 +158,10 @@
                 } catch (e) {
                     console.error("FATAL_ERROR::WebAudioAPI_UNSUPPORTED", e);
                     alert("FATAL_ERROR::WebAudioAPI_UNSUPPORTED");
+                    return false;
                 }
             }
-            return audioCtx !== null;
+            return true;
         }
         async function resumeAudioContext() {
             if (!audioCtx) {
@@ -169,7 +170,7 @@
             if (audioCtx.state === 'suspended') {
                 try {
                     await audioCtx.resume();
-                    console.log("AudioContext::RESUMED");
+                    console.log("AudioContext::RESUMED | State:", audioCtx.state);
                     isAudioContextStarted = true;
                 } catch (e) {
                     console.error("ERROR::AudioContext_RESUME_FAILED", e);
@@ -182,16 +183,13 @@
         }
 
         function playSound(params, midiNote) {
-            if (!resumeAudioContext()) { console.warn("WARN::AudioContext_INACTIVE"); return; }
+            if (!audioCtx || !isAudioContextStarted) { console.warn("WARN::AudioContext_NOT_READY"); return; }
             if (!params) { console.warn("WARN::PARAMETER_SET_MISSING"); return; }
 
             const now = audioCtx.currentTime;
             const is808 = params.soundType === '808';
-
-            // Dynamic fade-out time for 808s, extended for smoother decay
             const fadeOutTime = is808 ? Math.max(0.5, params.ampEnv.decay + params.ampEnv.release * 0.8) : MONO_FADE_OUT_TIME;
 
-            // Monophonic Cutoff
             if (currentPlayingNode) {
                 console.log(`Applying cutoff (${fadeOutTime.toFixed(3)}s ramp) to previous node at ${now.toFixed(4)}`);
                 currentPlayingNode.gain.cancelScheduledValues(now);
@@ -199,7 +197,6 @@
                 currentPlayingNode.gain.linearRampToValueAtTime(0, now + fadeOutTime);
             }
 
-            // Create Base Nodes
             const noteMasterGain = audioCtx.createGain();
             noteMasterGain.connect(audioCtx.destination);
             currentPlayingNode = noteMasterGain;
@@ -218,7 +215,6 @@
             let transientGain = null;
             let preEffectMix = audioCtx.createGain();
 
-            // Apply Core Parameters
             osc1.type = params.osc1.type;
             osc2.type = params.osc2.type;
             const baseFreq = midiToFreq(midiNote);
@@ -326,7 +322,6 @@
             finalStageInput.connect(noteMasterGain);
             noteMasterGain.gain.setValueAtTime(params.masterGain, now);
 
-            // Schedule Envelopes with Improved 808 Handling
             const { attack: filtAtk, decay: filtDec, sustain: filtSus, release: filtRel } = params.filterEnv;
             const filterEnvNode = audioCtx.createGain();
             filterEnvNode.gain.setValueAtTime(0, now);
@@ -348,7 +343,6 @@
             ampEnvGain.gain.exponentialRampToValueAtTime(0.0001, releaseStartTime + extendedRelease);
             filterEnvNode.gain.setTargetAtTime(0.0, releaseStartTime, filtRel / 3 + 0.001);
 
-            // Start Oscillators & Transient
             lfo.start(now);
             osc1.start(now);
             osc2.start(now);
@@ -356,7 +350,6 @@
                 transientNoise.start(now);
             }
 
-            // Schedule Cleanup with Extra Buffer
             const totalDuration = releaseStartTime + extendedRelease + (is808 ? 0.8 : 0.1);
             osc1.stop(totalDuration);
             osc2.stop(totalDuration);
@@ -589,9 +582,8 @@
         }
 
         // === Event Handlers ===
-        function handleRandomize() {
-            if (!initAudioContext()) return;
-            resumeAudioContext();
+        async function handleRandomize() {
+            if (!await resumeAudioContext()) return;
             const selectedType = soundTypeSelect.value;
             const newParams = generateRandomParams(selectedType);
             if (newParams) {
@@ -602,11 +594,11 @@
                 playSound(currentParams, currentParams.baseMIDINote);
             }
         }
-        function handleVariation5() { handleVariation(0.05); }
-        function handleVariation10() { handleVariation(0.10); }
-        function handleVariation25() { handleVariation(0.25); }
-        function handleVariation(factor) {
-            if (!currentParams || !resumeAudioContext()) return;
+        async function handleVariation5() { await handleVariation(0.05); }
+        async function handleVariation10() { await handleVariation(0.10); }
+        async function handleVariation25() { await handleVariation(0.25); }
+        async function handleVariation(factor) {
+            if (!currentParams || !await resumeAudioContext()) return;
             const variedParams = generateVariationParams(currentParams, factor);
             if (variedParams) {
                 previousParams = JSON.parse(JSON.stringify(currentParams));
@@ -615,16 +607,16 @@
                 playSound(currentParams, currentParams.baseMIDINote);
             }
         }
-        function handleUndo() {
-            if (previousParams && resumeAudioContext()) {
+        async function handleUndo() {
+            if (previousParams && await resumeAudioContext()) {
                 currentParams = previousParams;
                 previousParams = null;
                 updateUI();
                 playSound(currentParams, currentParams.baseMIDINote);
             }
         }
-        function handlePlayBase() {
-            if (!currentParams || !resumeAudioContext()) return;
+        async function handlePlayBase() {
+            if (!currentParams || !await resumeAudioContext()) return;
             playSound(currentParams, currentParams.baseMIDINote);
         }
         function handleNewName() {
@@ -635,16 +627,20 @@
             if (event.metaKey || event.ctrlKey || event.altKey) { return; }
             const activeElement = document.activeElement;
             if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'SELECT' || activeElement.tagName === 'TEXTAREA')) { return; }
-            if (!currentParams || !resumeAudioContext()) {
-                if (!isAudioContextStarted) { resumeAudioContext(); }
-                return;
-            }
             const semitoneOffset = KEY_MAP[event.code];
             if (semitoneOffset !== undefined) {
                 event.preventDefault();
+                if (!currentParams || !resumeAudioContext()) return;
                 const targetMidiNote = currentParams.baseMIDINote + semitoneOffset;
                 playSound(currentParams, targetMidiNote);
             }
+        }
+        async function handleTouchStart(event) {
+            if (!currentParams || !await resumeAudioContext()) return;
+            const touch = event.touches[0];
+            const target = touch.target;
+            if (target.tagName === 'BUTTON' || target.tagName === 'SELECT') return;
+            playSound(currentParams, currentParams.baseMIDINote);
         }
 
         function bufferToWav(aBuffer) {
@@ -687,7 +683,7 @@
         }
 
         async function handleRender() {
-            if (!currentParams || !resumeAudioContext()) return;
+            if (!currentParams || !await resumeAudioContext()) return;
             const originalButtonText = btnRender.textContent;
             btnRender.disabled = true;
             btnPlay.disabled = true;
@@ -909,8 +905,8 @@
             btnNewName.addEventListener('click', handleNewName);
             btnRender.addEventListener('click', handleRender);
             window.addEventListener('keydown', handleKeyDown);
+            window.addEventListener('touchstart', handleTouchStart);
 
-            initAudioContext();
             currentFilenameWord = randomElement(FILENAME_WORDS);
             updateUI();
             console.log("// MODULE::ONE-SHOT_SYNTH v1.3.8 :: Interface Active //");
