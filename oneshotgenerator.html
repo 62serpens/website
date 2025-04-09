@@ -3,538 +3,806 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>//NODE_62S :: DYNAMIC_ANALYSIS_MODULE v4.5 (Scrubber Re-integrated)</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%230077CC' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
+    <title>// MODULE::ONE-SHOT_SYNTH v1.3.8 [62S]</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-color: #040408; --text-color: #a8a8b0; --header-color: #d0d0e0;
-            --accent-color: #0077CC; --accent-hover: #90CAF9; --border-color: #1f1f2f;
-            --success-color: #00dd55; --error-color: #ff2222; --font-main: 'Roboto Mono', monospace;
-            --transition-fast: 0.1s ease-in-out;
+            --bg-color: #040408;
+            --text-color: #a8a8b0;
+            --header-color: #d0d0e0;
+            --accent-color: #00BFFF;
+            --accent-hover: #ffffff;
+            --border-color: #1f1f2f;
+            --input-bg-color: #0c0c12;
+            --button-bg-color: #101018;
+            --success-color: #00dd55;
+            --warning-color: #c69026;
+            --error-color: #ff2222;
+            --info-color: #a074c4;
+            --disabled-opacity: 0.4;
+            --font-main: 'Roboto Mono', monospace;
+            --transition-fast: 0.15s ease-in-out;
         }
-        *, *::before, *::after { box-sizing: border-box; } html { scroll-behavior: smooth; }
-        body { margin: 0; padding: 3vh 20px 20px 20px; width: 100%; min-height: 100vh; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-main); font-size: 14px; line-height: 1.6; overflow-x: hidden; overflow-y: auto; cursor: default; position: relative; display: flex; flex-direction: column; align-items: center; }
-        .module-container { width: 100%; max-width: 850px; border: 1px solid var(--border-color); padding: 20px; margin-bottom: 20px; background-color: rgba(0,0,0, 0.3); box-shadow: inset 0 0 15px rgba(0,0,0, 0.6); position: relative; overflow: hidden; display: flex; flex-direction: column; }
-        .module-header { font-family: var(--font-main); font-weight: 700; text-transform: uppercase; font-size: 1.1em; color: var(--header-color); margin: 0 0 20px 0; padding-bottom: 10px; text-align: left; border-bottom: 1px solid var(--border-color); letter-spacing: 1px; }
-        .header-domain { opacity: 0.6; font-size: 0.85em; margin-left: 15px; font-weight: 400; }
-        .file-input-area { margin-bottom: 20px; padding: 15px; border: 1px dashed var(--border-color); text-align: center; background-color: rgba(0,0,0, 0.2); }
-        input[type="file"] { display: none; }
-        .file-label { font-family: var(--font-main); display: inline-block; padding: 8px 15px; border: 1px solid var(--accent-color); color: var(--accent-color); background-color: transparent; cursor: pointer; transition: all var(--transition-fast); font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.5px; }
-        .file-label:hover { color: var(--bg-color); background-color: var(--accent-color); }
-        #fileName { display: block; margin-top: 10px; font-size: 0.8em; opacity: 0.7; min-height: 1.2em; }
-        #visualizerCanvas { display: block; width: 100%; height: 350px; background-color: #040408; border: 1px solid var(--border-color); margin-bottom: 20px; flex-shrink: 0; image-rendering: optimizeSpeed; }
-        #statusMessage { font-size: 0.85em; text-align: center; min-height: 1.5em; opacity: 0.7; margin-bottom: 15px; flex-shrink: 0; color: var(--text-color); }
-        .scrubber-area { display: flex; align-items: center; gap: 10px; width: 100%; margin-bottom: 15px; padding: 5px 0; flex-shrink: 0; }
-        .time-display { font-size: 0.8em; min-width: 40px; text-align: center; opacity: 0.8; font-variant-numeric: tabular-nums; }
-        #scrubber { flex-grow: 1; height: 8px; cursor: pointer; margin: 0; padding: 0; -webkit-appearance: none; appearance: none; background-color: var(--border-color); border-radius: 4px; outline: none; transition: opacity var(--transition-fast); }
-        #scrubber:disabled { cursor: not-allowed; opacity: 0.5; }
-        #scrubber::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; background: var(--accent-color); border-radius: 50%; cursor: pointer; border: 2px solid var(--bg-color); transition: background-color var(--transition-fast); }
-        #scrubber:hover::-webkit-slider-thumb { background: var(--accent-hover); }
-        #scrubber::-moz-range-thumb { width: 14px; height: 14px; background: var(--accent-color); border-radius: 50%; cursor: pointer; border: 2px solid var(--bg-color); transition: background-color var(--transition-fast); }
-        #scrubber:hover::-moz-range-thumb { background: var(--accent-hover); }
-        .playback-area { margin-bottom: 15px; flex-shrink: 0; }
-        .controls { display: flex; flex-wrap: wrap; gap: 10px 15px; justify-content: center; }
-        .control-button { font-family: var(--font-main); font-size: 0.9em; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-color); background-color: transparent; border: 1px solid var(--accent-color); padding: 8px 15px; cursor: pointer; transition: all var(--transition-fast); }
-        .control-button:hover:not(:disabled) { background-color: var(--accent-color); color: var(--bg-color); box-shadow: 0 0 10px var(--accent-color); }
-        .control-button:disabled { color: var(--border-color); border-color: var(--border-color); cursor: not-allowed; opacity: 0.5; }
-        #fullscreenButton.not-available { color: var(--border-color); border-color: var(--border-color); opacity: 0.5; cursor: not-allowed; }
-        .customization-controls { border-top: 1px solid var(--border-color); margin-top: 20px; padding-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px 20px; font-size: 0.85em; flex-shrink: 0; }
-        .control-group { display: flex; flex-direction: column; gap: 5px; }
-        .customization-controls label { font-family: var(--font-main); text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; font-size: 0.9em; margin-bottom: 3px; }
-        .customization-controls select, .customization-controls input[type="range"]:not(#scrubber) { font-family: var(--font-main); background-color: var(--border-color); border: 1px solid var(--border-color); color: var(--text-color); padding: 6px 8px; width: 100%; border-radius: 0; -webkit-appearance: none; appearance: none; }
-        .customization-controls select { background-image: linear-gradient(45deg, transparent 50%, var(--accent-color) 50%), linear-gradient(135deg, var(--accent-color) 50%, transparent 50%); background-position: calc(100% - 15px) center, calc(100% - 10px) center; background-size: 5px 5px, 5px 5px; background-repeat: no-repeat; padding-right: 30px; cursor: pointer; }
-        .customization-controls input[type="range"]:not(#scrubber) { padding: 0; height: 20px; cursor: pointer;}
-        .back-link { display: inline-block; margin-top: 20px; font-size: 0.9em; color: var(--accent-color); text-decoration: none; border: 1px dashed var(--border-color); padding: 5px 10px; transition: all var(--transition-fast); align-self: center; }
-        .back-link:hover { color: var(--accent-hover); border-color: var(--accent-hover); background-color: var(--border-color); }
-        .module-container:fullscreen { max-width: none; width: 100%; height: 100%; border: none; padding: 10px; background-color: #000; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; margin: 0; max-height: none; }
-        .module-container:fullscreen #visualizerCanvas { height: auto; flex-grow: 1; min-height: 200px; flex-shrink: 0; }
-        body:has(.module-container:fullscreen) .back-link { display: none; }
-        .module-container:-webkit-full-screen { max-width: none; width: 100%; height: 100%; border: none; padding: 10px; background-color: #000; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; margin: 0; max-height: none; }
-        .module-container:-webkit-full-screen #visualizerCanvas { height: auto; flex-grow: 1; min-height: 200px; flex-shrink: 0; }
-        body:has(.module-container:-webkit-full-screen) .back-link { display: none; }
-        .module-container:-moz-full-screen { max-width: none; width: 100%; height: 100%; border: none; padding: 10px; background-color: #000; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; margin: 0; max-height: none; }
-        .module-container:-moz-full-screen #visualizerCanvas { height: auto; flex-grow: 1; min-height: 200px; flex-shrink: 0; }
-        body:has(.module-container:-moz-full-screen) .back-link { display: none; }
-        .module-container:-ms-fullscreen { max-width: none; width: 100%; height: 100%; border: none; padding: 10px; background-color: #000; display: flex; flex-direction: column; justify-content: flex-start; overflow-y: auto; margin: 0; max-height: none; }
-        .module-container:-ms-fullscreen #visualizerCanvas { height: auto; flex-grow: 1; min-height: 200px; flex-shrink: 0; }
-        body:has(.module-container:-ms-fullscreen) .back-link { display: none; }
-        @media (max-width: 700px) { body{padding:10px;} .module-container{padding:15px; margin: 10px auto; max-width: 95%;} #visualizerCanvas{height:250px;} .control-button{font-size:.8em;padding:6px 12px;} .back-link{font-size:.8em;margin-top:15px;} .file-label{font-size:.8em;padding:6px 12px;} .file-input-area{padding:10px;} .customization-controls{grid-template-columns:1fr 1fr;} }
-        @media (max-width: 450px) { .customization-controls{grid-template-columns:1fr;} #visualizerCanvas { height: 200px; } .module-header { font-size: 1em; } .scrubber-area { gap: 5px; } .time-display { font-size: 0.75em; min-width: 35px; } }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0;}
+        html { scroll-behavior: smooth; }
+        body { margin: 0; padding: 0; width: 100%; min-height: 100vh; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-main); font-size: 14px; line-height: 1.6; display: flex; justify-content: center; align-items: flex-start; padding: 2rem; cursor: default; overflow-y: hidden; }
+        .container { background: none; border: 1px solid var(--border-color); padding: 20px; max-width: 750px; width: 100%; display: flex; flex-direction: column; gap: 20px; }
+        h1 { font-family: var(--font-main); font-weight: 700; text-transform: uppercase; font-size: 1.2em; color: var(--header-color); margin: 0 0 10px 0; padding-bottom: 8px; text-align: left; border-bottom: 1px solid var(--border-color); letter-spacing: 1px; }
+        .control-group { border: 1px solid var(--border-color); padding: 15px; display: flex; flex-direction: column; gap: 12px; }
+        .control-group label.group-label { font-weight: 700; color: var(--header-color); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; display: block; font-size: 0.9em; }
+        .control-group label.group-label::before { content: "// "; opacity: 0.7; } .control-group label.group-label::after { content: " //"; opacity: 0.7; }
+        select { font-family: var(--font-main); font-size: 0.95em; padding: 10px 12px; border-radius: 0; border: 1px solid var(--border-color); background-color: var(--input-bg-color); color: var(--text-color); cursor: pointer; transition: border-color var(--transition-fast); appearance: none; -webkit-appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%2220%22 height%3D%2220%22 fill%3D%22%23a8a8b0%22%3E%3Cpath d%3D%22M5 8l5 5 5-5z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 0.7rem center; background-size: 1em; padding-right: 2.5em; }
+        select:focus { outline: none; border-color: var(--accent-color); }
+        .button-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+        .output-button-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+        button { font-family: var(--font-main); font-size: 0.9em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 15px; border-radius: 0; border: 1px solid var(--border-color); background-color: var(--button-bg-color); color: var(--text-color); cursor: pointer; text-align: center; transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast); }
+        button:not(:disabled):hover { color: var(--accent-hover); background-color: var(--border-color); border-color: var(--accent-color); }
+        button:not(:disabled):active { background-color: var(--accent-color); color: var(--bg-color); border-color: var(--accent-hover); }
+        button:disabled { opacity: var(--disabled-opacity); cursor: not-allowed; border-color: var(--border-color) !important; background-color: var(--button-bg-color) !important; color: var(--text-color) !important; }
+        #btn-randomize { border-color: var(--accent-color); color: var(--accent-color); } #btn-randomize:not(:disabled):hover { background-color: var(--accent-color); color: var(--bg-color); border-color: var(--accent-hover); } #btn-randomize:not(:disabled):active { background-color: var(--accent-hover); color: var(--bg-color); border-color: var(--accent-color); }
+        #btn-play { border-color: var(--warning-color); color: var(--warning-color); } #btn-play:not(:disabled):hover { background-color: var(--warning-color); color: var(--bg-color); border-color: var(--accent-hover); } #btn-play:not(:disabled):active { background-color: var(--accent-hover); color: var(--bg-color); border-color: var(--warning-color); }
+        #btn-undo { border-color: var(--info-color); color: var(--info-color); } #btn-undo:not(:disabled):hover { background-color: var(--info-color); color: var(--bg-color); border-color: var(--accent-hover); } #btn-undo:not(:disabled):active { background-color: var(--accent-hover); color: var(--bg-color); border-color: var(--info-color); }
+        #btn-variation5, #btn-variation10, #btn-variation25 { border-color: var(--success-color); color: var(--success-color); } #btn-variation5:not(:disabled):hover, #btn-variation10:not(:disabled):hover, #btn-variation25:not(:disabled):hover { background-color: var(--success-color); color: var(--bg-color); border-color: var(--accent-hover); } #btn-variation5:not(:disabled):active, #btn-variation10:not(:disabled):active, #btn-variation25:not(:disabled):active { background-color: var(--accent-hover); color: var(--bg-color); border-color: var(--success-color); }
+        #btn-new-name {} #btn-new-name:not(:disabled):hover { background-color: var(--border-color); color: var(--accent-hover); border-color: var(--text-color); } #btn-new-name:not(:disabled):active { background-color: var(--text-color); color: var(--bg-color); border-color: var(--accent-hover); }
+        #btn-render { border-color: var(--accent-color); color: var(--accent-color); } #btn-render:not(:disabled):hover { background-color: var(--accent-color); color: var(--bg-color); border-color: var(--accent-hover); } #btn-render:not(:disabled):active { background-color: var(--accent-hover); color: var(--bg-color); border-color: var(--accent-color); }
+        #filename-preview-container { font-family: var(--font-main); font-size: 0.9em; background-color: var(--input-bg-color); padding: 10px 15px; border: 1px dashed var(--border-color); color: var(--text-color); text-align: center; word-break: break-all; min-height: 41px; display: flex; align-items: center; justify-content: center; transition: border-color var(--transition-fast), border-style var(--transition-fast); } #filename-preview-container.active { border-color: var(--accent-color); border-style: solid; } #filename-preview { color: var(--header-color); font-weight: 700; }
+        .keyboard-hint { font-size: 0.85em; color: var(--text-color); text-align: center; margin-top: 1rem; padding: 12px; border: 1px dashed var(--border-color); background-color: var(--input-bg-color); line-height: 1.5; } .keyboard-hint code { background-color: var(--border-color); padding: 0.1em 0.4em; margin: 0 0.1em; border-radius: 0; font-family: var(--font-main); color: var(--accent-color); font-weight: 700; }
+        @media (max-width: 700px) { body{font-size:13px;padding:1rem;} .container{padding:15px;gap:15px;} h1{font-size:1.1em;} .control-group{padding:15px;gap:12px;} select{font-size:.9em;padding:9px 10px;padding-right:2.3em;} button{font-size:.85em;padding:9px 12px;} .button-grid, .output-button-grid{gap:10px;} #filename-preview-container{font-size:.85em;padding:9px 12px;min-height:38px;} .keyboard-hint{font-size:.8em;padding:10px;} } @media (max-width: 480px) { .button-grid, .output-button-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div class="module-container" id="moduleContainer">
-         <h1 class="module-header">// DYNAMIC_ANALYSIS_MODULE v4.5 //<span class="header-domain">// 62serpens.com</span></h1>
-         <div class="file-input-area">
-             <input type="file" id="audioFile" accept="audio/mpeg, audio/wav, audio/ogg, audio/aac, audio/flac, audio/x-m4a, audio/*" style="display: none;">
-             <label for="audioFile" class="file-label">SELECT AUDIO FILE</label>
-             <span id="fileName">No file selected</span>
-         </div>
-         <canvas id="visualizerCanvas"></canvas>
-         <div id="statusMessage">STATUS :: SELECT AN AUDIO FILE</div>
-         <div class="scrubber-area">
-             <span id="currentTime" class="time-display">00:00</span>
-             <input type="range" id="scrubber" min="0" max="100" value="0" step="0.1" disabled>
-             <span id="totalDuration" class="time-display">00:00</span>
-         </div>
-         <div class="playback-area">
-              <div class="controls">
-                  <button id="playButton" class="control-button" disabled>PLAY</button>
-                  <button id="pauseButton" class="control-button" disabled>PAUSE</button>
-                  <button id="fullscreenButton" class="control-button">FULLSCREEN</button>
-              </div>
-         </div>
-         <div class="customization-controls">
-              <div class="control-group"> <label for="themeSelector">Theme:</label> <select id="themeSelector"> <option value="layered" selected>Layered Wave</option> <option value="waveform">Glowing Waveform</option> <option value="bars">Frequency Bars</option> </select> </div>
-              <div class="control-group"> <label for="paletteSelector">Color Palette:</label> <select id="paletteSelector"> <option value="default">Default Blue</option> <option value="neon">Neon</option> <option value="ocean">Ocean</option> <option value="fire">Fire</option> <option value="forest">Forest</option> <option value="grayscale">Grayscale</option> </select> </div>
-              <div class="control-group"> <label for="glowSlider">Glow / Bloom:</label> <input type="range" id="glowSlider" min="0" max="50" value="10" step="1"> </div>
-              <div class="control-group"> <label for="thicknessSlider">Thickness / Width:</label> <input type="range" id="thicknessSlider" min="1" max="15" step="0.5" value="3"> </div>
-              <div class="control-group"> <label for="particleSlider">Particle Density:</label> <input type="range" id="particleSlider" min="0" max="10" value="2" step="1"> </div>
-         </div>
+    <div class="container">
+        <h1>// MODULE::ONE-SHOT_SYNTH [62serpens.com] //</h1>
+
+        <div class="control-group">
+            <label for="sound-type" class="group-label">SELECT_ARCHETYPE</label>
+            <select id="sound-type">
+                <option value="808" selected>808</option>
+                <option value="Lead Synth">Lead Synth</option>
+                <option value="Pluck Synth">Pluck Synth</option>
+                <option value="Pad Synth">Pad Synth</option>
+                <option value="Key Synth">Key Synth</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label class="group-label">SYNTHESIS_COMMANDS</label>
+            <div class="button-grid">
+                <button id="btn-randomize">RANDOMIZE NEW</button>
+                <button id="btn-play" disabled>PLAY CURRENT</button>
+                <button id="btn-undo" disabled>UNDO</button>
+            </div>
+        </div>
+
+        <div class="control-group">
+             <label class="group-label">PARAMETER_VARIATION</label>
+             <div class="button-grid">
+                 <button id="btn-variation5" disabled>VARIATION 5%</button>
+                 <button id="btn-variation10" disabled>VARIATION 10%</button>
+                 <button id="btn-variation25" disabled>VARIATION 25%</button>
+             </div>
+        </div>
+
+        <div class="control-group">
+             <label class="group-label">OUTPUT_CONFIGURATION</label>
+             <div id="filename-preview-container">
+                 <span id="filename-preview">(Awaiting Parameter Generation...)</span>
+             </div>
+             <div class="output-button-grid">
+                 <button id="btn-render" disabled>RENDER WAV @ C3</button>
+                 <button id="btn-new-name" disabled>RANDOM NAME</button>
+             </div>
+        </div>
+
+        <div class="keyboard-hint">
+            KEYBOARD_INPUT::ENABLED [MAP: Z=C, S=C#, X=D.., | Q=C+1, 2=C#+1..]
+            <br>
+            <code>Z</code><code>S</code><code>X</code><code>D</code><code>C</code><code>V</code><code>G</code><code>B</code><code>H</code><code>N</code><code>J</code><code>M</code><code>,</code><code>L</code><code>.</code><code>;</code><code>/</code>
+            <br>
+            <code>Q</code><code>2</code><code>W</code><code>3</code><code>E</code><code>R</code><code>5</code><code>T</code><code>6</code><code>Y</code><code>7</code><code>U</code><code>I</code><code>9</code><code>O</code><code>0</code><code>P</code><code>[</code><code>-</code><code>]</code><code>=</code>
+        </div>
     </div>
-    <a href="index.html" class="back-link"><< RETURN TO NODE_62S INTERFACE</a>
 
     <script>
-        console.log("Script loaded. v4.5 (Scrubber Re-integrated)");
+        // === DOM Elements ===
+        const soundTypeSelect = document.getElementById('sound-type');
+        const btnRandomize = document.getElementById('btn-randomize');
+        const btnVariation5 = document.getElementById('btn-variation5');
+        const btnVariation10 = document.getElementById('btn-variation10');
+        const btnVariation25 = document.getElementById('btn-variation25');
+        const btnUndo = document.getElementById('btn-undo');
+        const btnPlay = document.getElementById('btn-play');
+        const btnNewName = document.getElementById('btn-new-name');
+        const btnRender = document.getElementById('btn-render');
+        const filenamePreview = document.getElementById('filename-preview');
+        const filenamePreviewContainer = document.getElementById('filename-preview-container');
 
-        // --- Core Variables ---
-        const fftSize = 2048; const particleMaxLifeBase = 60; const particleSpeedBase = 1.8; const particleEmitThreshold = 190; const peakThrottleMs = 25;
-        const canvas = document.getElementById('visualizerCanvas'); const ctx = canvas.getContext('2d'); const audioElement = new Audio(); const playButton = document.getElementById('playButton'); const pauseButton = document.getElementById('pauseButton'); const statusMessage = document.getElementById('statusMessage'); const fileInput = document.getElementById('audioFile'); const fileNameDisplay = document.getElementById('fileName'); const themeSelector = document.getElementById('themeSelector'); const glowSlider = document.getElementById('glowSlider'); const thicknessSlider = document.getElementById('thicknessSlider'); const particleSlider = document.getElementById('particleSlider'); const paletteSelector = document.getElementById('paletteSelector'); const moduleContainer = document.getElementById('moduleContainer'); const fullscreenButton = document.getElementById('fullscreenButton');
-        const scrubber = document.getElementById('scrubber'); const currentTimeDisplay = document.getElementById('currentTime'); const totalDurationDisplay = document.getElementById('totalDuration');
+        // === Audio Context & State ===
+        let audioCtx = null;
+        let currentParams = null;
+        let previousParams = null;
+        let currentPlayingNode = null;
+        let isAudioContextStarted = false;
+        let currentFilenameWord = 'scan';
 
-        let audioContext; let analyser; let sourceNode = null;
-        let audioInitialized = false; let bufferLengthFreq; let bufferLengthTime; let dataArrayFreq; let dataArrayTime; let isPlaying = false; let particles = []; let lastPeakTime = 0; let canvasWidth, canvasHeight; let animationFrameId = null; let isSeeking = false;
+        // === Constants ===
+        const BASE_NOTE_C4 = 60;
+        const BASE_NOTE_C2 = 36;
+        const BASE_NOTE_C3 = 48;
+        const MONO_FADE_OUT_TIME = 0.1;
+        const WAVEFORMS = ['sine', 'square', 'sawtooth', 'triangle'];
+        const FILTER_TYPES = ['lowpass', 'highpass', 'bandpass'];
+        const FILENAME_WORDS = ["Vector","Matrix","Circuit","Phase","Flux","Datum","Sector","Grid","Node","Core","Pulse","Wave","Beam","Signal","Relay","Cipher","Index","Array","Buffer","Cache","Static","Glitch","Trace","Kernel","Log","Query","Syntax","Byte","Pixel","Frame","Module","Shard","Echo","Probe","Scan","Render","Compile","Execute","Thread","Process","Axon","Synapse","Neuron","Helix","Quant","Spike","Burst","Flare","Stream","Void"];
+        const KEY_MAP = { KeyZ: 0, KeyS: 1, KeyX: 2, KeyD: 3, KeyC: 4, KeyV: 5, KeyG: 6, KeyB: 7, KeyH: 8, KeyN: 9, KeyJ: 10, KeyM: 11, Comma: 12, KeyL: 13, Period: 14, Semicolon: 15, Slash: 16, KeyQ: 12, Digit2: 13, KeyW: 14, Digit3: 15, KeyE: 16, KeyR: 17, Digit5: 18, KeyT: 19, Digit6: 20, KeyY: 21, Digit7: 22, KeyU: 23, KeyI: 24, Digit9: 25, KeyO: 26, Digit0: 27, KeyP: 28, BracketLeft: 29, Minus: 30, BracketRight: 31, Equal: 32 };
 
-        const colorPalettes = { default:['#0077CC','#00AADD','#90CAF9','#E1F5FE'], neon:['#00FF66','#FF1493','#00FFFF','#FFFF00'], ocean:['#0077CC','#00AADD','#90CAF9','#E1F5FE'], fire:['#FF4500','#FFA500','#FF6347','#DC143C'], forest:['#00CC44','#556B2F','#8FBC8F','#9ACD32'], grayscale:['#FFFFFF','#C0C0C0','#808080','#404040'] };
-        let visualizerSettings = { theme: 'layered', palette: 'default', glow: 10, thickness: 3, particles: 2 };
+        // === Helper Functions ===
+        function midiToFreq(midiNote) { return 440 * Math.pow(2, (midiNote - 69) / 12); }
+        function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+        function randomIntInRange(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+        function randomElement(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+        function clamp(value, min, max) { return Math.max(min, Math.min(value, max)); }
+        function shouldChange(probability) { return Math.random() < probability; }
+        function makeDistortionCurve(amount) { const k = typeof amount === 'number' ? amount : 50; const n_samples = 44100; const curve = new Float32Array(n_samples); const deg = Math.PI / 180; let x; for (let i=0; i < n_samples; ++i) { x = i * 2 / n_samples - 1; curve[i] = (3 + k) * x * 20 * deg / (Math.PI + k * Math.abs(x)); } return curve; }
 
-        // --- Helper Functions ---
-        function updateSettings() { visualizerSettings.theme=themeSelector.value;visualizerSettings.palette=paletteSelector.value;visualizerSettings.glow=parseInt(glowSlider.value,10);visualizerSettings.thickness=parseFloat(thicknessSlider.value);visualizerSettings.particles=parseInt(particleSlider.value,10); }
-        function getCurrentPalette() { return colorPalettes[visualizerSettings.palette] || colorPalettes.default; }
-        function mapValue(v, im, iM, om, oM) { const val=om+(oM-om)*(v-im)/(iM-im);return Math.max(om,Math.min(oM,val)); }
-        function getAverage(data, start, end) { let s=0;const cE=Math.min(end,data.length);const ct=cE-start;if(ct<=0)return 0;for(let i=start;i<cE;i++){s+=data[i];}return s/ct; }
-        function hexToRgba(hex, alpha=1) { let r=0,g=0,b=0;if(!hex)return`rgba(255,255,255,${alpha})`;if(hex.length===4){r=parseInt(hex[1]+hex[1],16);g=parseInt(hex[2]+hex[2],16);b=parseInt(hex[3]+hex[3],16);}else if(hex.length===7){r=parseInt(hex[1]+hex[2],16);g=parseInt(hex[3]+hex[4],16);b=parseInt(hex[5]+hex[6],16);}else{return`rgba(255,255,255,${alpha})`;}return`rgba(${r},${g},${b},${alpha})`; }
-        function formatTime(seconds) { const minutes = Math.floor(seconds / 60); const secs = Math.floor(seconds % 60); return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`; }
-        function updateAccentColor() {
-            const palette = getCurrentPalette();
-            const primaryColor = palette[0];
-            const hoverColor = palette[2] || '#ffffff';
-            document.documentElement.style.setProperty('--accent-color', primaryColor);
-            document.documentElement.style.setProperty('--accent-hover', hoverColor);
-            console.log(`Accent color updated to ${primaryColor}, hover to ${hoverColor}`);
-        }
-
-        // --- Audio Initialization ---
-        function initializeAudioContext() {
-            if(audioInitialized) return true;
-            try{
-                statusMessage.textContent = "Init Context..."; statusMessage.style.color = 'var(--text-color)';
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                if (audioContext.state === 'suspended') { audioContext.resume(); }
-                analyser = audioContext.createAnalyser();
-                analyser.fftSize = fftSize; analyser.smoothingTimeConstant = 0.8;
-                bufferLengthFreq = analyser.frequencyBinCount; bufferLengthTime = analyser.fftSize;
-                dataArrayFreq = new Uint8Array(bufferLengthFreq); dataArrayTime = new Uint8Array(bufferLengthTime);
-                audioInitialized = true; console.log("AudioContext Initialized OK"); statusMessage.textContent = "Ctx Ready";
-                return true;
-            } catch(e) {
-                console.error("AudioContext Initialization Failed:", e); statusMessage.textContent = "ERR: Web Audio API Not Supported"; statusMessage.style.color = 'var(--error-color)';
-                fileInput.disabled = true; document.querySelector('.file-label').style.cursor = 'not-allowed'; document.querySelector('.file-label').style.opacity = '0.5';
-                playButton.disabled = true; pauseButton.disabled = true; fullscreenButton.disabled = true; fullscreenButton.textContent = "N/A"; fullscreenButton.classList.add('not-available');
-                scrubber.disabled = true;
-                return false;
-            }
-        }
-
-        // --- File Handling ---
-        fileInput.addEventListener('change', function(event) {
-            console.log("File input 'change' event");
-            if (!initializeAudioContext()) { return; }
-            scrubber.disabled = true; scrubber.value = 0;
-            currentTimeDisplay.textContent = "00:00"; totalDurationDisplay.textContent = "00:00";
-            isSeeking = false;
-            isPlaying = false; audioElement.pause(); audioElement.currentTime = 0;
-            playButton.disabled = true; pauseButton.disabled = true;
-            particles = [];
-            if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
-            drawVisualizer();
-            if(sourceNode){
-                try { sourceNode.disconnect(); console.log("Disconnected previous sourceNode."); } catch(e){ console.warn("Source node disconnect warning:", e); }
-                sourceNode = null;
-            }
-            const files = event.target.files;
-            if (files.length === 0) {
-                fileNameDisplay.textContent = 'No file selected'; statusMessage.textContent = 'STATUS :: SELECT FILE'; statusMessage.style.color = 'var(--text-color)';
-                audioElement.src = '';
-                fileInput.value = null;
-                return;
-            }
-            const file = files[0];
-            fileNameDisplay.textContent = `Selected: ${file.name}`;
-            statusMessage.textContent = 'Reading file...'; statusMessage.style.color = 'var(--text-color)';
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                console.log("FileReader 'onload'"); statusMessage.textContent = 'Decoding audio data...';
-                audioElement.src = e.target.result;
-                audioElement.load();
-                const metadataHandler = () => {
-                     console.log("Audio 'loadedmetadata' event");
-                     const duration = audioElement.duration;
-                     if (isFinite(duration)) {
-                         scrubber.max = duration;
-                         totalDurationDisplay.textContent = formatTime(duration);
-                     } else {
-                          totalDurationDisplay.textContent = "--:--"; statusMessage.textContent = 'ERR: Invalid audio duration.'; statusMessage.style.color = 'var(--error-color)';
-                          playButton.disabled = true; scrubber.disabled = true;
-                     }
-                };
-                const canPlayHandler = () => {
-                    console.log("Audio 'canplay' event");
-                    statusMessage.textContent = 'READY // PRESS PLAY';
-                    playButton.disabled = false;
-                    pauseButton.disabled = true;
-                    if (isFinite(audioElement.duration)) {
-                         scrubber.disabled = false;
-                    }
-                    if (!sourceNode) {
-                        try {
-                             sourceNode = audioContext.createMediaElementSource(audioElement);
-                             console.log("New MediaElementSource created and connected.");
-                             sourceNode.connect(analyser);
-                             analyser.connect(audioContext.destination);
-                        } catch (err) {
-                             console.error("Error connecting audio nodes:", err); statusMessage.textContent = 'ERR: Cannot connect audio.'; statusMessage.style.color = 'var(--error-color)';
-                             playButton.disabled = true; scrubber.disabled = true;
-                        }
-                    }
-                };
-                const errorHandler = (err) => {
-                    console.error("Audio Load Error:", err, audioElement.error); statusMessage.textContent = `ERR: Failed to load audio (${audioElement.error?.code || 'unknown'})`; statusMessage.style.color = 'var(--error-color)';
-                    playButton.disabled = true; pauseButton.disabled = true; scrubber.disabled = true;
-                    audioElement.removeEventListener('loadedmetadata', metadataHandler);
-                    audioElement.removeEventListener('canplay', canPlayHandler);
-                };
-                audioElement.addEventListener('loadedmetadata', metadataHandler, { once: true });
-                audioElement.addEventListener('canplay', canPlayHandler, { once: true });
-                audioElement.addEventListener('error', errorHandler, { once: true });
-            };
-            reader.onerror = function(e) {
-                console.error("FileReader Error:", e); statusMessage.textContent = 'ERR: Failed to read file'; statusMessage.style.color = 'var(--error-color)';
-                fileNameDisplay.textContent = 'File read error'; playButton.disabled = true; pauseButton.disabled = true; scrubber.disabled = true;
-            };
-            reader.readAsDataURL(file);
-        });
-
-        // --- Playback Controls ---
-        playButton.addEventListener('click', () => {
-            console.log("Play button clicked.");
-            if (!audioInitialized || !audioElement.src || audioElement.readyState < 2 || playButton.disabled) {
-                 console.warn(`Play prevented. Initialized: ${audioInitialized}, Src: ${!!audioElement.src}, ReadyState: ${audioElement.readyState}, Button Disabled: ${playButton.disabled}`);
-                 statusMessage.textContent = 'ERR: Audio not ready.'; statusMessage.style.color = 'var(--error-color)';
-                 return;
-            }
-            if (audioContext.state === 'suspended') {
-                console.log("AudioContext suspended, attempting resume...");
-                audioContext.resume().then(startPlayback).catch(err => { console.error("AudioContext resume failed:", err); statusMessage.textContent = 'ERR: Resume audio failed.'; statusMessage.style.color = 'var(--error-color)'; });
-            } else { startPlayback(); }
-        });
-
-        function startPlayback(){
-            console.log("Attempting audioElement.play()");
-            audioElement.play().then(() => {
-                 console.log("audioElement.play() successful");
-                 isPlaying = true;
-                 playButton.disabled = true; pauseButton.disabled = false;
-                 scrubber.disabled = !isFinite(audioElement.duration);
-                 statusMessage.textContent = 'PLAYING'; statusMessage.style.color = 'var(--text-color)';
-                 if(animationFrameId) cancelAnimationFrame(animationFrameId);
-                 drawVisualizer();
-            }).catch(err => {
-                 console.error("audioElement.play() failed:", err); statusMessage.textContent = `ERR: Playback failed (${err.name})`; statusMessage.style.color = 'var(--error-color)';
-                 playButton.disabled = false; pauseButton.disabled = true; scrubber.disabled = true;
-                 isPlaying = false;
-            });
-        }
-
-        pauseButton.addEventListener('click', () => { if (!isPlaying) return; console.log("Pause button clicked"); audioElement.pause(); });
-
-        // --- Audio Element Event Listeners ---
-        audioElement.onpause = () => {
-            if (isPlaying) {
-                isPlaying = false;
-                playButton.disabled = false; pauseButton.disabled = true;
-                statusMessage.textContent = 'PAUSED'; console.log("Audio paused.");
-                if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
-                requestAnimationFrame(drawVisualizer);
-            }
-        };
-
-        audioElement.onended = () => {
-            console.log("Audio ended.");
-            isPlaying = false;
-            playButton.disabled = false; pauseButton.disabled = true;
-            scrubber.disabled = true; scrubber.value = 0;
-            currentTimeDisplay.textContent = formatTime(0);
-            statusMessage.textContent = 'ENDED // SELECT FILE OR PLAY AGAIN'; particles = [];
-            if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
-            audioElement.currentTime = 0;
-            drawVisualizer();
-        };
-
-        audioElement.onerror = (e) => {
-             if (statusMessage.textContent.startsWith('ERR: Failed to load')) return;
-             console.error("Audio Element Error:", e, audioElement.error); statusMessage.textContent = `ERR: Audio Playback (${audioElement.error?.message || 'unknown'})`; statusMessage.style.color = 'var(--error-color)';
-             isPlaying = false; playButton.disabled = true; pauseButton.disabled = true; scrubber.disabled = true; particles = [];
-             if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
-             drawVisualizer();
-        };
-
-        // --- Scrubber Time Update ---
-        audioElement.addEventListener('timeupdate', () => {
-             if (!isSeeking && isFinite(audioElement.duration)) {
-                 scrubber.value = audioElement.currentTime;
-                 currentTimeDisplay.textContent = formatTime(audioElement.currentTime);
-             }
-        });
-
-        scrubber.addEventListener('input', () => {
-            if (!scrubber.disabled) {
-                isSeeking = true;
-                currentTimeDisplay.textContent = formatTime(parseFloat(scrubber.value));
-            }
-        });
-
-        scrubber.addEventListener('change', () => {
-             if (!scrubber.disabled) {
-                 const seekTime = parseFloat(scrubber.value);
-                 console.log(`Scrubber 'change' event: Seeking to ${seekTime}`);
-                 audioElement.currentTime = seekTime;
-                 setTimeout(() => { isSeeking = false; }, 50);
-             }
-        });
-
-        // --- Particle Emission ---
-        function emitParticles(x, y, count, settings) { const particleAmountMultiplier = settings.particles / 2; const actualCount = Math.min(10, Math.floor(count * particleAmountMultiplier)); const currentPalette = getCurrentPalette(); for (let i = 0; i < actualCount; i++) { if (particles.length > 150 * particleAmountMultiplier) return; const angle = Math.random() * Math.PI * 2; const speed = (Math.random() * particleSpeedBase * 0.5) + 0.2; const life = Math.random() * (particleMaxLifeBase * 0.5) + (particleMaxLifeBase * 0.5); const particleBaseColor = currentPalette[Math.floor(Math.random() * currentPalette.length)]; particles.push({ x: x, y: y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: life, maxLife: life, size: Math.random() * 1.5 + 0.5, color: particleBaseColor }); } }
-
-        // --- Canvas Setup ---
-        function setupCanvas() { const currentWidth = canvas.clientWidth; const currentHeight = canvas.clientHeight; if (currentWidth > 0 && currentHeight > 0) { const maxDPR = 1.5; const dpr = Math.min(window.devicePixelRatio || 1, maxDPR); if (canvas.width !== currentWidth * dpr || canvas.height !== currentHeight * dpr) { canvasWidth = currentWidth; canvasHeight = currentHeight; canvas.width = canvasWidth * dpr; canvas.height = canvasHeight * dpr; ctx.scale(dpr, dpr); console.log(`Canvas resized to: ${canvasWidth}x${canvasHeight} (Logical), ${canvas.width}x${canvas.height} (Physical), Used DPR: ${dpr} (Max: ${maxDPR})`); } } else { console.warn(`Canvas setup skipped: Invalid dimensions (${currentWidth}x${currentHeight})`); } }
-
-        // --- Drawing Functions ---
-        function drawIdle() { ctx.fillStyle = '#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); ctx.strokeStyle = 'rgba(128, 128, 128, 0.2)'; ctx.lineWidth = 1; ctx.shadowBlur = 0; ctx.beginPath(); ctx.moveTo(0, canvasHeight / 2); ctx.lineTo(canvasWidth, canvasHeight / 2); ctx.stroke(); }
-        function drawLayered(settings) {
-            analyser.getByteTimeDomainData(dataArrayTime);
-            analyser.getByteFrequencyData(dataArrayFreq);
-            let ampSum = 0;
-            for(let i = 0; i < bufferLengthTime; i++) { ampSum += Math.abs(dataArrayTime[i] - 128); }
-            const avgAmp = ampSum / bufferLengthTime;
-            const bBins = Math.floor(bufferLengthFreq * 0.1);
-            const mBins = Math.floor(bufferLengthFreq * 0.4);
-            const tBins = bufferLengthFreq;
-            const bEng = getAverage(dataArrayFreq, 0, bBins);
-            const mEng = getAverage(dataArrayFreq, bBins, mBins);
-            const tEng = getAverage(dataArrayFreq, mBins, tBins);
-            const currentPalette = getCurrentPalette();
-
-            ctx.fillStyle = '#040408';
-            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-
-            const pulseSize = mapValue(bEng, 0, 150, canvasHeight * 0.1, canvasHeight * 1.5);
-            const pulseAlpha = mapValue(bEng, 0, 150, 0, 0.1);
-            if (pulseAlpha > 0.01) {
-                const radGrad = ctx.createRadialGradient(canvasWidth / 2, canvasHeight / 2, 0, canvasWidth / 2, canvasHeight / 2, pulseSize);
-                radGrad.addColorStop(0, hexToRgba(currentPalette[0], pulseAlpha));
-                radGrad.addColorStop(1, hexToRgba(currentPalette[0], 0));
-                ctx.fillStyle = radGrad;
-                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-            }
-
-            const midPulseSize = mapValue(mEng, 0, 150, canvasHeight * 0.2, canvasHeight);
-            const midPulseAlpha = mapValue(mEng, 0, 150, 0, 0.08);
-            if (midPulseAlpha > 0.01) {
-                const midGrad = ctx.createRadialGradient(canvasWidth / 2, canvasHeight / 2, 0, canvasWidth / 2, canvasHeight / 2, midPulseSize);
-                midGrad.addColorStop(0, hexToRgba(currentPalette[1], midPulseAlpha));
-                midGrad.addColorStop(1, hexToRgba(currentPalette[1], 0));
-                ctx.fillStyle = midGrad;
-                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-            }
-
-            const barWidthFreq = canvasWidth / bufferLengthFreq;
-            const barAlpha = '08';
-            for (let i = 0; i < bufferLengthFreq; i++) {
-                const barHeightFreq = dataArrayFreq[i] * (canvasHeight / 255) * 0.7;
-                ctx.fillStyle = currentPalette[i % currentPalette.length] + barAlpha;
-                ctx.fillRect(i * barWidthFreq, canvasHeight - barHeightFreq, barWidthFreq * 0.8, barHeightFreq);
-            }
-
-            ctx.shadowBlur = Math.max(2, settings.glow / 2);
-            for (let i = particles.length - 1; i >= 0; i--) {
-                const p = particles[i];
-                p.life--;
-                if (p.life <= 0) { particles.splice(i, 1); continue; }
-                p.x += p.vx; p.y += p.vy;
-                const alpha = p.life / p.maxLife;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size * alpha * 1.5, 0, Math.PI * 2);
-                let rgbaColor = p.color;
-                if (p.color.startsWith('#')) { rgbaColor = hexToRgba(p.color, alpha); }
-                else { try { rgbaColor = p.color.replace(/[\d\.]+\)$/g, `${alpha})`); } catch(e) {} }
-                ctx.fillStyle = rgbaColor;
-                ctx.shadowColor = rgbaColor.replace(/[\d\.]+\)$/g, `${alpha * 0.7})`);
-                ctx.fill();
-            }
-
-            ctx.shadowBlur = 0;
-            ctx.lineWidth = mapValue(avgAmp, 0, 50, 2, settings.thickness * 1.5);
-            ctx.shadowColor = hexToRgba(currentPalette[0], 0.8);
-            ctx.shadowBlur = settings.glow * 1.5;
-            const waveGrad = ctx.createLinearGradient(0, 0, 0, canvasHeight);
-            waveGrad.addColorStop(0, currentPalette[0]);
-            waveGrad.addColorStop(0.5, currentPalette[1]);
-            waveGrad.addColorStop(1, currentPalette[2]);
-            ctx.strokeStyle = waveGrad;
-            ctx.beginPath();
-            const sliceW = canvasWidth * 1.0 / bufferLengthTime;
-            let x = 0;
-            const curTime = performance.now();
-            for (let i = 0; i < bufferLengthTime; i++) {
-                const curAmp = dataArrayTime[i];
-                const v = curAmp / 128.0;
-                const y = (v * canvasHeight / 2);
-                if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
-                x += sliceW;
-                if (settings.particles > 0 && curAmp > particleEmitThreshold && (curTime - lastPeakTime > peakThrottleMs)) {
-                    emitParticles(x - sliceW / 2, y, Math.floor(Math.random() * settings.particles) + 2, settings);
-                    lastPeakTime = curTime;
+        // === Core Synth Logic ===
+        function initAudioContext() {
+            if (!audioCtx) {
+                try {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    console.log("AudioContext::INITIALIZED | SampleRate:", audioCtx.sampleRate);
+                } catch (e) {
+                    console.error("FATAL_ERROR::WebAudioAPI_UNSUPPORTED", e);
+                    alert("FATAL_ERROR::WebAudioAPI_UNSUPPORTED");
+                    return false;
                 }
             }
-            ctx.stroke();
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
+            return true;
         }
-        function drawWaveform(settings) {
-            analyser.getByteTimeDomainData(dataArrayTime);
-            analyser.getByteFrequencyData(dataArrayFreq);
-            const currentPalette = getCurrentPalette();
-            ctx.fillStyle = '#040408';
-            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-            
-            const mBins = Math.floor(bufferLengthFreq * 0.4);
-            const midEnergy = getAverage(dataArrayFreq, Math.floor(bufferLengthFreq * 0.1), mBins);
-            const oscAmp = mapValue(midEnergy, 0, 150, 0, canvasHeight * 0.1);
-
-            ctx.lineWidth = settings.thickness;
-            const waveColor = currentPalette[0];
-            ctx.strokeStyle = waveColor;
-            ctx.shadowColor = hexToRgba(waveColor, 0.8);
-            ctx.shadowBlur = settings.glow * 1.5;
-
-            ctx.beginPath();
-            const sliceWidth = canvasWidth * 1.0 / bufferLengthTime;
-            let x = 0;
-            for (let i = 0; i < bufferLengthTime; i++) {
-                const v = dataArrayTime[i] / 128.0;
-                const y = (v * canvasHeight / 2) + Math.sin(x * 0WUeM05) * oscAmp;
-                if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
-                x += sliceWidth;
+        async function resumeAudioContext() {
+            if (!audioCtx) {
+                if (!initAudioContext()) return false;
             }
-            ctx.stroke();
-
-            ctx.beginPath();
-            x = 0;
-            for (let i = 0; i < bufferLengthTime; i++) {
-                const v = dataArrayTime[i] / 128.0;
-                const y = canvasHeight - ((v * canvasHeight / 2) + Math.sin(x * 0.05) * oscAmp);
-                if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
-                x += sliceWidth;
+            if (audioCtx.state === 'suspended') {
+                try {
+                    await audioCtx.resume();
+                    console.log("AudioContext::RESUMED | State:", audioCtx.state);
+                    isAudioContextStarted = true;
+                } catch (e) {
+                    console.error("ERROR::AudioContext_RESUME_FAILED", e);
+                    return false;
+                }
+            } else if (audioCtx.state === 'running') {
+                isAudioContextStarted = true;
             }
-            ctx.stroke();
-
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
-        }
-        function drawBars(settings) {
-            analyser.getByteFrequencyData(dataArrayFreq);
-            const currentPalette = getCurrentPalette();
-            ctx.fillStyle = '#040408';
-            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-            const totalBars = bufferLengthFreq;
-            const barWidth = canvasWidth / totalBars;
-            let x = 0;
-            const barGlow = Math.max(0, Math.min(8, settings.glow / 1.5));
-            ctx.shadowBlur = barGlow;
-            for (let i = 0; i < totalBars; i++) {
-                const barHeight = dataArrayFreq[i] * (canvasHeight / 255);
-                if (barHeight < 1) continue;
-                const colorIndex = i % currentPalette.length;
-                const barColor = currentPalette[colorIndex];
-                ctx.fillStyle = barColor;
-                ctx.shadowColor = hexToRgba(barColor, 0.7);
-                const adjustedWidth = (i === totalBars - 1) ? (canvasWidth - x) : Math.max(1, barWidth * settings.thickness);
-                ctx.fillRect(x, canvasHeight - barHeight, adjustedWidth, barHeight);
-                x += barWidth;
-            }
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
+            return isAudioContextStarted;
         }
 
-        // --- Main Draw Loop ---
-        function drawVisualizer() {
-             if (isPlaying) {
-                 animationFrameId = requestAnimationFrame(drawVisualizer);
-             } else {
-                 animationFrameId = null;
+        function playSound(params, midiNote) {
+            if (!audioCtx || !isAudioContextStarted) { console.warn("WARN::AudioContext_NOT_READY"); return; }
+            if (!params) { console.warn("WARN::PARAMETER_SET_MISSING"); return; }
+
+            const now = audioCtx.currentTime;
+            const is808 = params.soundType === '808';
+            const fadeOutTime = is808 ? Math.max(0.5, params.ampEnv.decay + params.ampEnv.release * 0.8) : MONO_FADE_OUT_TIME;
+
+            if (currentPlayingNode) {
+                console.log(`Applying cutoff (${fadeOutTime.toFixed(3)}s ramp) to previous node at ${now.toFixed(4)}`);
+                currentPlayingNode.gain.cancelScheduledValues(now);
+                currentPlayingNode.gain.setValueAtTime(currentPlayingNode.gain.value, now);
+                currentPlayingNode.gain.linearRampToValueAtTime(0, now + fadeOutTime);
+            }
+
+            const noteMasterGain = audioCtx.createGain();
+            noteMasterGain.connect(audioCtx.destination);
+            currentPlayingNode = noteMasterGain;
+            const osc1 = audioCtx.createOscillator();
+            const osc2 = audioCtx.createOscillator();
+            const osc1Gain = audioCtx.createGain();
+            const osc2Gain = audioCtx.createGain();
+            const oscMixGain = audioCtx.createGain();
+            const filter = audioCtx.createBiquadFilter();
+            const ampEnvGain = audioCtx.createGain();
+            const filterEnvMod = audioCtx.createGain();
+            const lfo = audioCtx.createOscillator();
+            const lfoGainPitch = audioCtx.createGain();
+            const lfoGainFilter = audioCtx.createGain();
+            let transientNoise = null;
+            let transientGain = null;
+            let preEffectMix = audioCtx.createGain();
+
+            osc1.type = params.osc1.type;
+            osc2.type = params.osc2.type;
+            const baseFreq = midiToFreq(midiNote);
+            const osc1Freq = baseFreq * Math.pow(2, params.osc1.fineTune / 1200);
+            const osc2Freq = osc1Freq * Math.pow(2, (params.osc2.pitchOffset * 100 + params.osc2.fineTune) / 1200);
+
+            if (is808) {
+                const targetPitch = osc1Freq * params.pitchEnvAmount;
+                osc1.frequency.setValueAtTime(osc1Freq, now);
+                osc1.frequency.exponentialRampToValueAtTime(targetPitch, now + params.pitchEnvDecay);
+                const targetPitch2 = osc2Freq * params.pitchEnvAmount;
+                osc2.frequency.setValueAtTime(osc2Freq, now);
+                osc2.frequency.exponentialRampToValueAtTime(targetPitch2, now + params.pitchEnvDecay);
+                transientNoise = audioCtx.createBufferSource();
+                transientGain = audioCtx.createGain();
+                const noiseBufferSize = audioCtx.sampleRate * 0.05;
+                const noiseBuffer = audioCtx.createBuffer(1, noiseBufferSize, audioCtx.sampleRate);
+                const noiseOutput = noiseBuffer.getChannelData(0);
+                for (let i = 0; i < noiseBufferSize; i++) { noiseOutput[i] = Math.random() * 2 - 1; }
+                transientNoise.buffer = noiseBuffer;
+                transientNoise.loop = false;
+                transientGain.gain.setValueAtTime(0, now);
+                transientGain.gain.linearRampToValueAtTime(params.transientAmount, now + 0.001);
+                transientGain.gain.exponentialRampToValueAtTime(0.0001, now + params.transientDecay * 1.5);
+                transientNoise.connect(transientGain);
+                transientGain.connect(preEffectMix);
+            } else {
+                osc1.frequency.setValueAtTime(osc1Freq, now);
+                osc2.frequency.setValueAtTime(osc2Freq, now);
+            }
+
+            osc1Gain.gain.setValueAtTime(params.osc1.gain, now);
+            osc2Gain.gain.setValueAtTime(params.osc2.gain, now);
+            filter.type = params.filter.type;
+            filter.Q.setValueAtTime(params.filter.Q, now);
+            const filterBaseCutoff = params.filter.cutoff;
+            filter.frequency.setValueAtTime(filterBaseCutoff, now);
+            filterEnvMod.gain.setValueAtTime(params.filter.envAmount, now);
+            filterEnvMod.connect(filter.frequency);
+            lfo.type = params.lfo.type;
+            lfo.frequency.setValueAtTime(params.lfo.rate, now);
+            lfoGainPitch.gain.setValueAtTime(params.lfo.pitchMod, now);
+            lfoGainFilter.gain.setValueAtTime(params.lfo.filterMod, now);
+            lfoGainPitch.connect(osc1.detune);
+            lfoGainPitch.connect(osc2.detune);
+            lfoGainFilter.connect(filter.frequency);
+
+            osc1.connect(osc1Gain);
+            osc2.connect(osc2Gain);
+            osc1Gain.connect(oscMixGain);
+            osc2Gain.connect(oscMixGain);
+            oscMixGain.connect(preEffectMix);
+
+            let currentNode = preEffectMix;
+            if (params.effects.drive.mix > 0.01) {
+                const driveNode = audioCtx.createWaveShaper();
+                const driveMixGain = audioCtx.createGain();
+                const driveInputGain = audioCtx.createGain();
+                const driveOutputGain = audioCtx.createGain();
+                const dryGain = audioCtx.createGain();
+                const curveAmount = params.effects.drive.amount * 50 + 5;
+                driveNode.curve = makeDistortionCurve(curveAmount);
+                driveNode.oversample = '2x';
+                const inputGainValue = 1 + params.effects.drive.amount * 2;
+                const outputGainValue = 0.8 / (1 + params.effects.drive.amount * 1.5);
+                driveInputGain.gain.setValueAtTime(inputGainValue, now);
+                driveOutputGain.gain.setValueAtTime(outputGainValue, now);
+                driveMixGain.gain.setValueAtTime(params.effects.drive.mix, now);
+                dryGain.gain.setValueAtTime(1.0 - params.effects.drive.mix, now);
+                const driveMerge = audioCtx.createGain();
+                currentNode.connect(driveInputGain).connect(driveNode).connect(driveOutputGain).connect(driveMixGain).connect(driveMerge);
+                currentNode.connect(dryGain).connect(driveMerge);
+                currentNode = driveMerge;
+            }
+            if (params.effects.delay.mix > 0.01 && params.effects.delay.time > 0.005) {
+                const delayNode = audioCtx.createDelay(2.0);
+                const feedbackGain = audioCtx.createGain();
+                const wetGain = audioCtx.createGain();
+                const dryGain = audioCtx.createGain();
+                const delayMerge = audioCtx.createGain();
+                delayNode.delayTime.setValueAtTime(clamp(params.effects.delay.time, 0.001, 2.0), now);
+                feedbackGain.gain.setValueAtTime(clamp(params.effects.delay.feedback, 0, 0.95), now);
+                wetGain.gain.setValueAtTime(params.effects.delay.mix, now);
+                dryGain.gain.setValueAtTime(1.0 - params.effects.delay.mix, now);
+                currentNode.connect(delayNode);
+                delayNode.connect(feedbackGain).connect(delayNode);
+                delayNode.connect(wetGain).connect(delayMerge);
+                currentNode.connect(dryGain).connect(delayMerge);
+                currentNode = delayMerge;
+            }
+            let compressorNode = null;
+            if (params.effects.compressor.enabled) {
+                compressorNode = audioCtx.createDynamicsCompressor();
+                compressorNode.threshold.setValueAtTime(params.effects.compressor.threshold, now);
+                compressorNode.knee.setValueAtTime(5, now);
+                compressorNode.ratio.setValueAtTime(params.effects.compressor.ratio, now);
+                compressorNode.attack.setValueAtTime(params.effects.compressor.attack, now);
+                compressorNode.release.setValueAtTime(params.effects.compressor.release, now);
+            }
+
+            currentNode.connect(filter);
+            filter.connect(ampEnvGain);
+            let finalStageInput = ampEnvGain;
+            if (compressorNode) { ampEnvGain.connect(compressorNode); finalStageInput = compressorNode; }
+            finalStageInput.connect(noteMasterGain);
+            noteMasterGain.gain.setValueAtTime(params.masterGain, now);
+
+            const { attack: filtAtk, decay: filtDec, sustain: filtSus, release: filtRel } = params.filterEnv;
+            const filterEnvNode = audioCtx.createGain();
+            filterEnvNode.gain.setValueAtTime(0, now);
+            filterEnvNode.gain.linearRampToValueAtTime(1.0, now + filtAtk);
+            const filterSustainLevel = clamp(filtSus, 0.0001, 1.0);
+            filterEnvNode.gain.setTargetAtTime(filterSustainLevel, now + filtAtk, filtDec / 3 + 0.001);
+            filterEnvNode.connect(filterEnvMod);
+
+            const { attack: ampAtk, decay: ampDec, sustain: ampSus, release: ampRel } = params.ampEnv;
+            const sustainLevel = clamp(ampSus, 0.0001, 1.0);
+            ampEnvGain.gain.setValueAtTime(0, now);
+            ampEnvGain.gain.linearRampToValueAtTime(1.0, now + ampAtk);
+            ampEnvGain.gain.setTargetAtTime(sustainLevel, now + ampAtk, ampDec / 3 + 0.001);
+
+            const releaseStartTime = now + ampAtk + ampDec + (is808 ? 1.0 : 0.5);
+            ampEnvGain.gain.cancelScheduledValues(releaseStartTime);
+            ampEnvGain.gain.setValueAtTime(sustainLevel, releaseStartTime);
+            const extendedRelease = is808 ? ampRel * 1.5 : ampRel;
+            ampEnvGain.gain.exponentialRampToValueAtTime(0.0001, releaseStartTime + extendedRelease);
+            filterEnvNode.gain.setTargetAtTime(0.0, releaseStartTime, filtRel / 3 + 0.001);
+
+            lfo.start(now);
+            osc1.start(now);
+            osc2.start(now);
+            if (is808 && transientNoise) {
+                transientNoise.start(now);
+            }
+
+            const totalDuration = releaseStartTime + extendedRelease + (is808 ? 0.8 : 0.1);
+            osc1.stop(totalDuration);
+            osc2.stop(totalDuration);
+            lfo.stop(totalDuration);
+            if (is808 && transientNoise) {
+                transientNoise.stop(now + params.transientDecay * 1.5 + 0.5);
+            }
+        }
+
+        // === Parameter Generation ===
+        function generateRandomParams(soundType) {
+             const params = { soundType: soundType };
+             params.masterGain = randomInRange(0.6, 0.8);
+             params.osc1 = { gain: randomInRange(0.5, 1.0), fineTune: 0 };
+             params.osc2 = { gain: randomInRange(0.0, 0.7), fineTune: 0, pitchOffset: 0 };
+             const totalGain = params.osc1.gain + params.osc2.gain;
+             if (totalGain > 1.1) { params.osc1.gain /= totalGain / 1.1; params.osc2.gain /= totalGain / 1.1; }
+             params.filter = { type: 'lowpass', Q: 1, envAmount: 0, cutoff: 5000 };
+             params.filterEnv = { attack: 0.05, decay: 0.3, sustain: 0.1, release: 0.5 };
+             params.ampEnv = { attack: 0.01, decay: 0.2, sustain: 0.5, release: 0.3 };
+             params.lfo = { type: 'sine', rate: 5, pitchMod: 0, filterMod: 0 };
+             params.effects = {
+                 drive: { amount: randomInRange(0, 0.5), mix: randomInRange(0, 0.6) },
+                 delay: { time: randomInRange(0.05, 0.6), feedback: randomInRange(0.1, 0.6), mix: randomInRange(0, 0.5) },
+                 compressor: { enabled: Math.random() > 0.3, threshold: randomInRange(-40, -12), ratio: randomInRange(2, 16), attack: randomInRange(0.001, 0.03), release: randomInRange(0.1, 0.5) }
+             };
+
+             switch (soundType) {
+                   case '808':
+                         params.baseMIDINote = BASE_NOTE_C2;
+                         params.osc1.type = 'sine';
+                         params.osc1.fineTune = randomInRange(-10, 10);
+                         params.osc2.type = randomElement(['sine', 'triangle']);
+                         params.osc2.pitchOffset = randomElement([0, 12]);
+                         params.osc2.fineTune = randomInRange(-15, 15);
+                         params.osc2.gain *= 0.2;
+                         params.pitchEnvAmount = randomInRange(0.3, 0.9);
+                         params.pitchEnvDecay = randomInRange(0.05, 0.3);
+                         params.transientAmount = randomInRange(0.1, 0.8);
+                         params.transientDecay = randomInRange(0.005, 0.04);
+                         params.ampEnv = { attack: randomInRange(0.001, 0.005), decay: randomInRange(0.5, 1.5), sustain: 0.001, release: randomInRange(0.5, 3.0) };
+                         params.filter.type = 'lowpass';
+                         params.filter.cutoff = randomInRange(50, 800);
+                         params.filter.Q = randomInRange(0.5, 3.0);
+                         params.filter.envAmount = randomInRange(-100, 100);
+                         params.filterEnv = { attack: 0.01, decay: 0.05, sustain: 0.1, release: 0.1 };
+                         params.lfo.pitchMod = randomInRange(0, 3);
+                         params.effects.drive.amount = randomInRange(0.1, 1.0);
+                         params.effects.drive.mix = randomInRange(0.2, 0.8);
+                         params.effects.delay.mix = 0;
+                         params.effects.compressor.enabled = true;
+                         params.effects.compressor.threshold = randomInRange(-24, -12);
+                         params.effects.compressor.ratio = randomInRange(4, 10);
+                         params.effects.compressor.attack = randomInRange(0.001, 0.01);
+                         params.effects.compressor.release = randomInRange(0.05, 0.15);
+                         params.masterGain = randomInRange(0.75, 0.95);
+                         break;
+                   case 'Lead Synth':
+                         params.baseMIDINote = BASE_NOTE_C4;
+                         params.osc1.type = randomElement(['sawtooth', 'square']);
+                         params.osc1.fineTune = randomInRange(-5, 5);
+                         params.osc2.type = randomElement(WAVEFORMS);
+                         params.osc2.pitchOffset = randomElement([-12, 0, 7, 12]);
+                         params.osc2.fineTune = randomInRange(-25, 25);
+                         params.ampEnv = { attack: randomInRange(0.005, 0.1), decay: randomInRange(0.1, 0.4), sustain: randomInRange(0.3, 0.8), release: randomInRange(0.1, 0.5) };
+                         params.filter.type = randomElement(['lowpass', 'lowpass', 'bandpass']);
+                         params.filter.cutoff = randomInRange(500, 9000);
+                         params.filter.Q = randomInRange(1, 10);
+                         params.filter.envAmount = randomInRange(-5000, 6000);
+                         params.filterEnv = { attack: randomInRange(0.01, 0.3), decay: randomInRange(0.1, 0.6), sustain: randomInRange(0.1, 0.7), release: randomInRange(0.2, 0.8) };
+                         params.lfo.rate = randomInRange(2, 10);
+                         if (Math.random() > 0.4) params.lfo.pitchMod = randomInRange(5, 30);
+                         if (Math.random() > 0.4) params.lfo.filterMod = randomInRange(200, 3000);
+                         params.effects.delay.mix = randomInRange(0, 0.6);
+                         params.effects.compressor.enabled = Math.random() > 0.5;
+                         break;
+                   case 'Pluck Synth':
+                         params.baseMIDINote = BASE_NOTE_C4;
+                         params.osc1.type = randomElement(['triangle', 'sine', 'square']);
+                         params.osc1.fineTune = randomInRange(-10, 10);
+                         params.osc2.type = randomElement(WAVEFORMS);
+                         params.osc2.pitchOffset = randomElement([0, 7, 12, 19, 24]);
+                         params.osc2.fineTune = randomInRange(-15, 15);
+                         params.ampEnv = { attack: randomInRange(0.001, 0.02), decay: randomInRange(0.05, 0.3), sustain: 0.0001, release: randomInRange(0.05, 0.2) };
+                         params.filter.type = 'lowpass';
+                         params.filter.cutoff = randomInRange(1000, 10000);
+                         params.filter.Q = randomInRange(0.8, 5);
+                         params.filter.envAmount = randomInRange(1000, 7000);
+                         params.filterEnv = { attack: randomInRange(0.001, 0.05), decay: randomInRange(0.05, 0.4), sustain: 0.0001, release: randomInRange(0.1, 0.3) };
+                         params.lfo.pitchMod = 0;
+                         params.lfo.filterMod = 0;
+                         params.effects.delay.time = randomInRange(0.1, 0.5);
+                         params.effects.delay.feedback = randomInRange(0.2, 0.7);
+                         params.effects.delay.mix = randomInRange(0.2, 0.7);
+                         params.effects.compressor.enabled = Math.random() > 0.6;
+                         break;
+                   case 'Pad Synth':
+                         params.baseMIDINote = BASE_NOTE_C4;
+                         params.osc1.type = randomElement(['sawtooth', 'triangle', 'sine']);
+                         params.osc1.fineTune = randomInRange(-7, 7);
+                         params.osc2.type = randomElement(WAVEFORMS);
+                         params.osc2.pitchOffset = randomElement([-12, 0, 7, 12]);
+                         params.osc2.fineTune = randomInRange(-40, 40);
+                         params.ampEnv = { attack: randomInRange(0.4, 2.5), decay: randomInRange(0.5, 2.5), sustain: randomInRange(0.4, 0.8), release: randomInRange(1.0, 6.0) };
+                         params.filter.type = randomElement(['lowpass', 'lowpass', 'bandpass']);
+                         params.filter.cutoff = randomInRange(300, 7000);
+                         params.filter.Q = randomInRange(0.7, 7);
+                         params.filter.envAmount = randomInRange(-4000, 4000);
+                         params.filterEnv = { attack: randomInRange(0.5, 3.5), decay: randomInRange(0.5, 3.0), sustain: randomInRange(0.2, 0.7), release: randomInRange(1.5, 6.0) };
+                         params.lfo.rate = randomInRange(0.05, 4.0);
+                         if (Math.random() > 0.3) params.lfo.pitchMod = randomInRange(2, 15);
+                         if (Math.random() > 0.4) params.lfo.filterMod = randomInRange(100, 2500);
+                         params.effects.delay.mix = randomInRange(0.1, 0.6);
+                         params.effects.compressor.enabled = Math.random() > 0.4;
+                         if (params.effects.compressor.enabled) { params.effects.compressor.release = randomInRange(0.1, 1.5); }
+                         break;
+                   case 'Key Synth':
+                         params.baseMIDINote = BASE_NOTE_C4;
+                         params.osc1.type = randomElement(['sine', 'triangle', 'square']);
+                         params.osc1.fineTune = randomInRange(-5, 5);
+                         params.osc2.type = randomElement(WAVEFORMS);
+                         params.osc2.pitchOffset = randomElement([0, 12, 19, 24]);
+                         params.osc2.fineTune = randomInRange(-10, 10);
+                         params.ampEnv = { attack: randomInRange(0.005, 0.05), decay: randomInRange(0.1, 0.6), sustain: randomInRange(0.1, 0.7), release: randomInRange(0.1, 1.2) };
+                         params.filter.type = randomElement(['lowpass', 'lowpass', 'bandpass']);
+                         params.filter.cutoff = randomInRange(800, 8000);
+                         params.filter.Q = randomInRange(0.8, 5);
+                         params.filter.envAmount = randomInRange(-2000, 2500);
+                         params.filterEnv = { attack: randomInRange(0.01, 0.1), decay: randomInRange(0.1, 0.7), sustain: randomInRange(0.1, 0.6), release: randomInRange(0.2, 1.5) };
+                         params.lfo.rate = randomInRange(3, 8);
+                         if (Math.random() > 0.6) params.lfo.pitchMod = randomInRange(2, 10);
+                         params.effects.compressor.enabled = Math.random() > 0.5;
+                         break;
              }
-             const currentSettings = visualizerSettings;
-             if (audioInitialized && isPlaying && analyser) {
-                 const theme = currentSettings.theme;
-                 if (theme === 'layered') { drawLayered(currentSettings); }
-                 else if (theme === 'waveform') { drawWaveform(currentSettings); }
-                 else if (theme === 'bars') { drawBars(currentSettings); }
-                 else { drawIdle(); }
+             params.osc1.pitchMIDIBase = params.baseMIDINote;
+             console.log("Generated Params:", JSON.parse(JSON.stringify(params)));
+             return params;
+        }
+
+        function generateVariationParams(baseParams, factor) {
+            if (!baseParams) return null;
+            const newParams = JSON.parse(JSON.stringify(baseParams));
+            const is808 = baseParams.soundType === '808';
+            const vary = (val, min, max, fact) => clamp(val + randomInRange(-(max - min) * fact / 2, (max - min) * fact / 2), min, max);
+            const varyInt = (val, min, max, fact) => clamp(val + randomIntInRange(Math.floor(-(max - min) * fact / 2), Math.ceil((max - min) * fact / 2)), min, max);
+            const varyLog = (val, min, max, fact) => clamp(Math.exp(Math.log(val) + randomInRange(-Math.log(max / min) * fact / 2, Math.log(max / min) * fact / 2)), min, max);
+            const varyChoice = (val, choices, prob) => shouldChange(prob) ? randomElement(choices.filter(c => c !== val) || choices) : val;
+            const varyBool = (val, prob) => shouldChange(prob) ? !val : val;
+
+            newParams.osc1.fineTune = vary(newParams.osc1.fineTune, -50, 50, factor);
+            newParams.osc1.gain = vary(newParams.osc1.gain, 0, 1, factor);
+            newParams.osc1.type = varyChoice(newParams.osc1.type, WAVEFORMS, factor / 4);
+            newParams.osc2.fineTune = vary(newParams.osc2.fineTune, -50, 50, factor);
+            newParams.osc2.gain = vary(newParams.osc2.gain, 0, 1, factor);
+            newParams.osc2.pitchOffset = varyInt(newParams.osc2.pitchOffset, -24, 24, factor * 1.5);
+            newParams.osc2.type = varyChoice(newParams.osc2.type, WAVEFORMS, factor / 4);
+            const totalGain = newParams.osc1.gain + newParams.osc2.gain;
+            if (totalGain > 1.1) { newParams.osc1.gain /= totalGain / 1.1; newParams.osc2.gain /= totalGain / 1.1; }
+
+            newParams.ampEnv.attack = vary(newParams.ampEnv.attack, 0.001, 5.0, factor);
+            newParams.ampEnv.decay = vary(newParams.ampEnv.decay, 0.01, 5.0, factor);
+            newParams.ampEnv.sustain = vary(newParams.ampEnv.sustain, 0.0001, 1.0, factor);
+            newParams.ampEnv.release = vary(newParams.ampEnv.release, 0.01, 8.0, factor);
+            newParams.filterEnv.attack = vary(newParams.filterEnv.attack, 0.001, 5.0, factor);
+            newParams.filterEnv.decay = vary(newParams.filterEnv.decay, 0.01, 5.0, factor);
+            newParams.filterEnv.sustain = vary(newParams.filterEnv.sustain, 0.0001, 1.0, factor);
+            newParams.filterEnv.release = vary(newParams.filterEnv.release, 0.01, 8.0, factor);
+            newParams.filter.cutoff = varyLog(newParams.filter.cutoff, 20, 20000, factor);
+            newParams.filter.Q = vary(newParams.filter.Q, 0.1, 20, factor);
+            newParams.filter.envAmount = vary(newParams.filter.envAmount, -8000, 8000, factor);
+            newParams.filter.type = varyChoice(newParams.filter.type, FILTER_TYPES, factor / 5);
+            newParams.lfo.rate = varyLog(newParams.lfo.rate, 0.01, 30, factor);
+            newParams.lfo.pitchMod = vary(newParams.lfo.pitchMod, 0, 100, factor);
+            newParams.lfo.filterMod = vary(newParams.lfo.filterMod, 0, 5000, factor);
+            newParams.lfo.type = varyChoice(newParams.lfo.type, WAVEFORMS, factor / 4);
+            newParams.effects.drive.amount = vary(newParams.effects.drive.amount, 0, 1.0, factor);
+            newParams.effects.drive.mix = vary(newParams.effects.drive.mix, 0, 1.0, factor);
+            newParams.effects.delay.time = vary(newParams.effects.delay.time, 0.001, 2.0, factor);
+            newParams.effects.delay.feedback = vary(newParams.effects.delay.feedback, 0, 0.95, factor);
+            newParams.effects.delay.mix = vary(newParams.effects.delay.mix, 0, 1.0, factor);
+            newParams.effects.compressor.enabled = varyBool(newParams.effects.compressor.enabled, factor / 3);
+            newParams.effects.compressor.threshold = vary(newParams.effects.compressor.threshold, -80, 0, factor);
+            newParams.effects.compressor.ratio = vary(newParams.effects.compressor.ratio, 1, 20, factor);
+            newParams.effects.compressor.attack = vary(newParams.effects.compressor.attack, 0.001, 0.1, factor);
+            newParams.effects.compressor.release = vary(newParams.effects.compressor.release, 0.05, 1.0, factor);
+            newParams.masterGain = vary(newParams.masterGain, 0.1, 1.0, factor);
+            if (is808 && newParams.pitchEnvAmount !== undefined) {
+                newParams.pitchEnvAmount = vary(newParams.pitchEnvAmount, 0.1, 0.95, factor);
+                newParams.pitchEnvDecay = vary(newParams.pitchEnvDecay, 0.01, 0.5, factor);
+                newParams.transientAmount = vary(newParams.transientAmount, 0, 1.0, factor);
+                newParams.transientDecay = vary(newParams.transientDecay, 0.001, 0.1, factor);
+            }
+            console.log("Varied Params:", JSON.parse(JSON.stringify(newParams)));
+            return newParams;
+        }
+
+        // === UI Update Functions ===
+        function updateUI() {
+             const soundLoaded = currentParams !== null;
+             const undoAvailable = previousParams !== null;
+             btnVariation5.disabled = !soundLoaded;
+             btnVariation10.disabled = !soundLoaded;
+             btnVariation25.disabled = !soundLoaded;
+             btnPlay.disabled = !soundLoaded;
+             btnNewName.disabled = !soundLoaded;
+             btnRender.disabled = !soundLoaded;
+             btnUndo.disabled = !undoAvailable;
+             if (soundLoaded) {
+                 btnRender.textContent = 'RENDER WAV @ C3';
+                 updateFilenamePreview();
+                 filenamePreviewContainer.classList.add('active');
              } else {
-                  if (particles.length > 0) {
-                      ctx.fillStyle='#040408'; ctx.fillRect(0,0,canvasWidth,canvasHeight);
-                      ctx.shadowBlur=Math.max(1,currentSettings.glow/3);
-                      for(let i=particles.length-1;i>=0;i--){ const p=particles[i];p.life--; if(p.life<=0){particles.splice(i,1); continue;} p.x+=p.vx;p.y+=p.vy; const alpha=p.life/p.maxLife; ctx.beginPath();ctx.arc(p.x,p.y,p.size*alpha,0,Math.PI*2); let rgbaColor=p.color; if(p.color.startsWith('#')){rgbaColor=hexToRgba(p.color,alpha*0.9);}else{try{rgbaColor=p.color.replace(/[\d\.]+\)$/g,`${alpha*0.9})`);}catch(e){}} ctx.fillStyle=rgbaColor;ctx.shadowColor=rgbaColor.replace(/[\d\.]+\)$/g,`${alpha*0.5})`);ctx.fill(); }
-                      ctx.shadowBlur=0;
-                      requestAnimationFrame(drawVisualizer);
-                  } else {
-                      drawIdle();
-                  }
+                 filenamePreview.textContent = '(Awaiting Parameter Generation...)';
+                 btnRender.textContent = 'RENDER WAV @ C3';
+                 filenamePreviewContainer.classList.remove('active');
              }
-         }
+        }
+        function updateFilenamePreview() {
+             if (!currentParams) return;
+             let typeStr = currentParams.soundType;
+             if (typeStr === '808') { typeStr = '808'; } else if (typeStr === 'Lead Synth') { typeStr = 'Lead'; } else if (typeStr === 'Pluck Synth') { typeStr = 'Pluck'; } else if (typeStr === 'Pad Synth') { typeStr = 'Pad'; } else if (typeStr === 'Key Synth') { typeStr = 'Key'; }
+             typeStr = typeStr.toUpperCase();
+             const wordStr = currentFilenameWord.toUpperCase();
+             const filename = `${typeStr} ★ ${wordStr} [62serpens.com].wav`;
+             filenamePreview.textContent = filename;
+        }
+        function setNewFilenameWord() {
+            currentFilenameWord = randomElement(FILENAME_WORDS);
+            if (currentParams) { updateFilenamePreview(); }
+        }
 
-        // --- UI Control Listeners ---
-        themeSelector.addEventListener('change', (e) => { updateSettings(); particles = []; console.log(`Theme changed to: ${visualizerSettings.theme}`); if (!isPlaying) drawVisualizer(); });
-        paletteSelector.addEventListener('change', (e) => { updateSettings(); updateAccentColor(); console.log(`Palette changed to: ${visualizerSettings.palette}`); if (!isPlaying) drawVisualizer(); });
-        glowSlider.addEventListener('input', updateSettings);
-        thicknessSlider.addEventListener('input', updateSettings);
-        particleSlider.addEventListener('input', updateSettings);
+        // === WAV Encoding ===
+        function bufferToWav(buffer) {
+            const numChannels = buffer.numberOfChannels;
+            const sampleRate = buffer.sampleRate;
+            const length = buffer.length * numChannels * 2 + 44;
+            const arrayBuffer = new ArrayBuffer(length);
+            const view = new DataView(arrayBuffer);
 
-        // --- Fullscreen Logic ---
-        function updateFullscreenButton() { const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement; const isFullscreen = fullscreenElement === moduleContainer; const fsEnabledCheck = moduleContainer.requestFullscreen || moduleContainer.webkitRequestFullscreen || moduleContainer.mozRequestFullScreen || moduleContainer.msRequestFullscreen; fullscreenButton.classList.remove('not-available'); if (isFullscreen) { fullscreenButton.textContent = "EXIT"; fullscreenButton.disabled = false; console.log("updateFullscreenButton: Now fullscreen."); } else { if (fsEnabledCheck) { fullscreenButton.textContent = "FULLSCREEN"; fullscreenButton.disabled = false; console.log("updateFullscreenButton: Not fullscreen, API Supported."); } else { fullscreenButton.textContent = "N/A"; fullscreenButton.disabled = true; fullscreenButton.classList.add('not-available'); console.log("updateFullscreenButton: Not fullscreen, API Not Supported."); } } }
-        fullscreenButton.addEventListener('click', () => { if (fullscreenButton.disabled && fullscreenButton.classList.contains('not-available')) { console.warn("Fullscreen button clicked, but API is not supported."); statusMessage.textContent = "Fullscreen not supported on this device."; statusMessage.style.color = 'var(--error-color)'; return; } const elem = moduleContainer; const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement; if (!fullscreenElement) { console.log("Requesting Fullscreen..."); statusMessage.textContent = 'Requesting Fullscreen...'; statusMessage.style.color = 'var(--text-color)'; let requestMethod = elem.requestFullscreen || elem.webkitRequestFullscreen || elem.mozRequestFullScreen || elem.msRequestFullscreen; if (requestMethod) { requestMethod.call(elem).catch(err => { console.error(`Fullscreen request failed: ${err.message} (${err.name})`); statusMessage.textContent = `ERR: Fullscreen failed (${err.name}).`; statusMessage.style.color = 'var(--error-color)'; updateFullscreenButton(); }); } else { console.error("No fullscreen request method found."); statusMessage.textContent = 'ERR: Fullscreen not supported.'; statusMessage.style.color = 'var(--error-color)'; updateFullscreenButton(); } } else { console.log("Exiting Fullscreen..."); statusMessage.textContent = 'Exiting Fullscreen...'; statusMessage.style.color = 'var(--text-color)'; let exitMethod = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen; if (exitMethod) { exitMethod.call(document).catch(err => { console.error(`Exit Fullscreen failed: ${err.message} (${err.name})`); statusMessage.textContent = `ERR: Could not exit fullscreen (${err.name}).`; statusMessage.style.color = 'var(--error-color)'; updateFullscreenButton(); }); } else { console.error("No fullscreen exit method found."); statusMessage.textContent = 'ERR: Cannot exit fullscreen.'; statusMessage.style.color = 'var(--error-color)'; updateFullscreenButton(); } } });
-        function handleFullscreenChange() { const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement; console.log("Fullscreen change event detected. Element:", fullscreenElement); updateFullscreenButton(); setTimeout(() => { console.log("Resizing canvas after fullscreen change."); setupCanvas(); drawVisualizer(); }, 100); }
-        document.addEventListener('fullscreenchange', handleFullscreenChange); document.addEventListener('webkitfullscreenchange', handleFullscreenChange); document.addEventListener('mozfullscreenchange', handleFullscreenChange); document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+            // Write WAV header
+            view.setUint32(0, 0x52494646, false); // "RIFF"
+            view.setUint32(4, length - 8, true);  // File size - 8
+            view.setUint32(8, 0x57415645, false); // "WAVE"
+            view.setUint32(12, 0x666d7420, false); // "fmt "
+            view.setUint32(16, 16, true);         // Subchunk1 size (16 for PCM)
+            view.setUint16(20, 1, true);          // Audio format (1 = PCM)
+            view.setUint16(22, numChannels, true); // Number of channels
+            view.setUint32(24, sampleRate, true);  // Sample rate
+            view.setUint32(28, sampleRate * numChannels * 2, true); // Byte rate
+            view.setUint16(32, numChannels * 2, true); // Block align
+            view.setUint16(34, 16, true);         // Bits per sample
+            view.setUint32(36, 0x64617461, false); // "data"
+            view.setUint32(40, buffer.length * numChannels * 2, true); // Data size
 
-        // --- Window Resize Listener ---
-        window.addEventListener('resize', () => { const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement; if (!fullscreenElement) { console.log("Window resize event detected (not fullscreen)."); setupCanvas(); drawVisualizer(); } else { console.log("Window resize event skipped (currently fullscreen)."); }});
+            // Write PCM data
+            let offset = 44;
+            const channelData = buffer.getChannelData(0); // Mono for simplicity
+            for (let i = 0; i < buffer.length; i++) {
+                const sample = Math.max(-1, Math.min(1, channelData[i]));
+                const value = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+                view.setInt16(offset, value, true);
+                offset += 2;
+            }
 
-        // --- Initial Setup ---
-        function syncControlsToSettings() { themeSelector.value=visualizerSettings.theme;paletteSelector.value=visualizerSettings.palette;glowSlider.value=visualizerSettings.glow;thicknessSlider.value=visualizerSettings.thickness;particleSlider.value=visualizerSettings.particles; }
-        syncControlsToSettings();
-        setupCanvas();
-        updateFullscreenButton();
-        updateAccentColor();
-        drawVisualizer();
-        scrubber.disabled = true;
-        currentTimeDisplay.textContent = "00:00"; totalDurationDisplay.textContent = "00:00";
-        console.log("Initial setup complete. v4.5");
-        console.log(`Current Time (Client): ${new Date().toLocaleString()}`);
+            console.log("WAV::ENCODED | Length:", length, "SampleRate:", sampleRate);
+            return new Blob([arrayBuffer], { type: 'audio/wav' });
+        }
+
+        // === Event Handlers ===
+        async function handleRandomize() {
+            if (!await resumeAudioContext()) return;
+            const selectedType = soundTypeSelect.value;
+            const newParams = generateRandomParams(selectedType);
+            if (newParams) {
+                previousParams = currentParams ? JSON.parse(JSON.stringify(currentParams)) : null;
+                currentParams = newParams;
+                setNewFilenameWord();
+                updateUI();
+                playSound(currentParams, currentParams.baseMIDINote);
+            }
+        }
+        async function handleVariation5() { await handleVariation(0.05); }
+        async function handleVariation10() { await handleVariation(0.10); }
+        async function handleVariation25() { await handleVariation(0.25); }
+        async function handleVariation(factor) {
+            if (!currentParams || !await resumeAudioContext()) return;
+            const variedParams = generateVariationParams(currentParams, factor);
+            if (variedParams) {
+                previousParams = JSON.parse(JSON.stringify(currentParams));
+                currentParams = variedParams;
+                updateUI();
+                playSound(currentParams, currentParams.baseMIDINote);
+            }
+        }
+        async function handleUndo() {
+            if (previousParams && await resumeAudioContext()) {
+                currentParams = previousParams;
+                previousParams = null;
+                updateUI();
+                playSound(currentParams, currentParams.baseMIDINote);
+            }
+        }
+        async function handlePlayBase() {
+            if (!currentParams || !await resumeAudioContext()) return;
+            playSound(currentParams, currentParams.baseMIDINote);
+        }
+        function handleNewName() {
+            if (!currentParams) return;
+            setNewFilenameWord();
+        }
+        function handleKeyDown(event) {
+            if (event.metaKey || event.ctrlKey || event.altKey) { return; }
+            const activeElement = document.activeElement;
+            if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'SELECT' || activeElement.tagName === 'TEXTAREA')) { return; }
+            const semitoneOffset = KEY_MAP[event.code];
+            if (semitoneOffset !== undefined) {
+                event.preventDefault();
+                if (!currentParams || !resumeAudioContext()) return;
+                const targetMidiNote = currentParams.baseMIDINote + semitoneOffset;
+                playSound(currentParams, targetMidiNote);
+            }
+        }
+        async function handleTouchStart(event) {
+            if (!currentParams || !await resumeAudioContext()) return;
+            const touch = event.touches[0];
+            const target = touch.target;
+            if (target.tagName === 'BUTTON' || target.tagName === 'SELECT') return;
+            playSound(currentParams, currentParams.baseMIDINote);
+        }
+
+        async function handleRender() {
+            if (!currentParams || !await resumeAudioContext()) return;
+            const originalButtonText = btnRender.textContent;
+            btnRender.disabled = true;
+            btnPlay.disabled = true;
+            filenamePreviewContainer.classList.remove('active');
+            filenamePreview.textContent = 'RENDERING...';
+
+            try {
+                const paramsToRender = JSON.parse(JSON.stringify(currentParams));
+                const targetMidiNote = BASE_NOTE_C3;
+                const { attack: ampAtk, decay: ampDec, sustain: ampSus, release: ampRel } = paramsToRender.ampEnv;
+                const is808 = paramsToRender.soundType === '808';
+                const extendedRelease = is808 ? ampRel * 2.0 : ampRel * 1.5;
+                const estimatedDuration = ampAtk + ampDec + extendedRelease + (is808 ? 3.0 : 2.0); // Generous buffer
+                const sampleRate = audioCtx.sampleRate;
+
+                console.log(`RENDER::START | Note: C3 (${targetMidiNote}), Duration: ${estimatedDuration.toFixed(2)}s, SampleRate: ${sampleRate}`);
+
+                const offlineCtx = new OfflineAudioContext(1, Math.ceil(estimatedDuration * sampleRate), sampleRate);
+                const now = 0;
+
+                // Simplified rendering: only oscillators, filter, and envelope (no effects)
+                const noteMasterGain = offlineCtx.createGain();
+                noteMasterGain.connect(offlineCtx.destination);
+                const osc1 = offlineCtx.createOscillator();
+                const osc1Gain = offlineCtx.createGain();
+                const filter = offlineCtx.createBiquadFilter();
+                const ampEnvGain = offlineCtx.createGain();
+
+                osc1.type = paramsToRender.osc1.type;
+                const baseFreq = midiToFreq(targetMidiNote);
+                const osc1Freq = baseFreq * Math.pow(2, paramsToRender.osc1.fineTune / 1200);
+                osc1.frequency.setValueAtTime(osc1Freq, now);
+                if (is808) {
+                    const targetPitch = osc1Freq * paramsToRender.pitchEnvAmount;
+                    osc1.frequency.exponentialRampToValueAtTime(targetPitch, now + paramsToRender.pitchEnvDecay);
+                }
+
+                osc1Gain.gain.setValueAtTime(paramsToRender.osc1.gain, now);
+                filter.type = paramsToRender.filter.type;
+                filter.Q.setValueAtTime(paramsToRender.filter.Q, now);
+                filter.frequency.setValueAtTime(paramsToRender.filter.cutoff, now);
+                noteMasterGain.gain.setValueAtTime(paramsToRender.masterGain, now);
+
+                osc1.connect(osc1Gain);
+                osc1Gain.connect(filter);
+                filter.connect(ampEnvGain);
+                ampEnvGain.connect(noteMasterGain);
+
+                // Envelope
+                const sustainLevel = clamp(ampSus, 0.0001, 1.0);
+                ampEnvGain.gain.setValueAtTime(0, now);
+                ampEnvGain.gain.linearRampToValueAtTime(1.0, now + ampAtk);
+                ampEnvGain.gain.setTargetAtTime(sustainLevel, now + ampAtk, ampDec / 3 + 0.001);
+                const releaseStartTime = now + ampAtk + ampDec + (is808 ? 1.0 : 0.5);
+                ampEnvGain.gain.cancelScheduledValues(releaseStartTime);
+                ampEnvGain.gain.setValueAtTime(sustainLevel, releaseStartTime);
+                ampEnvGain.gain.exponentialRampToValueAtTime(0.0001, releaseStartTime + extendedRelease);
+
+                osc1.start(now);
+                const totalDuration = releaseStartTime + extendedRelease + 0.5;
+                osc1.stop(totalDuration);
+
+                const renderedBuffer = await offlineCtx.startRendering();
+                console.log("RENDER::COMPLETE | Buffer Length:", renderedBuffer.length, "Duration:", renderedBuffer.duration);
+
+                filenamePreview.textContent = 'ENCODING WAV...';
+                const wavBlob = bufferToWav(renderedBuffer);
+
+                let typeStr = paramsToRender.soundType;
+                if (typeStr === '808') { typeStr = '808'; } else if (typeStr === 'Lead Synth') { typeStr = 'Lead'; } else if (typeStr === 'Pluck Synth') { typeStr = 'Pluck'; } else if (typeStr === 'Pad Synth') { typeStr = 'Pad'; } else if (typeStr === 'Key Synth') { typeStr = 'Key'; }
+                typeStr = typeStr.toUpperCase();
+                const wordStr = currentFilenameWord.toUpperCase();
+                const filename = `${typeStr} ★ ${wordStr} [62serpens.com].wav`;
+
+                const url = URL.createObjectURL(wavBlob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+                console.log("DOWNLOAD::TRIGGERED | File:", filename);
+                filenamePreview.textContent = 'RENDER COMPLETE!';
+            } catch (error) {
+                console.error("ERROR::RENDER_FAILED", error);
+                filenamePreview.textContent = `ERROR::RENDER_FAILED!`;
+                alert(`ERROR::RENDER_FAILED | ${error.message}`);
+            } finally {
+                btnRender.disabled = false;
+                btnPlay.disabled = !currentParams;
+                setTimeout(() => {
+                    if (currentParams) {
+                        updateFilenamePreview();
+                        filenamePreviewContainer.classList.add('active');
+                    } else {
+                        filenamePreview.textContent = '(Awaiting Parameter Generation...)';
+                        filenamePreviewContainer.classList.remove('active');
+                    }
+                    btnRender.textContent = 'RENDER WAV @ C3';
+                }, 3000);
+            }
+        }
+
+        // === Initialization ===
+        document.addEventListener('DOMContentLoaded', () => {
+            btnRandomize.addEventListener('click', handleRandomize);
+            btnVariation5.addEventListener('click', handleVariation5);
+            btnVariation10.addEventListener('click', handleVariation10);
+            btnVariation25.addEventListener('click', handleVariation25);
+            btnUndo.addEventListener('click', handleUndo);
+            btnPlay.addEventListener('click', handlePlayBase);
+            btnNewName.addEventListener('click', handleNewName);
+            btnRender.addEventListener('click', handleRender);
+            window.addEventListener('keydown', handleKeyDown);
+            window.addEventListener('touchstart', handleTouchStart);
+
+            currentFilenameWord = randomElement(FILENAME_WORDS);
+            updateUI();
+            console.log("// MODULE::ONE-SHOT_SYNTH v1.3.8 :: Interface Active //");
+        });
     </script>
 </body>
 </html>
