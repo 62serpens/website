@@ -29,7 +29,7 @@
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0;}
         html { scroll-behavior: smooth; }
-        body { margin: 0; padding: 0; width: 100%; min-height: 100vh; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-main); font-size: 14px; line-height: 1.6; display: flex; justify-content: center; align-items: flex-start; padding: 2rem; cursor: default; overflow-y: hidden; position: relative; }
+        body { margin: 0; padding: 0; width: 100%; min-height: 100vh; background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-main); font-size: 14px; line-height: 1.6; display: flex; justify-content: center; align-items: flex-start; padding: 2rem; cursor: default; overflow-y: hidden; }
         .container { background: none; border: 1px solid var(--border-color); padding: 20px; max-width: 750px; width: 100%; display: flex; flex-direction: column; gap: 20px; }
         h1 { font-family: var(--font-main); font-weight: 700; text-transform: uppercase; font-size: 1.2em; color: var(--header-color); margin: 0 0 10px 0; padding-bottom: 8px; text-align: left; border-bottom: 1px solid var(--border-color); letter-spacing: 1px; }
         .control-group { border: 1px solid var(--border-color); padding: 15px; display: flex; flex-direction: column; gap: 12px; }
@@ -38,7 +38,7 @@
         select { font-family: var(--font-main); font-size: 0.95em; padding: 10px 12px; border-radius: 0; border: 1px solid var(--border-color); background-color: var(--input-bg-color); color: var(--text-color); cursor: pointer; transition: border-color var(--transition-fast); appearance: none; -webkit-appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%2220%22 height%3D%2220%22 fill%3D%22%23a8a8b0%22%3E%3Cpath d%3D%22M5 8l5 5 5-5z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 0.7rem center; background-size: 1em; padding-right: 2.5em; }
         select:focus { outline: none; border-color: var(--accent-color); }
         .button-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
-        .output-button-grid { display: flex; flex-direction: column; gap: 12px; }
+        .output-button-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
         button { font-family: var(--font-main); font-size: 0.9em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 15px; border-radius: 0; border: 1px solid var(--border-color); background-color: var(--button-bg-color); color: var(--text-color); cursor: pointer; text-align: center; transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast); }
         button:not(:disabled):hover { color: var(--accent-hover); background-color: var(--border-color); border-color: var(--accent-color); }
         button:not(:disabled):active { background-color: var(--accent-color); color: var(--bg-color); border-color: var(--accent-hover); }
@@ -51,13 +51,10 @@
         #btn-render { border-color: var(--accent-color); color: var(--accent-color); } #btn-render:not(:disabled):hover { background-color: var(--accent-color); color: var(--bg-color); border-color: var(--accent-hover); } #btn-render:not(:disabled):active { background-color: var(--accent-hover); color: var(--bg-color); border-color: var(--accent-color); }
         #filename-preview-container { font-family: var(--font-main); font-size: 0.9em; background-color: var(--input-bg-color); padding: 10px 15px; border: 1px dashed var(--border-color); color: var(--text-color); text-align: center; word-break: break-all; min-height: 41px; display: flex; align-items: center; justify-content: center; transition: border-color var(--transition-fast), border-style var(--transition-fast); } #filename-preview-container.active { border-color: var(--accent-color); border-style: solid; } #filename-preview { color: var(--header-color); font-weight: 700; }
         .keyboard-hint { font-size: 0.85em; color: var(--text-color); text-align: center; margin-top: 1rem; padding: 12px; border: 1px dashed var(--border-color); background-color: var(--input-bg-color); line-height: 1.5; } .keyboard-hint code { background-color: var(--border-color); padding: 0.1em 0.4em; margin: 0 0.1em; border-radius: 0; font-family: var(--font-main); color: var(--accent-color); font-weight: 700; }
-        #audio-unlock-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); color: var(--accent-color); display: flex; align-items: center; justify-content: center; z-index: 1000; font-size: 1.2em; text-transform: uppercase; }
-        @media (max-width: 700px) { body{font-size:13px;padding:1rem;} .container{padding:15px;gap:15px;} h1{font-size:1.1em;} .control-group{padding:15px;gap:12px;} select{font-size:.9em;padding:9px 10px;padding-right:2.3em;} button{font-size:.85em;padding:9px 12px;} .button-grid, .output-button-grid{gap:10px;} #filename-preview-container{font-size:.85em;padding:9px 12px;min-height:38px;} .keyboard-hint{font-size:.8em;padding:10px;} } @media (max-width: 480px) { .button-grid { grid-template-columns: 1fr; } .output-button-grid { gap: 10px; } }
+        @media (max-width: 700px) { body{font-size:13px;padding:1rem;} .container{padding:15px;gap:15px;} h1{font-size:1.1em;} .control-group{padding:15px;gap:12px;} select{font-size:.9em;padding:9px 10px;padding-right:2.3em;} button{font-size:.85em;padding:9px 12px;} .button-grid, .output-button-grid{gap:10px;} #filename-preview-container{font-size:.85em;padding:9px 12px;min-height:38px;} .keyboard-hint{font-size:.8em;padding:10px;} } @media (max-width: 480px) { .button-grid, .output-button-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <div id="audio-unlock-overlay">Tap to Enable Audio</div>
-
     <div class="container">
         <h1>// MODULE::ONE-SHOT_SYNTH [62serpens.com] //</h1>
 
@@ -123,7 +120,6 @@
         const btnRender = document.getElementById('btn-render');
         const filenamePreview = document.getElementById('filename-preview');
         const filenamePreviewContainer = document.getElementById('filename-preview-container');
-        const audioUnlockOverlay = document.getElementById('audio-unlock-overlay');
 
         // === Audio Context & State ===
         let audioCtx = null;
@@ -173,7 +169,7 @@
             if (audioCtx.state === 'suspended') {
                 try {
                     await audioCtx.resume();
-                    console.log("AudioContext::RESUMED | State:", audioCtx.state);
+                    console.log("AudioContext::RESUMED");
                     isAudioContextStarted = true;
                 } catch (e) {
                     console.error("ERROR::AudioContext_RESUME_FAILED", e);
@@ -186,19 +182,16 @@
         }
 
         function playSound(params, midiNote) {
-            if (!isAudioContextStarted && !resumeAudioContext()) { 
-                console.warn("WARN::AudioContext_INACTIVE"); 
-                return; 
-            }
-            if (!params) { 
-                console.warn("WARN::PARAMETER_SET_MISSING"); 
-                return; 
-            }
+            if (!resumeAudioContext()) { console.warn("WARN::AudioContext_INACTIVE"); return; }
+            if (!params) { console.warn("WARN::PARAMETER_SET_MISSING"); return; }
 
             const now = audioCtx.currentTime;
             const is808 = params.soundType === '808';
+
+            // Dynamic fade-out time for 808s, extended for smoother decay
             const fadeOutTime = is808 ? Math.max(0.5, params.ampEnv.decay + params.ampEnv.release * 0.8) : MONO_FADE_OUT_TIME;
 
+            // Monophonic Cutoff
             if (currentPlayingNode) {
                 console.log(`Applying cutoff (${fadeOutTime.toFixed(3)}s ramp) to previous node at ${now.toFixed(4)}`);
                 currentPlayingNode.gain.cancelScheduledValues(now);
@@ -206,6 +199,7 @@
                 currentPlayingNode.gain.linearRampToValueAtTime(0, now + fadeOutTime);
             }
 
+            // Create Base Nodes
             const noteMasterGain = audioCtx.createGain();
             noteMasterGain.connect(audioCtx.destination);
             currentPlayingNode = noteMasterGain;
@@ -224,6 +218,7 @@
             let transientGain = null;
             let preEffectMix = audioCtx.createGain();
 
+            // Apply Core Parameters
             osc1.type = params.osc1.type;
             osc2.type = params.osc2.type;
             const baseFreq = midiToFreq(midiNote);
@@ -331,6 +326,7 @@
             finalStageInput.connect(noteMasterGain);
             noteMasterGain.gain.setValueAtTime(params.masterGain, now);
 
+            // Schedule Envelopes with Improved 808 Handling
             const { attack: filtAtk, decay: filtDec, sustain: filtSus, release: filtRel } = params.filterEnv;
             const filterEnvNode = audioCtx.createGain();
             filterEnvNode.gain.setValueAtTime(0, now);
@@ -352,6 +348,7 @@
             ampEnvGain.gain.exponentialRampToValueAtTime(0.0001, releaseStartTime + extendedRelease);
             filterEnvNode.gain.setTargetAtTime(0.0, releaseStartTime, filtRel / 3 + 0.001);
 
+            // Start Oscillators & Transient
             lfo.start(now);
             osc1.start(now);
             osc2.start(now);
@@ -359,6 +356,7 @@
                 transientNoise.start(now);
             }
 
+            // Schedule Cleanup with Extra Buffer
             const totalDuration = releaseStartTime + extendedRelease + (is808 ? 0.8 : 0.1);
             osc1.stop(totalDuration);
             osc2.stop(totalDuration);
@@ -467,4 +465,456 @@
                          params.filter.cutoff = randomInRange(300, 7000);
                          params.filter.Q = randomInRange(0.7, 7);
                          params.filter.envAmount = randomInRange(-4000, 4000);
-                         params.filterEnv = { attack: randomInRange(0
+                         params.filterEnv = { attack: randomInRange(0.5, 3.5), decay: randomInRange(0.5, 3.0), sustain: randomInRange(0.2, 0.7), release: randomInRange(1.5, 6.0) };
+                         params.lfo.rate = randomInRange(0.05, 4.0);
+                         if (Math.random() > 0.3) params.lfo.pitchMod = randomInRange(2, 15);
+                         if (Math.random() > 0.4) params.lfo.filterMod = randomInRange(100, 2500);
+                         params.effects.delay.mix = randomInRange(0.1, 0.6);
+                         params.effects.compressor.enabled = Math.random() > 0.4;
+                         if (params.effects.compressor.enabled) { params.effects.compressor.release = randomInRange(0.1, 1.5); }
+                         break;
+                   case 'Key Synth':
+                         params.baseMIDINote = BASE_NOTE_C4;
+                         params.osc1.type = randomElement(['sine', 'triangle', 'square']);
+                         params.osc1.fineTune = randomInRange(-5, 5);
+                         params.osc2.type = randomElement(WAVEFORMS);
+                         params.osc2.pitchOffset = randomElement([0, 12, 19, 24]);
+                         params.osc2.fineTune = randomInRange(-10, 10);
+                         params.ampEnv = { attack: randomInRange(0.005, 0.05), decay: randomInRange(0.1, 0.6), sustain: randomInRange(0.1, 0.7), release: randomInRange(0.1, 1.2) };
+                         params.filter.type = randomElement(['lowpass', 'lowpass', 'bandpass']);
+                         params.filter.cutoff = randomInRange(800, 8000);
+                         params.filter.Q = randomInRange(0.8, 5);
+                         params.filter.envAmount = randomInRange(-2000, 2500);
+                         params.filterEnv = { attack: randomInRange(0.01, 0.1), decay: randomInRange(0.1, 0.7), sustain: randomInRange(0.1, 0.6), release: randomInRange(0.2, 1.5) };
+                         params.lfo.rate = randomInRange(3, 8);
+                         if (Math.random() > 0.6) params.lfo.pitchMod = randomInRange(2, 10);
+                         params.effects.compressor.enabled = Math.random() > 0.5;
+                         break;
+             }
+             params.osc1.pitchMIDIBase = params.baseMIDINote;
+             console.log("Generated Params:", JSON.parse(JSON.stringify(params)));
+             return params;
+        }
+
+        function generateVariationParams(baseParams, factor) {
+            if (!baseParams) return null;
+            const newParams = JSON.parse(JSON.stringify(baseParams));
+            const is808 = baseParams.soundType === '808';
+            const vary = (val, min, max, fact) => clamp(val + randomInRange(-(max - min) * fact / 2, (max - min) * fact / 2), min, max);
+            const varyInt = (val, min, max, fact) => clamp(val + randomIntInRange(Math.floor(-(max - min) * fact / 2), Math.ceil((max - min) * fact / 2)), min, max);
+            const varyLog = (val, min, max, fact) => clamp(Math.exp(Math.log(val) + randomInRange(-Math.log(max / min) * fact / 2, Math.log(max / min) * fact / 2)), min, max);
+            const varyChoice = (val, choices, prob) => shouldChange(prob) ? randomElement(choices.filter(c => c !== val) || choices) : val;
+            const varyBool = (val, prob) => shouldChange(prob) ? !val : val;
+
+            newParams.osc1.fineTune = vary(newParams.osc1.fineTune, -50, 50, factor);
+            newParams.osc1.gain = vary(newParams.osc1.gain, 0, 1, factor);
+            newParams.osc1.type = varyChoice(newParams.osc1.type, WAVEFORMS, factor / 4);
+            newParams.osc2.fineTune = vary(newParams.osc2.fineTune, -50, 50, factor);
+            newParams.osc2.gain = vary(newParams.osc2.gain, 0, 1, factor);
+            newParams.osc2.pitchOffset = varyInt(newParams.osc2.pitchOffset, -24, 24, factor * 1.5);
+            newParams.osc2.type = varyChoice(newParams.osc2.type, WAVEFORMS, factor / 4);
+            const totalGain = newParams.osc1.gain + newParams.osc2.gain;
+            if (totalGain > 1.1) { newParams.osc1.gain /= totalGain / 1.1; newParams.osc2.gain /= totalGain / 1.1; }
+
+            newParams.ampEnv.attack = vary(newParams.ampEnv.attack, 0.001, 5.0, factor);
+            newParams.ampEnv.decay = vary(newParams.ampEnv.decay, 0.01, 5.0, factor);
+            newParams.ampEnv.sustain = vary(newParams.ampEnv.sustain, 0.0001, 1.0, factor);
+            newParams.ampEnv.release = vary(newParams.ampEnv.release, 0.01, 8.0, factor);
+            newParams.filterEnv.attack = vary(newParams.filterEnv.attack, 0.001, 5.0, factor);
+            newParams.filterEnv.decay = vary(newParams.filterEnv.decay, 0.01, 5.0, factor);
+            newParams.filterEnv.sustain = vary(newParams.filterEnv.sustain, 0.0001, 1.0, factor);
+            newParams.filterEnv.release = vary(newParams.filterEnv.release, 0.01, 8.0, factor);
+            newParams.filter.cutoff = varyLog(newParams.filter.cutoff, 20, 20000, factor);
+            newParams.filter.Q = vary(newParams.filter.Q, 0.1, 20, factor);
+            newParams.filter.envAmount = vary(newParams.filter.envAmount, -8000, 8000, factor);
+            newParams.filter.type = varyChoice(newParams.filter.type, FILTER_TYPES, factor / 5);
+            newParams.lfo.rate = varyLog(newParams.lfo.rate, 0.01, 30, factor);
+            newParams.lfo.pitchMod = vary(newParams.lfo.pitchMod, 0, 100, factor);
+            newParams.lfo.filterMod = vary(newParams.lfo.filterMod, 0, 5000, factor);
+            newParams.lfo.type = varyChoice(newParams.lfo.type, WAVEFORMS, factor / 4);
+            newParams.effects.drive.amount = vary(newParams.effects.drive.amount, 0, 1.0, factor);
+            newParams.effects.drive.mix = vary(newParams.effects.drive.mix, 0, 1.0, factor);
+            newParams.effects.delay.time = vary(newParams.effects.delay.time, 0.001, 2.0, factor);
+            newParams.effects.delay.feedback = vary(newParams.effects.delay.feedback, 0, 0.95, factor);
+            newParams.effects.delay.mix = vary(newParams.effects.delay.mix, 0, 1.0, factor);
+            newParams.effects.compressor.enabled = varyBool(newParams.effects.compressor.enabled, factor / 3);
+            newParams.effects.compressor.threshold = vary(newParams.effects.compressor.threshold, -80, 0, factor);
+            newParams.effects.compressor.ratio = vary(newParams.effects.compressor.ratio, 1, 20, factor);
+            newParams.effects.compressor.attack = vary(newParams.effects.compressor.attack, 0.001, 0.1, factor);
+            newParams.effects.compressor.release = vary(newParams.effects.compressor.release, 0.05, 1.0, factor);
+            newParams.masterGain = vary(newParams.masterGain, 0.1, 1.0, factor);
+            if (is808 && newParams.pitchEnvAmount !== undefined) {
+                newParams.pitchEnvAmount = vary(newParams.pitchEnvAmount, 0.1, 0.95, factor);
+                newParams.pitchEnvDecay = vary(newParams.pitchEnvDecay, 0.01, 0.5, factor);
+                newParams.transientAmount = vary(newParams.transientAmount, 0, 1.0, factor);
+                newParams.transientDecay = vary(newParams.transientDecay, 0.001, 0.1, factor);
+            }
+            console.log("Varied Params:", JSON.parse(JSON.stringify(newParams)));
+            return newParams;
+        }
+
+        // === UI Update Functions ===
+        function updateUI() {
+             const soundLoaded = currentParams !== null;
+             const undoAvailable = previousParams !== null;
+             btnVariation5.disabled = !soundLoaded;
+             btnVariation10.disabled = !soundLoaded;
+             btnVariation25.disabled = !soundLoaded;
+             btnPlay.disabled = !soundLoaded;
+             btnNewName.disabled = !soundLoaded;
+             btnRender.disabled = !soundLoaded;
+             btnUndo.disabled = !undoAvailable;
+             if (soundLoaded) {
+                 btnRender.textContent = 'RENDER WAV @ C3';
+                 updateFilenamePreview();
+                 filenamePreviewContainer.classList.add('active');
+             } else {
+                 filenamePreview.textContent = '(Awaiting Parameter Generation...)';
+                 btnRender.textContent = 'RENDER WAV @ C3';
+                 filenamePreviewContainer.classList.remove('active');
+             }
+        }
+        function updateFilenamePreview() {
+             if (!currentParams) return;
+             let typeStr = currentParams.soundType;
+             if (typeStr === '808') { typeStr = '808'; } else if (typeStr === 'Lead Synth') { typeStr = 'Lead'; } else if (typeStr === 'Pluck Synth') { typeStr = 'Pluck'; } else if (typeStr === 'Pad Synth') { typeStr = 'Pad'; } else if (typeStr === 'Key Synth') { typeStr = 'Key'; }
+             typeStr = typeStr.toUpperCase();
+             const wordStr = currentFilenameWord.toUpperCase();
+             const filename = `${typeStr} ★ ${wordStr} [62serpens.com].wav`;
+             filenamePreview.textContent = filename;
+        }
+        function setNewFilenameWord() {
+            currentFilenameWord = randomElement(FILENAME_WORDS);
+            if (currentParams) { updateFilenamePreview(); }
+        }
+
+        // === Event Handlers ===
+        function handleRandomize() {
+            if (!initAudioContext()) return;
+            resumeAudioContext();
+            const selectedType = soundTypeSelect.value;
+            const newParams = generateRandomParams(selectedType);
+            if (newParams) {
+                previousParams = currentParams ? JSON.parse(JSON.stringify(currentParams)) : null;
+                currentParams = newParams;
+                setNewFilenameWord();
+                updateUI();
+                playSound(currentParams, currentParams.baseMIDINote);
+            }
+        }
+        function handleVariation5() { handleVariation(0.05); }
+        function handleVariation10() { handleVariation(0.10); }
+        function handleVariation25() { handleVariation(0.25); }
+        function handleVariation(factor) {
+            if (!currentParams || !resumeAudioContext()) return;
+            const variedParams = generateVariationParams(currentParams, factor);
+            if (variedParams) {
+                previousParams = JSON.parse(JSON.stringify(currentParams));
+                currentParams = variedParams;
+                updateUI();
+                playSound(currentParams, currentParams.baseMIDINote);
+            }
+        }
+        function handleUndo() {
+            if (previousParams && resumeAudioContext()) {
+                currentParams = previousParams;
+                previousParams = null;
+                updateUI();
+                playSound(currentParams, currentParams.baseMIDINote);
+            }
+        }
+        function handlePlayBase() {
+            if (!currentParams || !resumeAudioContext()) return;
+            playSound(currentParams, currentParams.baseMIDINote);
+        }
+        function handleNewName() {
+            if (!currentParams) return;
+            setNewFilenameWord();
+        }
+        function handleKeyDown(event) {
+            if (event.metaKey || event.ctrlKey || event.altKey) { return; }
+            const activeElement = document.activeElement;
+            if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'SELECT' || activeElement.tagName === 'TEXTAREA')) { return; }
+            if (!currentParams || !resumeAudioContext()) {
+                if (!isAudioContextStarted) { resumeAudioContext(); }
+                return;
+            }
+            const semitoneOffset = KEY_MAP[event.code];
+            if (semitoneOffset !== undefined) {
+                event.preventDefault();
+                const targetMidiNote = currentParams.baseMIDINote + semitoneOffset;
+                playSound(currentParams, targetMidiNote);
+            }
+        }
+
+        function bufferToWav(aBuffer) {
+            let numOfChan = aBuffer.numberOfChannels,
+                btwLength = aBuffer.length * numOfChan * 2 + 44,
+                btwArrBuff = new ArrayBuffer(btwLength),
+                btwView = new DataView(btwArrBuff),
+                btwChnls = [],
+                btwIndex,
+                btwSample,
+                btwOffset = 0,
+                btwPos = 0;
+            const setUint16 = (data) => { btwView.setUint16(btwPos, data, true); btwPos += 2; };
+            const setUint32 = (data) => { btwView.setUint32(btwPos, data, true); btwPos += 4; };
+            setUint32(0x46464952);
+            setUint32(btwLength - 8);
+            setUint32(0x45564157);
+            setUint32(0x20746d66);
+            setUint32(16);
+            setUint16(1);
+            setUint16(numOfChan);
+            setUint32(aBuffer.sampleRate);
+            setUint32(aBuffer.sampleRate * 2 * numOfChan);
+            setUint16(numOfChan * 2);
+            setUint16(16);
+            setUint32(0x61746164);
+            setUint32(btwLength - 44);
+            for (btwIndex = 0; btwIndex < aBuffer.numberOfChannels; btwIndex++) { btwChnls.push(aBuffer.getChannelData(btwIndex)); }
+            btwPos = 44;
+            while (btwOffset < aBuffer.length) {
+                for (btwIndex = 0; btwIndex < numOfChan; btwIndex++) {
+                    btwSample = Math.max(-1, Math.min(1, btwChnls[btwIndex][btwOffset]));
+                    btwSample = btwSample < 0 ? btwSample * 0x8000 : btwSample * 0x7FFF;
+                    if (btwPos < btwLength) { btwView.setInt16(btwPos, btwSample, true); btwPos += 2; } else { console.warn("WAV Buffer overflow detected"); break; }
+                }
+                btwOffset++;
+                if (btwIndex < numOfChan) break;
+            }
+            return new Blob([btwView], { type: 'audio/wav' });
+        }
+
+        async function handleRender() {
+            if (!currentParams || !resumeAudioContext()) return;
+            const originalButtonText = btnRender.textContent;
+            btnRender.disabled = true;
+            btnPlay.disabled = true;
+            filenamePreviewContainer.classList.remove('active');
+            filenamePreview.textContent = 'RENDERING...';
+            try {
+                const paramsToRender = JSON.parse(JSON.stringify(currentParams));
+                const targetMidiNote = BASE_NOTE_C3;
+                const { attack: ampAtk, decay: ampDec, release: ampRel } = paramsToRender.ampEnv;
+                const is808 = paramsToRender.soundType === '808';
+                const extendedRelease = is808 ? ampRel * 1.5 : ampRel;
+                const estimatedDuration = Math.min(10.0, ampAtk + ampDec + extendedRelease + (is808 ? 2.0 : 1.0));
+                console.log(`RENDER::INITIATED | Target Note: C3 (${targetMidiNote}), Duration: ${estimatedDuration.toFixed(2)}s`);
+                const offlineCtx = new OfflineAudioContext(1, Math.ceil(estimatedDuration * SAMPLE_RATE), SAMPLE_RATE);
+                const now = 0;
+
+                const noteMasterGain = offlineCtx.createGain();
+                noteMasterGain.connect(offlineCtx.destination);
+                const osc1 = offlineCtx.createOscillator();
+                const osc2 = offlineCtx.createOscillator();
+                const osc1Gain = offlineCtx.createGain();
+                const osc2Gain = offlineCtx.createGain();
+                const oscMixGain = offlineCtx.createGain();
+                const filter = offlineCtx.createBiquadFilter();
+                const ampEnvGain = offlineCtx.createGain();
+                const filterEnvMod = offlineCtx.createGain();
+                const lfo = offlineCtx.createOscillator();
+                const lfoGainPitch = offlineCtx.createGain();
+                const lfoGainFilter = offlineCtx.createGain();
+                let transientNoise = null;
+                let transientGain = null;
+                let preEffectMix = offlineCtx.createGain();
+
+                osc1.type = paramsToRender.osc1.type;
+                osc2.type = paramsToRender.osc2.type;
+                const baseFreq = midiToFreq(targetMidiNote);
+                const osc1Freq = baseFreq * Math.pow(2, paramsToRender.osc1.fineTune / 1200);
+                const osc2Freq = osc1Freq * Math.pow(2, (paramsToRender.osc2.pitchOffset * 100 + paramsToRender.osc2.fineTune) / 1200);
+
+                if (is808) {
+                    const targetPitch = osc1Freq * paramsToRender.pitchEnvAmount;
+                    osc1.frequency.setValueAtTime(osc1Freq, now);
+                    osc1.frequency.exponentialRampToValueAtTime(targetPitch, now + paramsToRender.pitchEnvDecay);
+                    const targetPitch2 = osc2Freq * paramsToRender.pitchEnvAmount;
+                    osc2.frequency.setValueAtTime(osc2Freq, now);
+                    osc2.frequency.exponentialRampToValueAtTime(targetPitch2, now + paramsToRender.pitchEnvDecay);
+                    transientNoise = offlineCtx.createBufferSource();
+                    transientGain = offlineCtx.createGain();
+                    const noiseBufferSize = offlineCtx.sampleRate * 0.05;
+                    const noiseBuffer = offlineCtx.createBuffer(1, noiseBufferSize, offlineCtx.sampleRate);
+                    const noiseOutput = noiseBuffer.getChannelData(0);
+                    for (let i = 0; i < noiseBufferSize; i++) { noiseOutput[i] = Math.random() * 2 - 1; }
+                    transientNoise.buffer = noiseBuffer;
+                    transientNoise.loop = false;
+                    transientGain.gain.setValueAtTime(0, now);
+                    transientGain.gain.linearRampToValueAtTime(paramsToRender.transientAmount, now + 0.001);
+                    transientGain.gain.exponentialRampToValueAtTime(0.0001, now + paramsToRender.transientDecay * 1.5);
+                    transientNoise.connect(transientGain);
+                    transientGain.connect(preEffectMix);
+                } else {
+                    osc1.frequency.setValueAtTime(osc1Freq, now);
+                    osc2.frequency.setValueAtTime(osc2Freq, now);
+                }
+
+                osc1Gain.gain.setValueAtTime(paramsToRender.osc1.gain, now);
+                osc2Gain.gain.setValueAtTime(paramsToRender.osc2.gain, now);
+                filter.type = paramsToRender.filter.type;
+                filter.Q.setValueAtTime(paramsToRender.filter.Q, now);
+                filter.frequency.setValueAtTime(paramsToRender.filter.cutoff, now);
+                filterEnvMod.gain.setValueAtTime(paramsToRender.filter.envAmount, now);
+                filterEnvMod.connect(filter.frequency);
+                lfo.type = paramsToRender.lfo.type;
+                lfo.frequency.setValueAtTime(paramsToRender.lfo.rate, now);
+                lfoGainPitch.gain.setValueAtTime(paramsToRender.lfo.pitchMod, now);
+                lfoGainFilter.gain.setValueAtTime(paramsToRender.lfo.filterMod, now);
+                lfoGainPitch.connect(osc1.detune);
+                lfoGainPitch.connect(osc2.detune);
+                lfoGainFilter.connect(filter.frequency);
+
+                osc1.connect(osc1Gain);
+                osc2.connect(osc2Gain);
+                osc1Gain.connect(oscMixGain);
+                osc2Gain.connect(oscMixGain);
+                oscMixGain.connect(preEffectMix);
+
+                let currentNode = preEffectMix;
+                if (paramsToRender.effects.drive.mix > 0.01) {
+                    const driveNode = offlineCtx.createWaveShaper();
+                    const driveMixGain = offlineCtx.createGain();
+                    const driveInputGain = offlineCtx.createGain();
+                    const driveOutputGain = offlineCtx.createGain();
+                    const dryGain = offlineCtx.createGain();
+                    const curveAmount = paramsToRender.effects.drive.amount * 50 + 5;
+                    driveNode.curve = makeDistortionCurve(curveAmount);
+                    driveNode.oversample = '2x';
+                    const inputGainValue = 1 + paramsToRender.effects.drive.amount * 2;
+                    const outputGainValue = 0.8 / (1 + paramsToRender.effects.drive.amount * 1.5);
+                    driveInputGain.gain.setValueAtTime(inputGainValue, now);
+                    driveOutputGain.gain.setValueAtTime(outputGainValue, now);
+                    driveMixGain.gain.setValueAtTime(paramsToRender.effects.drive.mix, now);
+                    dryGain.gain.setValueAtTime(1.0 - paramsToRender.effects.drive.mix, now);
+                    const driveMerge = offlineCtx.createGain();
+                    currentNode.connect(driveInputGain).connect(driveNode).connect(driveOutputGain).connect(driveMixGain).connect(driveMerge);
+                    currentNode.connect(dryGain).connect(driveMerge);
+                    currentNode = driveMerge;
+                }
+                if (paramsToRender.effects.delay.mix > 0.01 && paramsToRender.effects.delay.time > 0.005) {
+                    const delayNode = offlineCtx.createDelay(2.0);
+                    const feedbackGain = offlineCtx.createGain();
+                    const wetGain = offlineCtx.createGain();
+                    const dryGain = offlineCtx.createGain();
+                    const delayMerge = offlineCtx.createGain();
+                    delayNode.delayTime.setValueAtTime(clamp(paramsToRender.effects.delay.time, 0.001, 2.0), now);
+                    feedbackGain.gain.setValueAtTime(clamp(paramsToRender.effects.delay.feedback, 0, 0.95), now);
+                    wetGain.gain.setValueAtTime(paramsToRender.effects.delay.mix, now);
+                    dryGain.gain.setValueAtTime(1.0 - paramsToRender.effects.delay.mix, now);
+                    currentNode.connect(delayNode);
+                    delayNode.connect(feedbackGain).connect(delayNode);
+                    delayNode.connect(wetGain).connect(delayMerge);
+                    currentNode.connect(dryGain).connect(delayMerge);
+                    currentNode = delayMerge;
+                }
+                let compressorNode = null;
+                if (paramsToRender.effects.compressor.enabled) {
+                    compressorNode = offlineCtx.createDynamicsCompressor();
+                    compressorNode.threshold.setValueAtTime(paramsToRender.effects.compressor.threshold, now);
+                    compressorNode.knee.setValueAtTime(5, now);
+                    compressorNode.ratio.setValueAtTime(paramsToRender.effects.compressor.ratio, now);
+                    compressorNode.attack.setValueAtTime(paramsToRender.effects.compressor.attack, now);
+                    compressorNode.release.setValueAtTime(paramsToRender.effects.compressor.release, now);
+                }
+
+                currentNode.connect(filter);
+                filter.connect(ampEnvGain);
+                let finalStageInput = ampEnvGain;
+                if (compressorNode) { ampEnvGain.connect(compressorNode); finalStageInput = compressorNode; }
+                finalStageInput.connect(noteMasterGain);
+                noteMasterGain.gain.setValueAtTime(paramsToRender.masterGain * 1.2, now);
+
+                const { attack: offFiltAtk, decay: offFiltDec, sustain: offFiltSus, release: offFiltRel } = paramsToRender.filterEnv;
+                const { attack: offAmpAtk, decay: offAmpDec, sustain: offAmpSus, release: offAmpRel } = paramsToRender.ampEnv;
+                const offSustainLevel = clamp(offAmpSus, 0.0001, 1.0);
+                ampEnvGain.gain.setValueAtTime(0, now);
+                ampEnvGain.gain.linearRampToValueAtTime(1.0, now + offAmpAtk);
+                ampEnvGain.gain.setTargetAtTime(offSustainLevel, now + offAmpAtk, offAmpDec / 3 + 0.001);
+                const releaseStartTime = now + offAmpAtk + offAmpDec + (is808 ? 1.0 : 0.5);
+                ampEnvGain.gain.cancelScheduledValues(releaseStartTime);
+                ampEnvGain.gain.setValueAtTime(offSustainLevel, releaseStartTime);
+                ampEnvGain.gain.exponentialRampToValueAtTime(0.0001, releaseStartTime + extendedRelease);
+
+                const filterEnvNode = offlineCtx.createGain();
+                filterEnvNode.gain.setValueAtTime(0, now);
+                filterEnvNode.gain.linearRampToValueAtTime(1.0, now + offFiltAtk);
+                const offFilterSustainLevel = clamp(offFiltSus, 0.0001, 1.0);
+                filterEnvNode.gain.setTargetAtTime(offFilterSustainLevel, now + offFiltAtk, offFiltDec / 3 + 0.001);
+                filterEnvNode.gain.setTargetAtTime(0.0, releaseStartTime, offFiltRel / 3 + 0.001);
+                filterEnvNode.connect(filterEnvMod);
+
+                lfo.start(now);
+                osc1.start(now);
+                osc2.start(now);
+                if (is808 && transientNoise) { transientNoise.start(now); }
+                const totalDuration = releaseStartTime + extendedRelease + (is808 ? 0.8 : 0.1);
+                osc1.stop(totalDuration);
+                osc2.stop(totalDuration);
+                lfo.stop(totalDuration);
+                if (is808 && transientNoise) { transientNoise.stop(now + paramsToRender.transientDecay * 1.5 + 0.5); }
+
+                const renderedBuffer = await offlineCtx.startRendering();
+                console.log("RENDER::COMPLETE");
+                filenamePreview.textContent = 'ENCODING WAV...';
+                const wavBlob = bufferToWav(renderedBuffer);
+
+                let typeStr = paramsToRender.soundType;
+                if (typeStr === '808') { typeStr = '808'; } else if (typeStr === 'Lead Synth') { typeStr = 'Lead'; } else if (typeStr === 'Pluck Synth') { typeStr = 'Pluck'; } else if (typeStr === 'Pad Synth') { typeStr = 'Pad'; } else if (typeStr === 'Key Synth') { typeStr = 'Key'; }
+                typeStr = typeStr.toUpperCase();
+                const wordStr = currentFilenameWord.toUpperCase();
+                const filename = `${typeStr} ★ ${wordStr} [62serpens.com].wav`;
+
+                const url = URL.createObjectURL(wavBlob);
+                const a = document.createElement('a');
+                a.style.display = 'none';
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+                console.log("DOWNLOAD::TRIGGERED | File:", filename);
+                filenamePreview.textContent = 'RENDER COMPLETE!';
+            } catch (error) {
+                console.error("ERROR::RENDER_FAILED", error);
+                filenamePreview.textContent = `ERROR::RENDER_FAILED!`;
+                alert(`ERROR::RENDER_FAILED | ${error.message}`);
+            } finally {
+                btnRender.disabled = false;
+                btnPlay.disabled = !currentParams;
+                setTimeout(() => {
+                    if (currentParams) {
+                        updateFilenamePreview();
+                        filenamePreviewContainer.classList.add('active');
+                    } else {
+                        filenamePreview.textContent = '(Awaiting Parameter Generation...)';
+                        filenamePreviewContainer.classList.remove('active');
+                    }
+                    btnRender.textContent = 'RENDER WAV @ C3';
+                }, 3000);
+            }
+        }
+
+        // === Initialization ===
+        document.addEventListener('DOMContentLoaded', () => {
+            btnRandomize.addEventListener('click', handleRandomize);
+            btnVariation5.addEventListener('click', handleVariation5);
+            btnVariation10.addEventListener('click', handleVariation10);
+            btnVariation25.addEventListener('click', handleVariation25);
+            btnUndo.addEventListener('click', handleUndo);
+            btnPlay.addEventListener('click', handlePlayBase);
+            btnNewName.addEventListener('click', handleNewName);
+            btnRender.addEventListener('click', handleRender);
+            window.addEventListener('keydown', handleKeyDown);
+
+            initAudioContext();
+            currentFilenameWord = randomElement(FILENAME_WORDS);
+            updateUI();
+            console.log("// MODULE::ONE-SHOT_SYNTH v1.3.8 :: Interface Active //");
+        });
+    </script>
+</body>
+</html>
