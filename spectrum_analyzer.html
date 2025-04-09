@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>//NODE_62S :: DYNAMIC_ANALYSIS_MODULE v4.5 (Scrubber Re-integrated)</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%230077CC' stroke-width='1.5' fill='none'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS is identical to v4.4 - includes scrubber styles */
         :root {
             --bg-color: #040408; --text-color: #a8a8b0; --header-color: #d0d0e0;
-            --accent-color: #00BFFF; --accent-hover: #ffffff; --border-color: #1f1f2f;
+            --accent-color: #0077CC; --accent-hover: #90CAF9; --border-color: #1f1f2f;
             --success-color: #00dd55; --error-color: #ff2222; --font-main: 'Roboto Mono', monospace;
             --transition-fast: 0.1s ease-in-out;
         }
@@ -92,26 +91,26 @@
          <div class="customization-controls">
               <div class="control-group"> <label for="themeSelector">Theme:</label> <select id="themeSelector"> <option value="layered" selected>Layered Wave</option> <option value="waveform">Glowing Waveform</option> <option value="bars">Frequency Bars</option> </select> </div>
               <div class="control-group"> <label for="paletteSelector">Color Palette:</label> <select id="paletteSelector"> <option value="default">Default Blue</option> <option value="neon">Neon</option> <option value="ocean">Ocean</option> <option value="fire">Fire</option> <option value="forest">Forest</option> <option value="grayscale">Grayscale</option> </select> </div>
-              <div class="control-group"> <label for="glowSlider">Glow / Bloom:</label> <input type="range" id="glowSlider" min="0" max="30" value="5" step="1"> </div>
-              <div class="control-group"> <label for="thicknessSlider">Thickness / Width:</label> <input type="range" id="thicknessSlider" min="1" max="10" step="0.5" value="2"> </div>
-              <div class="control-group"> <label for="particleSlider">Particle Density:</label> <input type="range" id="particleSlider" min="0" max="5" value="1" step="1"> </div>
+              <div class="control-group"> <label for="glowSlider">Glow / Bloom:</label> <input type="range" id="glowSlider" min="0" max="50" value="10" step="1"> </div>
+              <div class="control-group"> <label for="thicknessSlider">Thickness / Width:</label> <input type="range" id="thicknessSlider" min="1" max="15" step="0.5" value="3"> </div>
+              <div class="control-group"> <label for="particleSlider">Particle Density:</label> <input type="range" id="particleSlider" min="0" max="10" value="2" step="1"> </div>
          </div>
     </div>
-    <a href="index.html" class="back-link">&lt;&lt; RETURN TO NODE_62S INTERFACE</a>
+    <a href="index.html" class="back-link"><< RETURN TO NODE_62S INTERFACE</a>
 
     <script>
         console.log("Script loaded. v4.5 (Scrubber Re-integrated)");
 
         // --- Core Variables ---
-        const fftSize = 2048; const particleMaxLifeBase = 50; const particleSpeedBase = 1.2; const particleEmitThreshold = 210; const peakThrottleMs = 40;
+        const fftSize = 2048; const particleMaxLifeBase = 60; const particleSpeedBase = 1.8; const particleEmitThreshold = 190; const peakThrottleMs = 25;
         const canvas = document.getElementById('visualizerCanvas'); const ctx = canvas.getContext('2d'); const audioElement = new Audio(); const playButton = document.getElementById('playButton'); const pauseButton = document.getElementById('pauseButton'); const statusMessage = document.getElementById('statusMessage'); const fileInput = document.getElementById('audioFile'); const fileNameDisplay = document.getElementById('fileName'); const themeSelector = document.getElementById('themeSelector'); const glowSlider = document.getElementById('glowSlider'); const thicknessSlider = document.getElementById('thicknessSlider'); const particleSlider = document.getElementById('particleSlider'); const paletteSelector = document.getElementById('paletteSelector'); const moduleContainer = document.getElementById('moduleContainer'); const fullscreenButton = document.getElementById('fullscreenButton');
         const scrubber = document.getElementById('scrubber'); const currentTimeDisplay = document.getElementById('currentTime'); const totalDurationDisplay = document.getElementById('totalDuration');
 
-        let audioContext; let analyser; let sourceNode = null; // Initialize sourceNode to null
+        let audioContext; let analyser; let sourceNode = null;
         let audioInitialized = false; let bufferLengthFreq; let bufferLengthTime; let dataArrayFreq; let dataArrayTime; let isPlaying = false; let particles = []; let lastPeakTime = 0; let canvasWidth, canvasHeight; let animationFrameId = null; let isSeeking = false;
 
-        const colorPalettes = { default:['#00BFFF','#40E0D0','#FFFFFF','#87CEFA'], neon:['#39FF14','#FF1493','#00FFFF','#FFFF00'], ocean:['#0077CC','#00AADD','#90CAF9','#E1F5FE'], fire:['#FF4500','#FFA500','#FF6347','#DC143C'], forest:['#228B22','#556B2F','#8FBC8F','#9ACD32'], grayscale:['#FFFFFF','#C0C0C0','#808080','#404040'] };
-        let visualizerSettings = { theme: 'layered', palette: 'default', glow: 5, thickness: 2, particles: 1 };
+        const colorPalettes = { default:['#0077CC','#00AADD','#90CAF9','#E1F5FE'], neon:['#00FF66','#FF1493','#00FFFF','#FFFF00'], ocean:['#0077CC','#00AADD','#90CAF9','#E1F5FE'], fire:['#FF4500','#FFA500','#FF6347','#DC143C'], forest:['#00CC44','#556B2F','#8FBC8F','#9ACD32'], grayscale:['#FFFFFF','#C0C0C0','#808080','#404040'] };
+        let visualizerSettings = { theme: 'layered', palette: 'default', glow: 10, thickness: 3, particles: 2 };
 
         // --- Helper Functions ---
         function updateSettings() { visualizerSettings.theme=themeSelector.value;visualizerSettings.palette=paletteSelector.value;visualizerSettings.glow=parseInt(glowSlider.value,10);visualizerSettings.thickness=parseFloat(thicknessSlider.value);visualizerSettings.particles=parseInt(particleSlider.value,10); }
@@ -120,8 +119,16 @@
         function getAverage(data, start, end) { let s=0;const cE=Math.min(end,data.length);const ct=cE-start;if(ct<=0)return 0;for(let i=start;i<cE;i++){s+=data[i];}return s/ct; }
         function hexToRgba(hex, alpha=1) { let r=0,g=0,b=0;if(!hex)return`rgba(255,255,255,${alpha})`;if(hex.length===4){r=parseInt(hex[1]+hex[1],16);g=parseInt(hex[2]+hex[2],16);b=parseInt(hex[3]+hex[3],16);}else if(hex.length===7){r=parseInt(hex[1]+hex[2],16);g=parseInt(hex[3]+hex[4],16);b=parseInt(hex[5]+hex[6],16);}else{return`rgba(255,255,255,${alpha})`;}return`rgba(${r},${g},${b},${alpha})`; }
         function formatTime(seconds) { const minutes = Math.floor(seconds / 60); const secs = Math.floor(seconds % 60); return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`; }
+        function updateAccentColor() {
+            const palette = getCurrentPalette();
+            const primaryColor = palette[0];
+            const hoverColor = palette[2] || '#ffffff';
+            document.documentElement.style.setProperty('--accent-color', primaryColor);
+            document.documentElement.style.setProperty('--accent-hover', hoverColor);
+            console.log(`Accent color updated to ${primaryColor}, hover to ${hoverColor}`);
+        }
 
-        // --- Audio Initialization (Stable version from v4.3) ---
+        // --- Audio Initialization ---
         function initializeAudioContext() {
             if(audioInitialized) return true;
             try{
@@ -138,53 +145,42 @@
                 console.error("AudioContext Initialization Failed:", e); statusMessage.textContent = "ERR: Web Audio API Not Supported"; statusMessage.style.color = 'var(--error-color)';
                 fileInput.disabled = true; document.querySelector('.file-label').style.cursor = 'not-allowed'; document.querySelector('.file-label').style.opacity = '0.5';
                 playButton.disabled = true; pauseButton.disabled = true; fullscreenButton.disabled = true; fullscreenButton.textContent = "N/A"; fullscreenButton.classList.add('not-available');
-                scrubber.disabled = true; // Disable scrubber too
+                scrubber.disabled = true;
                 return false;
             }
         }
 
-        // --- File Handling (Revised combination of v4.3 logic + scrubber reset) ---
+        // --- File Handling ---
         fileInput.addEventListener('change', function(event) {
             console.log("File input 'change' event");
             if (!initializeAudioContext()) { return; }
-
-            // Reset scrubber state
             scrubber.disabled = true; scrubber.value = 0;
             currentTimeDisplay.textContent = "00:00"; totalDurationDisplay.textContent = "00:00";
             isSeeking = false;
-
-            // Reset playback state
             isPlaying = false; audioElement.pause(); audioElement.currentTime = 0;
             playButton.disabled = true; pauseButton.disabled = true;
             particles = [];
             if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
-            drawVisualizer(); // Draw idle state immediately after reset
-
-            // Disconnect and clear previous sourceNode if it exists
+            drawVisualizer();
             if(sourceNode){
                 try { sourceNode.disconnect(); console.log("Disconnected previous sourceNode."); } catch(e){ console.warn("Source node disconnect warning:", e); }
-                sourceNode = null; // Explicitly clear the reference
+                sourceNode = null;
             }
-
             const files = event.target.files;
             if (files.length === 0) {
                 fileNameDisplay.textContent = 'No file selected'; statusMessage.textContent = 'STATUS :: SELECT FILE'; statusMessage.style.color = 'var(--text-color)';
-                audioElement.src = ''; // Clear src
-                fileInput.value = null; // Allow re-selecting same file
-                return; // Exit early
+                audioElement.src = '';
+                fileInput.value = null;
+                return;
             }
-
             const file = files[0];
             fileNameDisplay.textContent = `Selected: ${file.name}`;
             statusMessage.textContent = 'Reading file...'; statusMessage.style.color = 'var(--text-color)';
-
             const reader = new FileReader();
             reader.onload = function(e) {
                 console.log("FileReader 'onload'"); statusMessage.textContent = 'Decoding audio data...';
                 audioElement.src = e.target.result;
-                audioElement.load(); // Load the new source
-
-                // Define temporary handlers for this specific load cycle
+                audioElement.load();
                 const metadataHandler = () => {
                      console.log("Audio 'loadedmetadata' event");
                      const duration = audioElement.duration;
@@ -195,20 +191,15 @@
                           totalDurationDisplay.textContent = "--:--"; statusMessage.textContent = 'ERR: Invalid audio duration.'; statusMessage.style.color = 'var(--error-color)';
                           playButton.disabled = true; scrubber.disabled = true;
                      }
-                     // Don't remove listener here, keep for potential seeks needing duration info? No, load once.
                 };
-
                 const canPlayHandler = () => {
                     console.log("Audio 'canplay' event");
                     statusMessage.textContent = 'READY // PRESS PLAY';
-                    playButton.disabled = false; // Enable play now
+                    playButton.disabled = false;
                     pauseButton.disabled = true;
-                    // Enable scrubber only if duration was valid
                     if (isFinite(audioElement.duration)) {
                          scrubber.disabled = false;
                     }
-
-                    // Connect graph only if sourceNode is not already set up for this src
                     if (!sourceNode) {
                         try {
                              sourceNode = audioContext.createMediaElementSource(audioElement);
@@ -219,20 +210,14 @@
                              console.error("Error connecting audio nodes:", err); statusMessage.textContent = 'ERR: Cannot connect audio.'; statusMessage.style.color = 'var(--error-color)';
                              playButton.disabled = true; scrubber.disabled = true;
                         }
-                    } else {
-                         console.log("SourceNode already exists, assuming connected.");
                     }
                 };
-
                 const errorHandler = (err) => {
                     console.error("Audio Load Error:", err, audioElement.error); statusMessage.textContent = `ERR: Failed to load audio (${audioElement.error?.code || 'unknown'})`; statusMessage.style.color = 'var(--error-color)';
                     playButton.disabled = true; pauseButton.disabled = true; scrubber.disabled = true;
-                    // Clean up other listeners if error occurs during setup
                     audioElement.removeEventListener('loadedmetadata', metadataHandler);
                     audioElement.removeEventListener('canplay', canPlayHandler);
                 };
-
-                // Add listeners using {once: true} for cleaner management
                 audioElement.addEventListener('loadedmetadata', metadataHandler, { once: true });
                 audioElement.addEventListener('canplay', canPlayHandler, { once: true });
                 audioElement.addEventListener('error', errorHandler, { once: true });
@@ -244,11 +229,9 @@
             reader.readAsDataURL(file);
         });
 
-
-        // --- Playback Controls (Based on v4.3, enable scrubber) ---
+        // --- Playback Controls ---
         playButton.addEventListener('click', () => {
             console.log("Play button clicked.");
-            // Use readyState >= 2 (HAVE_METADATA) as minimum check before trying to play
             if (!audioInitialized || !audioElement.src || audioElement.readyState < 2 || playButton.disabled) {
                  console.warn(`Play prevented. Initialized: ${audioInitialized}, Src: ${!!audioElement.src}, ReadyState: ${audioElement.readyState}, Button Disabled: ${playButton.disabled}`);
                  statusMessage.textContent = 'ERR: Audio not ready.'; statusMessage.style.color = 'var(--error-color)';
@@ -264,55 +247,53 @@
             console.log("Attempting audioElement.play()");
             audioElement.play().then(() => {
                  console.log("audioElement.play() successful");
-                 isPlaying = true; // Set state
+                 isPlaying = true;
                  playButton.disabled = true; pauseButton.disabled = false;
-                 scrubber.disabled = !isFinite(audioElement.duration); // Enable based on duration
+                 scrubber.disabled = !isFinite(audioElement.duration);
                  statusMessage.textContent = 'PLAYING'; statusMessage.style.color = 'var(--text-color)';
-                 if(animationFrameId) cancelAnimationFrame(animationFrameId); // Clear old loop if any
-                 drawVisualizer(); // Start visualization loop
+                 if(animationFrameId) cancelAnimationFrame(animationFrameId);
+                 drawVisualizer();
             }).catch(err => {
                  console.error("audioElement.play() failed:", err); statusMessage.textContent = `ERR: Playback failed (${err.name})`; statusMessage.style.color = 'var(--error-color)';
                  playButton.disabled = false; pauseButton.disabled = true; scrubber.disabled = true;
-                 isPlaying = false; // Reset state on error
+                 isPlaying = false;
             });
         }
 
         pauseButton.addEventListener('click', () => { if (!isPlaying) return; console.log("Pause button clicked"); audioElement.pause(); });
 
-        // --- Audio Element Event Listeners (Pause, End, Error - Update Scrubber State) ---
+        // --- Audio Element Event Listeners ---
         audioElement.onpause = () => {
-            if (isPlaying) { // Only act if pause was initiated while playing
-                isPlaying = false; // Update state
+            if (isPlaying) {
+                isPlaying = false;
                 playButton.disabled = false; pauseButton.disabled = true;
-                // Keep scrubber enabled while paused
                 statusMessage.textContent = 'PAUSED'; console.log("Audio paused.");
                 if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
-                // Call drawVisualizer once to potentially draw idle frame or clear canvas
-                requestAnimationFrame(drawVisualizer); // Use rAF to ensure it draws after state update
+                requestAnimationFrame(drawVisualizer);
             }
         };
 
         audioElement.onended = () => {
             console.log("Audio ended.");
-            isPlaying = false; // Update state
+            isPlaying = false;
             playButton.disabled = false; pauseButton.disabled = true;
-            scrubber.disabled = true; scrubber.value = 0; // Reset and disable scrubber
-            currentTimeDisplay.textContent = formatTime(0); // Reset time display
+            scrubber.disabled = true; scrubber.value = 0;
+            currentTimeDisplay.textContent = formatTime(0);
             statusMessage.textContent = 'ENDED // SELECT FILE OR PLAY AGAIN'; particles = [];
             if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
-            audioElement.currentTime = 0; // Reset position for replay
-            drawVisualizer(); // Draw final idle state
+            audioElement.currentTime = 0;
+            drawVisualizer();
         };
 
-        audioElement.onerror = (e) => { // General playback/element error
-             if (statusMessage.textContent.startsWith('ERR: Failed to load')) return; // Avoid duplicate message if load failed
+        audioElement.onerror = (e) => {
+             if (statusMessage.textContent.startsWith('ERR: Failed to load')) return;
              console.error("Audio Element Error:", e, audioElement.error); statusMessage.textContent = `ERR: Audio Playback (${audioElement.error?.message || 'unknown'})`; statusMessage.style.color = 'var(--error-color)';
              isPlaying = false; playButton.disabled = true; pauseButton.disabled = true; scrubber.disabled = true; particles = [];
              if(animationFrameId){ cancelAnimationFrame(animationFrameId); animationFrameId = null; }
-             drawVisualizer(); // Draw idle state
+             drawVisualizer();
         };
 
-        // --- Scrubber Time Update Listener ---
+        // --- Scrubber Time Update ---
         audioElement.addEventListener('timeupdate', () => {
              if (!isSeeking && isFinite(audioElement.duration)) {
                  scrubber.value = audioElement.currentTime;
@@ -320,86 +301,227 @@
              }
         });
 
-        // --- Scrubber Input Listeners (Manage Seeking State) ---
-        scrubber.addEventListener('input', () => { // Fired continuously during drag
+        scrubber.addEventListener('input', () => {
             if (!scrubber.disabled) {
-                isSeeking = true; // Indicate user is actively seeking
-                // Update time display immediately for feedback
+                isSeeking = true;
                 currentTimeDisplay.textContent = formatTime(parseFloat(scrubber.value));
             }
         });
 
-        scrubber.addEventListener('change', () => { // Fired when drag ends
+        scrubber.addEventListener('change', () => {
              if (!scrubber.disabled) {
                  const seekTime = parseFloat(scrubber.value);
                  console.log(`Scrubber 'change' event: Seeking to ${seekTime}`);
                  audioElement.currentTime = seekTime;
-                 // It's crucial to reset the flag slightly after setting currentTime
-                 // to prevent the next 'timeupdate' event from immediately overwriting the scrubber value.
-                 setTimeout(() => { isSeeking = false; }, 50); // Small delay works well
+                 setTimeout(() => { isSeeking = false; }, 50);
              }
         });
 
-        // --- Particle Emission (Unchanged) ---
+        // --- Particle Emission ---
         function emitParticles(x, y, count, settings) { const particleAmountMultiplier = settings.particles / 2; const actualCount = Math.min(10, Math.floor(count * particleAmountMultiplier)); const currentPalette = getCurrentPalette(); for (let i = 0; i < actualCount; i++) { if (particles.length > 150 * particleAmountMultiplier) return; const angle = Math.random() * Math.PI * 2; const speed = (Math.random() * particleSpeedBase * 0.5) + 0.2; const life = Math.random() * (particleMaxLifeBase * 0.5) + (particleMaxLifeBase * 0.5); const particleBaseColor = currentPalette[Math.floor(Math.random() * currentPalette.length)]; particles.push({ x: x, y: y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: life, maxLife: life, size: Math.random() * 1.5 + 0.5, color: particleBaseColor }); } }
 
-        // --- Canvas Setup (Unchanged - uses capped DPR) ---
+        // --- Canvas Setup ---
         function setupCanvas() { const currentWidth = canvas.clientWidth; const currentHeight = canvas.clientHeight; if (currentWidth > 0 && currentHeight > 0) { const maxDPR = 1.5; const dpr = Math.min(window.devicePixelRatio || 1, maxDPR); if (canvas.width !== currentWidth * dpr || canvas.height !== currentHeight * dpr) { canvasWidth = currentWidth; canvasHeight = currentHeight; canvas.width = canvasWidth * dpr; canvas.height = canvasHeight * dpr; ctx.scale(dpr, dpr); console.log(`Canvas resized to: ${canvasWidth}x${canvasHeight} (Logical), ${canvas.width}x${canvas.height} (Physical), Used DPR: ${dpr} (Max: ${maxDPR})`); } } else { console.warn(`Canvas setup skipped: Invalid dimensions (${currentWidth}x${currentHeight})`); } }
 
-        // --- Drawing Functions (Unchanged - drawIdle, drawLayered, drawWaveform, drawBars) ---
+        // --- Drawing Functions ---
         function drawIdle() { ctx.fillStyle = '#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); ctx.strokeStyle = 'rgba(128, 128, 128, 0.2)'; ctx.lineWidth = 1; ctx.shadowBlur = 0; ctx.beginPath(); ctx.moveTo(0, canvasHeight / 2); ctx.lineTo(canvasWidth, canvasHeight / 2); ctx.stroke(); }
-        function drawLayered(settings) { analyser.getByteTimeDomainData(dataArrayTime);analyser.getByteFrequencyData(dataArrayFreq);let ampSum=0;for(let i=0;i<bufferLengthTime;i++){ampSum+=Math.abs(dataArrayTime[i]-128);}const avgAmp=ampSum/bufferLengthTime;const bBins=Math.floor(bufferLengthFreq*0.1);const mBins=Math.floor(bufferLengthFreq*0.4);const tBins=bufferLengthFreq;const bEng=getAverage(dataArrayFreq,0,bBins);const mEng=getAverage(dataArrayFreq,bBins,mBins);const tEng=getAverage(dataArrayFreq,mBins,tBins);const currentPalette=getCurrentPalette();ctx.fillStyle='#040408';ctx.fillRect(0,0,canvasWidth,canvasHeight);const pulseSize=mapValue(bEng,0,150,canvasHeight*0.1,canvasHeight*1.5);const pulseAlpha=mapValue(bEng,0,150,0,0.1);if(pulseAlpha>0.01){const radGrad=ctx.createRadialGradient(canvasWidth/2,canvasHeight/2,0,canvasWidth/2,canvasHeight/2,pulseSize);radGrad.addColorStop(0,hexToRgba(currentPalette[0],pulseAlpha));radGrad.addColorStop(1,hexToRgba(currentPalette[0],0));ctx.fillStyle=radGrad;ctx.fillRect(0,0,canvasWidth,canvasHeight);} const barWidthFreq=canvasWidth/bufferLengthFreq;const barAlpha='08';for(let i=0;i<bufferLengthFreq;i++){const barHeightFreq=dataArrayFreq[i]*(canvasHeight/255)*0.7;ctx.fillStyle=currentPalette[i%currentPalette.length]+barAlpha;ctx.fillRect(i*barWidthFreq,canvasHeight-barHeightFreq,barWidthFreq*0.8,barHeightFreq);} ctx.shadowBlur=Math.max(1,settings.glow/3);for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.life--;if(p.life<=0){particles.splice(i,1);continue;}p.x+=p.vx;p.y+=p.vy;const alpha=p.life/p.maxLife;ctx.beginPath();ctx.arc(p.x,p.y,p.size*alpha,0,Math.PI*2);let rgbaColor=p.color;if(p.color.startsWith('#')){rgbaColor=hexToRgba(p.color,alpha*0.9);}else{try{rgbaColor=p.color.replace(/[\d\.]+\)$/g,`${alpha*0.9})`);}catch(e){}} ctx.fillStyle=rgbaColor;ctx.shadowColor=rgbaColor.replace(/[\d\.]+\)$/g,`${alpha*0.5})`);ctx.fill();} ctx.shadowBlur=0; ctx.lineWidth=mapValue(avgAmp,0,50,1,settings.thickness);ctx.shadowColor=hexToRgba(currentPalette[0],0.6); ctx.shadowBlur=settings.glow;const waveGrad=ctx.createLinearGradient(0,0,0,canvasHeight);waveGrad.addColorStop(0,currentPalette[0]||'#FFFFFF');waveGrad.addColorStop(0.5,currentPalette[1]||'#C0C0C0');waveGrad.addColorStop(1,currentPalette[2]||'#808080');ctx.strokeStyle=waveGrad;ctx.beginPath();const sliceW=canvasWidth*1.0/bufferLengthTime;let x=0;let curAmp;const curTime=performance.now();for(let i=0;i<bufferLengthTime;i++){curAmp=dataArrayTime[i];const v=curAmp/128.0;const y=(v*canvasHeight/2);if(i===0){ctx.moveTo(x,y);}else{ctx.lineTo(x,y);}x+=sliceW;if(settings.particles>0&&curAmp>particleEmitThreshold&&(curTime-lastPeakTime>peakThrottleMs)){emitParticles(x-sliceW/2,y,Math.floor(Math.random()*settings.particles)+1,settings);lastPeakTime=curTime;}} ctx.stroke();ctx.shadowColor='transparent';ctx.shadowBlur=0; }
-        function drawWaveform(settings) { analyser.getByteTimeDomainData(dataArrayTime); const currentPalette = getCurrentPalette(); ctx.fillStyle='#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); ctx.lineWidth=settings.thickness; const waveColor = currentPalette[0] || 'var(--accent-color)'; ctx.strokeStyle = waveColor; ctx.shadowColor = hexToRgba(waveColor, 0.7); ctx.shadowBlur = settings.glow; ctx.beginPath(); const sliceWidth = canvasWidth * 1.0 / bufferLengthTime; let x = 0; for (let i = 0; i < bufferLengthTime; i++) { const v = dataArrayTime[i] / 128.0; const y = (v * canvasHeight / 2); if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); } x += sliceWidth; } ctx.stroke(); ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
-        function drawBars(settings) { analyser.getByteFrequencyData(dataArrayFreq); const currentPalette = getCurrentPalette(); ctx.fillStyle='#040408'; ctx.fillRect(0, 0, canvasWidth, canvasHeight); const barWidth = (canvasWidth / bufferLengthFreq); let barHeight; let x = 0; const barGlow = Math.max(0, Math.min(8, settings.glow / 1.5)); ctx.shadowBlur = barGlow; for (let i = 0; i < bufferLengthFreq; i++) { barHeight = dataArrayFreq[i] * (canvasHeight / 255); if (barHeight < 1) continue; const colorIndex = i % currentPalette.length; const barColor = currentPalette[colorIndex]; ctx.fillStyle = barColor; ctx.shadowColor = hexToRgba(barColor, 0.7); ctx.fillRect(x, canvasHeight - barHeight, Math.max(1, barWidth * settings.thickness / 1.5), barHeight); x += barWidth; } ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; }
+        function drawLayered(settings) {
+            analyser.getByteTimeDomainData(dataArrayTime);
+            analyser.getByteFrequencyData(dataArrayFreq);
+            let ampSum = 0;
+            for(let i = 0; i < bufferLengthTime; i++) { ampSum += Math.abs(dataArrayTime[i] - 128); }
+            const avgAmp = ampSum / bufferLengthTime;
+            const bBins = Math.floor(bufferLengthFreq * 0.1);
+            const mBins = Math.floor(bufferLengthFreq * 0.4);
+            const tBins = bufferLengthFreq;
+            const bEng = getAverage(dataArrayFreq, 0, bBins);
+            const mEng = getAverage(dataArrayFreq, bBins, mBins);
+            const tEng = getAverage(dataArrayFreq, mBins, tBins);
+            const currentPalette = getCurrentPalette();
 
-        // --- Main Draw Loop (drawVisualizer - Relying on isPlaying state) ---
+            ctx.fillStyle = '#040408';
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+            const pulseSize = mapValue(bEng, 0, 150, canvasHeight * 0.1, canvasHeight * 1.5);
+            const pulseAlpha = mapValue(bEng, 0, 150, 0, 0.1);
+            if (pulseAlpha > 0.01) {
+                const radGrad = ctx.createRadialGradient(canvasWidth / 2, canvasHeight / 2, 0, canvasWidth / 2, canvasHeight / 2, pulseSize);
+                radGrad.addColorStop(0, hexToRgba(currentPalette[0], pulseAlpha));
+                radGrad.addColorStop(1, hexToRgba(currentPalette[0], 0));
+                ctx.fillStyle = radGrad;
+                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+            }
+
+            const midPulseSize = mapValue(mEng, 0, 150, canvasHeight * 0.2, canvasHeight);
+            const midPulseAlpha = mapValue(mEng, 0, 150, 0, 0.08);
+            if (midPulseAlpha > 0.01) {
+                const midGrad = ctx.createRadialGradient(canvasWidth / 2, canvasHeight / 2, 0, canvasWidth / 2, canvasHeight / 2, midPulseSize);
+                midGrad.addColorStop(0, hexToRgba(currentPalette[1], midPulseAlpha));
+                midGrad.addColorStop(1, hexToRgba(currentPalette[1], 0));
+                ctx.fillStyle = midGrad;
+                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+            }
+
+            const barWidthFreq = canvasWidth / bufferLengthFreq;
+            const barAlpha = '08';
+            for (let i = 0; i < bufferLengthFreq; i++) {
+                const barHeightFreq = dataArrayFreq[i] * (canvasHeight / 255) * 0.7;
+                ctx.fillStyle = currentPalette[i % currentPalette.length] + barAlpha;
+                ctx.fillRect(i * barWidthFreq, canvasHeight - barHeightFreq, barWidthFreq * 0.8, barHeightFreq);
+            }
+
+            ctx.shadowBlur = Math.max(2, settings.glow / 2);
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.life--;
+                if (p.life <= 0) { particles.splice(i, 1); continue; }
+                p.x += p.vx; p.y += p.vy;
+                const alpha = p.life / p.maxLife;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size * alpha * 1.5, 0, Math.PI * 2);
+                let rgbaColor = p.color;
+                if (p.color.startsWith('#')) { rgbaColor = hexToRgba(p.color, alpha); }
+                else { try { rgbaColor = p.color.replace(/[\d\.]+\)$/g, `${alpha})`); } catch(e) {} }
+                ctx.fillStyle = rgbaColor;
+                ctx.shadowColor = rgbaColor.replace(/[\d\.]+\)$/g, `${alpha * 0.7})`);
+                ctx.fill();
+            }
+
+            ctx.shadowBlur = 0;
+            ctx.lineWidth = mapValue(avgAmp, 0, 50, 2, settings.thickness * 1.5);
+            ctx.shadowColor = hexToRgba(currentPalette[0], 0.8);
+            ctx.shadowBlur = settings.glow * 1.5;
+            const waveGrad = ctx.createLinearGradient(0, 0, 0, canvasHeight);
+            waveGrad.addColorStop(0, currentPalette[0]);
+            waveGrad.addColorStop(0.5, currentPalette[1]);
+            waveGrad.addColorStop(1, currentPalette[2]);
+            ctx.strokeStyle = waveGrad;
+            ctx.beginPath();
+            const sliceW = canvasWidth * 1.0 / bufferLengthTime;
+            let x = 0;
+            const curTime = performance.now();
+            for (let i = 0; i < bufferLengthTime; i++) {
+                const curAmp = dataArrayTime[i];
+                const v = curAmp / 128.0;
+                const y = (v * canvasHeight / 2);
+                if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
+                x += sliceW;
+                if (settings.particles > 0 && curAmp > particleEmitThreshold && (curTime - lastPeakTime > peakThrottleMs)) {
+                    emitParticles(x - sliceW / 2, y, Math.floor(Math.random() * settings.particles) + 2, settings);
+                    lastPeakTime = curTime;
+                }
+            }
+            ctx.stroke();
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+        }
+        function drawWaveform(settings) {
+            analyser.getByteTimeDomainData(dataArrayTime);
+            analyser.getByteFrequencyData(dataArrayFreq);
+            const currentPalette = getCurrentPalette();
+            ctx.fillStyle = '#040408';
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+            
+            const mBins = Math.floor(bufferLengthFreq * 0.4);
+            const midEnergy = getAverage(dataArrayFreq, Math.floor(bufferLengthFreq * 0.1), mBins);
+            const oscAmp = mapValue(midEnergy, 0, 150, 0, canvasHeight * 0.1);
+
+            ctx.lineWidth = settings.thickness;
+            const waveColor = currentPalette[0];
+            ctx.strokeStyle = waveColor;
+            ctx.shadowColor = hexToRgba(waveColor, 0.8);
+            ctx.shadowBlur = settings.glow * 1.5;
+
+            ctx.beginPath();
+            const sliceWidth = canvasWidth * 1.0 / bufferLengthTime;
+            let x = 0;
+            for (let i = 0; i < bufferLengthTime; i++) {
+                const v = dataArrayTime[i] / 128.0;
+                const y = (v * canvasHeight / 2) + Math.sin(x * 0WUeM05) * oscAmp;
+                if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
+                x += sliceWidth;
+            }
+            ctx.stroke();
+
+            ctx.beginPath();
+            x = 0;
+            for (let i = 0; i < bufferLengthTime; i++) {
+                const v = dataArrayTime[i] / 128.0;
+                const y = canvasHeight - ((v * canvasHeight / 2) + Math.sin(x * 0.05) * oscAmp);
+                if (i === 0) { ctx.moveTo(x, y); } else { ctx.lineTo(x, y); }
+                x += sliceWidth;
+            }
+            ctx.stroke();
+
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+        }
+        function drawBars(settings) {
+            analyser.getByteFrequencyData(dataArrayFreq);
+            const currentPalette = getCurrentPalette();
+            ctx.fillStyle = '#040408';
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+            const totalBars = bufferLengthFreq;
+            const barWidth = canvasWidth / totalBars;
+            let x = 0;
+            const barGlow = Math.max(0, Math.min(8, settings.glow / 1.5));
+            ctx.shadowBlur = barGlow;
+            for (let i = 0; i < totalBars; i++) {
+                const barHeight = dataArrayFreq[i] * (canvasHeight / 255);
+                if (barHeight < 1) continue;
+                const colorIndex = i % currentPalette.length;
+                const barColor = currentPalette[colorIndex];
+                ctx.fillStyle = barColor;
+                ctx.shadowColor = hexToRgba(barColor, 0.7);
+                const adjustedWidth = (i === totalBars - 1) ? (canvasWidth - x) : Math.max(1, barWidth * settings.thickness);
+                ctx.fillRect(x, canvasHeight - barHeight, adjustedWidth, barHeight);
+                x += barWidth;
+            }
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+        }
+
+        // --- Main Draw Loop ---
         function drawVisualizer() {
-             // Only request next frame if playing is intended
              if (isPlaying) {
                  animationFrameId = requestAnimationFrame(drawVisualizer);
              } else {
-                 animationFrameId = null; // Ensure loop stops if not playing
+                 animationFrameId = null;
              }
-
              const currentSettings = visualizerSettings;
-
-             // Check if audio is initialized AND playing AND analyser exists
              if (audioInitialized && isPlaying && analyser) {
-                 // Select and call the appropriate drawing function based on theme
                  const theme = currentSettings.theme;
                  if (theme === 'layered') { drawLayered(currentSettings); }
                  else if (theme === 'waveform') { drawWaveform(currentSettings); }
                  else if (theme === 'bars') { drawBars(currentSettings); }
-                 else { drawIdle(); } // Fallback
+                 else { drawIdle(); }
              } else {
-                  // Draw idle state or fade out particles if not playing
                   if (particles.length > 0) {
-                      // Simplified particle drawing when idle
                       ctx.fillStyle='#040408'; ctx.fillRect(0,0,canvasWidth,canvasHeight);
                       ctx.shadowBlur=Math.max(1,currentSettings.glow/3);
                       for(let i=particles.length-1;i>=0;i--){ const p=particles[i];p.life--; if(p.life<=0){particles.splice(i,1); continue;} p.x+=p.vx;p.y+=p.vy; const alpha=p.life/p.maxLife; ctx.beginPath();ctx.arc(p.x,p.y,p.size*alpha,0,Math.PI*2); let rgbaColor=p.color; if(p.color.startsWith('#')){rgbaColor=hexToRgba(p.color,alpha*0.9);}else{try{rgbaColor=p.color.replace(/[\d\.]+\)$/g,`${alpha*0.9})`);}catch(e){}} ctx.fillStyle=rgbaColor;ctx.shadowColor=rgbaColor.replace(/[\d\.]+\)$/g,`${alpha*0.5})`);ctx.fill(); }
                       ctx.shadowBlur=0;
-                      requestAnimationFrame(drawVisualizer); // Keep drawing until particles fade
+                      requestAnimationFrame(drawVisualizer);
                   } else {
-                      drawIdle(); // Draw static idle frame
+                      drawIdle();
                   }
              }
          }
 
-        // --- UI Control Listeners (Unchanged) ---
+        // --- UI Control Listeners ---
         themeSelector.addEventListener('change', (e) => { updateSettings(); particles = []; console.log(`Theme changed to: ${visualizerSettings.theme}`); if (!isPlaying) drawVisualizer(); });
-        paletteSelector.addEventListener('change', (e) => { updateSettings(); console.log(`Palette changed to: ${visualizerSettings.palette}`); if (!isPlaying) drawVisualizer(); });
+        paletteSelector.addEventListener('change', (e) => { updateSettings(); updateAccentColor(); console.log(`Palette changed to: ${visualizerSettings.palette}`); if (!isPlaying) drawVisualizer(); });
         glowSlider.addEventListener('input', updateSettings);
         thicknessSlider.addEventListener('input', updateSettings);
         particleSlider.addEventListener('input', updateSettings);
 
-        // --- Fullscreen Logic (Identical to v4.3/v4.4 - should be stable) ---
+        // --- Fullscreen Logic ---
         function updateFullscreenButton() { const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement; const isFullscreen = fullscreenElement === moduleContainer; const fsEnabledCheck = moduleContainer.requestFullscreen || moduleContainer.webkitRequestFullscreen || moduleContainer.mozRequestFullScreen || moduleContainer.msRequestFullscreen; fullscreenButton.classList.remove('not-available'); if (isFullscreen) { fullscreenButton.textContent = "EXIT"; fullscreenButton.disabled = false; console.log("updateFullscreenButton: Now fullscreen."); } else { if (fsEnabledCheck) { fullscreenButton.textContent = "FULLSCREEN"; fullscreenButton.disabled = false; console.log("updateFullscreenButton: Not fullscreen, API Supported."); } else { fullscreenButton.textContent = "N/A"; fullscreenButton.disabled = true; fullscreenButton.classList.add('not-available'); console.log("updateFullscreenButton: Not fullscreen, API Not Supported."); } } }
         fullscreenButton.addEventListener('click', () => { if (fullscreenButton.disabled && fullscreenButton.classList.contains('not-available')) { console.warn("Fullscreen button clicked, but API is not supported."); statusMessage.textContent = "Fullscreen not supported on this device."; statusMessage.style.color = 'var(--error-color)'; return; } const elem = moduleContainer; const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement; if (!fullscreenElement) { console.log("Requesting Fullscreen..."); statusMessage.textContent = 'Requesting Fullscreen...'; statusMessage.style.color = 'var(--text-color)'; let requestMethod = elem.requestFullscreen || elem.webkitRequestFullscreen || elem.mozRequestFullScreen || elem.msRequestFullscreen; if (requestMethod) { requestMethod.call(elem).catch(err => { console.error(`Fullscreen request failed: ${err.message} (${err.name})`); statusMessage.textContent = `ERR: Fullscreen failed (${err.name}).`; statusMessage.style.color = 'var(--error-color)'; updateFullscreenButton(); }); } else { console.error("No fullscreen request method found."); statusMessage.textContent = 'ERR: Fullscreen not supported.'; statusMessage.style.color = 'var(--error-color)'; updateFullscreenButton(); } } else { console.log("Exiting Fullscreen..."); statusMessage.textContent = 'Exiting Fullscreen...'; statusMessage.style.color = 'var(--text-color)'; let exitMethod = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen; if (exitMethod) { exitMethod.call(document).catch(err => { console.error(`Exit Fullscreen failed: ${err.message} (${err.name})`); statusMessage.textContent = `ERR: Could not exit fullscreen (${err.name}).`; statusMessage.style.color = 'var(--error-color)'; updateFullscreenButton(); }); } else { console.error("No fullscreen exit method found."); statusMessage.textContent = 'ERR: Cannot exit fullscreen.'; statusMessage.style.color = 'var(--error-color)'; updateFullscreenButton(); } } });
         function handleFullscreenChange() { const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement; console.log("Fullscreen change event detected. Element:", fullscreenElement); updateFullscreenButton(); setTimeout(() => { console.log("Resizing canvas after fullscreen change."); setupCanvas(); drawVisualizer(); }, 100); }
         document.addEventListener('fullscreenchange', handleFullscreenChange); document.addEventListener('webkitfullscreenchange', handleFullscreenChange); document.addEventListener('mozfullscreenchange', handleFullscreenChange); document.addEventListener('MSFullscreenChange', handleFullscreenChange);
 
-        // --- Window Resize Listener (Unchanged) ---
+        // --- Window Resize Listener ---
         window.addEventListener('resize', () => { const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement; if (!fullscreenElement) { console.log("Window resize event detected (not fullscreen)."); setupCanvas(); drawVisualizer(); } else { console.log("Window resize event skipped (currently fullscreen)."); }});
 
         // --- Initial Setup ---
@@ -407,16 +529,12 @@
         syncControlsToSettings();
         setupCanvas();
         updateFullscreenButton();
-        drawVisualizer(); // Draw initial idle frame
-        scrubber.disabled = true; // Ensure scrubber starts disabled
+        updateAccentColor();
+        drawVisualizer();
+        scrubber.disabled = true;
         currentTimeDisplay.textContent = "00:00"; totalDurationDisplay.textContent = "00:00";
         console.log("Initial setup complete. v4.5");
-
-        // Log current time
         console.log(`Current Time (Client): ${new Date().toLocaleString()}`);
-        console.log(`Context Time: ${"Monday, April 7, 2025 at 3:02:59 AM AEST (Hobart, Tasmania, Australia)"}`);
-
     </script>
-
 </body>
 </html>
