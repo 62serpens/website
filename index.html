@@ -198,9 +198,10 @@
             }
             .main-header {
                 padding: 6px 10px;
-                flex-direction: column; /* Stack title and status vertically */
-                align-items: flex-start;
-                min-height: 80px; /* Fixed height for 4 stacked spans */
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                padding-bottom: 8px;
+                min-height: 50px; /* Fixed height to prevent jumping */
             }
             .main-title {
                 font-size: 1em;
@@ -209,27 +210,35 @@
                 margin-bottom: 5px;
             }
             .status-info {
-                font-size: 0.65em; /* Slightly smaller for compactness */
-                gap: 4px;
+                font-size: 0.7em;
+                gap: 6px;
                 width: 100%;
-                flex-direction: column; /* Stack spans vertically */
-                align-items: flex-start;
-                overflow: visible; /* Allow full text */
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                overflow: hidden;
             }
             .status-info span {
-                padding-left: 0; /* Remove padding for cleaner look */
-                border-left: none; /* Remove borders for vertical stack */
-                width: 100%; /* Full width for readability */
-                line-height: 1.2; /* Tighten spacing */
+                padding-left: 6px;
+                min-width: 75px;
+                border-left: 1px solid var(--border-color);
             }
             .status-info span:first-child {
                 padding-left: 0;
                 border-left: none;
+                min-width: 85px;
+            }
+            /* Truncate only UPLINK span */
+            #uplinkStatus {
+                min-width: 60px;
+                max-width: 70px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
             }
 
             .main-content {
                 padding: 20px 8px;
-                margin-top: 80px; /* Match header height to prevent overlap */
+                padding-top: 50px; /* Match header height */
             }
             .content-section { padding: 15px; margin-bottom: 25px; }
             .content-section h2 { font-size: 0.9em; }
