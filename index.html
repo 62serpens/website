@@ -200,7 +200,7 @@
                 padding: 6px 10px;
                 flex-direction: column; /* Stack title and status vertically */
                 align-items: flex-start;
-                min-height: 60px; /* Fixed height to prevent jumping */
+                min-height: 80px; /* Fixed height for 4 stacked spans */
             }
             .main-title {
                 font-size: 1em;
@@ -209,30 +209,28 @@
                 margin-bottom: 5px;
             }
             .status-info {
-                font-size: 0.7em;
-                gap: 6px;
+                font-size: 0.65em; /* Slightly smaller for compactness */
+                gap: 4px;
                 width: 100%;
-                justify-content: flex-start;
-                flex-wrap: nowrap; /* Prevent wrapping */
-                overflow: hidden;
+                flex-direction: column; /* Stack spans vertically */
+                align-items: flex-start;
+                overflow: visible; /* Allow full text */
             }
             .status-info span {
-                padding-left: 6px;
-                min-width: 60px; /* Reduced to fit */
-                max-width: 80px; /* Limit width */
-                text-overflow: ellipsis; /* Truncate long text */
-                overflow: hidden;
-                white-space: nowrap;
-                border-left: 1px solid var(--border-color);
+                padding-left: 0; /* Remove padding for cleaner look */
+                border-left: none; /* Remove borders for vertical stack */
+                width: 100%; /* Full width for readability */
+                line-height: 1.2; /* Tighten spacing */
             }
             .status-info span:first-child {
                 padding-left: 0;
                 border-left: none;
-                min-width: 70px;
-                max-width: 90px;
             }
 
-            .main-content { padding: 20px 8px; }
+            .main-content {
+                padding: 20px 8px;
+                margin-top: 80px; /* Match header height to prevent overlap */
+            }
             .content-section { padding: 15px; margin-bottom: 25px; }
             .content-section h2 { font-size: 0.9em; }
 
@@ -266,7 +264,6 @@
     </header>
 
     <main class="main-content">
-
         <section id="links" class="content-section">
             <h2 class="section-heading">// PRIMARY_DIRECTIVES //</h2>
             <nav class="link-grid">
@@ -302,7 +299,6 @@ STATUS:      <span id="unitIdStatus">OPTIMAL</span>
 AI_ASSIST:   v4.0_ACTIVE
 </pre>
         </section>
-
     </main>
 
     <footer>// SYSTEM_ID::62S // RUNTIME::2025 //</footer>
