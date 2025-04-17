@@ -661,7 +661,6 @@
 
         .gallery-enlarged {
             display: none;
-            visibility: hidden;
             position: fixed;
             top: 50%;
             left: 50%;
@@ -1115,19 +1114,20 @@
                         placeholder.addEventListener('click', (e) => {
                             e.preventDefault();
                             console.log(`Clicked image: ${item.src}`);
-                            const tempImg = new Image();
-                            tempImg.src = item.src;
-                            tempImg.onload = () => {
-                                if (enlargedPhoto) {
+                            if (enlargedPhoto) {
+                                const tempImg = new Image();
+                                tempImg.src = item.src;
+                                tempImg.onload = () => {
                                     enlargedPhoto.style.backgroundImage = `url('${item.src}')`;
                                     enlargedPhoto.style.display = 'block';
-                                    setTimeout(() => {
-                                        enlargedPhoto.style.visibility = 'visible';
-                                        console.log(`Enlarged modal size: ${enlargedPhoto.offsetWidth}x${enlargedPhoto.offsetHeight}`);
-                                    }, 50);
-                                }
-                            };
-                            tempImg.onerror = () => console.error(`Failed to load enlarged image: ${item.src}`);
+                                    console.log(`Enlarged modal opened: ${item.src}, size: ${enlargedPhoto.offsetWidth}x${enlargedPhoto.offsetHeight}`);
+                                };
+                                tempImg.onerror = () => {
+                                    console.error(`Failed to load enlarged image: ${item.src}`);
+                                };
+                            } else {
+                                console.error('Enlarged photo element not found');
+                            }
                         });
                         placeholder.addEventListener('touchstart', (e) => {
                             touchStartX = e.touches[0].clientX;
@@ -1146,25 +1146,26 @@
                             e.stopPropagation();
                             if (!touchMoved) {
                                 console.log(`Tapped image: ${item.src}`);
-                                const tempImg = new Image();
-                                tempImg.src = item.src;
-                                tempImg.onload = () => {
-                                    if (enlargedPhoto) {
+                                if (enlargedPhoto) {
+                                    const tempImg = new Image();
+                                    tempImg.src = item.src;
+                                    tempImg.onload = () => {
                                         enlargedPhoto.style.backgroundImage = `url('${item.src}')`;
                                         enlargedPhoto.style.display = 'block';
-                                        setTimeout(() => {
-                                            enlargedPhoto.style.visibility = 'visible';
-                                            console.log(`Enlarged modal size: ${enlargedPhoto.offsetWidth}x${enlargedPhoto.offsetHeight}`);
-                                        }, 50);
-                                    }
-                                };
-                                tempImg.onerror = () => console.error(`Failed to load enlarged image: ${item.src}`);
+                                        console.log(`Enlarged modal opened: ${item.src}, size: ${enlargedPhoto.offsetWidth}x${enlargedPhoto.offsetHeight}`);
+                                    };
+                                    tempImg.onerror = () => {
+                                        console.error(`Failed to load enlarged image: ${item.src}`);
+                                    };
+                                } else {
+                                    console.error('Enlarged photo element not found');
+                                }
                             }
                         });
                     };
                     img.onerror = () => {
                         placeholder.classList.add('failed');
-                        console.error(`Failed to load image: ${item.src}`);
+                        console.error(`Failed to load thumbnail: ${item.src}`);
                     };
                     galleryGrid.appendChild(placeholder);
 
@@ -1189,8 +1190,8 @@
             function closeGalleryPopup() {
                 if (enlargedPhoto) {
                     enlargedPhoto.style.display = 'none';
-                    enlargedPhoto.style.visibility = 'hidden';
                     enlargedPhoto.style.backgroundImage = '';
+                    console.log('Enlarged modal closed');
                 }
             }
 
