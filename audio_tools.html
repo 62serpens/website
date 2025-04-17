@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Configuration (Copied from index.html for consistency) --- */
+        /* --- Configuration --- */
         :root {
             --bg-color: #040408;
             --text-color: #a8a8b0;
@@ -17,55 +17,82 @@
             --accent-color: #00BFFF; /* Electric Blue */
             --accent-hover: #ffffff;
             --border-color: #1f1f2f;
+            --error-color: #ff2222;
             --font-main: 'Roboto Mono', monospace;
             --transition-fast: 0.1s ease-in-out;
         }
 
-        /* --- Base & Structure (Minimal) --- */
+        /* --- Base & Structure --- */
         *, *::before, *::after { box-sizing: border-box; }
         body {
-            margin: 0; padding: 25px 15px; /* Decent padding for mobile */
+            margin: 0; padding: 25px 15px;
             min-height: 100vh;
             background-color: var(--bg-color); color: var(--text-color);
             font-family: var(--font-main); font-size: 14px; line-height: 1.6;
         }
 
-        /* --- Headings (Themed) --- */
+        /* --- Headings --- */
         h1, h2 {
             font-family: var(--font-main); font-weight: 700; text-transform: uppercase;
             color: var(--header-color); margin: 0 0 25px 0; padding-bottom: 8px;
             border-bottom: 1px solid var(--border-color); letter-spacing: 1px;
         }
         h1 { font-size: 1.2em; }
-        h2 { font-size: 1em; margin-bottom: 15px; border-bottom: none; } /* Removed border for simplicity */
+        h2 { font-size: 1em; margin-bottom: 15px; border-bottom: none; }
 
-        /* --- Submodule List (Adapted from index.html #launchAreaSection) --- */
+        /* --- Submodule List --- */
         .submodule-list {
-            list-style: none; /* Removes default bullet points */
-            padding-left: 5px; /* Small indent */
+            list-style: none;
+            padding-left: 5px;
             margin: 0 0 30px 0;
         }
         .submodule-list li {
-            margin-bottom: 10px; /* Spacing between items */
+            margin-bottom: 10px;
         }
         .submodule-list a {
             font-family: var(--font-main); font-size: 0.95em;
-            color: var(--accent-color); /* <<< Unvisited Link Color */
+            color: var(--accent-color);
             text-decoration: none;
             transition: color var(--transition-fast), padding-left var(--transition-fast);
-            display: block; /* Makes the link take full width for easier tapping */
+            display: block;
         }
         .submodule-list a:hover {
-            color: var(--accent-hover); /* <<< Hover Color */
-            padding-left: 10px; /* Indent text slightly on hover */
+            color: var(--accent-hover);
+            padding-left: 10px;
         }
-        /* --- ADDED RULE FOR VISITED LINKS --- */
         .submodule-list a:visited {
-            color: var(--accent-color); /* <<< Visited Link Color (Same as unvisited) */
-            /* opacity: 0.85; */ /* Optional: Slightly fade visited links */
+            color: var(--accent-color);
         }
-        /* --- END ADDED RULE --- */
 
+        /* --- Access Button Style --- */
+        .access-button {
+            display: inline-block;
+            padding: 8px 15px;
+            font-family: var(--font-main);
+            font-size: 0.95em;
+            color: var(--bg-color);
+            background-color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all var(--transition-fast);
+            text-align: center;
+            text-decoration: none;
+        }
+        .access-button:hover {
+            background-color: var(--accent-hover);
+            color: var(--bg-color);
+            border-color: var(--accent-hover);
+        }
+
+        /* --- Access Denied Message --- */
+        .access-denied-msg {
+            color: var(--error-color);
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
 
         /* --- Back Link --- */
         .back-link {
@@ -78,14 +105,15 @@
         }
         .back-link:hover { color: var(--accent-hover); }
 
-        /* --- Mobile Adjustments (Minimal needed, structure is simple) --- */
-         @media (max-width: 600px) {
+        /* --- Mobile Adjustments --- */
+        @media (max-width: 600px) {
             body { font-size: 13px; padding: 20px 10px; }
             h1 { font-size: 1.1em; }
             h2 { font-size: 0.9em; }
-            .submodule-list a { font-size: 0.9em; }
+            .submodule-list a, .access-button { font-size: 0.9em; }
             .back-link { font-size: 0.85em; }
-         }
+            .access-denied-msg { font-size: 0.85em; }
+        }
     </style>
 </head>
 <body>
@@ -96,9 +124,48 @@
     <ul class="submodule-list">
         <li><a href="spectrum_analyzer.html" target="_self">> MODULE::SPECTRUM_ANALYZER [Status: Active]</a></li>
         <li><a href="oneshotgenerator.html" target="_self">> MODULE::ONESHOT_GENERATOR [Status: Active]</a></li>
-        <li><a href="hhgen.html" target="_self">> MODULE::HH_GENERATOR [Status: Active]</a></li>
-        <li><a href="theremin_module.html" target="_self">> MODULE::THEREMIN_INTERFACE [Status: Active]</a></li> </ul>
-    <a href="index.html" class="back-link">&lt;&lt; RETURN_TO_NODE_ROOT</a>
+        <li>
+            <a href="hhgen.html" target="_self" id="hhgenLink" style="display: none;">> MODULE::HH_GENERATOR [Status: Active]</a>
+            <button id="hhgenAccessButton" class="access-button">ACCESS::HH_GENERATOR</button>
+            <p id="accessDeniedMsg" class="access-denied-msg">ACCESS::DENIED // INVALID_CODE</p>
+        </li>
+        <li><a href="theremin_module.html" target="_self">> MODULE::THEREMIN_INTERFACE [Status: Active]</a></li>
+    </ul>
+    <a href="index.html" class="back-link"><< RETURN_TO_NODE_ROOT</a>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const accessButton = document.getElementById('hhgenAccessButton');
+            const hhgenLink = document.getElementById('hhgenLink');
+            const accessDeniedMsg = document.getElementById('accessDeniedMsg');
+
+            if (accessButton && hhgenLink && accessDeniedMsg) {
+                accessButton.addEventListener('click', () => {
+                    // Clear any previous error message
+                    accessDeniedMsg.style.display = 'none';
+
+                    const enteredPassword = prompt("ACCESS_CODE::REQUIRED");
+
+                    // Check if the user entered the correct password
+                    if (enteredPassword === "hhgen123") {
+                        // Correct password
+                        hhgenLink.style.display = 'block'; // Show the link
+                        accessButton.style.display = 'none'; // Hide the button
+                        accessDeniedMsg.style.display = 'none'; // Ensure error is hidden
+                        console.log("HH_GENERATOR_ACCESS::GRANTED");
+                    } else if (enteredPassword !== null) {
+                        // Incorrect password (and user didn't click Cancel)
+                        console.warn("HH_GENERATOR_ACCESS::DENIED - Invalid Code Entered");
+                        accessDeniedMsg.style.display = 'block'; // Show error message
+                    } else {
+                        // User clicked Cancel on the prompt
+                        console.log("HH_GENERATOR_ACCESS::CANCELLED");
+                    }
+                });
+            } else {
+                console.error("HH Generator access elements not found.");
+            }
+        });
+    </script>
 </body>
 </html>
