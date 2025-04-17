@@ -32,7 +32,7 @@
             background-color: var(--bg-color); color: var(--text-color);
             font-family: var(--font-main); font-size: 14px; line-height: 1.6;
             overflow-x: hidden;
-            overflow-y: auto; /* Changed to auto for scrolling */
+            overflow-y: auto;
             cursor: default; position: relative;
         }
 
@@ -60,16 +60,16 @@
             overflow: hidden;
         }
         .status-info span {
-             border-left: 1px solid var(--border-color);
-             padding-left: 12px;
-             display: inline-block;
-             min-width: 95px;
-             text-align: left;
+            border-left: 1px solid var(--border-color);
+            padding-left: 12px;
+            display: inline-block;
+            min-width: 95px;
+            text-align: left;
         }
-         .status-info span:first-child {
-             border-left: none;
-             padding-left: 0;
-             min-width: 100px;
+        .status-info span:first-child {
+            border-left: none;
+            padding-left: 0;
+            min-width: 100px;
         }
 
         /* --- Main Content Container --- */
@@ -95,7 +95,7 @@
 
         /* --- Link Grid Section --- */
         #links {
-             border: none; padding: 0; margin-bottom: 30px;
+            border: none; padding: 0; margin-bottom: 30px;
         }
         #links h2 { border: none; padding: 0; margin-bottom: 15px; }
         .link-grid {
@@ -112,8 +112,8 @@
         }
         .link-item:last-child { border-bottom: none; }
         .link-item:hover {
-             background-color: var(--border-color); color: var(--accent-hover);
-             padding-left: 20px;
+            background-color: var(--border-color); color: var(--accent-hover);
+            padding-left: 20px;
         }
         .link-item::before {
             content: '>'; position: absolute; left: -20px; top: 50%;
@@ -131,21 +131,21 @@
         #unitIdSection .about-content span { color: var(--success-color); font-weight: 700; }
 
         /* --- Launch Area / Archive Section --- */
-         #launchAreaSection ul { list-style: '// '; padding-left: 15px; margin: 0; }
-         #launchAreaSection li { margin-bottom: 5px; }
-         #launchAreaSection a { font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color); }
-         #launchAreaSection a:hover { color: var(--accent-hover); }
-         /* Style for password-protected item */
-         #launchAreaSection .protected-item {
-             font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color);
-             cursor: pointer; transition: color var(--transition-fast); display: inline-block;
-         }
-         #launchAreaSection .protected-item:hover { color: var(--accent-hover); }
-         /* Error message style */
-         .password-error {
-             color: var(--error-color); font-size: 0.85em; margin-top: 10px;
-             display: none; font-family: var(--font-main);
-         }
+        #launchAreaSection ul { list-style: '// '; padding-left: 15px; margin: 0; }
+        #launchAreaSection li { margin-bottom: 5px; }
+        #launchAreaSection a { font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color); }
+        #launchAreaSection a:hover { color: var(--accent-hover); }
+        /* Style for password-protected item */
+        #launchAreaSection .protected-item {
+            font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color);
+            cursor: pointer; transition: color var(--transition-fast); display: inline-block;
+        }
+        #launchAreaSection .protected-item:hover { color: var(--accent-hover); }
+        /* Error message style */
+        .password-error {
+            color: var(--error-color); font-size: 0.85em; margin-top: 10px;
+            display: none; font-family: var(--font-main);
+        }
 
         /* --- Footer --- */
         footer {
@@ -169,8 +169,8 @@
             max-width: 90%;
         }
         .contact-modal h3 {
-             margin: 0 0 15px 0; font-family: var(--font-main); color: var(--header-color);
-             font-weight: 700; font-size: 1.1em; text-transform: uppercase;
+            margin: 0 0 15px 0; font-family: var(--font-main); color: var(--header-color);
+            font-weight: 700; font-size: 1.1em; text-transform: uppercase;
         }
         .contact-email {
             display: block; padding: 10px; border: 1px dashed var(--border-color);
@@ -180,9 +180,9 @@
         .contact-email:hover { background-color: var(--border-color); color: var(--accent-hover); }
         .copy-feedback { font-size: 0.8em; opacity: 0.7; height: 1.2em; }
         .contact-close {
-             position: absolute; top: 5px; right: 5px; background: none; border: none;
-             color: var(--text-color); font-size: 1.5em; cursor: pointer; padding: 5px;
-             line-height: 1; opacity: 0.6; transition: all var(--transition-fast);
+            position: absolute; top: 5px; right: 5px; background: none; border: none;
+            color: var(--text-color); font-size: 1.5em; cursor: pointer; padding: 5px;
+            line-height: 1; opacity: 0.6; transition: all var(--transition-fast);
         }
         .contact-close:hover { color: var(--error-color); opacity: 1; transform: scale(1.1); }
 
@@ -190,61 +190,67 @@
         @keyframes simpleFadeIn-kf { from { opacity: 0; } to { opacity: 1; } }
 
         /* --- Mobile Adjustments --- */
-         @media (max-width: 600px) {
-             body {
-                 font-size: 13px;
-                 padding: 10px 5px;
-                 overflow-y: auto;
-             }
-             .main-header {
-                 padding: 6px 10px;
-                 flex-wrap: wrap;
-                 justify-content: flex-start;
-                 padding-bottom: 8px;
-             }
-              .main-title {
-                   font-size: 1em;
-                   width: 100%;
-                   text-align: left;
-                   margin-bottom: 5px;
-             }
-              .status-info {
-                   font-size: 0.7em;
-                   gap: 6px;
-                   width: 100%;
-                   justify-content: flex-start;
-                   flex-wrap: wrap;
-             }
-               .status-info span {
-                    padding-left: 6px;
-                    min-width: 75px;
-                    border-left: 1px solid var(--border-color);
-               }
-               .status-info span:first-child {
-                    padding-left: 0;
-                    border-left: none;
-                    min-width: 85px;
-               }
+        @media (max-width: 600px) {
+            body {
+                font-size: 13px;
+                padding: 10px 5px;
+                overflow-y: auto;
+            }
+            .main-header {
+                padding: 6px 10px;
+                flex-direction: column; /* Stack title and status vertically */
+                align-items: flex-start;
+                min-height: 60px; /* Fixed height to prevent jumping */
+            }
+            .main-title {
+                font-size: 1em;
+                width: 100%;
+                text-align: left;
+                margin-bottom: 5px;
+            }
+            .status-info {
+                font-size: 0.7em;
+                gap: 6px;
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: nowrap; /* Prevent wrapping */
+                overflow: hidden;
+            }
+            .status-info span {
+                padding-left: 6px;
+                min-width: 60px; /* Reduced to fit */
+                max-width: 80px; /* Limit width */
+                text-overflow: ellipsis; /* Truncate long text */
+                overflow: hidden;
+                white-space: nowrap;
+                border-left: 1px solid var(--border-color);
+            }
+            .status-info span:first-child {
+                padding-left: 0;
+                border-left: none;
+                min-width: 70px;
+                max-width: 90px;
+            }
 
-             .main-content { padding: 20px 8px; }
-             .content-section { padding: 15px; margin-bottom: 25px; }
-             .content-section h2 { font-size: 0.9em; }
+            .main-content { padding: 20px 8px; }
+            .content-section { padding: 15px; margin-bottom: 25px; }
+            .content-section h2 { font-size: 0.9em; }
 
-             .link-item { font-size: 0.9em; padding: 10px; }
-              .link-item:hover { padding-left: 15px; }
-              .link-item:hover::before { left: 5px; }
+            .link-item { font-size: 0.9em; padding: 10px; }
+            .link-item:hover { padding-left: 15px; }
+            .link-item:hover::before { left: 5px; }
 
-             #unitIdSection .about-content { font-size: 0.85em; }
-             #launchAreaSection ul { padding-left: 10px; }
-             #launchAreaSection a, #launchAreaSection .protected-item { font-size: 0.85em; }
-             .password-error { font-size: 0.8em; }
+            #unitIdSection .about-content { font-size: 0.85em; }
+            #launchAreaSection ul { padding-left: 10px; }
+            #launchAreaSection a, #launchAreaSection .protected-item { font-size: 0.85em; }
+            .password-error { font-size: 0.8em; }
 
-             footer { margin-top: 20px; font-size: 0.75em; }
+            footer { margin-top: 20px; font-size: 0.75em; }
 
-             .contact-modal-content { padding: 20px; width: 85vw; }
-             .contact-modal h3 { font-size: 1em; }
-             .contact-email { font-size: 0.9em; }
-         }
+            .contact-modal-content { padding: 20px; width: 85vw; }
+            .contact-modal h3 { font-size: 1em; }
+            .contact-email { font-size: 0.9em; }
+        }
     </style>
 </head>
 <body>
@@ -262,16 +268,16 @@
     <main class="main-content">
 
         <section id="links" class="content-section">
-             <h2 class="section-heading">// PRIMARY_DIRECTIVES //</h2>
-             <nav class="link-grid">
-                 <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" class="link-item"><span class="link-text">QUERY::BEAT_STORE</span></a>
-                 <a href="https://www.instagram.com/62serpens" target="_blank" class="link-item"><span class="link-text">MONITOR::INSTAGRAM</span></a>
-                 <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" class="link-item"><span class="link-text">STREAM::SPOTIFY</span></a>
-                 <a href="https://www.soundcloud.com/62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::SOUNDCLOUD</span></a>
-                 <a href="https://www.youtube.com/@62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::YOUTUBE</span></a>
-                 <a href="https://discord.gg/cCedfQgHVG" target="_blank" class="link-item"><span class="link-text">INTERFACE::DISCORD</span></a>
-                 <a href="#" id="contactLink" class="link-item"><span class="link-text">TRANSMIT::CONTACT</span></a>
-             </nav>
+            <h2 class="section-heading">// PRIMARY_DIRECTIVES //</h2>
+            <nav class="link-grid">
+                <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" class="link-item"><span class="link-text">QUERY::BEAT_STORE</span></a>
+                <a href="https://www.instagram.com/62serpens" target="_blank" class="link-item"><span class="link-text">MONITOR::INSTAGRAM</span></a>
+                <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" class="link-item"><span class="link-text">STREAM::SPOTIFY</span></a>
+                <a href="https://www.soundcloud.com/62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::SOUNDCLOUD</span></a>
+                <a href="https://www.youtube.com/@62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::YOUTUBE</span></a>
+                <a href="https://discord.gg/cCedfQgHVG" target="_blank" class="link-item"><span class="link-text">INTERFACE::DISCORD</span></a>
+                <a href="#" id="contactLink" class="link-item"><span class="link-text">TRANSMIT::CONTACT</span></a>
+            </nav>
         </section>
 
         <section id="launchAreaSection" class="content-section">
@@ -287,8 +293,8 @@
         </section>
 
         <section id="unitIdSection" class="content-section">
-             <h2>// SYSTEM_DESIGNATION //</h2>
-             <pre class="about-content">
+            <h2>// SYSTEM_DESIGNATION //</h2>
+            <pre class="about-content">
 UNIT_ID:     62serpens
 DESIGNATION: Audio Pattern Synthesis/Analysis Node
 ORIGIN:      SECTOR::∞ // GRID_REF::[REDACTED]
