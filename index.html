@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>//NODE_62S :: v3.6 ONLINE (ALPHA v1.0)</title>
+    <title>//NODE_62S :: v3.6 ONLINE</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%23cc33ff' stroke-width='2' stroke-dasharray='4' fill='none'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,10 +15,10 @@
             --bg-color: #040408;
             --text-color: #a8a8b0;
             --header-color: #d0d0e0;
-            --accent-color: #bf00ff; /* Your purple */
+            --accent-color: #bf00ff;
             --accent-hover: #ffffff;
             --border-color: #1f1f2f;
-            --success-color: #00b7a8; /* Teal to complement purple */
+            --success-color: #00b7a8;
             --error-color: #ff2222;
             --font-main: 'Roboto Mono', monospace;
             --transition-fast: 0.1s ease-in-out;
@@ -32,9 +32,9 @@
             background-color: var(--bg-color); color: var(--text-color);
             font-family: var(--font-main); font-size: 14px; line-height: 1.6;
             overflow-x: hidden;
-            overflow-y: hidden; /* <<< Vertical scroll DISABLED by default (Desktop) */
+            overflow-y: hidden;
             cursor: default; position: relative;
-            padding-top: 45px; /* Adjusted based on header height test */
+            padding-top: 45px;
         }
 
         /* --- Link Style --- */
@@ -47,45 +47,45 @@
             padding: 8px 15px; border-bottom: 1px solid var(--border-color);
             position: sticky; top: 0; background: var(--bg-color);
             z-index: 500; display: flex; justify-content: space-between; align-items: center;
-            min-height: 38px; gap: 15px; /* Ensure gap between title and status */
+            min-height: 38px; gap: 15px;
         }
         .main-title {
             font-family: var(--font-main); font-weight: 700; font-size: 1.1em;
             color: var(--header-color); margin: 0; letter-spacing: 1px; cursor: default;
-            white-space: nowrap; flex-shrink: 0; /* Prevent shrinking */
+            white-space: nowrap; flex-shrink: 0;
         }
         .status-info {
-            display: flex; gap: 12px; /* Slightly reduced gap */
+            display: flex; gap: 12px;
             font-family: var(--font-main); font-size: 0.8em; color: var(--text-color);
             opacity: 0.7; align-items: center; white-space: nowrap;
-            overflow: hidden; /* Hide potential overflow if min-width isn't enough */
+            overflow: hidden;
         }
         .status-info span {
              border-left: 1px solid var(--border-color);
-             padding-left: 12px; /* Match gap */
-             display: inline-block; /* Needed for min-width */
-             min-width: 95px; /* <<< Fixed width to prevent jumping */
-             text-align: left; /* Ensure text starts left */
+             padding-left: 12px;
+             display: inline-block;
+             min-width: 95px;
+             text-align: left;
         }
          .status-info span:first-child {
              border-left: none;
              padding-left: 0;
-             min-width: 100px; /* Allow slightly more for time */
+             min-width: 100px;
         }
 
         /* --- Main Content Container --- */
         .main-content {
             max-width: 700px;
-            margin: 0 auto; padding: 25px 10px; /* Slightly reduced padding */
+            margin: 0 auto; padding: 25px 10px;
             z-index: 5; position: relative;
         }
 
         /* --- Section Styling (General) --- */
         .content-section {
-            margin-bottom: 30px; /* Slightly reduced margin */
-            padding: 18px; /* Slightly reduced padding */
+            margin-bottom: 30px;
+            padding: 18px;
             border: 1px solid var(--border-color);
-            background: none; /* <<< Removed subtle background */
+            background: none;
         }
         .content-section h2 {
             font-family: var(--font-main); font-weight: 700; text-transform: uppercase;
@@ -132,36 +132,14 @@
         #unitIdSection .about-content span { color: var(--success-color); font-weight: 700; }
 
         /* --- Launch Area / Archive Section --- */
-         #launchAreaSection ul { list-style: '// '; padding-left: 15px; margin: 0; } /* Style remains for list when shown */
+         #launchAreaSection ul { list-style: '// '; padding-left: 15px; margin: 0; }
          #launchAreaSection li { margin-bottom: 5px; }
          #launchAreaSection a { font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color); }
          #launchAreaSection a:hover { color: var(--accent-hover); }
 
-        /* --- Access Button Style --- */
-        .access-button {
-            display: block; /* Or inline-block */
-            margin-bottom: 15px; /* Space below button */
-            padding: 8px 15px;
-            font-family: var(--font-main);
-            font-size: 0.9em;
-            color: var(--bg-color); /* Dark text on light button */
-            background-color: var(--accent-color); /* Now purple */
-            border: 1px solid var(--accent-color);
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all var(--transition-fast);
-            text-align: center;
-        }
-        .access-button:hover {
-            background-color: var(--accent-hover);
-            color: var(--bg-color);
-             border-color: var(--accent-hover);
-        }
-
         /* --- Footer --- */
         footer {
-            padding: 15px; margin-top: 25px; /* Reduced margin */
+            padding: 15px; margin-top: 25px;
             text-align: center; font-size: 0.8em;
             color: var(--border-color); border-top: 1px solid var(--border-color);
             font-family: var(--font-main); letter-spacing: 1px; opacity: 0.5;
@@ -204,37 +182,37 @@
          @media (max-width: 600px) {
              body {
                  font-size: 13px;
-                 padding: 50px 5px 5px 5px; /* Adjusted top padding */
-                 overflow-y: auto; /* <<< Scroll ENABLED ONLY for mobile */
+                 padding: 50px 5px 5px 5px;
+                 overflow-y: auto;
              }
              .main-header {
                  padding: 6px 10px;
-                 flex-wrap: wrap; /* Allow wrapping */
-                 justify-content: flex-start; /* Align items to start */
-                  padding-bottom: 8px; /* Space below wrapped items */
+                 flex-wrap: wrap;
+                 justify-content: flex-start;
+                  padding-bottom: 8px;
              }
               .main-title {
                    font-size: 1em;
-                   width: 100%; /* Take full width */
-                   text-align: left; /* <<< Align title left */
-                   margin-bottom: 5px; /* Space below title when wrapped */
+                   width: 100%;
+                   text-align: left;
+                   margin-bottom: 5px;
              }
               .status-info {
                    font-size: 0.7em;
-                   gap: 6px; /* Further reduce gap */
-                   width: 100%; /* Take full width when wrapped */
-                   justify-content: flex-start; /* <<< Align status items left */
-                   flex-wrap: wrap; /* Allow status items to wrap if needed */
+                   gap: 6px;
+                   width: 100%;
+                   justify-content: flex-start;
+                   flex-wrap: wrap;
              }
                .status-info span {
-                    padding-left: 6px; /* Match reduced gap */
-                    min-width: 75px; /* <<< Adjusted min-width for mobile stability */
+                    padding-left: 6px;
+                    min-width: 75px;
                     border-left: 1px solid var(--border-color);
                }
                .status-info span:first-child {
                     padding-left: 0;
                     border-left: none;
-                     min-width: 85px; /* Time needs slightly more */
+                     min-width: 85px;
                }
 
              .main-content { padding: 20px 8px; }
@@ -246,9 +224,8 @@
               .link-item:hover::before { left: 5px; }
 
              #unitIdSection .about-content { font-size: 0.85em; }
-             #launchAreaSection ul { padding-left: 10px; } /* Adjust list padding */
+             #launchAreaSection ul { padding-left: 10px; }
              #launchAreaSection a { font-size: 0.85em; }
-             .access-button { font-size: 0.85em; padding: 6px 12px;} /* Adjust button */
 
              footer { margin-top: 20px; font-size: 0.75em; }
 
@@ -256,13 +233,13 @@
              .contact-modal h3 { font-size: 1em; }
              .contact-email { font-size: 0.9em; }
          }
-
     </style>
 </head>
 <body>
 
     <header class="main-header">
-        <h1 class="main-title">//NODE::62S</h1>
+        <h1 class="main-title">//NODE::62S (ALPHA v3.6)
+        </h1>
         <div class="status-info">
             <span id="dateTime" title="Local Timezone: Australia/Hobart">LST_--:--:--</span>
             <span id="systemStatus">STATUS::INIT</span>
@@ -274,28 +251,28 @@
     <main class="main-content">
 
         <section id="links" class="content-section">
-             <h2 class="section-heading">// PRIMARY_DIRECTIVES //</h2> <nav class="link-grid">
+             <h2 class="section-heading">// PRIMARY_DIRECTIVES //</h2>
+             <nav class="link-grid">
                  <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" class="link-item"><span class="link-text">QUERY::BEAT_STORE</span></a>
                  <a href="https://www.instagram.com/62serpens" target="_blank" class="link-item"><span class="link-text">MONITOR::INSTAGRAM</span></a>
-                 <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" class="link-item"><span class="link-text">STREAM::SPOTIFY</span></a> <a href="https://www.soundcloud.com/62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::SOUNDCLOUD</span></a>
+                 <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" class="link-item"><span class="link-text">STREAM::SPOTIFY</span></a>
+                 <a href="https://www.soundcloud.com/62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::SOUNDCLOUD</span></a>
+                 <a href="https://www.youtube.com/@62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::YOUTUBE</span></a>
                  <a href="https://discord.gg/cCedfQgHVG" target="_blank" class="link-item"><span class="link-text">INTERFACE::DISCORD</span></a>
                  <a href="#" id="contactLink" class="link-item"><span class="link-text">TRANSMIT::CONTACT</span></a>
              </nav>
         </section>
 
-       <section id="launchAreaSection" class="content-section">
-           <h2>// SUBMODULE_DEPLOYMENT //</h2>
+        <section id="launchAreaSection" class="content-section">
+            <h2>// SUBMODULE_DEPLOYMENT //</h2>
+            <ul id="submoduleList">
+                <li><a href="2000.html" target="_self"> > NODE_V2 :: Retro Simulation [Status: Archived]</a></li>
+                <li><a href="b.html" target="_self"> > MODULE::BLACKJACK_SIM [Status: Active]</a></li>
+                <li><a href="audio_tools.html" target="_self"> > MODULE::AUDIO_PROCESSING_SUITE [Status: Active]</a></li>
+            </ul>
+        </section>
 
-           <button id="submoduleAccessButton" class="access-button">REQUEST_ACCESS::SUBMODULES</button>
-
-           <ul id="submoduleList" style="display: none;">
-               <li><a href="2000.html" target="_self"> > NODE_V2 :: Retro Simulation [Status: Archived]</a></li> <li><a href="b.html" target="_self"> > MODULE::BLACKJACK_SIM [Status: Active]</a></li>
-               <li><a href="audio_tools.html" target="_self"> > MODULE::AUDIO_PROCESSING_SUITE [Status: Active]</a></li>
-           </ul>
-           <p id="accessDeniedMsg" style="color: var(--error-color); display: none; font-size: 0.9em;">ACCESS::DENIED // INVALID_CODE</p>
-
-       </section>
-       <section id="unitIdSection" class="content-section">
+        <section id="unitIdSection" class="content-section">
              <h2>// SYSTEM_DESIGNATION //</h2>
              <pre class="about-content">
 UNIT_ID:     62serpens
@@ -306,7 +283,7 @@ AI_ASSIST:   v4.0_ACTIVE
 </pre>
         </section>
 
-        </main>
+    </main>
 
     <footer>// SYSTEM_ID::62S // RUNTIME::2025 //</footer>
 
@@ -328,7 +305,7 @@ AI_ASSIST:   v4.0_ACTIVE
                 const systemStatusEl = document.getElementById('systemStatus');
                 const coreTempEl = document.getElementById('coreTemp');
                 const uplinkStatusEl = document.getElementById('uplinkStatus');
-                const unitIdStatusEl = document.getElementById('unitIdStatus'); // For the status in the About section
+                const unitIdStatusEl = document.getElementById('unitIdStatus');
 
                 const contactLink = document.getElementById('contactLink');
                 const contactModal = document.getElementById('contactModal');
@@ -337,7 +314,7 @@ AI_ASSIST:   v4.0_ACTIVE
                 const contactClose = document.getElementById('contactClose');
 
                 // --- Config & State ---
-                const userEmail = "626262xxx@gmail.com"; // Store email here - UPDATE IF NEEDED
+                const userEmail = "626262xxx@gmail.com";
                 const statusOptions = ["OPTIMAL", "NOMINAL", "STABLE", "PROCESSING", "CALIBRATING", "SYNCED", "ANALYSING", "IDLE"];
                 const uplinkOptions = ["ACTIVE", "ACTIVE", "ACTIVE", "SYNCING", "STANDBY", "ENCRYPTED", "ROUTING", "SECURE_TUNNEL"];
                 let currentCoreTemp = 28.0;
@@ -354,7 +331,7 @@ AI_ASSIST:   v4.0_ACTIVE
                         const timeStr = now.toLocaleTimeString("en-AU", timeOpts);
                         dateTimeEl.textContent = `LST_${timeStr}`;
                     } catch (e) {
-                         console.warn(`Timezone formatting for ${location} failed. Using local fallback. Error: ${e.message}`);
+                        console.warn(`Timezone formatting for ${location} failed. Using local fallback. Error: ${e.message}`);
                         const timeStr = now.toLocaleTimeString("en-US", { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
                         dateTimeEl.textContent = `LCL_${timeStr}`;
                     }
@@ -365,15 +342,15 @@ AI_ASSIST:   v4.0_ACTIVE
                     if (systemStatusEl) {
                         const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
                         systemStatusEl.textContent = `STATUS::${randomStatus}`;
-                         if (unitIdStatusEl) unitIdStatusEl.textContent = randomStatus;
+                        if (unitIdStatusEl) unitIdStatusEl.textContent = randomStatus;
                     }
 
                     if (coreTempEl) {
-                         const baseTemp = 28.0;
-                         const fluctuation = (Math.random() - 0.5);
-                         currentCoreTemp = baseTemp + fluctuation;
-                         currentCoreTemp = Math.max(25.0, Math.min(31.0, currentCoreTemp));
-                         coreTempEl.textContent = `CORE_TEMP::${currentCoreTemp.toFixed(1)}C`;
+                        const baseTemp = 28.0;
+                        const fluctuation = (Math.random() - 0.5);
+                        currentCoreTemp = baseTemp + fluctuation;
+                        currentCoreTemp = Math.max(25.0, Math.min(31.0, currentCoreTemp));
+                        coreTempEl.textContent = `CORE_TEMP::${currentCoreTemp.toFixed(1)}C`;
                     }
 
                     if (uplinkStatusEl) {
@@ -415,51 +392,17 @@ AI_ASSIST:   v4.0_ACTIVE
                 if (contactEmailDisplay) contactEmailDisplay.addEventListener('click', copyEmailToClipboard);
                 if (contactModal) contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeContactModal(); });
 
-                // --- Password Gate Logic for Submodules ---
-                const accessButton = document.getElementById('submoduleAccessButton');
-                const submoduleList = document.getElementById('submoduleList');
-                const accessDeniedMsg = document.getElementById('accessDeniedMsg'); // Get the error message element
-
-                if (accessButton && submoduleList) {
-                    accessButton.addEventListener('click', function() {
-                        // Clear any previous error message
-                        if(accessDeniedMsg) accessDeniedMsg.style.display = 'none';
-
-                        const enteredPassword = prompt("ACCESS_CODE::REQUIRED");
-
-                        // Check if the user entered something and it's the correct password
-                        if (enteredPassword === "1") {
-                            // Correct password
-                            submoduleList.style.display = 'block'; // Show the list
-                            accessButton.style.display = 'none'; // Hide the button
-                            if(accessDeniedMsg) accessDeniedMsg.style.display = 'none'; // Ensure error is hidden
-                            console.log("SUBMODULE_ACCESS::GRANTED");
-                        } else if (enteredPassword !== null) {
-                            // Incorrect password (and user didn't click Cancel)
-                            console.warn("SUBMODULE_ACCESS::DENIED - Invalid Code Entered");
-                            if(accessDeniedMsg) accessDeniedMsg.style.display = 'block'; // Show error message
-                        } else {
-                             // User clicked Cancel on the prompt
-                             console.log("SUBMODULE_ACCESS::CANCELLED");
-                        }
-                    });
-                } else {
-                    console.error("Password gate elements not found (button or list).");
-                }
-
                 // --- Initialization ---
                 updateDateTime();
                 updateStatusIndicators();
                 setInterval(updateDateTime, 1000);
-                setInterval(updateStatusIndicators, 3000); // Update statuses every 3 seconds
+                setInterval(updateStatusIndicators, 3000);
 
                 console.log("NODE_62S v3.6 :: Interface Active");
-                document.body.classList.add('loaded'); // Add class if needed for CSS transitions after load
-
-            }); // End DOMContentLoaded
+                document.body.classList.add('loaded');
+            });
         } catch (error) {
             console.error("!!! KERNEL FAULT !!!:", error);
-             // Basic error display on screen
             document.body.innerHTML = `<div style="color:#ff3333; background:#040408; padding: 20px; font-family: monospace; font-size: 14px;">SYSTEM_ERROR [CODE::${Math.random().toString(16).substring(2, 10).toUpperCase()}]<br><br>${error.message}<br>----------------<br>${error.stack || 'NO_STACK_TRACE'}</div>`;
         }
     </script>
