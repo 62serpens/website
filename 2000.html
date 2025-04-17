@@ -14,6 +14,10 @@
     <link rel="preload" href="images/img_006.jpg" as="image">
     <link rel="preload" href="images/img_007.jpg" as="image">
     <link rel="preload" href="images/img_008.jpg" as="image">
+    <link rel="preload" href="images/img_009.jpg" as="image">
+    <link rel="preload" href="images/img_010.jpg" as="image">
+    <link rel="preload" href="images/img_011.jpg" as="image">
+    <link rel="preload" href="images/img_012.jpg" as="image">
     <style>
         :root {
             --color-black: #000;
@@ -73,7 +77,7 @@
             background: var(--color-black);
             color: var(--color-cyan);
             font-size: 14px;
-            padding: 5px 10px; /* Ensure padding */
+            padding: 5px 10px;
             border-bottom: 2px solid var(--color-magenta);
             display: flex;
             justify-content: space-between;
@@ -116,7 +120,7 @@
 
         .nav-bar {
             position: fixed;
-            top: 50px; /* Adjust if needed based on status bar height */
+            top: 50px;
             left: 10px;
             padding: 10px;
             z-index: 110;
@@ -127,7 +131,7 @@
             border: 2px solid var(--color-magenta);
             border-radius: 10px;
             box-shadow: 0 0 10px var(--color-magenta);
-            display: none; /* Hidden by default */
+            display: none;
         }
 
         .nav-link {
@@ -154,7 +158,7 @@
         }
 
         .content-wrapper {
-            margin-top: 40px; /* Adjust if needed */
+            margin-top: 40px;
             margin-bottom: 40px;
             padding: 10px;
             width: 100%;
@@ -169,7 +173,7 @@
             box-shadow: 0 0 20px var(--color-magenta);
             position: relative;
             box-sizing: border-box;
-            scroll-margin-top: 50px; /* Offset for fixed status bar */
+            scroll-margin-top: 50px;
         }
 
         .section-heading {
@@ -222,16 +226,6 @@
             text-align: center;
             margin-left: auto;
             margin-right: auto;
-        }
-
-        #signupSection {
-            border: 4px dashed var(--color-red);
-            max-width: 700px;
-            padding: 20px;
-            text-align: center;
-            margin-left: auto;
-            margin-right: auto;
-            background: rgba(0, 0, 0, 0.95);
         }
 
         @keyframes shake { 0% { transform: translateX(0); } 50% { transform: translateX(2px); } 100% { transform: translateX(-2px); } }
@@ -373,7 +367,7 @@
             width: 40px;
             height: 100px;
             background: linear-gradient(var(--color-green), var(--color-red));
-            position: fixed; /* Changed to fixed for full-page movement */
+            position: fixed;
             left: 20px;
             top: var(--chaser-top, 50%);
             transform: translateY(-50%);
@@ -582,7 +576,7 @@
             overflow: hidden;
             margin: 0 auto;
             position: relative;
-            width: calc(195px * 4 + 20px * 3 + 8px); /* Adjust if placeholder size changes */
+            width: calc(195px * 4 + 20px * 3 + 8px);
         }
 
         .gallery-grid {
@@ -699,55 +693,6 @@
             padding: 10px;
         }
 
-        /* Signup Section Styles */
-        .signup-title {
-            font-size: 28px;
-            color: var(--color-cyan);
-            text-shadow: 2px 2px 0 var(--color-magenta);
-            margin-bottom: 15px;
-            animation: blink 0.5s infinite;
-        }
-
-        .signup-text {
-            color: var(--color-yellow);
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-
-        .signup-form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .signup-input {
-            width: 100%;
-            max-width: 300px;
-            padding: 10px;
-            background: var(--color-dark-grey);
-            border: 2px solid var(--color-green);
-            color: var(--color-cyan);
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-
-        .signup-button {
-            background: var(--color-magenta);
-            color: var(--color-cyan);
-            padding: 10px 20px;
-            border: 2px solid var(--color-yellow);
-            font-size: 16px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            width: 100%;
-            max-width: 300px;
-            text-align: center;
-        }
-
-        .signup-button:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--color-green); }
-
         /* Desktop Overrides */
         @media (min-width: 600px) {
             #homePage { max-width: 700px; padding: 30px; }
@@ -755,7 +700,6 @@
             #galleryPage { width: 900px; height: 500px; }
             .gallery-viewport { width: calc(195px * 4 + 20px * 3 + 8px); }
             #aboutPage { max-width: 600px; padding: 30px; }
-            #signupSection { max-width: 700px; padding: 30px; }
             h1 { font-size: 90px; }
             .domain { font-size: 90px; }
             .button { font-size: 24px; padding: 15px 30px; max-width: 400px; }
@@ -775,13 +719,11 @@
             .blog-nav-button span { font-size: 11px; }
             .astral-particle { animation-duration: 10s; }
             .section-heading { font-size: 48px; }
-            .signup-title { font-size: 36px; }
-            .signup-text { font-size: 18px; }
         }
 
         /* Mobile Overrides */
         @media (max-width: 599px) {
-            body { padding: 5px; font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif; -webkit-font-smoothing: antialiased; font-weight: 400; padding-top: 35px; /* Adjust top padding for smaller status bar */ }
+            body { padding: 5px; font-family: 'Chalkboard SE', 'Comic Sans MS', 'Comic Neue', sans-serif; -webkit-font-smoothing: antialiased; font-weight: 400; padding-top: 35px; }
             .status-bar { font-size: 12px; padding: 3px 5px; }
             .content-wrapper { margin-top: 30px; margin-left: 0; width: 100%; padding: 5px; }
             .page-content { padding: 10px; margin-bottom: 20px; }
@@ -789,7 +731,6 @@
             #blogPage, #galleryPage { width: 98%; height: auto; max-height: none; padding: 10px; border-width: 3px; box-shadow: 0 0 10px var(--color-magenta); }
             #galleryPage { justify-content: flex-start; }
             #aboutPage { padding: 15px; max-width: 95%; border-width: 3px; }
-            #signupSection { padding: 15px; max-width: 95%; border-width: 3px; }
             h1 { font-size: 36px; }
             .domain { font-size: 36px; }
             .button { font-size: 14px; padding: 8px 15px; max-width: 90%; }
@@ -820,61 +761,60 @@
             .blog-nav-button { font-size: 11px; padding: 4px 6px; max-width: none; width: auto; margin-bottom: 0; flex-shrink: 0; }
             .blog-nav-button span { font-size: 9px; }
             .section-heading { font-size: 28px; }
-            .signup-title { font-size: 20px; }
-            .signup-text { font-size: 14px; }
-            .signup-input { font-size: 14px; }
-            .signup-button { font-size: 14px; padding: 8px 15px; }
+            .nav-link[data-page="blogPage"] { padding-right: 5px; } /* Shift "Blog" text left on mobile */
         }
 
-        /* --- Styles for Return Button --- */
+        /* Styles for Return Button */
         .return-button {
-            color: var(--color-yellow); /* Retro interactive color */
-            font-size: 14px; /* Match status bar font */
-            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif; /* Match theme font */
+            color: var(--color-yellow);
+            font-size: 14px;
+            font-family: 'Comic Sans MS', 'Comic Neue', sans-serif;
             text-decoration: none;
             cursor: pointer;
             transition: color 0.2s ease, text-shadow 0.2s ease;
-            white-space: nowrap; /* Prevent wrapping */
-            font-weight: bold; /* Make it stand out slightly */
+            white-space: nowrap;
+            font-weight: bold;
         }
 
         .return-button:hover {
-            color: var(--color-magenta); /* Retro hover color */
-            text-shadow: 0 0 5px var(--color-green); /* Retro glow effect */
+            color: var(--color-magenta);
+            text-shadow: 0 0 5px var(--color-green);
         }
 
-        /* Mobile adjustment for return button */
         @media (max-width: 599px) {
-            .return-button {
-                font-size: 11px; /* Smaller font on mobile */
-            }
-            /* Reduce gap on mobile if right side feels too cramped */
-             .status-bar > div:last-child { /* Target the right-side wrapper */
-                gap: 8px;
-             }
+            .return-button { font-size: 11px; }
+            .status-bar > div:last-child { gap: 8px; }
         }
     </style>
 </head>
 <body>
     <div class="status-bar">
-        <div style="display: flex; align-items: center;"> <span id="dateTime"></span>
+        <div style="display: flex; align-items: center;">
+            <span id="dateTime"></span>
             <div class="mode-buttons">
                 <button class="mode-button invert-button" id="invertButton" title="Toggle Invert">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"> <circle cx="8" cy="8" r="4" fill="#ff00ff"/> <path d="M8 0v2M8 14v2M0 8h2M14 8h2M2.34 2.34l1.42 1.42M12.24 12.24l1.42 1.42M2.34 13.66l1.42-1.42M12.24 3.76l1.42-1.42" stroke="#ff00ff" stroke-width="1"/> </svg>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="8" cy="8" r="4" fill="#ff00ff"/>
+                        <path d="M8 0v2M8 14v2M0 8h2M14 8h2M2.34 2.34l1.42 1.42M12.24 12.24l1.42 1.42M2.34 13.66l1.42-1.42M12.24 3.76l1.42-1.42" stroke="#ff00ff" stroke-width="1"/>
+                    </svg>
                 </button>
                 <button class="mode-button wallpaper-button" id="wallpaperButton" title="Swap Wallpaper">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <rect x="6" y="6" width="12" height="12" stroke="#ff0000" stroke-width="2"/> </svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="6" y="6" width="12" height="12" stroke="#ff0000" stroke-width="2"/>
+                    </svg>
                 </button>
             </div>
         </div>
-        <div style="display: flex; align-items: center; gap: 15px;"> <a href="index.html" class="return-button" title="Return to Main Node">[&lt;&lt; BACK TO NODE]</a> <span id="coordinates"></span> </div>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <a href="index.html" class="return-button" title="Return to Main Node">[<< BACK TO NODE]</a>
+            <span id="coordinates"></span>
+        </div>
     </div>
     <div class="nav-bar">
         <span class="nav-link active" data-page="homePage">Homepage</span>
         <span class="nav-link" data-page="blogPage">Blog</span>
         <span class="nav-link" data-page="galleryPage">Gallery</span>
         <span class="nav-link" data-page="aboutPage">About</span>
-        <span class="nav-link" data-page="signupSection">Signup</span>
     </div>
     <div class="content-wrapper">
         <div class="page-content" id="homePage">
@@ -927,16 +867,9 @@
                 He is best known for his work with major artists such as Drake, Playboi Carti, Future, Yeat, Nettspend, Tate Mcrae, Taylor Swift, Ye West, Osamason, Pitbull, Britney Spears, Skrillex, Justin Bieber, Red Hot Chilli Peppers, One Direction and many more.
             </div>
         </div>
-        <div class="page-content" id="signupSection">
-            <h2 class="section-heading">Signup</h2>
-            <p class="signup-text">Drop ur email for beats, updates, and chaos!</p>
-            <form class="signup-form" id="signupForm" onsubmit="handleSignup(event)">
-                <input type="email" class="signup-input" id="emailInput" placeholder="ur email here..." required>
-                <button type="submit" class="signup-button">SUBMIT</button>
-            </form>
-        </div>
     </div>
-    <div class="graphic-left" id="egg3"></div> <footer class="copyright" id="copyright">
+    <div class="graphic-left" id="egg3"></div>
+    <footer class="copyright" id="copyright">
         <p>© 62serpens 2025 - All Rights Reserved</p>
     </footer>
     <span class="flash-text" id="flashText">626262626262626262626262626262626262626262626262626262626262</span>
@@ -969,16 +902,22 @@
             const galleryClose = document.getElementById('galleryClose');
             const galleryCaption = document.getElementById('galleryCaption');
             const galleryViewport = document.querySelector('#galleryPage .gallery-viewport');
-            const signupForm = document.getElementById('signupForm');
-            const emailInput = document.getElementById('emailInput');
             const invertButton = document.getElementById('invertButton');
             const wallpaperButton = document.getElementById('wallpaperButton');
 
             const galleryImagesData = [
-                { src: 'images/img_001.jpg', caption: 'Photo 1' }, { src: 'images/img_002.jpg', caption: 'Photo 2' },
-                { src: 'images/img_003.jpg', caption: 'Photo 3' }, { src: 'images/img_004.jpg', caption: 'Photo 4' },
-                { src: 'images/img_005.jpg', caption: 'Photo 5' }, { src: 'images/img_006.jpg', caption: 'Photo 6' },
-                { src: 'images/img_007.jpg', caption: 'Photo 7' }, { src: 'images/img_008.jpg', caption: 'Photo 8' }
+                { src: 'images/img_001.jpg', caption: 'Photo 1' },
+                { src: 'images/img_002.jpg', caption: 'Photo 2' },
+                { src: 'images/img_003.jpg', caption: 'Photo 3' },
+                { src: 'images/img_004.jpg', caption: 'Photo 4' },
+                { src: 'images/img_005.jpg', caption: 'Photo 5' },
+                { src: 'images/img_006.jpg', caption: 'Photo 6' },
+                { src: 'images/img_007.jpg', caption: 'Photo 7' },
+                { src: 'images/img_008.jpg', caption: 'Photo 8' },
+                { src: 'images/img_009.jpg', caption: 'Photo 9' },
+                { src: 'images/img_010.jpg', caption: 'Photo 10' },
+                { src: 'images/img_011.jpg', caption: 'Photo 11' },
+                { src: 'images/img_012.jpg', caption: 'Photo 12' }
             ];
             const blogPosts = {
                 'post1': { date: "31/03/2025", title: "Hello World", content: `just setting up my blog lol :)` },
@@ -999,77 +938,73 @@
             let isFlipped = false;
             let slideSpeed = 6;
             let clickCount = 0;
-            let sliderHeight = 100; // Initial height percentage or px
+            let sliderHeight = 100;
             let gameActive = false;
             let secretLink = null;
             let wallpaperIndex = 0;
             let galleryCurrentPage = 0;
-            const galleryImagesPerPage = 4; // Desktop view
+            const galleryImagesPerPage = 4;
             const galleryTotalPages = Math.ceil(galleryImagesData.length / galleryImagesPerPage);
 
-            // --- Functions (Keep all original JS functions) ---
-             function preloadInitialImages() {
-                 const initialSources = galleryImagesData.slice(0, initialImagesToLoad).map(item => item.src);
-                 const defaultWallpaperUrl = wallpapers[0].match(/url\(['"]?(.*?)['"]?\)/);
-                 if (defaultWallpaperUrl && defaultWallpaperUrl[1]) initialSources.push(defaultWallpaperUrl[1]);
+            function preloadInitialImages() {
+                const initialSources = galleryImagesData.slice(0, initialImagesToLoad).map(item => item.src);
+                const defaultWallpaperUrl = wallpapers[0].match(/url\(['"]?(.*?)['"]?\)/);
+                if (defaultWallpaperUrl && defaultWallpaperUrl[1]) initialSources.push(defaultWallpaperUrl[1]);
 
-                 let loadedCount = 0;
-                 const totalToLoad = initialSources.length;
+                let loadedCount = 0;
+                const totalToLoad = initialSources.length;
 
-                 if (totalToLoad === 0) {
-                     document.body.classList.add('loaded');
-                     preloadRemainingImages();
-                     return;
-                 }
+                if (totalToLoad === 0) {
+                    document.body.classList.add('loaded');
+                    preloadRemainingImages();
+                    return;
+                }
 
-                 initialSources.forEach(src => {
-                     const img = new Image();
-                     img.src = src;
-                     img.onload = () => {
-                         loadedCount++;
-                         if (loadedCount >= totalToLoad && !document.body.classList.contains('loaded')) {
-                             document.body.classList.add('loaded');
-                             preloadRemainingImages();
-                         }
-                     };
-                     img.onerror = () => {
-                         console.error(`Failed to preload: ${src}`);
-                         loadedCount++;
-                          if (loadedCount >= totalToLoad && !document.body.classList.contains('loaded')) {
-                             document.body.classList.add('loaded');
-                             preloadRemainingImages();
-                         }
-                     };
-                 });
-             }
+                initialSources.forEach(src => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = () => {
+                        loadedCount++;
+                        if (loadedCount >= totalToLoad && !document.body.classList.contains('loaded')) {
+                            document.body.classList.add('loaded');
+                            preloadRemainingImages();
+                        }
+                    };
+                    img.onerror = () => {
+                        console.error(`Failed to preload: ${src}`);
+                        loadedCount++;
+                        if (loadedCount >= totalToLoad && !document.body.classList.contains('loaded')) {
+                            document.body.classList.add('loaded');
+                            preloadRemainingImages();
+                        }
+                    };
+                });
+            }
 
             function preloadRemainingImages() {
                 galleryImagesData.slice(initialImagesToLoad).forEach((item, index) => {
                     const img = new Image();
                     img.src = item.src;
                     img.onerror = () => {
-                         console.error(`Failed background load: ${item.src}`);
-                         // Mark placeholder as failed if needed
+                        console.error(`Failed background load: ${item.src}`);
                         const placeholder = document.querySelector(`.gallery-placeholder[data-index="${initialImagesToLoad + index + 1}"]`);
-                         if (placeholder) placeholder.classList.add('failed');
-                     };
-                 });
-             }
+                        if (placeholder) placeholder.classList.add('failed');
+                    };
+                });
+            }
 
             function updateDateTime() {
-                 const now = new Date();
-                 // Use Hobart time if possible, fallback otherwise
-                 let dateStr, timeStr;
-                 try {
+                const now = new Date();
+                let dateStr, timeStr;
+                try {
                     dateStr = now.toLocaleDateString('en-AU', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'Australia/Hobart' });
                     timeStr = now.toLocaleTimeString('en-AU', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Australia/Hobart' });
                     if (dateTime) dateTime.textContent = `${dateStr} ${timeStr} AEST`;
                 } catch(e) {
-                    // Fallback if timezone is not supported
-                    dateStr = now.toLocaleDateString('en-CA'); // Different locale for fallback format
+                    dateStr = now.toLocaleDateString('en-CA');
                     timeStr = now.toLocaleTimeString('en-US', { hour12: false });
                     if (dateTime) dateTime.textContent = `${dateStr} ${timeStr} (Local)`;
-                 }
+                }
             }
 
             function updateCoordinates() {
@@ -1080,287 +1015,271 @@
                 if (coordinates) coordinates.textContent = `COORDS: ${lat}°N, ${lon}°E`;
             }
 
-             function createParticle() {
-                 if (!particlesActive) return;
-                 const particle = document.createElement('div');
-                 particle.className = 'astral-particle';
-                 const startX = window.innerWidth / 2;
-                 const startY = window.scrollY + window.innerHeight / 2; // Center based on viewport
-                 particle.style.left = `${startX}px`;
-                 particle.style.top = `${startY}px`;
-                 particle.style.background = Math.random() < 0.5 ? '#ff00ff' : '#00ffff'; // Magenta or Cyan
-                 const angle = Math.random() * 2 * Math.PI;
-                 const distance = (Math.min(window.innerWidth, window.innerHeight) / 2) + Math.random() * 200; // Spread out more
-                 const endX = distance * Math.cos(angle);
-                 const endY = distance * Math.sin(angle);
-                 particle.style.setProperty('--end-x', `${endX}px`);
-                 particle.style.setProperty('--end-y', `${endY}px`);
-                 document.body.appendChild(particle);
-                 // Adjust lifetime based on media query if needed
-                 setTimeout(() => particle.remove(), window.innerWidth < 600 ? 15000 : 10000); // Longer on mobile?
+            function createParticle() {
+                if (!particlesActive) return;
+                const particle = document.createElement('div');
+                particle.className = 'astral-particle';
+                const startX = window.innerWidth / 2;
+                const startY = window.scrollY + window.innerHeight / 2;
+                particle.style.left = `${startX}px`;
+                particle.style.top = `${startY}px`;
+                particle.style.background = Math.random() < 0.5 ? '#ff00ff' : '#00ffff';
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = (Math.min(window.innerWidth, window.innerHeight) / 2) + Math.random() * 200;
+                const endX = distance * Math.cos(angle);
+                const endY = distance * Math.sin(angle);
+                particle.style.setProperty('--end-x', `${endX}px`);
+                particle.style.setProperty('--end-y', `${endY}px`);
+                document.body.appendChild(particle);
+                setTimeout(() => particle.remove(), window.innerWidth < 600 ? 15000 : 10000);
             }
 
             function toggleParticles() {
                 if (particlesActive) {
                     clearInterval(particleInterval);
                     particlesActive = false;
-                    if (coordinates) coordinates.style.color = '#00ffff'; // Back to Cyan
+                    if (coordinates) coordinates.style.color = '#00ffff';
                     document.querySelectorAll('.astral-particle').forEach(p => p.remove());
                 } else {
-                    particleInterval = setInterval(createParticle, window.innerWidth < 600 ? 100 : 50); // Faster on desktop
+                    particleInterval = setInterval(createParticle, window.innerWidth < 600 ? 100 : 50);
                     particlesActive = true;
-                    if (coordinates) coordinates.style.color = '#ff00ff'; // Magenta when active
-                 }
+                    if (coordinates) coordinates.style.color = '#ff00ff';
+                }
             }
 
-             function triggerGlitch() {
+            function triggerGlitch() {
                 if (titleText) {
                     titleText.classList.add('glitch');
                     setTimeout(() => titleText.classList.remove('glitch'), 300);
                 }
             }
 
-             function buildBlogMenu() {
-                 if (!blogMenu) return;
-                 blogMenu.innerHTML = ''; // Clear existing
-                 Object.keys(blogPosts).forEach(key => {
+            function buildBlogMenu() {
+                if (!blogMenu) return;
+                blogMenu.innerHTML = '';
+                Object.keys(blogPosts).forEach(key => {
                     const post = blogPosts[key];
                     const button = document.createElement('div');
                     button.className = 'blog-nav-button';
-                    button.setAttribute('data-date', key); // Use key instead of date
-                    button.innerHTML = `<span>${post.date}</span><br>${post.title}`; // Show date and title
+                    button.setAttribute('data-date', key);
+                    button.innerHTML = `<span>${post.date}</span><br>${post.title}`;
                     button.addEventListener('click', () => updateBlogContent(key));
                     blogMenu.appendChild(button);
-                 });
-             }
-
-             function updateBlogContent(postKey) {
-                 const post = blogPosts[postKey];
-                 if (!post || !blogTitle || !blogContent) return;
-                 blogTitle.textContent = post.title;
-                 // Simple HTML structure for content
-                blogContent.innerHTML = `<div class="blog-date">${post.date}</div>${post.content}`;
-                 // Highlight active button
-                 document.querySelectorAll('.blog-nav-button').forEach(btn => {
-                     btn.classList.toggle('active', btn.getAttribute('data-date') === postKey);
-                 });
-                 // Scroll main content area to top
-                 const blogMain = document.querySelector('#blogPage .blog-main');
-                 if (blogMain) blogMain.scrollTop = 0;
+                });
             }
 
-             function buildGallery() {
-                 if (!galleryGrid) return;
-                 galleryGrid.innerHTML = ''; // Clear existing
+            function updateBlogContent(postKey) {
+                const post = blogPosts[postKey];
+                if (!post || !blogTitle || !blogContent) return;
+                blogTitle.textContent = post.title;
+                blogContent.innerHTML = `<div class="blog-date">${post.date}</div>${post.content}`;
+                document.querySelectorAll('.blog-nav-button').forEach(btn => {
+                    btn.classList.toggle('active', btn.getAttribute('data-date') === postKey);
+                });
+                const blogMain = document.querySelector('#blogPage .blog-main');
+                if (blogMain) blogMain.scrollTop = 0;
+            }
+
+            function buildGallery() {
+                if (!galleryGrid) return;
+                galleryGrid.innerHTML = '';
                 galleryImagesData.forEach((item, index) => {
                     const placeholder = document.createElement('div');
                     placeholder.className = 'gallery-placeholder';
                     placeholder.setAttribute('data-index', index + 1);
                     placeholder.setAttribute('data-caption', item.caption);
                     placeholder.style.backgroundImage = `url('${item.src}')`;
-                    placeholder.setAttribute('data-full', item.src); // Store full image URL
+                    placeholder.setAttribute('data-full', item.src);
                     placeholder.addEventListener('click', () => {
-                         if (enlargedPhoto) enlargedPhoto.style.display = 'block';
-                         if (enlargedPhoto) enlargedPhoto.style.backgroundImage = `url('${item.src}')`;
-                         if (galleryCaption) galleryCaption.textContent = item.caption || 'No caption';
-                     });
-                     galleryGrid.appendChild(placeholder);
-                 });
-             }
+                        if (enlargedPhoto) {
+                            enlargedPhoto.style.display = 'block';
+                            enlargedPhoto.style.backgroundImage = `url('${item.src}')`;
+                        }
+                        if (galleryCaption) galleryCaption.textContent = item.caption || 'No caption';
+                    });
+                    placeholder.addEventListener('touchend', (e) => {
+                        e.preventDefault();
+                        if (enlargedPhoto) {
+                            enlargedPhoto.style.display = 'block';
+                            enlargedPhoto.style.backgroundImage = `url('${item.src}')`;
+                        }
+                        if (galleryCaption) galleryCaption.textContent = item.caption || 'No caption';
+                    });
+                    const img = new Image();
+                    img.src = item.src;
+                    img.onerror = () => {
+                        placeholder.classList.add('failed');
+                    };
+                    galleryGrid.appendChild(placeholder);
+                });
+            }
 
             function closeGalleryPopup() {
                 if (enlargedPhoto) enlargedPhoto.style.display = 'none';
             }
 
-             function calculateGalleryPageWidth() {
-                 // Calculate based on actual placeholder width, border, and gap
-                 const placeholderStyle = window.getComputedStyle(document.querySelector('.gallery-placeholder') || {});
-                 const placeholderWidth = parseFloat(placeholderStyle.width) || 195; // Fallback width
-                 const border = parseFloat(placeholderStyle.borderLeftWidth) * 2 || 8; // Border width * 2
-                 const gap = 20; // Defined gap
-                 return (placeholderWidth) * galleryImagesPerPage + gap * (galleryImagesPerPage - 1); // Include border in width if box-sizing is border-box
-             }
+            function calculateGalleryPageWidth() {
+                const placeholderStyle = window.getComputedStyle(document.querySelector('.gallery-placeholder') || {});
+                const placeholderWidth = parseFloat(placeholderStyle.width) || 195;
+                const border = parseFloat(placeholderStyle.borderLeftWidth) * 2 || 8;
+                const gap = 20;
+                return (placeholderWidth + border) * galleryImagesPerPage + gap * (galleryImagesPerPage - 1);
+            }
 
-
-             function updateGalleryPosition() {
-                if (window.innerWidth >= 600 && galleryGrid && galleryViewport) { // Desktop logic
-                    galleryViewport.style.overflowX = 'hidden'; // Ensure hidden on desktop
-                     const itemWidth = 195 + 8; // placeholder width + border*2
-                     const gap = 20;
-                     const totalItemWidth = itemWidth + gap;
-                     const offset = -galleryCurrentPage * totalItemWidth * galleryImagesPerPage; // Simplified calc needed? Check logic
-                     // Simpler: Assume page width calculation is correct
-                     const pageWidth = (195 + 8) * galleryImagesPerPage + 20 * (galleryImagesPerPage - 1) ; // Width of 4 items + 3 gaps + borders
+            function updateGalleryPosition() {
+                if (window.innerWidth >= 600 && galleryGrid && galleryViewport) {
+                    galleryViewport.style.overflowX = 'hidden';
+                    const pageWidth = calculateGalleryPageWidth();
                     galleryGrid.style.transform = `translateX(-${galleryCurrentPage * pageWidth}px)`;
+                } else if (galleryGrid && galleryViewport) {
+                    galleryGrid.style.transform = 'none';
+                    galleryViewport.style.overflowX = 'auto';
+                }
+                updateGalleryNavButtons();
+            }
 
-                } else if (galleryGrid && galleryViewport) { // Mobile logic
-                     galleryGrid.style.transform = 'none'; // No transform on mobile
-                     galleryViewport.style.overflowX = 'auto'; // Enable scroll on mobile
-                 }
-                 updateGalleryNavButtons(); // Update button states regardless
-             }
+            function updateGalleryNavButtons() {
+                if (galleryLeft) galleryLeft.classList.toggle('disabled', galleryCurrentPage === 0);
+                if (galleryRight) galleryRight.classList.toggle('disabled', galleryCurrentPage >= galleryTotalPages - 1);
+            }
 
-             function updateGalleryNavButtons() {
-                 if (galleryLeft) galleryLeft.classList.toggle('disabled', galleryCurrentPage === 0);
-                 if (galleryRight) galleryRight.classList.toggle('disabled', galleryCurrentPage >= galleryTotalPages - 1);
-             }
-
-             function handleSignup(event) {
-                 event.preventDefault();
-                 const email = emailInput.value.trim();
-                 if (email) {
-                     console.log(`Email submitted: ${email}`); // Log for now
-                     alert('Thx 4 signing up! Ur in the 62 Zone now!'); // Simple alert
-                     emailInput.value = ''; // Clear input
-                 }
-             }
-
-            // --- Easter Egg Handlers ---
-            function handleEgg1Click() { /* Graphic Top */
-                for (let i = 0; i < 5; i++) { // Spawn 5 stars
+            function handleEgg1Click() {
+                for (let i = 0; i < 5; i++) {
                     const star = document.createElement('span');
                     star.className = 'chaos-star';
-                    star.textContent = '★'; // Star character
+                    star.textContent = '★';
                     star.style.left = `${Math.random() * 100}%`;
                     star.style.top = `${Math.random() * 100}%`;
                     document.body.appendChild(star);
-                    setTimeout(() => star.remove(), 2000); // Remove after 2 seconds
+                    setTimeout(() => star.remove(), 2000);
                 }
             }
-            function handleEgg2Click() { /* Graphic Bottom */
-                 isFlipped = !isFlipped;
-                 // Apply flip to content wrapper or body
-                 if (contentWrapper) contentWrapper.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
-                 // Alternatively flip the whole body, might be weird
-                 // document.body.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
-             }
-             function handleEgg3Click() { /* Graphic Left */
-                 clickCount++;
-                 if (!gameActive) gameActive = true;
 
-                 if (gameActive && egg3) {
-                     // Speed up and shrink
-                     slideSpeed = Math.max(1.5, slideSpeed * 0.85); // Increase speed (reduce duration)
-                     sliderHeight = Math.max(60, sliderHeight * 0.95); // Reduce height (px or %)
-                    const direction = Math.random() < 0.5 ? '' : 'reverse'; // Random direction
-                    egg3.style.height = `${sliderHeight}px`; // Apply height if using px
-                    // Apply animation with new speed and direction
-                     egg3.style.animation = `slideFull ${slideSpeed}s infinite linear ${direction}`;
-                 }
+            function handleEgg2Click() {
+                isFlipped = !isFlipped;
+                if (contentWrapper) contentWrapper.style.transform = isFlipped ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
 
-                 if (clickCount >= 6) { // Trigger after 6 clicks
+            function handleEgg3Click() {
+                clickCount++;
+                if (!gameActive) gameActive = true;
+                if (gameActive && egg3) {
+                    slideSpeed = Math.max(1.5, slideSpeed * 0.85);
+                    sliderHeight = Math.max(60, sliderHeight * 0.95);
+                    const direction = Math.random() < 0.5 ? '' : 'reverse';
+                    egg3.style.height = `${sliderHeight}px`;
+                    egg3.style.animation = `slideFull ${slideSpeed}s infinite linear ${direction}`;
+                }
+                if (clickCount >= 6) {
                     if (discountCode) discountCode.style.display = 'block';
-                    setTimeout(() => { if (discountCode) discountCode.style.display = 'none'; }, 5000); // Show for 5s
-                    // Reset game
+                    setTimeout(() => { if (discountCode) discountCode.style.display = 'none'; }, 5000);
                     clickCount = 0;
                     slideSpeed = 6;
-                    sliderHeight = 100; // Reset height (use initial value)
+                    sliderHeight = 100;
                     gameActive = false;
                     if (egg3) {
-                         egg3.style.height = `100px`; // Reset height (use initial value)
-                         egg3.style.animation = `slideFull 6s infinite`; // Reset animation
+                        egg3.style.height = `100px`;
+                        egg3.style.animation = `slideFull 6s infinite`;
                     }
-                 }
-             }
-             function handleEgg4Click() { /* Graphic Right */
-                 if (!secretLink) { // If link doesn't exist, create it
+                }
+            }
+
+            function handleEgg4Click() {
+                if (!secretLink) {
                     secretLink = document.createElement('a');
                     secretLink.className = 'button secret';
                     secretLink.textContent = 'SECRET LINK';
-                    secretLink.href = 'https://discord.gg/cCedfQgHVG'; // Your Discord link
+                    secretLink.href = 'https://discord.gg/cCedfQgHVG';
                     secretLink.target = '_blank';
-                    secretLink.style.background = '#00ffff'; // Cyan background
-                    secretLink.style.color = '#ff00ff'; // Magenta text
+                    secretLink.style.background = '#00ffff';
+                    secretLink.style.color = '#ff00ff';
                     if (buttonContainer) buttonContainer.appendChild(secretLink);
-                 } else { // If link exists, remove it
-                     secretLink.remove();
-                     secretLink = null;
-                 }
-             }
-             function handleEgg5Click() { /* Under Construction */
-                 const originalBg = document.body.style.background;
-                 document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)'; // Flashy gradient
-                 setTimeout(() => { document.body.style.background = originalBg; }, 1000); // Revert after 1s
-            }
-            function handleCopyrightClick() {
-                if (flashText) flashText.style.display = 'block';
-                setTimeout(() => { if (flashText) flashText.style.display = 'none'; }, 1000); // Flash for 1s
-             }
-            function handleDomainClick() { // Toggle Nav Bar visibility
-                if (navBar) navBar.style.display = navBar.style.display === 'flex' ? 'none' : 'flex';
-            }
-            function handleInvertClick() {
-                if (invertButton) invertButton.classList.toggle('active');
-                 document.body.style.filter = invertButton.classList.contains('active') ? 'invert(100%)' : 'none';
-             }
-             function handleWallpaperClick() {
-                 wallpaperIndex = (wallpaperIndex + 1) % wallpapers.length;
-                 document.body.style.background = wallpapers[wallpaperIndex];
-                 if (wallpaperButton) wallpaperButton.classList.toggle('active', wallpaperIndex !== 0); // Active if not default
+                } else {
+                    secretLink.remove();
+                    secretLink = null;
+                }
             }
 
-            // --- Event Listeners ---
+            function handleEgg5Click() {
+                const originalBg = document.body.style.background;
+                document.body.style.background = 'linear-gradient(45deg, #ff00ff, #00ffff)';
+                setTimeout(() => { document.body.style.background = originalBg; }, 1000);
+            }
+
+            function handleCopyrightClick() {
+                if (flashText) flashText.style.display = 'block';
+                setTimeout(() => { if (flashText) flashText.style.display = 'none'; }, 1000);
+            }
+
+            function handleDomainClick() {
+                if (navBar) navBar.style.display = navBar.style.display === 'flex' ? 'none' : 'flex';
+            }
+
+            function handleInvertClick() {
+                if (invertButton) invertButton.classList.toggle('active');
+                document.body.style.filter = invertButton.classList.contains('active') ? 'invert(100%)' : 'none';
+            }
+
+            function handleWallpaperClick() {
+                wallpaperIndex = (wallpaperIndex + 1) % wallpapers.length;
+                document.body.style.background = wallpapers[wallpaperIndex];
+                if (wallpaperButton) wallpaperButton.classList.toggle('active', wallpaperIndex !== 0);
+            }
+
             if (coordinates) coordinates.addEventListener('click', toggleParticles);
-             if (titleText) titleText.addEventListener('click', () => titleText.classList.toggle('up') && titleText.classList.toggle('down')); // Simple toggle
+            if (titleText) titleText.addEventListener('click', () => titleText.classList.toggle('up') && titleText.classList.toggle('down'));
             if (egg1) egg1.addEventListener('click', handleEgg1Click);
             if (egg2) egg2.addEventListener('click', handleEgg2Click);
-            if (egg3) egg3.addEventListener('click', handleEgg3Click);
+            if (egg3) egg1.addEventListener('click', handleEgg3Click);
             if (egg4) egg4.addEventListener('click', handleEgg4Click);
             if (egg5) egg5.addEventListener('click', handleEgg5Click);
             if (copyright) copyright.addEventListener('click', handleCopyrightClick);
-            if (domain) domain.addEventListener('click', handleDomainClick); // Listener for domain click
+            if (domain) domain.addEventListener('click', handleDomainClick);
             if (invertButton) invertButton.addEventListener('click', handleInvertClick);
             if (wallpaperButton) wallpaperButton.addEventListener('click', handleWallpaperClick);
-             if (galleryLeft) galleryLeft.addEventListener('click', () => {
-                if (window.innerWidth >= 600 && galleryCurrentPage > 0) { // Only allow on desktop view
-                     galleryCurrentPage--;
-                     updateGalleryPosition();
-                 }
-             });
-             if (galleryRight) galleryRight.addEventListener('click', () => {
-                if (window.innerWidth >= 600 && galleryCurrentPage < galleryTotalPages - 1) { // Only allow on desktop view
-                     galleryCurrentPage++;
-                     updateGalleryPosition();
-                 }
-             });
-             if (galleryClose) {
-                 // Use click and touchend for better mobile compatibility
-                 galleryClose.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); closeGalleryPopup(); });
-                 galleryClose.addEventListener('touchend', (e) => { e.preventDefault(); e.stopPropagation(); closeGalleryPopup(); }); // Handle touch end as well
-             }
-            // Prevent default wheel scroll on desktop gallery viewport
-             if (galleryViewport) galleryViewport.addEventListener('wheel', (e) => { if (window.innerWidth >= 600) e.preventDefault(); }, { passive: false });
-             if (signupForm) signupForm.addEventListener('submit', handleSignup);
+            if (galleryLeft) galleryLeft.addEventListener('click', () => {
+                if (window.innerWidth >= 600 && galleryCurrentPage > 0) {
+                    galleryCurrentPage--;
+                    updateGalleryPosition();
+                }
+            });
+            if (galleryRight) galleryRight.addEventListener('click', () => {
+                if (window.innerWidth >= 600 && galleryCurrentPage < galleryTotalPages - 1) {
+                    galleryCurrentPage++;
+                    updateGalleryPosition();
+                }
+            });
+            if (galleryClose) {
+                galleryClose.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); closeGalleryPopup(); });
+                galleryClose.addEventListener('touchend', (e) => { e.preventDefault(); e.stopPropagation(); closeGalleryPopup(); });
+            }
+            if (galleryViewport) galleryViewport.addEventListener('wheel', (e) => { if (window.innerWidth >= 600) e.preventDefault(); }, { passive: false });
 
-            window.addEventListener('resize', updateGalleryPosition); // Recalculate gallery on resize
+            window.addEventListener('resize', updateGalleryPosition);
             window.addEventListener('scroll', () => {
-                 if (particlesActive) createParticle(); // Spawn particles on scroll for flow
-             });
+                if (particlesActive) createParticle();
+            });
 
-            // --- Initialization ---
             preloadInitialImages();
             updateDateTime(); setInterval(updateDateTime, 1000);
-            updateCoordinates(); setInterval(updateCoordinates, 1000); // Update coords every second
-            setInterval(() => { if (Math.random() < 0.1) triggerGlitch(); }, 1000); // Random glitch effect
+            updateCoordinates(); setInterval(updateCoordinates, 1000);
+            setInterval(() => { if (Math.random() < 0.1) triggerGlitch(); }, 1000);
 
             buildBlogMenu();
             buildGallery();
-            updateGalleryPosition(); // Initial gallery setup
+            updateGalleryPosition();
 
-            // Load first blog post by default
             const firstPostKey = Object.keys(blogPosts)[0];
             if (firstPostKey) updateBlogContent(firstPostKey);
 
-            // Remove fbclid if present
-             if (window.location.search.includes('fbclid=')) {
+            if (window.location.search.includes('fbclid=')) {
                 const url = new URL(window.location.href);
                 if (url.searchParams.has('fbclid')) {
                     url.searchParams.delete('fbclid');
                     window.history.replaceState({}, document.title, url.toString());
-                 }
-             }
-
-        }); // End DOMContentLoaded
+                }
+            }
+        });
     </script>
 </body>
 </html>
