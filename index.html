@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>//NODE_62S :: v3.6 ONLINE</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%23cc33ff' stroke-width='2' stroke-dasharray='4' fill='none'/%3E%3C/svg%3E">
+    <title>//NODE_62S :: v3.6 ONLINE (ALPHA v1.0)</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='2' stroke-dasharray='4' fill='none'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -15,10 +15,10 @@
             --bg-color: #040408;
             --text-color: #a8a8b0;
             --header-color: #d0d0e0;
-            --accent-color: #bf00ff;
+            --accent-color: #00BFFF; /* Changed to Electric Blue */
             --accent-hover: #ffffff;
             --border-color: #1f1f2f;
-            --success-color: #00b7a8;
+            --success-color: #00ff00; /* Changed to brighter green */
             --error-color: #ff2222;
             --font-main: 'Roboto Mono', monospace;
             --transition-fast: 0.1s ease-in-out;
@@ -155,7 +155,8 @@
         .contact-modal-content {
             background: var(--bg-color); padding: 30px 40px; border: 1px solid var(--accent-color);
             text-align: center; position: relative;
-            box-shadow: 0 0 25px rgba(191, 0, 255, 0.2); max-width: 90%;
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.2); /* Updated shadow to use blue */
+            max-width: 90%;
         }
         .contact-modal h3 {
              margin: 0 0 15px 0; font-family: var(--font-main); color: var(--header-color);
@@ -238,8 +239,7 @@
 <body>
 
     <header class="main-header">
-        <h1 class="main-title">//NODE::62S (ALPHA v3.6)
-        </h1>
+        <h1 class="main-title">//NODE::62S</h1>
         <div class="status-info">
             <span id="dateTime" title="Local Timezone: Australia/Hobart">LST_--:--:--</span>
             <span id="systemStatus">STATUS::INIT</span>
@@ -406,6 +406,5 @@ AI_ASSIST:   v4.0_ACTIVE
             document.body.innerHTML = `<div style="color:#ff3333; background:#040408; padding: 20px; font-family: monospace; font-size: 14px;">SYSTEM_ERROR [CODE::${Math.random().toString(16).substring(2, 10).toUpperCase()}]<br><br>${error.message}<br>----------------<br>${error.stack || 'NO_STACK_TRACE'}</div>`;
         }
     </script>
-
 </body>
 </html>
