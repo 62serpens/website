@@ -32,9 +32,8 @@
             background-color: var(--bg-color); color: var(--text-color);
             font-family: var(--font-main); font-size: 14px; line-height: 1.6;
             overflow-x: hidden;
-            overflow-y: hidden;
+            overflow-y: auto; /* Changed to auto for scrolling */
             cursor: default; position: relative;
-            /* Removed padding-top: 45px to fix gap */
         }
 
         /* --- Link Style --- */
@@ -136,6 +135,17 @@
          #launchAreaSection li { margin-bottom: 5px; }
          #launchAreaSection a { font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color); }
          #launchAreaSection a:hover { color: var(--accent-hover); }
+         /* Style for password-protected item */
+         #launchAreaSection .protected-item {
+             font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color);
+             cursor: pointer; transition: color var(--transition-fast); display: inline-block;
+         }
+         #launchAreaSection .protected-item:hover { color: var(--accent-hover); }
+         /* Error message style */
+         .password-error {
+             color: var(--error-color); font-size: 0.85em; margin-top: 10px;
+             display: none; font-family: var(--font-main);
+         }
 
         /* --- Footer --- */
         footer {
@@ -183,7 +193,7 @@
          @media (max-width: 600px) {
              body {
                  font-size: 13px;
-                 padding: 10px 5px; /* Reduced top padding for mobile */
+                 padding: 10px 5px;
                  overflow-y: auto;
              }
              .main-header {
@@ -226,7 +236,8 @@
 
              #unitIdSection .about-content { font-size: 0.85em; }
              #launchAreaSection ul { padding-left: 10px; }
-             #launchAreaSection a { font-size: 0.85em; }
+             #launchAreaSection a, #launchAreaSection .protected-item { font-size: 0.85em; }
+             .password-error { font-size: 0.8em; }
 
              footer { margin-top: 20px; font-size: 0.75em; }
 
@@ -268,8 +279,11 @@
             <ul id="submoduleList">
                 <li><a href="2000.html" target="_self"> > NODE_V2 :: Retro Simulation [Status: Active]</a></li>
                 <li><a href="b.html" target="_self"> > MODULE::BLACKJACK_SIM [Status: Active]</a></li>
-                <li><a href="audio_tools.html" target="_self"> > MODULE::AUDIO_PROCESSING_SUITE [Status: Active]</a></li>
+                <li>
+                    <span class="protected-item" id="audioToolsLink"> > MODULE::AUDIO_PROCESSING_SUITE [Status: Restricted]</span>
+                </li>
             </ul>
+            <p class="password-error" id="passwordError"></p>
         </section>
 
         <section id="unitIdSection" class="content-section">
@@ -313,11 +327,15 @@ AI_ASSIST:   v4.0_ACTIVE
                 const copyFeedback = document.getElementById('copyFeedback');
                 const contactClose = document.getElementById('contactClose');
 
+                const audioToolsLink = document.getElementById('audioToolsLink');
+                const passwordError = document.getElementById('passwordError');
+
                 // --- Config & State ---
                 const userEmail = "626262xxx@gmail.com";
                 const statusOptions = ["OPTIMAL", "NOMINAL", "STABLE", "PROCESSING", "CALIBRATING", "SYNCED", "ANALYSING", "IDLE"];
                 const uplinkOptions = ["ACTIVE", "ACTIVE", "ACTIVE", "SYNCING", "STANDBY", "ENCRYPTED", "ROUTING", "SECURE_TUNNEL"];
                 let currentCoreTemp = 28.0;
+                const audioToolsPassword = "serpens62"; // Change this to your desired password
 
                 // --- Core Functions ---
 
@@ -359,6 +377,22 @@ AI_ASSIST:   v4.0_ACTIVE
                     }
                 };
 
+                // --- Password Protection for Audio Tools ---
+                function handleAudioToolsAccess() {
+                    const userInput = prompt("ENTER ACCESS CODE :: MODULE::AUDIO_PROCESSING_SUITE", "");
+                    if (userInput === audioToolsPassword) {
+                        window.location.href = "audio_tools.html";
+                    } else {
+                        if (passwordError) {
+                            passwordError.textContent = "ACCESS DENIED :: INVALID CODE";
+                            passwordError.style.display = "block";
+                            setTimeout(() => {
+                                if (passwordError) passwordError.style.display = "none";
+                            }, 3000);
+                        }
+                    }
+                }
+
                 // --- Contact Modal Logic ---
                 function openContactModal() {
                     if (contactModal && contactEmailDisplay) {
@@ -391,6 +425,7 @@ AI_ASSIST:   v4.0_ACTIVE
                 if (contactClose) contactClose.addEventListener('click', closeContactModal);
                 if (contactEmailDisplay) contactEmailDisplay.addEventListener('click', copyEmailToClipboard);
                 if (contactModal) contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeContactModal(); });
+                if (audioToolsLink) audioToolsLink.addEventListener('click', handleAudioToolsAccess);
 
                 // --- Initialization ---
                 updateDateTime();
