@@ -17,8 +17,8 @@
             --text-primary: #f4f4f5;
             --text-secondary: #a1a1aa;
             --text-tertiary: #71717a;
-            --accent-primary: #9333ea; /* Purple-700 */
-            --accent-secondary: #c084fc; /* Purple-400 */
+            --accent-primary: #9333ea;
+            --accent-secondary: #c084fc;
             --accent-tertiary: #3b0764;
             --border-color: #3f3f46;
             --shadow-color-light: rgba(255, 255, 255, 0.05);
@@ -81,10 +81,9 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            gap: 24px; /* Spacing between profile, links, bonus button */
+            gap: 24px;
         }
 
-        /* Subtle animated background elements */
         body::before, body::after {
             content: '';
             position: fixed;
@@ -95,14 +94,14 @@
             z-index: -1;
             animation: pulse 15s infinite alternate ease-in-out;
         }
-        body::before { /* Top-leftish */
+        body::before {
             width: 300px; height: 300px;
             top: 5%; left: 10%;
         }
-        body::after { /* Bottom-rightish */
+        body::after {
             width: 250px; height: 250px;
             bottom: 5%; right: 10%;
-            animation-delay: -7.5s; /* Offset animation */
+            animation-delay: -7.5s;
         }
 
         @keyframes pulse {
@@ -110,17 +109,16 @@
             100% { transform: scale(1.1); opacity: 0.1; }
         }
 
-
         .page {
             width: 100%;
             display: none;
             flex-direction: column;
             align-items: center;
-            gap: 20px; /* Spacing within a page */
+            gap: 20px;
             opacity: 0;
             transform: translateY(10px);
             transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-            will-change: opacity, transform; /* Performance hint */
+            will-change: opacity, transform;
         }
         .page.active-page {
             display: flex;
@@ -134,7 +132,7 @@
             flex-direction: column;
             align-items: center;
             gap: 8px;
-            margin-bottom: 8px; /* Extra space below profile */
+            margin-bottom: 8px;
         }
 
         .profile-pic-wrapper {
@@ -149,10 +147,10 @@
             object-fit: cover;
             display: block;
             border: 3px solid var(--border-color);
-            background-color: var(--bg-tertiary); /* Placeholder bg */
-            padding: 3px; /* Creates inner border effect */
-            background-clip: content-box; /* Keeps bg inside padding */
-            box-shadow: 0 0 0 2px var(--bg-primary), /* Outer ring */
+            background-color: var(--bg-tertiary);
+            padding: 3px;
+            background-clip: content-box;
+            box-shadow: 0 0 0 2px var(--bg-primary),
                         0 4px 15px var(--shadow-color-dark);
             transition: transform var(--transition-duration) ease;
         }
@@ -176,7 +174,6 @@
             font-weight: 400;
         }
 
-        /* Enhanced Equalizer */
         .equalizer {
             width: 50px;
             height: 20px;
@@ -200,7 +197,6 @@
             50% { opacity: 0.6; }
             100% { height: 100%; opacity: 0.4; }
         }
-        /* Adjust height dynamically based on initial setting */
         .equalizer-bar:nth-child(1) { animation-name: equalize1; }
         .equalizer-bar:nth-child(2) { animation-name: equalize2; }
         .equalizer-bar:nth-child(3) { animation-name: equalize3; }
@@ -208,28 +204,24 @@
         @keyframes equalize2 { 0% { height: 8px; } 100% { height: 18px; } }
         @keyframes equalize3 { 0% { height: 6px; } 100% { height: 14px; } }
 
-
         .links { width: 100%; }
         .links ul {
             list-style: none;
             padding: 0;
             margin: 0;
             display: grid;
-            grid-template-columns: 1fr; /* Default to single column */
+            grid-template-columns: 1fr;
             gap: 12px;
         }
-        /* Use 2 columns on wider screens */
-         @media (min-width: 480px) {
+        @media (min-width: 480px) {
             .links ul { grid-template-columns: 1fr 1fr; }
-            /* Make last odd item span full width if needed */
-             .links li:last-child:nth-child(odd) { grid-column: span 2; }
+            .links li:last-child:nth-child(odd) { grid-column: span 2; }
         }
-
 
         .link-button {
             display: flex;
             align-items: center;
-            justify-content: center; /* Center content by default */
+            justify-content: center;
             text-align: center;
             width: 100%;
             padding: 14px 18px;
@@ -257,11 +249,10 @@
                         inset 0 1px 1px var(--shadow-color-light);
         }
 
-
         .link-button i.icon {
             margin-right: 12px;
             font-size: 1.1em;
-            width: 1.2em; /* Ensure consistent width */
+            width: 1.2em;
             text-align: center;
             opacity: 0.9;
             transition: color var(--transition-duration) ease;
@@ -275,14 +266,11 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            text-align: left; /* Align text left, icon pushes it */
+            text-align: left;
         }
-        /* Center text if no icon or specifically centered */
         .link-button.center-text span { text-align: center; }
-        .link-button.center-text i.icon { margin-right: 8px; } /* Slightly less space when centered */
+        .link-button.center-text i.icon { margin-right: 8px; }
 
-
-        /* Icon Colors (Consider moving to inline styles if dynamically generated) */
         #mainContent .fa-store { color: #f59e0b; }
         #mainContent .fa-instagram { color: #e1306c; }
         #mainContent .fa-spotify { color: #1db954; }
@@ -290,16 +278,15 @@
         #mainContent .fa-youtube { color: #ff0000; }
         #mainContent .fa-discord { color: #5865f2; }
         #mainContent .fa-envelope { color: var(--text-secondary); }
-        #mainContent .fa-check { color: #22c55e; } /* Green */
-        #mainContent .fa-times { color: #ef4444; } /* Red */
+        #mainContent .fa-check { color: #22c55e; }
+        #mainContent .fa-times { color: #ef4444; }
         #mainContent .fa-star { color: var(--accent-secondary); }
 
-
-        #contactButton { justify-content: center; } /* Ensure contact button text is centered */
+        #contactButton { justify-content: center; }
         #contactButton.locked {
             pointer-events: none;
             opacity: 0.7;
-            background-color: var(--bg-tertiary); /* Indicate locked state */
+            background-color: var(--bg-tertiary);
         }
         #contactButton .fa-check, #contactButton .fa-times { margin-right: 8px; }
 
@@ -309,14 +296,13 @@
              justify-content: center;
         }
         #showBonusButton {
-             /* Inherits .link-button styles, add specifics */
-             max-width: 320px; /* Limit width */
+             max-width: 320px;
              font-weight: 700;
              background-color: transparent;
              border: 1px solid var(--accent-primary);
              color: var(--accent-secondary);
              box-shadow: 0 1px 2px var(--shadow-color-dark),
-                        inset 0 0 10px rgba(147, 51, 234, 0.2); /* Inner accent glow */
+                        inset 0 0 10px rgba(147, 51, 234, 0.2);
         }
         #showBonusButton:hover {
              background-color: rgba(147, 51, 234, 0.1);
@@ -329,8 +315,7 @@
         #showBonusButton i { color: var(--accent-primary); transition: color var(--transition-duration) ease; }
          #showBonusButton:hover i { color: var(--accent-secondary); }
 
-
-        #bonusContent { align-items: stretch; text-align: left; } /* Stretch items, align text left */
+        #bonusContent { align-items: stretch; text-align: left; }
         #bonusContent h2 {
             font-family: var(--font-heading);
             font-size: 1.6em;
@@ -343,7 +328,7 @@
 
         .bonus-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 12px;
             width: 100%;
             margin-bottom: 16px;
@@ -352,14 +337,15 @@
         .bonus-item {
             display: flex;
             flex-direction: column;
-            align-items: stretch; /* Ensure children stretch */
+            align-items: stretch;
             background: var(--bg-secondary);
             padding: 8px;
             border-radius: var(--border-radius-md);
             border: 1px solid var(--border-color);
             box-shadow: 0 2px 4px var(--shadow-color-dark),
                         inset 0 1px 0 var(--shadow-color-light);
-            overflow: hidden; /* Clip potential overflows */
+            overflow: hidden;
+            text-align: left;
         }
         .bonus-item:hover {
             transform: translateY(-4px) scale(1.02);
@@ -377,12 +363,12 @@
         .bonus-item-thumbnail {
             width: 100%;
             height: auto;
-            aspect-ratio: 16 / 10; /* Widescreen aspect ratio */
+            aspect-ratio: 16 / 10;
             background-color: var(--bg-tertiary);
             border-radius: var(--border-radius-sm);
             margin-bottom: 8px;
             overflow: hidden;
-            display: flex; /* Center potential placeholder */
+            display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
@@ -393,27 +379,31 @@
             height: 100%;
             object-fit: cover;
             transition: transform var(--transition-duration) ease, opacity 0.5s ease;
-            opacity: 0; /* Fade in */
+            opacity: 0;
         }
         .bonus-item:hover .bonus-item-thumbnail img {
             transform: scale(1.05);
         }
-        /* Lazy loading fade-in */
          img[loading="lazy"] { opacity: 0; }
-         img:not([loading="lazy"]) { opacity: 1; } /* Show if not lazy or already loaded */
-         img.lazyloaded { opacity: 1; } /* Class added by lazysizes or similar */
-         /* Basic fade-in for images as they load */
+         img:not([loading="lazy"]) { opacity: 1; }
+         img.lazyloaded { opacity: 1; }
          @keyframes fadeIn { to { opacity: 1; } }
          .bonus-item-thumbnail img { animation: fadeIn 0.5s ease forwards; }
 
-
-        .bonus-item-info { padding: 4px; }
+        .bonus-item-info {
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left !important;
+        }
         .bonus-item-info h4 {
             margin: 0 0 4px;
             font-size: 0.9em;
             font-weight: 700;
             color: var(--text-primary);
             line-height: 1.3;
+            text-align: left !important;
         }
         .bonus-item-info p {
             margin: 0;
@@ -421,12 +411,16 @@
             font-weight: 400;
             color: var(--text-secondary);
             line-height: 1.4;
+            text-align: left !important;
+        }
+        .bonus-item-info p br + span {
+            font-style: italic;
+            opacity: 0.9;
         }
 
-        /* Back Button specific styling */
         .back-button-wrapper { width: 100%; text-align: center; margin-bottom: 10px; }
         #backButton {
-            display: inline-flex; /* Allow centering */
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             padding: 8px 16px;
@@ -446,20 +440,18 @@
         }
         #backButton i { margin-right: 6px; font-size: 0.9em; }
 
-
         #passwordError {
             display: none;
-            color: #f87171; /* Lighter Red */
+            color: #f87171;
             font-size: 0.8em;
             text-align: center;
             width: 100%;
-            margin-top: 8px; /* Space above error */
+            margin-top: 8px;
             background-color: rgba(239, 68, 68, 0.1);
             padding: 6px;
             border-radius: var(--border-radius-sm);
             border: 1px solid rgba(239, 68, 68, 0.3);
         }
-
 
         footer {
             padding: 20px 10px;
@@ -467,11 +459,10 @@
             color: var(--text-tertiary);
             text-align: center;
             width: 100%;
-            margin-top: 20px; /* Space above footer */
+            margin-top: 20px;
             opacity: 0.8;
         }
 
-        /* Responsive Adjustments */
         @media (max-width: 600px) {
             body { padding: 12px env(safe-area-inset-right) 12px env(safe-area-inset-left); }
             .container { padding: 0 8px; gap: 20px; }
@@ -480,8 +471,8 @@
             .profile h1 { font-size: 1.9em; }
             .profile .subtitle { font-size: 0.9em; }
             .equalizer { width: 40px; height: 16px; }
-            .links ul { gap: 10px; grid-template-columns: 1fr; /* Force single column */ }
-            .links li:last-child:nth-child(odd) { grid-column: span 1; } /* Reset span */
+            .links ul { grid-template-columns: 1fr; gap: 10px; }
+            .links li:last-child:nth-child(odd) { grid-column: span 1; }
             .link-button { padding: 12px 16px; font-size: 0.9em; min-height: 48px; }
             #showBonusButton { max-width: 280px; font-size: 0.9em; }
             .bonus-grid { gap: 10px; }
@@ -497,18 +488,16 @@
             .profile-pic, .link-button, #showBonusButton, .bonus-item, #backButton, .bonus-item-thumbnail img { transition: none; transform: none; }
             .link-button:hover, #showBonusButton:hover, .bonus-item:hover, #backButton:hover { transform: none; }
             .bonus-item:hover .bonus-item-thumbnail img { transform: none; }
-             .page { transition: opacity 0.4s ease-in-out; transform: none !important; } /* Keep fade but remove slide */
+             .page { transition: opacity 0.4s ease-in-out; transform: none !important; }
         }
-
     </style>
 </head>
 <body>
     <div class="container">
-
         <div id="mainContent" class="page active-page" role="main" aria-live="polite">
             <header class="profile">
                 <div class="profile-pic-wrapper">
-                     <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic" onerror="this.style.backgroundColor='#333'; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; /* Minimal placeholder on error */">
+                     <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic" onerror="this.style.backgroundColor='#333'; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';">
                 </div>
                 <h1>62serpens</h1>
                 <p class="subtitle">Music Producer</p>
@@ -542,12 +531,13 @@
             </div>
             <h2>Bonus Content & Experiments</h2>
              <div class="bonus-grid">
-                 <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Restricted Access)">
+                 <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Coming Soon)">
                     <div class="bonus-item-thumbnail">
-                        <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';"> </div>
+                        <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
+                    </div>
                     <div class="bonus-item-info">
                         <h4>Audio Tools Suite</h4>
-                        <p>Tools for music producers <i class="fas fa-lock fa-xs" style="opacity: 0.7;"></i></p>
+                        <p>Tools for music producers<br><span>Coming soon</span></p>
                     </div>
                 </button>
                 <a href="b.html" target="_self" class="bonus-item" aria-label="Blackjack Sim">
@@ -580,8 +570,8 @@
             </div>
             <p id="passwordError" class="error-text" role="alert">Invalid access code. Please try again.</p>
         </div>
-
-    </div><footer>
+    </div>
+    <footer>
         © <span id="year"></span> 62serpens. All rights reserved.
     </footer>
 
@@ -594,9 +584,7 @@
         const contactButton = document.getElementById('contactButton');
         const audioToolsLink = document.getElementById('audioToolsLink');
         const passwordError = document.getElementById('passwordError');
-        // Note: container selector might need adjustment if HTML structure changed significantly
-        // In this redesign, the .container div remains the primary scroll parent if content overflows.
-        const container = document.querySelector('body'); // Use body for scroll reset if container doesn't scroll
+        const container = document.querySelector('body');
 
         if (mainContent && bonusContent && showBonusButton && backButton) {
             showBonusButton.addEventListener('click', () => {
@@ -605,7 +593,7 @@
                 showBonusButton.setAttribute('aria-expanded', 'true');
                 bonusContent.setAttribute('aria-hidden', 'false');
                 mainContent.setAttribute('aria-hidden', 'true');
-                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll window to top smoothly
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
             backButton.addEventListener('click', () => {
                 bonusContent.classList.remove('active-page');
@@ -613,56 +601,48 @@
                 showBonusButton.setAttribute('aria-expanded', 'false');
                 bonusContent.setAttribute('aria-hidden', 'true');
                 mainContent.setAttribute('aria-hidden', 'false');
-                 window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll window to top smoothly
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         } else {
             console.error('Page switching elements not found.');
         }
 
         if (contactButton) {
-             // Store original content using a data attribute for safety
-             contactButton.setAttribute('data-original-content', contactButton.innerHTML);
-
+            contactButton.setAttribute('data-original-content', contactButton.innerHTML);
             async function copyEmail() {
                 const originalContent = contactButton.getAttribute('data-original-content');
-                const emailAddress = '626262xxx@gmail.com'; // Keep email definition local to function or define globally if needed elsewhere
-
+                const emailAddress = '626262xxx@gmail.com';
                 contactButton.classList.add('locked');
-                contactButton.disabled = true; // Disable button during operation
-
+                contactButton.disabled = true;
                 try {
                     await navigator.clipboard.writeText(emailAddress);
                     console.log('Clipboard API success: Email copied');
-                    contactButton.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!'; // Simpler confirmation
+                    contactButton.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!';
                 } catch (err) {
                     console.warn('Clipboard API failed:', err);
-                    // Fallback attempt
                     try {
                         const textarea = document.createElement('textarea');
                         textarea.value = emailAddress;
-                        textarea.style.position = 'fixed'; // Keep off-screen
+                        textarea.style.position = 'fixed';
                         textarea.style.left = '-9999px';
                         textarea.style.top = '0';
                         document.body.appendChild(textarea);
                         textarea.select();
-                        textarea.setSelectionRange(0, 99999); // For mobile devices
+                        textarea.setSelectionRange(0, 99999);
                         document.execCommand('copy');
                         document.body.removeChild(textarea);
                         console.log('execCommand success: Email copied');
-                        contactButton.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!'; // Simpler confirmation
+                        contactButton.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!';
                     } catch (execErr) {
                         console.error('execCommand failed:', execErr);
                         contactButton.innerHTML = '<i class="fas fa-times icon"></i> Copy Error!';
-                        // Provide email directly as last resort if prompt is undesirable UX
-                        // window.prompt('Clipboard unavailable. Copy this email:', emailAddress);
                     }
                 }
-
                 setTimeout(() => {
                     contactButton.innerHTML = originalContent;
                     contactButton.classList.remove('locked');
-                    contactButton.disabled = false; // Re-enable button
-                }, 2500); // Slightly longer duration for visibility
+                    contactButton.disabled = false;
+                }, 2500);
             }
             contactButton.addEventListener('click', copyEmail);
         } else {
@@ -670,37 +650,30 @@
         }
 
         if (audioToolsLink && passwordError) {
-             const correctPassword = 'serpens62'; // Keep password definition local or define globally
-
+            const correctPassword = 'serpens62';
             audioToolsLink.addEventListener('click', () => {
-                 passwordError.style.display = 'none'; // Hide previous errors
+                passwordError.style.display = 'none';
                 const userInput = prompt('Enter access code for Audio Tools:', '');
                 if (userInput === correctPassword) {
-                     // Consider adding loading state or visual feedback before redirect
                     window.location.href = 'audio_tools.html';
-                } else if (userInput !== null) { // Only show error if user entered something (didn't cancel)
+                } else if (userInput !== null) {
                     passwordError.style.display = 'block';
-                    // Automatically hide the error message after a delay
                     setTimeout(() => { passwordError.style.display = 'none'; }, 3000);
                 }
             });
         } else {
-             if (!audioToolsLink) console.error('Audio Tools link element not found.');
-             if (!passwordError) console.error('Password error element not found.');
+            if (!audioToolsLink) console.error('Audio Tools link element not found.');
+            if (!passwordError) console.error('Password error element not found.');
         }
 
-         // Simple lazy loading check for fade-in (if not using a library)
-         document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", () => {
             const lazyImages = document.querySelectorAll('img.lazyload');
             lazyImages.forEach(img => {
-                // Basic check: if src is set and different from placeholder
                 if (img.src && !img.src.startsWith('data:image')) {
-                     img.classList.add('lazyloaded'); // Add class to trigger potential CSS transition
+                    img.classList.add('lazyloaded');
                 }
-                 // More robust check needed if using actual lazy loading logic
             });
         });
-
     </script>
-    </body>
+</body>
 </html>
