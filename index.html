@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>62serpens</title>
+    <title>62serpens.com</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23181818'/%3E%3Ccircle cx='16' cy='16' r='10' fill='%23a855f7'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,7 +75,13 @@
             transition: opacity 0.4s ease-in-out;
         }
         .page.active-page { display: flex; opacity: 1; }
-        .profile { margin-bottom: 16px; width: 100%; position: relative; }
+        .profile {
+            margin-bottom: 16px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .profile-pic {
             width: 90px;
             height: 90px;
@@ -86,12 +92,11 @@
             border: 2px solid var(--button-border);
             box-shadow: 0 2px 6px var(--shadow-light);
             display: block;
-            margin-left: auto;
-            margin-right: auto;
         }
         .equalizer {
             width: 70px;
             margin: 8px auto;
+            display: block;
             opacity: 0;
             animation: fadeIn 0.5s ease forwards;
         }
@@ -102,8 +107,7 @@
             color: #ffffff;
             margin: 0 0 4px;
             letter-spacing: 0.3px;
-            position: relative;
-            display: inline-block;
+            text-align: center;
         }
         .profile h1:after {
             content: '';
@@ -114,6 +118,13 @@
             height: 3px;
             background: var(--accent-purple);
             transform: translateX(-50%);
+        }
+        .profile .subtitle {
+            font-size: 1.1em;
+            color: var(--text-muted);
+            margin: 0;
+            font-weight: 400;
+            text-align: center;
         }
         .links { width: 100%; margin-bottom: 16px; }
         .links ul {
@@ -317,28 +328,30 @@
         }
         @media (max-width: 600px) {
             body { padding: 4px env(safe-area-inset-right) 4px env(safe-area-inset-left); }
-            .container { padding: 8px 6px; justify-content: flex-start; }
-            .profile { margin-bottom: 12px; }
-            .profile-pic { width: 70px; height: 70px; margin-bottom: 6px; }
-            .profile h1 { font-size: 1.6em; }
-            .equalizer { width: 60px; }
+            .container { padding: 6px 6px; justify-content: flex-start; }
+            .profile { margin-bottom: 10px; }
+            .profile-pic { width: 60px; height: 60px; margin-bottom: 6px; }
+            .profile h1 { font-size: 1.5em; }
+            .profile .subtitle { font-size: 0.85em; }
+            .equalizer { width: 50px; }
+            .links { margin-bottom: 10px; }
             .links ul { grid-template-columns: 1fr 1fr; gap: 6px; }
             .links li:last-child:nth-child(odd) { grid-column: span 2; }
-            .link-button { padding: 6px; font-size: 0.8em; min-height: 36px; }
+            .link-button { padding: 5px; font-size: 0.75em; min-height: 32px; }
             .show-bonus-button-container { max-width: 100%; }
-            #showBonusButton { padding: 6px; font-size: 0.8em; min-height: 36px; }
+            #showBonusButton { padding: 5px; font-size: 0.75em; min-height: 32px; }
             .bonus-grid { grid-template-columns: 1fr 1fr; gap: 5px; }
             #bonusContent h2 { font-size: 1.2em; }
-            footer { font-size: 0.5em; }
+            footer { font-size: 0.45em; padding: 3px; }
         }
         @media (max-height: 700px) {
-            .profile { margin-bottom: 8px; }
-            .profile-pic { width: 60px; height: 60px; margin-bottom: 4px; }
-            .links { margin-bottom: 8px; }
+            .profile { margin-bottom: 6px; }
+            .profile-pic { width: 50px; height: 50px; margin-bottom: 4px; }
+            .links { margin-bottom: 6px; }
             .links ul { gap: 4px; }
-            .link-button { padding: 4px; font-size: 0.75em; min-height: 32px; }
+            .link-button { padding: 4px; font-size: 0.7em; min-height: 28px; }
             .show-bonus-button-container { max-width: 260px; }
-            #showBonusButton { padding: 4px; font-size: 0.75em; min-height: 32px; }
+            #showBonusButton { padding: 4px; font-size: 0.7em; min-height: 28px; }
             .bonus-grid { gap: 4px; }
             .bonus-item { padding: 4px; }
             .bonus-item-info h4 { font-size: 0.7em; }
@@ -357,6 +370,7 @@
             <div class="profile">
                 <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic" onerror="this.src='images/profile.jpg'">
                 <h1>62serpens</h1>
+                <p class="subtitle">Music Producer</p>
                 <svg class="equalizer" viewBox="0 0 70 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="15" y="8" width="8" height="12" fill="var(--accent-purple)" opacity="0.3"/>
                     <rect x="31" y="4" width="8" height="16" fill="var(--accent-purple)" opacity="0.3"/>
