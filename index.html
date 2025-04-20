@@ -73,6 +73,7 @@
             align-items: center;
             opacity: 0;
             transition: opacity 0.4s ease-in-out;
+            margin-top: 0;
         }
         .page.active-page { display: flex; opacity: 1; }
         .profile {
@@ -108,16 +109,6 @@
             margin: 0 0 4px;
             letter-spacing: 0.3px;
             text-align: center;
-        }
-        .profile h1:after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 50%;
-            width: 60%;
-            height: 3px;
-            background: var(--accent-purple);
-            transform: translateX(-50%);
         }
         .profile .subtitle {
             font-size: 1.1em;
@@ -328,34 +319,37 @@
         }
         @media (max-width: 600px) {
             body { padding: 4px env(safe-area-inset-right) 4px env(safe-area-inset-left); }
-            .container { padding: 6px 6px; justify-content: flex-start; }
-            .profile { margin-bottom: 10px; }
-            .profile-pic { width: 60px; height: 60px; margin-bottom: 6px; }
-            .profile h1 { font-size: 1.5em; }
+            .container { padding: 4px 6px; justify-content: flex-start; }
+            .profile { margin-bottom: 8px; }
+            .profile-pic { width: 70px; height: 70px; margin-bottom: 6px; }
+            .profile h1 { font-size: 1.7em; }
             .profile .subtitle { font-size: 0.85em; }
-            .equalizer { width: 50px; }
-            .links { margin-bottom: 10px; }
-            .links ul { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .equalizer { width: 40px; margin: 6px auto; }
+            .links { margin-bottom: 8px; }
+            .links ul { grid-template-columns: 1fr 1fr; gap: 5px; }
             .links li:last-child:nth-child(odd) { grid-column: span 2; }
-            .link-button { padding: 5px; font-size: 0.75em; min-height: 32px; }
-            .show-bonus-button-container { max-width: 100%; }
-            #showBonusButton { padding: 5px; font-size: 0.75em; min-height: 32px; }
-            .bonus-grid { grid-template-columns: 1fr 1fr; gap: 5px; }
-            #bonusContent h2 { font-size: 1.2em; }
-            footer { font-size: 0.45em; padding: 3px; }
+            .link-button { padding: 5px; font-size: 0.75em; min-height: 30px; }
+            .show-bonus-button-container { max-width: 240px; }
+            #showBonusButton { padding: 5px; font-size: 0.75em; min-height: 30px; }
+            .bonus-grid { grid-template-columns: 1fr 1fr; gap: 4px; }
+            #bonusContent h2 { font-size: 1.1em; margin-bottom: 8px; }
+            #backButton { padding: 5px 8px; font-size: 0.65em; margin-bottom: 8px; }
+            .bonus-item-thumbnail { --thumb-size: 40px; }
+            #passwordError { font-size: 0.55em; }
+            footer { font-size: 0.4em; padding: 2px; }
         }
         @media (max-height: 700px) {
             .profile { margin-bottom: 6px; }
-            .profile-pic { width: 50px; height: 50px; margin-bottom: 4px; }
+            .profile-pic { width: 60px; height: 60px; margin-bottom: 4px; }
             .links { margin-bottom: 6px; }
             .links ul { gap: 4px; }
             .link-button { padding: 4px; font-size: 0.7em; min-height: 28px; }
-            .show-bonus-button-container { max-width: 260px; }
+            .show-bonus-button-container { max-width: 220px; }
             #showBonusButton { padding: 4px; font-size: 0.7em; min-height: 28px; }
-            .bonus-grid { gap: 4px; }
-            .bonus-item { padding: 4px; }
-            .bonus-item-info h4 { font-size: 0.7em; }
-            .bonus-item-info p { font-size: 0.6em; }
+            .bonus-grid { gap: 3px; }
+            .bonus-item { padding: 3px; }
+            .bonus-item-info h4 { font-size: 0.65em; }
+            .bonus-item-info p { font-size: 0.55em; }
         }
         @media (prefers-reduced-motion) {
             .link-button:hover, #showBonusButton:hover, .bonus-item:hover, #backButton:hover, .equalizer { transform: none; animation: none; }
