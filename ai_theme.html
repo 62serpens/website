@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>//NODE_62S :: v3.6 ONLINE</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='2' stroke-dasharray='4' fill='none'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Configuration --- */
+        :root {
+            --bg-color: #040408;
+            --text-color: #a8a8b0;
+            --header-color: #d0d0e0;
+            --accent-color: #00BFFF; /* Electric Blue */
+            --accent-hover: #ffffff;
+            --border-color: #1f1f2f;
+            --success-color: #00ff00; /* Bright green */
+            --error-color: #ff2222;
+            --font-main: 'Roboto Mono', monospace;
+            --transition-fast: 0.1s ease-in-out;
+        }
+
+        /* --- Base & Structure --- */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0; padding: 0; width: 100%; min-height: 100vh;
+            background-color: var(--bg-color); color: var(--text-color);
+            font-family: var(--font-main); font-size: 14px; line-height: 1.6;
+            overflow-x: hidden;
+            overflow-y: auto;
+            cursor: default; position: relative;
+        }
+
+        /* --- Link Style --- */
+        a { color: var(--accent-color); text-decoration: none; transition: color var(--transition-fast); }
+        a:hover { color: var(--accent-hover); }
+        a:visited { opacity: 0.8; }
+
+        /* --- Header --- */
+        .main-header {
+            padding: 8px 15px; border-bottom: 1px solid var(--border-color);
+            position: sticky; top: 0; background: var(--bg-color);
+            z-index: 500; display: flex; justify-content: space-between; align-items: center;
+            min-height: 38px; gap: 15px;
+        }
+        .main-title {
+            font-family: var(--font-main); font-weight: 700; font-size: 1.1em;
+            color: var(--header-color); margin: 0; letter-spacing: 1px; cursor: default;
+            white-space: nowrap; flex-shrink: 0;
+        }
+        .status-info {
+            display: flex; gap: 12px;
+            font-family: var(--font-main); font-size: 0.8em; color: var(--text-color);
+            opacity: 0.7; align-items: center; white-space: nowrap;
+            overflow: hidden;
+        }
+        .status-info span {
+            border-left: 1px solid var(--border-color);
+            padding-left: 12px;
+            display: inline-block;
+            min-width: 95px;
+            text-align: left;
+        }
+        .status-info span:first-child {
+            border-left: none;
+            padding-left: 0;
+            min-width: 100px;
+        }
+
+        /* --- Main Content Container --- */
+        .main-content {
+            max-width: 700px;
+            margin: 0 auto; padding: 25px 10px;
+            z-index: 5; position: relative;
+        }
+
+        /* --- Section Styling (General) --- */
+        .content-section {
+            margin-bottom: 30px;
+            padding: 18px;
+            border: 1px solid var(--border-color);
+            background: none;
+        }
+        .content-section h2 {
+            font-family: var(--font-main); font-weight: 700; text-transform: uppercase;
+            font-size: 1em; color: var(--header-color); margin: 0 0 15px 0;
+            padding-bottom: 8px; text-align: left; border-bottom: 1px solid var(--border-color);
+            letter-spacing: 1px;
+        }
+
+        /* --- Link Grid Section --- */
+        #links {
+            border: none; padding: 0; margin-bottom: 30px;
+        }
+        #links h2 { border: none; padding: 0; margin-bottom: 15px; }
+        .link-grid {
+            display: grid; grid-template-columns: 1fr;
+            gap: 1px; border: 1px solid var(--border-color);
+        }
+        .link-item {
+            display: block; padding: 10px 12px; border: none; border-bottom: 1px solid var(--border-color);
+            text-align: left; font-size: 0.95em; font-weight: 400;
+            color: var(--text-color); background-color: var(--bg-color);
+            transition: all var(--transition-fast); text-decoration: none;
+            font-family: var(--font-main); position: relative;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .link-item:last-child { border-bottom: none; }
+        .link-item:hover {
+            background-color: var(--border-color); color: var(--accent-hover);
+            padding-left: 20px;
+        }
+        .link-item::before {
+            content: '>'; position: absolute; left: -20px; top: 50%;
+            transform: translateY(-50%); opacity: 0;
+            transition: all var(--transition-fast); color: var(--accent-hover);
+        }
+        .link-item:hover::before { left: 8px; opacity: 1; }
+
+        /* --- Unit ID / About Section --- */
+        #unitIdSection .about-content {
+            font-size: 0.9em; color: var(--text-color); line-height: 1.6;
+            padding: 0; background: none; border: none; text-align: left;
+            white-space: pre-wrap; word-wrap: break-word;
+        }
+        #unitIdSection .about-content span { color: var(--success-color); font-weight: 700; }
+
+        /* --- Launch Area / Archive Section --- */
+        #launchAreaSection ul { list-style: '// '; padding-left: 15px; margin: 0; }
+        #launchAreaSection li { margin-bottom: 5px; }
+        #launchAreaSection a { font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color); }
+        #launchAreaSection a:hover { color: var(--accent-hover); }
+        /* Style for password-protected item */
+        #launchAreaSection .protected-item {
+            font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color);
+            cursor: pointer; transition: color var(--transition-fast); display: inline-block;
+        }
+        #launchAreaSection .protected-item:hover { color: var(--accent-hover); }
+        /* Error message style */
+        .password-error {
+            color: var(--error-color); font-size: 0.85em; margin-top: 10px;
+            display: none; font-family: var(--font-main);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 15px; margin-top: 25px;
+            text-align: center; font-size: 0.8em;
+            color: var(--border-color); border-top: 1px solid var(--border-color);
+            font-family: var(--font-main); letter-spacing: 1px; opacity: 0.5;
+        }
+
+        /* --- Contact Modal --- */
+        .contact-modal {
+            display: none; position: fixed; inset: 0; background: rgba(4, 4, 8, 0.9);
+            z-index: 1100; align-items: center; justify-content: center;
+            backdrop-filter: blur(3px); animation: simpleFadeIn-kf 0.2s;
+        }
+        .contact-modal.visible { display: flex; }
+        .contact-modal-content {
+            background: var(--bg-color); padding: 30px 40px; border: 1px solid var(--accent-color);
+            text-align: center; position: relative;
+            box-shadow: 0 0 25px rgba(0, 191, 255, 0.2);
+            max-width: 90%;
+        }
+        .contact-modal h3 {
+            margin: 0 0 15px 0; font-family: var(--font-main); color: var(--header-color);
+            font-weight: 700; font-size: 1.1em; text-transform: uppercase;
+        }
+        .contact-email {
+            display: block; padding: 10px; border: 1px dashed var(--border-color);
+            margin-bottom: 15px; color: var(--text-color); font-size: 1em; cursor: pointer;
+            transition: background-color var(--transition-fast); word-break: break-all;
+        }
+        .contact-email:hover { background-color: var(--border-color); color: var(--accent-hover); }
+        .copy-feedback { font-size: 0.8em; opacity: 0.7; height: 1.2em; }
+        .contact-close {
+            position: absolute; top: 5px; right: 5px; background: none; border: none;
+            color: var(--text-color); font-size: 1.5em; cursor: pointer; padding: 5px;
+            line-height: 1; opacity: 0.6; transition: all var(--transition-fast);
+        }
+        .contact-close:hover { color: var(--error-color); opacity: 1; transform: scale(1.1); }
+
+        /* Simple fade-in animation */
+        @keyframes simpleFadeIn-kf { from { opacity: 0; } to { opacity: 1; } }
+
+        /* --- Mobile Adjustments --- */
+        @media (max-width: 600px) {
+            body {
+                font-size: 13px;
+                padding: 10px 5px;
+                overflow-y: auto;
+            }
+            .main-header {
+                padding: 6px 10px;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                padding-bottom: 8px;
+                min-height: 50px; /* Fixed height to prevent jumping */
+            }
+            .main-title {
+                font-size: 1em;
+                width: 100%;
+                text-align: left;
+                margin-bottom: 5px;
+            }
+            .status-info {
+                font-size: 0.7em;
+                gap: 6px;
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                overflow: hidden;
+            }
+            .status-info span {
+                padding-left: 6px;
+                min-width: 75px;
+                border-left: 1px solid var(--border-color);
+            }
+            .status-info span:first-child {
+                padding-left: 0;
+                border-left: none;
+                min-width: 85px;
+            }
+            /* Truncate only UPLINK span */
+            #uplinkStatus {
+                min-width: 60px;
+                max-width: 70px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+
+            .main-content {
+                padding: 20px 8px;
+                padding-top: 50px; /* Match header height */
+            }
+            .content-section { padding: 15px; margin-bottom: 25px; }
+            .content-section h2 { font-size: 0.9em; }
+
+            .link-item { font-size: 0.9em; padding: 10px; }
+            .link-item:hover { padding-left: 15px; }
+            .link-item:hover::before { left: 5px; }
+
+            #unitIdSection .about-content { font-size: 0.85em; }
+            #launchAreaSection ul { padding-left: 10px; }
+            #launchAreaSection a, #launchAreaSection .protected-item { font-size: 0.85em; }
+            .password-error { font-size: 0.8em; }
+
+            footer { margin-top: 20px; font-size: 0.75em; }
+
+            .contact-modal-content { padding: 20px; width: 85vw; }
+            .contact-modal h3 { font-size: 1em; }
+            .contact-email { font-size: 0.9em; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <h1 class="main-title">//NODE::62S</h1>
+        <div class="status-info">
+            <span id="dateTime" title="Local Timezone: Australia/Hobart">LST_--:--:--</span>
+            <span id="systemStatus">STATUS::INIT</span>
+            <span id="coreTemp">CORE_TEMP::--.-C</span>
+            <span id="uplinkStatus">UPLINK::STANDBY</span>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="links" class="content-section">
+            <h2 class="section-heading">// PRIMARY_DIRECTIVES //</h2>
+            <nav class="link-grid">
+                <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" class="link-item"><span class="link-text">QUERY::BEAT_STORE</span></a>
+                <a href="https://www.instagram.com/62serpens" target="_blank" class="link-item"><span class="link-text">MONITOR::INSTAGRAM</span></a>
+                <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" class="link-item"><span class="link-text">STREAM::SPOTIFY</span></a>
+                <a href="https://www.soundcloud.com/62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::SOUNDCLOUD</span></a>
+                <a href="https://www.youtube.com/@62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::YOUTUBE</span></a>
+                <a href="https://discord.gg/cCedfQgHVG" target="_blank" class="link-item"><span class="link-text">INTERFACE::DISCORD</span></a>
+                <a href="#" id="contactLink" class="link-item"><span class="link-text">TRANSMIT::CONTACT</span></a>
+            </nav>
+        </section>
+
+        <section id="launchAreaSection" class="content-section">
+            <h2>// SUBMODULE_DEPLOYMENT //</h2>
+            <ul id="submoduleList">
+                <li><a href="2000.html" target="_self"> > NODE_V2 :: Retro Simulation [Status: Active]</a></li>
+                <li><a href="b.html" target="_self"> > MODULE::BLACKJACK_SIM [Status: Active]</a></li>
+                <li>
+                    <span class="protected-item" id="audioToolsLink"> > MODULE::AUDIO_PROCESSING_SUITE [Status: Restricted]</span>
+                </li>
+            </ul>
+            <p class="password-error" id="passwordError"></p>
+        </section>
+
+        <section id="unitIdSection" class="content-section">
+            <h2>// SYSTEM_DESIGNATION //</h2>
+            <pre class="about-content">
+UNIT_ID:     62serpens
+DESIGNATION: Audio Pattern Synthesis/Analysis Node
+ORIGIN:      SECTOR::∞ // GRID_REF::[REDACTED]
+STATUS:      <span id="unitIdStatus">OPTIMAL</span>
+V_ASSIST:   v4.0_ACTIVE
+</pre>
+        </section>
+    </main>
+
+    <footer>// SYSTEM_ID::62S // RUNTIME::2025 //</footer>
+
+    <div class="contact-modal" id="contactModal">
+        <div class="contact-modal-content">
+            <button class="contact-close" id="contactClose" title="Close">X</button>
+            <h3>// SECURE_TRANSMISSION_CHANNEL //</h3>
+            <p>Address:</p>
+            <code id="contactEmailDisplay" class="contact-email" title="Click to Copy"></code>
+            <p class="copy-feedback" id="copyFeedback"></p>
+        </div>
+    </div>
+
+    <script>
+        try {
+            document.addEventListener('DOMContentLoaded', () => {
+                // --- Selectors ---
+                const dateTimeEl = document.getElementById('dateTime');
+                const systemStatusEl = document.getElementById('systemStatus');
+                const coreTempEl = document.getElementById('coreTemp');
+                const uplinkStatusEl = document.getElementById('uplinkStatus');
+                const unitIdStatusEl = document.getElementById('unitIdStatus');
+
+                const contactLink = document.getElementById('contactLink');
+                const contactModal = document.getElementById('contactModal');
+                const contactEmailDisplay = document.getElementById('contactEmailDisplay');
+                const copyFeedback = document.getElementById('copyFeedback');
+                const contactClose = document.getElementById('contactClose');
+
+                const audioToolsLink = document.getElementById('audioToolsLink');
+                const passwordError = document.getElementById('passwordError');
+
+                // --- Config & State ---
+                const userEmail = "626262xxx@gmail.com";
+                const statusOptions = ["OPTIMAL", "NOMINAL", "STABLE", "PROCESSING", "CALIBRATING", "SYNCED", "ANALYSING", "IDLE"];
+                const uplinkOptions = ["ACTIVE", "ACTIVE", "ACTIVE", "SYNCING", "STANDBY", "ENCRYPTED", "ROUTING", "SECURE_TUNNEL"];
+                let currentCoreTemp = 28.0;
+                const audioToolsPassword = "serpens62"; // Change this to your desired password
+
+                // --- Core Functions ---
+
+                // Update Date/Time in Header
+                const updateDateTime = () => {
+                    if (!dateTimeEl) return;
+                    const now = new Date();
+                    try {
+                        const location = "Australia/Hobart";
+                        const timeOpts = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: location };
+                        const timeStr = now.toLocaleTimeString("en-AU", timeOpts);
+                        dateTimeEl.textContent = `LST_${timeStr}`;
+                    } catch (e) {
+                        console.warn(`Timezone formatting for ${location} failed. Using local fallback. Error: ${e.message}`);
+                        const timeStr = now.toLocaleTimeString("en-US", { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                        dateTimeEl.textContent = `LCL_${timeStr}`;
+                    }
+                };
+
+                // Update Other Status Indicators
+                const updateStatusIndicators = () => {
+                    if (systemStatusEl) {
+                        const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
+                        systemStatusEl.textContent = `STATUS::${randomStatus}`;
+                        if (unitIdStatusEl) unitIdStatusEl.textContent = randomStatus;
+                    }
+
+                    if (coreTempEl) {
+                        const baseTemp = 28.0;
+                        const fluctuation = (Math.random() - 0.5);
+                        currentCoreTemp = baseTemp + fluctuation;
+                        currentCoreTemp = Math.max(25.0, Math.min(31.0, currentCoreTemp));
+                        coreTempEl.textContent = `CORE_TEMP::${currentCoreTemp.toFixed(1)}C`;
+                    }
+
+                    if (uplinkStatusEl) {
+                        const randomUplink = uplinkOptions[Math.floor(Math.random() * uplinkOptions.length)];
+                        uplinkStatusEl.textContent = `UPLINK::${randomUplink}`;
+                    }
+                };
+
+                // --- Password Protection for Audio Tools ---
+                function handleAudioToolsAccess() {
+                    const userInput = prompt("ENTER ACCESS CODE :: MODULE::AUDIO_PROCESSING_SUITE", "");
+                    if (userInput === audioToolsPassword) {
+                        window.location.href = "audio_tools.html";
+                    } else {
+                        if (passwordError) {
+                            passwordError.textContent = "ACCESS DENIED :: INVALID CODE";
+                            passwordError.style.display = "block";
+                            setTimeout(() => {
+                                if (passwordError) passwordError.style.display = "none";
+                            }, 3000);
+                        }
+                    }
+                }
+
+                // --- Contact Modal Logic ---
+                function openContactModal() {
+                    if (contactModal && contactEmailDisplay) {
+                        contactEmailDisplay.textContent = userEmail;
+                        contactModal.classList.add('visible');
+                        if (copyFeedback) copyFeedback.textContent = "(Click Address to Copy)";
+                    }
+                }
+
+                function closeContactModal() {
+                    if (contactModal) contactModal.classList.remove('visible');
+                }
+
+                function copyEmailToClipboard() {
+                    if (!navigator.clipboard) {
+                        if (copyFeedback) copyFeedback.textContent = "COPY::ERR [Unsupported Browser]";
+                        return;
+                    }
+                    navigator.clipboard.writeText(userEmail).then(() => {
+                        if (copyFeedback) copyFeedback.textContent = "ADDRESS COPIED!";
+                        setTimeout(() => { if (copyFeedback) copyFeedback.textContent = "(Click Address to Copy)"; }, 1500);
+                    }).catch(err => {
+                        console.error('Clipboard copy failed: ', err);
+                        if (copyFeedback) copyFeedback.textContent = "COPY::FAIL";
+                    });
+                }
+
+                // --- Event Listeners ---
+                if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); openContactModal(); });
+                if (contactClose) contactClose.addEventListener('click', closeContactModal);
+                if (contactEmailDisplay) contactEmailDisplay.addEventListener('click', copyEmailToClipboard);
+                if (contactModal) contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeContactModal(); });
+                if (audioToolsLink) audioToolsLink.addEventListener('click', handleAudioToolsAccess);
+
+                // --- Initialization ---
+                updateDateTime();
+                updateStatusIndicators();
+                setInterval(updateDateTime, 1000);
+                setInterval(updateStatusIndicators, 3000);
+
+                console.log("NODE_62S v3.6 :: Interface Active");
+                document.body.classList.add('loaded');
+            });
+        } catch (error) {
+            console.error("!!! KERNEL FAULT !!!:", error);
+            document.body.innerHTML = `<div style="color:#ff3333; background:#040408; padding: 20px; font-family: monospace; font-size: 14px;">SYSTEM_ERROR [CODE::${Math.random().toString(16).substring(2, 10).toUpperCase()}]<br><br>${error.message}<br>----------------<br>${error.stack || 'NO_STACK_TRACE'}</div>`;
+        }
+    </script>
+</body>
+</html>
