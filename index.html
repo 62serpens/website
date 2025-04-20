@@ -3,52 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>62serpens // Links</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23e5e5e5' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23f5f5f5'/%3E%3C/svg%3E">
+    <title>62serpens.com - Links</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101012'/%3E%3Cpath d='M16 6 C10.477 6 6 10.477 6 16 S 10.477 26 16 26 S 26 21.523 26 16 S 21.523 6 16 6 Z M16 24 C 11.582 24 8 20.418 8 16 S 11.582 8 16 8 S 24 11.582 24 16 S 20.418 24 16 24 Z' fill='%239333ea'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23c084fc'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
-            --bg-main: #0a0a0a; /* Near black */
-            --bg-card: #1a1a1a; /* Dark gray */
-            --bg-card-hover: #2b2b2b;
-            --text-primary: #f5f5f5; /* Off-white */
-            --text-secondary: #a3a3a3; /* Medium gray */
-            --text-tertiary: #525252; /* Darker gray */
-            --border-color: #404040;
-            --border-highlight: #e5e5e5; /* High contrast border */
-            --shadow-color: rgba(255, 255, 255, 0.1); /* Subtle white shadow for depth on black */
+            --bg-primary: #101012;
+            --bg-secondary: #18181B;
+            --bg-tertiary: #27272A;
+            --text-primary: #f4f4f5;
+            --text-secondary: #a1a1aa;
+            --text-tertiary: #71717a;
+            --accent-primary: #9333ea; /* Purple-700 */
+            --accent-secondary: #c084fc; /* Purple-400 */
+            --accent-tertiary: #3b0764;
+            --border-color: #3f3f46;
+            --shadow-color-light: rgba(255, 255, 255, 0.05);
+            --shadow-color-dark: rgba(0, 0, 0, 0.3);
+            --shadow-color-accent: rgba(192, 132, 252, 0.2);
             --font-body: 'Inter', sans-serif;
-            --font-heading: 'Oswald', sans-serif; /* Changed heading font */
-            --transition-duration: 0.25s;
-            --border-radius: 4px; /* Sharper corners */
+            --font-heading: 'Space Grotesk', sans-serif;
+            --transition-duration: 0.3s;
+            --border-radius-sm: 6px;
+            --border-radius-md: 10px;
+            --border-radius-lg: 16px;
         }
 
-        html { box-sizing: border-box; scroll-behavior: smooth; }
+        html { box-sizing: border-box; }
         *, *:before, *:after { box-sizing: inherit; }
 
         body {
             font-family: var(--font-body);
             font-weight: 400;
-            line-height: 1.6;
             width: 100%;
             margin: 0;
             min-height: 100vh;
-            background-color: var(--bg-main);
+            background-color: var(--bg-primary);
             color: var(--text-primary);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px env(safe-area-inset-right) 20px env(safe-area-inset-left);
+            padding: 16px env(safe-area-inset-right) 16px env(safe-area-inset-left);
             -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            /* Subtle noise texture for Noir feel */
-            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4"%3E%3Cpath fill="%231a1a1a" fill-opacity="0.1" d="M0 2h2v2H0zM2 0h2v2H2z"%3E%3C/path%3E%3C/svg%3E');
+            text-rendering: optimizeLegibility;
+            position: relative;
+            background-image: radial-gradient(circle at 10% 10%, var(--accent-tertiary), transparent 40%),
+                              radial-gradient(circle at 90% 80%, var(--accent-tertiary), transparent 40%);
+            background-attachment: fixed;
         }
 
         a, button {
@@ -57,86 +65,149 @@
             outline: none;
             color: inherit;
             text-decoration: none;
-            transition: all var(--transition-duration) ease-in-out;
-            border-radius: var(--border-radius); /* Apply globally */
+            transition: all var(--transition-duration) cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         a:focus-visible, button:focus-visible {
-             outline: 2px solid var(--border-highlight);
-             outline-offset: 2px;
+             outline: 2px solid var(--accent-secondary);
+             outline-offset: 3px;
+             border-radius: var(--border-radius-sm);
         }
 
         .container {
-            max-width: 600px; /* Slightly narrower for focus */
+            max-width: 640px;
             width: 100%;
-            padding: 0 10px;
+            padding: 0 12px;
             text-align: center;
             position: relative;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 24px; /* Spacing between profile, links, bonus button */
         }
+
+        /* Subtle animated background elements */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            opacity: 0.08;
+            filter: blur(100px);
+            z-index: -1;
+            animation: pulse 15s infinite alternate ease-in-out;
+        }
+        body::before { /* Top-leftish */
+            width: 300px; height: 300px;
+            top: 5%; left: 10%;
+        }
+        body::after { /* Bottom-rightish */
+            width: 250px; height: 250px;
+            bottom: 5%; right: 10%;
+            animation-delay: -7.5s; /* Offset animation */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.06; }
+            100% { transform: scale(1.1); opacity: 0.1; }
+        }
+
 
         .page {
             width: 100%;
             display: none;
             flex-direction: column;
             align-items: center;
-            gap: 25px; /* Spacing within a page */
+            gap: 20px; /* Spacing within a page */
             opacity: 0;
-            animation: pageFadeIn 0.5s ease forwards;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            will-change: opacity, transform; /* Performance hint */
         }
-        @keyframes pageFadeIn { to { opacity: 1; } }
-
-        .page.active-page { display: flex; }
-        /* Hide inactive pages completely for screen readers */
-        .page:not(.active-page) { display: none; }
-
+        .page.active-page {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         .profile {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 8px;
+            margin-bottom: 8px; /* Extra space below profile */
         }
 
-        .profile-pic {
+        .profile-pic-wrapper {
+            position: relative;
             width: 100px;
             height: 100px;
+        }
+        .profile-pic {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
             display: block;
-            border: 2px solid var(--border-color);
-            background-color: var(--bg-card);
-            padding: 4px;
-            filter: grayscale(100%); /* Noir effect */
-            transition: filter var(--transition-duration), transform var(--transition-duration);
+            border: 3px solid var(--border-color);
+            background-color: var(--bg-tertiary); /* Placeholder bg */
+            padding: 3px; /* Creates inner border effect */
+            background-clip: content-box; /* Keeps bg inside padding */
+            box-shadow: 0 0 0 2px var(--bg-primary), /* Outer ring */
+                        0 4px 15px var(--shadow-color-dark);
+            transition: transform var(--transition-duration) ease;
         }
-         .profile-pic:hover {
-             filter: grayscale(0%);
-             transform: scale(1.03);
-         }
+        .profile-pic-wrapper:hover .profile-pic {
+            transform: scale(1.05);
+        }
 
         .profile h1 {
             font-family: var(--font-heading);
-            font-size: 3em; /* Larger, more impactful heading */
-            font-weight: 500; /* Oswald looks good mid-weight */
+            font-size: 2.2em;
+            font-weight: 500;
             color: var(--text-primary);
             margin: 0;
-            letter-spacing: 1.5px; /* More spacing */
-            text-transform: uppercase; /* Classic Noir feel */
+            letter-spacing: 1px;
         }
 
         .profile .subtitle {
             font-size: 1em;
-            font-style: italic; /* Subtle stylistic touch */
             color: var(--text-secondary);
-            margin: -5px 0 0; /* Pull up slightly */
+            margin: 0;
             font-weight: 400;
         }
 
-        /* Removed equalizer, kept structure clean */
+        /* Enhanced Equalizer */
+        .equalizer {
+            width: 50px;
+            height: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .equalizer-bar {
+            width: 8px;
+            background-color: var(--accent-secondary);
+            opacity: 0.5;
+            border-radius: 2px;
+            animation: equalize 1.5s infinite ease-in-out alternate;
+        }
+        .equalizer-bar:nth-child(1) { height: 10px; animation-delay: 0s; }
+        .equalizer-bar:nth-child(2) { height: 18px; animation-delay: 0.2s; }
+        .equalizer-bar:nth-child(3) { height: 14px; animation-delay: 0.4s; }
+
+        @keyframes equalize {
+            0% { height: 5px; opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { height: 100%; opacity: 0.4; }
+        }
+        /* Adjust height dynamically based on initial setting */
+        .equalizer-bar:nth-child(1) { animation-name: equalize1; }
+        .equalizer-bar:nth-child(2) { animation-name: equalize2; }
+        .equalizer-bar:nth-child(3) { animation-name: equalize3; }
+        @keyframes equalize1 { 0% { height: 5px; } 100% { height: 10px; } }
+        @keyframes equalize2 { 0% { height: 8px; } 100% { height: 18px; } }
+        @keyframes equalize3 { 0% { height: 6px; } 100% { height: 14px; } }
+
 
         .links { width: 100%; }
         .links ul {
@@ -144,48 +215,59 @@
             padding: 0;
             margin: 0;
             display: grid;
-            grid-template-columns: 1fr; /* Single column always for starkness */
-            gap: 10px;
+            grid-template-columns: 1fr; /* Default to single column */
+            gap: 12px;
         }
+        /* Use 2 columns on wider screens */
+         @media (min-width: 480px) {
+            .links ul { grid-template-columns: 1fr 1fr; }
+            /* Make last odd item span full width if needed */
+             .links li:last-child:nth-child(odd) { grid-column: span 2; }
+        }
+
 
         .link-button {
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* Align icon/text left */
-            text-align: left;
+            justify-content: center; /* Center content by default */
+            text-align: center;
             width: 100%;
-            padding: 12px 15px;
-            font-size: 1em; /* Slightly larger base size */
+            padding: 14px 18px;
+            font-size: 0.95em;
             font-weight: 500;
-            background-color: transparent; /* Stark outlined buttons */
+            background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            color: var(--text-secondary); /* Start with secondary color */
-            min-height: 50px;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 1px 2px var(--shadow-color-dark),
+                        inset 0 1px 1px var(--shadow-color-light);
+            min-height: 52px;
         }
 
         .link-button:hover {
-            background-color: var(--bg-card-hover);
-            border-color: var(--border-highlight);
-            color: var(--text-primary);
-            transform: scale(1.02); /* Subtle scale */
-             box-shadow: 0 0 8px var(--shadow-color);
+            transform: translateY(-3px);
+            background-color: var(--bg-tertiary);
+            border-color: var(--accent-secondary);
+            box-shadow: 0 6px 12px var(--shadow-color-dark),
+                        inset 0 1px 1px var(--shadow-color-light),
+                        0 0 15px var(--shadow-color-accent);
         }
         .link-button:active {
-             transform: scale(1.01);
-             background-color: var(--bg-card);
+             transform: translateY(-1px);
+             box-shadow: 0 2px 4px var(--shadow-color-dark),
+                        inset 0 1px 1px var(--shadow-color-light);
         }
 
 
         .link-button i.icon {
-            margin-right: 15px;
+            margin-right: 12px;
             font-size: 1.1em;
-            width: 1.2em;
+            width: 1.2em; /* Ensure consistent width */
             text-align: center;
-            color: var(--text-tertiary); /* Muted icon color initially */
+            opacity: 0.9;
             transition: color var(--transition-duration) ease;
         }
-        .link-button:hover i.icon {
-             color: var(--border-highlight); /* Highlight icon on hover */
+         .link-button:hover i.icon {
+             opacity: 1;
          }
 
         .link-button span {
@@ -193,97 +275,116 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            text-align: left; /* Align text left, icon pushes it */
         }
+        /* Center text if no icon or specifically centered */
+        .link-button.center-text span { text-align: center; }
+        .link-button.center-text i.icon { margin-right: 8px; } /* Slightly less space when centered */
 
-        /* Icon Colors - using monochrome palette */
-        #mainContent .icon { color: var(--text-tertiary); } /* Base for all */
-        #mainContent .link-button:hover .icon { color: var(--border-highlight); } /* Hover state */
-        /* Specific icons that indicate success/failure */
-        #mainContent .fa-check { color: #bbf7d0; } /* Light green */
-        #mainContent .fa-times { color: #fecaca; } /* Light red */
-        /* Star icon for bonus button */
-        #mainContent .fa-star { color: var(--text-secondary); }
-         #mainContent #showBonusButton:hover .fa-star { color: var(--text-primary); }
 
-        #contactButton { justify-content: center; text-align: center; } /* Center contact button */
+        /* Icon Colors (Consider moving to inline styles if dynamically generated) */
+        #mainContent .fa-store { color: #f59e0b; }
+        #mainContent .fa-instagram { color: #e1306c; }
+        #mainContent .fa-spotify { color: #1db954; }
+        #mainContent .fa-soundcloud { color: #ff5500; }
+        #mainContent .fa-youtube { color: #ff0000; }
+        #mainContent .fa-discord { color: #5865f2; }
+        #mainContent .fa-envelope { color: var(--text-secondary); }
+        #mainContent .fa-check { color: #22c55e; } /* Green */
+        #mainContent .fa-times { color: #ef4444; } /* Red */
+        #mainContent .fa-star { color: var(--accent-secondary); }
+
+
+        #contactButton { justify-content: center; } /* Ensure contact button text is centered */
         #contactButton.locked {
             pointer-events: none;
-            opacity: 0.6;
-            background-color: var(--bg-card);
+            opacity: 0.7;
+            background-color: var(--bg-tertiary); /* Indicate locked state */
         }
         #contactButton .fa-check, #contactButton .fa-times { margin-right: 8px; }
-
 
         .show-bonus-button-container {
              width: 100%;
              display: flex;
              justify-content: center;
-             margin-top: 15px; /* Space above bonus button */
         }
-        /* Style bonus button similarly to others, but maybe bolder */
         #showBonusButton {
-             max-width: 350px;
-             justify-content: center; /* Center content */
-             text-align: center;
-             font-weight: 700; /* Bolder text */
-             color: var(--text-secondary);
-             border-width: 1px; /* Thicker border */
-             border-color: var(--border-color);
-             background-color: var(--bg-card); /* Give it a slight background */
+             /* Inherits .link-button styles, add specifics */
+             max-width: 320px; /* Limit width */
+             font-weight: 700;
+             background-color: transparent;
+             border: 1px solid var(--accent-primary);
+             color: var(--accent-secondary);
+             box-shadow: 0 1px 2px var(--shadow-color-dark),
+                        inset 0 0 10px rgba(147, 51, 234, 0.2); /* Inner accent glow */
         }
         #showBonusButton:hover {
-             border-color: var(--border-highlight);
+             background-color: rgba(147, 51, 234, 0.1);
+             border-color: var(--accent-secondary);
              color: var(--text-primary);
-             background-color: var(--bg-main); /* Invert background */
+             box-shadow: 0 6px 12px var(--shadow-color-dark),
+                        inset 0 0 15px rgba(147, 51, 234, 0.3),
+                        0 0 20px var(--shadow-color-accent);
         }
-        #showBonusButton i { color: var(--text-secondary); transition: color var(--transition-duration) ease; }
-         #showBonusButton:hover i { color: var(--text-primary); }
+        #showBonusButton i { color: var(--accent-primary); transition: color var(--transition-duration) ease; }
+         #showBonusButton:hover i { color: var(--accent-secondary); }
 
 
-        #bonusContent { align-items: stretch; text-align: left; }
+        #bonusContent { align-items: stretch; text-align: left; } /* Stretch items, align text left */
         #bonusContent h2 {
             font-family: var(--font-heading);
-            font-size: 2em;
+            font-size: 1.6em;
             font-weight: 500;
             color: var(--text-primary);
-            margin: 0 0 15px;
+            margin: 0 0 10px;
             text-align: center;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .bonus-grid {
             display: grid;
-             /* Fewer columns for larger previews */
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+            gap: 12px;
             width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
         .bonus-item {
             display: flex;
             flex-direction: column;
-            align-items: stretch;
-            background: var(--bg-card);
+            align-items: stretch; /* Ensure children stretch */
+            background: var(--bg-secondary);
+            padding: 8px;
+            border-radius: var(--border-radius-md);
             border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-             box-shadow: 3px 3px 0px 0px var(--border-color); /* Sharp offset shadow */
-             transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+            box-shadow: 0 2px 4px var(--shadow-color-dark),
+                        inset 0 1px 0 var(--shadow-color-light);
+            overflow: hidden; /* Clip potential overflows */
         }
         .bonus-item:hover {
-             transform: translate(-3px, -3px); /* Shift up/left */
-             box-shadow: 6px 6px 0px 0px var(--border-highlight); /* Enhance shadow on hover */
-             border-color: var(--bg-card); /* Hide border matching bg */
+            transform: translateY(-4px) scale(1.02);
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 16px var(--shadow-color-dark),
+                        inset 0 1px 0 var(--shadow-color-light),
+                        0 0 15px var(--shadow-color-accent);
         }
+         .bonus-item:active {
+             transform: translateY(-1px) scale(1.01);
+             box-shadow: 0 3px 6px var(--shadow-color-dark),
+                        inset 0 1px 0 var(--shadow-color-light);
+         }
 
         .bonus-item-thumbnail {
             width: 100%;
             height: auto;
-            aspect-ratio: 16 / 9; /* Standard video aspect ratio */
-            background-color: var(--bg-main);
+            aspect-ratio: 16 / 10; /* Widescreen aspect ratio */
+            background-color: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 8px;
             overflow: hidden;
+            display: flex; /* Center potential placeholder */
+            align-items: center;
+            justify-content: center;
             position: relative;
         }
         .bonus-item-thumbnail img {
@@ -291,108 +392,112 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(100%); /* Grayscale images */
-            transition: filter var(--transition-duration) ease, transform var(--transition-duration) ease;
-            opacity: 0.8; /* Slightly faded */
+            transition: transform var(--transition-duration) ease, opacity 0.5s ease;
+            opacity: 0; /* Fade in */
         }
         .bonus-item:hover .bonus-item-thumbnail img {
-             filter: grayscale(0%);
-             transform: scale(1.05);
-             opacity: 1;
+            transform: scale(1.05);
         }
+        /* Lazy loading fade-in */
+         img[loading="lazy"] { opacity: 0; }
+         img:not([loading="lazy"]) { opacity: 1; } /* Show if not lazy or already loaded */
+         img.lazyloaded { opacity: 1; } /* Class added by lazysizes or similar */
+         /* Basic fade-in for images as they load */
+         @keyframes fadeIn { to { opacity: 1; } }
+         .bonus-item-thumbnail img { animation: fadeIn 0.5s ease forwards; }
 
-        .bonus-item-info { padding: 12px 15px; }
+
+        .bonus-item-info { padding: 4px; }
         .bonus-item-info h4 {
-            font-family: var(--font-heading);
-            margin: 0 0 5px;
-            font-size: 1.2em;
-            font-weight: 500;
+            margin: 0 0 4px;
+            font-size: 0.9em;
+            font-weight: 700;
             color: var(--text-primary);
             line-height: 1.3;
-            letter-spacing: 0.5px;
         }
         .bonus-item-info p {
             margin: 0;
-            font-size: 0.9em;
+            font-size: 0.8em;
             font-weight: 400;
             color: var(--text-secondary);
-            line-height: 1.5;
+            line-height: 1.4;
         }
-         .bonus-item-info .fa-lock { color: var(--text-tertiary); margin-left: 4px;}
 
-
-        .back-button-wrapper { width: 100%; text-align: center; margin-bottom: 15px; }
+        /* Back Button specific styling */
+        .back-button-wrapper { width: 100%; text-align: center; margin-bottom: 10px; }
         #backButton {
-             /* Similar to link buttons but maybe inline */
-            display: inline-flex;
+            display: inline-flex; /* Allow centering */
             align-items: center;
             justify-content: center;
-            padding: 8px 20px;
+            padding: 8px 16px;
             color: var(--text-secondary);
-            background-color: transparent;
-            border-radius: var(--border-radius);
-            font-size: 0.9em;
+            background-color: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.85em;
             font-weight: 500;
             border: 1px solid var(--border-color);
         }
         #backButton:hover {
             color: var(--text-primary);
-            background-color: var(--bg-card-hover);
-            border-color: var(--border-highlight);
+            background-color: var(--accent-primary);
+            border-color: var(--accent-primary);
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px var(--shadow-color-dark), 0 0 10px var(--shadow-color-accent);
         }
-        #backButton i { margin-right: 8px; }
+        #backButton i { margin-right: 6px; font-size: 0.9em; }
 
 
         #passwordError {
             display: none;
-            color: #fecaca; /* Light Red */
-            font-size: 0.85em;
+            color: #f87171; /* Lighter Red */
+            font-size: 0.8em;
             text-align: center;
             width: 100%;
-            margin-top: 10px;
-            background-color: rgba(254, 202, 202, 0.1); /* Very subtle red bg */
-            padding: 8px;
-            border-radius: var(--border-radius);
-            border: 1px solid rgba(254, 202, 202, 0.2);
+            margin-top: 8px; /* Space above error */
+            background-color: rgba(239, 68, 68, 0.1);
+            padding: 6px;
+            border-radius: var(--border-radius-sm);
+            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
 
         footer {
-            padding: 30px 10px 10px; /* More padding top */
-            font-size: 0.8em;
+            padding: 20px 10px;
+            font-size: 0.75em;
             color: var(--text-tertiary);
             text-align: center;
             width: 100%;
-            margin-top: 30px;
-            opacity: 0.7;
+            margin-top: 20px; /* Space above footer */
+            opacity: 0.8;
         }
 
         /* Responsive Adjustments */
         @media (max-width: 600px) {
-             body { padding: 15px env(safe-area-inset-right) 15px env(safe-area-inset-left); }
-            .container { padding: 0 5px; gap: 25px; }
-            .profile h1 { font-size: 2.5em; }
+            body { padding: 12px env(safe-area-inset-right) 12px env(safe-area-inset-left); }
+            .container { padding: 0 8px; gap: 20px; }
+            .profile { margin-bottom: 4px; }
+            .profile-pic-wrapper { width: 80px; height: 80px; }
+            .profile h1 { font-size: 1.9em; }
             .profile .subtitle { font-size: 0.9em; }
-            .links ul { gap: 8px; }
-            .link-button { padding: 10px 12px; font-size: 0.95em; min-height: 46px; }
-             .bonus-grid { grid-template-columns: 1fr; gap: 12px; } /* Force single column */
-            #bonusContent h2 { font-size: 1.8em; }
-            #backButton { font-size: 0.85em; padding: 7px 15px; }
-             .bonus-item-info h4 { font-size: 1.1em;}
-             .bonus-item-info p { font-size: 0.85em;}
-            footer { font-size: 0.75em; padding-top: 25px; }
+            .equalizer { width: 40px; height: 16px; }
+            .links ul { gap: 10px; grid-template-columns: 1fr; /* Force single column */ }
+            .links li:last-child:nth-child(odd) { grid-column: span 1; } /* Reset span */
+            .link-button { padding: 12px 16px; font-size: 0.9em; min-height: 48px; }
+            #showBonusButton { max-width: 280px; font-size: 0.9em; }
+            .bonus-grid { gap: 10px; }
+            #bonusContent h2 { font-size: 1.4em; }
+            #backButton { font-size: 0.8em; padding: 7px 14px; }
+            .bonus-item-info h4 { font-size: 0.85em; }
+            .bonus-item-info p { font-size: 0.75em; }
+            footer { font-size: 0.7em; padding: 15px 8px; }
         }
 
-        /* Reduced Motion */
         @media (prefers-reduced-motion) {
-             body { animation: none; } /* Disable background pulse if any */
-            .profile-pic, .link-button, #showBonusButton, .bonus-item, #backButton, .bonus-item-thumbnail img {
-                 transition: none;
-                 transform: none !important; /* Important to override hover transforms */
-             }
-             .bonus-item { box-shadow: 3px 3px 0px 0px var(--border-color); } /* Keep base shadow */
-            .bonus-item:hover { box-shadow: 3px 3px 0px 0px var(--border-color); } /* Prevent hover shadow change */
-            .page { animation: none; transition: opacity 0.4s ease-in-out; }
+            body::before, body::after, .equalizer-bar { animation: none; }
+            .profile-pic, .link-button, #showBonusButton, .bonus-item, #backButton, .bonus-item-thumbnail img { transition: none; transform: none; }
+            .link-button:hover, #showBonusButton:hover, .bonus-item:hover, #backButton:hover { transform: none; }
+            .bonus-item:hover .bonus-item-thumbnail img { transform: none; }
+             .page { transition: opacity 0.4s ease-in-out; transform: none !important; } /* Keep fade but remove slide */
         }
 
     </style>
@@ -400,78 +505,84 @@
 <body>
     <div class="container">
 
-        <div id="mainContent" class="page active-page" role="main" aria-labelledby="profile-heading">
+        <div id="mainContent" class="page active-page" role="main" aria-live="polite">
             <header class="profile">
-                <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic" onerror="this.style.display='none';">
-                <h1 id="profile-heading">62serpens</h1>
-                <p class="subtitle">Music Producer // Sound Architect</p>
-                 </header>
+                <div class="profile-pic-wrapper">
+                     <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic" onerror="this.style.backgroundColor='#333'; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'; /* Minimal placeholder on error */">
+                </div>
+                <h1>62serpens</h1>
+                <p class="subtitle">Music Producer</p>
+                <div class="equalizer" aria-hidden="true">
+                    <div class="equalizer-bar"></div>
+                    <div class="equalizer-bar"></div>
+                    <div class="equalizer-bar"></div>
+                </div>
+            </header>
 
             <nav class="links" aria-label="Main Links">
                 <ul>
-                    <li><a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Beat Store"><i class="fas fa-store icon"></i><span>Beat Store</span></a></li>
-                    <li><a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Instagram"><i class="fab fa-instagram icon"></i><span>Instagram</span></a></li>
-                    <li><a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Spotify"><i class="fab fa-spotify icon"></i><span>Spotify</span></a></li>
-                    <li><a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="SoundCloud"><i class="fab fa-soundcloud icon"></i><span>SoundCloud</span></a></li>
-                    <li><a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="YouTube"><i class="fab fa-youtube icon"></i><span>YouTube</span></a></li>
-                    <li><a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Discord Server"><i class="fab fa-discord icon"></i><span>Discord Server</span></a></li>
-                    <li><button type="button" id="contactButton" class="link-button" aria-label="Copy Contact Email"><i class="fas fa-envelope icon"></i><span>Contact (Copy Email)</span></button></li>
+                    <li><a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Beat Store"><i class="fas fa-store icon"></i><span>Beat Store</span></a></li>
+                    <li><a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Instagram"><i class="fab fa-instagram icon"></i><span>Instagram</span></a></li>
+                    <li><a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Spotify"><i class="fab fa-spotify icon"></i><span>Spotify</span></a></li>
+                    <li><a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit SoundCloud"><i class="fab fa-soundcloud icon"></i><span>SoundCloud</span></a></li>
+                    <li><a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit YouTube"><i class="fab fa-youtube icon"></i><span>YouTube</span></a></li>
+                    <li><a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Discord Server"><i class="fab fa-discord icon"></i><span>Discord Server</span></a></li>
+                    <li><button type="button" id="contactButton" class="link-button center-text" aria-label="Copy Contact Email"><i class="fas fa-envelope icon"></i><span>Contact (Copy Email)</span></button></li>
                 </ul>
             </nav>
 
             <div class="show-bonus-button-container">
-                <button type="button" id="showBonusButton" class="link-button" aria-controls="bonusContent" aria-expanded="false"><i class="fas fa-star icon"></i><span>Bonus Content & Experiments</span></button>
+                 <button type="button" id="showBonusButton" class="link-button center-text" aria-controls="bonusContent" aria-expanded="false"><i class="fas fa-star icon"></i><span>Bonus Content & Experiments</span></button>
             </div>
         </div>
 
-        <div id="bonusContent" class="page" role="region" aria-labelledby="bonus-heading">
-             <div class="back-button-wrapper">
-                 <button type="button" id="backButton" aria-controls="mainContent" aria-label="Back to Main Links"><i class="fas fa-arrow-left"></i> Back</button>
-             </div>
-            <h2 id="bonus-heading">Bonus Content & Experiments</h2>
+        <div id="bonusContent" class="page" role="region" aria-live="polite" aria-label="Bonus Content Section">
+            <div class="back-button-wrapper">
+                <button type="button" id="backButton" aria-controls="mainContent" aria-label="Back to Main Links"><i class="fas fa-arrow-left"></i>Back to Main Links</button>
+            </div>
+            <h2>Bonus Content & Experiments</h2>
              <div class="bonus-grid">
-                <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Restricted Access)">
+                 <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Restricted Access)">
                     <div class="bonus-item-thumbnail">
-                        <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview" loading="lazy" onerror="this.style.display='none'; this.parentElement.style.backgroundColor='#333';">
-                    </div>
+                        <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';"> </div>
                     <div class="bonus-item-info">
                         <h4>Audio Tools Suite</h4>
-                        <p>Restricted Access <i class="fas fa-lock fa-xs"></i></p>
+                        <p>Tools for music producers <i class="fas fa-lock fa-xs" style="opacity: 0.7;"></i></p>
                     </div>
                 </button>
                 <a href="b.html" target="_self" class="bonus-item" aria-label="Blackjack Sim">
                     <div class="bonus-item-thumbnail">
-                        <img src="images/blackjack.webp" alt="Blackjack Sim Preview" loading="lazy" onerror="this.style.display='none'; this.parentElement.style.backgroundColor='#333';">
+                        <img src="images/blackjack.webp" alt="Blackjack Sim Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
                     </div>
                     <div class="bonus-item-info">
                         <h4>Blackjack Sim</h4>
-                        <p>Card game simulation</p>
+                        <p>Simple Blackjack card game simulation</p>
                     </div>
                 </a>
                  <a href="2000.html" target="_self" class="bonus-item" aria-label="Site Theme - 2000s">
                     <div class="bonus-item-thumbnail">
-                        <img src="images/retro.webp" alt="Retro Theme Preview" loading="lazy" onerror="this.style.display='none'; this.parentElement.style.backgroundColor='#333';">
+                        <img src="images/retro.webp" alt="Retro Theme Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
                     </div>
                     <div class="bonus-item-info">
-                        <h4>Site Theme // 2000s</h4>
-                        <p>Experimental retro design</p>
+                        <h4>Site Theme - 2000s</h4>
+                        <p>Geocities-inspired experimental theme</p>
                     </div>
                 </a>
                  <a href="ai_theme.html" target="_self" class="bonus-item" aria-label="Site Theme - 2030">
                     <div class="bonus-item-thumbnail">
-                        <img src="images/ai_theme.webp" alt="AI Theme Preview" loading="lazy" onerror="this.style.display='none'; this.parentElement.style.backgroundColor='#333';">
+                        <img src="images/ai_theme.webp" alt="AI Theme Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
                     </div>
                     <div class="bonus-item-info">
-                        <h4>Site Theme // 2030</h4>
-                        <p>Advanced AI interface</p>
+                        <h4>Site Theme - 2030</h4>
+                        <p>Advanced AI/Tech themed interface</p>
                     </div>
                 </a>
             </div>
-            <p id="passwordError" class="error-text" role="alert">ACCESS DENIED. Invalid code.</p>
+            <p id="passwordError" class="error-text" role="alert">Invalid access code. Please try again.</p>
         </div>
 
     </div><footer>
-        &copy; <span id="year"></span> 62SERPENS. ALL RIGHTS RESERVED. LOCATION: HOBART, TAS.
+        © <span id="year"></span> 62serpens. All rights reserved.
     </footer>
 
     <script>
@@ -483,20 +594,25 @@
         const contactButton = document.getElementById('contactButton');
         const audioToolsLink = document.getElementById('audioToolsLink');
         const passwordError = document.getElementById('passwordError');
-        // Use body for scroll reset
-        const container = document.querySelector('body');
+        // Note: container selector might need adjustment if HTML structure changed significantly
+        // In this redesign, the .container div remains the primary scroll parent if content overflows.
+        const container = document.querySelector('body'); // Use body for scroll reset if container doesn't scroll
 
         if (mainContent && bonusContent && showBonusButton && backButton) {
             showBonusButton.addEventListener('click', () => {
                 mainContent.classList.remove('active-page');
                 bonusContent.classList.add('active-page');
                 showBonusButton.setAttribute('aria-expanded', 'true');
+                bonusContent.setAttribute('aria-hidden', 'false');
+                mainContent.setAttribute('aria-hidden', 'true');
                 window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll window to top smoothly
             });
             backButton.addEventListener('click', () => {
                 bonusContent.classList.remove('active-page');
                 mainContent.classList.add('active-page');
                 showBonusButton.setAttribute('aria-expanded', 'false');
+                bonusContent.setAttribute('aria-hidden', 'true');
+                mainContent.setAttribute('aria-hidden', 'false');
                  window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll window to top smoothly
             });
         } else {
@@ -504,42 +620,49 @@
         }
 
         if (contactButton) {
-            const originalContent = contactButton.innerHTML; // Store original HTML
-            const emailAddress = '626262xxx@gmail.com';
+             // Store original content using a data attribute for safety
+             contactButton.setAttribute('data-original-content', contactButton.innerHTML);
 
             async function copyEmail() {
+                const originalContent = contactButton.getAttribute('data-original-content');
+                const emailAddress = '626262xxx@gmail.com'; // Keep email definition local to function or define globally if needed elsewhere
+
                 contactButton.classList.add('locked');
                 contactButton.disabled = true; // Disable button during operation
 
                 try {
                     await navigator.clipboard.writeText(emailAddress);
                     console.log('Clipboard API success: Email copied');
-                    contactButton.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!';
+                    contactButton.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!'; // Simpler confirmation
                 } catch (err) {
                     console.warn('Clipboard API failed:', err);
                     // Fallback attempt
                     try {
                         const textarea = document.createElement('textarea');
                         textarea.value = emailAddress;
-                        textarea.style.position = 'fixed'; textarea.style.left = '-9999px'; textarea.style.top = '0';
+                        textarea.style.position = 'fixed'; // Keep off-screen
+                        textarea.style.left = '-9999px';
+                        textarea.style.top = '0';
                         document.body.appendChild(textarea);
                         textarea.select();
                         textarea.setSelectionRange(0, 99999); // For mobile devices
                         document.execCommand('copy');
                         document.body.removeChild(textarea);
                         console.log('execCommand success: Email copied');
-                        contactButton.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!';
+                        contactButton.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!'; // Simpler confirmation
                     } catch (execErr) {
                         console.error('execCommand failed:', execErr);
                         contactButton.innerHTML = '<i class="fas fa-times icon"></i> Copy Error!';
+                        // Provide email directly as last resort if prompt is undesirable UX
+                        // window.prompt('Clipboard unavailable. Copy this email:', emailAddress);
                     }
                 }
 
                 setTimeout(() => {
-                    contactButton.innerHTML = originalContent; // Restore original HTML
+                    contactButton.innerHTML = originalContent;
                     contactButton.classList.remove('locked');
                     contactButton.disabled = false; // Re-enable button
-                }, 2500);
+                }, 2500); // Slightly longer duration for visibility
             }
             contactButton.addEventListener('click', copyEmail);
         } else {
@@ -547,15 +670,17 @@
         }
 
         if (audioToolsLink && passwordError) {
-             const correctPassword = 'serpens62';
+             const correctPassword = 'serpens62'; // Keep password definition local or define globally
 
             audioToolsLink.addEventListener('click', () => {
                  passwordError.style.display = 'none'; // Hide previous errors
                 const userInput = prompt('Enter access code for Audio Tools:', '');
                 if (userInput === correctPassword) {
+                     // Consider adding loading state or visual feedback before redirect
                     window.location.href = 'audio_tools.html';
-                } else if (userInput !== null) { // Only show error if user entered something
+                } else if (userInput !== null) { // Only show error if user entered something (didn't cancel)
                     passwordError.style.display = 'block';
+                    // Automatically hide the error message after a delay
                     setTimeout(() => { passwordError.style.display = 'none'; }, 3000);
                 }
             });
@@ -564,7 +689,18 @@
              if (!passwordError) console.error('Password error element not found.');
         }
 
-    </script>
+         // Simple lazy loading check for fade-in (if not using a library)
+         document.addEventListener("DOMContentLoaded", () => {
+            const lazyImages = document.querySelectorAll('img.lazyload');
+            lazyImages.forEach(img => {
+                // Basic check: if src is set and different from placeholder
+                if (img.src && !img.src.startsWith('data:image')) {
+                     img.classList.add('lazyloaded'); // Add class to trigger potential CSS transition
+                }
+                 // More robust check needed if using actual lazy loading logic
+            });
+        });
 
-</body>
+    </script>
+    </body>
 </html>
