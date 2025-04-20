@@ -3,453 +3,510 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>//NODE_62S :: v3.6 ONLINE</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23040408'/%3E%3Crect x='6' y='6' width='20' height='20' stroke='%2300BFFF' stroke-width='2' stroke-dasharray='4' fill='none'/%3E%3C/svg%3E">
+    <title>62serpens - Music Producer</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23181818'/%3E%3Ccircle cx='16' cy='16' r='10' fill='%23a855f7'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* --- Configuration --- */
         :root {
-            --bg-color: #040408;
-            --text-color: #a8a8b0;
-            --header-color: #d0d0e0;
-            --accent-color: #00BFFF; /* Electric Blue */
-            --accent-hover: #ffffff;
-            --border-color: #1f1f2f;
-            --success-color: #00ff00; /* Bright green */
-            --error-color: #ff2222;
-            --font-main: 'Roboto Mono', monospace;
-            --transition-fast: 0.1s ease-in-out;
+            --bg-color: #181818;
+            --text-color: #e5e7eb;
+            --text-muted: #9ca3af;
+            --accent-purple: #a855f7;
+            --accent-dark-purple: #7e22ce;
+            --button-bg-gradient: linear-gradient(to bottom, #2d2d2d, #1a1a1a);
+            --button-border: #4b5563;
+            --shadow-light: rgba(0,0,0,0.3);
+            --font-main: 'Space Grotesk', sans-serif;
+            --grid-gap: 10px;
+            --bonus-grid-gap: 6px;
+            --thumb-size: 45px;
+            --transition-speed: 0.2s;
         }
-
-        /* --- Base & Structure --- */
-        *, *::before, *::after { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { box-sizing: border-box; }
+        *, *:before, *:after { box-sizing: inherit; }
         body {
-            margin: 0; padding: 0; width: 100%; min-height: 100vh;
-            background-color: var(--bg-color); color: var(--text-color);
-            font-family: var(--font-main); font-size: 14px; line-height: 1.6;
+            font-family: var(--font-main);
+            width: 100%;
+            margin: 0;
+            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2vh 8px;
+            font-weight: 400;
+            -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
-            overflow-y: auto;
-            cursor: default; position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
-
-        /* --- Link Style --- */
-        a { color: var(--accent-color); text-decoration: none; transition: color var(--transition-fast); }
-        a:hover { color: var(--accent-hover); }
-        a:visited { opacity: 0.8; }
-
-        /* --- Header --- */
-        .main-header {
-            padding: 8px 15px; border-bottom: 1px solid var(--border-color);
-            position: sticky; top: 0; background: var(--bg-color);
-            z-index: 500; display: flex; justify-content: space-between; align-items: center;
-            min-height: 38px; gap: 15px;
+        a, button { -webkit-tap-highlight-color: transparent; cursor: pointer; outline: none; }
+        .container {
+            max-width: 680px;
+            width: 100%;
+            padding: 20px 8px;
+            text-align: center;
+            position: relative;
+            margin: auto;
         }
-        .main-title {
-            font-family: var(--font-main); font-weight: 700; font-size: 1.1em;
-            color: var(--header-color); margin: 0; letter-spacing: 1px; cursor: default;
-            white-space: nowrap; flex-shrink: 0;
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(to bottom, rgba(168,85,247,0.1), transparent);
         }
-        .status-info {
-            display: flex; gap: 12px;
-            font-family: var(--font-main); font-size: 0.8em; color: var(--text-color);
-            opacity: 0.7; align-items: center; white-space: nowrap;
-            overflow: hidden;
+        .page {
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
         }
-        .status-info span {
-            border-left: 1px solid var(--border-color);
-            padding-left: 12px;
+        .page.active-page { display: flex; opacity: 1; }
+        .profile { margin-bottom: 24px; width: 100%; position: relative; }
+        .profile-pic {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            background-color: rgba(255,255,255,0.1);
+            border: 2px solid var(--button-border);
+            box-shadow: 0 2px 6px var(--shadow-light);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        .equalizer {
+            width: 70px;
+            margin: 10px auto;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
+        .profile h1 {
+            font-size: 2em;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 5px;
+            letter-spacing: 0.3px;
+            position: relative;
             display: inline-block;
-            min-width: 95px;
+        }
+        .profile h1:after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 60%;
+            height: 3px;
+            background: var(--accent-purple);
+            transform: translateX(-50%);
+        }
+        .profile .subtitle {
+            font-size: 1.1em;
+            color: var(--text-muted);
+            margin: 0;
+            font-weight: 400;
+        }
+        .links { width: 100%; margin-bottom: 20px; }
+        .links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--grid-gap);
+        }
+        .links li:last-child:nth-child(odd) { grid-column: span 2; }
+        .link-button {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
             text-align: left;
+            width: 100%;
+            padding: 12px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.95em;
+            font-weight: 500;
+            background: var(--button-bg-gradient);
+            border: 1px solid var(--button-border);
+            box-shadow: 0 3px 6px var(--shadow-light);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            min-height: 48px;
         }
-        .status-info span:first-child {
-            border-left: none;
-            padding-left: 0;
-            min-width: 100px;
+        .link-button:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 6px rgba(168,85,247,0.3);
+            border-color: var(--accent-purple);
         }
-
-        /* --- Main Content Container --- */
-        .main-content {
-            max-width: 700px;
-            margin: 0 auto; padding: 25px 10px;
-            z-index: 5; position: relative;
+        .link-button:focus {
+            outline: 2px solid var(--accent-purple);
+            outline-offset: 2px;
         }
-
-        /* --- Section Styling (General) --- */
-        .content-section {
-            margin-bottom: 30px;
-            padding: 18px;
-            border: 1px solid var(--border-color);
-            background: none;
+        .link-button i.icon {
+            margin-right: 10px;
+            font-size: 1em;
+            width: 1em;
+            text-align: center;
         }
-        .content-section h2 {
-            font-family: var(--font-main); font-weight: 700; text-transform: uppercase;
-            font-size: 1em; color: var(--header-color); margin: 0 0 15px 0;
-            padding-bottom: 8px; text-align: left; border-bottom: 1px solid var(--border-color);
-            letter-spacing: 1px;
+        .link-button span {
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
-
-        /* --- Link Grid Section --- */
-        #links {
-            border: none; padding: 0; margin-bottom: 30px;
+        #mainContent .fa-store { color: #F59E0B; }
+        #mainContent .fa-instagram { color: #DD2A7B; }
+        #mainContent .fa-spotify { color: #22C55E; }
+        #mainContent .fa-soundcloud { color: #F97316; }
+        #mainContent .fa-youtube { color: #EF4444; }
+        #mainContent .fa-discord { color: #6366F1; }
+        #mainContent .fa-envelope, #mainContent .fa-check, #mainContent .fa-times { color: var(--text-muted); }
+        #contactButton { justify-content: center; text-align: center; }
+        #contactButton.locked { pointer-events: none; opacity: 0.7; }
+        .show-bonus-button-container { width: 100%; max-width: 280px; margin: 0 auto; }
+        #showBonusButton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            background: var(--button-bg-gradient);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.95em;
+            font-weight: 700;
+            border: 1px solid var(--button-border);
+            box-shadow: 0 3px 6px var(--shadow-light);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            min-height: 48px;
         }
-        #links h2 { border: none; padding: 0; margin-bottom: 15px; }
-        .link-grid {
-            display: grid; grid-template-columns: 1fr;
-            gap: 1px; border: 1px solid var(--border-color);
+        #showBonusButton:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 6px rgba(168,85,247,0.3);
+            border-color: var(--accent-purple);
         }
-        .link-item {
-            display: block; padding: 10px 12px; border: none; border-bottom: 1px solid var(--border-color);
-            text-align: left; font-size: 0.95em; font-weight: 400;
-            color: var(--text-color); background-color: var(--bg-color);
-            transition: all var(--transition-fast); text-decoration: none;
-            font-family: var(--font-main); position: relative;
-            text-transform: uppercase; letter-spacing: 0.5px;
+        #showBonusButton:focus {
+            outline: 2px solid var(--accent-purple);
+            outline-offset: 2px;
         }
-        .link-item:last-child { border-bottom: none; }
-        .link-item:hover {
-            background-color: var(--border-color); color: var(--accent-hover);
-            padding-left: 20px;
+        #showBonusButton i { margin-right: 6px; font-size: 1em; color: var(--accent-purple); }
+        #bonusContent { justify-content: flex-start; }
+        #bonusContent h2 {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 10px;
+            letter-spacing: 0.3px;
         }
-        .link-item::before {
-            content: '>'; position: absolute; left: -20px; top: 50%;
-            transform: translateY(-50%); opacity: 0;
-            transition: all var(--transition-fast); color: var(--accent-hover);
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--bonus-grid-gap);
+            width: 100%;
+            margin-bottom: 10px;
         }
-        .link-item:hover::before { left: 8px; opacity: 1; }
-
-        /* --- Unit ID / About Section --- */
-        #unitIdSection .about-content {
-            font-size: 0.9em; color: var(--text-color); line-height: 1.6;
-            padding: 0; background: none; border: none; text-align: left;
-            white-space: pre-wrap; word-wrap: break-word;
+        .bonus-item {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            background: var(--button-bg-gradient);
+            padding: 6px;
+            border-radius: 3px;
+            border: 1px solid transparent;
+            text-align: left;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 2px 4px var(--shadow-light);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            font-family: var(--font-main);
+            font-size: inherit;
+            font-weight: inherit;
         }
-        #unitIdSection .about-content span { color: var(--success-color); font-weight: 700; }
-
-        /* --- Launch Area / Archive Section --- */
-        #launchAreaSection ul { list-style: '// '; padding-left: 15px; margin: 0; }
-        #launchAreaSection li { margin-bottom: 5px; }
-        #launchAreaSection a { font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color); }
-        #launchAreaSection a:hover { color: var(--accent-hover); }
-        /* Style for password-protected item */
-        #launchAreaSection .protected-item {
-            font-family: var(--font-main); font-size: 0.9em; color: var(--accent-color);
-            cursor: pointer; transition: color var(--transition-fast); display: inline-block;
+        .bonus-item:hover {
+            transform: scale(1.01);
+            box-shadow: 0 0 6px rgba(168,85,247,0.3);
+            border-color: var(--accent-purple);
         }
-        #launchAreaSection .protected-item:hover { color: var(--accent-hover); }
-        /* Error message style */
-        .password-error {
-            color: var(--error-color); font-size: 0.85em; margin-top: 10px;
-            display: none; font-family: var(--font-main);
+        .bonus-item:focus {
+            outline: 2px solid var(--accent-purple);
+            outline-offset: 2px;
         }
-
-        /* --- Footer --- */
+        .bonus-item-thumbnail {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4/3;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 4px;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeIn 0.3s ease forwards;
+        }
+        .bonus-item-thumbnail img, .bonus-item-thumbnail svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .bonus-item-info h4 {
+            margin: 0 0 2px;
+            font-size: 0.75em;
+            font-weight: 500;
+            color: var(--text-color);
+            line-height: 1.3;
+            letter-spacing: 0.2px;
+        }
+        .bonus-item-info p {
+            margin: 0;
+            font-size: 0.65em;
+            font-weight: 400;
+            color: var(--text-muted);
+            line-height: 1.4;
+            letter-spacing: 0.2px;
+        }
+        #backButton {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 8px;
+            color: var(--text-muted);
+            background-color: transparent;
+            border-radius: 3px;
+            font-size: 0.6em;
+            font-weight: 500;
+            border: 1px solid var(--button-border);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            margin-bottom: 10px;
+        }
+        #backButton:hover {
+            background: var(--button-bg-gradient);
+            color: var(--text-color);
+            transform: scale(1.03);
+            box-shadow: 0 0 6px rgba(168,85,247,0.3);
+            border-color: var(--accent-purple);
+        }
+        #backButton:focus {
+            outline: 2px solid var(--accent-purple);
+            outline-offset: 2px;
+        }
+        #backButton i { margin-right: 4px; }
+        #passwordError {
+            display: none;
+            color: #ef4444;
+            font-size: 0.6em;
+            margin: 5px 0;
+        }
         footer {
-            padding: 15px; margin-top: 25px;
-            text-align: center; font-size: 0.8em;
-            color: var(--border-color); border-top: 1px solid var(--border-color);
-            font-family: var(--font-main); letter-spacing: 1px; opacity: 0.5;
+            padding: 6px;
+            font-size: 0.6em;
+            color: var(--text-muted);
+            text-align: center;
+            width: 100%;
+            margin-top: 10px;
         }
-
-        /* --- Contact Modal --- */
-        .contact-modal {
-            display: none; position: fixed; inset: 0; background: rgba(4, 4, 8, 0.9);
-            z-index: 1100; align-items: center; justify-content: center;
-            backdrop-filter: blur(3px); animation: simpleFadeIn-kf 0.2s;
-        }
-        .contact-modal.visible { display: flex; }
-        .contact-modal-content {
-            background: var(--bg-color); padding: 30px 40px; border: 1px solid var(--accent-color);
-            text-align: center; position: relative;
-            box-shadow: 0 0 25px rgba(0, 191, 255, 0.2);
-            max-width: 90%;
-        }
-        .contact-modal h3 {
-            margin: 0 0 15px 0; font-family: var(--font-main); color: var(--header-color);
-            font-weight: 700; font-size: 1.1em; text-transform: uppercase;
-        }
-        .contact-email {
-            display: block; padding: 10px; border: 1px dashed var(--border-color);
-            margin-bottom: 15px; color: var(--text-color); font-size: 1em; cursor: pointer;
-            transition: background-color var(--transition-fast); word-break: break-all;
-        }
-        .contact-email:hover { background-color: var(--border-color); color: var(--accent-hover); }
-        .copy-feedback { font-size: 0.8em; opacity: 0.7; height: 1.2em; }
-        .contact-close {
-            position: absolute; top: 5px; right: 5px; background: none; border: none;
-            color: var(--text-color); font-size: 1.5em; cursor: pointer; padding: 5px;
-            line-height: 1; opacity: 0.6; transition: all var(--transition-fast);
-        }
-        .contact-close:hover { color: var(--error-color); opacity: 1; transform: scale(1.1); }
-
-        /* Simple fade-in animation */
-        @keyframes simpleFadeIn-kf { from { opacity: 0; } to { opacity: 1; } }
-
-        /* --- Mobile Adjustments --- */
         @media (max-width: 600px) {
-            body {
-                font-size: 13px;
-                padding: 10px 5px;
-                overflow-y: auto;
-            }
-            .main-header {
-                padding: 6px 10px;
-                flex-wrap: wrap;
-                justify-content: flex-start;
-                padding-bottom: 8px;
-                min-height: 50px; /* Fixed height to prevent jumping */
-            }
-            .main-title {
-                font-size: 1em;
-                width: 100%;
-                text-align: left;
-                margin-bottom: 5px;
-            }
-            .status-info {
-                font-size: 0.7em;
-                gap: 6px;
-                width: 100%;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-                overflow: hidden;
-            }
-            .status-info span {
-                padding-left: 6px;
-                min-width: 75px;
-                border-left: 1px solid var(--border-color);
-            }
-            .status-info span:first-child {
-                padding-left: 0;
-                border-left: none;
-                min-width: 85px;
-            }
-            /* Truncate only UPLINK span */
-            #uplinkStatus {
-                min-width: 60px;
-                max-width: 70px;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-            }
-
-            .main-content {
-                padding: 20px 8px;
-                padding-top: 50px; /* Match header height */
-            }
-            .content-section { padding: 15px; margin-bottom: 25px; }
-            .content-section h2 { font-size: 0.9em; }
-
-            .link-item { font-size: 0.9em; padding: 10px; }
-            .link-item:hover { padding-left: 15px; }
-            .link-item:hover::before { left: 5px; }
-
-            #unitIdSection .about-content { font-size: 0.85em; }
-            #launchAreaSection ul { padding-left: 10px; }
-            #launchAreaSection a, #launchAreaSection .protected-item { font-size: 0.85em; }
-            .password-error { font-size: 0.8em; }
-
-            footer { margin-top: 20px; font-size: 0.75em; }
-
-            .contact-modal-content { padding: 20px; width: 85vw; }
-            .contact-modal h3 { font-size: 1em; }
-            .contact-email { font-size: 0.9em; }
+            body { padding: 6px; }
+            .container { padding: 16px 6px; }
+            .profile-pic { width: 80px; height: 80px; }
+            .profile h1 { font-size: 1.8em; }
+            .profile .subtitle { font-size: 1em; }
+            .links ul { grid-template-columns: 1fr; gap: 8px; }
+            .links li:last-child:nth-child(odd) { grid-column: span 1; }
+            .link-button { padding: 10px; font-size: 0.9em; min-height: 44px; }
+            .show-bonus-button-container { max-width: 100%; }
+            #showBonusButton { padding: 10px; font-size: 0.9em; min-height: 44px; }
+            .bonus-grid { grid-template-columns: 1fr; gap: 5px; }
+            #bonusContent h2 { font-size: 1.2em; }
+            footer { margin-top: 8px; font-size: 0.55em; }
+        }
+        @media (max-height: 700px) {
+            .profile { margin-bottom: 10px; }
+            .profile-pic { width: 70px; height: 70px; margin-bottom: 6px; }
+            .links { margin-bottom: 10px; }
+            .links ul { gap: 6px; }
+            .link-button { padding: 8px; font-size: 0.85em; min-height: 40px; }
+            .show-bonus-button-container { max-width: 260px; }
+            #showBonusButton { padding: 8px; font-size: 0.85em; min-height: 40px; }
+            .bonus-grid { gap: 4px; }
+            .bonus-item { padding: 4px; }
+            .bonus-item-info h4 { font-size: 0.7em; }
+            .bonus-item-info p { font-size: 0.6em; }
+            footer { display: none; }
+        }
+        @media (prefers-reduced-motion) {
+            .link-button:hover, #showBonusButton:hover, .bonus-item:hover, #backButton:hover, .profile-pic, .equalizer { transform: none; animation: none; }
+            .bonus-item-thumbnail { animation: none; opacity: 1; }
         }
     </style>
 </head>
 <body>
-
-    <header class="main-header">
-        <h1 class="main-title">//NODE::62S</h1>
-        <div class="status-info">
-            <span id="dateTime" title="Local Timezone: Australia/Hobart">LST_--:--:--</span>
-            <span id="systemStatus">STATUS::INIT</span>
-            <span id="coreTemp">CORE_TEMP::--.-C</span>
-            <span id="uplinkStatus">UPLINK::STANDBY</span>
-        </div>
-    </header>
-
-    <main class="main-content">
-        <section id="links" class="content-section">
-            <h2 class="section-heading">// PRIMARY_DIRECTIVES //</h2>
-            <nav class="link-grid">
-                <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" class="link-item"><span class="link-text">QUERY::BEAT_STORE</span></a>
-                <a href="https://www.instagram.com/62serpens" target="_blank" class="link-item"><span class="link-text">MONITOR::INSTAGRAM</span></a>
-                <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" class="link-item"><span class="link-text">STREAM::SPOTIFY</span></a>
-                <a href="https://www.soundcloud.com/62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::SOUNDCLOUD</span></a>
-                <a href="https://www.youtube.com/@62serpens" target="_blank" class="link-item"><span class="link-text">STREAM::YOUTUBE</span></a>
-                <a href="https://discord.gg/cCedfQgHVG" target="_blank" class="link-item"><span class="link-text">INTERFACE::DISCORD</span></a>
-                <a href="#" id="contactLink" class="link-item"><span class="link-text">TRANSMIT::CONTACT</span></a>
+    <div class="bg-gradient"></div>
+    <div class="container">
+        <div id="mainContent" class="page active-page" role="region" aria-live="polite">
+            <div class="profile">
+                <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic">
+                <h1>62serpens</h1>
+                <p class="subtitle">Music Producer</p>
+                <svg class="equalizer" viewBox="0 0 70 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="15" y="8" width="8" height="12" fill="var(--accent-purple)" opacity="0.3"/>
+                    <rect x="31" y="4" width="8" height="16" fill="var(--accent-purple)" opacity="0.3"/>
+                    <rect x="47" y="6" width="8" height="14" fill="var(--accent-purple)" opacity="0.3"/>
+                </svg>
+            </div>
+            <nav class="links">
+                <ul>
+                    <li><a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Beat Store"><i class="fas fa-store icon"></i><span>Beat Store</span></a></li>
+                    <li><a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Instagram"><i class="fab fa-instagram icon"></i><span>Instagram</span></a></li>
+                    <li><a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Spotify"><i class="fab fa-spotify icon"></i><span>Spotify</span></a></li>
+                    <li><a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit SoundCloud"><i class="fab fa-soundcloud icon"></i><span>SoundCloud</span></a></li>
+                    <li><a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit YouTube"><i class="fab fa-youtube icon"></i><span>YouTube</span></a></li>
+                    <li><a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Discord Server"><i class="fab fa-discord icon"></i><span>Discord Server</span></a></li>
+                    <li><button type="button" id="contactButton" class="link-button" aria-label="Copy Contact Email"><i class="fas fa-envelope icon"></i><span>Contact (Copy Email)</span></button></li>
+                </ul>
             </nav>
-        </section>
-
-        <section id="launchAreaSection" class="content-section">
-            <h2>// SUBMODULE_DEPLOYMENT //</h2>
-            <ul id="submoduleList">
-                <li><a href="2000.html" target="_self"> > NODE_V2 :: Retro Simulation [Status: Active]</a></li>
-                <li><a href="b.html" target="_self"> > MODULE::BLACKJACK_SIM [Status: Active]</a></li>
-                <li>
-                    <span class="protected-item" id="audioToolsLink"> > MODULE::AUDIO_PROCESSING_SUITE [Status: Restricted]</span>
-                </li>
-            </ul>
-            <p class="password-error" id="passwordError"></p>
-        </section>
-
-        <section id="unitIdSection" class="content-section">
-            <h2>// SYSTEM_DESIGNATION //</h2>
-            <pre class="about-content">
-UNIT_ID:     62serpens
-DESIGNATION: Audio Pattern Synthesis/Analysis Node
-ORIGIN:      SECTOR::∞ // GRID_REF::[REDACTED]
-STATUS:      <span id="unitIdStatus">OPTIMAL</span>
-V_ASSIST:   v4.0_ACTIVE
-</pre>
-        </section>
-    </main>
-
-    <footer>// SYSTEM_ID::62S // RUNTIME::2025 //</footer>
-
-    <div class="contact-modal" id="contactModal">
-        <div class="contact-modal-content">
-            <button class="contact-close" id="contactClose" title="Close">X</button>
-            <h3>// SECURE_TRANSMISSION_CHANNEL //</h3>
-            <p>Address:</p>
-            <code id="contactEmailDisplay" class="contact-email" title="Click to Copy"></code>
-            <p class="copy-feedback" id="copyFeedback"></p>
+            <div class="show-bonus-button-container">
+                <button type="button" id="showBonusButton" aria-label="Show Bonus Content"><i class="fas fa-star icon"></i><span>Bonus Content & Experiments</span></button>
+            </div>
+        </div>
+        <div id="bonusContent" class="page" role="region" aria-live="polite">
+            <h2>Bonus Content & Experiments</h2>
+            <button type="button" id="backButton" aria-label="Back to Main Links"><i class="fas fa-arrow-left"></i>Back to Main Links</button>
+            <div class="bonus-grid">
+                <button type="button" id="audioToolsLink" class="bonus-item">
+                    <div class="bonus-item-thumbnail">
+                        <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview" loading="lazy">
+                    </div>
+                    <div class="bonus-item-info">
+                        <h4>Audio Tools Suite</h4>
+                        <p>Tools for music producers [Restricted]</p>
+                    </div>
+                </button>
+                <a href="b.html" target="_self" class="bonus-item">
+                    <div class="bonus-item-thumbnail">
+                        <img src="images/blackjack.webp" alt="Blackjack Sim Preview" loading="lazy">
+                    </div>
+                    <div class="bonus-item-info">
+                        <h4>Blackjack Sim</h4>
+                        <p>Simple Blackjack card game simulation</p>
+                    </div>
+                </a>
+                <a href="2000.html" target="_self" class="bonus-item">
+                    <div class="bonus-item-thumbnail">
+                        <img src="images/retro.webp" alt="Retro Theme Preview" loading="lazy">
+                    </div>
+                    <div class="bonus-item-info">
+                        <h4>Site Theme - 2000s</h4>
+                        <p>Geocities-inspired experimental theme</p>
+                    </div>
+                </a>
+                <a href="ai_theme.html" target="_self" class="bonus-item">
+                    <div class="bonus-item-thumbnail">
+                        <img src="images/ai_theme.webp" alt="AI Theme Preview" loading="lazy">
+                    </div>
+                    <div class="bonus-item-info">
+                        <h4>Site Theme - 2030</h4>
+                        <p>Advanced AI/Tech themed interface</p>
+                    </div>
+                </a>
+            </div>
+            <p id="passwordError" class="error-text">Invalid access code. Please try again.</p>
         </div>
     </div>
-
+    <footer>
+        © <span id="year"></span> 62serpens. All rights reserved.
+    </footer>
     <script>
-        try {
-            document.addEventListener('DOMContentLoaded', () => {
-                // --- Selectors ---
-                const dateTimeEl = document.getElementById('dateTime');
-                const systemStatusEl = document.getElementById('systemStatus');
-                const coreTempEl = document.getElementById('coreTemp');
-                const uplinkStatusEl = document.getElementById('uplinkStatus');
-                const unitIdStatusEl = document.getElementById('unitIdStatus');
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const mainContent = document.getElementById('mainContent');
+        const bonusContent = document.getElementById('bonusContent');
+        const showBonusButton = document.getElementById('showBonusButton');
+        const backButton = document.getElementById('backButton');
+        const contactButton = document.getElementById('contactButton');
+        const audioToolsLink = document.getElementById('audioToolsLink');
+        const passwordError = document.getElementById('passwordError');
+        const container = document.querySelector('.container');
+        const emailAddress = '626262xxx@gmail.com';
+        const correctPassword = 'serpens62';
 
-                const contactLink = document.getElementById('contactLink');
-                const contactModal = document.getElementById('contactModal');
-                const contactEmailDisplay = document.getElementById('contactEmailDisplay');
-                const copyFeedback = document.getElementById('copyFeedback');
-                const contactClose = document.getElementById('contactClose');
-
-                const audioToolsLink = document.getElementById('audioToolsLink');
-                const passwordError = document.getElementById('passwordError');
-
-                // --- Config & State ---
-                const userEmail = "626262xxx@gmail.com";
-                const statusOptions = ["OPTIMAL", "NOMINAL", "STABLE", "PROCESSING", "CALIBRATING", "SYNCED", "ANALYSING", "IDLE"];
-                const uplinkOptions = ["ACTIVE", "ACTIVE", "ACTIVE", "SYNCING", "STANDBY", "ENCRYPTED", "ROUTING", "SECURE_TUNNEL"];
-                let currentCoreTemp = 28.0;
-                const audioToolsPassword = "serpens62"; // Change this to your desired password
-
-                // --- Core Functions ---
-
-                // Update Date/Time in Header
-                const updateDateTime = () => {
-                    if (!dateTimeEl) return;
-                    const now = new Date();
-                    try {
-                        const location = "Australia/Hobart";
-                        const timeOpts = { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: location };
-                        const timeStr = now.toLocaleTimeString("en-AU", timeOpts);
-                        dateTimeEl.textContent = `LST_${timeStr}`;
-                    } catch (e) {
-                        console.warn(`Timezone formatting for ${location} failed. Using local fallback. Error: ${e.message}`);
-                        const timeStr = now.toLocaleTimeString("en-US", { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                        dateTimeEl.textContent = `LCL_${timeStr}`;
-                    }
-                };
-
-                // Update Other Status Indicators
-                const updateStatusIndicators = () => {
-                    if (systemStatusEl) {
-                        const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
-                        systemStatusEl.textContent = `STATUS::${randomStatus}`;
-                        if (unitIdStatusEl) unitIdStatusEl.textContent = randomStatus;
-                    }
-
-                    if (coreTempEl) {
-                        const baseTemp = 28.0;
-                        const fluctuation = (Math.random() - 0.5);
-                        currentCoreTemp = baseTemp + fluctuation;
-                        currentCoreTemp = Math.max(25.0, Math.min(31.0, currentCoreTemp));
-                        coreTempEl.textContent = `CORE_TEMP::${currentCoreTemp.toFixed(1)}C`;
-                    }
-
-                    if (uplinkStatusEl) {
-                        const randomUplink = uplinkOptions[Math.floor(Math.random() * uplinkOptions.length)];
-                        uplinkStatusEl.textContent = `UPLINK::${randomUplink}`;
-                    }
-                };
-
-                // --- Password Protection for Audio Tools ---
-                function handleAudioToolsAccess() {
-                    const userInput = prompt("ENTER ACCESS CODE :: MODULE::AUDIO_PROCESSING_SUITE", "");
-                    if (userInput === audioToolsPassword) {
-                        window.location.href = "audio_tools.html";
-                    } else {
-                        if (passwordError) {
-                            passwordError.textContent = "ACCESS DENIED :: INVALID CODE";
-                            passwordError.style.display = "block";
-                            setTimeout(() => {
-                                if (passwordError) passwordError.style.display = "none";
-                            }, 3000);
-                        }
-                    }
-                }
-
-                // --- Contact Modal Logic ---
-                function openContactModal() {
-                    if (contactModal && contactEmailDisplay) {
-                        contactEmailDisplay.textContent = userEmail;
-                        contactModal.classList.add('visible');
-                        if (copyFeedback) copyFeedback.textContent = "(Click Address to Copy)";
-                    }
-                }
-
-                function closeContactModal() {
-                    if (contactModal) contactModal.classList.remove('visible');
-                }
-
-                function copyEmailToClipboard() {
-                    if (!navigator.clipboard) {
-                        if (copyFeedback) copyFeedback.textContent = "COPY::ERR [Unsupported Browser]";
-                        return;
-                    }
-                    navigator.clipboard.writeText(userEmail).then(() => {
-                        if (copyFeedback) copyFeedback.textContent = "ADDRESS COPIED!";
-                        setTimeout(() => { if (copyFeedback) copyFeedback.textContent = "(Click Address to Copy)"; }, 1500);
-                    }).catch(err => {
-                        console.error('Clipboard copy failed: ', err);
-                        if (copyFeedback) copyFeedback.textContent = "COPY::FAIL";
-                    });
-                }
-
-                // --- Event Listeners ---
-                if (contactLink) contactLink.addEventListener('click', (e) => { e.preventDefault(); openContactModal(); });
-                if (contactClose) contactClose.addEventListener('click', closeContactModal);
-                if (contactEmailDisplay) contactEmailDisplay.addEventListener('click', copyEmailToClipboard);
-                if (contactModal) contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeContactModal(); });
-                if (audioToolsLink) audioToolsLink.addEventListener('click', handleAudioToolsAccess);
-
-                // --- Initialization ---
-                updateDateTime();
-                updateStatusIndicators();
-                setInterval(updateDateTime, 1000);
-                setInterval(updateStatusIndicators, 3000);
-
-                console.log("NODE_62S v3.6 :: Interface Active");
-                document.body.classList.add('loaded');
+        if (mainContent && bonusContent && showBonusButton && backButton && container) {
+            showBonusButton.addEventListener('click', () => {
+                mainContent.classList.remove('active-page');
+                bonusContent.classList.add('active-page');
+                container.scrollTop = 0;
             });
-        } catch (error) {
-            console.error("!!! KERNEL FAULT !!!:", error);
-            document.body.innerHTML = `<div style="color:#ff3333; background:#040408; padding: 20px; font-family: monospace; font-size: 14px;">SYSTEM_ERROR [CODE::${Math.random().toString(16).substring(2, 10).toUpperCase()}]<br><br>${error.message}<br>----------------<br>${error.stack || 'NO_STACK_TRACE'}</div>`;
+            backButton.addEventListener('click', () => {
+                bonusContent.classList.remove('active-page');
+                mainContent.classList.add('active-page');
+                container.scrollTop = 0;
+            });
+        } else {
+            console.error('Page switching elements not found.');
+        }
+
+        if (contactButton) {
+            const originalContent = contactButton.innerHTML;
+            async function copyEmail() {
+                contactButton.classList.add('locked');
+                try {
+                    await navigator.clipboard.writeText(emailAddress);
+                    console.log('Clipboard API success: Email copied');
+                    contactButton.innerHTML = '<i class="fas fa-check icon"></i> Copied!';
+                } catch (err) {
+                    console.warn('Clipboard API failed:', err);
+                    try {
+                        const textarea = document.createElement('textarea');
+                        textarea.value = emailAddress;
+                        textarea.style.position = 'fixed';
+                        textarea.style.opacity = '0';
+                        document.body.appendChild(textarea);
+                        textarea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textarea);
+                        console.log('execCommand success: Email copied');
+                        contactButton.innerHTML = '<i class="fas fa-check icon"></i> Copied!';
+                    } catch (execErr) {
+                        console.error('execCommand failed:', execErr);
+                        contactButton.innerHTML = '<i class="fas fa-times icon"></i> Error!';
+                        window.prompt('Clipboard unavailable. Copy this email:', emailAddress);
+                    }
+                }
+                setTimeout(() => {
+                    contactButton.innerHTML = originalContent;
+                    contactButton.classList.remove('locked');
+                }, 2000);
+            }
+            contactButton.addEventListener('click', copyEmail);
+        } else {
+            console.error('Contact button not found.');
+        }
+
+        if (audioToolsLink && passwordError) {
+            audioToolsLink.addEventListener('click', () => {
+                const userInput = prompt('Enter access code for Audio Tools:', '');
+                if (userInput === correctPassword) {
+                    window.location.href = 'audio_tools.html';
+                } else {
+                    passwordError.style.display = 'block';
+                    setTimeout(() => { passwordError.style.display = 'none'; }, 3000);
+                }
+            });
         }
     </script>
 </body>
