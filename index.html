@@ -247,7 +247,7 @@
         .link-button:active {
              transform: translateY(-1px);
              box-shadow: 0 2px 4px var(--shadow-color-dark),
-                        inset 0 1px 1px var(--shadow-color-light);
+                         inset 0 1px 1px var(--shadow-color-light);
         }
 
         .link-button i.icon {
@@ -260,7 +260,7 @@
         }
          .link-button:hover i.icon {
              opacity: 1;
-         }
+        }
 
         .link-button span {
             flex-grow: 1;
@@ -303,15 +303,15 @@
              border: 1px solid var(--accent-primary);
              color: var(--accent-secondary);
              box-shadow: 0 1px 2px var(--shadow-color-dark),
-                        inset 0 0 10px rgba(147, 51, 234, 0.2);
+                         inset 0 0 10px rgba(147, 51, 234, 0.2);
         }
         #showBonusButton:hover {
              background-color: rgba(147, 51, 234, 0.1);
              border-color: var(--accent-secondary);
              color: var(--text-primary);
              box-shadow: 0 6px 12px var(--shadow-color-dark),
-                        inset 0 0 15px rgba(147, 51, 234, 0.3),
-                        0 0 20px var(--shadow-color-accent);
+                         inset 0 0 15px rgba(147, 51, 234, 0.3),
+                         0 0 20px var(--shadow-color-accent);
         }
         #showBonusButton i { color: var(--accent-primary); transition: color var(--transition-duration) ease; }
          #showBonusButton:hover i { color: var(--accent-secondary); }
@@ -347,6 +347,10 @@
                         inset 0 1px 0 var(--shadow-color-light);
             overflow: hidden;
             text-align: left;
+            text-decoration: none; /* Added to ensure links look like other items */
+            color: inherit; /* Added to ensure links look like other items */
+            cursor: pointer; /* Added for consistency */
+            transition: all var(--transition-duration) cubic-bezier(0.25, 0.8, 0.25, 1); /* Added for consistency */
         }
         .bonus-item:hover {
             transform: translateY(-4px) scale(1.02);
@@ -358,7 +362,7 @@
          .bonus-item:active {
              transform: translateY(-1px) scale(1.01);
              box-shadow: 0 3px 6px var(--shadow-color-dark),
-                        inset 0 1px 0 var(--shadow-color-light);
+                         inset 0 1px 0 var(--shadow-color-light);
          }
 
         .bonus-item-thumbnail {
@@ -574,7 +578,15 @@
                         <p>Advanced AI/Tech themed interface</p>
                     </div>
                 </a>
-            </div>
+                <a href="#" class="bonus-item" aria-label="PhD Section (Coming Soon)">
+                    <div class="bonus-item-thumbnail" style="background-color: white;">
+                        </div>
+                    <div class="bonus-item-info">
+                        <h4>PhD</h4>
+                        <p>Description coming soon<br><span>relevant links to points etc</span></p>
+                    </div>
+                </a>
+                </div>
             <p id="passwordError" class="error-text" role="alert">Invalid access code. Please try again.</p>
         </div>
     </div>
