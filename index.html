@@ -3,705 +3,382 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>62serpens.com</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101012'/%3E%3Cpath d='M16 6 C10.477 6 6 10.477 6 16 S 10.477 26 16 26 S 26 21.523 26 16 S 21.523 6 16 6 Z M16 24 C 11.582 24 8 20.418 8 16 S 11.582 8 16 8 S 24 11.582 24 16 S 20.418 24 16 24 Z' fill='%239333ea'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23c084fc'/%3E%3C/svg%3E">
+    <title>62serpens.com - Professional Redesign v2</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ffffff;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23f0f0f0;stop-opacity:1' /%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0a'/%3E%3Ccircle cx='50' cy='50' r='30' fill='url(%23g)' stroke='%231f1f1f' stroke-width='4'/%3E%3Ccircle cx='50' cy='50' r='15' fill='%23f3f4f6'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
-            --bg-primary: #101012;
-            --bg-secondary: #18181B;
-            --bg-tertiary: #27272A;
-            --text-primary: #f4f4f5;
-            --text-secondary: #a1a1aa;
-            --text-tertiary: #71717a;
-            --accent-primary: #9333ea;
-            --accent-secondary: #c084fc;
-            --accent-tertiary: #3b0764;
-            --border-color: #3f3f46;
+            /* Professional Theme with White Highlights */
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #171717;
+            --bg-tertiary: #242424;
+            --bg-overlay: rgba(10, 10, 10, 0.8);
+            --text-primary: #ededed;
+            --text-secondary: #ababab;
+            --text-tertiary: #7d7d7d;
+            --accent-primary: #ffffff;
+            --accent-secondary: #f0f0f0;
+            --accent-glow: rgba(255, 255, 255, 0.15);
+            --border-color: #333333;
             --shadow-color-light: rgba(255, 255, 255, 0.03);
-            --shadow-color-dark: rgba(0, 0, 0, 0.2);
-            --shadow-color-accent: rgba(192, 132, 252, 0.15);
+            --shadow-color-dark: rgba(0, 0, 0, 0.5);
+            --shadow-color-accent: rgba(255, 255, 255, 0.2);
+
+            /* Typography & Spacing */
             --font-body: 'Inter', sans-serif;
             --font-heading: 'Space Grotesk', sans-serif;
+            --base-font-size: 16px;
+            --line-height-base: 1.6;
+            --spacing-unit: 8px;
+
+            /* Effects & Transitions */
             --transition-duration: 0.3s;
-            --border-radius-sm: 8px;
-            --border-radius-md: 12px;
-            --border-radius-lg: 20px;
+            --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+            --border-radius-sm: 5px;
+            --border-radius-md: 10px;
+            --border-radius-lg: 14px;
         }
 
-        html { box-sizing: border-box; }
+        html { box-sizing: border-box; font-size: var(--base-font-size); scroll-behavior: smooth; }
         *, *:before, *:after { box-sizing: inherit; }
 
         body {
-            font-family: var(--font-body);
-            font-weight: 400;
-            font-size: 16px;
-            width: 100%;
-            margin: 0;
-            min-height: 100vh;
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px env(safe-area-inset-right) 20px env(safe-area-inset-left);
-            -webkit-tap-highlight-color: transparent;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
+            font-family: var(--font-body); font-weight: 400; line-height: var(--line-height-base);
+            width: 100%; margin: 0; min-height: 100vh; color: var(--text-primary);
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+            padding: 0; -webkit-tap-highlight-color: transparent; overflow-x: hidden;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
             position: relative;
-            background-image: radial-gradient(circle at 10% 10%, var(--accent-tertiary) 0%, transparent 50%),
-                              radial-gradient(circle at 90% 80%, var(--accent-tertiary) 0%, transparent 50%);
-            background-attachment: fixed;
+            background-color: var(--bg-primary);
         }
 
         a, button {
-            cursor: pointer;
-            outline: none;
-            color: inherit;
-            text-decoration: none;
-            transition: all var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-tap-highlight-color: transparent; cursor: pointer; outline: none;
+            color: inherit; text-decoration: none;
+            transition: all var(--transition-duration) var(--transition-timing);
+            font-family: inherit; border: none; background: none; padding: 0;
         }
         a:focus-visible, button:focus-visible {
-            outline: 2px solid var(--accent-secondary);
-            outline-offset: 4px;
-            border-radius: var(--border-radius-sm);
+            outline: 2px solid var(--accent-secondary); outline-offset: 2px; border-radius: var(--border-radius-sm);
         }
 
-        .container {
-            max-width: 680px;
+        .main-container {
+            max-width: 720px;
             width: 100%;
-            padding: 0 16px;
-            text-align: center;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
+            padding: calc(var(--spacing-unit) * 5) calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 10);
+            text-align: center; position: relative; z-index: 1;
+            display: flex; flex-direction: column;
+            gap: calc(var(--spacing-unit) * 5);
         }
 
-        body::before, body::after {
-            content: '';
-            position: fixed;
-            border-radius: 50%;
-            background: var(--accent-primary);
-            opacity: 0.05;
-            filter: blur(120px);
-            z-index: -1;
-            animation: pulse 15s infinite alternate ease-in-out;
-        }
-        body::before {
-            width: 320px; height: 320px;
-            top: 5%; left: 10%;
-        }
-        body::after {
-            width: 280px; height: 280px;
-            bottom: 5%; right: 10%;
-            animation-delay: -7.5s;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 0.04; }
-            100% { transform: scale(1.15); opacity: 0.08; }
-        }
-
-        .page {
-            width: 100%;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 24px;
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-            will-change: opacity, transform;
-        }
-        .page.active-page {
-            display: flex;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .profile {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .profile-pic-wrapper {
-            position: relative;
-            width: 120px;
-            height: 120px;
-        }
-        .profile-pic {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            border: 3px solid var(--border-color);
-            background-color: var(--bg-tertiary);
-            padding: 3px;
-            background-clip: content-box;
-            box-shadow: 0 0 0 2px var(--bg-primary),
-                        0 4px 20px var(--shadow-color-dark);
-            transition: transform var(--transition-duration) ease;
-        }
-        .profile-pic-wrapper:hover .profile-pic {
-            transform: scale(1.06);
-        }
-
+        /* Profile Section */
+        .profile { width: 100%; display: flex; flex-direction: column; align-items: center; gap: calc(var(--spacing-unit) * 1.5); position: relative; }
+        .profile-pic-wrapper { position: relative; width: 130px; height: 130px; margin-bottom: var(--spacing-unit); filter: drop-shadow(0 5px 18px var(--shadow-color-dark)); transition: transform var(--transition-duration) var(--transition-timing); }
+        .profile-pic-wrapper:hover { transform: scale(1.06); }
+        .profile-pic { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; border: 4px solid var(--bg-primary); outline: 2px solid var(--accent-primary); background-color: var(--bg-secondary); }
         .profile h1 {
-            font-family: var(--font-heading);
-            font-size: 2.5em;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin: 0;
-            letter-spacing: 1.2px;
+            font-family: var(--font-heading); font-size: 2.75rem; font-weight: 700;
+            color: var(--text-primary); margin: 0;
+            letter-spacing: 0.2px;
+            line-height: 1.15;
         }
-
         .profile .subtitle {
-            font-size: 1.1em;
-            color: var(--text-secondary);
-            margin: 0;
-            font-weight: 500;
+            font-size: 1.15rem; color: var(--text-secondary); margin: calc(var(--spacing-unit) * 0.5) 0 0;
+            font-weight: 400; line-height: 1.4;
         }
 
-        .equalizer {
-            width: 50px;
-            height: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+        /* Links Section */
+        .links-grid {
+            list-style: none; padding: 0; margin: 0;
+            display: grid; grid-template-columns: 1fr;
+            gap: calc(var(--spacing-unit) * 2);
         }
-        .equalizer-bar {
-            width: 8px;
-            background-color: var(--accent-secondary);
-            opacity: 0.5;
-            border-radius: 2px;
-            animation: equalize 1.5s infinite ease-in-out alternate;
+        @media (min-width: 640px) {
+            .links-grid { grid-template-columns: repeat(2, 1fr); gap: calc(var(--spacing-unit) * 2.5); }
         }
-        .equalizer-bar:nth-child(1) { height: 10px; animation-delay: 0s; }
-        .equalizer-bar:nth-child(2) { height: 18px; animation-delay: 0.2s; }
-        .equalizer-bar:nth-child(3) { height: 14px; animation-delay: 0.4s; }
 
-        @keyframes equalize {
-            0% { height: 5px; opacity: 0.3; }
-            50% { opacity: 0.6; }
-            100% { height: 100%; opacity: 0.4; }
+        .link-card {
+            position: relative;
+            border-radius: var(--border-radius-md);
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            box-shadow: inset 0 1px 1px var(--shadow-color-light), 0 1px 2px rgba(0,0,0,0.1);
+            transition: background-color var(--transition-duration) var(--transition-timing),
+                        border-color var(--transition-duration) var(--transition-timing),
+                        box-shadow var(--transition-duration) var(--transition-timing);
+            overflow: visible;
         }
-        .equalizer-bar:nth-child(1) { animation-name: equalize1; }
-        .equalizer-bar:nth-child(2) { animation-name: equalize2; }
-        .equalizer-bar:nth-child(3) { animation-name: equalize3; }
-        @keyframes equalize1 { 0% { height: 5px; } 100% { height: 10px; } }
-        @keyframes equalize2 { 0% { height: 8px; } 100% { height: 18px; } }
-        @keyframes equalize3 { 0% { height: 6px; } 100% { height: 14px; } }
 
-        .links { width: 100%; }
-        .links ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 14px;
-        }
-        @media (min-width: 480px) {
-            .links ul { grid-template-columns: 1fr 1fr; }
-            .links li:last-child:nth-child(odd) { grid-column: span 2; }
+        .link-card:hover {
+            background-color: var(--bg-tertiary);
+            border-color: var(--accent-primary);
+            box-shadow: inset 0 1px 1px var(--shadow-color-light),
+                        0 2px 4px rgba(0,0,0,0.1);
         }
 
         .link-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            width: 100%;
-            padding: 14px 20px;
-            font-size: 0.95em;
-            font-weight: 500;
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-md);
-            box-shadow: 0 2px 8px var(--shadow-color-dark),
-                        inset 0 1px 1px var(--shadow-color-light);
-            min-height: 54px;
-        }
-
-        .link-button:hover {
-            transform: translateY(-3px) scale(1.02);
-            background-color: var(--bg-tertiary);
-            border-color: var(--accent-secondary);
-            box-shadow: 0 8px 20px var(--shadow-color-dark),
-                        inset 0 1px 1px var(--shadow-color-light),
-                        0 0 20px var(--shadow-color-accent);
-        }
-        .link-button:active {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px var(--shadow-color-dark),
-                        inset 0 1px 1px var(--shadow-color-light);
+            display: flex; align-items: center; width: 100%;
+            padding: calc(var(--spacing-unit) * 1.2) calc(var(--spacing-unit) * 1.8);
+            font-size: 0.9rem;
+            font-weight: 500; text-align: left;
+            min-height: 48px;
+            position: relative; z-index: 0;
         }
 
         .link-button i.icon {
-            margin-right: 12px;
-            font-size: 1.1em;
-            width: 1.2em;
-            text-align: center;
-            opacity: 0.9;
-            transition: color var(--transition-duration) ease;
+            margin-right: calc(var(--spacing-unit) * 1.5);
+            font-size: 1.3em;
+            width: 1.5em; text-align: center;
+            vertical-align: middle;
+            opacity: 0.8;
+            transition: color var(--transition-duration) var(--transition-timing),
+                        opacity var(--transition-duration) var(--transition-timing);
         }
-        .link-button:hover i.icon {
+        .link-card:hover i.icon {
             opacity: 1;
         }
+        .fa-store { color: #f59e0b; } .fa-instagram { color: #e1306c; } .fa-spotify { color: #1db954; }
+        .fa-soundcloud { color: #ff5500; } .fa-youtube { color: #ff0000; } .fa-discord { color: #5865f2; }
+        .fa-star { color: var(--accent-primary); }
+        .fa-envelope { color: var(--text-secondary); }
+        .fa-check { color: #22c55e; } .fa-times { color: #ef4444; }
 
         .link-button span {
-            flex-grow: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: left;
-        }
-        .link-button.center-text span { text-align: center; }
-        .link-button.center-text i.icon { margin-right: 8px; }
-
-        #mainContent .fa-store { color: #f59e0b; }
-        #mainContent .fa-instagram { color: #e1306c; }
-        #mainContent .fa-spotify { color: #1db954; }
-        #mainContent .fa-soundcloud { color: #ff5500; }
-        #mainContent .fa-youtube { color: #ff0000; }
-        #mainContent .fa-discord { color: #5865f2; }
-        #mainContent .fa-envelope { color: var(--text-secondary); }
-        #mainContent .fa-check { color: #22c55e; }
-        #mainContent .fa-times { color: #ef4444; }
-        #mainContent .fa-star { color: var(--accent-secondary); }
-
-        #contactButton { justify-content: center; }
-        #contactButton.locked {
-            pointer-events: none;
-            opacity: 0.7;
-            background-color: var(--bg-tertiary);
-        }
-        #contactButton .fa-check, #contactButton .fa-times { margin-right: 8px; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        #contactButton.copied .fa-check {
-            animation: fadeIn 0.3s ease;
+            flex-grow: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            line-height: 1.3;
         }
 
-        .show-bonus-button-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
+        /* Contact Button */
+        .contact-wrapper {
+            margin-top: calc(var(--spacing-unit) * 2);
+            text-align: center;
         }
-        #showBonusButton {
-            max-width: 340px;
-            font-weight: 700;
-            background-color: transparent;
-            border: 1px solid var(--accent-primary);
-            color: var(--accent-secondary);
-            box-shadow: 0 2px 8px var(--shadow-color-dark),
-                        inset 0 0 12px rgba(147, 51, 234, 0.15);
-        }
-        #showBonusButton:hover {
-            background-color: rgba(147, 51, 234, 0.08);
-            border-color: var(--accent-secondary);
-            color: var(--text-primary);
-            box-shadow: 0 8px 20px var(--shadow-color-dark),
-                        inset 0 0 15px rgba(147, 51, 234, 0.25),
-                        0 0 25px var(--shadow-color-accent);
-        }
-        #showBonusButton i { color: var(--accent-primary); transition: color var(--transition-duration) ease; }
-        #showBonusButton:hover i { color: var(--accent-secondary); }
-
-        #bonusContent { align-items: stretch; text-align: left; }
-        #bonusContent h2 {
-            font-family: var(--font-heading);
-            font-size: 1.6em;
+        #contactButton {
+            display: inline-flex; align-items: center;
+            padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.5);
+            font-size: 0.85rem;
             font-weight: 500;
             color: var(--text-primary);
-            margin: 0 0 12px;
-            text-align: center;
-            letter-spacing: 0.5px;
-        }
-
-        .bonus-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 14px;
-            width: 100%;
-            margin-bottom: 18px;
-        }
-
-        .bonus-item {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            background: var(--bg-secondary);
-            padding: 10px;
-            border-radius: var(--border-radius-md);
+            background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            box-shadow: 0 2px 8px var(--shadow-color-dark),
-                        inset 0 1px 0 var(--shadow-color-light);
-            overflow: hidden;
-            text-align: left;
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-            transition: all var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: var(--border-radius-lg);
+            transition: all var(--transition-duration) var(--transition-timing);
         }
-        .bonus-item:hover {
-            transform: translateY(-4px) scale(1.02);
-            border-color: var(--accent-primary);
-            box-shadow: 0 8px 20px var(--shadow-color-dark),
-                        inset 0 1px 0 var(--shadow-color-light),
-                        0 0 20px var(--shadow-color-accent);
-        }
-        .bonus-item:active {
-            transform: translateY(-1px) scale(1.01);
-            box-shadow: 0 3px 8px var(--shadow-color-dark),
-                        inset 0 1px 0 var(--shadow-color-light);
-        }
-
-        .bonus-item-thumbnail {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 10;
-            background-color: var(--bg-tertiary);
-            border-radius: var(--border-radius-sm);
-            margin-bottom: 10px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .bonus-item-thumbnail img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform var(--transition-duration) ease, opacity 0.5s ease;
-            opacity: 0;
-        }
-        .bonus-item:hover .bonus-item-thumbnail img {
-            transform: scale(1.05);
-        }
-        img[loading="lazy"] { opacity: 0; }
-        img:not([loading="lazy"]) { opacity: 1; }
-        img.lazyloaded { opacity: 1; }
-        @keyframes fadeIn { to { opacity: 1; } }
-        .bonus-item-thumbnail img { animation: fadeIn 0.5s ease forwards; }
-
-        .bonus-item-info {
-            padding: 4px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left !important;
-        }
-        .bonus-item-info h4 {
-            margin: 0 0 4px;
-            font-size: 14.4px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            color: var(--text-primary);
-            line-height: 1.3;
-            text-align: left !important;
-        }
-        .bonus-item-info p {
-            margin: 0;
-            font-size: 12.8px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-            color: var(--text-secondary);
-            line-height: 1.4;
-            text-align: left !important;
-        }
-        .audio-tools-text h4, .audio-tools-text p {
-            font-family: 'Inter', sans-serif !important;
-            text-align: left !important;
-        }
-        .bonus-item-info p br + span {
-            font-style: italic;
+        #contactButton i.icon {
+            margin-right: calc(var(--spacing-unit) * 1);
+            font-size: 1.2em;
             opacity: 0.9;
         }
-
-        .back-button-wrapper { width: 100%; text-align: center; margin-bottom: 12px; }
-        #backButton {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px 16px;
-            color: var(--text-secondary);
+        #contactButton:hover {
             background-color: var(--bg-tertiary);
-            border-radius: var(--border-radius-sm);
-            font-size: 0.85em;
-            font-weight: 500;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 8px var(--shadow-color-dark);
-        }
-        #backButton:hover {
-            color: var(--text-primary);
-            background-color: var(--accent-primary);
             border-color: var(--accent-primary);
-            transform: scale(1.05);
-            box-shadow: 0 6px 16px var(--shadow-color-dark),
-                        0 0 15px var(--shadow-color-accent);
         }
-        #backButton i { margin-right: 6px; font-size: 0.9em; }
+        #contactButton.locked { cursor: default; background-color: var(--bg-tertiary); opacity: 0.7; }
+        #contactButton.locked span, #contactButton.locked i { opacity: 0.7; }
+        #contactButton .fa-check, #contactButton .fa-times { margin-right: var(--spacing-unit); }
 
-        #passwordError {
-            display: none;
-            color: #f87171;
-            font-size: 0.8em;
-            text-align: center;
-            width: 100%;
-            margin-top: 8px;
-            background-color: rgba(239, 68, 68, 0.1);
-            padding: 6px;
-            border-radius: var(--border-radius-sm);
-            border: 1px solid rgba(239, 68, 68, 0.3);
+        /* Bonus Button */
+        .bonus-trigger-wrapper { margin-top: calc(var(--spacing-unit) * 4); }
+        #showBonusButton {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 2);
+            font-size: 0.95rem; font-weight: 600;
+            border-radius: var(--border-radius-md);
+            border: 2px solid var(--accent-primary); color: var(--accent-secondary);
+            background-color: transparent;
+            box-shadow: 0 0 12px var(--accent-glow);
+            transition: all var(--transition-duration) var(--transition-timing);
+        }
+        #showBonusButton:hover {
+            background-color: var(--accent-primary); color: var(--bg-primary);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        #showBonusButton i.icon { margin-right: var(--spacing-unit); color: inherit; font-size: 1.2em; transition: transform var(--transition-duration) var(--transition-timing); }
+        #showBonusButton:hover i.icon { transform: scale(1.1); }
+
+        /* Bonus Content Overlay */
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-overlay);
+            backdrop-filter: blur(10px) saturate(100%);
+            -webkit-backdrop-filter: blur(10px) saturate(100%);
+            z-index: 100; display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+            overflow-y: auto; padding: calc(var(--spacing-unit) * 2.5);
+        }
+        .overlay.active { opacity: 1; visibility: visible; transition: opacity 0.5s ease, visibility 0s linear 0s; }
+
+        #bonusContent {
+            background-color: var(--bg-primary);
+            border-radius: var(--border-radius-lg);
+            padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 4.5);
+            max-width: 800px; width: 100%; max-height: 88vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.6);
+            border: 1px solid var(--border-color); position: relative;
+            transform: translateY(20px); opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            will-change: transform, opacity; display: flex; flex-direction: column;
+            gap: calc(var(--spacing-unit) * 3.5);
+        }
+        .overlay.active #bonusContent { transform: translateY(0); opacity: 1; }
+
+        #backButton {
+            position: absolute; top: calc(var(--spacing-unit) * 2); right: calc(var(--spacing-unit) * 2);
+            background: var(--bg-tertiary); border: 1px solid var(--border-color);
+            color: var(--text-secondary); border-radius: 50%; width: 34px; height: 34px;
+            display: flex; align-items: center; justify-content: center; font-size: 1rem; z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        #backButton:hover { background: var(--accent-primary); color: var(--bg-primary); border-color: var(--accent-primary); transform: scale(1.1) rotate(90deg); }
+        #backButton i { margin: 0; }
+
+        #bonusContent h2 {
+            font-family: var(--font-heading); font-size: 2.1rem; font-weight: 700;
+            color: var(--text-primary); margin: 0 0 var(--spacing-unit); text-align: center;
+            padding-right: 40px; letter-spacing: 0.5px;
         }
 
-        footer {
-            padding: 20px 10px;
-            font-size: 0.75em;
-            color: var(--text-tertiary);
-            text-align: center;
-            width: 100%;
-            margin-top: 24px;
-            opacity: 0.8;
-        }
+        .bonus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: calc(var(--spacing-unit) * 2.5); width: 100%; }
+        @media (min-width: 768px) { .bonus-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); } }
 
-        @media (max-width: 600px) {
-            body { padding: 16px env(safe-area-inset-right) 16px env(safe-area-inset-left); }
-            .container { padding: 0 12px; gap: 24px; }
-            .profile { margin-bottom: 6px; }
-            .profile-pic-wrapper { width: 100px; height: 100px; }
-            .profile h1 { font-size: 2.2em; }
-            .profile .subtitle { font-size: 1em; }
-            .equalizer { width: 40px; height: 16px; }
-            .links ul { grid-template-columns: 1fr; gap: 12px; }
-            .links li:last-child:nth-child(odd) { grid-column: span 1; }
-            .link-button { padding: 12px 18px; font-size: 0.9em; min-height: 50px; }
-            #showBonusButton { max-width: 300px; font-size: 0.9em; }
-            .bonus-grid { gap: 12px; }
-            #bonusContent h2 { font-size: 1.4em; }
-            #backButton { font-size: 0.8em; padding: 7px 14px; }
-            .bonus-item-info h4 { font-size: 13.6px; }
-            .bonus-item-info p { font-size: 12px; }
-            footer { font-size: 0.7em; padding: 15px 8px; }
+        .bonus-item {
+            display: block; background: var(--bg-primary); padding: calc(var(--spacing-unit)*1.5);
+            border-radius: var(--border-radius-md); border: 1px solid var(--border-color);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.02), 0 3px 8px rgba(0,0,0,0.3);
+            overflow: hidden; text-align: left; transition: all var(--transition-duration) var(--transition-timing);
+            opacity: 0; transform: translateY(20px);
         }
+        .overlay.active .bonus-item { opacity: 1; transform: translateY(0); transition: all 0.5s ease 0.2s; }
+        .bonus-item:hover { border-color: var(--accent-secondary); box-shadow: inset 0 1px 1px rgba(255,255,255,0.02), 0 2px 4px rgba(0,0,0,0.1); }
 
-        @media (prefers-reduced-motion) {
-            body::before, body::after, .equalizer-bar { animation: none; }
-            .profile-pic, .link-button, #showBonusButton, .bonus-item, #backButton, .bonus-item-thumbnail img { transition: none; transform: none; }
-            .link-button:hover, #showBonusButton:hover, .bonus-item:hover, #backButton:hover { transform: none; }
-            .bonus-item:hover .bonus-item-thumbnail img { transform: none; }
-            .page { transition: opacity 0.4s ease-in-out; transform: none !important; }
-            #contactButton.copied .fa-check { animation: none; }
+        .bonus-item-thumbnail { width: 100%; padding-top: 60%; position: relative; background-color: var(--bg-secondary); border-radius: var(--border-radius-sm); margin-bottom: calc(var(--spacing-unit)*1.5); overflow: hidden; }
+        .bonus-item-thumbnail img { position: absolute; top: 0; left: 0; display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease, opacity 0.5s ease; opacity: 0; }
+        .bonus-item:hover .bonus-item-thumbnail img { transform: scale(1.05); }
+        img.lazyload { opacity: 0; transition: opacity 0.5s ease; } img.lazyloaded { opacity: 1; }
+        .bonus-item-thumbnail img[onerror] { visibility: hidden; }
+
+        .bonus-item-info { padding: 0 var(--spacing-unit) var(--spacing-unit); }
+        .bonus-item-info h4 { margin: 0 0 calc(var(--spacing-unit) * 0.5); font-size: 1rem; font-weight: 600; color: var(--text-primary); line-height: 1.35; }
+        .bonus-item-info p { margin: 0; font-size: 0.875rem; color: var(--text-secondary); line-height: 1.45; }
+        .bonus-item-info p span { display: block; margin-top: calc(var(--spacing-unit) * 0.5); font-style: italic; font-size: 0.8rem; opacity: 0.8; color: var(--text-tertiary); }
+        #passwordError { display: none; color: #ff3333; background-color: #ffcccc; padding: 10px; border-radius: 5px; margin-top: 10px; text-align: center; width: calc(100% - var(--spacing-unit) * 4); }
+
+        footer { padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2.5); font-size: 0.85rem; color: var(--text-tertiary); text-align: center; width: 100%; margin-top: auto; opacity: 0.75; position: relative; z-index: 1; }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            body { animation: none; } html { scroll-behavior: auto; }
+            .profile-pic-wrapper, .link-card, #showBonusButton, .bonus-item, #backButton, .bonus-item-thumbnail img, #bonusContent, .overlay, .link-button i.icon { transition: none; animation: none; transform: none !important; }
+            .link-card:hover { background-color: var(--bg-tertiary); border-color: var(--accent-primary); box-shadow: inset 0 1px 1px var(--shadow-color-light), 0 1px 2px rgba(0,0,0,0.1); }
+            #showBonusButton:hover { background-color: var(--accent-primary); color: var(--bg-primary); }
+            .bonus-item:hover { border-color: var(--accent-secondary); box-shadow: inset 0 1px 1px rgba(255,255,255,0.02), 0 3px 8px rgba(0,0,0,0.3); }
+            .overlay.active #bonusContent { transition-delay: 0s; }
+            #backButton:hover { transform: none !important; }
+            .overlay { transition: opacity var(--transition-duration) ease, visibility 0s linear var(--transition-duration); }
+            #bonusContent { transition: opacity var(--transition-duration) ease; }
+        }
+        /* Mobile */
+        @media (max-width: 640px) {
+             :root { --base-font-size: 15px; }
+             .main-container { padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 8); gap: calc(var(--spacing-unit) * 4); }
+             .profile-pic-wrapper { width: 105px; height: 105px; } .profile h1 { font-size: 2.2rem; } .profile .subtitle { font-size: 1.05rem; }
+             .link-button { padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 1.5); min-height: 44px; font-size: 0.85rem; }
+             #contactButton { font-size: 0.8rem; padding: calc(var(--spacing-unit) * 0.7) calc(var(--spacing-unit) * 1.2); }
+             #showBonusButton { font-size: 0.9rem; padding: calc(var(--spacing-unit) * 0.9) calc(var(--spacing-unit) * 1.8); }
+             #bonusContent { padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 3.5); gap: calc(var(--spacing-unit) * 3); max-height: 85vh; }
+             #bonusContent h2 { font-size: 1.7rem; padding-right: 36px; }
+             #backButton { width: 32px; height: 32px; font-size: 0.9rem; top: calc(var(--spacing-unit)*1.5); right: calc(var(--spacing-unit)*1.5); }
+             .bonus-grid { grid-template-columns: 1fr; gap: calc(var(--spacing-unit) * 2); }
+             .bonus-item-info h4 { font-size: 0.95rem; } .bonus-item-info p { font-size: 0.85rem; }
+             footer { font-size: 0.8rem; padding: calc(var(--spacing-unit) * 4) var(--spacing-unit); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div id="mainContent" class="page active-page" role="main" aria-live="polite">
-            <header class="profile">
-                <div class="profile-pic-wrapper">
-                    <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic" onerror="this.style.backgroundColor='#333'; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';">
-                </div>
-                <h1>62serpens</h1>
-                <p class="subtitle">Music Producer</p>
-                <div class="equalizer" aria-hidden="true">
-                    <div class="equalizer-bar"></div>
-                    <div class="equalizer-bar"></div>
-                    <div class="equalizer-bar"></div>
-                </div>
-            </header>
-
-            <nav class="links" aria-label="Main Links">
-                <ul>
-                    <li><a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Beat Store"><i class="fas fa-store icon"></i><span>Beat Store</span></a></li>
-                    <li><a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Instagram"><i class="fab fa-instagram icon"></i><span>Instagram</span></a></li>
-                    <li><a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Spotify"><i class="fab fa-spotify icon"></i><span>Spotify</span></a></li>
-                    <li><a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit SoundCloud"><i class="fab fa-soundcloud icon"></i><span>SoundCloud</span></a></li>
-                    <li><a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit YouTube uman"><i class="fab fa-youtube icon"></i><span>YouTube</span></a></li>
-                    <li><a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Discord Server"><i class="fab fa-discord icon"></i><span>Discord Server</span></a></li>
-                    <li><button type="button" id="contactButton" class="link-button center-text" aria-label="Copy Contact Email"><i class="fas fa-envelope icon"></i><span>Contact (Copy Email)</span></button></li>
-                </ul>
-            </nav>
-
-            <div class="show-bonus-button-container">
-                <button type="button" id="showBonusButton" class="link-button center-text" aria-controls="bonusContent" aria-expanded="false"><i class="fas fa-star icon"></i><span>Bonus Content & Experiments</span></button>
+    <div class="main-container" id="mainPageContent">
+        <header class="profile">
+            <div class="profile-pic-wrapper">
+                <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic" onerror="this.style.border='none'; this.style.padding='0'; this.style.backgroundColor='var(--bg-secondary)'; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1 1\'%3E%3C/svg%3E';">
             </div>
+            <h1>62serpens</h1>
+            <p class="subtitle">Music Producer</p>
+        </header>
+
+        <nav aria-label="Main Links">
+            <ul class="links-grid">
+                <li class="link-card"> <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Beat Store"><i class="fas fa-store icon"></i><span>Beat Store</span></a> </li>
+                <li class="link-card"> <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Instagram"><i class="fab fa-instagram icon"></i><span>Instagram</span></a> </li>
+                <li class="link-card"> <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Spotify"><i class="fab fa-spotify icon"></i><span>Spotify</span></a> </li>
+                <li class="link-card"> <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit SoundCloud"><i class="fab fa-soundcloud icon"></i><span>SoundCloud</span></a> </li>
+                <li class="link-card"> <a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit YouTube"><i class="fab fa-youtube icon"></i><span>YouTube</span></a> </li>
+                <li class="link-card"> <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Discord Server"><i class="fab fa-discord icon"></i><span>Discord Server</span></a> </li>
+            </ul>
+        </nav>
+
+        <div class="contact-wrapper">
+            <button type="button" id="contactButton" aria-label="Copy Contact Email"><i class="fas fa-envelope icon"></i><span>Contact (Copy Email)</span></button>
         </div>
 
-        <div id="bonusContent" class="page" role="region" aria-live="polite" aria-label="Bonus Content Section">
-            <div class="back-button-wrapper">
-                <button type="button" id="backButton" aria-controls="mainContent" aria-label="Back to Main Links"><i class="fas fa-arrow-left"></i>Back to Main Links</button>
-            </div>
-            <h2>Bonus Content & Experiments</h2>
-            <div class="bonus-grid">
-                <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Coming Soon)">
-                    <div class="bonus-item-thumbnail">
-                        <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
-                    </div>
-                    <div class="bonus-item-info audio-tools-text">
-                        <h4>Audio Tools Suite</h4>
-                        <p>Tools for music producers<br><span>Coming soon</span></p>
-                    </div>
-                </button>
-                <a href="b.html" target="_self" class="bonus-item" aria-label="Blackjack Sim">
-                    <div class="bonus-item-thumbnail">
-                        <img src="images/blackjack.webp" alt="Blackjack Sim Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
-                    </div>
-                    <div class="bonus-item-info">
-                        <h4>Blackjack Sim</h4>
-                        <p>Simple Blackjack card game simulation</p>
-                    </div>
-                </a>
-                <a href="2000.html" target="_self" class="bonus-item" aria-label="Site Theme - 2000s">
-                    <div class="bonus-item-thumbnail">
-                        <img src="images/retro.webp" alt="Retro Theme Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
-                    </div>
-                    <div class="bonus-item-info">
-                        <h4>Site Theme - 2000s</h4>
-                        <p>Geocities-inspired experimental theme</p>
-                    </div>
-                </a>
-                <a href="ai_theme.html" target="_self" class="bonus-item" aria-label="Site Theme - 2030">
-                    <div class="bonus-item-thumbnail">
-                        <img src="images/ai_theme.webp" alt="AI Theme Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
-                    </div>
-                    <div class="bonus-item-info">
-                        <h4>Site Theme - 2030</h4>
-                        <p>Advanced AI/Tech themed interface</p>
-                    </div>
-                </a>
-                <a href="#" class="bonus-item" aria-label="PhD Section (Coming Soon)">
-                    <div class="bonus-item-thumbnail" style="background-color: white;"></div>
-                    <div class="bonus-item-info">
-                        <h4>PhD</h4>
-                        <p>Description coming soon<br><span>.</span></p>
-                    </div>
-                </a>
-            </div>
-            <p id="passwordError" class="error-text" role="alert">Invalid access code. Please try again.</p>
+        <div class="bonus-trigger-wrapper">
+            <button type="button" id="showBonusButton" aria-controls="bonusOverlay" aria-expanded="false"><i class="fas fa-star icon"></i><span>Bonus Content & Experiments</span></button>
         </div>
     </div>
+
+    <div class="overlay" id="bonusOverlay" role="dialog" aria-modal="true" aria-labelledby="bonusTitle" aria-hidden="true">
+        <div id="bonusContent">
+            <button type="button" id="backButton" aria-label="Close Bonus Content"><i class="fas fa-times"></i></button>
+            <h2 id="bonusTitle">Bonus Content & Experiments</h2>
+            <div class="bonus-grid">
+                <a href="#" id="audioToolsLinkWrapper" class="bonus-item" aria-label="Audio Tools Suite (Coming Soon)"> <div class="bonus-item-thumbnail"> <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='var(--bg-secondary)';"> </div> <div class="bonus-item-info audio-tools-text"> <h trafficking>Audio Tools Suite</h4> <p>Tools for music producers<span>Coming soon</span></p> </div> </a>
+                <a href="b.html" target="_self" class="bonus-item" aria-label="Blackjack Sim"> <div class="bonus-item-thumbnail"> <img src="images/blackjack.webp" alt="Blackjack Sim Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='var(--bg-secondary)';"> </div> <div class="bonus-item-info"> <h4>Blackjack Sim</h4> <p>Simple Blackjack card game simulation</p> </div> </a>
+                <a href="2000.html" target="_self" class="bonus-item" aria-label="Site Theme - 2000s"> <div class="bonus-item-thumbnail"> <img src="images/retro.webp" alt="Retro Theme Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='var(--bg-secondary)';"> </div> <div class="bonus-item-info"> <h4>Site Theme - 2000s</h4> <p>Geocities-inspired experimental theme</p> </div> </a>
+                <a href="ai_theme.html" target="_self" class="bonus-item" aria-label="Site Theme - 2030"> <div class="bonus-item-thumbnail"> <img src="images/ai_theme.webp" alt="AI Theme Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='var(--bg-secondary)';"> </div> <div class="bonus-item-info"> <h4>Site Theme - 2030</h4> <p>Advanced AI/Tech themed interface</p> </div> </a>
+                <a href="#" class="bonus-item" aria-label="PhD Section (Coming Soon)"> <div class="bonus-item-thumbnail" style="background-color: var(--bg-primary);"> </div> <div class="bonus-item-info"> <h4>PhD</h4> <p>Description coming soon<span>Placeholder</span></p> </div> </a>
+            </div>
+            <p id="passwordError" role="alert"></p>
+        </div>
+    </div>
+
     <footer>
         © <span id="year"></span> 62serpens. All rights reserved.
     </footer>
 
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-        const mainContent = document.getElementById('mainContent');
-        const bonusContent = document.getElementById('bonusContent');
+        const currentYear = new Date().getFullYear();
+        const yearSpan = document.getElementById('year');
+        if (yearSpan) { yearSpan.textContent = currentYear; } else { console.warn('Footer year span not found.'); }
         const showBonusButton = document.getElementById('showBonusButton');
+        const bonusOverlay = document.getElementById('bonusOverlay');
+        const bonusContent = document.getElementById('bonusContent');
         const backButton = document.getElementById('backButton');
         const contactButton = document.getElementById('contactButton');
-        const audioToolsLink = document.getElementById('audioToolsLink');
+        const audioToolsLinkWrapper = document.getElementById('audioToolsLinkWrapper');
         const passwordError = document.getElementById('passwordError');
-        const container = document.querySelector('body');
-
-        if (mainContent && bonusContent && showBonusButton && backButton) {
-            showBonusButton.addEventListener('click', () => {
-                mainContent.classList.remove('active-page');
-                bonusContent.classList.add('active-page');
-                showBonusButton.setAttribute('aria-expanded', 'true');
-                bonusContent.setAttribute('aria-hidden', 'false');
-                mainContent.setAttribute('aria-hidden', 'true');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-            backButton.addEventListener('click', () => {
-                bonusContent.classList.remove('active-page');
-                mainContent.classList.add('active-page');
-                showBonusButton.setAttribute('aria-expanded', 'false');
-                bonusContent.setAttribute('aria-hidden', 'true');
-                mainContent.setAttribute('aria-hidden', 'false');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        } else {
-            console.error('Page switching elements not found.');
-        }
-
+        if (showBonusButton && bonusOverlay && backButton && bonusContent) {
+            const openOverlay = () => { bonusOverlay.classList.add('active'); bonusOverlay.setAttribute('aria-hidden', 'false'); showBonusButton.setAttribute('aria-expanded', 'true'); const focusableElements = bonusContent.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'); if (focusableElements.length > 0) { focusableElements[0].focus(); } document.body.style.overflow = 'hidden'; };
+            const closeOverlay = () => { bonusOverlay.classList.remove('active'); bonusOverlay.setAttribute('aria-hidden', 'true'); showBonusButton.setAttribute('aria-expanded', 'false'); showBonusButton.focus(); document.body.style.overflow = ''; if(passwordError) passwordError.style.display = 'none'; };
+            showBonusButton.addEventListener('click', openOverlay); backButton.addEventListener('click', closeOverlay); bonusOverlay.addEventListener('click', (event) => { if (event.target === bonusOverlay) closeOverlay(); }); document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && bonusOverlay.classList.contains('active')) closeOverlay(); });
+        } else { console.error('Overlay elements not found.'); }
         if (contactButton) {
             contactButton.setAttribute('data-original-content', contactButton.innerHTML);
             async function copyEmail() {
-                const originalContent = contactButton.getAttribute('data-original-content');
-                const emailAddress = '626262xxx@gmail.com';
-                contactButton.classList.add('locked', 'copied');
-                contactButton.disabled = true;
-                try {
-                    await navigator.clipboard.writeText(emailAddress);
-                    console.log('Clipboard API success: Email copied');
-                    contactButton.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!';
-                } catch (err) {
-                    console.warn('Clipboard API failed:', err);
-                    try {
-                        const textarea = document.createElement('textarea');
-                        textarea.value = emailAddress;
-                        textarea.style.position = 'fixed';
-                        textarea.style.left = '-9999px';
-                        textarea.style.top = '0';
-                        document.body.appendChild(textarea);
-                        textarea.select();
-                        textarea.setSelectionRange(0, 99999);
-                        document.execCommand('copy');
-                        document.body.removeChild(textarea);
-                        console.log('execCommand success: Email copied');
-                        contactButton.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!';
-                    } catch (execErr) {
-                        console.error('execCommand failed:', execErr);
-                        contactButton.innerHTML = '<i class="fas fa-times icon"></i> Copy Error!';
-                        contactButton.classList.remove('copied');
-                    }
-                }
-                setTimeout(() => {
-                    contactButton.innerHTML = originalContent;
-                    contactButton.classList.remove('locked', 'copied');
-                    contactButton.disabled = false;
-                }, 2500);
-            }
-            contactButton.addEventListener('click', copyEmail);
-        } else {
-            console.error('Contact button not found.');
-        }
-
-        if (audioToolsLink && passwordError) {
+                const originalContent = contactButton.getAttribute('data-original-content'); const emailAddress = '626262xxx@gmail.com'; contactButton.classList.add('locked'); contactButton.disabled = true; let success = false;
+                try { if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(emailAddress); success = true; } else { throw new Error('Clipboard API unavailable'); } } catch (err) { console.warn('Clipboard API failed, fallback:', err); try { const ta = document.createElement('textarea'); ta.value = emailAddress; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, 99999); document.execCommand('copy'); document.body.removeChild(ta); success = true; } catch (execErr) { console.error('Fallback failed:', execErr); } }
+                contactButton.innerHTML = success ? '<i class="fas fa-check icon"></i> <span>Copied!</span>' : '<i class="fas fa-times icon"></i> <span>Error</span>'; setTimeout(() => { contactButton.innerHTML = originalContent; contactButton.classList.remove('locked'); contactButton.disabled = false; }, 2500);
+            } contactButton.addEventListener('click', copyEmail);
+        } else { console.error('Contact button not found.'); }
+        if (audioToolsLinkWrapper && passwordError) {
             const correctPassword = 'serpens62';
-            audioToolsLink.addEventListener('click', () => {
-                passwordError.style.display = 'none';
-                const userInput = prompt('Enter access code for Audio Tools:', '');
-                if (userInput === correctPassword) {
-                    window.location.href = 'audio_tools.html';
-                } else if (userInput !== null) {
-                    passwordError.style.display = 'block';
-                    setTimeout(() => { passwordError.style.display = 'none'; }, 3000);
-                }
-            });
-        } else {
-            if (!audioToolsLink) console.error('Audio Tools link element not found.');
-            if (!passwordError) console.error('Password error element not found.');
-        }
-
+            audioToolsLinkWrapper.addEventListener('click', (e) => { e.preventDefault(); passwordError.style.display = 'none'; passwordError.textContent = ''; const userInput = prompt('Enter access code for Audio Tools:', ''); if (userInput === correctPassword) { window.location.href = 'audio_tools.html'; } else if (userInput !== null && userInput !== '') { passwordError.textContent = 'Invalid access code. Please try again.'; passwordError.style.display = 'block'; } });
+        } else { if (!audioToolsLinkWrapper) console.error('Audio Tools link wrapper not found.'); if (!passwordError) console.error('Password error element not found.'); }
         document.addEventListener("DOMContentLoaded", () => {
             const lazyImages = document.querySelectorAll('img.lazyload');
-            lazyImages.forEach(img => {
-                if (img.src && !img.src.startsWith('data:image')) {
-                    img.classList.add('lazyloaded');
-                }
-            });
-        });
+            if ('IntersectionObserver' in window) { const imageObserver = new IntersectionObserver((entries, observer) => { entries.forEach(entry => { if (entry.isIntersecting) { const img = entry.target; const imageSource = img.dataset.src || img.src; if (imageSource && !img.classList.contains('lazyloaded')) { img.src = imageSource; img.classList.remove('lazyload'); img.classList.add('lazyloaded'); } observer.unobserve(img); } }); }); lazyImages.forEach(img => imageObserver.observe(img)); } else { console.warn('IntersectionObserver not supported, loading all images.'); lazyImages.forEach(img => { const iS = img.dataset.src || img.src; if (iS && !img.classList.contains('lazyloaded')) { img.src = iS; img.classList.remove('lazyload'); img.classList.add('lazyloaded'); } }); } });
     </script>
 </body>
 </html>
