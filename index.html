@@ -21,15 +21,15 @@
             --accent-secondary: #c084fc;
             --accent-tertiary: #3b0764;
             --border-color: #3f3f46;
-            --shadow-color-light: rgba(255, 255, 255, 0.05);
-            --shadow-color-dark: rgba(0, 0, 0, 0.3);
-            --shadow-color-accent: rgba(192, 132, 252, 0.2);
+            --shadow-color-light: rgba(255, 255, 255, 0.03);
+            --shadow-color-dark: rgba(0, 0, 0, 0.2);
+            --shadow-color-accent: rgba(192, 132, 252, 0.15);
             --font-body: 'Inter', sans-serif;
             --font-heading: 'Space Grotesk', sans-serif;
             --transition-duration: 0.3s;
-            --border-radius-sm: 6px;
-            --border-radius-md: 10px;
-            --border-radius-lg: 16px;
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 20px;
         }
 
         html { box-sizing: border-box; }
@@ -48,41 +48,40 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 16px env(safe-area-inset-right) 16px env(safe-area-inset-left);
+            padding: 20px env(safe-area-inset-right) 20px env(safe-area-inset-left);
             -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
             position: relative;
-            background-image: radial-gradient(circle at 10% 10%, var(--accent-tertiary), transparent 40%),
-                              radial-gradient(circle at 90% 80%, var(--accent-tertiary), transparent 40%);
+            background-image: radial-gradient(circle at 10% 10%, var(--accent-tertiary) 0%, transparent 50%),
+                              radial-gradient(circle at 90% 80%, var(--accent-tertiary) 0%, transparent 50%);
             background-attachment: fixed;
         }
 
         a, button {
-            -webkit-tap-highlight-color: transparent;
             cursor: pointer;
             outline: none;
             color: inherit;
             text-decoration: none;
-            transition: all var(--transition-duration) cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
         }
         a:focus-visible, button:focus-visible {
-             outline: 2px solid var(--accent-secondary);
-             outline-offset: 3px;
-             border-radius: var(--border-radius-sm);
+            outline: 2px solid var(--accent-secondary);
+            outline-offset: 4px;
+            border-radius: var(--border-radius-sm);
         }
 
         .container {
-            max-width: 640px;
+            max-width: 680px;
             width: 100%;
-            padding: 0 12px;
+            padding: 0 16px;
             text-align: center;
             position: relative;
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 28px;
         }
 
         body::before, body::after {
@@ -90,24 +89,24 @@
             position: fixed;
             border-radius: 50%;
             background: var(--accent-primary);
-            opacity: 0.08;
-            filter: blur(100px);
+            opacity: 0.05;
+            filter: blur(120px);
             z-index: -1;
             animation: pulse 15s infinite alternate ease-in-out;
         }
         body::before {
-            width: 300px; height: 300px;
+            width: 320px; height: 320px;
             top: 5%; left: 10%;
         }
         body::after {
-            width: 250px; height: 250px;
+            width: 280px; height: 280px;
             bottom: 5%; right: 10%;
             animation-delay: -7.5s;
         }
 
         @keyframes pulse {
-            0% { transform: scale(0.9); opacity: 0.06; }
-            100% { transform: scale(1.1); opacity: 0.1; }
+            0% { transform: scale(0.95); opacity: 0.04; }
+            100% { transform: scale(1.15); opacity: 0.08; }
         }
 
         .page {
@@ -115,9 +114,9 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 24px;
             opacity: 0;
-            transform: translateY(10px);
+            transform: translateY(15px);
             transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
             will-change: opacity, transform;
         }
@@ -132,14 +131,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
         .profile-pic-wrapper {
             position: relative;
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
         }
         .profile-pic {
             width: 100%;
@@ -152,27 +151,27 @@
             padding: 3px;
             background-clip: content-box;
             box-shadow: 0 0 0 2px var(--bg-primary),
-                        0 4px 15px var(--shadow-color-dark);
+                        0 4px 20px var(--shadow-color-dark);
             transition: transform var(--transition-duration) ease;
         }
         .profile-pic-wrapper:hover .profile-pic {
-            transform: scale(1.05);
+            transform: scale(1.06);
         }
 
         .profile h1 {
             font-family: var(--font-heading);
-            font-size: 2.2em;
+            font-size: 2.5em;
             font-weight: 500;
             color: var(--text-primary);
             margin: 0;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
         }
 
         .profile .subtitle {
-            font-size: 1em;
+            font-size: 1.1em;
             color: var(--text-secondary);
             margin: 0;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .equalizer {
@@ -212,7 +211,7 @@
             margin: 0;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 12px;
+            gap: 14px;
         }
         @media (min-width: 480px) {
             .links ul { grid-template-columns: 1fr 1fr; }
@@ -225,29 +224,29 @@
             justify-content: center;
             text-align: center;
             width: 100%;
-            padding: 14px 18px;
+            padding: 14px 20px;
             font-size: 0.95em;
             font-weight: 500;
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-md);
-            box-shadow: 0 1px 2px var(--shadow-color-dark),
+            box-shadow: 0 2px 8px var(--shadow-color-dark),
                         inset 0 1px 1px var(--shadow-color-light);
-            min-height: 52px;
+            min-height: 54px;
         }
 
         .link-button:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.02);
             background-color: var(--bg-tertiary);
             border-color: var(--accent-secondary);
-            box-shadow: 0 6px 12px var(--shadow-color-dark),
+            box-shadow: 0 8px 20px var(--shadow-color-dark),
                         inset 0 1px 1px var(--shadow-color-light),
-                        0 0 15px var(--shadow-color-accent);
+                        0 0 20px var(--shadow-color-accent);
         }
         .link-button:active {
-             transform: translateY(-1px);
-             box-shadow: 0 2px 4px var(--shadow-color-dark),
-                         inset 0 1px 1px var(--shadow-color-light);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px var(--shadow-color-dark),
+                        inset 0 1px 1px var(--shadow-color-light);
         }
 
         .link-button i.icon {
@@ -258,8 +257,8 @@
             opacity: 0.9;
             transition: color var(--transition-duration) ease;
         }
-         .link-button:hover i.icon {
-             opacity: 1;
+        .link-button:hover i.icon {
+            opacity: 1;
         }
 
         .link-button span {
@@ -290,31 +289,38 @@
             background-color: var(--bg-tertiary);
         }
         #contactButton .fa-check, #contactButton .fa-times { margin-right: 8px; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        #contactButton.copied .fa-check {
+            animation: fadeIn 0.3s ease;
+        }
 
         .show-bonus-button-container {
-             width: 100%;
-             display: flex;
-             justify-content: center;
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
         #showBonusButton {
-             max-width: 320px;
-             font-weight: 700;
-             background-color: transparent;
-             border: 1px solid var(--accent-primary);
-             color: var(--accent-secondary);
-             box-shadow: 0 1px 2px var(--shadow-color-dark),
-                         inset 0 0 10px rgba(147, 51, 234, 0.2);
+            max-width: 340px;
+            font-weight: 700;
+            background-color: transparent;
+            border: 1px solid var(--accent-primary);
+            color: var(--accent-secondary);
+            box-shadow: 0 2px 8px var(--shadow-color-dark),
+                        inset 0 0 12px rgba(147, 51, 234, 0.15);
         }
         #showBonusButton:hover {
-             background-color: rgba(147, 51, 234, 0.1);
-             border-color: var(--accent-secondary);
-             color: var(--text-primary);
-             box-shadow: 0 6px 12px var(--shadow-color-dark),
-                         inset 0 0 15px rgba(147, 51, 234, 0.3),
-                         0 0 20px var(--shadow-color-accent);
+            background-color: rgba(147, 51, 234, 0.08);
+            border-color: var(--accent-secondary);
+            color: var(--text-primary);
+            box-shadow: 0 8px 20px var(--shadow-color-dark),
+                        inset 0 0 15px rgba(147, 51, 234, 0.25),
+                        0 0 25px var(--shadow-color-accent);
         }
         #showBonusButton i { color: var(--accent-primary); transition: color var(--transition-duration) ease; }
-         #showBonusButton:hover i { color: var(--accent-secondary); }
+        #showBonusButton:hover i { color: var(--accent-secondary); }
 
         #bonusContent { align-items: stretch; text-align: left; }
         #bonusContent h2 {
@@ -322,17 +328,17 @@
             font-size: 1.6em;
             font-weight: 500;
             color: var(--text-primary);
-            margin: 0 0 10px;
+            margin: 0 0 12px;
             text-align: center;
             letter-spacing: 0.5px;
         }
 
         .bonus-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
             width: 100%;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .bonus-item {
@@ -340,30 +346,30 @@
             flex-direction: column;
             align-items: stretch;
             background: var(--bg-secondary);
-            padding: 8px;
+            padding: 10px;
             border-radius: var(--border-radius-md);
             border: 1px solid var(--border-color);
-            box-shadow: 0 2px 4px var(--shadow-color-dark),
+            box-shadow: 0 2px 8px var(--shadow-color-dark),
                         inset 0 1px 0 var(--shadow-color-light);
             overflow: hidden;
             text-align: left;
-            text-decoration: none; /* Added to ensure links look like other items */
-            color: inherit; /* Added to ensure links look like other items */
-            cursor: pointer; /* Added for consistency */
-            transition: all var(--transition-duration) cubic-bezier(0.25, 0.8, 0.25, 1); /* Added for consistency */
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            transition: all var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
         }
         .bonus-item:hover {
             transform: translateY(-4px) scale(1.02);
             border-color: var(--accent-primary);
-            box-shadow: 0 8px 16px var(--shadow-color-dark),
+            box-shadow: 0 8px 20px var(--shadow-color-dark),
                         inset 0 1px 0 var(--shadow-color-light),
-                        0 0 15px var(--shadow-color-accent);
+                        0 0 20px var(--shadow-color-accent);
         }
-         .bonus-item:active {
-             transform: translateY(-1px) scale(1.01);
-             box-shadow: 0 3px 6px var(--shadow-color-dark),
-                         inset 0 1px 0 var(--shadow-color-light);
-         }
+        .bonus-item:active {
+            transform: translateY(-1px) scale(1.01);
+            box-shadow: 0 3px 8px var(--shadow-color-dark),
+                        inset 0 1px 0 var(--shadow-color-light);
+        }
 
         .bonus-item-thumbnail {
             width: 100%;
@@ -371,7 +377,7 @@
             aspect-ratio: 16 / 10;
             background-color: var(--bg-tertiary);
             border-radius: var(--border-radius-sm);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -389,11 +395,11 @@
         .bonus-item:hover .bonus-item-thumbnail img {
             transform: scale(1.05);
         }
-         img[loading="lazy"] { opacity: 0; }
-         img:not([loading="lazy"]) { opacity: 1; }
-         img.lazyloaded { opacity: 1; }
-         @keyframes fadeIn { to { opacity: 1; } }
-         .bonus-item-thumbnail img { animation: fadeIn 0.5s ease forwards; }
+        img[loading="lazy"] { opacity: 0; }
+        img:not([loading="lazy"]) { opacity: 1; }
+        img.lazyloaded { opacity: 1; }
+        @keyframes fadeIn { to { opacity: 1; } }
+        .bonus-item-thumbnail img { animation: fadeIn 0.5s ease forwards; }
 
         .bonus-item-info {
             padding: 4px;
@@ -429,7 +435,7 @@
             opacity: 0.9;
         }
 
-        .back-button-wrapper { width: 100%; text-align: center; margin-bottom: 10px; }
+        .back-button-wrapper { width: 100%; text-align: center; margin-bottom: 12px; }
         #backButton {
             display: inline-flex;
             align-items: center;
@@ -441,13 +447,15 @@
             font-size: 0.85em;
             font-weight: 500;
             border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px var(--shadow-color-dark);
         }
         #backButton:hover {
             color: var(--text-primary);
             background-color: var(--accent-primary);
             border-color: var(--accent-primary);
             transform: scale(1.05);
-            box-shadow: 0 4px 8px var(--shadow-color-dark), 0 0 10px var(--shadow-color-accent);
+            box-shadow: 0 6px 16px var(--shadow-color-dark),
+                        0 0 15px var(--shadow-color-accent);
         }
         #backButton i { margin-right: 6px; font-size: 0.9em; }
 
@@ -470,23 +478,23 @@
             color: var(--text-tertiary);
             text-align: center;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 24px;
             opacity: 0.8;
         }
 
         @media (max-width: 600px) {
-            body { padding: 12px env(safe-area-inset-right) 12px env(safe-area-inset-left); }
-            .container { padding: 0 8px; gap: 20px; }
-            .profile { margin-bottom: 4px; }
-            .profile-pic-wrapper { width: 80px; height: 80px; }
-            .profile h1 { font-size: 1.9em; }
-            .profile .subtitle { font-size: 0.9em; }
+            body { padding: 16px env(safe-area-inset-right) 16px env(safe-area-inset-left); }
+            .container { padding: 0 12px; gap: 24px; }
+            .profile { margin-bottom: 6px; }
+            .profile-pic-wrapper { width: 100px; height: 100px; }
+            .profile h1 { font-size: 2.2em; }
+            .profile .subtitle { font-size: 1em; }
             .equalizer { width: 40px; height: 16px; }
-            .links ul { grid-template-columns: 1fr; gap: 10px; }
+            .links ul { grid-template-columns: 1fr; gap: 12px; }
             .links li:last-child:nth-child(odd) { grid-column: span 1; }
-            .link-button { padding: 12px 16px; font-size: 0.9em; min-height: 48px; }
-            #showBonusButton { max-width: 280px; font-size: 0.9em; }
-            .bonus-grid { gap: 10px; }
+            .link-button { padding: 12px 18px; font-size: 0.9em; min-height: 50px; }
+            #showBonusButton { max-width: 300px; font-size: 0.9em; }
+            .bonus-grid { gap: 12px; }
             #bonusContent h2 { font-size: 1.4em; }
             #backButton { font-size: 0.8em; padding: 7px 14px; }
             .bonus-item-info h4 { font-size: 13.6px; }
@@ -499,7 +507,8 @@
             .profile-pic, .link-button, #showBonusButton, .bonus-item, #backButton, .bonus-item-thumbnail img { transition: none; transform: none; }
             .link-button:hover, #showBonusButton:hover, .bonus-item:hover, #backButton:hover { transform: none; }
             .bonus-item:hover .bonus-item-thumbnail img { transform: none; }
-             .page { transition: opacity 0.4s ease-in-out; transform: none !important; }
+            .page { transition: opacity 0.4s ease-in-out; transform: none !important; }
+            #contactButton.copied .fa-check { animation: none; }
         }
     </style>
 </head>
@@ -508,7 +517,7 @@
         <div id="mainContent" class="page active-page" role="main" aria-live="polite">
             <header class="profile">
                 <div class="profile-pic-wrapper">
-                     <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic" onerror="this.style.backgroundColor='#333'; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';">
+                    <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic" onerror="this.style.backgroundColor='#333'; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';">
                 </div>
                 <h1>62serpens</h1>
                 <p class="subtitle">Music Producer</p>
@@ -525,14 +534,14 @@
                     <li><a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Instagram"><i class="fab fa-instagram icon"></i><span>Instagram</span></a></li>
                     <li><a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Spotify"><i class="fab fa-spotify icon"></i><span>Spotify</span></a></li>
                     <li><a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit SoundCloud"><i class="fab fa-soundcloud icon"></i><span>SoundCloud</span></a></li>
-                    <li><a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit YouTube"><i class="fab fa-youtube icon"></i><span>YouTube</span></a></li>
+                    <li><a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit YouTube uman"><i class="fab fa-youtube icon"></i><span>YouTube</span></a></li>
                     <li><a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Discord Server"><i class="fab fa-discord icon"></i><span>Discord Server</span></a></li>
                     <li><button type="button" id="contactButton" class="link-button center-text" aria-label="Copy Contact Email"><i class="fas fa-envelope icon"></i><span>Contact (Copy Email)</span></button></li>
                 </ul>
             </nav>
 
             <div class="show-bonus-button-container">
-                 <button type="button" id="showBonusButton" class="link-button center-text" aria-controls="bonusContent" aria-expanded="false"><i class="fas fa-star icon"></i><span>Bonus Content & Experiments</span></button>
+                <button type="button" id="showBonusButton" class="link-button center-text" aria-controls="bonusContent" aria-expanded="false"><i class="fas fa-star icon"></i><span>Bonus Content & Experiments</span></button>
             </div>
         </div>
 
@@ -541,8 +550,8 @@
                 <button type="button" id="backButton" aria-controls="mainContent" aria-label="Back to Main Links"><i class="fas fa-arrow-left"></i>Back to Main Links</button>
             </div>
             <h2>Bonus Content & Experiments</h2>
-             <div class="bonus-grid">
-                 <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Coming Soon)">
+            <div class="bonus-grid">
+                <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Coming Soon)">
                     <div class="bonus-item-thumbnail">
                         <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
                     </div>
@@ -560,7 +569,7 @@
                         <p>Simple Blackjack card game simulation</p>
                     </div>
                 </a>
-                 <a href="2000.html" target="_self" class="bonus-item" aria-label="Site Theme - 2000s">
+                <a href="2000.html" target="_self" class="bonus-item" aria-label="Site Theme - 2000s">
                     <div class="bonus-item-thumbnail">
                         <img src="images/retro.webp" alt="Retro Theme Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
                     </div>
@@ -569,7 +578,7 @@
                         <p>Geocities-inspired experimental theme</p>
                     </div>
                 </a>
-                 <a href="ai_theme.html" target="_self" class="bonus-item" aria-label="Site Theme - 2030">
+                <a href="ai_theme.html" target="_self" class="bonus-item" aria-label="Site Theme - 2030">
                     <div class="bonus-item-thumbnail">
                         <img src="images/ai_theme.webp" alt="AI Theme Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
                     </div>
@@ -579,14 +588,13 @@
                     </div>
                 </a>
                 <a href="#" class="bonus-item" aria-label="PhD Section (Coming Soon)">
-                    <div class="bonus-item-thumbnail" style="background-color: white;">
-                        </div>
+                    <div class="bonus-item-thumbnail" style="background-color: white;"></div>
                     <div class="bonus-item-info">
                         <h4>PhD</h4>
                         <p>Description coming soon<br><span>.</span></p>
                     </div>
                 </a>
-                </div>
+            </div>
             <p id="passwordError" class="error-text" role="alert">Invalid access code. Please try again.</p>
         </div>
     </div>
@@ -631,7 +639,7 @@
             async function copyEmail() {
                 const originalContent = contactButton.getAttribute('data-original-content');
                 const emailAddress = '626262xxx@gmail.com';
-                contactButton.classList.add('locked');
+                contactButton.classList.add('locked', 'copied');
                 contactButton.disabled = true;
                 try {
                     await navigator.clipboard.writeText(emailAddress);
@@ -655,11 +663,12 @@
                     } catch (execErr) {
                         console.error('execCommand failed:', execErr);
                         contactButton.innerHTML = '<i class="fas fa-times icon"></i> Copy Error!';
+                        contactButton.classList.remove('copied');
                     }
                 }
                 setTimeout(() => {
                     contactButton.innerHTML = originalContent;
-                    contactButton.classList.remove('locked');
+                    contactButton.classList.remove('locked', 'copied');
                     contactButton.disabled = false;
                 }, 2500);
             }
