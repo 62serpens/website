@@ -86,20 +86,15 @@
         }
         .nav-link {
             color: var(--text-secondary);
-            font-weight: 500;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            font-size: 1rem;
         }
         .nav-link:hover {
             color: var(--accent-secondary);
+            text-decoration: underline;
             opacity: 1;
-        }
-        .hero {
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1920x300');
-            background-size: cover;
-            background-position: center;
-            border-radius: var(--border-radius-md);
         }
         .link-button {
             display: flex;
@@ -141,19 +136,19 @@
         .social-icons {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 16px;
             margin-top: 8px;
         }
         .social-icon {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 24px;
-            height: 24px;
+            width: 32px;
+            height: 32px;
             background-color: var(--bg-tertiary);
             border-radius: 50%;
             border: 1px solid var(--border-color);
-            font-size: 0.9rem;
+            font-size: 1.2rem;
             opacity: 0.9;
         }
         .social-icon:hover {
@@ -179,6 +174,11 @@
             object-fit: cover;
             border: 2px solid var(--border-color);
             border-radius: var(--border-radius-sm);
+            display: block;
+        }
+        .portfolio-img:hover {
+            transform: scale(1.02);
+            border-color: var(--accent-secondary);
         }
         .equalizer {
             width: 40px;
@@ -296,8 +296,8 @@
             opacity: 0.9;
         }
         nav {
-            backdrop-filter: blur(8px);
-            background-color: rgba(24, 24, 27, 0.8);
+            backdrop-filter: blur(10px);
+            background-color: rgba(24, 24, 27, 0.9);
         }
         section[id] {
             scroll-margin-top: 48px;
@@ -306,7 +306,7 @@
             body { padding: 12px env(safe-area-inset-right) 12px env(safe-area-inset-left); }
             .container { padding: 0 8px; gap: 16px; }
             .section-header { font-size: 1.5rem; }
-            .nav-link { font-size: 0.75rem; }
+            .nav-link { font-size: 0.875rem; }
             .hero { padding: 2rem 0; }
             .link-button { padding: 10px 14px; font-size: 0.85rem; min-height: 44px; max-width: 280px; }
             .gallery-img { height: 140px; }
@@ -317,11 +317,12 @@
             .bonus-grid { grid-template-columns: 1fr; gap: 12px; }
             .bonus-item-info h4 { font-size: 13px; }
             .bonus-item-info p { font-size: 12px; }
-            .social-icon { width: 20px; height: 20px; font-size: 0.8rem; }
+            .social-icon { width: 28px; height: 28px; font-size: 1rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
         }
         @media (prefers-reduced-motion) {
-            .equalizer-bar, .gallery-img, .link-button, .bonus-item { animation: none; transition: none; }
-            .gallery-img:hover, .link-button:hover, .bonus-item:hover { transform: none; }
+            .equalizer-bar, .gallery-img, .portfolio-img, .link-button, .bonus-item { animation: none; transition: none; }
+            .gallery-img:hover, .portfolio-img:hover, .link-button:hover, .bonus-item:hover { transform: none; }
             .contact-button.copied .fa-check { animation: none; }
         }
     </style>
@@ -329,13 +330,13 @@
 <body>
     <div class="container">
         <!-- Navigation -->
-        <nav class="bg-[#18181B] shadow-sm sticky top-0 z-50 rounded-b-[16px] border-b border-[#3f3f46]">
+        <nav class="bg-[#18181B] shadow-sm sticky top-0 z-50 rounded-b-[16px] border-b-2 border-[#3f3f46]">
             <div class="max-w-4xl mx-auto px-4 sm:px-6">
-                <div class="flex justify-between h-10">
+                <div class="flex justify-between h-12">
                     <div class="flex items-center">
                         <h1 class="text-sm font-medium text-[#c084fc] tracking-wide">62serpens</h1>
                     </div>
-                    <div class="flex items-center space-x-2">
+                    <div class="flex items-center space-x-3">
                         <a href="#portfolio" class="nav-link">Portfolio</a>
                         <a href="#services" class="nav-link">Services</a>
                         <a href="#gallery" class="nav-link">Gallery</a>
@@ -346,10 +347,10 @@
         </nav>
 
         <!-- Hero Section -->
-        <section class="hero py-12">
-            <div class="text-center">
+        <section class="card">
+            <div class="text-center py-12">
                 <div class="profile-pic-wrapper">
-                    <img src="https://via.placeholder.com/80" alt="62serpens Profile Picture" class="profile-pic">
+                    <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic">
                 </div>
                 <h1 class="text-2xl font-[Space Grotesk] text-[#f4f4f5] mt-2 mb-1">62serpens</h1>
                 <p class="text-sm text-[#d4d4d8] mb-2">Portable Music Producer</p>
@@ -369,128 +370,131 @@
         </section>
 
         <!-- Portfolio Section -->
-        <section id="portfolio">
+        <section id="portfolio" class="card">
             <h2 class="section-header">Portfolio</h2>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/400x100" alt="Down Bad Album Art" class="portfolio-img mb-2">
+                <div>
+                    <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
+                        <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="portfolio-img mb-2">
+                    </a>
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Down Bad - OnlyBino</h3>
                     <p class="text-[#d4d4d8] text-sm mb-1">Original melody, production, mixing.</p>
-                    <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc] block mb-1">Listen on SoundCloud</a>
                     <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@onlybino</a>
                 </div>
-                <div class="card">
-                    <img src="https://via.placeholder.com/400x100" alt="Track Album Art" class="portfolio-img mb-2">
+                <div>
+                    <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" rel="noopener noreferrer">
+                        <img src="images/albumart_beatitup.jpg" alt="Beat It Up Album Art" class="portfolio-img mb-2">
+                    </a>
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Track Name - Artist</h3>
-                    <p class="text-[#d4d4d8] text-sm mb-1">Production, creative direction.</p>
-                    <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc] block mb-1">Listen on Spotify</a>
+                    <p class="text-[#d4d4d8] text-sm mb-1">Original melody composition, co-production.</p>
                     <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@954.eddison</a>
                 </div>
-                <div class="card">
-                    <img src="https://via.placeholder.com/400x100" alt="Madaway Album Art" class="portfolio-img mb-2">
-                    <h3 class="text-sm font-medium text-[#c084fc] mb-1">Madaway - Tefflon, 63 Saint, Dextersesh, Hooli</h3>
-                    <p class="text-[#d4d4d8] text-sm mb-1">Production, mixing basics.</p>
-                    <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc] block mb-1">Listen on SoundCloud</a>
+                <div>
+                    <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
+                        <img src="images/albumart_madaway.jpg" alt="Madaway Album Art" class="portfolio-img mb-2">
+                    </a>
+                    <h3 class="text-sm font-medium text-[#c084fc] mb-1">Madaway - Tefflon</h3>
+                    <p class="text-[#d4d4d8] text-sm mb-1">Original melody composition, co-production.</p>
                     <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@1tefflon</a>
                 </div>
             </div>
         </section>
 
         <!-- Services Section -->
-        <section id="services">
+        <section id="services" class="card">
             <h2 class="section-header">Services</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="card text-center">
+                <div class="text-center">
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Beat Leasing</h3>
                     <p class="text-[#d4d4d8] text-sm mb-2">Lease beats from my BeatStars store.</p>
                     <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button center-text"><i class="fas fa-store icon"></i><span>Visit Beat Store</span></a>
                 </div>
-                <div class="card text-center">
+                <div class="text-center">
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Creative Production</h3>
                     <p class="text-[#d4d4d8] text-sm mb-2">Craft vibe-heavy tracks as a producer, executive producer, or creative director, shaping your project’s vision.</p>
                     <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-music icon"></i><span>Contact Me</span>'><i class="fas fa-music icon"></i><span>Contact Me</span></button>
                 </div>
-                <div class="card text-center">
+                <div class="text-center">
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Recording & Engineering</h3>
                     <p class="text-[#d4d4d8] text-sm mb-2">Capture your sound with clean, professional recording and engineering, plus a strong foundation for mixing and mastering using top-tier plugins.</p>
                     <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-microphone icon"></i><span>Contact Me</span>'><i class="fas fa-microphone icon"></i><span>Contact Me</span></button>
                 </div>
-                <div class="card text-center">
+                <div class="text-center">
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Production Tutoring</h3>
                     <p class="text-[#d4d4d8] text-sm mb-2">Specialized FL Studio tutoring with workflow tips, personalized feedback, and production advice to level up.</p>
                     <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-chalkboard-teacher icon"></i><span>Contact Me</span>'><i class="fas fa-chalkboard-teacher icon"></i><span>Contact Me</span></button>
                 </div>
             </div>
-            <div class="card mt-4">
-                <h3 class="text-sm font-medium text-[#c084fc] mb-1 text-center">My Gear</h3>
-                <p class="text-[#d4d4d8] text-sm leading-relaxed">
-                    I use reliable, high-end gear with a UAD Apollo X4 interface and premium plugin suite for in-the-box processing, delivering pro-quality results.
-                </p>
-            </div>
+            <h3 class="text-sm font-medium text-[#c084fc] mt-4 mb-1 text-center">My Gear</h3>
+            <p class="text-[#d4d4d8] text-sm leading-relaxed">
+                I use reliable, high-end gear with a UAD Apollo X4 interface and premium plugin suite for in-the-box processing, delivering pro-quality results.
+            </p>
         </section>
 
         <!-- Gallery Section -->
-        <section id="gallery">
+        <section id="gallery" class="card">
             <h2 class="section-header">Gallery</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <img src="https://via.placeholder.com/400x160" alt="Studio 1" class="gallery-img">
-                <img src="https://via.placeholder.com/400x160" alt="Studio 2" class="gallery-img">
-                <img src="https://via.placeholder.com/400x160" alt="Studio 3" class="gallery-img">
+            <div class="gallery-grid grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <img src="images/img_013.jpg" alt="Studio 1" class="gallery-img">
+                <img src="images/img_014.jpg" alt="Studio 2" class="gallery-img">
+                <img src="images/img_015.jpg" alt="Studio 3" class="gallery-img">
+                <img src="images/img_016.jpg" alt="Studio 4" class="gallery-img">
+                <img src="images/img_017.jpg" alt="Studio 5" class="gallery-img">
+                <img src="images/img_018.jpg" alt="Studio 6" class="gallery-img">
+                <img src="images/img_008.jpg" alt="Studio 7" class="gallery-img">
             </div>
         </section>
 
         <!-- Bonus Content Section -->
-        <section id="bonus">
+        <section id="bonus" class="card">
             <h2 class="section-header">Bonus Content</h2>
-            <div class="card">
-                <h3 class="text-sm font-medium text-[#c084fc] mb-2 text-center">Bonus Content & Experiments</h3>
-                <div class="bonus-grid">
-                    <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Coming Soon)">
-                        <div class="bonus-item-thumbnail">
-                            <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview">
-                        </div>
-                        <div class="bonus-item-info">
-                            <h4>Audio Tools Suite</h4>
-                            <p>Tools for music producers<br><span>Coming soon</span></p>
-                        </div>
-                    </button>
-                    <a href="b.html" target="_self" class="bonus-item" aria-label="Blackjack Sim">
-                        <div class="bonus-item-thumbnail">
-                            <img src="images/blackjack.webp" alt="Blackjack Sim Preview">
-                        </div>
-                        <div class="bonus-item-info">
-                            <h4>Blackjack Sim</h4>
-                            <p>Simple Blackjack card game simulation</p>
-                        </div>
-                    </a>
-                    <a href="2000.html" target="_self" class="bonus-item" aria-label="Site Theme - 2000s">
-                        <div class="bonus-item-thumbnail">
-                            <img src="images/retro.webp" alt="Retro Theme Preview">
-                        </div>
-                        <div class="bonus-item-info">
-                            <h4>Site Theme - 2000s</h4>
-                            <p>Geocities-inspired experimental theme</p>
-                        </div>
-                    </a>
-                    <a href="ai_theme.html" target="_self" class="bonus-item" aria-label="Site Theme - 2030">
-                        <div class="bonus-item-thumbnail">
-                            <img src="images/ai_theme.webp" alt="AI Theme Preview">
-                        </div>
-                        <div class="bonus-item-info">
-                            <h4>Site Theme - 2030</h4>
-                            <p>Advanced AI/Tech themed interface</p>
-                        </div>
-                    </a>
-                    <a href="#" class="bonus-item" aria-label="PhD Section (Coming Soon)">
-                        <div class="bonus-item-thumbnail" style="background-color: white;"></div>
-                        <div class="bonus-item-info">
-                            <h4>PhD</h4>
-                            <p>Description coming soon<br><span>.</span></p>
-                        </div>
-                    </a>
-                </div>
-                <p id="passwordError" role="alert" style="display: none; color: #f87171; font-size: 0.875rem; text-align: center; width: 100%; margin-top: 8px; background-color: rgba(239, 68, 68, 0.1); padding: 6px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3);">Invalid access code. Please try again.</p>
+            <h3 class="text-sm font-medium text-[#c084fc] mb-2 text-center">Bonus Content & Experiments</h3>
+            <div class="bonus-grid">
+                <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Coming Soon)">
+                    <div class="bonus-item-thumbnail">
+                        <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview">
+                    </div>
+                    <div class="bonus-item-info">
+                        <h4>Audio Tools Suite</h4>
+                        <p>Tools for music producers<br><span>Coming soon</span></p>
+                    </div>
+                </button>
+                <a href="b.html" target="_self" class="bonus-item" aria-label="Blackjack Sim">
+                    <div class="bonus-item-thumbnail">
+                        <img src="images/blackjack.webp" alt="Blackjack Sim Preview">
+                    </div>
+                    <div class="bonus-item-info">
+                        <h4>Blackjack Sim</h4>
+                        <p>Simple Blackjack card game simulation</p>
+                    </div>
+                </a>
+                <a href="2000.html" target="_self" class="bonus-item" aria-label="Site Theme - 2000s">
+                    <div class="bonus-item-thumbnail">
+                        <img src="images/retro.webp" alt="Retro Theme Preview">
+                    </div>
+                    <div class="bonus-item-info">
+                        <h4>Site Theme - 2000s</h4>
+                        <p>Geocities-inspired experimental theme</p>
+                    </div>
+                </a>
+                <a href="ai_theme.html" target="_self" class="bonus-item" aria-label="Site Theme - 2030">
+                    <div class="bonus-item-thumbnail">
+                        <img src="images/ai_theme.webp" alt="AI Theme Preview">
+                    </div>
+                    <div class="bonus-item-info">
+                        <h4>Site Theme - 2030</h4>
+                        <p>Advanced AI/Tech themed interface</p>
+                    </div>
+                </a>
+                <a href="#" class="bonus-item" aria-label="PhD Section (Coming Soon)">
+                    <div class="bonus-item-thumbnail" style="background-color: white;"></div>
+                    <div class="bonus-item-info">
+                        <h4>PhD</h4>
+                        <p>Description coming soon<br><span>.</span></p>
+                    </div>
+                </a>
             </div>
+            <p id="passwordError" role="alert" style="display: none; color: #f87171; font-size: 0.875rem; text-align: center; width: 100%; margin-top: 8px; background-color: rgba(239, 68, 68, 0.1); padding: 6px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3);">Invalid access code. Please try again.</p>
         </section>
 
         <!-- Footer -->
