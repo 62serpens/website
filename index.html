@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Portable music production by 62serpens for young artists.">
+    <meta name="description" content="Music production by 62serpens for young artists.">
     <meta name="theme-color" content="#101012" media="(prefers-color-scheme: dark)">
     <meta name="theme-color" content="#18181B" media="(prefers-color-scheme: light)">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -101,15 +101,20 @@
             justify-content: space-between;
         }
         .nav-link {
-            color: var(--text-secondary);
+            color: var(--text-primary);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            font-size: 1rem;
+            font-size: 1.125rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            padding: 6px 12px;
         }
         .nav-link:hover {
             color: var(--accent-secondary);
-            text-decoration: underline;
+            background-color: var(--bg-tertiary);
+            border-color: var(--accent-secondary);
+            transform: scale(1.05);
             opacity: 1;
         }
         .link-button {
@@ -159,12 +164,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             background-color: var(--bg-tertiary);
             border-radius: 50%;
             border: 1px solid var(--border-color);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             opacity: 0.9;
         }
         .social-icon:hover {
@@ -173,10 +178,22 @@
             box-shadow: 0 0 10px var(--shadow-color-accent);
             opacity: 1;
         }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            width: 100%;
+            margin: 0 auto;
+            justify-items: center;
+            align-items: center;
+        }
+        .gallery-grid div:last-child {
+            grid-column: 2 / 3;
+        }
         .gallery-img {
             object-fit: cover;
-            width: 160px;
-            height: 160px;
+            width: 100px;
+            height: 100px;
             border: 2px solid var(--border-color);
             border-radius: var(--border-radius-sm);
             transition: transform var(--transition-duration) ease;
@@ -196,8 +213,18 @@
             transform: scale(1.02);
             border-color: var(--accent-secondary);
         }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            width: 100%;
+        }
+        .portfolio-item {
+            word-break: break-word;
+            line-height: 1.2;
+        }
         .equalizer {
-            width: 40px;
+            width: 48px;
             height: 16px;
             display: flex;
             justify-content: space-between;
@@ -220,8 +247,8 @@
             100% { height: 100%; opacity: 0.4; }
         }
         .profile-pic-wrapper {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             margin: 0 auto;
         }
         .profile-pic {
@@ -354,23 +381,31 @@
             body { font-size: 14px; padding: 10px env(safe-area-inset-right) 10px env(safe-area-inset-left); }
             .container { padding: 0 8px; gap: 12px; }
             .section-header { font-size: 1.5rem; }
-            .nav-link { font-size: 0.875rem; }
+            .nav-link { font-size: 0.875rem; padding: 4px 8px; }
             nav { height: 40px; }
-            .link-button, .expand-button { padding: 10px 14px; font-size: 0.9rem; min-height: 44px; max-width: 280px; }
-            .gallery-img { width: 120px; height: 120px; }
+            .link-button, .expand-button { padding: 10px 14px; font-size: 0.85rem; min-height: 44px; max-width: 280px; }
+            .gallery-img { width: 80px; height: 80px; }
             .portfolio-img { width: 120px; height: 120px; }
-            .profile-pic-wrapper { width: 48px; height: 48px; }
+            .profile-pic-wrapper { width: 64px; height: 64px; }
             .card, .service-card { padding: 0.75rem; }
             section { padding: 1rem 0; }
-            .bonus-grid, .gallery-grid, .services-grid, .portfolio-grid { grid-template-columns: 1fr; gap: 10px; }
-            .bonus-item-info h4 { font-size: 13px; }
-            .bonus-item-info p { font-size: 12px; }
-            .social-icon { width: 24px; height: 24px; font-size: 0.9rem; }
-            .service-card { min-height: 200px; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .portfolio-grid, .bonus-grid, .gallery-grid { gap: 8px; }
+            .portfolio-item h3 { font-size: 0.75rem; }
+            .portfolio-item p { font-size: 0.7rem; }
+            .portfolio-item a { font-size: 0.7rem; }
+            .service-card h3 { font-size: 0.75rem; }
+            .service-card p { font-size: 0.7rem; }
+            .service-card .link-button { font-size: 0.85rem; }
+            .bonus-item-info h4 { font-size: 0.75rem; }
+            .bonus-item-info p { font-size: 0.7rem; }
+            .social-icon { width: 32px; height: 32px; font-size: 1.2rem; }
+            .service-card { min-height: 180px; }
+            .equalizer { width: 36px; }
         }
         @media (prefers-reduced-motion) {
-            .equalizer-bar, .gallery-img, .portfolio-img, .link-button, .bonus-item, .expand-button { animation: none; transition: none; }
-            .gallery-img:hover, .portfolio-img:hover, .link-button:hover, .bonus-item:hover, .expand-button:hover { transform: none; }
+            .equalizer-bar, .gallery-img, .portfolio-img, .link-button, .bonus-item, .expand-button, .nav-link { animation: none; transition: none; }
+            .gallery-img:hover, .portfolio-img:hover, .link-button:hover, .bonus-item:hover, .expand-button:hover, .nav-link:hover { transform: none; }
             .contact-button.copied .fa-check { animation: none; }
         }
     </style>
@@ -381,7 +416,7 @@
         <nav class="bg-[#18181B] shadow-sm sticky top-0 z-50 rounded-b-[16px] border-b-2 border-[#3f3f46]">
             <div class="max-w-4xl mx-auto px-6">
                 <div class="flex justify-center h-12">
-                    <div class="flex items-center space-x-3">
+                    <div class="flex items-center space-x-4">
                         <a href="#services" class="nav-link">Services</a>
                         <a href="#portfolio" class="nav-link">Portfolio</a>
                         <a href="#gallery" class="nav-link">Gallery</a>
@@ -393,12 +428,12 @@
 
         <!-- Hero Section -->
         <section class="card">
-            <div class="text-center py-8">
+            <div class="text-center py-10">
                 <div class="profile-pic-wrapper">
                     <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic">
                 </div>
-                <h1 class="text-2xl font-[Bebas Neue] text-[#f4f4f5] mt-2 mb-1">62serpens</h1>
-                <p class="text-sm text-[#e4e4e7] mb-2">Portable Music Producer</p>
+                <h1 class="text-3xl font-[Bebas Neue] text-[#f4f4f5] mt-2 mb-1">62serpens</h1>
+                <p class="text-base text-[#e4e4e7] mb-2">Portable Music Producer</p>
                 <div class="equalizer" aria-hidden="true">
                     <div class="equalizer-bar"></div>
                     <div class="equalizer-bar"></div>
@@ -417,7 +452,7 @@
         <!-- Services Section -->
         <section id="services">
             <h2 class="section-header">Services</h2>
-            <div class="services-grid grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="services-grid grid grid-cols-2 gap-12">
                 <div class="service-card text-center">
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Beat Leasing</h3>
                     <p class="text-[#e4e4e7] text-sm mb-2">Lease beats from my BeatStars store.</p>
@@ -450,30 +485,30 @@
         <!-- Portfolio Section -->
         <section id="portfolio" class="card">
             <h2 class="section-header">Portfolio</h2>
-            <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
                     <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
                         <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="portfolio-img mb-2">
                     </a>
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Down Bad - OnlyBino</h3>
-                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody, production, mixing.</p>
-                    <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@onlybino</a>
+                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody production mixing</p>
+                    <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]">@onlybino</a>
                 </div>
-                <div>
+                <div class="portfolio-item">
                     <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" rel="noopener noreferrer">
                         <img src="images/albumart_beatitup.jpg" alt="Beat It Up Album Art" class="portfolio-img mb-2">
                     </a>
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Track Name - Artist</h3>
-                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody composition, co-production.</p>
-                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@954.eddison</a>
+                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody composition co-production</p>
+                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]">@954.eddison</a>
                 </div>
-                <div>
+                <div class="portfolio-item">
                     <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
                         <img src="images/albumart_madaway.jpg" alt="Madaway Album Art" class="portfolio-img mb-2">
                     </a>
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Madaway - Tefflon</h3>
-                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody composition, co-production.</p>
-                    <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@1tefflon</a>
+                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody composition co-production</p>
+                    <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]">@1tefflon</a>
                 </div>
             </div>
         </section>
@@ -481,14 +516,14 @@
         <!-- Gallery Section -->
         <section id="gallery" class="card">
             <h2 class="section-header">Gallery</h2>
-            <div class="gallery-grid grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <img src="images/img_013.jpg" alt="Studio 1" class="gallery-img">
-                <img src="images/img_014.jpg" alt="Studio 2" class="gallery-img">
-                <img src="images/img_015.jpg" alt="Studio 3" class="gallery-img">
-                <img src="images/img_016.jpg" alt="Studio 4" class="gallery-img">
-                <img src="images/img_017.jpg" alt="Studio 5" class="gallery-img">
-                <img src="images/img_018.jpg" alt="Studio 6" class="gallery-img">
-                <img src="images/img_008.jpg" alt="Studio 7" class="gallery-img">
+            <div class="gallery-grid">
+                <div><img src="images/img_013.jpg" alt="Studio 1" class="gallery-img"></div>
+                <div><img src="images/img_014.jpg" alt="Studio 2" class="gallery-img"></div>
+                <div><img src="images/img_015.jpg" alt="Studio 3" class="gallery-img"></div>
+                <div><img src="images/img_016.jpg" alt="Studio 4" class="gallery-img"></div>
+                <div><img src="images/img_017.jpg" alt="Studio 5" class="gallery-img"></div>
+                <div><img src="images/img_018.jpg" alt="Studio 6" class="gallery-img"></div>
+                <div><img src="images/img_008.jpg" alt="Studio 7" class="gallery-img"></div>
             </div>
         </section>
 
