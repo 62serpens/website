@@ -22,7 +22,7 @@
             --text-primary: #f4f4f5;
             --text-secondary: #e4e4e7;
             --accent-primary: #9333ea;
-            --accent-secondary: #c084fc;
+            --accent-secondary: #d8b4fe;
             --accent-tertiary: #3b0764;
             --border-color: #3f3f46;
             --shadow-color-light: rgba(255, 255, 255, 0.03);
@@ -33,6 +33,7 @@
             --transition-duration: 0.3s;
             --border-radius-sm: 8px;
             --border-radius-md: 16px;
+            --border-radius-btn: 12px;
         }
         html { box-sizing: border-box; }
         *, *:before, *:after { box-sizing: inherit; }
@@ -40,10 +41,11 @@
             font-family: var(--font-body);
             font-size: 16px;
             margin: 0;
-            min-height: 100vh;
+            min-height: calc(100vh - env(safe-area-inset-bottom));
             background: linear-gradient(to bottom, #101012, #18181B);
             color: var(--text-primary);
             padding: 12px env(safe-area-inset-right) 12px env(safe-area-inset-left);
+            padding-bottom: env(safe-area-inset-bottom);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
@@ -67,20 +69,25 @@
             width: 100%;
             margin: 0 auto;
             padding: 0 12px;
+            padding-bottom: 16px;
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
         .section-header {
             font-family: var(--font-heading);
-            font-size: 1.75rem;
+            font-size: 2rem;
             font-weight: 400;
             color: var(--accent-secondary);
             text-align: center;
             margin-bottom: 1rem;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
             line-height: 1.2;
+            background-color: rgba(39, 39, 42, 0.5);
+            padding: 8px 16px;
+            border-radius: var(--border-radius-sm);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
         .card {
             background-color: var(--bg-secondary);
@@ -91,14 +98,18 @@
         }
         .service-card {
             background-color: var(--bg-secondary);
-            padding: 1rem;
+            padding: 1.25rem;
             border-radius: var(--border-radius-md);
             border: 1px solid var(--border-color);
             box-shadow: 0 4px 12px var(--shadow-color-dark), inset 0 1px 0 var(--shadow-color-light);
-            min-height: 180px;
+            min-height: 200px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            align-items: center;
+        }
+        .service-card h3 {
+            font-weight: 700;
         }
         .nav-link {
             color: var(--text-primary);
@@ -123,17 +134,17 @@
             justify-content: center;
             text-align: center;
             width: 100%;
-            max-width: 300px;
-            margin: 0 auto;
+            max-width: 260px;
             padding: 12px 16px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 500;
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-md);
+            border-radius: var(--border-radius-btn);
             box-shadow: 0 2px 8px var(--shadow-color-dark), inset 0 1px 1px var(--shadow-color-light);
             min-height: 48px;
             opacity: 0.9;
+            box-sizing: border-box;
         }
         .link-button:hover {
             transform: translateY(-3px) scale(1.02);
@@ -187,13 +198,10 @@
             justify-items: center;
             align-items: center;
         }
-        .gallery-grid div:last-child {
-            grid-column: 2 / 3;
-        }
         .gallery-img {
             object-fit: cover;
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border: 2px solid var(--border-color);
             border-radius: var(--border-radius-sm);
             transition: transform var(--transition-duration) ease;
@@ -222,6 +230,10 @@
         .portfolio-item {
             word-break: break-word;
             line-height: 1.2;
+        }
+        .portfolio-item a {
+            display: inline-flex;
+            align-items: center;
         }
         .equalizer {
             width: 48px;
@@ -344,14 +356,14 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            max-width: 300px;
+            max-width: 260px;
             margin: 0 auto;
             padding: 12px 16px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 500;
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-md);
+            border-radius: var(--border-radius-btn);
             box-shadow: 0 2px 8px var(--shadow-color-dark), inset 0 1px 1px var(--shadow-color-light);
             min-height: 48px;
             opacity: 0.9;
@@ -377,14 +389,18 @@
         section[id] {
             scroll-margin-top: 48px;
         }
+        footer {
+            margin-bottom: 16px;
+        }
         @media (max-width: 600px) {
             body { font-size: 14px; padding: 10px env(safe-area-inset-right) 10px env(safe-area-inset-left); }
             .container { padding: 0 8px; gap: 12px; }
-            .section-header { font-size: 1.5rem; }
+            .section-header { font-size: 1.75rem; }
             .nav-link { font-size: 0.875rem; padding: 4px 8px; }
             nav { height: 40px; }
-            .link-button, .expand-button { padding: 10px 14px; font-size: 0.85rem; min-height: 44px; max-width: 280px; }
-            .gallery-img { width: 80px; height: 80px; }
+            .link-button, .expand-button { max-width: 240px; padding: 10px 14px; font-size: 0.9rem; min-height: 44px; }
+            .link-button i.icon { font-size: 1rem; }
+            .gallery-img { width: 100px; height: 100px; }
             .portfolio-img { width: 120px; height: 120px; }
             .profile-pic-wrapper { width: 64px; height: 64px; }
             .card, .service-card { padding: 0.75rem; }
@@ -394,13 +410,14 @@
             .portfolio-item h3 { font-size: 0.75rem; }
             .portfolio-item p { font-size: 0.7rem; }
             .portfolio-item a { font-size: 0.7rem; }
+            .portfolio-item .fa-instagram { font-size: 0.7rem; }
             .service-card h3 { font-size: 0.75rem; }
             .service-card p { font-size: 0.7rem; }
-            .service-card .link-button { font-size: 0.85rem; }
+            .service-card .link-button { font-size: 0.9rem; white-space: nowrap; }
             .bonus-item-info h4 { font-size: 0.75rem; }
             .bonus-item-info p { font-size: 0.7rem; }
             .social-icon { width: 32px; height: 32px; font-size: 1.2rem; }
-            .service-card { min-height: 180px; }
+            .service-card { min-height: 200px; }
             .equalizer { width: 36px; }
         }
         @media (prefers-reduced-motion) {
@@ -460,18 +477,18 @@
                 </div>
                 <div class="service-card text-center">
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Creative Production</h3>
-                    <p class="text-[#e4e4e7] text-sm mb-2">Craft vibe-heavy tracks as a producer, executive producer, or creative director, shaping your project’s vision.</p>
-                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-music icon"></i><span>Contact Me for Quote</span>'><i class="fas fa-music icon"></i><span>Contact Me for Quote</span></button>
+                    <p class="text-[#e4e4e7] text-sm mb-2">Craft vibe-heavy tracks as producer or creative director.</p>
+                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-music icon"></i><span>Email for Quote</span>'><i class="fas fa-music icon"></i><span>Email for Quote</span></button>
                 </div>
                 <div class="service-card text-center">
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Recording & Engineering</h3>
-                    <p class="text-[#e4e4e7] text-sm mb-2">Capture your sound with clean, professional recording and engineering, plus a strong foundation for mixing and mastering using top-tier plugins.</p>
-                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-microphone icon"></i><span>Contact Me for Quote</span>'><i class="fas fa-microphone icon"></i><span>Contact Me for Quote</span></button>
+                    <p class="text-[#e4e4e7] text-sm mb-2">Professional recording and engineering with top-tier plugins.</p>
+                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-microphone icon"></i><span>Email for Quote</span>'><i class="fas fa-microphone icon"></i><span>Email for Quote</span></button>
                 </div>
                 <div class="service-card text-center">
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Production Tutoring</h3>
-                    <p class="text-[#e4e4e7] text-sm mb-2">Specialized FL Studio tutoring with workflow tips, personalized feedback, and production advice to level up.</p>
-                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-chalkboard-teacher icon"></i><span>Contact Me for Quote</span>'><i class="fas fa-chalkboard-teacher icon"></i><span>Contact Me for Quote</span></button>
+                    <p class="text-[#e4e4e7] text-sm mb-2">FL Studio tutoring with workflow tips and feedback.</p>
+                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-chalkboard-teacher icon"></i><span>Email for Quote</span>'><i class="fas fa-chalkboard-teacher icon"></i><span>Email for Quote</span></button>
                 </div>
             </div>
             <div class="card mt-4">
@@ -491,24 +508,24 @@
                         <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="portfolio-img mb-2">
                     </a>
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Down Bad - OnlyBino</h3>
-                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody production mixing</p>
-                    <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]">@onlybino</a>
+                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody, production, mixing</p>
+                    <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@onlybino</a>
                 </div>
                 <div class="portfolio-item">
                     <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" rel="noopener noreferrer">
-                        <img src="images/albumart_beatitup.jpg" alt="Beat It Up Album Art" class="portfolio-img mb-2">
+                        <img src="images/albumart_beatitup.jpg" alt="Beatitup Album Art" class="portfolio-img mb-2">
                     </a>
-                    <h3 class="text-sm font-medium text-[#c084fc] mb-1">Track Name - Artist</h3>
-                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody composition co-production</p>
-                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]">@954.eddison</a>
+                    <h3 class="text-sm font-medium text-[#c084fc] mb-1">Beatitup - 954.eddison</h3>
+                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody composition, co-production</p>
+                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@954.eddison</a>
                 </div>
                 <div class="portfolio-item">
                     <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
                         <img src="images/albumart_madaway.jpg" alt="Madaway Album Art" class="portfolio-img mb-2">
                     </a>
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Madaway - Tefflon</h3>
-                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody composition co-production</p>
-                    <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]">@1tefflon</a>
+                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody composition, co-production</p>
+                    <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@1tefflon</a>
                 </div>
             </div>
         </section>
@@ -523,7 +540,6 @@
                 <div><img src="images/img_016.jpg" alt="Studio 4" class="gallery-img"></div>
                 <div><img src="images/img_017.jpg" alt="Studio 5" class="gallery-img"></div>
                 <div><img src="images/img_018.jpg" alt="Studio 6" class="gallery-img"></div>
-                <div><img src="images/img_008.jpg" alt="Studio 7" class="gallery-img"></div>
             </div>
         </section>
 
@@ -589,7 +605,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="text-[#71717a] text-sm text-center py-3">
+        <footer class="text-[#71717a] text-sm text-center py-4">
             © <span id="year"></span> 62serpens. All rights reserved.
         </footer>
     </div>
