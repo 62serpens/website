@@ -47,14 +47,16 @@
             font-size: 16px;
             margin: 0;
             min-height: 100vh;
-            background: linear-gradient(to bottom, var(--bg-primary), var(--bg-tertiary));
+            background: linear-gradient(135deg, #0a0015 0%, #1a002a 50%, #000000 100%);
             color: var(--text-primary);
             padding: 12px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
             scroll-behavior: smooth;
-            background-image: radial-gradient(circle at 10% 10%, var(--accent-tertiary) 0%, transparent 50%), radial-gradient(circle at 90% 80%, var(--accent-tertiary) 0%, transparent 50%);
+            background-image: radial-gradient(circle at 20% 30%, rgba(191, 0, 255, 0.15) 0%, transparent 40%),
+                             radial-gradient(circle at 80% 70%, rgba(224, 102, 255, 0.1) 0%, transparent 40%),
+                             radial-gradient(circle at 50% 50%, rgba(21, 0, 34, 0.3) 0%, transparent 50%);
             background-attachment: fixed;
         }
 
@@ -564,6 +566,9 @@
                 height: 80px;
                 object-fit: cover;
             }
+            .home-heading {
+                font-size: 3rem;
+            }
         }
 
         @media (prefers-reduced-motion) {
@@ -605,7 +610,7 @@
             <div class="social-icons">
                 <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
-                <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+                <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class=" social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
                 <a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
             </div>
@@ -658,7 +663,7 @@
                         <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="portfolio-img" aria-label="View Down Bad track">
                     </a>
                     <h3 class="mb-2">Down Bad - OnlyBino</h3>
-                    <p class="text-[var(--text-secondary)] mb-2">Original melody, production, mixing</p>
+                    <p class="text-[var(--text-secondary)] mb-2">Original melody, full production, mixing</p>
                     <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> onlybino</a>
                 </div>
                 <div class="portfolio-item">
