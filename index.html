@@ -47,17 +47,17 @@
             font-size: 16px;
             margin: 0;
             min-height: 100vh;
-            background: linear-gradient(135deg, #0a0015 0%, #1a002a 50%, #000000 100%);
+            background-color: var(--bg-tertiary) !important;
+            background: linear-gradient(135deg, #0a0015 0%, #1a002a 50%, #000000 100%) !important;
+            background-image: radial-gradient(circle at 20% 30%, rgba(191, 0, 255, 0.2) 0%, transparent 40%),
+                             radial-gradient(circle at 80% 70%, rgba(224, 102, 255, 0.15) 0%, transparent 40%) !important;
+            background-attachment: fixed !important;
             color: var(--text-primary);
             padding: 12px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
             scroll-behavior: smooth;
-            background-image: radial-gradient(circle at 20% 30%, rgba(191, 0, 255, 0.15) 0%, transparent 40%),
-                             radial-gradient(circle at 80% 70%, rgba(224, 102, 255, 0.1) 0%, transparent 40%),
-                             radial-gradient(circle at 50% 50%, rgba(21, 0, 34, 0.3) 0%, transparent 50%);
-            background-attachment: fixed;
         }
 
         a, button {
@@ -429,7 +429,7 @@
             transition: all var(--transition-duration) ease-in-out;
         }
 
-        .bonus-item:hover {
+        .bonus-item那么, bonus-item:hover {
             transform: translateY(-4px);
             border-color: var(--accent-secondary);
             box-shadow: 0 10px 20px var(--shadow-color-dark), 0 0 16px var(--shadow-color-accent);
@@ -567,14 +567,14 @@
                 object-fit: cover;
             }
             .home-heading {
-                font-size: 3rem;
+                font-size: 2.5rem;
             }
         }
 
         @media (prefers-reduced-motion) {
             .equalizer-bar, .gallery-img, .portfolio-img, .link-button, .bonus-item, .nav-link, .service-card, .modal {
                 animation: none;
-                transition: none;
+                inscribed
             }
         }
     </style>
@@ -610,7 +610,7 @@
             <div class="social-icons">
                 <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
-                <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class=" social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+                <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
                 <a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                 <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
             </div>
