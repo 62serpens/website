@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Professional music production services by 62serpens, specializing in beat leasing, creative production, recording, and tutoring for young artists.">
-    <meta name="keywords" content="music production, beat leasing, recording, music producer, FL Studio tutoring, 62serpens">
+    <meta name="description" content="Professional music production and website design services by 62serpens, specializing in beat leasing, creative production, recording, tutoring, and custom websites.">
+    <meta name="keywords" content="music production, beat leasing, recording, music producer, FL Studio tutoring, website design, 62serpens">
     <meta name="author" content="62serpens">
-    <meta name="theme-color" content="#0A0A0B" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#121214" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#08080A" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#0F0F11" media="(prefers-color-scheme: light)">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>62serpens.com</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0B'/%3E%3Cpath d='M16 6 C10.477 6 6 10.477 6 16 S 10.477 26 16 26 S 26 21.523 26 16 S 21.523 6 16 6 Z M16 24 C 11.582 24 8 20.418 8 16 S 11.582 8 16 8 S 24 11.582 24 16 S 20.418 24 16 24 Z' fill='%239333ea'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23c084fc'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2308080A'/%3E%3Cpath d='M16 6 C10.477 6 6 10.477 6 16 S 10.477 26 16 26 S 26 21.523 26 16 S 21.523 6 16 6 Z M16 24 C 11.582 24 8 20.418 8 16 S 11.582 8 16 8 S 24 11.582 24 16 S 20.418 24 16 24 Z' fill='%23bf00ff'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23e066ff'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -18,18 +18,18 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0A0A0B;
-            --bg-secondary: #121214;
-            --bg-tertiary: #1E1E21;
+            --bg-primary: #08080A;
+            --bg-secondary: #0F0F11;
+            --bg-tertiary: #1A1A1C;
             --text-primary: #f4f4f5;
             --text-secondary: #E0E0E4;
-            --accent-primary: #9333ea;
-            --accent-secondary: #d8b4fe;
-            --accent-tertiary: #3b0764;
+            --accent-primary: #bf00ff;
+            --accent-secondary: #e066ff;
+            --accent-tertiary: #2a0040;
             --border-color: #3f3f46;
             --shadow-color-light: rgba(255, 255, 255, 0.08);
             --shadow-color-dark: rgba(0, 0, 0, 0.25);
-            --shadow-color-accent: rgba(192, 132, 252, 0.2);
+            --shadow-color-accent: rgba(191, 0, 255, 0.2);
             --font-body: 'Inter', sans-serif;
             --font-heading: 'Bebas Neue', sans-serif;
             --transition-duration: 0.3s;
@@ -96,8 +96,8 @@
             text-transform: uppercase;
             padding: 8px 16px;
             border-radius: var(--border-radius-sm);
-            background: linear-gradient(145deg, rgba(30, 30, 33, 0.6), rgba(30, 30, 33, 0.3));
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 0 8px var(--shadow-color-accent);
+            background: linear-gradient(145deg, rgba(26, 26, 28, 0.6), rgba(26, 26, 28, 0.3));
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6), 0 0 6px var(--shadow-color-accent);
         }
 
         .card {
@@ -114,11 +114,12 @@
             border-radius: var(--border-radius-md);
             border: 1px solid var(--border-color);
             box-shadow: 0 6px 16px var(--shadow-color-dark), inset 0 1px 0 var(--shadow-color-light);
-            min-height: 180px;
+            min-height: 200px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
+            text-align: center;
             transition: transform var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out;
         }
 
@@ -131,6 +132,24 @@
             font-size: 1rem;
             font-weight: 600;
             color: var(--accent-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            flex-grow: 1;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
         }
 
         .nav-link {
@@ -159,6 +178,7 @@
             justify-content: center;
             width: 100%;
             max-width: 240px;
+            min-height: 40px;
             padding: 10px 14px;
             font-size: 0.9rem;
             font-weight: 500;
@@ -361,6 +381,7 @@
         .fa-discord { color: #5865f2; }
         .fa-check { color: #22c55e; }
         .fa-times { color: #ef4444; }
+        .fa-laptop-code { color: var(--accent-secondary); }
 
         .bonus-grid {
             display: grid;
@@ -403,7 +424,7 @@
 
         nav {
             backdrop-filter: blur(12px);
-            background: rgba(18, 18, 20, 0.9);
+            background: rgba(15, 15, 17, 0.9);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-sm);
             overflow: hidden;
@@ -445,7 +466,7 @@
                 height: 80px;
             }
             .service-card {
-                min-height: 160px;
+                min-height: 180px;
                 padding: 0.75rem;
             }
             .services-grid {
@@ -528,33 +549,38 @@
                 <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
                 <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
                 <a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria="Discord"><i class="fab fa-discord"></i></a>
+                <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
             </div>
         </section>
 
         <!-- Services Section -->
         <section id="services" class="card">
             <h2 class="section-header">Services</h2>
-            <div class="services-grid grid grid-cols-2 gap-8">
-                <div class="service-card text-center">
+            <div class="services-grid">
+                <div class="service-card">
                     <h3 class="mb-2">Beat Leasing</h3>
                     <p class="text-[var(--text-secondary)] text-sm mb-4">High-quality beats available for lease through my BeatStars store.</p>
                     <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button"><i class="fas fa-store icon"></i>Visit Beat Store</a>
                 </div>
-                <div class="service-card text-center">
+                <div class="service-card">
                     <h3 class="mb-2">Personalized Production</h3>
                     <p class="text-[var(--text-secondary)] text-sm mb-4">Collaborative production to bring your musical vision to life, with portable studio setups.</p>
                     <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-music icon"></i>Email for Quote'><i class="fas fa-music icon"></i>Email for Quote</button>
                 </div>
-                <div class="service-card text-center">
+                <div class="service-card">
                     <h3 class="mb-2">Recording & Engineering</h3>
                     <p class="text-[var(--text-secondary)] text-sm mb-4">Professional recording and mixing using top-tier plugins and equipment, on the go.</p>
                     <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-microphone icon"></i>Email for Quote'><i class="fas fa-microphone icon"></i>Email for Quote</button>
                 </div>
-                <div class="service-card text-center">
+                <div class="service-card">
                     <h3 class="mb-2">Production Tutoring</h3>
                     <p class="text-[var(--text-secondary)] text-sm mb-4">Personalized FL Studio tutoring with expert workflow tips and feedback.</p>
                     <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-chalkboard-teacher icon"></i>Email for Quote'><i class="fas fa-chalkboard-teacher icon"></i>Email for Quote</button>
+                </div>
+                <div class="service-card">
+                    <h3 class="mb-2">Website Design</h3>
+                    <p class="text-[var(--text-secondary)] text-sm mb-4">Custom professional websites built to showcase your brand, like this one.</p>
+                    <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-laptop-code icon"></i>Email for Quote'><i class="fas fa-laptop-code icon"></i>Email for Quote</button>
                 </div>
             </div>
         </section>
