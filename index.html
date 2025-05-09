@@ -110,11 +110,11 @@
 
         .service-card {
             background: var(--bg-secondary);
-            padding: 1rem 1rem 8px;
+            padding: 12px 8px;
             border-radius: var(--border-radius-md);
             border: 1px solid var(--border-color);
             box-shadow: 0 6px 16px var(--shadow-color-dark), inset 0 1px 0 var(--shadow-color-light);
-            min-height: 260px;
+            min-height: 220px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -129,17 +129,23 @@
         }
 
         .service-card h3 {
-            font-size: 1rem;
+            min-height: 48px;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--accent-secondary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             margin: 0 0 8px;
+            line-height: 1.3;
         }
 
         .service-card p {
+            min-height: 56px;
             color: var(--text-secondary);
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             line-height: 1.4;
-            margin: 0 0 12px;
+            margin: 0 0 8px;
             flex-grow: 1;
         }
 
@@ -178,9 +184,9 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            height: 44px;
-            padding: 8px 12px;
-            font-size: 0.9rem;
+            height: 36px;
+            padding: 6px 8px;
+            font-size: 0.78rem;
             font-weight: 500;
             background: linear-gradient(145deg, var(--bg-secondary), var(--bg-tertiary));
             border: 1px solid var(--border-color);
@@ -199,7 +205,7 @@
 
         .link-button i.icon {
             margin-right: 8px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--text-primary);
         }
 
@@ -257,13 +263,21 @@
             gap: 12px;
         }
 
+        .portfolio-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
         .portfolio-img {
-            width: 160px;
-            height: 160px;
+            width: 120px;
+            height: 120px;
             object-fit: cover;
             border: 2px solid var(--border-color);
             border-radius: var(--border-radius-sm);
             transition: transform var(--transition-duration) ease-in-out, border-color var(--transition-duration) ease-in-out;
+            margin: 0 auto 8px;
         }
 
         .portfolio-img:hover {
@@ -276,11 +290,17 @@
             font-size: 0.875rem;
             font-weight: 600;
             color: var(--accent-secondary);
+            margin: 0 0 4px;
         }
 
         .portfolio-item p {
             font-size: 0.75rem;
             color: var(--text-secondary);
+            margin: 0 0 4px;
+        }
+
+        .portfolio-item a {
+            font-size: 0.75rem;
         }
 
         .equalizer {
@@ -456,29 +476,36 @@
                 margin: 0 3px;
             }
             .link-button {
-                height: 44px;
-                padding: 8px 10px;
-                font-size: 0.82rem;
+                height: 36px;
+                padding: 6px 8px;
+                font-size: 0.78rem;
             }
-            .gallery-img, .portfolio-img {
+            .link-button i.icon {
+                font-size: 0.9rem;
+            }
+            .gallery-img {
                 width: 120px;
                 height: 120px;
+            }
+            .portfolio-img {
+                width: 100px;
+                height: 100px;
             }
             .profile-pic-wrapper {
                 width: 80px;
                 height: 80px;
             }
             .service-card {
-                min-height: 240px;
-                padding: 0.75rem 0.75rem 8px;
+                min-height: 200px;
+                padding: 10px 6px;
             }
             .service-card h3 {
-                font-size: 0.95rem;
-                margin: 0 0 8px;
+                min-height: 44px;
+                font-size: 0.9rem;
             }
             .service-card p {
-                font-size: 0.8rem;
-                margin: 0 0 12px;
+                min-height: 52px;
+                font-size: 0.78rem;
             }
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -510,8 +537,8 @@
                 gap: 8px;
             }
             .portfolio-img {
-                width: 140px;
-                height: 140px;
+                width: 120px;
+                height: 120px;
             }
             .bonus-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -580,28 +607,28 @@
             <h2 class="section-header">Services</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <h3 class="mb-2">Instrumental Leasing</h3>
-                    <p class="text-[var(--text-secondary)] mb-4">High-quality instrumentals available for lease through my BeatStars store.</p>
+                    <h3 class="mb-2">Instrumental<br>Leasing</h3>
+                    <p class="text-[var(--text-secondary)] mb-4">High-quality instrumentals for lease via my BeatStars store.</p>
                     <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button"><i class="fas fa-store icon"></i>Visit Beat Store</a>
                 </div>
                 <div class="service-card">
-                    <h3 class="mb-2">Personalized Production</h3>
-                    <p class="text-[var(--text-secondary)] mb-4">Collaborative production to realize your musical vision with portable studio setups.</p>
+                    <h3 class="mb-2">Personalized<br>Production</h3>
+                    <p class="text-[var(--text-secondary)] mb-4">Collaborative production to realize your vision with portable setups.</p>
                     <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-music icon"></i>Email for Quote'><i class="fas fa-music icon"></i>Email for Quote</button>
                 </div>
                 <div class="service-card">
-                    <h3 class="mb-2">Recording & Engineering</h3>
-                    <p class="text-[var(--text-secondary)] mb-4">Professional recording and mixing using top-tier plugins and equipment, on the go.</p>
+                    <h3 class="mb-2">Recording &<br>Engineering</h3>
+                    <p class="text-[var(--text-secondary)] mb-4">Professional recording and mixing with top-tier plugins, mobile.</p>
                     <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-microphone icon"></i>Email for Quote'><i class="fas fa-microphone icon"></i>Email for Quote</button>
                 </div>
                 <div class="service-card">
-                    <h3 class="mb-2">Production Tutoring</h3>
-                    <p class="text-[var(--text-secondary)] mb-4">Personalized FL Studio tutoring with expert workflow tips and feedback.</p>
+                    <h3 class="mb-2">Production<br>Tutoring</h3>
+                    <p class="text-[var(--text-secondary)] mb-4">Personalized FL Studio tutoring with expert workflow guidance.</p>
                     <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-chalkboard-teacher icon"></i>Email for Quote'><i class="fas fa-chalkboard-teacher icon"></i>Email for Quote</button>
                 </div>
                 <div class="service-card">
-                    <h3 class="mb-2">Website Design</h3>
-                    <p class="text-[var(--text-secondary)] mb-4">Custom professional websites built to showcase your brand, like this one.</p>
+                    <h3 class="mb-2">Website<br>Design</h3>
+                    <p class="text-[var(--text-secondary)] mb-4">Custom websites to showcase your brand, like this one.</p>
                     <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-laptop-code icon"></i>Email for Quote'><i class="fas fa-laptop-code icon"></i>Email for Quote</button>
                 </div>
             </div>
@@ -619,27 +646,27 @@
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
-                        <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="portfolio-img mb-3" aria-label="View Down Bad track">
+                        <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="portfolio-img" aria-label="View Down Bad track">
                     </a>
                     <h3 class="mb-2">Down Bad - OnlyBino</h3>
-                    <p class="text-[var(--text-secondary)] text-sm mb-2">Original melody, production, mixing</p>
-                    <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[var(--accent-primary)] text-sm hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> onlybino</a>
+                    <p class="text-[var(--text-secondary)] mb-2">Original melody, production, mixing</p>
+                    <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> onlybino</a>
                 </div>
                 <div class="portfolio-item">
                     <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" rel="noopener noreferrer">
-                        <img src="images/albumart_beatitup.jpg" alt="Beatitup Album Art" class="portfolio-img mb-3" aria-label="View Beatitup track">
+                        <img src="images/albumart_beatitup.jpg" alt="Beatitup Album Art" class="portfolio-img" aria-label="View Beatitup track">
                     </a>
                     <h3 class="mb-2">Beatitup - 954.eddison</h3>
-                    <p class="text-[var(--text-secondary)] text-sm mb-2">Original melody composition, co-production</p>
-                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] text-sm hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 954.eddison</a>
+                    <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
+                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 954.eddison</a>
                 </div>
                 <div class="portfolio-item">
                     <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
-                        <img src="images/albumart_madaway.jpg" alt="Madaway Album Art" class="portfolio-img mb-3" aria-label="View Madaway track">
+                        <img src="images/albumart_madaway.jpg" alt="Madaway Album Art" class="portfolio-img" aria-label="View Madaway track">
                     </a>
                     <h3 class="mb-2">Madaway - Tefflon</h3>
-                    <p class="text-[var(--text-secondary)] text-sm mb-2">Original melody composition, co-production</p>
-                    <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[var(--accent-primary)] text-sm hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 1tefflon</a>
+                    <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
+                    <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 1tefflon</a>
                 </div>
             </div>
         </section>
