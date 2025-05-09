@@ -50,9 +50,10 @@
             background: radial-gradient(circle at 10% 20%, rgba(191, 0, 255, 0.25) 0%, transparent 50%),
                         radial-gradient(circle at 90% 80%, rgba(224, 102, 255, 0.25) 0%, transparent 50%),
                         radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
-                        linear-gradient(160deg, #0a0015 0%, #2a004d 25%, #1a0033 55%, #000000 80%) !important;
-            background-color: #0a0015 !important; /* Fallback */
-            background-attachment: fixed !important;
+                        linear-gradient(160deg, #0a0015 0%, #2a004d 25%, #1a0033 55%, #000000 80%),
+                        linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            background-color: #0a0015; /* Fallback */
+            background-attachment: fixed;
         }
 
         body {
@@ -60,9 +61,10 @@
             background: radial-gradient(circle at 10% 20%, rgba(191, 0, 255, 0.25) 0%, transparent 50%),
                         radial-gradient(circle at 90% 80%, rgba(224, 102, 255, 0.25) 0%, transparent 50%),
                         radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
-                        linear-gradient(160deg, #0a0015 0%, #2a004d 25%, #1a0033 55%, #000000 80%) !important;
-            background-color: #0a0015 !important; /* Fallback */
-            background-attachment: fixed !important;
+                        linear-gradient(160deg, #0a0015 0%, #2a004d 25%, #1a0033 55%, #000000 80%),
+                        linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            background-color: #0a0015; /* Fallback */
+            background-attachment: fixed;
             font-family: var(--font-body);
             font-size: 16px;
             color: var(--text-primary);
@@ -78,7 +80,8 @@
             background: radial-gradient(circle at 10% 20%, rgba(191, 0, 255, 0.25) 0%, transparent 50%),
                         radial-gradient(circle at 90% 80%, rgba(224, 102, 255, 0.25) 0%, transparent 50%),
                         radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
-                        linear-gradient(160deg, #0a0015 0%, #2a004d 25%, #1a0033 55%, #000000 80%) !important;
+                        linear-gradient(160deg, #0a0015 0%, #2a004d 25%, #1a0033 55%, #000000 80%),
+                        linear-gradient(0deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
         }
 
         a, button {
@@ -207,12 +210,23 @@
             box-shadow: 0 0 16px var(--shadow-color-accent);
         }
 
-        .nav-link:active {
+        .nav-link.tapped {
             color: var(--accent-secondary);
             background: var(--bg-tertiary);
             border-color: var(--accent-secondary);
             transform: scale(1.05);
             box-shadow: 0 0 16px var(--shadow-color-accent);
+        }
+
+        /* Disable hover on touch devices */
+        @media (pointer: coarse) {
+            .nav-link:hover {
+                color: var(--text-primary);
+                background: transparent;
+                border-color: var(--border-color);
+                transform: none;
+                box-shadow: none;
+            }
         }
 
         .link-button {
@@ -832,11 +846,16 @@
                 const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
                 window.scrollTo({ top: targetPosition, behavior: 'smooth' });
             });
+            anchor.addEventListener('touchstart', e => {
+                if (window.innerWidth <= 600) {
+                    anchor.classList.add('tapped');
+                }
+            });
             anchor.addEventListener('touchend', e => {
                 if (window.innerWidth <= 600) {
                     document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('tapped');
                         link.blur();
-                        link.classList.remove('hover');
                         link.style.background = '';
                         link.style.borderColor = '';
                         link.style.transform = '';
