@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Portable music production by 62serpens for young artists.">
+    <meta name="theme-color" content="#101012" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#18181B" media="(prefers-color-scheme: light)">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>62serpens - Portable Music Producer</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101012'/%3E%3Cpath d='M16 6 C10.477 6 6 10.477 6 16 S 10.477 26 16 26 S 26 21.523 26 16 S 21.523 6 16 6 Z M16 24 C 11.582 24 8 20.418 8 16 S 11.582 8 16 8 S 24 11.582 24 16 S 20.418 24 16 24 Z' fill='%239333ea'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23c084fc'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +20,7 @@
             --bg-secondary: #18181B;
             --bg-tertiary: #27272A;
             --text-primary: #f4f4f5;
-            --text-secondary: #d4d4d8;
+            --text-secondary: #e4e4e7;
             --accent-primary: #9333ea;
             --accent-secondary: #c084fc;
             --accent-tertiary: #3b0764;
@@ -38,7 +41,7 @@
             font-size: 16px;
             margin: 0;
             min-height: 100vh;
-            background-color: var(--bg-primary);
+            background: linear-gradient(to bottom, #101012, #18181B);
             color: var(--text-primary);
             padding: 16px env(safe-area-inset-right) 16px env(safe-area-inset-left);
             -webkit-font-smoothing: antialiased;
@@ -60,13 +63,13 @@
             outline-offset: 2px;
         }
         .container {
-            max-width: 680px;
+            max-width: 720px;
             width: 100%;
             margin: 0 auto;
             padding: 0 12px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 24px;
         }
         .section-header {
             font-family: var(--font-heading);
@@ -82,7 +85,18 @@
             padding: 1rem;
             border-radius: var(--border-radius-md);
             border: 1px solid var(--border-color);
-            box-shadow: 0 2px 8px var(--shadow-color-dark), inset 0 1px 0 var(--shadow-color-light);
+            box-shadow: 0 4px 12px var(--shadow-color-dark), inset 0 1px 0 var(--shadow-color-light);
+        }
+        .service-card {
+            background-color: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-color-dark), inset 0 1px 0 var(--shadow-color-light);
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .nav-link {
             color: var(--text-secondary);
@@ -105,7 +119,7 @@
             max-width: 300px;
             margin: 0 auto;
             padding: 12px 16px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -161,6 +175,7 @@
             object-fit: cover;
             width: 100%;
             height: 160px;
+            aspect-ratio: 1/1;
             border: 2px solid var(--border-color);
             border-radius: var(--border-radius-sm);
             transition: transform var(--transition-duration) ease;
@@ -244,7 +259,7 @@
         .fa-star { color: var(--accent-secondary); }
         .bonus-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 16px;
             width: 100%;
             margin-bottom: 16px;
@@ -269,7 +284,7 @@
         .bonus-item-thumbnail {
             width: 100%;
             height: auto;
-            aspect-ratio: 16 / 10;
+            aspect-ratio: 16/10;
             background-color: var(--bg-tertiary);
             border-radius: var(--border-radius-sm);
             margin-bottom: 8px;
@@ -303,22 +318,22 @@
             scroll-margin-top: 48px;
         }
         @media (max-width: 600px) {
-            body { padding: 12px env(safe-area-inset-right) 12px env(safe-area-inset-left); }
+            body { font-size: 15px; padding: 12px env(safe-area-inset-right) 12px env(safe-area-inset-left); }
             .container { padding: 0 8px; gap: 16px; }
             .section-header { font-size: 1.5rem; }
             .nav-link { font-size: 0.875rem; }
-            .hero { padding: 2rem 0; }
-            .link-button { padding: 10px 14px; font-size: 0.85rem; min-height: 44px; max-width: 280px; }
+            nav { height: 44px; }
+            .link-button { padding: 10px 14px; font-size: 0.9rem; min-height: 44px; max-width: 280px; }
             .gallery-img { height: 140px; }
             .portfolio-img { height: 100px; }
-            .profile-pic-wrapper { width: 60px; height: 60px; }
-            .card { padding: 0.75rem; }
-            section { padding: 1rem 0; }
-            .bonus-grid { grid-template-columns: 1fr; gap: 12px; }
+            .profile-pic-wrapper { width: 56px; height: 56px; }
+            .card, .service-card { padding: 0.75rem; }
+            section { padding: 1.5rem 0; }
+            .bonus-grid, .gallery-grid, .services-grid, .portfolio-grid { grid-template-columns: 1fr; gap: 12px; }
             .bonus-item-info h4 { font-size: 13px; }
             .bonus-item-info p { font-size: 12px; }
             .social-icon { width: 28px; height: 28px; font-size: 1rem; }
-            .gallery-grid { grid-template-columns: 1fr; }
+            .service-card { min-height: 200px; }
         }
         @media (prefers-reduced-motion) {
             .equalizer-bar, .gallery-img, .portfolio-img, .link-button, .bonus-item { animation: none; transition: none; }
@@ -331,14 +346,11 @@
     <div class="container">
         <!-- Navigation -->
         <nav class="bg-[#18181B] shadow-sm sticky top-0 z-50 rounded-b-[16px] border-b-2 border-[#3f3f46]">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6">
-                <div class="flex justify-between h-12">
-                    <div class="flex items-center">
-                        <h1 class="text-sm font-medium text-[#c084fc] tracking-wide">62serpens</h1>
-                    </div>
+            <div class="max-w-4xl mx-auto px-6">
+                <div class="flex justify-center h-12">
                     <div class="flex items-center space-x-3">
-                        <a href="#portfolio" class="nav-link">Portfolio</a>
                         <a href="#services" class="nav-link">Services</a>
+                        <a href="#portfolio" class="nav-link">Portfolio</a>
                         <a href="#gallery" class="nav-link">Gallery</a>
                         <a href="#bonus" class="nav-link">Bonus</a>
                     </div>
@@ -348,12 +360,12 @@
 
         <!-- Hero Section -->
         <section class="card">
-            <div class="text-center py-12">
+            <div class="text-center py-10">
                 <div class="profile-pic-wrapper">
                     <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic">
                 </div>
                 <h1 class="text-2xl font-[Space Grotesk] text-[#f4f4f5] mt-2 mb-1">62serpens</h1>
-                <p class="text-sm text-[#d4d4d8] mb-2">Portable Music Producer</p>
+                <p class="text-sm text-[#e4e4e7] mb-2">Portable Music Producer</p>
                 <div class="equalizer" aria-hidden="true">
                     <div class="equalizer-bar"></div>
                     <div class="equalizer-bar"></div>
@@ -369,16 +381,49 @@
             </div>
         </section>
 
+        <!-- Services Section -->
+        <section id="services">
+            <h2 class="section-header">Services</h2>
+            <div class="services-grid grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="service-card text-center">
+                    <h3 class="text-sm font-medium text-[#c084fc] mb-1">Beat Leasing</h3>
+                    <p class="text-[#e4e4e7] text-sm mb-2">Lease beats from my BeatStars store.</p>
+                    <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button center-text"><i class="fas fa-store icon"></i><span>Visit Beat Store</span></a>
+                </div>
+                <div class="service-card text-center">
+                    <h3 class="text-sm font-medium text-[#c084fc] mb-1">Creative Production</h3>
+                    <p class="text-[#e4e4e7] text-sm mb-2">Craft vibe-heavy tracks as a producer, executive producer, or creative director, shaping your project’s vision.</p>
+                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-music icon"></i><span>Contact Me</span>'><i class="fas fa-music icon"></i><span>Contact Me</span></button>
+                </div>
+                <div class="service-card text-center">
+                    <h3 class="text-sm font-medium text-[#c084fc] mb-1">Recording & Engineering</h3>
+                    <p class="text-[#e4e4e7] text-sm mb-2">Capture your sound with clean, professional recording and engineering, plus a strong foundation for mixing and mastering using top-tier plugins.</p>
+                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-microphone icon"></i><span>Contact Me</span>'><i class="fas fa-microphone icon"></i><span>Contact Me</span></button>
+                </div>
+                <div class="service-card text-center">
+                    <h3 class="text-sm font-medium text-[#c084fc] mb-1">Production Tutoring</h3>
+                    <p class="text-[#e4e4e7] text-sm mb-2">Specialized FL Studio tutoring with workflow tips, personalized feedback, and production advice to level up.</p>
+                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-chalkboard-teacher icon"></i><span>Contact Me</span>'><i class="fas fa-chalkboard-teacher icon"></i><span>Contact Me</span></button>
+                </div>
+            </div>
+            <div class="card mt-4">
+                <h3 class="text-sm font-medium text-[#c084fc] mb-1 text-center">My Gear</h3>
+                <p class="text-[#e4e4e7] text-sm leading-relaxed">
+                    I use reliable, high-end gear with a UAD Apollo X4 interface and premium plugin suite for in-the-box processing, delivering pro-quality results.
+                </p>
+            </div>
+        </section>
+
         <!-- Portfolio Section -->
         <section id="portfolio" class="card">
             <h2 class="section-header">Portfolio</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="portfolio-grid grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                     <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
                         <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="portfolio-img mb-2">
                     </a>
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Down Bad - OnlyBino</h3>
-                    <p class="text-[#d4d4d8] text-sm mb-1">Original melody, production, mixing.</p>
+                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody, production, mixing.</p>
                     <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@onlybino</a>
                 </div>
                 <div>
@@ -386,7 +431,7 @@
                         <img src="images/albumart_beatitup.jpg" alt="Beat It Up Album Art" class="portfolio-img mb-2">
                     </a>
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Track Name - Artist</h3>
-                    <p class="text-[#d4d4d8] text-sm mb-1">Original melody composition, co-production.</p>
+                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody composition, co-production.</p>
                     <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@954.eddison</a>
                 </div>
                 <div>
@@ -394,41 +439,10 @@
                         <img src="images/albumart_madaway.jpg" alt="Madaway Album Art" class="portfolio-img mb-2">
                     </a>
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Madaway - Tefflon</h3>
-                    <p class="text-[#d4d4d8] text-sm mb-1">Original melody composition, co-production.</p>
+                    <p class="text-[#e4e4e7] text-sm mb-1">Original melody composition, co-production.</p>
                     <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[#9333ea] text-sm hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@1tefflon</a>
                 </div>
             </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="card">
-            <h2 class="section-header">Services</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="text-center">
-                    <h3 class="text-sm font-medium text-[#c084fc] mb-1">Beat Leasing</h3>
-                    <p class="text-[#d4d4d8] text-sm mb-2">Lease beats from my BeatStars store.</p>
-                    <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button center-text"><i class="fas fa-store icon"></i><span>Visit Beat Store</span></a>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-sm font-medium text-[#c084fc] mb-1">Creative Production</h3>
-                    <p class="text-[#d4d4d8] text-sm mb-2">Craft vibe-heavy tracks as a producer, executive producer, or creative director, shaping your project’s vision.</p>
-                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-music icon"></i><span>Contact Me</span>'><i class="fas fa-music icon"></i><span>Contact Me</span></button>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-sm font-medium text-[#c084fc] mb-1">Recording & Engineering</h3>
-                    <p class="text-[#d4d4d8] text-sm mb-2">Capture your sound with clean, professional recording and engineering, plus a strong foundation for mixing and mastering using top-tier plugins.</p>
-                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-microphone icon"></i><span>Contact Me</span>'><i class="fas fa-microphone icon"></i><span>Contact Me</span></button>
-                </div>
-                <div class="text-center">
-                    <h3 class="text-sm font-medium text-[#c084fc] mb-1">Production Tutoring</h3>
-                    <p class="text-[#d4d4d8] text-sm mb-2">Specialized FL Studio tutoring with workflow tips, personalized feedback, and production advice to level up.</p>
-                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-chalkboard-teacher icon"></i><span>Contact Me</span>'><i class="fas fa-chalkboard-teacher icon"></i><span>Contact Me</span></button>
-                </div>
-            </div>
-            <h3 class="text-sm font-medium text-[#c084fc] mt-4 mb-1 text-center">My Gear</h3>
-            <p class="text-[#d4d4d8] text-sm leading-relaxed">
-                I use reliable, high-end gear with a UAD Apollo X4 interface and premium plugin suite for in-the-box processing, delivering pro-quality results.
-            </p>
         </section>
 
         <!-- Gallery Section -->
