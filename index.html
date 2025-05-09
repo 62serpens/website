@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/np m/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         :root {
             --bg-primary: #0A0A0B;
@@ -40,7 +40,7 @@
 
         *, *:before, *:after { box-sizing: border-box; }
         html {
-            scroll-padding-top: 64px; /* Offset for sticky nav */
+            scroll-padding-top: 64px;
         }
         body {
             font-family: var(--font-body);
@@ -79,6 +79,10 @@
             flex-direction: column;
             gap: 16px;
             min-height: 100vh;
+        }
+
+        section {
+            padding-top: 64px;
         }
 
         .section-header {
@@ -272,4 +276,461 @@
             animation: equalize 1.2s infinite ease-in-out alternate;
         }
 
-        .equalizer-bar:nth-child(1) { height: 8、手動で変更しました。
+        .equalizer-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
+        .equalizer-bar:nth-child(2) { height: 14px; animation-delay: 0.2s; }
+        .equalizer-bar:nth-child(3) { height: 10px; animation-delay: 0.4s; }
+
+        @keyframes equalize {
+            0% { height: 4px; opacity: 0.5; }
+            100% { height: 100%; opacity: 0.8; }
+        }
+
+        .profile-pic-wrapper {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-color-dark);
+        }
+
+        .contact-button.locked {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .contact-button .fa-check, .contact-button .fa-times {
+            margin-right: 8px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity var(--transition-duration) ease-in-out;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: var(--border-radius-sm);
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 16px var(--shadow-color-accent);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--text-primary);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color var(--transition-duration) ease-in-out;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-secondary);
+        }
+
+        .fa-store { color: #f59e0b; }
+        .fa-instagram { color: #e1306c; }
+        .fa-spotify { color: #1db954; }
+        .fa-soundcloud { color: #ff5500; }
+        .fa-youtube { color: #ff0000; }
+        .fa-discord { color: #5865f2; }
+        .fa-check { color: #22c55e; }
+        .fa-times { color: #ef4444; }
+
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .bonus-item {
+            background: var(--bg-secondary);
+            padding: 8px;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 6px 16px var(--shadow-color-dark);
+            transition: all var(--transition-duration) ease-in-out;
+        }
+
+        .bonus-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-secondary);
+            box-shadow: 0 10px 20px var(--shadow-color-dark), 0 0 16px var(--shadow-color-accent);
+        }
+
+        .bonus-item-thumbnail img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .bonus-item-info h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .bonus-item-info p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        nav {
+            backdrop-filter: blur(12px);
+            background: rgba(18, 18, 20, 0.9);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+        }
+
+        footer {
+            margin-bottom: 24px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .container {
+                padding: 0 8px;
+                gap: 12px;
+            }
+            .section-header {
+                font-size: 1.75rem;
+            }
+            .nav-link {
+                font-size: 0.85rem;
+                padding: 4px 6px;
+                margin: 0 3px;
+            }
+            .link-button {
+                max-width: 220px;
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+            .gallery-img, .portfolio-img {
+                width: 120px;
+                height: 120px;
+            }
+            .profile-pic-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+            .service-card {
+                min-height: 160px;
+                padding: 0.75rem;
+            }
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            nav {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding: 8px 4px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .nav-link {
+                display: inline-block;
+            }
+            .portfolio-grid, .bonus-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+        }
+
+        @media (min-width: 601px) {
+            .bonus-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .bonus-item {
+                padding: 6px;
+                max-width: 180px;
+                margin: 0 auto;
+                width: 100%;
+            }
+            .bonus-item-thumbnail img {
+                width: 100%;
+                max-width: 180px;
+                height: 80px;
+                object-fit: cover;
+            }
+        }
+
+        @media (prefers-reduced-motion) {
+            .equalizer-bar, .gallery-img, .portfolio-img, .link-button, .bonus-item, .nav-link, .service-card, .modal {
+                animation: none;
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="sticky top-0 z-50">
+            <div class="flex justify-center py-3">
+                <div class="flex items-center space-x-2">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#gear" class="nav-link">Gear</a>
+                    <a href="#portfolio" class="nav-link">Portfolio</a>
+                    <a href="#gallery" class="nav-link">Gallery</a>
+                    <a href="#bonus" class="nav-link">Bonus</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="card text-center py-10">
+            <div class="profile-pic-wrapper">
+                <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic">
+            </div>
+            <h1 class="text-3xl font-[Bebas Neue] mt-4 mb-2">62serpens</h1>
+            <p class="text-base text-[var(--text-secondary)] mb-4">Professional Music Producer</p>
+            <div class="equalizer" aria-hidden="true">
+                <div class="equalizer-bar"></div>
+                <div class="equalizer-bar"></div>
+                <div class="equalizer-bar"></div>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+                <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+                <a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria="Discord"><i class="fab fa-discord"></i></a>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="card">
+            <h2 class="section-header">Services</h2>
+            <div class="services-grid grid grid-cols-2 gap-8">
+                <div class="service-card text-center">
+                    <h3 class="mb-2">Beat Leasing</h3>
+                    <p class="text-[var(--text-secondary)] text-sm mb-4">High-quality beats available for lease through my BeatStars store.</p>
+                    <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button"><i class="fas fa-store icon"></i>Visit Beat Store</a>
+                </div>
+                <div class="service-card text-center">
+                    <h3 class="mb-2">Personalized Production</h3>
+                    <p class="text-[var(--text-secondary)] text-sm mb-4">Collaborative production to bring your musical vision to life, with portable studio setups.</p>
+                    <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-music icon"></i>Email for Quote'><i class="fas fa-music icon"></i>Email for Quote</button>
+                </div>
+                <div class="service-card text-center">
+                    <h3 class="mb-2">Recording & Engineering</h3>
+                    <p class="text-[var(--text-secondary)] text-sm mb-4">Professional recording and mixing using top-tier plugins and equipment, on the go.</p>
+                    <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-microphone icon"></i>Email for Quote'><i class="fas fa-microphone icon"></i>Email for Quote</button>
+                </div>
+                <div class="service-card text-center">
+                    <h3 class="mb-2">Production Tutoring</h3>
+                    <p class="text-[var(--text-secondary)] text-sm mb-4">Personalized FL Studio tutoring with expert workflow tips and feedback.</p>
+                    <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-chalkboard-teacher icon"></i>Email for Quote'><i class="fas fa-chalkboard-teacher icon"></i>Email for Quote</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gear Section -->
+        <section id="gear" class="card">
+            <h2 class="section-header">My Gear</h2>
+            <p class="text-[var(--text-secondary)] text-sm text-center">My setup is portable, quick to set up, and adaptable to any environment, ensuring no compromise in quality. I use industry-standard equipment from UAD, Nord, Apple, and more, delivering professional-grade results.</p>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="card">
+            <h2 class="section-header">Portfolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
+                        <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="portfolio-img mb-3" aria-label="View Down Bad track">
+                    </a>
+                    <h3 class="mb-2">Down Bad - OnlyBino</h3>
+                    <p class="text-[var(--text-secondary)] text-sm mb-2">Original melody, production, mixing</p>
+                    <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[var(--accent-primary)] text-sm hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> onlybino</a>
+                </div>
+                <div class="portfolio-item">
+                    <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" rel="noopener noreferrer">
+                        <img src="images/albumart_beatitup.jpg" alt="Beatitup Album Art" class="portfolio-img mb-3" aria-label="View Beatitup track">
+                    </a>
+                    <h3 class="mb-2">Beatitup - 954.eddison</h3>
+                    <p class="text-[var(--text-secondary)] text-sm mb-2">Original melody composition, co-production</p>
+                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] text-sm hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 954.eddison</a>
+                </div>
+                <div class="portfolio-item">
+                    <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
+                        <img src="images/albumart_madaway.jpg" alt="Madaway Album Art" class="portfolio-img mb-3" aria-label="View Madaway track">
+                    </a>
+                    <h3 class="mb-2">Madaway - Tefflon</h3>
+                    <p class="text-[var(--text-secondary)] text-sm mb-2">Original melody composition, co-production</p>
+                    <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[var(--accent-primary)] text-sm hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 1tefflon</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="card">
+            <h2 class="section-header">Gallery</h2>
+            <div class="gallery-grid">
+                <img src="images/img_013.jpg" alt="Studio Setup 1" class="gallery-img" aria-label="Expand Studio Setup 1">
+                <img src="images/img_014.jpg" alt="Studio Setup 2" class="gallery-img" aria-label="Expand Studio Setup 2">
+                <img src="images/img_015.jpg" alt="Studio Setup 3" class="gallery-img" aria-label="Expand Studio Setup 3">
+                <img src="images/img_016.jpg" alt="Studio Setup 4" class="gallery-img" aria-label="Expand Studio Setup 4">
+                <img src="images/img_017.jpg" alt="Studio Setup 5" class="gallery-img" aria-label="Expand Studio Setup 5">
+                <img src="images/img_018.jpg" alt="Studio Setup 6" class="gallery-img" aria-label="Expand Studio Setup 6">
+            </div>
+        </section>
+
+        <!-- Bonus Content Section -->
+        <section id="bonus" class="card">
+            <h2 class="section-header">Bonus Content</h2>
+            <div class="bonus-grid">
+                <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Coming Soon)">
+                    <div class="bonus-item-thumbnail">
+                        <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview">
+                    </div>
+                    <div class="bonus-item-info">
+                        <h4>Audio Tools Suite</h4>
+                        <p>Tools for music producers<br><span>Coming Soon</span></p>
+                    </div>
+                </button>
+                <a href="b.html" class="bonus-item" aria-label="Blackjack Sim">
+                    <div class="bonus-item-thumbnail">
+                        <img src="images/blackjack.webp" alt="Blackjack Sim Preview">
+                    </div>
+                    <div class="bonus-item-info">
+                        <h4>Blackjack Sim</h4>
+                        <p>Interactive Blackjack card game simulation</p>
+                    </div>
+                </a>
+                <a href="2000.html" class="bonus-item" aria-label="Site Theme - 2000s">
+                    <div class="bonus-item-thumbnail">
+                        <img src="images/retro.webp" alt="Retro Theme Preview">
+                    </div>
+                    <div class="bonus-item-info">
+                        <h4>Site Theme - 2000s</h4>
+                        <p>Retro Geocities-inspired design</p>
+                    </div>
+                </a>
+                <a href="ai_theme.html" class="bonus-item" aria-label="Site Theme - 2030">
+                    <div class="bonus-item-thumbnail">
+                        <img src="images/ai_theme.webp" alt="AI Theme Preview">
+                    </div>
+                    <div class="bonus-item-info">
+                        <h4>Site Theme - 2030</h4>
+                        <p>Futuristic AI/Tech-themed interface</p>
+                    </div>
+                </a>
+            </div>
+            <p id="passwordError" role="alert" class="hidden text-red-400 text-sm text-center mt-4 bg-red-900/20 p-2 rounded-md">Invalid access code. Please try again.</p>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-4 text-[var(--text-secondary)] text-sm">
+            © <span id="year"></span> 62serpens. All rights reserved.
+        </footer>
+
+        <!-- Image Modal -->
+        <div id="imageModal" class="modal" role="dialog" aria-label="Expanded Image">
+            <span id="closeModal" class="modal-close" aria-label="Close image modal">×</span>
+            <img id="modalImage" class="modal-img" src="" alt="Expanded Image">
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Contact Button Email Copy
+        document.querySelectorAll('.contact-button').forEach(button => {
+            button.addEventListener('click', async () => {
+                const originalContent = button.getAttribute('data-original-content');
+                const email = '626262xxx@gmail.com';
+                button.classList.add('locked', 'copied');
+                button.disabled = true;
+                try {
+                    await navigator.clipboard.writeText(email);
+                    button.innerHTML = '<i class="fas fa-check icon"></i>Email Copied!';
+                } catch (err) {
+                    button.innerHTML = '<i class="fas fa-times icon"></i>Copy Failed!';
+                    button.classList.remove('copied');
+                }
+                setTimeout(() => {
+                    button.innerHTML = originalContent;
+                    button.classList.remove('locked', 'copied');
+                    button.disabled = false;
+                }, 2000);
+            });
+        });
+
+        // Audio Tools Password Prompt
+        const audioToolsLink = document.getElementById('audioToolsLink');
+        const passwordError = document.getElementById('passwordError');
+        if (audioToolsLink && passwordError) {
+            audioToolsLink.addEventListener('click', () => {
+                const password = prompt('Enter access code for Audio Tools:');
+                if (password === 'serpens62') {
+                    window.location.href = 'audio_tools.html';
+                } else {
+                    passwordError.classList.remove('hidden');
+                    setTimeout(() => passwordError.classList.add('hidden'), 3000);
+                }
+            });
+        }
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+            });
+        });
+
+        // Image Modal
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModal = document.getElementById('closeModal');
+        document.querySelectorAll('.gallery-img, .portfolio-img').forEach(img => {
+            img.addEventListener('click', () => {
+                modalImage.src = img.src;
+                modalImage.alt = img.alt;
+                modal.classList.add('active');
+            });
+        });
+        closeModal.addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', e => {
+            if (e.target === modal) modal.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
