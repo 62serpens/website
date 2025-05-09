@@ -208,21 +208,11 @@
         }
 
         .nav-link:active {
-            background: transparent;
-            border-color: var(--border-color);
-            transform: scale(1);
-            box-shadow: none;
-        }
-
-        /* Disable hover effects on touch devices */
-        @media (hover: none) {
-            .nav-link:hover {
-                color: var(--text-primary);
-                background: transparent;
-                border-color: var(--border-color);
-                transform: none;
-                box-shadow: none;
-            }
+            color: var(--accent-secondary);
+            background: var(--bg-tertiary);
+            border-color: var(--accent-secondary);
+            transform: scale(1.05);
+            box-shadow: 0 0 16px var(--shadow-color-accent);
         }
 
         .link-button {
@@ -378,40 +368,6 @@
         }
 
         .profile-pic-wrapper {
-Categorias: 0.75rem;
-            color: var(--text-secondary);
-            margin: 0 0 4px;
-        }
-
-        .discography-item a {
-            font-size: 0.75rem;
-        }
-
-        .equalizer {
-            width: 48px;
-            height: 16px;
-            display: flex;
-            justify-content: space-between;
-            margin: 8px auto;
-        }
-
-        .equalizer-bar {
-            width: 6px;
-            background: var(--accent-secondary);
-            border-radius: 2px;
-            animation: equalize 1.2s infinite ease-in-out alternate;
-        }
-
-        .equalizer-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
-        .equalizer-bar:nth-child(2) { height: 14px; animation-delay: 0.2s; }
-        .equalizer-bar:nth-child(3) { height: 10px; animation-delay: 0.4s; }
-
-        @keyframes equalize {
-            0% { height: 4px; opacity: 0.5; }
-            100% { height: 100%; opacity: 0.8; }
-        }
-
-        .profile-pic-wrapper {
             width: 100px;
             height: 100px;
             margin: 0 auto;
@@ -534,7 +490,6 @@ Categorias: 0.75rem;
             background: rgba(10, 10, 12, 0.9);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-sm);
-            overflow-x: auto;
         }
 
         footer {
@@ -558,9 +513,9 @@ Categorias: 0.75rem;
                 font-size: 1.5rem;
             }
             .nav-link {
-                font-size: 0.8rem;
-                padding: 4px 8px;
-                margin: 0 4px;
+                font-size: 0.75rem;
+                padding: 4px 6px;
+                margin: 0 2px;
             }
             .link-button {
                 height: 36px;
@@ -599,12 +554,11 @@ Categorias: 0.75rem;
                 gap: 8px;
             }
             nav {
-                overflow-x: auto;
-                white-space: nowrap;
-                padding: 8px 12px;
+                padding: 8px 8px;
                 display: flex;
-                justify-content: flex-start;
+                justify-content: center;
                 align-items: center;
+                flex-wrap: wrap;
             }
             .nav-link {
                 display: inline-block;
@@ -666,7 +620,6 @@ Categorias: 0.75rem;
                     <a href="#equipment" class="nav-link">Equipment</a>
                     <a href="#discography" class="nav-link">Discography</a>
                     <a href="#gallery" class="nav-link">Gallery</a>
-                    <a href="#bonus" class="nav-link">Bonus</a>
                 </div>
             </div>
         </nav>
@@ -748,7 +701,7 @@ Categorias: 0.75rem;
                     </a>
                     <h3 class="mb-2">Eddison - Beatitup</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
-                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 954.eddison</a>
+                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> Eddison</a>
                 </div>
                 <div class="discography-item">
                     <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
@@ -888,6 +841,7 @@ Categorias: 0.75rem;
                         link.style.borderColor = '';
                         link.style.transform = '';
                         link.style.boxShadow = '';
+                        link.style.color = '';
                     });
                 }
             });
