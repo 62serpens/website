@@ -464,10 +464,16 @@
                 padding: 6px;
                 max-width: 180px;
                 margin: 0 auto;
+                display: block; /* Normalize button vs. link rendering */
+                width: 100%; /* Ensure consistent width */
             }
             .bonus-item-thumbnail img {
+                width: 100%;
+                max-width: 180px; /* Match max-width for consistent scaling */
                 height: 80px;
+                object-fit: cover;
             }
+            /* Note: Ensure audio_tools.webp has same dimensions as other bonus images (e.g., 180px wide) for perfect alignment */
         }
 
         @media (prefers-reduced-motion) {
@@ -545,9 +551,7 @@
         <!-- Gear Section -->
         <section id="gear" class="card">
             <h2 class="section-header">My Gear</h2>
-            <p class="text-[var(--text-secondary)] text-sm text-center">My setup is portable, quick to set up, and adaptable to any environment, ensuring no compromise in quality. I use industry-standard equipment from UAD, Nord, Apple, and more, delivering professional-grade results.
-
-</p>
+            <p class="text-[var(--text-secondary)] text-sm text-center">My setup is portable, quick to set up, and adaptable to any environment, ensuring no compromise in quality. I use industry-standard equipment from UAD, Nord, Apple, and more, delivering professional-grade results.</p>
         </section>
 
         <!-- Portfolio Section -->
@@ -560,7 +564,7 @@
                     </a>
                     <h3 class="mb-2">Down Bad - OnlyBino</h3>
                     <p class="text-[var(--text-secondary)] text-sm mb-2">Original melody, production, mixing</p>
-                    <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[var(--accent-primary)] text-sm hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i>OnlyBino</a>
+                    <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[var(--accent-primary)] text-sm hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> OnlyBino</a>
                 </div>
                 <div class="portfolio-item">
                     <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" rel="noopener noreferrer">
@@ -568,7 +572,7 @@
                     </a>
                     <h3 class="mb-2">Beatitup - 954.eddison</h3>
                     <p class="text-[var(--text-secondary)] text-sm mb-2">Original melody composition, co-production</p>
-                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] text-sm hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i>954.eddison</a>
+                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] text-sm hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 954.eddison</a>
                 </div>
                 <div class="portfolio-item">
                     <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
@@ -576,7 +580,7 @@
                     </a>
                     <h3 class="mb-2">Madaway - Tefflon</h3>
                     <p class="text-[var(--text-secondary)] text-sm mb-2">Original melody composition, co-production</p>
-                    <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[var(--accent-primary)] text-sm hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i>Tefflon</a>
+                    <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[var(--accent-primary)] text-sm hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> Tefflon</a>
                 </div>
             </div>
         </section>
