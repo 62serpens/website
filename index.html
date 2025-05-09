@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>62serpens.com</title>
+    <title>62serpens - Portable Music Producer</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101012'/%3E%3Cpath d='M16 6 C10.477 6 6 10.477 6 16 S 10.477 26 16 26 S 26 21.523 26 16 S 21.523 6 16 6 Z M16 24 C 11.582 24 8 20.418 8 16 S 11.582 8 16 8 S 24 11.582 24 16 S 20.418 24 16 24 Z' fill='%239333ea'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23c084fc'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@500&display=stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         :root {
             --bg-primary: #101012;
@@ -16,7 +17,6 @@
             --bg-tertiary: #27272A;
             --text-primary: #f4f4f5;
             --text-secondary: #a1a1aa;
-            --text-tertiary: #71717a;
             --accent-primary: #9333ea;
             --accent-secondary: #c084fc;
             --accent-tertiary: #3b0764;
@@ -29,37 +29,24 @@
             --transition-duration: 0.3s;
             --border-radius-sm: 8px;
             --border-radius-md: 12px;
-            --border-radius-lg: 20px;
         }
-
         html { box-sizing: border-box; }
         *, *:before, *:after { box-sizing: inherit; }
-
         body {
             font-family: var(--font-body);
-            font-weight: 400;
-            font-size: 16px;
-            width: 100%;
+            font-size: 14px;
             margin: 0;
             min-height: 100vh;
             background-color: var(--bg-primary);
             color: var(--text-primary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px env(safe-area-inset-right) 20px env(safe-area-inset-left);
-            -webkit-tap-highlight-color: transparent;
-            overflow-x: hidden;
+            padding: 16px env(safe-area-inset-right) 16px env(safe-area-inset-left);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
-            position: relative;
-            background-image: radial-gradient(circle at 10% 10%, var(--accent-tertiary) 0%, transparent 50%),
-                              radial-gradient(circle at 90% 80%, var(--accent-tertiary) 0%, transparent 50%);
+            scroll-behavior: smooth;
+            background-image: radial-gradient(circle at 10% 10%, var(--accent-tertiary) 0%, transparent 50%), radial-gradient(circle at 90% 80%, var(--accent-tertiary) 0%, transparent 50%);
             background-attachment: fixed;
         }
-
         a, button {
             cursor: pointer;
             outline: none;
@@ -69,374 +56,252 @@
         }
         a:focus-visible, button:focus-visible {
             outline: 2px solid var(--accent-secondary);
-            outline-offset: 4px;
-            border-radius: var(--border-radius-sm);
+            outline-offset: 2px;
         }
-
         .container {
             max-width: 680px;
             width: 100%;
-            padding: 0 16px;
-            text-align: center;
-            position: relative;
+            margin: 0 auto;
+            padding: 0 12px;
             display: flex;
             flex-direction: column;
-            gap: 28px;
+            gap: 16px;
         }
-
-        body::before, body::after {
-            content: '';
-            position: fixed;
-            border-radius: 50%;
-            background: var(--accent-primary);
-            opacity: 0.05;
-            filter: blur(120px);
-            z-index: -1;
-            animation: pulse 15s infinite alternate ease-in-out;
-        }
-        body::before {
-            width: 320px; height: 320px;
-            top: 5%; left: 10%;
-        }
-        body::after {
-            width: 280px; height: 280px;
-            bottom: 5%; right: 10%;
-            animation-delay: -7.5s;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 0.04; }
-            100% { transform: scale(1.15); opacity: 0.08; }
-        }
-
-        .page {
-            width: 100%;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 24px;
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-            will-change: opacity, transform;
-        }
-        .page.active-page {
-            display: flex;
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .profile {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .profile-pic-wrapper {
-            position: relative;
-            width: 120px;
-            height: 120px;
-        }
-        .profile-pic {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            border: 3px solid var(--border-color);
-            background-color: var(--bg-tertiary);
-            padding: 3px;
-            background-clip: content-box;
-            box-shadow: 0 0 0 2px var(--bg-primary),
-                        0 4px 20px var(--shadow-color-dark);
-            transition: transform var(--transition-duration) ease;
-        }
-        .profile-pic-wrapper:hover .profile-pic {
-            transform: scale(1.06);
-        }
-
-        .profile h1 {
+        .section-header {
             font-family: var(--font-heading);
-            font-size: 2.5em;
+            font-size: 1.5rem;
             font-weight: 500;
-            color: var(--text-primary);
-            margin: 0;
-            letter-spacing: 1.2px;
+            color: var(--accent-secondary);
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
         }
-
-        .profile .subtitle {
-            font-size: 1.1em;
+        .card {
+            background-color: var(--bg-secondary);
+            padding: 0.75rem;
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px var(--shadow-color-dark);
+        }
+        .nav-link {
             color: var(--text-secondary);
-            margin: 0;
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
         }
-
-        .equalizer {
-            width: 50px;
-            height: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+        .nav-link:hover {
+            color: var(--accent-secondary);
         }
-        .equalizer-bar {
-            width: 8px;
-            background-color: var(--accent-secondary);
-            opacity: 0.5;
-            border-radius: 2px;
-            animation: equalize 1.5s infinite ease-in-out alternate;
+        .hero {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1920x300');
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--border-radius-md);
         }
-        .equalizer-bar:nth-child(1) { height: 10px; animation-delay: 0s; }
-        .equalizer-bar:nth-child(2) { height: 18px; animation-delay: 0.2s; }
-        .equalizer-bar:nth-child(3) { height: 14px; animation-delay: 0.4s; }
-
-        @keyframes equalize {
-            0% { height: 5px; opacity: 0.3; }
-            50% { opacity: 0.6; }
-            100% { height: 100%; opacity: 0.4; }
-        }
-        .equalizer-bar:nth-child(1) { animation-name: equalize1; }
-        .equalizer-bar:nth-child(2) { animation-name: equalize2; }
-        .equalizer-bar:nth-child(3) { animation-name: equalize3; }
-        @keyframes equalize1 { 0% { height: 5px; } 100% { height: 10px; } }
-        @keyframes equalize2 { 0% { height: 8px; } 100% { height: 18px; } }
-        @keyframes equalize3 { 0% { height: 6px; } 100% { height: 14px; } }
-
-        .links { width: 100%; }
-        .links ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 14px;
-        }
-        @media (min-width: 480px) {
-            .links ul { grid-template-columns: 1fr 1fr; }
-            .links li:last-child:nth-child(odd) { grid-column: span 2; }
-        }
-
         .link-button {
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             width: 100%;
-            padding: 14px 20px;
-            font-size: 0.95em;
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 12px 16px;
+            font-size: 0.9rem;
             font-weight: 500;
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-md);
-            box-shadow: 0 2px 8px var(--shadow-color-dark),
-                        inset 0 1px 1px var(--shadow-color-light);
-            min-height: 54px;
+            box-shadow: 0 2px 8px var(--shadow-color-dark), inset 0 1px 1px var(--shadow-color-light);
+            min-height: 48px;
         }
-
         .link-button:hover {
             transform: translateY(-3px) scale(1.02);
             background-color: var(--bg-tertiary);
             border-color: var(--accent-secondary);
-            box-shadow: 0 8px 20px var(--shadow-color-dark),
-                        inset 0 1px 1px var(--shadow-color-light),
-                        0 0 20px var(--shadow-color-accent);
+            box-shadow: 0 8px 20px var(--shadow-color-dark), inset 0 1px 1px var(--shadow-color-light), 0 0 20px var(--shadow-color-accent);
         }
-        .link-button:active {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px var(--shadow-color-dark),
-                        inset 0 1px 1px var(--shadow-color-light);
-        }
-
         .link-button i.icon {
-            margin-right: 12px;
-            font-size: 1.1em;
-            width: 1.2em;
+            margin-right: 10px;
+            font-size: 1.1rem;
+            width: 1.2rem;
             text-align: center;
             opacity: 0.9;
-            transition: color var(--transition-duration) ease;
         }
         .link-button:hover i.icon {
             opacity: 1;
         }
-
-        .link-button span {
-            flex-grow: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: left;
-        }
-        .link-button.center-text span { text-align: center; }
+        .link-button.center-text { justify-content: center; }
         .link-button.center-text i.icon { margin-right: 8px; }
-
-        #mainContent .fa-store { color: #f59e0b; }
-        #mainContent .fa-instagram { color: #e1306c; }
-        #mainContent .fa-spotify { color: #1db954; }
-        #mainContent .fa-soundcloud { color: #ff5500; }
-        #mainContent .fa-youtube { color: #ff0000; }
-        #mainContent .fa-discord { color: #5865f2; }
-        #mainContent .fa-envelope { color: var(--text-secondary); }
-        #mainContent .fa-check { color: #22c55e; }
-        #mainContent .fa-times { color: #ef4444; }
-        #mainContent .fa-star { color: var(--accent-secondary); }
-
-        #contactButton { justify-content: center; }
-        #contactButton.locked {
+        .links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        @media (min-width: 480px) {
+            .links ul { grid-template-columns: 1fr 1fr; }
+            .links li:last-child:nth-child(odd) { grid-column: span 2; }
+        }
+        .gallery-img {
+            object-fit: cover;
+            width: 100%;
+            height: 160px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            transition: transform var(--transition-duration) ease;
+        }
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
+        .portfolio-img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+        }
+        .equalizer {
+            width: 40px;
+            height: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin: 0 auto;
+        }
+        .equalizer-bar {
+            width: 6px;
+            background-color: var(--accent-secondary);
+            opacity: 0.5;
+            border-radius: 2px;
+            animation: equalize 1.5s infinite ease-in-out alternate;
+        }
+        .equalizer-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
+        .equalizer-bar:nth-child(2) { height: 14px; animation-delay: 0.2s; }
+        .equalizer-bar:nth-child(3) { height: 10px; animation-delay: 0.4s; }
+        @keyframes equalize {
+            0% { height: 4px; opacity: 0.3; }
+            50% { opacity: 0.6; }
+            100% { height: 100%; opacity: 0.4; }
+        }
+        .profile-pic-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+        }
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            background-color: var(--bg-tertiary);
+            padding: 2px;
+            background-clip: content-box;
+            box-shadow: 0 0 0 1px var(--bg-primary), 0 4px 10px var(--shadow-color-dark);
+        }
+        .equipment-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .equipment-list li {
+            margin-bottom: 0.25rem;
+        }
+        .contact-button.locked {
             pointer-events: none;
             opacity: 0.7;
             background-color: var(--bg-tertiary);
         }
-        #contactButton .fa-check, #contactButton .fa-times { margin-right: 8px; }
+        .contact-button .fa-check, .contact-button .fa-times { margin-right: 8px; }
         @keyframes fadeIn {
             from { opacity: 0; transform: scale(0.8); }
             to { opacity: 1; transform: scale(1); }
         }
-        #contactButton.copied .fa-check {
+        .contact-button.copied .fa-check {
             animation: fadeIn 0.3s ease;
         }
-
-        .show-bonus-button-container {
+        .fa-store { color: #f59e0b; }
+        .fa-instagram { color: #e1306c; }
+        .fa-spotify { color: #1db954; }
+        .fa-soundcloud { color: #ff5500; }
+        .fa-youtube { color: #ff0000; }
+        .fa-discord { color: #5865f2; }
+        .fa-envelope { color: var(--text-secondary); }
+        .fa-check { color: #22c55e; }
+        .fa-times { color: #ef4444; }
+        .fa-star { color: var(--accent-secondary); }
+        .page {
             width: 100%;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+        }
+        .page.active-page {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            opacity: 1;
         }
-        #showBonusButton {
-            max-width: 340px;
-            font-weight: 700;
-            background-color: transparent;
-            border: 1px solid var(--accent-primary);
-            color: var(--accent-secondary);
-            box-shadow: 0 2px 8px var(--shadow-color-dark),
-                        inset 0 0 12px rgba(147, 51, 234, 0.15);
-        }
-        #showBonusButton:hover {
-            background-color: rgba(147, 51, 234, 0.08);
-            border-color: var(--accent-secondary);
-            color: var(--text-primary);
-            box-shadow: 0 8px 20px var(--shadow-color-dark),
-                        inset 0 0 15px rgba(147, 51, 234, 0.25),
-                        0 0 25px var(--shadow-color-accent);
-        }
-        #showBonusButton i { color: var(--accent-primary); transition: color var(--transition-duration) ease; }
-        #showBonusButton:hover i { color: var(--accent-secondary); }
-
-        #bonusContent { align-items: stretch; text-align: left; }
-        #bonusContent h2 {
-            font-family: var(--font-heading);
-            font-size: 1.6em;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin: 0 0 12px;
-            text-align: center;
-            letter-spacing: 0.5px;
-        }
-
         .bonus-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 14px;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
             width: 100%;
-            margin-bottom: 18px;
+            margin-bottom: 12px;
         }
-
         .bonus-item {
             display: flex;
             flex-direction: column;
             align-items: stretch;
             background: var(--bg-secondary);
-            padding: 10px;
+            padding: 8px;
             border-radius: var(--border-radius-md);
             border: 1px solid var(--border-color);
-            box-shadow: 0 2px 8px var(--shadow-color-dark),
-                        inset 0 1px 0 var(--shadow-color-light);
-            overflow: hidden;
-            text-align: left;
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-            transition: all var(--transition-duration) cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px var(--shadow-color-dark), inset 0 1px 0 var(--shadow-color-light);
+            max-width: 160px;
         }
         .bonus-item:hover {
             transform: translateY(-4px) scale(1.02);
             border-color: var(--accent-primary);
-            box-shadow: 0 8px 20px var(--shadow-color-dark),
-                        inset 0 1px 0 var(--shadow-color-light),
-                        0 0 20px var(--shadow-color-accent);
+            box-shadow: 0 8px 20px var(--shadow-color-dark), inset 0 1px 0 var(--shadow-color-light), 0 0 20px var(--shadow-color-accent);
         }
-        .bonus-item:active {
-            transform: translateY(-1px) scale(1.01);
-            box-shadow: 0 3px 8px var(--shadow-color-dark),
-                        inset 0 1px 0 var(--shadow-color-light);
-        }
-
         .bonus-item-thumbnail {
             width: 100%;
             height: auto;
             aspect-ratio: 16 / 10;
             background-color: var(--bg-tertiary);
             border-radius: var(--border-radius-sm);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
         }
         .bonus-item-thumbnail img {
-            display: block;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform var(--transition-duration) ease, opacity 0.5s ease;
-            opacity: 0;
-        }
-        .bonus-item:hover .bonus-item-thumbnail img {
-            transform: scale(1.05);
-        }
-        img[loading="lazy"] { opacity: 0; }
-        img:not([loading="lazy"]) { opacity: 1; }
-        img.lazyloaded { opacity: 1; }
-        @keyframes fadeIn { to { opacity: 1; } }
-        .bonus-item-thumbnail img { animation: fadeIn 0.5s ease forwards; }
-
-        .bonus-item-info {
-            padding: 4px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left !important;
         }
         .bonus-item-info h4 {
             margin: 0 0 4px;
-            font-size: 14.4px;
-            font-family: 'Inter', sans-serif;
+            font-size: 13px;
             font-weight: 700;
             color: var(--text-primary);
-            line-height: 1.3;
-            text-align: left !important;
         }
         .bonus-item-info p {
             margin: 0;
-            font-size: 12.8px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
+            font-size: 12px;
             color: var(--text-secondary);
-            line-height: 1.4;
-            text-align: left !important;
         }
-        .audio-tools-text h4, .audio-tools-text p {
-            font-family: 'Inter', sans-serif !important;
-            text-align: left !important;
-        }
-        .bonus-item-info p br + span {
+        .bonus-item-info p span {
             font-style: italic;
             opacity: 0.9;
         }
-
-        .back-button-wrapper { width: 100%; text-align: center; margin-bottom: 12px; }
-        #backButton {
+        .back-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -444,25 +309,22 @@
             color: var(--text-secondary);
             background-color: var(--bg-tertiary);
             border-radius: var(--border-radius-sm);
-            font-size: 0.85em;
+            font-size: 0.85rem;
             font-weight: 500;
             border: 1px solid var(--border-color);
             box-shadow: 0 2px 8px var(--shadow-color-dark);
         }
-        #backButton:hover {
+        .back-button:hover {
             color: var(--text-primary);
             background-color: var(--accent-primary);
             border-color: var(--accent-primary);
             transform: scale(1.05);
-            box-shadow: 0 6px 16px var(--shadow-color-dark),
-                        0 0 15px var(--shadow-color-accent);
         }
-        #backButton i { margin-right: 6px; font-size: 0.9em; }
-
+        .back-button i { margin-right: 6px; font-size: 0.9rem; }
         #passwordError {
             display: none;
             color: #f87171;
-            font-size: 0.8em;
+            font-size: 0.8rem;
             text-align: center;
             width: 100%;
             margin-top: 8px;
@@ -471,212 +333,297 @@
             border-radius: var(--border-radius-sm);
             border: 1px solid rgba(239, 68, 68, 0.3);
         }
-
-        footer {
-            padding: 20px 10px;
-            font-size: 0.75em;
-            color: var(--text-tertiary);
-            text-align: center;
-            width: 100%;
-            margin-top: 24px;
-            opacity: 0.8;
+        nav {
+            backdrop-filter: blur(8px);
+            background-color: rgba(24, 24, 27, 0.8);
         }
-
         @media (max-width: 600px) {
-            body { padding: 16px env(safe-area-inset-right) 16px env(safe-area-inset-left); }
-            .container { padding: 0 12px; gap: 24px; }
-            .profile { margin-bottom: 6px; }
-            .profile-pic-wrapper { width: 100px; height: 100px; }
-            .profile h1 { font-size: 2.2em; }
-            .profile .subtitle { font-size: 1em; }
-            .equalizer { width: 40px; height: 16px; }
-            .links ul { grid-template-columns: 1fr; gap: 12px; }
-            .links li:last-child:nth-child(odd) { grid-column: span 1; }
-            .link-button { padding: 12px 18px; font-size: 0.9em; min-height: 50px; }
-            #showBonusButton { max-width: 300px; font-size: 0.9em; }
-            .bonus-grid { gap: 12px; }
-            #bonusContent h2 { font-size: 1.4em; }
-            #backButton { font-size: 0.8em; padding: 7px 14px; }
-            .bonus-item-info h4 { font-size: 13.6px; }
-            .bonus-item-info p { font-size: 12px; }
-            footer { font-size: 0.7em; padding: 15px 8px; }
+            body { padding: 12px env(safe-area-inset-right) 12px env(safe-area-inset-left); }
+            .container { padding: 0 8px; gap: 12px; }
+            .section-header { font-size: 1.25rem; }
+            .nav-link { font-size: 0.7rem; }
+            .hero { padding: 2rem 0; }
+            .link-button { padding: 10px 14px; font-size: 0.85rem; min-height: 44px; max-width: 280px; }
+            .gallery-img { height: 140px; }
+            .portfolio-img { height: 100px; }
+            .profile-pic-wrapper { width: 60px; height: 60px; }
+            .card { padding: 0.5rem; }
+            section { padding: 1rem 0; }
+            .bonus-grid { grid-template-columns: 1fr; gap: 10px; }
+            .bonus-item { max-width: none; }
+            .bonus-item-info h4 { font-size: 12px; }
+            .bonus-item-info p { font-size: 11px; }
         }
-
         @media (prefers-reduced-motion) {
-            body::before, body::after, .equalizer-bar { animation: none; }
-            .profile-pic, .link-button, #showBonusButton, .bonus-item, #backButton, .bonus-item-thumbnail img { transition: none; transform: none; }
-            .link-button:hover, #showBonusButton:hover, .bonus-item:hover, #backButton:hover { transform: none; }
-            .bonus-item:hover .bonus-item-thumbnail img { transform: none; }
-            .page { transition: opacity 0.4s ease-in-out; transform: none !important; }
-            #contactButton.copied .fa-check { animation: none; }
+            .equalizer-bar, .gallery-img, .link-button, .bonus-item, .page { animation: none; transition: none; }
+            .gallery-img:hover, .link-button:hover, .bonus-item:hover { transform: none; }
+            .contact-button.copied .fa-check { animation: none; }
+            .page { transition: opacity 0.4s ease-in-out; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div id="mainContent" class="page active-page" role="main" aria-live="polite">
-            <header class="profile">
-                <div class="profile-pic-wrapper">
-                    <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic" onerror="this.style.backgroundColor='#333'; this.src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';">
+        <!-- Navigation -->
+        <nav class="bg-[#18181B] shadow-sm sticky top-0 z-50 rounded-b-[12px] border-b border-[#3f3f46]">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6">
+                <div class="flex justify-between h-10">
+                    <div class="flex items-center">
+                        <h1 class="text-sm font-medium text-[#c084fc] tracking-wide">62serpens</h1>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <a href="#about" class="nav-link">About</a>
+                        <a href="#services" class="nav-link">Services</a>
+                        <a href="#portfolio" class="nav-link">Portfolio</a>
+                        <a href="#gallery" class="nav-link">Gallery</a>
+                        <a href="#equipment" class="nav-link">Gear</a>
+                        <a href="#contact" class="nav-link">Connect</a>
+                        <a href="#bonus" class="nav-link">Bonus</a>
+                    </div>
                 </div>
-                <h1>62serpens</h1>
-                <p class="subtitle">Music Producer</p>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero py-12">
+            <div class="text-center">
+                <div class="profile-pic-wrapper">
+                    <img src="https://via.placeholder.com/80" alt="62serpens Profile Picture" class="profile-pic">
+                </div>
+                <h1 class="text-2xl font-[Space Grotesk] text-[#f4f4f5] mt-2 mb-1">62serpens</h1>
+                <p class="text-sm text-[#a1a1aa] mb-2">Portable Music Producer</p>
                 <div class="equalizer" aria-hidden="true">
                     <div class="equalizer-bar"></div>
                     <div class="equalizer-bar"></div>
                     <div class="equalizer-bar"></div>
                 </div>
-            </header>
-
-            <nav class="links" aria-label="Main Links">
-                <ul>
-                    <li><a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Beat Store"><i class="fas fa-store icon"></i><span>Beat Store</span></a></li>
-                    <li><a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Instagram"><i class="fab fa-instagram icon"></i><span>Instagram</span></a></li>
-                    <li><a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Spotify"><i class="fab fa-spotify icon"></i><span>Spotify</span></a></li>
-                    <li><a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit SoundCloud"><i class="fab fa-soundcloud icon"></i><span>SoundCloud</span></a></li>
-                    <li><a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit YouTube uman"><i class="fab fa-youtube icon"></i><span>YouTube</span></a></li>
-                    <li><a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Discord Server"><i class="fab fa-discord icon"></i><span>Discord Server</span></a></li>
-                    <li><button type="button" id="contactButton" class="link-button center-text" aria-label="Copy Contact Email"><i class="fas fa-envelope icon"></i><span>Contact (Copy Email)</span></button></li>
-                </ul>
-            </nav>
-
-            <div class="show-bonus-button-container">
-                <button type="button" id="showBonusButton" class="link-button center-text" aria-controls="bonusContent" aria-expanded="false"><i class="fas fa-star icon"></i><span>Bonus Content & Experiments</span></button>
             </div>
-        </div>
+        </section>
 
-        <div id="bonusContent" class="page" role="region" aria-live="polite" aria-label="Bonus Content Section">
-            <div class="back-button-wrapper">
-                <button type="button" id="backButton" aria-controls="mainContent" aria-label="Back to Main Links"><i class="fas fa-arrow-left"></i>Back to Main Links</button>
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-header">About Me</h2>
+            <div class="card">
+                <p class="text-[#a1a1aa] text-xs leading-relaxed">
+                    I’m 62serpens, a Burleigh Heads producer with 6 years in FL Studio, rooted in underground rap. I’m all about high-energy collabs with young artists, turning raw ideas into fresh tracks. My work’s real, my vibe’s chill—let’s create something dope together!
+                </p>
             </div>
-            <h2>Bonus Content & Experiments</h2>
-            <div class="bonus-grid">
-                <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Coming Soon)">
-                    <div class="bonus-item-thumbnail">
-                        <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
-                    </div>
-                    <div class="bonus-item-info audio-tools-text">
-                        <h4>Audio Tools Suite</h4>
-                        <p>Tools for music producers<br><span>Coming soon</span></p>
-                    </div>
-                </button>
-                <a href="b.html" target="_self" class="bonus-item" aria-label="Blackjack Sim">
-                    <div class="bonus-item-thumbnail">
-                        <img src="images/blackjack.webp" alt="Blackjack Sim Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
-                    </div>
-                    <div class="bonus-item-info">
-                        <h4>Blackjack Sim</h4>
-                        <p>Simple Blackjack card game simulation</p>
-                    </div>
-                </a>
-                <a href="2000.html" target="_self" class="bonus-item" aria-label="Site Theme - 2000s">
-                    <div class="bonus-item-thumbnail">
-                        <img src="images/retro.webp" alt="Retro Theme Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
-                    </div>
-                    <div class="bonus-item-info">
-                        <h4>Site Theme - 2000s</h4>
-                        <p>Geocities-inspired experimental theme</p>
-                    </div>
-                </a>
-                <a href="ai_theme.html" target="_self" class="bonus-item" aria-label="Site Theme - 2030">
-                    <div class="bonus-item-thumbnail">
-                        <img src="images/ai_theme.webp" alt="AI Theme Preview" loading="lazy" class="lazyload" onerror="this.style.visibility='hidden'; this.parentElement.style.backgroundColor='#444';">
-                    </div>
-                    <div class="bonus-item-info">
-                        <h4>Site Theme - 2030</h4>
-                        <p>Advanced AI/Tech themed interface</p>
-                    </div>
-                </a>
-                <a href="#" class="bonus-item" aria-label="PhD Section (Coming Soon)">
-                    <div class="bonus-item-thumbnail" style="background-color: white;"></div>
-                    <div class="bonus-item-info">
-                        <h4>PhD</h4>
-                        <p>Description coming soon<br><span>.</span></p>
-                    </div>
-                </a>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <h2 class="section-header">Services</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="card text-center">
+                    <h3 class="text-xs font-medium text-[#c084fc] mb-1">Beat Leasing</h3>
+                    <p class="text-[#a1a1aa] text-xs mb-2">Lease high-quality beats from my Beat Store to kickstart your tracks, all from the comfort of my home studio.</p>
+                    <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button center-text"><i class="fas fa-store icon"></i><span>Visit Beat Store</span></a>
+                </div>
+                <div class="card text-center">
+                    <h3 class="text-xs font-medium text-[#c084fc] mb-1">Creative Production</h3>
+                    <p class="text-[#a1a1aa] text-xs mb-2">Craft vibe-heavy tracks as a producer, executive producer, or creative director, shaping your project’s vision.</p>
+                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-music icon"></i><span>Contact Me</span>'><i class="fas fa-music icon"></i><span>Contact Me</span></button>
+                </div>
+                <div class="card text-center">
+                    <h3 class="text-xs font-medium text-[#c084fc] mb-1">Recording & Engineering</h3>
+                    <p class="text-[#a1a1aa] text-xs mb-2">Capture your sound with clean, professional recording and engineering, plus a strong foundation for mixing and mastering using top-tier plugins.</p>
+                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-microphone icon"></i><span>Contact Me</span>'><i class="fas fa-microphone icon"></i><span>Contact Me</span></button>
+                </div>
+                <div class="card text-center">
+                    <h3 class="text-xs font-medium text-[#c084fc] mb-1">Production Tutoring</h3>
+                    <p class="text-[#a1a1aa] text-xs mb-2">Specialized FL Studio tutoring with workflow tips, personalized feedback, and production advice to level up.</p>
+                    <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-chalkboard-teacher icon"></i><span>Contact Me</span>'><i class="fas fa-chalkboard-teacher icon"></i><span>Contact Me</span></button>
+                </div>
             </div>
-            <p id="passwordError" class="error-text" role="alert">Invalid access code. Please try again.</p>
-        </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio">
+            <h2 class="section-header">Portfolio</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x100" alt="Down Bad Album Art" class="portfolio-img mb-2">
+                    <h3 class="text-xs font-medium text-[#c084fc] mb-1">Down Bad - OnlyBino</h3>
+                    <p class="text-[#a1a1aa] text-xs mb-1">Original melody, production, mixing.</p>
+                    <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" class="text-[#9333ea] text-xs hover:text-[#c084fc] block mb-1">Listen on SoundCloud</a>
+                    <a href="https://www.instagram.com/onlybino_" target="_blank" class="text-[#9333ea] text-xs hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@onlybino_</a>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x100" alt="Track Album Art" class="portfolio-img mb-2">
+                    <h3 class="text-xs font-medium text-[#c084fc] mb-1">Track Name - Artist</h3>
+                    <p class="text-[#a1a1aa] text-xs mb-1">Production, creative direction.</p>
+                    <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" class="text-[#9333ea] text-xs hover:text-[#c084fc] block mb-1">Listen on Spotify</a>
+                    <a href="https://www.instagram.com/artist_handle" target="_blank" class="text-[#9333ea] text-xs hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@artist_handle</a>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x100" alt="Madaway Album Art" class="portfolio-img mb-2">
+                    <h3 class="text-xs font-medium text-[#c084fc] mb-1">Madaway - Tefflon, 63 Saint, Dextersesh, Hooli</h3>
+                    <p class="text-[#a1a1aa] text-xs mb-1">Production, mixing basics.</p>
+                    <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" class="text-[#9333ea] text-xs hover:text-[#c084fc] block mb-1">Listen on SoundCloud</a>
+                    <a href="https://www.instagram.com/tefflon_" target="_blank" class="text-[#9333ea] text-xs hover:text-[#c084fc]"><i class="fab fa-instagram icon"></i>@tefflon_</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery">
+            <h2 class="section-header">Gallery</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <img src="https://via.placeholder.com/400x160" alt="Studio 1" class="gallery-img">
+                <img src="https://via.placeholder.com/400x160" alt="Studio 2" class="gallery-img">
+                <img src="https://via.placeholder.com/400x160" alt="Studio 3" class="gallery-img">
+            </div>
+        </section>
+
+        <!-- Equipment Section -->
+        <section id="equipment">
+            <h2 class="section-header">My Gear</h2>
+            <div class="card">
+                <p class="text-[#a1a1aa] text-xs leading-relaxed">
+                    I use reliable, high-end gear with a UAD Apollo X4 interface and premium plugin suite for in-the-box processing, delivering pro-quality results.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-header">Connect With Me</h2>
+            <div class="card mb-3">
+                <button type="button" id="contactButton" class="link-button center-text contact-button" data-original-content='<i class="fas fa-envelope icon"></i><span>Contact (Copy Email)</span>' aria-label="Copy Contact Email"><i class="fas fa-envelope icon"></i><span>Contact (Copy Email)</span></button>
+            </div>
+            <div class="card">
+                <nav class="links" aria-label="Social Links">
+                    <ul>
+                        <li><a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Instagram"><i class="fab fa-instagram icon"></i><span>Instagram</span></a></li>
+                        <li><a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Spotify"><i class="fab fa-spotify icon"></i><span>Spotify</span></a></li>
+                        <li><a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit SoundCloud"><i class="fab fa-soundcloud icon"></i><span>SoundCloud</span></a></li>
+                        <li><a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit YouTube"><i class="fab fa-youtube icon"></i><span>YouTube</span></a></li>
+                        <li><a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="link-button" aria-label="Visit Discord Server"><i class="fab fa-discord icon"></i><span>Discord Server</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Bonus Content Section -->
+        <section id="bonus">
+            <h2 class="section-header">Bonus Content</h2>
+            <div id="mainContent" class="page active-page">
+                <div class="card text-center">
+                    <button type="button" id="showBonusButton" class="link-button center-text" aria-controls="bonusContent" aria-expanded="false"><i class="fas fa-star icon"></i><span>Show Bonus Content & Experiments</span></button>
+                </div>
+            </div>
+            <div id="bonusContent" class="page">
+                <div class="card">
+                    <button type="button" class="back-button mb-3" aria-controls="mainContent" aria-label="Back to Main Content"><i class="fas fa-arrow-left"></i>Back</button>
+                    <h3 class="text-sm font-medium text-[#c084fc] mb-2 text-center">Bonus Content & Experiments</h3>
+                    <div class="bonus-grid">
+                        <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Coming Soon)">
+                            <div class="bonus-item-thumbnail">
+                                <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview">
+                            </div>
+                            <div class="bonus-item-info">
+                                <h4>Audio Tools Suite</h4>
+                                <p>Tools for music producers<br><span>Coming soon</span></p>
+                            </div>
+                        </button>
+                        <a href="b.html" target="_self" class="bonus-item" aria-label="Blackjack Sim">
+                            <div class="bonus-item-thumbnail">
+                                <img src="images/blackjack.webp" alt="Blackjack Sim Preview">
+                            </div>
+                            <div class="bonus-item-info">
+                                <h4>Blackjack Sim</h4>
+                                <p>Simple Blackjack card game simulation</p>
+                            </div>
+                        </a>
+                        <a href="2000.html" target="_self" class="bonus-item" aria-label="Site Theme - 2000s">
+                            <div class="bonus-item-thumbnail">
+                                <img src="images/retro.webp" alt="Retro Theme Preview">
+                            </div>
+                            <div class="bonus-item-info">
+                                <h4>Site Theme - 2000s</h4>
+                                <p>Geocities-inspired experimental theme</p>
+                            </div>
+                        </a>
+                        <a href="ai_theme.html" target="_self" class="bonus-item" aria-label="Site Theme - 2030">
+                            <div class="bonus-item-thumbnail">
+                                <img src="images/ai_theme.webp" alt="AI Theme Preview">
+                            </div>
+                            <div class="bonus-item-info">
+                                <h4>Site Theme - 2030</h4>
+                                <p>Advanced AI/Tech themed interface</p>
+                            </div>
+                        </a>
+                        <a href="#" class="bonus-item" aria-label="PhD Section (Coming Soon)">
+                            <div class="bonus-item-thumbnail" style="background-color: white;"></div>
+                            <div class="bonus-item-info">
+                                <h4>PhD</h4>
+                                <p>Description coming soon<br><span>.</span></p>
+                            </div>
+                        </a>
+                    </div>
+                    <p id="passwordError" role="alert">Invalid access code. Please try again.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-[#71717a] text-xs text-center py-3">
+            © <span id="year"></span> 62serpens. All rights reserved.
+        </footer>
     </div>
-    <footer>
-        © <span id="year"></span> 62serpens. All rights reserved.
-    </footer>
-
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
-        const mainContent = document.getElementById('mainContent');
-        const bonusContent = document.getElementById('bonusContent');
-        const showBonusButton = document.getElementById('showBonusButton');
-        const backButton = document.getElementById('backButton');
-        const contactButton = document.getElementById('contactButton');
-        const audioToolsLink = document.getElementById('audioToolsLink');
-        const passwordError = document.getElementById('passwordError');
-        const container = document.querySelector('body');
-
-        if (mainContent && bonusContent && showBonusButton && backButton) {
-            showBonusButton.addEventListener('click', () => {
-                mainContent.classList.remove('active-page');
-                bonusContent.classList.add('active-page');
-                showBonusButton.setAttribute('aria-expanded', 'true');
-                bonusContent.setAttribute('aria-hidden', 'false');
-                mainContent.setAttribute('aria-hidden', 'true');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-            backButton.addEventListener('click', () => {
-                bonusContent.classList.remove('active-page');
-                mainContent.classList.add('active-page');
-                showBonusButton.setAttribute('aria-expanded', 'false');
-                bonusContent.setAttribute('aria-hidden', 'true');
-                mainContent.setAttribute('aria-hidden', 'false');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        } else {
-            console.error('Page switching elements not found.');
-        }
-
-        if (contactButton) {
-            contactButton.setAttribute('data-original-content', contactButton.innerHTML);
-            async function copyEmail() {
-                const originalContent = contactButton.getAttribute('data-original-content');
+        const contactButtons = document.querySelectorAll('.contact-button');
+        contactButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const originalContent = button.getAttribute('data-original-content');
                 const emailAddress = '626262xxx@gmail.com';
-                contactButton.classList.add('locked', 'copied');
-                contactButton.disabled = true;
+                button.classList.add('locked', 'copied');
+                button.disabled = true;
                 try {
                     await navigator.clipboard.writeText(emailAddress);
-                    console.log('Clipboard API success: Email copied');
-                    contactButton.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!';
+                    button.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!';
                 } catch (err) {
-                    console.warn('Clipboard API failed:', err);
                     try {
                         const textarea = document.createElement('textarea');
                         textarea.value = emailAddress;
                         textarea.style.position = 'fixed';
                         textarea.style.left = '-9999px';
-                        textarea.style.top = '0';
                         document.body.appendChild(textarea);
                         textarea.select();
-                        textarea.setSelectionRange(0, 99999);
                         document.execCommand('copy');
                         document.body.removeChild(textarea);
-                        console.log('execCommand success: Email copied');
-                        contactButton.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!';
+                        button.innerHTML = '<i class="fas fa-check icon"></i> Email Copied!';
                     } catch (execErr) {
-                        console.error('execCommand failed:', execErr);
-                        contactButton.innerHTML = '<i class="fas fa-times icon"></i> Copy Error!';
-                        contactButton.classList.remove('copied');
+                        button.innerHTML = '<i class="fas fa-times icon"></i> Copy Error!';
+                        button.classList.remove('copied');
                     }
                 }
                 setTimeout(() => {
-                    contactButton.innerHTML = originalContent;
-                    contactButton.classList.remove('locked', 'copied');
-                    contactButton.disabled = false;
+                    button.innerHTML = originalContent;
+                    button.classList.remove('locked', 'copied');
+                    button.disabled = false;
                 }, 2500);
-            }
-            contactButton.addEventListener('click', copyEmail);
-        } else {
-            console.error('Contact button not found.');
+            });
+        });
+        const mainContent = document.getElementById('mainContent');
+        const bonusContent = document.getElementById('bonusContent');
+        const showBonusButton = document.getElementById('showBonusButton');
+        const backButton = document.querySelector('.back-button');
+        const audioToolsLink = document.getElementById('audioToolsLink');
+        const passwordError = document.getElementById('passwordError');
+        if (mainContent && bonusContent && showBonusButton && backButton) {
+            showBonusButton.addEventListener('click', () => {
+                mainContent.classList.remove('active-page');
+                bonusContent.classList.add('active-page');
+                showBonusButton.setAttribute('aria-expanded', 'true');
+            });
+            backButton.addEventListener('click', () => {
+                bonusContent.classList.remove('active-page');
+                mainContent.classList.add('active-page');
+                showBonusButton.setAttribute('aria-expanded', 'false');
+            });
         }
-
         if (audioToolsLink && passwordError) {
             const correctPassword = 'serpens62';
             audioToolsLink.addEventListener('click', () => {
@@ -689,19 +636,7 @@
                     setTimeout(() => { passwordError.style.display = 'none'; }, 3000);
                 }
             });
-        } else {
-            if (!audioToolsLink) console.error('Audio Tools link element not found.');
-            if (!passwordError) console.error('Password error element not found.');
         }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const lazyImages = document.querySelectorAll('img.lazyload');
-            lazyImages.forEach(img => {
-                if (img.src && !img.src.startsWith('data:image')) {
-                    img.classList.add('lazyloaded');
-                }
-            });
-        });
     </script>
 </body>
 </html>
