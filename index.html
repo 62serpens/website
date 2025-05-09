@@ -90,6 +90,17 @@
             border-radius: var(--border-radius-sm);
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
+        .subheader {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 400;
+            color: #c084fc;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
         .card {
             background-color: var(--bg-secondary);
             padding: 1rem;
@@ -114,19 +125,21 @@
         }
         .nav-link {
             color: var(--text-primary);
-            font-weight: 600;
+            font-family: var(--font-heading);
+            font-weight: 400;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 1.125rem;
-            border: 1px solid var(--border-color);
+            letter-spacing: 0.08em;
+            font-size: 1.25rem;
+            border: 2px solid var(--border-color);
             border-radius: var(--border-radius-sm);
-            padding: 6px 12px;
+            padding: 6px 14px;
         }
         .nav-link:hover {
             color: var(--accent-secondary);
             background-color: var(--bg-tertiary);
             border-color: var(--accent-secondary);
-            transform: scale(1.05);
+            transform: scale(1.03);
+            box-shadow: 0 0 10px var(--shadow-color-accent);
             opacity: 1;
         }
         .link-button {
@@ -431,7 +444,8 @@
             body { font-size: 14px; padding: 10px env(safe-area-inset-right) 10px env(safe-area-inset-left); }
             .container { padding: 0 8px; gap: 12px; }
             .section-header { font-size: 1.75rem; }
-            .nav-link { font-size: 0.875rem; padding: 4px 8px; }
+            .subheader { font-size: 0.875rem; }
+            .nav-link { font-size: 1rem; padding: 4px 10px; }
             nav { height: 40px; }
             .link-button, .expand-button { max-width: 240px; padding: 10px 14px; font-size: 0.9rem; min-height: 44px; }
             .link-button i.icon { font-size: 1rem; }
@@ -443,11 +457,11 @@
             .services-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
             .portfolio-grid, .bonus-grid, .gallery-grid { gap: 8px; }
             .portfolio-item h3 { font-size: 0.75rem; }
-            .portfolio-item p { font-size: 0.7rem; }
+            .portfolio-item p { font-size: 0.7rem; line-height: 1.3; }
             .portfolio-item a { font-size: 0.7rem; }
             .portfolio-item .fa-instagram { font-size: 0.7rem; }
             .service-card h3 { font-size: 0.75rem; }
-            .service-card p { font-size: 0.7rem; }
+            .service-card p { font-size: 0.7rem; line-height: 1.3; }
             .service-card .link-button { font-size: 0.9rem; white-space: nowrap; }
             .bonus-item-info h4 { font-size: 0.75rem; }
             .bonus-item-info p { font-size: 0.7rem; }
@@ -468,7 +482,7 @@
         <nav class="bg-[#18181B] shadow-sm sticky top-0 z-50 rounded-b-[16px] border-b-2 border-[#3f3f46]">
             <div class="max-w-4xl mx-auto px-6">
                 <div class="flex justify-center h-12">
-                    <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-3">
                         <a href="#home" class="nav-link">Home</a>
                         <a href="#services" class="nav-link">Services</a>
                         <a href="#portfolio" class="nav-link">Portfolio</a>
@@ -513,7 +527,7 @@
                 </div>
                 <div class="service-card text-center">
                     <h3 class="text-sm font-medium text-[#c084fc] mb-1">Creative Production</h3>
-                    <p class="text-[#e4e4e7] text-sm mb-2">Personal producer working closely to bring your song or idea to life.</p>
+                    <p class="text-[#e4e4e7] text-sm mb-2">Personal producer working closely to bring your song or idea to life. I can come to you with my equipment.</p>
                     <button type="button" class="link-button center-text contact-button" data-original-content='<i class="fas fa-music icon"></i><span>Email for Quote</span>'><i class="fas fa-music icon"></i><span>Email for Quote</span></button>
                 </div>
                 <div class="service-card text-center">
@@ -528,7 +542,7 @@
                 </div>
             </div>
             <div class="card mt-4">
-                <h3 class="text-sm font-medium text-[#c084fc] mb-1 text-center">My Gear</h3>
+                <h3 class="subheader">My Gear</h3>
                 <p class="text-[#e4e4e7] text-sm leading-relaxed">
                     I use reliable, high-end gear with a UAD Apollo X4 interface and premium plugin suite for in-the-box processing, delivering pro-quality results.
                 </p>
@@ -589,7 +603,7 @@
             </div>
             <div id="bonusContent" class="bonus-content hidden">
                 <div class="card">
-                    <h3 class="text-sm font-medium text-[#c084fc] mb-2 text-center">Bonus Content & Experiments</h3>
+                    <h3 class="subheader">Bonus Content & Experiments</h3>
                     <div class="bonus-grid">
                         <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Coming Soon)">
                             <div class="bonus-item-thumbnail">
@@ -647,7 +661,7 @@
 
         <!-- Image Modal -->
         <div id="imageModal" class="modal hidden" role="dialog" aria-label="Expanded Image">
-            <span id="closeModal" class="modal-close" aria-label="Close image modal">&times;</span>
+            <span id="closeModal" class="modal-close" aria-label="Close image modal">×</span>
             <img id="modalImage" class="modal-img" src="" alt="Expanded Image">
         </div>
     </div>
