@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Professional music production and website design services by 62serpens, specializing in beat leasing, creative production, recording, tutoring, and custom websites.">
-    <meta name="keywords" content="music production, beat leasing, recording, music producer, FL Studio tutoring, website design, 62serpens">
+    <meta name="description" content="Professional music production and website design services by 62serpens, specializing in instrumental leasing, creative production, recording, tutoring, and custom websites.">
+    <meta name="keywords" content="music production, instrumental leasing, recording, music producer, FL Studio tutoring, website design, 62serpens">
     <meta name="author" content="62serpens">
-    <meta name="theme-color" content="#050506" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
     <meta name="theme-color" content="#0A0A0C" media="(prefers-color-scheme: light)">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>62serpens.com</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050506'/%3E%3Cpath d='M16 6 C10.477 6 6 10.477 6 16 S 10.477 26 16 26 S 26 21.523 26 16 S 21.523 6 16 6 Z M16 24 C 11.582 24 8 20.418 8 16 S 11.582 8 16 8 S 24 11.582 24 16 S 20.418 24 16 24 Z' fill='%23bf00ff'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23e066ff'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000000'/%3E%3Cpath d='M16 6 C10.477 6 6 10.477 6 16 S 10.477 26 16 26 S 26 21.523 26 16 S 21.523 6 16 6 Z M16 24 C 11.582 24 8 20.418 8 16 S 11.582 8 16 8 S 24 11.582 24 16 S 20.418 24 16 24 Z' fill='%23bf00ff'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23e066ff'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #050506;
+            --bg-primary: #000000;
             --bg-secondary: #0A0A0C;
             --bg-tertiary: #151517;
             --text-primary: #f4f4f5;
@@ -114,11 +114,11 @@
             border-radius: var(--border-radius-md);
             border: 1px solid var(--border-color);
             box-shadow: 0 6px 16px var(--shadow-color-dark), inset 0 1px 0 var(--shadow-color-light);
-            min-height: 220px;
+            min-height: 240px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            align-items: stretch;
+            justify-content: flex-start;
+            align-items: center;
             text-align: center;
             transition: transform var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out;
         }
@@ -129,21 +129,28 @@
         }
 
         .service-card h3 {
+            height: 32px;
             font-size: 1rem;
             font-weight: 600;
             color: var(--accent-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 0.5rem;
         }
 
         .service-card p {
-            flex-grow: 1;
-            height: 64px;
+            height: 68px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--text-secondary);
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             margin-bottom: 1rem;
+        }
+
+        .service-card .link-button {
+            margin-top: auto;
         }
 
         .services-grid {
@@ -467,12 +474,16 @@
                 height: 80px;
             }
             .service-card {
-                min-height: 200px;
+                min-height: 220px;
                 padding: 0.75rem;
             }
+            .service-card h3 {
+                height: 32px;
+                font-size: 0.95rem;
+            }
             .service-card p {
-                height: 64px;
-                font-size: 0.8rem;
+                height: 68px;
+                font-size: 0.78rem;
             }
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -496,6 +507,14 @@
         }
 
         @media (min-width: 601px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+            .portfolio-img {
+                width: 140px;
+                height: 140px;
+            }
             .bonus-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -542,7 +561,7 @@
             <div class="profile-pic-wrapper">
                 <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic">
             </div>
-            <h1 class="section-header text-2.5rem font-[Bebas Neue] mt-4 mb-2 mx-auto max-w-[80%]">62serpens</h1>
+            <h1 class="text-2.75rem font-[Bebas Neue] mt-4 mb-2 mx-auto max-w-[80%] uppercase text-[var(--accent-secondary)]" style="letter-spacing: 0.1em; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);">62serpens</h1>
             <p class="text-base text-[var(--text-secondary)] mb-4">Professional Music Producer</p>
             <div class="equalizer" aria-hidden="true">
                 <div class="equalizer-bar"></div>
@@ -563,8 +582,8 @@
             <h2 class="section-header">Services</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <h3 class="mb-2">Beat Leasing</h3>
-                    <p class="text-[var(--text-secondary)] mb-4">High-quality beats available for lease through my BeatStars store.</p>
+                    <h3 class="mb-2">Instrumental Leasing</h3>
+                    <p class="text-[var(--text-secondary)] mb-4">High-quality instrumentals available for lease through my BeatStars store.</p>
                     <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button"><i class="fas fa-store icon"></i>Visit Beat Store</a>
                 </div>
                 <div class="service-card">
