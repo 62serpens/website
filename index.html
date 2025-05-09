@@ -46,26 +46,28 @@
         }
 
         html {
-            height: 100%;
-            background: linear-gradient(135deg, #0a0015 0%, #1a002a 50%, #000000 100%) !important;
-            background-color: #0a0015 !important; /* Fallback */
-            background-attachment: fixed !important;
-        }
+    height: 100%;
+    background: radial-gradient(circle at 30% 20%, #1a0033 0%, #0a0015 40%, transparent 70%),
+                linear-gradient(135deg, #2a004d 0%, #1a0033 30%, #0a1a4d 60%, #000000 100%) !important;
+    background-color: #0a0015 !important; /* Fallback */
+    background-attachment: fixed !important;
+}
 
-        body {
-            height: 100%;
-            background: linear-gradient(135deg, #0a0015 0%, #1a002a 50%, #000000 100%) !important;
-            background-color: #0a0015 !important; /* Fallback */
-            background-attachment: fixed !important;
-            font-family: var(--font-body);
-            font-size: 16px;
-            color: var(--text-primary);
-            padding: 12px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-            scroll-behavior: smooth;
-        }
+body {
+    height: 100%;
+    background: radial-gradient(circle at 30% 20%, #1a0033 0%, #0a0015 40%, transparent 70%),
+                linear-gradient(135deg, #2a004d 0%, #1a0033 30%, #0a1a4d 60%, #000000 100%) !important;
+    background-color: #0a0015 !important; /* Fallback */
+    background-attachment: fixed !important;
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--text-primary);
+    padding: 12px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+}
 
         /* Ensure no Tailwind interference */
         body:not([class*="bg-"]) {
