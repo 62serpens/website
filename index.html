@@ -74,7 +74,7 @@
         }
 
         /* Ensure no Tailwind interference */
-++.    body:not([class*="bg-"]) {
+        body:not([class*="bg-"]) {
             background: radial-gradient(circle at 10% 20%, rgba(191, 0, 255, 0.25) 0%, transparent 50%),
                         radial-gradient(circle at 90% 80%, rgba(224, 102, 255, 0.25) 0%, transparent 50%),
                         radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
@@ -174,7 +174,7 @@
             font-size: 0.8rem;
             line-height: 1.4;
             margin: 0 0 8px;
-            flex-grow: 1;
+            headers: 1;
         }
 
         .service-card .link-button {
@@ -289,20 +289,20 @@
             box-shadow: 0 0 12px var(--shadow-color-accent);
         }
 
-        .portfolio-grid {
+        .discography-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
         }
 
-        .portfolio-item {
+        .discography-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
 
-        .portfolio-img {
+        .discography-img {
             width: 120px;
             height: 120px;
             object-fit: cover;
@@ -312,26 +312,26 @@
             margin: 0 auto 8px;
         }
 
-        .portfolio-img:hover {
+        .discography-img:hover {
             transform: scale(1.03);
             border-color: var(--accent-secondary);
             box-shadow: 0 0 12px var(--shadow-color-accent);
         }
 
-        .portfolio-item h3 {
+        .discography-item h3 {
             font-size: 0.875rem;
             font-weight: 600;
             color: var(--accent-secondary);
             margin: 0 0 4px;
         }
 
-        .portfolio-item p {
+        .discography-item p {
             font-size: 0.75rem;
             color: var(--text-secondary);
             margin: 0 0 4px;
         }
 
-        .portfolio-item a {
+        .discography-item a {
             font-size: 0.75rem;
         }
 
@@ -522,7 +522,7 @@
                 width: 120px;
                 height: 120px;
             }
-            .portfolio-img {
+            .discography-img {
                 width: 100px;
                 height: 100px;
             }
@@ -557,7 +557,7 @@
             .nav-link {
                 display: inline-block;
             }
-            .portfolio-grid, .bonus-grid {
+            .discography-grid, .bonus-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 8px;
             }
@@ -567,11 +567,11 @@
         }
 
         @media (min-width: 601px) {
-            .portfolio-grid {
+            .discography-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 8px;
             }
-            .portfolio-img {
+            .discography-img {
                 width: 120px;
                 height: 120px;
             }
@@ -596,7 +596,7 @@
         }
 
         @media (prefers-reduced-motion) {
-            .equalizer-bar, .gallery-img, .portfolio-img, .link-button, .bonus-item, .nav-link, .service-card, .modal {
+            .equalizer-bar, .gallery-img, .discography-img, .link-button, .bonus-item, .nav-link, .service-card, .modal {
                 animation: none;
                 transition: none;
             }
@@ -612,7 +612,7 @@
                     <a href="#home" class="nav-link">Home</a>
                     <a href="#services" class="nav-link">Services</a>
                     <a href="#gear" class="nav-link">Gear</a>
-                    <a href="#portfolio" class="nav-link">Portfolio</a>
+                    <a href="#discography" class="nav-link">Discography</a>
                     <a href="#gallery" class="nav-link">Gallery</a>
                     <a href="#bonus" class="nav-link">Bonus</a>
                 </div>
@@ -646,7 +646,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <h3 class="mb-2">Instrumental<br>Leasing</h3>
-                    <p class="text-[var(--text-secondary)] mb-4">High quality instrumentals for lease via my BeatStars store.</p>
+                    <p class="text-[var(--text-secondary)] mb-4">High-quality instrumentals for lease via my BeatStars store.</p>
                     <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button beat-store-button"><i class="fas fa-store icon"></i>Visit Beat Store</a>
                 </div>
                 <div class="service-card">
@@ -656,7 +656,7 @@
                 </div>
                 <div class="service-card">
                     <h3 class="mb-2">Recording &<br>Engineering</h3>
-                    <p class="text-[var(--text-secondary)] mb-4">Professional recording and mixing with with top-tier plugins.</p>
+                    <p class="text-[var(--text-secondary)] mb-4">Professional recording and mixing with top-tier plugins.</p>
                     <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-microphone icon"></i>Email for Quote'><i class="fas fa-microphone icon"></i>Email for Quote</button>
                 </div>
                 <div class="service-card">
@@ -678,29 +678,29 @@
             <p class="text-[var(--text-secondary)] text-sm text-center">My setup is portable, quick to set up, and adaptable to any environment, ensuring no compromise in quality. I use industry-standard equipment from UAD, Nord, Apple, and more, delivering professional-grade results.</p>
         </section>
 
-        <!-- Portfolio Section -->
-        <section id="portfolio" class="card">
-            <h2 class="section-header">Portfolio</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
+        <!-- Discography Section -->
+        <section id="discography" class="card">
+            <h2 class="section-header">Discography</h2>
+            <div class="discography-grid">
+                <div class="discography-item">
                     <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
-                        <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="portfolio-img" aria-label="View Down Bad track">
+                        <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img" aria-label="View Down Bad track">
                     </a>
                     <h3 class="mb-2">OnlyBino - Down Bad</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody, full production, mixing</p>
                     <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> onlybino</a>
                 </div>
-                <div class="portfolio-item">
+                <div class="discography-item">
                     <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" rel="noopener noreferrer">
-                        <img src="images/albumart_beatitup.jpg" alt="Beatitup Album Art" class="portfolio-img" aria-label="View Beatitup track">
+                        <img src="images/albumart_beatitup.jpg" alt="Beatitup Album Art" class="discography-img" aria-label="View Beatitup track">
                     </a>
                     <h3 class="mb-2">954.eddison - Beatitup</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
                     <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 954.eddison</a>
                 </div>
-                <div class="portfolio-item">
+                <div class="discography-item">
                     <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
-                        <img src="images/albumart_madaway.jpg" alt="Madaway Album Art" class="portfolio-img" aria-label="View Madaway track">
+                        <img src="images/albumart_madaway.jpg" alt="Madaway Album Art" class="discography-img" aria-label="View Madaway track">
                     </a>
                     <h3 class="mb-2">Tefflon - Madaway</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
@@ -833,7 +833,7 @@
         const modal = document.getElementById('imageModal');
         const modalImage = document.getElementById('modalImage');
         const closeModal = document.getElementById('closeModal');
-        document.querySelectorAll('.gallery-img, .portfolio-img').forEach(img => {
+        document.querySelectorAll('.gallery-img, .discography-img').forEach(img => {
             img.addEventListener('click', () => {
                 modalImage.src = img.src;
                 modalImage.alt = img.alt;
