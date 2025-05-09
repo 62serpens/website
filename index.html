@@ -47,20 +47,20 @@
 
         html {
             height: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(191, 0, 255, 0.3) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(0, 183, 235, 0.25) 0%, transparent 40%),
-                        radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.2) 0%, transparent 50%),
-                        linear-gradient(160deg, #0a0015 0%, #2a004d 30%, #1a0033 60%, #000000 100%) !important;
+            background: radial-gradient(circle at 10% 20%, rgba(191, 0, 255, 0.25) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(224, 102, 255, 0.25) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
+                        linear-gradient(160deg, #0a0015 0%, #2a004d 25%, #1a0033 55%, #000000 80%) !important;
             background-color: #0a0015 !important; /* Fallback */
             background-attachment: fixed !important;
         }
 
         body {
             height: 100%;
-            background: radial-gradient(circle at 10% 20%, rgba(191, 0, 255, 0.3) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(0, 183, 235, 0.25) 0%, transparent 40%),
-                        radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.2) 0%, transparent 50%),
-                        linear-gradient(160deg, #0a0015 0%, #2a004d 30%, #1a0033 60%, #000000 100%) !important;
+            background: radial-gradient(circle at 10% 20%, rgba(191, 0, 255, 0.25) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(224, 102, 255, 0.25) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
+                        linear-gradient(160deg, #0a0015 0%, #2a004d 25%, #1a0033 55%, #000000 80%) !important;
             background-color: #0a0015 !important; /* Fallback */
             background-attachment: fixed !important;
             font-family: var(--font-body);
@@ -74,11 +74,11 @@
         }
 
         /* Ensure no Tailwind interference */
-        body:not([class*="bg-"]) {
-            background: radial-gradient(circle at 10% 20%, rgba(191, 0, 255, 0.3) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(0, 183, 235, 0.25) 0%, transparent 40%),
-                        radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.2) 0%, transparent 50%),
-                        linear-gradient(160deg, #0a0015 0%, #2a004d 30%, #1a0033 60%, #000000 100%) !important;
+++.    body:not([class*="bg-"]) {
+            background: radial-gradient(circle at 10% 20%, rgba(191, 0, 255, 0.25) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(224, 102, 255, 0.25) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
+                        linear-gradient(160deg, #0a0015 0%, #2a004d 25%, #1a0033 55%, #000000 80%) !important;
         }
 
         a, button {
@@ -479,7 +479,7 @@
 
         nav {
             backdrop-filter: blur(12px);
-            background: rgba(10, 10, 12, 0.9 lubricated);
+            background: rgba(10, 10, 12, 0.9);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-sm);
             overflow: hidden;
@@ -656,7 +656,7 @@
                 </div>
                 <div class="service-card">
                     <h3 class="mb-2">Recording &<br>Engineering</h3>
-                    <p class="text-[var(--text-secondary)] mb-4">Professional recording and mixing with top-tier plugins, mobile.</p>
+                    <p class="text-[var(--text-secondary)] mb-4">Professional recording and mixing with with top-tier plugins, mobile.</p>
                     <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-microphone icon"></i>Email for Quote'><i class="fas fa-microphone icon"></i>Email for Quote</button>
                 </div>
                 <div class="service-card">
