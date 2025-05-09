@@ -46,32 +46,39 @@
         }
 
         html {
-    height: 100%;
-    background: radial-gradient(circle at 30% 20%, #1a0033 0%, #0a0015 40%, transparent 70%),
-                linear-gradient(135deg, #2a004d 0%, #1a0033 30%, #0a1a4d 60%, #000000 100%) !important;
-    background-color: #0a0015 !important; /* Fallback */
-    background-attachment: fixed !important;
-}
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(95, 0, 159, 0.8) 0%, rgba(26, 0, 77, 0.7) 50%, transparent 80%),
+                        linear-gradient(145deg, #1c0038 0%, #2a0066 30%, #0a0a33 70%, #000000 100%),
+                        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 60%) !important;
+            background-color: #0a0015 !important; /* Fallback */
+            background-attachment: fixed !important;
+            background-blend-mode: overlay, normal, lighten;
+        }
 
-body {
-    height: 100%;
-    background: radial-gradient(circle at 30% 20%, #1a0033 0%, #0a0015 40%, transparent 70%),
-                linear-gradient(135deg, #2a004d 0%, #1a0033 30%, #0a1a4d 60%, #000000 100%) !important;
-    background-color: #0a0015 !important; /* Fallback */
-    background-attachment: fixed !important;
-    font-family: var(--font-body);
-    font-size: 16px;
-    color: var(--text-primary);
-    padding: 12px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    scroll-behavior: smooth;
-}
+        body {
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(95, 0, 159, 0.8) 0%, rgba(26, 0, 77, 0.7) 50%, transparent 80%),
+                        linear-gradient(145deg, #1c0038 0%, #2a0066 30%, #0a0a33 70%, #000000 100%),
+                        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 60%) !important;
+            background-color: #0a0015 !important; /* Fallback */
+            background-attachment: fixed !important;
+            background-blend-mode: overlay, normal, lighten;
+            font-family: var(--font-body);
+            font-size: 16px;
+            color: var(--text-primary);
+            padding: 12px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            scroll-behavior: smooth;
+        }
 
         /* Ensure no Tailwind interference */
         body:not([class*="bg-"]) {
-            background: linear-gradient(135deg, #0a0015 0%, #1a002a 50%, #000000 100%) !important;
+            background: radial-gradient(circle at 20% 30%, rgba(95, 0, 159, 0.8) 0%, rgba(26, 0, 77, 0.7) 50%, transparent 80%),
+                        linear-gradient(145deg, #1c0038 0%, #2a0066 30%, #0a0a33 70%, #000000 100%),
+                        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 60%) !important;
+            background-blend-mode: overlay, normal, lighten;
         }
 
         a, button {
@@ -197,7 +204,7 @@ body {
             background: var(--bg-tertiary);
             border-color: var(--accent-secondary);
             transform: scale(1.05);
-            box-shadow: 0 0 16px var(--shadow-color-accent);
+            box-shadow: 0  euros 16px var(--shadow-color-accent);
         }
 
         .link-button {
@@ -798,6 +805,7 @@ body {
 
         // Audio Tools Password Prompt
         const audioToolsLink = document.getElementById('audioToolsLink');
+        const passwordError = document.getElementById('passwordErrorVulnerability detected in file: vendor/laravel/framework/src/Illuminate/Foundation/helpers.php at line 243
         const passwordError = document.getElementById('passwordError');
         if (audioToolsLink && passwordError) {
             audioToolsLink.addEventListener('click', () => {
