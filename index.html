@@ -66,7 +66,7 @@
             font-family: var(--font-body);
             font-size: 16px;
             color: var(--text-primary);
-            padding: 12px;
+            padding: 12px max(calc(8px + env(safe-area-inset-left)), 12px) 12px max(calc(8px + env(safe-area-inset-right)), 12px);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
@@ -97,7 +97,7 @@
         .container {
             max-width: 720px;
             margin: 0 auto;
-            padding: 0 12px;
+            padding: 0 max(calc(8px + env(safe-area-inset-left)), 12px) 0 max(calc(8px + env(safe-area-inset-right)), 12px);
             display: flex;
             flex-direction: column;
             gap: 16px;
@@ -205,6 +205,13 @@
             border-color: var(--accent-secondary);
             transform: scale(1.05);
             box-shadow: 0 0 16px var(--shadow-color-accent);
+        }
+
+        .nav-link:active {
+            background: transparent;
+            border-color: var(--border-color);
+            transform: scale(1);
+            box-shadow: none;
         }
 
         .link-button {
@@ -493,10 +500,10 @@
         @media (max-width: 600px) {
             body {
                 font-size: 14px;
-                padding: 8px;
+                padding: 8px max(calc(8px + env(safe-area-inset-left)), 8px) 8px max(calc(8px + env(safe-area-inset-right)), 8px);
             }
             .container {
-                padding: 0 8px;
+                padding: 0 max(calc(8px + env(safe-area-inset-left)), 8px) 0 max(calc(8px + env(safe-area-inset-right)), 8px);
                 gap: 12px;
             }
             .section-header {
@@ -506,9 +513,9 @@
                 font-size: 1.5rem;
             }
             .nav-link {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
                 padding: 4px 6px;
-                margin: 0 3px;
+                margin: 0 2px;
             }
             .link-button {
                 height: 36px;
@@ -611,7 +618,7 @@
                 <div class="flex items-center space-x-2">
                     <a href="#home" class="nav-link">Home</a>
                     <a href="#services" class="nav-link">Services</a>
-                    <a href="#gear" class="nav-link">Gear</a>
+                    <a href="#equipment" class="nav-link">Equipment</a>
                     <a href="#discography" class="nav-link">Discography</a>
                     <a href="#gallery" class="nav-link">Gallery</a>
                     <a href="#bonus" class="nav-link">Bonus</a>
@@ -672,9 +679,9 @@
             </div>
         </section>
 
-        <!-- Gear Section -->
-        <section id="gear" class="card">
-            <h2 class="section-header">Gear</h2>
+        <!-- Equipment Section -->
+        <section id="equipment" class="card">
+            <h2 class="section-header">Equipment</h2>
             <p class="text-[var(--text-secondary)] text-sm text-center">My setup is portable, quick to set up, and adaptable to any environment, ensuring no compromise in quality. I use industry-standard equipment from UAD, Nord, Apple, and more, delivering professional-grade results.</p>
         </section>
 
@@ -818,7 +825,7 @@
             });
         }
 
-        // Smooth Scroll for Anchor Links
+        // Smooth Scroll for Anchor Links and Clear Nav Highlight
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', e => {
                 e.preventDefault();
@@ -826,6 +833,13 @@
                 const navHeight = document.querySelector('nav').offsetHeight;
                 const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
                 window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                // Clear hover/focus styles on mobile
+                if (window.innerWidth <= 600) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.blur();
+                        link.classList.remove('hover');
+                    });
+                }
             });
         });
 
