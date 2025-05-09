@@ -38,26 +38,38 @@
             --border-radius-btn: 10px;
         }
 
-        *, *:before, *:after { box-sizing: border-box; }
-        html {
-            scroll-padding-top: 64px;
+        /* Reset and force background */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        html {
+            height: 100%;
+            background: linear-gradient(135deg, #0a0015 0%, #1a002a 50%, #000000 100%) !important;
+            background-color: #0a0015 !important; /* Fallback */
+            background-attachment: fixed !important;
+        }
+
         body {
+            height: 100%;
+            background: linear-gradient(135deg, #0a0015 0%, #1a002a 50%, #000000 100%) !important;
+            background-color: #0a0015 !important; /* Fallback */
+            background-attachment: fixed !important;
             font-family: var(--font-body);
             font-size: 16px;
-            margin: 0;
-            min-height: 100vh;
-            background-color: var(--bg-tertiary) !important;
-            background: linear-gradient(135deg, #0a0015 0%, #1a002a 50%, #000000 100%) !important;
-            background-image: radial-gradient(circle at 20% 30%, rgba(191, 0, 255, 0.2) 0%, transparent 40%),
-                             radial-gradient(circle at 80% 70%, rgba(224, 102, 255, 0.15) 0%, transparent 40%) !important;
-            background-attachment: fixed !important;
             color: var(--text-primary);
             padding: 12px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
             scroll-behavior: smooth;
+        }
+
+        /* Ensure no Tailwind interference */
+        body:not([class*="bg-"]) {
+            background: linear-gradient(135deg, #0a0015 0%, #1a002a 50%, #000000 100%) !important;
         }
 
         a, button {
@@ -128,11 +140,10 @@
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            transition: transform var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out;
+            transition: box-shadow var(--transition-duration) ease-in-out;
         }
 
         .service-card:hover {
-            transform: translateY(-4px);
             box-shadow: 0 10px 28px var(--shadow-color-dark), 0 0 16px var(--shadow-color-accent);
         }
 
@@ -205,10 +216,14 @@
         }
 
         .link-button:hover {
-            transform: translateY(-2px);
             background: var(--bg-tertiary);
             border-color: var(--accent-secondary);
             box-shadow: 0 12px 28px var(--shadow-color-dark), 0 0 16px var(--shadow-color-accent);
+        }
+
+        /* Specific hover effect for Beat Store and Copy Email buttons */
+        .beat-store-button:hover, .contact-button:hover {
+            transform: translateY(-2px);
         }
 
         .link-button i.icon {
@@ -429,7 +444,7 @@
             transition: all var(--transition-duration) ease-in-out;
         }
 
-        .bonus-item那么, bonus-item:hover {
+        .bonus-item:hover {
             transform: translateY(-4px);
             border-color: var(--accent-secondary);
             box-shadow: 0 10px 20px var(--shadow-color-dark), 0 0 16px var(--shadow-color-accent);
@@ -574,7 +589,7 @@
         @media (prefers-reduced-motion) {
             .equalizer-bar, .gallery-img, .portfolio-img, .link-button, .bonus-item, .nav-link, .service-card, .modal {
                 animation: none;
-                inscribed
+                transition: none;
             }
         }
     </style>
@@ -623,7 +638,7 @@
                 <div class="service-card">
                     <h3 class="mb-2">Instrumental<br>Leasing</h3>
                     <p class="text-[var(--text-secondary)] mb-4">High-quality instrumentals for lease via my BeatStars store.</p>
-                    <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button"><i class="fas fa-store icon"></i>Visit Beat Store</a>
+                    <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button beat-store-button"><i class="fas fa-store icon"></i>Visit Beat Store</a>
                 </div>
                 <div class="service-card">
                     <h3 class="mb-2">Personalized<br>Production</h3>
@@ -662,7 +677,7 @@
                     <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
                         <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="portfolio-img" aria-label="View Down Bad track">
                     </a>
-                    <h3 class="mb-2">Down Bad - OnlyBino</h3>
+                    <h3 class="mb-2">OnlyBino - Down Bad</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody, full production, mixing</p>
                     <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> onlybino</a>
                 </div>
@@ -670,7 +685,7 @@
                     <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" rel="noopener noreferrer">
                         <img src="images/albumart_beatitup.jpg" alt="Beatitup Album Art" class="portfolio-img" aria-label="View Beatitup track">
                     </a>
-                    <h3 class="mb-2">Beatitup - 954.eddison</h3>
+                    <h3 class="mb-2">954.eddison - Beatitup</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
                     <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 954.eddison</a>
                 </div>
@@ -678,7 +693,7 @@
                     <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
                         <img src="images/albumart_madaway.jpg" alt="Madaway Album Art" class="portfolio-img" aria-label="View Madaway track">
                     </a>
-                    <h3 class="mb-2">Madaway - Tefflon</h3>
+                    <h3 class="mb-2">Tefflon - Madaway</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
                     <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 1tefflon</a>
                 </div>
