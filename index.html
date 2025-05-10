@@ -856,6 +856,7 @@
                     <option value="mixing">Recording & Engineering</option>
                     <option value="tutoring">Production Tutoring</option>
                     <option value="website">Website Design</option>
+                    <option value="other">Other</option>
                 </select>
                 <textarea name="message" placeholder="Please provide as much detail as possible about your inquiry." required aria-label="Your Inquiry"></textarea>
                 <button type="submit" class="form-submit-button">Inquire</button>
@@ -940,29 +941,23 @@
         });
 
         // Auto-select category from query parameter
-        document.addEventListener('DOMContentLoaded', () => {
+        function setCategoryFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
             const category = urlParams.get('category');
             const categorySelect = document.getElementById('category');
-            if (category && ['leasing', 'production', 'mixing', 'tutoring', 'website'].includes(category)) {
+            const validCategories = ['leasing', 'production', 'mixing', 'tutoring', 'website', 'other'];
+            if (category && validCategories.includes(category)) {
                 categorySelect.value = category;
-                // Dispatch change event to ensure UI updates
                 const event = new Event('change');
                 categorySelect.dispatchEvent(event);
             }
-        });
+        }
 
-        // Re-check URL after smooth scrolling
-        window.addEventListener('scroll', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const category = urlParams.get('category');
-            const categorySelect = document.getElementById('category');
-            if (category && ['leasing', 'production', 'mixing', 'tutoring', 'website'].includes(category) && categorySelect.value !== category) {
-                categorySelect.value = category;
-                const event = new Event('change');
-                categorySelect.dispatchEvent(event);
-            }
-        }, { once: true });
+        document.addEventListener('DOMContentLoaded', () => {
+            setCategoryFromUrl();
+            // Re-check after smooth scroll
+            setTimeout(setCategoryFromUrl, 500);
+        });
     </script>
 </body>
 </html>
