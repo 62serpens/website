@@ -448,6 +448,8 @@
             font-size: 2rem;
             cursor: pointer;
             transition: color var(--transition-duration) ease-in-out;
+            pointer-events: auto;
+            z-index: 1001;
         }
 
         .modal-close:hover {
@@ -1063,7 +1065,9 @@
             updateModalImage(currentImageIndex);
         });
 
-        closeModal.addEventListener('click', () => {
+        closeModal.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent click from bubbling to modal
+            console.log('Close button clicked'); // Debug log
             modal.classList.remove('active');
         });
 
