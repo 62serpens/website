@@ -438,6 +438,11 @@
             border-radius: var(--border-radius-sm);
             border: 2px solid var(--border-color);
             box-shadow: 0 0 16px var(--shadow-color-accent);
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            transition: opacity 0.2s ease-in-out;
         }
 
         .modal-close {
@@ -975,7 +980,7 @@
             <span id="closeModal" class="modal-close" aria-label="Close image modal">×</span>
             <div class="modal-content">
                 <span id="prevArrow" class="modal-arrow left" aria-label="Previous image"><i class="fas fa-chevron-left"></i></span>
-                <img id="modalImage" class="modal-img" src="" alt="Expanded Image">
+                <img id="modalImage" class="modal-img" src="" alt="Expanded Image" draggable="false">
                 <span id="nextArrow" class="modal-arrow right" aria-label="Next image"><i class="fas fa-chevron-right"></i></span>
             </div>
         </div>
@@ -1042,8 +1047,12 @@
 
         function updateModalImage(index) {
             currentImageIndex = index;
-            modalImage.src = galleryImages[index].src;
-            modalImage.alt = galleryImages[index].alt;
+            modalImage.style.opacity = '0'; // Fade out
+            setTimeout(() => {
+                modalImage.src = galleryImages[index].src;
+                modalImage.alt = galleryImages[index].alt;
+                modalImage.style.opacity = '1'; // Fade in
+            }, 200); // Match the CSS transition duration
         }
 
         galleryImages.forEach((img, index) => {
