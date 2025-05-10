@@ -1086,15 +1086,26 @@
             }
         });
 
-        // Swipe Navigation for Mobile
+        // Swipe Navigation for Mobile with Pinch-Zoom Handling
         let touchStartX = 0;
         let touchEndX = 0;
+        let isPinching = false;
 
         modal.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
+            if (e.touches.length > 1) {
+                isPinching = true; // Detect pinch-zoom (multi-touch)
+            } else {
+                isPinching = false;
+                touchStartX = e.changedTouches[0].screenX;
+            }
         });
 
         modal.addEventListener('touchend', e => {
+            if (isPinching || e.changedTouches.length > 1) {
+                isPinching = false; // Reset pinch state
+                return; // Ignore swipe if pinch-zoom was detected
+            }
+
             touchEndX = e.changedTouches[0].screenX;
             const swipeDistance = touchEndX - touchStartX;
             const swipeThreshold = 50; // Minimum distance to register a swipe
