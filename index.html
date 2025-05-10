@@ -583,7 +583,7 @@
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            background: var(--bg-tertiary) url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbD0iI2UwZTBlNCIgZD0iTTggMTFMMyA2aDEwbC01IDV6Ii8+PC9zdmc+") no-repeat right 10px center;
+            background: var(--bg-tertiary) url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA1NiAxNiI+PHBhdGggZmlsbD0iI2UwZTBlNCIgZD0iTTggMTFMMyA2aDEwbC01IDV6Ii8+PC9zdmc+") no-repeat right 10px center;
             background-size: 12px;
         }
 
@@ -707,7 +707,7 @@
                 padding: 8px;
             }
             .contact-form select {
-                background: var(--bg-tertiary) url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbD0iI2UwZTBlNCIgZD0iTTggMTFMMyA2aDEwbC01IDV6Ii8+PC9zdmc+") no-repeat right 8px center;
+                background: var(--bg-tertiary) url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA1NiAxNiI+PHBhdGggZmlsbD0iI2UwZTBlNCIgZD0iTTggMTFMMyA2aDEwbC01IDV6Ii8+PC9zdmc+") no-repeat right 8px center;
                 background-size: 10px;
             }
             .form-submit-button {
@@ -1035,7 +1035,7 @@
             });
         });
 
-        // Image Modal with Navigation
+        // Image Modal with Navigation (Arrows Only)
         const modal = document.getElementById('imageModal');
         const modalContent = document.querySelector('.modal-content');
         const modalImage = document.getElementById('modalImage');
@@ -1083,41 +1083,6 @@
         modal.addEventListener('click', e => {
             if (e.target === modal || !modalContent.contains(e.target)) {
                 modal.classList.remove('active');
-            }
-        });
-
-        // Swipe Navigation for Mobile with Pinch-Zoom Handling
-        let touchStartX = 0;
-        let touchEndX = 0;
-        let isPinching = false;
-
-        modal.addEventListener('touchstart', e => {
-            if (e.touches.length > 1) {
-                isPinching = true; // Detect pinch-zoom (multi-touch)
-            } else {
-                isPinching = false;
-                touchStartX = e.changedTouches[0].screenX;
-            }
-        });
-
-        modal.addEventListener('touchend', e => {
-            if (isPinching || e.changedTouches.length > 1) {
-                isPinching = false; // Reset pinch state
-                return; // Ignore swipe if pinch-zoom was detected
-            }
-
-            touchEndX = e.changedTouches[0].screenX;
-            const swipeDistance = touchEndX - touchStartX;
-            const swipeThreshold = 50; // Minimum distance to register a swipe
-
-            if (swipeDistance > swipeThreshold) {
-                // Swipe right (previous)
-                currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
-                updateModalImage(currentImageIndex);
-            } else if (swipeDistance < -swipeThreshold) {
-                // Swipe left (next)
-                currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
-                updateModalImage(currentImageIndex);
             }
         });
 
