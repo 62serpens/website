@@ -178,13 +178,25 @@
             gap: 12px;
         }
 
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .nav-row {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
         .nav-link {
             font-family: var(--font-heading);
-            font-size: 1.125rem;
+            font-size: 1rem;
             color: var(--text-primary);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            padding: 6px 12px;
+            padding: 4px 10px;
             border: 2px solid var(--border-color);
             border-radius: var(--border-radius-sm);
             transition: all var(--transition-duration) ease-in-out;
@@ -561,11 +573,6 @@
             #bonus .section-header {
                 font-size: 1.5rem;
             }
-            .nav-link {
-                font-size: 0.75rem;
-                padding: 4px 6px;
-                margin: 0 2px;
-            }
             .link-button {
                 height: 36px;
                 padding: 6px 8px;
@@ -603,14 +610,19 @@
                 gap: 8px;
             }
             nav {
-                padding: 8px 8px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                padding: 6px;
+            }
+            .nav-container {
+                gap: 4px;
+            }
+            .nav-row {
+                gap: 3px;
                 flex-wrap: wrap;
+                justify-content: center;
             }
             .nav-link {
-                display: inline-block;
+                font-size: 0.65rem;
+                padding: 3px 5px;
             }
             .discography-grid, .bonus-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -661,6 +673,18 @@
             .home-heading {
                 font-size: 2.5rem;
             }
+            .nav-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-row {
+                gap: 6px;
+            }
+            .nav-link {
+                font-size: 1rem;
+                padding: 4px 10px;
+            }
         }
 
         @media (prefers-reduced-motion) {
@@ -684,13 +708,17 @@
 
         <!-- Navigation -->
         <nav class="sticky top-0 z-50">
-            <div class="flex justify-center py-3">
-                <div class="flex items-center space-x-2">
+            <div class="nav-container flex flex-col items-center py-3 gap-2">
+                <div class="nav-row flex justify-center space-x-2">
+                    <a href="#home" class="nav-link">Home</a>
                     <a href="#services" class="nav-link">Services</a>
                     <a href="#equipment" class="nav-link">Equipment</a>
                     <a href="#discography" class="nav-link">Discography</a>
-                    <a href="#gallery" class="nav-link">Gallery</a>
                     <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <div class="nav-row flex justify-center space-x-2">
+                    <a href="#gallery" class="nav-link">Gallery</a>
+                    <a href="#bonus" class="nav-link">Bonus</a>
                 </div>
             </div>
         </nav>
@@ -793,6 +821,28 @@
             </div>
         </section>
 
+        <!-- Contact Section -->
+        <section id="contact" class="card">
+            <h2 class="section-header">Contact</h2>
+            <form name="contact" method="POST" data-netlify="true" action="/success" class="contact-form">
+                <input type="hidden" name="form-name" value="contact">
+                <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
+                <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
+                <input type="text" name="social-links" placeholder="Relevant Social Media or Streaming Links (Optional, Preferred)" aria-label="Social Media or Streaming Links">
+                <select name="category" id="category" required aria-label="Service Category">
+                    <option value="" disabled selected>Select a Service</option>
+                    <option value="leasing">Instrumental Leasing</option>
+                    <option value="production">Personalized Production</option>
+                    <option value="mixing">Recording & Engineering</option>
+                    <option value="tutoring">Production Tutoring</option>
+                    <option value="website">Website Design</option>
+                    <option value="other">Other</option>
+                </select>
+                <textarea name="message" placeholder="Please provide as much detail as possible about your inquiry." required aria-label="Your Inquiry"></textarea>
+                <button type="submit" class="form-submit-button">Inquire</button>
+            </form>
+        </section>
+
         <!-- Gallery Section -->
         <section id="gallery" class="card">
             <h2 class="section-header">Gallery</h2>
@@ -848,28 +898,6 @@
                 </a>
             </div>
             <p id="passwordError" role="alert" class="hidden text-red-400 text-sm text-center mt-4 bg-red-900/20 p-2 rounded-md">Invalid access code. Please try again.</p>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="card">
-            <h2 class="section-header">Contact</h2>
-            <form name="contact" method="POST" data-netlify="true" action="/success" class="contact-form">
-                <input type="hidden" name="form-name" value="contact">
-                <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
-                <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
-                <input type="text" name="social-links" placeholder="Relevant Social Media or Streaming Links (Optional, Preferred)" aria-label="Social Media or Streaming Links">
-                <select name="category" id="category" required aria-label="Service Category">
-                    <option value="" disabled selected>Select a Service</option>
-                    <option value="leasing">Instrumental Leasing</option>
-                    <option value="production">Personalized Production</option>
-                    <option value="mixing">Recording & Engineering</option>
-                    <option value="tutoring">Production Tutoring</option>
-                    <option value="website">Website Design</option>
-                    <option value="other">Other</option>
-                </select>
-                <textarea name="message" placeholder="Please provide as much detail as possible about your inquiry." required aria-label="Your Inquiry"></textarea>
-                <button type="submit" class="form-submit-button">Inquire</button>
-            </form>
         </section>
 
         <!-- Footer -->
