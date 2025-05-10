@@ -375,6 +375,7 @@
             background: var(--accent-secondary);
             border-radius: 2px;
             animation: equalize 1.2s infinite ease-in-out alternate;
+            will-change: height, opacity; /* Optimize for mobile performance */
         }
 
         .equalizer-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
@@ -1084,6 +1085,26 @@
             if (e.target === modal || !modalContent.contains(e.target)) {
                 modal.classList.remove('active');
             }
+        });
+
+        // Ensure Equalizer Animation Runs on Mobile
+        const equalizerBars = document.querySelectorAll('.equalizer-bar');
+        function checkAnimation() {
+            const bar = equalizerBars[0];
+            const style = window.getComputedStyle(bar);
+            const animation = style.getPropertyValue('animation-name') || style.getPropertyValue('-webkit-animation-name');
+            if (animation !== 'equalize') {
+                equalizerBars.forEach(bar => {
+                    bar.style.animation = 'equalize 1.2s infinite ease-in-out alternate';
+                    const index = Array.from(equalizerBars).indexOf(bar);
+                    bar.style.animationDelay = `${index * 0.2}s`;
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAnimation();
+            window.addEventListener('scroll', checkAnimation); // Re-check on scroll for mobile
         });
 
         // Auto-select category from query parameter
