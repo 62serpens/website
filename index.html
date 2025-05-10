@@ -195,11 +195,16 @@
             font-size: 1rem;
             color: var(--text-primary);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.05em;
             padding: 4px 10px;
             border: 2px solid var(--border-color);
             border-radius: var(--border-radius-sm);
             transition: all var(--transition-duration) ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1;
         }
 
         .nav-link:hover {
@@ -417,6 +422,15 @@
             opacity: 1;
         }
 
+        .modal-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
         .modal-img {
             max-width: 90%;
             max-height: 90vh;
@@ -438,6 +452,42 @@
 
         .modal-close:hover {
             color: var(--accent-secondary);
+        }
+
+        .modal-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-primary);
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px;
+            transition: color var(--transition-duration) ease-in-out;
+        }
+
+        .modal-arrow:hover {
+            color: var(--accent-secondary);
+        }
+
+        .modal-arrow.left {
+            left: 10px;
+        }
+
+        .modal-arrow.right {
+            right: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .modal-arrow {
+                font-size: 1.5rem;
+                padding: 5px;
+            }
+            .modal-arrow.left {
+                left: 5px;
+            }
+            .modal-arrow.right {
+                right: 5px;
+            }
         }
 
         .fa-store, .fa-music, .fa-microphone, .fa-chalkboard-teacher, .fa-laptop-code {
@@ -511,6 +561,7 @@
         .contact-form input,
         .contact-form select,
         .contact-form textarea {
+            width: 100%;
             background: var(--bg-tertiary);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-sm);
@@ -519,6 +570,14 @@
             font-size: 0.9rem;
             font-family: var(--font-body);
             transition: border-color var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out;
+        }
+
+        .contact-form select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: var(--bg-tertiary) url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbD0iI2UwZTBlNCIgZD0iTTggMTFMMyA2aDEwbC01IDV6Ii8+PC9zdmc+") no-repeat right 10px center;
+            background-size: 12px;
         }
 
         .contact-form input::placeholder,
@@ -621,8 +680,8 @@
                 justify-content: center;
             }
             .nav-link {
-                font-size: 0.8rem;
-                padding: 4px 6px;
+                font-size: 0.75rem;
+                padding: 4px 5px;
             }
             .discography-grid, .bonus-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -639,6 +698,10 @@
             .contact-form textarea {
                 font-size: 0.85rem;
                 padding: 8px;
+            }
+            .contact-form select {
+                background: var(--bg-tertiary) url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbD0iI2UwZTBlNCIgZD0iTTggMTFMMyA2aDEwbC01IDV6Ii8+PC9zdmc+") no-repeat right 8px center;
+                background-size: 10px;
             }
             .form-submit-button {
                 font-size: 0.75rem;
@@ -714,9 +777,9 @@
                     <a href="#services" class="nav-link">Services</a>
                     <a href="#equipment" class="nav-link">Equipment</a>
                     <a href="#discography" class="nav-link">Discography</a>
+                    <a href="#contact" class="nav-link">Contact</a>
                 </div>
                 <div class="nav-row flex justify-center space-x-2">
-                    <a href="#contact" class="nav-link">Contact</a>
                     <a href="#gallery" class="nav-link">Gallery</a>
                     <a href="#bonus" class="nav-link">Bonus</a>
                 </div>
@@ -908,7 +971,11 @@
         <!-- Image Modal -->
         <div id="imageModal" class="modal" role="dialog" aria-label="Expanded Image">
             <span id="closeModal" class="modal-close" aria-label="Close image modal">×</span>
-            <img id="modalImage" class="modal-img" src="" alt="Expanded Image">
+            <div class="modal-content">
+                <span id="prevArrow" class="modal-arrow left" aria-label="Previous image"><i class="fas fa-chevron-left"></i></span>
+                <img id="modalImage" class="modal-img" src="" alt="Expanded Image">
+                <span id="nextArrow" class="modal-arrow right" aria-label="Next image"><i class="fas fa-chevron-right"></i></span>
+            </div>
         </div>
     </div>
 
@@ -961,20 +1028,73 @@
             });
         });
 
-        // Image Modal
+        // Image Modal with Navigation
         const modal = document.getElementById('imageModal');
+        const modalContent = document.querySelector('.modal-content');
         const modalImage = document.getElementById('modalImage');
         const closeModal = document.getElementById('closeModal');
-        document.querySelectorAll('.gallery-img, .discography-img').forEach(img => {
+        const prevArrow = document.getElementById('prevArrow');
+        const nextArrow = document.getElementById('nextArrow');
+        const galleryImages = document.querySelectorAll('.gallery-img');
+        let currentImageIndex = 0;
+
+        function updateModalImage(index) {
+            currentImageIndex = index;
+            modalImage.src = galleryImages[index].src;
+            modalImage.alt = galleryImages[index].alt;
+        }
+
+        galleryImages.forEach((img, index) => {
             img.addEventListener('click', () => {
-                modalImage.src = img.src;
-                modalImage.alt = img.alt;
+                updateModalImage(index);
                 modal.classList.add('active');
             });
         });
-        closeModal.addEventListener('click', () => modal.classList.remove('active'));
+
+        prevArrow.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent click from bubbling to modal
+            currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateModalImage(currentImageIndex);
+        });
+
+        nextArrow.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent click from bubbling to modal
+            currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+            updateModalImage(currentImageIndex);
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
         modal.addEventListener('click', e => {
-            if (e.target === modal) modal.classList.remove('active');
+            if (e.target === modal || !modalContent.contains(e.target)) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Swipe Navigation for Mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        modal.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        modal.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            const swipeDistance = touchEndX - touchStartX;
+            const swipeThreshold = 50; // Minimum distance to register a swipe
+
+            if (swipeDistance > swipeThreshold) {
+                // Swipe right (previous)
+                currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+                updateModalImage(currentImageIndex);
+            } else if (swipeDistance < -swipeThreshold) {
+                // Swipe left (next)
+                currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+                updateModalImage(currentImageIndex);
+            }
         });
 
         // Auto-select category from query parameter
