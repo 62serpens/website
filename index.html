@@ -80,7 +80,7 @@
             transition: all var(--transition-duration) ease-in-out;
         }
 
-        a:focus-visible, button:focus-visible {
+        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
             outline: 2px solid var(--accent-secondary);
             outline-offset: 2px;
         }
@@ -240,8 +240,8 @@
             box-shadow: 0 12px 28px var(--shadow-color-dark), 0 0 16px var(--shadow-color-accent);
         }
 
-        /* Specific hover effect for Beat Store and Copy Email buttons */
-        .beat-store-button:hover, .contact-button:hover {
+        /* Specific hover effect for buttons */
+        .beat-store-button:hover, .service-contact-button:hover, .form-submit-button:hover {
             transform: translateY(-2px);
         }
 
@@ -384,15 +384,6 @@
             box-shadow: 0 4px 12px var(--shadow-color-dark);
         }
 
-        .contact-button.locked {
-            pointer-events: none;
-            opacity: 0.6;
-        }
-
-        .contact-button .fa-check, .contact-button .fa-times {
-            margin-right: 8px;
-        }
-
         .modal {
             display: none;
             position: fixed;
@@ -445,8 +436,6 @@
         .fa-soundcloud { color: #ff5500; }
         .fa-youtube { color: #ff0000; }
         .fa-discord { color: #5865f2; }
-        .fa-check { color: #22c55e; }
-        .fa-times { color: #ef4444; }
 
         .bonus-grid {
             display: grid;
@@ -497,6 +486,64 @@
         footer {
             margin-bottom: 24px;
             color: var(--text-secondary);
+        }
+
+        /* Form Styles */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            padding: 10px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: var(--font-body);
+            transition: border-color var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .contact-form input:hover,
+        .contact-form select:hover,
+        .contact-form textarea:hover {
+            border-color: var(--accent-secondary);
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit-button {
+            background: linear-gradient(145deg, var(--bg-secondary), --bg-tertiary));
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-btn);
+            padding: 10px;
+            color: var(--text-primary);
+            font-size: 0.78rem;
+            font-weight: 500;
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px var(--shadow-color-dark), inset 0 1px 1px var(--shadow-color-light);
+            transition: all var(--transition-duration) ease-in-out;
+        }
+
+        .form-submit-button:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent-secondary);
+            box-shadow: 0 12px 28px var(--shadow-color-dark), 0 0 16px var(--shadow-color-accent);
         }
 
         @media (max-width: 600px) {
@@ -572,6 +619,19 @@
             .home-heading {
                 font-size: 1.75rem;
             }
+            .contact-form {
+                padding: 12px;
+            }
+            .contact-form input,
+            .contact-form select,
+            .contact-form textarea {
+                font-size: 0.85rem;
+                padding: 8px;
+            }
+            .form-submit-button {
+                font-size: 0.75rem;
+                padding: 8px;
+            }
         }
 
         @media (min-width: 601px) {
@@ -604,7 +664,7 @@
         }
 
         @media (prefers-reduced-motion) {
-            .equalizer-bar, .gallery-img, .discography-img, .link-button, .bonus-item, .nav-link, .service-card, .modal {
+            .equalizer-bar, .gallery-img, .discography-img, .link-button, .bonus-item, .nav-link, .service-card, .modal, .form-submit-button {
                 animation: none;
                 transition: none;
             }
@@ -622,6 +682,7 @@
                     <a href="#equipment" class="nav-link">Equipment</a>
                     <a href="#discography" class="nav-link">Discography</a>
                     <a href="#gallery" class="nav-link">Gallery</a>
+                    <a href="#contact" class="nav-link">Contact</a>
                 </div>
             </div>
         </nav>
@@ -659,22 +720,22 @@
                 <div class="service-card">
                     <h3 class="mb-2">Personalized<br>Production</h3>
                     <p class="text-[var(--text-secondary)] mb-4">Collaborative production to realize your vision. With a portable setup, I can come to you.</p>
-                    <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-music icon"></i>Email for Quote'><i class="fas fa-music icon"></i>Email for Quote</button>
+                    <a href="#contact?category=production" class="link-button service-contact-button"><i class="fas fa-music icon"></i>Inquire</a>
                 </div>
                 <div class="service-card">
                     <h3 class="mb-2">Recording &<br>Engineering</h3>
                     <p class="text-[var(--text-secondary)] mb-4">Professional recording and mixing with industry standard hardware and software.</p>
-                    <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-microphone icon"></i>Email for Quote'><i class="fas fa-microphone icon"></i>Email for Quote</button>
+                    <a href="#contact?category=mixing" class="link-button service-contact-button"><i class="fas fa-microphone icon"></i>Inquire</a>
                 </div>
                 <div class="service-card">
                     <h3 class="mb-2">Production<br>Tutoring</h3>
                     <p class="text-[var(--text-secondary)] mb-4">Personalized FL Studio tutoring with expert workflow guidance.</p>
-                    <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-chalkboard-teacher icon"></i>Email for Quote'><i class="fas fa-chalkboard-teacher icon"></i>Email for Quote</button>
+                    <a href="#contact?category=tutoring" class="link-button service-contact-button"><i class="fas fa-chalkboard-teacher icon"></i>Inquire</a>
                 </div>
                 <div class="service-card">
                     <h3 class="mb-2">Website<br>Design</h3>
                     <p class="text-[var(--text-secondary)] mb-4">Custom websites to showcase your brand, like this one.</p>
-                    <button type="button" class="link-button contact-button" data-original-content='<i class="fas fa-laptop-code icon"></i>Email for Quote'><i class="fas fa-laptop-code icon"></i>Email for Quote</button>
+                    <a href="#contact?category=website" class="link-button service-contact-button"><i class="fas fa-laptop-code icon"></i>Inquire</a>
                 </div>
             </div>
         </section>
@@ -693,7 +754,7 @@
                     <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
                         <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img" aria-label="View Down Bad track">
                     </a>
-                    <h3 class="mb-2">Onlybino - Down Bad</h3>
+                    <h3 class="mb-2">OnlyBino - Down Bad</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody, full production, mixing</p>
                     <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> onlybino</a>
                 </div>
@@ -701,15 +762,15 @@
                     <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" rel="noopener noreferrer">
                         <img src="images/albumart_beatitup.jpg" alt="Beatitup Album Art" class="discography-img" aria-label="View Beatitup track">
                     </a>
-                    <h3 class="mb-2">Eddison - beat it up</h3>
+                    <h3 class="mb-2">Eddison - Beatitup</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
-                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 954.eddison</a>
+                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> Eddison</a>
                 </div>
                 <div class="discography-item">
                     <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
                         <img src="images/albumart_madaway.jpg" alt="Madaway Album Art" class="discography-img" aria-label="View Madaway track">
                     </a>
-                    <h3 class="mb-2">Tefflon - MADAWAY</h3>
+                    <h3 class="mb-2">Tefflon - Madaway</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
                     <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 1tefflon</a>
                 </div>
@@ -718,7 +779,7 @@
                         <img src="images/albumart_keepitreal.jpg" alt="Keep It Real Album Art" class="discography-img" aria-label="View Keep It Real track">
                     </a>
                     <h3 class="mb-2">Big Taie - Keep It Real</h3>
-                    <p class="text-[var(--text-secondary)] mb-2">Original MIDI composition, co-production</p>
+                    <p class="text-[var(--text-secondary)] mb-2">Co-production</p>
                     <a href="https://www.instagram.com/bigtaie" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> bigtaie</a>
                 </div>
             </div>
@@ -781,6 +842,27 @@
             <p id="passwordError" role="alert" class="hidden text-red-400 text-sm text-center mt-4 bg-red-900/20 p-2 rounded-md">Invalid access code. Please try again.</p>
         </section>
 
+        <!-- Contact Section -->
+        <section id="contact" class="card">
+            <h2 class="section-header">Contact</h2>
+            <form name="contact" method="POST" data-netlify="true" class="contact-form">
+                <input type="hidden" name="form-name" value="contact">
+                <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
+                <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
+                <input type="text" name="social-links" placeholder="Relevant Social Media or Streaming Links (Optional, Preferred)" aria-label="Social Media or Streaming Links">
+                <select name="category" id="category" required aria-label="Service Category">
+                    <option value="" disabled selected>Select a Service</option>
+                    <option value="leasing">Instrumental Leasing</option>
+                    <option value="production">Personalized Production</option>
+                    <option value="mixing">Recording & Engineering</option>
+                    <option value="tutoring">Production Tutoring</option>
+                    <option value="website">Website Design</option>
+                </select>
+                <textarea name="message" placeholder="Please provide as much detail as possible about your inquiry." required aria-label="Your Inquiry"></textarea>
+                <button type="submit" class="form-submit-button">Inquire</button>
+            </form>
+        </section>
+
         <!-- Footer -->
         <footer class="text-center py-4 text-[var(--text-secondary)] text-sm">
             © <span id="year"></span> 62serpens. All rights reserved.
@@ -795,28 +877,6 @@
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Contact Button Email Copy
-        document.querySelectorAll('.contact-button').forEach(button => {
-            button.addEventListener('click', async () => {
-                const originalContent = button.getAttribute('data-original-content');
-                const email = '626262xxx@gmail.com';
-                button.classList.add('locked', 'copied');
-                button.disabled = true;
-                try {
-                    await navigator.clipboard.writeText(email);
-                    button.innerHTML = '<i class="fas fa-check icon"></i>Email Copied!';
-                } catch (err) {
-                    button.innerHTML = '<i class="fas fa-times icon"></i>Copy Failed!';
-                    button.classList.remove('copied');
-                }
-                setTimeout(() => {
-                    button.innerHTML = originalContent;
-                    button.classList.remove('locked', 'copied');
-                    button.disabled = false;
-                }, 2000);
-            });
-        });
 
         // Audio Tools Password Prompt
         const audioToolsLink = document.getElementById('audioToolsLink');
@@ -837,7 +897,9 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', e => {
                 e.preventDefault();
-                const target = document.querySelector(anchor.getAttribute('href'));
+                const href = anchor.getAttribute('href');
+                const targetId = href.split('?')[0];
+                const target = document.querySelector(targetId);
                 const navHeight = document.querySelector('nav').offsetHeight;
                 const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
                 window.scrollTo({ top: targetPosition, behavior: 'smooth' });
@@ -876,6 +938,16 @@
         closeModal.addEventListener('click', () => modal.classList.remove('active'));
         modal.addEventListener('click', e => {
             if (e.target === modal) modal.classList.remove('active');
+        });
+
+        // Auto-select category from query parameter
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            const categorySelect = document.getElementById('category');
+            if (category && ['leasing', 'production', 'mixing', 'tutoring', 'website'].includes(category)) {
+                categorySelect.value = category;
+            }
         });
     </script>
 </body>
