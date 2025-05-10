@@ -527,7 +527,7 @@
         }
 
         .form-submit-button {
-            background: linear-gradient(145deg, var(--bg-secondary), --bg-tertiary));
+            background: linear-gradient(145deg, var(--bg-secondary), var(--bg-tertiary));
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-btn);
             padding: 10px;
@@ -677,7 +677,6 @@
         <nav class="sticky top-0 z-50">
             <div class="flex justify-center py-3">
                 <div class="flex items-center space-x-2">
-                    <a href="#home" class="nav-link">Home</a>
                     <a href="#services" class="nav-link">Services</a>
                     <a href="#equipment" class="nav-link">Equipment</a>
                     <a href="#discography" class="nav-link">Discography</a>
@@ -743,7 +742,7 @@
         <!-- Equipment Section -->
         <section id="equipment" class="card">
             <h2 class="section-header">Equipment</h2>
-            <p class="text-[var(--text-secondary)] text-sm text-center">My setup is portable, quick to set up, and adaptable to any environment, ensuring no compromise in quality. I use industry-standard equipment from UAD, Nord, Apple, and more, delivering professional-grade results.</p>
+            <p class="text-[var(--text-secondary)] text-sm text-center">My setup is portable, quick to assemble, and adaptable to any environment, ensuring no compromise in quality. I use industry-standard equipment from UAD, Nord, Apple, and more, delivering professional-grade results.</p>
         </section>
 
         <!-- Discography Section -->
@@ -754,23 +753,23 @@
                     <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
                         <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img" aria-label="View Down Bad track">
                     </a>
-                    <h3 class="mb-2">OnlyBino - Down Bad</h3>
+                    <h3 class="mb-2">Onlybino - Down Bad</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody, full production, mixing</p>
                     <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> onlybino</a>
                 </div>
                 <div class="discography-item">
                     <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" rel="noopener noreferrer">
-                        <img src="images/albumart_beatitup.jpg" alt="Beatitup Album Art" class="discography-img" aria-label="View Beatitup track">
+                        <img src="images/albumart_beatitup.jpg" alt="Beat It Up Album Art" class="discography-img" aria-label="View Beat It Up track">
                     </a>
-                    <h3 class="mb-2">Eddison - Beatitup</h3>
+                    <h3 class="mb-2">Eddison - Beat It Up</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
-                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> Eddison</a>
+                    <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 954.eddison</a>
                 </div>
                 <div class="discography-item">
                     <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
-                        <img src="images/albumart_madaway.jpg" alt="Madaway Album Art" class="discography-img" aria-label="View Madaway track">
+                        <img src="images/albumart_madaway.jpg" alt="MADAWAY Album Art" class="discography-img" aria-label="View MADAWAY track">
                     </a>
-                    <h3 class="mb-2">Tefflon - Madaway</h3>
+                    <h3 class="mb-2">Tefflon - MADAWAY</h3>
                     <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
                     <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 1tefflon</a>
                 </div>
@@ -779,7 +778,7 @@
                         <img src="images/albumart_keepitreal.jpg" alt="Keep It Real Album Art" class="discography-img" aria-label="View Keep It Real track">
                     </a>
                     <h3 class="mb-2">Big Taie - Keep It Real</h3>
-                    <p class="text-[var(--text-secondary)] mb-2">Co-production</p>
+                    <p class="text-[var(--text-secondary)] mb-2">Original MIDI composition, co-production</p>
                     <a href="https://www.instagram.com/bigtaie" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> bigtaie</a>
                 </div>
             </div>
@@ -947,8 +946,23 @@
             const categorySelect = document.getElementById('category');
             if (category && ['leasing', 'production', 'mixing', 'tutoring', 'website'].includes(category)) {
                 categorySelect.value = category;
+                // Dispatch change event to ensure UI updates
+                const event = new Event('change');
+                categorySelect.dispatchEvent(event);
             }
         });
+
+        // Re-check URL after smooth scrolling
+        window.addEventListener('scroll', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            const categorySelect = document.getElementById('category');
+            if (category && ['leasing', 'production', 'mixing', 'tutoring', 'website'].includes(category) && categorySelect.value !== category) {
+                categorySelect.value = category;
+                const event = new Event('change');
+                categorySelect.dispatchEvent(event);
+            }
+        }, { once: true });
     </script>
 </body>
 </html>
