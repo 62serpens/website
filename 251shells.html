@@ -23,17 +23,8 @@
       background-color: #f7fafc;
       color: #1a202c;
     }
-    .landscape-prompt {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      text-align: center;
-      padding: 20px;
-    }
     .main-content {
-      display: none;
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -45,6 +36,7 @@
       font-size: 5rem;
       font-weight: bold;
       text-align: center;
+      padding: 0 20px;
     }
     .settings {
       position: absolute;
@@ -62,6 +54,13 @@
     }
     .settings.show {
       display: block;
+    }
+    .top-controls {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.5rem;
     }
     .controls {
       position: absolute;
@@ -101,22 +100,20 @@
       display: block;
       margin: 0.5rem 0 0.25rem;
     }
-    @media (orientation: landscape) {
-      .landscape-prompt {
-        display: none;
-      }
-      .main-content {
-        display: flex;
+    @media (max-width: 768px) {
+      .chord-display {
+        font-size: 3rem;
       }
     }
   </style>
 </head>
 <body class="dark-mode">
-  <div class="landscape-prompt">
-    <h1 style="font-size: 1.5rem; font-weight: bold;">Please rotate your device to landscape mode</h1>
-  </div>
   <div class="main-content">
     <div class="chord-display" id="chord">Dm7 (open)</div>
+    <div class="top-controls">
+      <button id="lightModeBtn">🌙</button>
+      <button id="settingsBtn">⚙️</button>
+    </div>
     <div class="settings" id="settings">
       <label for="interval">Interval (seconds):</label>
       <select id="interval">
@@ -139,11 +136,9 @@
         <label><input type="checkbox" value="Bb" checked> Bb</label>
         <label><input type="checkbox" value="B" checked> B</label>
       </div>
-      <label><input type="checkbox" id="lightModeToggle"> Light Mode</label>
     </div>
     <div class="controls">
       <button id="startPause">Start</button>
-      <button id="settingsBtn">⚙️</button>
     </div>
   </div>
   <script>
@@ -198,14 +193,15 @@
     let isRunning = false;
     let intervalTime = 10000;
     let timer = null;
+    let isLightMode = false;
 
     const chordDisplay = document.getElementById('chord');
     const startPauseBtn = document.getElementById('startPause');
     const settingsBtn = document.getElementById('settingsBtn');
+    const lightModeBtn = document.getElementById('lightModeBtn');
     const settingsPanel = document.getElementById('settings');
     const intervalSelect = document.getElementById('interval');
     const keyCheckboxes = document.getElementById('key-checkboxes');
-    const lightModeToggle = document.getElementById('lightModeToggle');
 
     function updateChord() {
       chordDisplay.textContent = shuffledChords[currentChordIndex].chord;
@@ -246,6 +242,13 @@
       }
     }
 
+    function toggleLightMode() {
+      isLightMode = !isLightMode;
+      document.body.classList.toggle('light-mode', isLightMode);
+      document.body.classList.toggle('dark-mode', !isLightMode);
+      lightModeBtn.textContent = isLightMode ? '🌞' : '🌙';
+    }
+
     startPauseBtn.addEventListener('click', () => {
       if (isRunning) pauseTimer();
       else startTimer();
@@ -254,6 +257,8 @@
     settingsBtn.addEventListener('click', () => {
       settingsPanel.classList.toggle('show');
     });
+
+    lightModeBtn.addEventListener('click', toggleLightMode);
 
     intervalSelect.addEventListener('change', (e) => {
       intervalTime = Number(e.target.value);
@@ -275,16 +280,11 @@
       }
     });
 
-    lightModeToggle.addEventListener('change', (e) => {
-      document.body.classList.toggle('light-mode', e.target.checked);
-      document.body.classList.toggle('dark-mode', !e.target.checked);
-    });
-
     // Initial chord display
     updateChord();
 
-    // Request fullscreen on load in landscape
-    if (window.matchMedia("(orientation: landscape)").matches && document.documentElement.requestFullscreen) {
+    // Request fullscreen on load
+    if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen().catch(err => console.log('Fullscreen failed:', err));
     }
   </script>
