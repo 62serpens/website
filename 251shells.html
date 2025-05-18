@@ -48,6 +48,7 @@
       display: none;
       max-height: 80vh;
       overflow-y: auto;
+      z-index: 10;
     }
     .light-mode .settings {
       background: #e2e8f0;
@@ -62,27 +63,34 @@
       display: flex;
       gap: 0.5rem;
     }
+    .home-button {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+    }
     .controls {
       position: absolute;
       bottom: 1rem;
       display: flex;
       gap: 1rem;
     }
-    button {
+    button, a.button {
       padding: 0.5rem 1rem;
       background: #3182ce;
       color: white;
       border: none;
       border-radius: 0.25rem;
       cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
     }
-    .light-mode button {
+    .light-mode button, .light-mode a.button {
       background: #2b6cb0;
     }
-    button:hover {
+    button:hover, a.button:hover {
       background: #2b6cb0;
     }
-    .light-mode button:hover {
+    .light-mode button:hover, .light-mode a.button:hover {
       background: #2c5282;
     }
     select, input[type="checkbox"] {
@@ -110,6 +118,7 @@
 <body class="dark-mode">
   <div class="main-content">
     <div class="chord-display" id="chord">Dm7 (open)</div>
+    <a href="index.html" class="button home-button">Home</a>
     <div class="top-controls">
       <button id="lightModeBtn">🌙</button>
       <button id="settingsBtn">⚙️</button>
@@ -124,17 +133,17 @@
       <label>Keys to Include:</label>
       <div id="key-checkboxes">
         <label><input type="checkbox" value="C" checked> C</label>
-        <label><input type="checkbox" value="Db" checked> Db</label>
-        <label><input type="checkbox" value="D" checked> D</label>
-        <label><input type="checkbox" value="Eb" checked> Eb</label>
-        <label><input type="checkbox" value="E" checked> E</label>
-        <label><input type="checkbox" value="F" checked> F</label>
-        <label><input type="checkbox" value="Gb" checked> Gb</label>
-        <label><input type="checkbox" value="G" checked> G</label>
-        <label><input type="checkbox" value="Ab" checked> Ab</label>
-        <label><input type="checkbox" value="A" checked> A</label>
-        <label><input type="checkbox" value="Bb" checked> Bb</label>
-        <label><input type="checkbox" value="B" checked> B</label>
+        <label><input type="checkbox" value="Db"> Db</label>
+        <label><input type="checkbox" value="D"> D</label>
+        <label><input type="checkbox" value="Eb"> Eb</label>
+        <label><input type="checkbox" value="E"> E</label>
+        <label><input type="checkbox" value="F"> F</label>
+        <label><input type="checkbox" value="Gb"> Gb</label>
+        <label><input type="checkbox" value="G"> G</label>
+        <label><input type="checkbox" value="Ab"> Ab</label>
+        <label><input type="checkbox" value="A"> A</label>
+        <label><input type="checkbox" value="Bb"> Bb</label>
+        <label><input type="checkbox" value="B"> B</label>
       </div>
     </div>
     <div class="controls">
@@ -186,8 +195,8 @@
       return newArray;
     }
 
-    let selectedKeys = new Set(majorKeys);
-    let filteredChords = chords;
+    let selectedKeys = new Set(['C']);
+    let filteredChords = chords.filter(chord => selectedKeys.has(chord.key));
     let shuffledChords = shuffleArray(filteredChords);
     let currentChordIndex = 0;
     let isRunning = false;
@@ -249,14 +258,16 @@
       lightModeBtn.textContent = isLightMode ? '🌞' : '🌙';
     }
 
+    function toggleSettings() {
+      settingsPanel.classList.toggle('show');
+    }
+
     startPauseBtn.addEventListener('click', () => {
       if (isRunning) pauseTimer();
       else startTimer();
     });
 
-    settingsBtn.addEventListener('click', () => {
-      settingsPanel.classList.toggle('show');
-    });
+    settingsBtn.addEventListener('click', toggleSettings);
 
     lightModeBtn.addEventListener('click', toggleLightMode);
 
