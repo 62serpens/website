@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Jazz Chord Flashcard Trainer</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+      overscroll-behavior: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .dark-mode {
+      background-color: #1a202c;
+      color: white;
+    }
+    .light-mode {
+      background-color: #f7fafc;
+      color: #1a202c;
+    }
+    .landscape-prompt {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+      padding: 20px;
+    }
+    .main-content {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .chord-display {
+      font-size: 5rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    .settings {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #4a5568;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      display: none;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .light-mode .settings {
+      background: #e2e8f0;
+    }
+    .settings.show {
+      display: block;
+    }
+    .controls {
+      position: absolute;
+      bottom: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      background: #3182ce;
+      color: white;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
+    .light-mode button {
+      background: #2b6cb0;
+    }
+    button:hover {
+      background: #2b6cb0;
+    }
+    .light-mode button:hover {
+      background: #2c5282;
+    }
+    select, input[type="checkbox"] {
+      margin: 0.25rem 0;
+      padding: 0.5rem;
+      background: #2d3748;
+      color: white;
+      border-radius: 0.25rem;
+    }
+    .light-mode select, .light-mode input[type="checkbox"] {
+      background: #edf2f7;
+      color: #1a202c;
+    }
+    label {
+      display: block;
+      margin: 0.5rem 0 0.25rem;
+    }
+    @media (orientation: landscape) {
+      .landscape-prompt {
+        display: none;
+      }
+      .main-content {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body class="dark-mode">
+  <div class="landscape-prompt">
+    <h1 style="font-size: 1.5rem; font-weight: bold;">Please rotate your device to landscape mode</h1>
+  </div>
+  <div class="main-content">
+    <div class="chord-display" id="chord">Dm7 (open)</div>
+    <div class="settings" id="settings">
+      <label for="interval">Interval (seconds):</label>
+      <select id="interval">
+        <option value="5000">5</option>
+        <option value="10000" selected>10</option>
+        <option value="15000">15</option>
+      </select>
+      <label>Keys to Include:</label>
+      <div id="key-checkboxes">
+        <label><input type="checkbox" value="C" checked> C</label>
+        <label><input type="checkbox" value="Db" checked> Db</label>
+        <label><input type="checkbox" value="D" checked> D</label>
+        <label><input type="checkbox" value="Eb" checked> Eb</label>
+        <label><input type="checkbox" value="E" checked> E</label>
+        <label><input type="checkbox" value="F" checked> F</label>
+        <label><input type="checkbox" value="Gb" checked> Gb</label>
+        <label><input type="checkbox" value="G" checked> G</label>
+        <label><input type="checkbox" value="Ab" checked> Ab</label>
+        <label><input type="checkbox" value="A" checked> A</label>
+        <label><input type="checkbox" value="Bb" checked> Bb</label>
+        <label><input type="checkbox" value="B" checked> B</label>
+      </div>
+      <label><input type="checkbox" id="lightModeToggle"> Light Mode</label>
+    </div>
+    <div class="controls">
+      <button id="startPause">Start</button>
+      <button id="settingsBtn">⚙️</button>
+    </div>
+  </div>
+  <script>
+    const majorKeys = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+    const chords = majorKeys.flatMap(key => {
+      const iiChord = key === 'C' ? 'Dm7' :
+                     key === 'Db' ? 'Ebm7' :
+                     key === 'D' ? 'Em7' :
+                     key === 'Eb' ? 'Fm7' :
+                     key === 'E' ? 'F#m7' :
+                     key === 'F' ? 'Gm7' :
+                     key === 'Gb' ? 'Abm7' :
+                     key === 'G' ? 'Am7' :
+                     key === 'Ab' ? 'Bbm7' :
+                     key === 'A' ? 'Bm7' :
+                     key === 'Bb' ? 'Cm7' : 'C#m7';
+      const vChord = key === 'C' ? 'G7' :
+                     key === 'Db' ? 'Ab7' :
+                     key === 'D' ? 'A7' :
+                     key === 'Eb' ? 'Bb7' :
+                     key === 'E' ? 'B7' :
+                     key === 'F' ? 'C7' :
+                     key === 'Gb' ? 'Db7' :
+                     key === 'G' ? 'D7' :
+                     key === 'Ab' ? 'Eb7' :
+                     key === 'A' ? 'E7' :
+                     key === 'Bb' ? 'F7' : 'F#7';
+      const iChord = key + 'maj7';
+      return [
+        { chord: `${iiChord} (open)`, key },
+        { chord: `${iiChord} (closed)`, key },
+        { chord: `${vChord} (open)`, key },
+        { chord: `${vChord} (closed)`, key },
+        { chord: `${iChord} (open)`, key },
+        { chord: `${iChord} (closed)`, key },
+      ];
+    });
+
+    function shuffleArray(array) {
+      const newArray = [...array];
+      for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+      }
+      return newArray;
+    }
+
+    let selectedKeys = new Set(majorKeys);
+    let filteredChords = chords;
+    let shuffledChords = shuffleArray(filteredChords);
+    let currentChordIndex = 0;
+    let isRunning = false;
+    let intervalTime = 10000;
+    let timer = null;
+
+    const chordDisplay = document.getElementById('chord');
+    const startPauseBtn = document.getElementById('startPause');
+    const settingsBtn = document.getElementById('settingsBtn');
+    const settingsPanel = document.getElementById('settings');
+    const intervalSelect = document.getElementById('interval');
+    const keyCheckboxes = document.getElementById('key-checkboxes');
+    const lightModeToggle = document.getElementById('lightModeToggle');
+
+    function updateChord() {
+      chordDisplay.textContent = shuffledChords[currentChordIndex].chord;
+    }
+
+    function nextChord() {
+      currentChordIndex++;
+      if (currentChordIndex >= shuffledChords.length) {
+        shuffledChords = shuffleArray(filteredChords);
+        currentChordIndex = 0;
+      }
+      updateChord();
+    }
+
+    function startTimer() {
+      if (!isRunning && filteredChords.length > 0) {
+        isRunning = true;
+        startPauseBtn.textContent = 'Pause';
+        timer = setInterval(nextChord, intervalTime);
+      }
+    }
+
+    function pauseTimer() {
+      if (isRunning) {
+        isRunning = false;
+        startPauseBtn.textContent = 'Start';
+        clearInterval(timer);
+      }
+    }
+
+    function updateFilteredChords() {
+      filteredChords = chords.filter(chord => selectedKeys.has(chord.key));
+      shuffledChords = shuffleArray(filteredChords);
+      currentChordIndex = 0;
+      updateChord();
+      if (isRunning && filteredChords.length === 0) {
+        pauseTimer();
+      }
+    }
+
+    startPauseBtn.addEventListener('click', () => {
+      if (isRunning) pauseTimer();
+      else startTimer();
+    });
+
+    settingsBtn.addEventListener('click', () => {
+      settingsPanel.classList.toggle('show');
+    });
+
+    intervalSelect.addEventListener('change', (e) => {
+      intervalTime = Number(e.target.value);
+      if (isRunning) {
+        pauseTimer();
+        startTimer();
+      }
+    });
+
+    keyCheckboxes.addEventListener('change', (e) => {
+      if (e.target.type === 'checkbox') {
+        const key = e.target.value;
+        if (e.target.checked) {
+          selectedKeys.add(key);
+        } else {
+          selectedKeys.delete(key);
+        }
+        updateFilteredChords();
+      }
+    });
+
+    lightModeToggle.addEventListener('change', (e) => {
+      document.body.classList.toggle('light-mode', e.target.checked);
+      document.body.classList.toggle('dark-mode', !e.target.checked);
+    });
+
+    // Initial chord display
+    updateChord();
+
+    // Request fullscreen on load in landscape
+    if (window.matchMedia("(orientation: landscape)").matches && document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(err => console.log('Fullscreen failed:', err));
+    }
+  </script>
+</body>
+</html>
