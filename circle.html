@@ -129,31 +129,31 @@
     <div class="settings" id="settings">
       <label for="circle-key">Key:</label>
       <select id="circle-key">
-        <optgroup label="Major and Relative Minor Keys">
+        <optgroup label="Select Key">
           <option value="C">C Major</option>
-          <option value="Am">A Minor</option>
-          <option value="G">G Major</option>
-          <option value="Em">E Minor</option>
-          <option value="D">D Major</option>
-          <option value="Bm">B Minor</option>
-          <option value="A">A Major</option>
-          <option value="F#m">F# Minor</option>
-          <option value="E">E Major</option>
-          <option value="C#m">C# Minor</option>
-          <option value="B">B Major</option>
-          <option value="G#m">G# Minor</option>
-          <option value="Gb">Gb Major</option>
-          <option value="Ebm">Eb Minor</option>
-          <option value="Db">Db Major</option>
-          <option value="Bbm">Bb Minor</option>
-          <option value="Ab">Ab Major</option>
-          <option value="Fm">F Minor</option>
-          <option value="Eb">Eb Major</option>
           <option value="Cm">C Minor</option>
-          <option value="Bb">Bb Major</option>
-          <option value="Gm">G Minor</option>
-          <option value="F">F Major</option>
+          <option value="C#m">C# Major</option>
+          <option value="C#m">C# Minor</option>
+          <option value="D">D Major</option>
           <option value="Dm">D Minor</option>
+          <option value="Eb">Eb Major</option>
+          <option value="Ebm">Eb Minor</option>
+          <option value="E">E Major</option>
+          <option value="Em">E Minor</option>
+          <option value="F">F Major</option>
+          <option value="Fm">F Minor</option>
+          <option value="F#m">F# Major</option>
+          <option value="F#m">F# Minor</option>
+          <option value="G">G Major</option>
+          <option value="Gm">G Minor</option>
+          <option value="Ab">Ab Major</option>
+          <option value="G#m">G# Minor</option>
+          <option value="A">A Major</option>
+          <option value="Am">A Minor</option>
+          <option value="Bb">Bb Major</option>
+          <option value="Bbm">Bb Minor</option>
+          <option value="B">B Major</option>
+          <option value="Bm">B Minor</option>
         </optgroup>
       </select>
       <label for="interval">Interval (seconds):</label>
@@ -168,10 +168,10 @@
     </div>
   </div>
   <script>
-    const majorKeys = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+    const majorKeys = ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'];
     const circleKeys = [
-      'C', 'Am', 'G', 'Em', 'D', 'Bm', 'A', 'F#m', 'E', 'C#m', 'B', 'G#m',
-      'Gb', 'Ebm', 'Db', 'Bbm', 'Ab', 'Fm', 'Eb', 'Cm', 'Bb', 'Gm', 'F', 'Dm'
+      'C', 'Cm', 'C#m', 'C#m', 'D', 'Dm', 'Eb', 'Ebm', 'E', 'Em', 'F', 'Fm',
+      'F#m', 'F#m', 'G', 'Gm', 'Ab', 'G#m', 'A', 'Am', 'Bb', 'Bbm', 'B', 'Bm'
     ];
 
     const circleChords = circleKeys.flatMap(key => {
