@@ -258,8 +258,15 @@
       lightModeBtn.textContent = isLightMode ? '🌞' : '🌙';
     }
 
-    function toggleSettings() {
+    function toggleSettings(e) {
+      e.stopPropagation();
       settingsPanel.classList.toggle('show');
+    }
+
+    function closeSettingsIfOutside(e) {
+      if (!settingsPanel.contains(e.target) && e.target !== settingsBtn) {
+        settingsPanel.classList.remove('show');
+      }
     }
 
     startPauseBtn.addEventListener('click', () => {
@@ -268,6 +275,8 @@
     });
 
     settingsBtn.addEventListener('click', toggleSettings);
+
+    document.addEventListener('click', closeSettingsIfOutside);
 
     lightModeBtn.addEventListener('click', toggleLightMode);
 
