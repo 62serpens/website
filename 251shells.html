@@ -38,6 +38,11 @@
       text-align: center;
       padding: 0 20px;
     }
+    .extensions-display {
+      font-size: 2rem;
+      text-align: center;
+      margin-top: 10px;
+    }
     .settings {
       position: absolute;
       top: 1rem;
@@ -93,6 +98,36 @@
     .light-mode button:hover, .light-mode a.button:hover {
       background: #2c5282;
     }
+    .toggle-button {
+      padding: 0.3rem 0.6rem;
+      background: #4a5568;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.2s;
+    }
+    .light-mode .toggle-button {
+      background: #e2e8f0;
+    }
+    .toggle-button:hover {
+      background: #5a6a80;
+    }
+    .light-mode .toggle-button:hover {
+      background: #cbd5e0;
+    }
+    .toggle-button.active {
+      background: rgba(255, 0, 0, 0.2);
+    }
+    .eleventh-thirteenth-toggle.active {
+      background: rgba(30, 144, 255, 0.2);
+    }
+    .ninth-toggle {
+      border: 1px solid #ff0000;
+    }
+    .eleventh-thirteenth-toggle {
+      border: 1px solid #1e90ff;
+    }
     select, input[type="checkbox"] {
       margin: 0.25rem 0;
       padding: 0.5rem;
@@ -108,9 +143,21 @@
       display: block;
       margin: 0.5rem 0 0.25rem;
     }
+    .ext-9th {
+      color: #ff0000;
+    }
+    .ext-11th {
+      color: #1e90ff;
+    }
+    .ext-13th {
+      color: #00ff00;
+    }
     @media (max-width: 768px) {
       .chord-display {
         font-size: 3rem;
+      }
+      .extensions-display {
+        font-size: 1.5rem;
       }
     }
   </style>
@@ -118,16 +165,19 @@
 <body class="dark-mode">
   <div class="main-content">
     <div class="chord-display" id="chord">Dm7 (open)</div>
+    <div class="extensions-display" id="extensions"></div>
     <a href="index.html" class="button home-button">Home</a>
     <div class="top-controls">
       <button id="lightModeBtn">🌙</button>
+      <button id="ninthBtn" class="toggle-button ninth-toggle"><span class="ext-9th">9th</span></button>
+      <button id="eleventhThirteenthBtn" class="toggle-button eleventh-thirteenth-toggle"><span class="ext-11th">11</span>/<span class="ext-13th">13</span></button>
       <button id="settingsBtn">⚙️</button>
     </div>
     <div class="settings" id="settings">
       <label for="interval">Interval (seconds):</label>
       <select id="interval">
-        <option value="5000">5</option>
-        <option value="10000" selected>10</option>
+        <option value="5000" selected>5</option>
+        <option value="10000">10</option>
         <option value="15000">15</option>
       </select>
       <label>Keys to Include:</label>
@@ -152,37 +202,67 @@
   </div>
   <script>
     const majorKeys = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+    const noteNames = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+    
     const chords = majorKeys.flatMap(key => {
-      const iiChord = key === 'C' ? 'Dm7' :
-                     key === 'Db' ? 'Ebm7' :
-                     key === 'D' ? 'Em7' :
-                     key === 'Eb' ? 'Fm7' :
-                     key === 'E' ? 'F#m7' :
-                     key === 'F' ? 'Gm7' :
-                     key === 'Gb' ? 'Abm7' :
-                     key === 'G' ? 'Am7' :
-                     key === 'Ab' ? 'Bbm7' :
-                     key === 'A' ? 'Bm7' :
-                     key === 'Bb' ? 'Cm7' : 'C#m7';
-      const vChord = key === 'C' ? 'G7' :
-                     key === 'Db' ? 'Ab7' :
-                     key === 'D' ? 'A7' :
-                     key === 'Eb' ? 'Bb7' :
-                     key === 'E' ? 'B7' :
-                     key === 'F' ? 'C7' :
-                     key === 'Gb' ? 'Db7' :
-                     key === 'G' ? 'D7' :
-                     key === 'Ab' ? 'Eb7' :
-                     key === 'A' ? 'E7' :
-                     key === 'Bb' ? 'F7' : 'F#7';
-      const iChord = key + 'maj7';
+      const keyIndex = majorKeys.indexOf(key);
+      const iiRootIndex = (keyIndex + 2) % 12;
+      const vRootIndex = (keyIndex + 7) % 12;
+      const iRootIndex = keyIndex;
+      
+      const iiChord = noteNames[iiRootIndex] + 'm7';
+      const vChord = noteNames[vRootIndex] + '7';
+      const iChord = noteNames[iRootIndex] + 'maj7';
+      
       return [
-        { chord: `${iiChord} (open)`, key },
-        { chord: `${iiChord} (closed)`, key },
-        { chord: `${vChord} (open)`, key },
-        { chord: `${vChord} (closed)`, key },
-        { chord: `${iChord} (open)`, key },
-        { chord: `${iChord} (closed)`, key },
+        { 
+          chord: `${iiChord} (open)`, 
+          key, 
+          extensions: {
+            ninth: noteNames[(iiRootIndex + 2) % 12],
+            eleventh: noteNames[(iiRootIndex + 5) % 12]
+          }
+        },
+        { 
+          chord: `${iiChord} (closed)`, 
+          key, 
+          extensions: {
+            ninth: noteNames[(iiRootIndex + 2) % 12],
+            eleventh: noteNames[(iiRootIndex + 5) % 12]
+          }
+        },
+        { 
+          chord: `${vChord} (open)`, 
+          key, 
+          extensions: {
+            ninth: noteNames[(vRootIndex + 2) % 12],
+            thirteenth: noteNames[(vRootIndex + 9) % 12]
+          }
+        },
+        { 
+          chord: `${vChord} (closed)`, 
+          key, 
+          extensions: {
+            ninth: noteNames[(vRootIndex + 2) % 12],
+            thirteenth: noteNames[(vRootIndex + 9) % 12]
+          }
+        },
+        { 
+          chord: `${iChord} (open)`, 
+          key, 
+          extensions: {
+            ninth: noteNames[(iRootIndex + 2) % 12],
+            thirteenth: noteNames[(iRootIndex + 9) % 12]
+          }
+        },
+        { 
+          chord: `${iChord} (closed)`, 
+          key, 
+          extensions: {
+            ninth: noteNames[(iRootIndex + 2) % 12],
+            thirteenth: noteNames[(iRootIndex + 9) % 12]
+          }
+        },
       ];
     });
 
@@ -200,20 +280,40 @@
     let shuffledChords = shuffleArray(filteredChords);
     let currentChordIndex = 0;
     let isRunning = false;
-    let intervalTime = 10000;
+    let intervalTime = 5000;
     let timer = null;
     let isLightMode = false;
+    let showNinths = false;
+    let showEleventhThirteenths = false;
 
     const chordDisplay = document.getElementById('chord');
+    const extensionsDisplay = document.getElementById('extensions');
     const startPauseBtn = document.getElementById('startPause');
     const settingsBtn = document.getElementById('settingsBtn');
     const lightModeBtn = document.getElementById('lightModeBtn');
+    const ninthBtn = document.getElementById('ninthBtn');
+    const eleventhThirteenthBtn = document.getElementById('eleventhThirteenthBtn');
     const settingsPanel = document.getElementById('settings');
     const intervalSelect = document.getElementById('interval');
     const keyCheckboxes = document.getElementById('key-checkboxes');
 
     function updateChord() {
-      chordDisplay.textContent = shuffledChords[currentChordIndex].chord;
+      const chordObj = shuffledChords[currentChordIndex];
+      chordDisplay.textContent = chordObj.chord;
+      let extensionsText = '';
+      if (showNinths && chordObj.extensions.ninth) {
+        extensionsText += `<span class="ext-9th">${chordObj.extensions.ninth}</span> `;
+      }
+      if (showEleventhThirteenths) {
+        if (chordObj.extensions.eleventh) {
+          extensionsText += `<span class="ext-11th">${chordObj.extensions.eleventh}</span> `;
+        } else if (chordObj.extensions.thirteenth) {
+          extensionsText += `<span class="ext-13th">${chordObj.extensions.thirteenth}</span> `;
+        }
+      }
+      extensionsDisplay.innerHTML = extensionsText.trim();
+      ninthBtn.classList.toggle('active', showNinths);
+      eleventhThirteenthBtn.classList.toggle('active', showEleventhThirteenths);
     }
 
     function nextChord() {
@@ -223,7 +323,6 @@
         shuffledChords = shuffleArray(filteredChords);
         nextIndex = 0;
       }
-      // Prevent same chord twice in a row
       if (shuffledChords[nextIndex].chord === shuffledChords[currentChordIndex].chord && shuffledChords.length > 1) {
         nextIndex = (nextIndex + 1) % shuffledChords.length;
       }
@@ -239,7 +338,7 @@
       if (!isRunning && filteredChords.length > 0) {
         isRunning = true;
         startPauseBtn.textContent = 'Pause';
-        if (timer) clearInterval(timer); // Safeguard: clear any existing timer
+        if (timer) clearInterval(timer);
         timer = setInterval(nextChord, intervalTime);
       }
     }
@@ -290,6 +389,16 @@
     document.addEventListener('click', closeSettingsIfOutside);
 
     lightModeBtn.addEventListener('click', toggleLightMode);
+
+    ninthBtn.addEventListener('click', () => {
+      showNinths = !showNinths;
+      updateChord();
+    });
+
+    eleventhThirteenthBtn.addEventListener('click', () => {
+      showEleventhThirteenths = !showEleventhThirteenths;
+      updateChord();
+    });
 
     intervalSelect.addEventListener('change', (e) => {
       intervalTime = Number(e.target.value);
