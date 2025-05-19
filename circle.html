@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Circle of Fifths Trainer</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+      overscroll-behavior: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .dark-mode {
+      background-color: #1a202c;
+      color: white;
+    }
+    .light-mode {
+      background-color: #f7fafc;
+      color: #1a202c;
+    }
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .chord-display {
+      font-size: 5rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .settings {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #4a5568;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      display: none;
+      max-height: 80vh;
+      overflow-y: auto;
+      z-index: 10;
+    }
+    .light-mode .settings {
+      background: #e2e8f0;
+    }
+    .settings.show {
+      display: block;
+    }
+    .top-controls {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .home-button {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+    }
+    .controls {
+      position: absolute;
+      bottom: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+    button, a.button {
+      padding: 0.5rem 1rem;
+      background: #3182ce;
+      color: white;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .light-mode button, .light-mode a.button {
+      background: #2b6cb0;
+    }
+    button:hover, a.button:hover {
+      background: #2b6cb0;
+    }
+    .light-mode button:hover, .light-mode a.button:hover {
+      background: #2c5282;
+    }
+    select {
+      margin: 0.25rem 0;
+      padding: 0.5rem;
+      background: #2d3748;
+      color: white;
+      border-radius: 0.25rem;
+    }
+    .light-mode select {
+      background: #edf2f7;
+      color: #1a202c;
+    }
+    label {
+      display: block;
+      margin: 0.5rem 0 0.25rem;
+    }
+    optgroup {
+      font-weight: bold;
+    }
+    @media (max-width: 768px) {
+      .chord-display {
+        font-size: 3rem;
+      }
+    }
+  </style>
+</head>
+<body class="dark-mode">
+  <div class="main-content">
+    <div class="chord-display" id="chord">C (I)</div>
+    <a href="index.html" class="button home-button">Home</a>
+    <div class="top-controls">
+      <button id="lightModeBtn">🌙</button>
+      <button id="settingsBtn">⚙️</button>
+    </div>
+    <div class="settings" id="settings">
+      <label for="circle-key">Key:</label>
+      <select id="circle-key">
+        <optgroup label="Major and Relative Minor Keys">
+          <option value="C">C Major</option>
+          <option value="Am">A Minor</option>
+          <option value="G">G Major</option>
+          <option value="Em">E Minor</option>
+          <option value="D">D Major</option>
+          <option value="Bm">B Minor</option>
+          <option value="A">A Major</option>
+          <option value="F#m">F# Minor</option>
+          <option value="E">E Major</option>
+          <option value="C#m">C# Minor</option>
+          <option value="B">B Major</option>
+          <option value="G#m">G# Minor</option>
+          <option value="Gb">Gb Major</option>
+          <option value="Ebm">Eb Minor</option>
+          <option value="Db">Db Major</option>
+          <option value="Bbm">Bb Minor</option>
+          <option value="Ab">Ab Major</option>
+          <option value="Fm">F Minor</option>
+          <option value="Eb">Eb Major</option>
+          <option value="Cm">C Minor</option>
+          <option value="Bb">Bb Major</option>
+          <option value="Gm">G Minor</option>
+          <option value="F">F Major</option>
+          <option value="Dm">D Minor</option>
+        </optgroup>
+      </select>
+      <label for="interval">Interval (seconds):</label>
+      <select id="interval">
+        <option value="5000">5</option>
+        <option value="10000" selected>10</option>
+        <option value="15000">15</option>
+      </select>
+    </div>
+    <div class="controls">
+      <button id="startPause">Start</button>
+    </div>
+  </div>
+  <script>
+    const majorKeys = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+    const circleKeys = [
+      'C', 'Am', 'G', 'Em', 'D', 'Bm', 'A', 'F#m', 'E', 'C#m', 'B', 'G#m',
+      'Gb', 'Ebm', 'Db', 'Bbm', 'Ab', 'Fm', 'Eb', 'Cm', 'Bb', 'Gm', 'F', 'Dm'
+    ];
+
+    const circleChords = circleKeys.flatMap(key => {
+      const isMinor = key.endsWith('m');
+      const root = isMinor ? key.slice(0, -1) : key;
+      const keyIndex = majorKeys.indexOf(root);
+      if (keyIndex === -1) return [];
+      const chords = isMinor ?
+        [
+          { chord: `${root}m`, function: 'i' },
+          { chord: `${majorKeys[(keyIndex + 2) % 12]}dim`, function: 'ii°' },
+          { chord: `${majorKeys[(keyIndex + 3) % 12]}`, function: 'III' },
+          { chord: `${majorKeys[(keyIndex + 5) % 12]}m`, function: 'iv' },
+          { chord: `${majorKeys[(keyIndex + 7) % 12]}m`, function: 'v' },
+          { chord: `${majorKeys[(keyIndex + 8) % 12]}`, function: 'VI' },
+          { chord: `${majorKeys[(keyIndex + 10) % 12]}`, function: 'VII' }
+        ] :
+        [
+          { chord: `${root}`, function: 'I' },
+          { chord: `${majorKeys[(keyIndex + 2) % 12]}m`, function: 'ii' },
+          { chord: `${majorKeys[(keyIndex + 4) % 12]}m`, function: 'iii' },
+          { chord: `${majorKeys[(keyIndex + 5) % 12]}`, function: 'IV' },
+          { chord: `${majorKeys[(keyIndex + 7) % 12]}`, function: 'V' },
+          { chord: `${majorKeys[(keyIndex + 9) % 12]}m`, function: 'vi' },
+          { chord: `${majorKeys[(keyIndex + 11) % 12]}dim`, function: 'vii°' }
+        ];
+      return chords.map(chord => ({ ...chord, key }));
+    });
+
+    function shuffleArray(array) {
+      const newArray = [...array];
+      for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+      }
+      return newArray;
+    }
+
+    let selectedCircleKey = 'C';
+    let filteredCircleChords = circleChords.filter(chord => chord.key === selectedCircleKey);
+    let shuffledCircleChords = shuffleArray(filteredCircleChords);
+    let currentChordIndex = 0;
+    let isRunning = false;
+    let intervalTime = 10000;
+    let timer = null;
+    let isLightMode = false;
+
+    const chordDisplay = document.getElementById('chord');
+    const startPauseBtn = document.getElementById('startPause');
+    const settingsBtn = document.getElementById('settingsBtn');
+    const lightModeBtn = document.getElementById('lightModeBtn');
+    const settingsPanel = document.getElementById('settings');
+    const intervalSelect = document.getElementById('interval');
+    const circleKeySelect = document.getElementById('circle-key');
+
+    function updateChord() {
+      const { chord, function: func } = shuffledCircleChords[currentChordIndex];
+      chordDisplay.textContent = `${chord} (${func})`;
+    }
+
+    function nextChord() {
+      let nextIndex = currentChordIndex + 1;
+      if (nextIndex >= shuffledCircleChords.length) {
+        shuffledCircleChords = shuffleArray(filteredCircleChords);
+        nextIndex = 0;
+      }
+      if (shuffledCircleChords[nextIndex].chord === shuffledCircleChords[currentChordIndex].chord && shuffledCircleChords.length > 1) {
+        nextIndex = (nextIndex + 1) % shuffledCircleChords.length;
+      }
+      currentChordIndex = nextIndex;
+      updateChord();
+    }
+
+    function startTimer() {
+      if (!isRunning && filteredCircleChords.length > 0) {
+        isRunning = true;
+        startPauseBtn.textContent = 'Pause';
+        if (timer) clearInterval(timer);
+        timer = setInterval(nextChord, intervalTime);
+      }
+    }
+
+    function pauseTimer() {
+      if (isRunning) {
+        isRunning = false;
+        startPauseBtn.textContent = 'Start';
+        clearInterval(timer);
+      }
+    }
+
+    function updateFilteredChords() {
+      filteredCircleChords = circleChords.filter(chord => chord.key === selectedCircleKey);
+      shuffledCircleChords = shuffleArray(filteredCircleChords);
+      currentChordIndex = 0;
+      updateChord();
+      if (isRunning && filteredCircleChords.length === 0) {
+        pauseTimer();
+      }
+    }
+
+    function toggleLightMode() {
+      isLightMode = !isLightMode;
+      document.body.classList.toggle('light-mode', isLightMode);
+      document.body.classList.toggle('dark-mode', !isLightMode);
+      lightModeBtn.textContent = isLightMode ? '🌞' : '🌙';
+    }
+
+    function toggleSettings(e) {
+      e.stopPropagation();
+      settingsPanel.classList.toggle('show');
+    }
+
+    function closeSettingsIfOutside(e) {
+      if (!settingsPanel.contains(e.target) && e.target !== settingsBtn) {
+        settingsPanel.classList.remove('show');
+      }
+    }
+
+    startPauseBtn.addEventListener('click', () => {
+      if (isRunning) pauseTimer();
+      else startTimer();
+    });
+
+    settingsBtn.addEventListener('click', toggleSettings);
+
+    document.addEventListener('click', closeSettingsIfOutside);
+
+    lightModeBtn.addEventListener('click', toggleLightMode);
+
+    intervalSelect.addEventListener('change', (e) => {
+      intervalTime = Number(e.target.value);
+      if (isRunning) {
+        pauseTimer();
+        startTimer();
+      }
+    });
+
+    circleKeySelect.addEventListener('change', (e) => {
+      selectedCircleKey = e.target.value;
+      updateFilteredChords();
+    });
+
+    // Initial chord display
+    updateChord();
+
+    // Request fullscreen on load
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(err => console.log('Fullscreen failed:', err));
+    }
+  </script>
+</body>
+</html>
