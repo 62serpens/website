@@ -217,18 +217,29 @@
     }
 
     function nextChord() {
-      currentChordIndex++;
-      if (currentChordIndex >= shuffledChords.length) {
+      const startTime = performance.now();
+      let nextIndex = currentChordIndex + 1;
+      if (nextIndex >= shuffledChords.length) {
         shuffledChords = shuffleArray(filteredChords);
-        currentChordIndex = 0;
+        nextIndex = 0;
       }
+      // Prevent same chord twice in a row
+      if (shuffledChords[nextIndex].chord === shuffledChords[currentChordIndex].chord && shuffledChords.length > 1) {
+        nextIndex = (nextIndex + 1) % shuffledChords.length;
+      }
+      currentChordIndex = nextIndex;
       updateChord();
+      const duration = performance.now() - startTime;
+      if (duration > 50) {
+        console.log(`nextChord took ${duration.toFixed(2)}ms, chord: ${shuffledChords[currentChordIndex].chord}`);
+      }
     }
 
     function startTimer() {
       if (!isRunning && filteredChords.length > 0) {
         isRunning = true;
         startPauseBtn.textContent = 'Pause';
+        if (timer) clearInterval(timer); // Safeguard: clear any existing timer
         timer = setInterval(nextChord, intervalTime);
       }
     }
