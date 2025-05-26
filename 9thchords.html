@@ -68,27 +68,34 @@
       display: flex;
       gap: 0.5rem;
     }
+    .home-button {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+    }
     .controls {
       position: absolute;
       bottom: 1rem;
       display: flex;
       gap: 1rem;
     }
-    button {
+    button, a.button {
       padding: 0.5rem 1rem;
       background: #3182ce;
       color: white;
       border: none;
       border-radius: 0.25rem;
       cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
     }
-    .light-mode button {
+    .light-mode button, .light-mode a.button {
       background: #2b6cb0;
     }
-    button:hover {
+    button:hover, a.button:hover {
       background: #2b6cb0;
     }
-    .light-mode button:hover {
+    .light-mode button:hover, .light-mode a.button:hover {
       background: #2c5282;
     }
     select {
@@ -120,6 +127,7 @@
   <div class="main-content">
     <div class="chord-display" id="chord">Cm9</div>
     <div class="notes-display" id="notes">C, Eb, G, Bb, D</div>
+    <a href="index.html" class="button home-button">Home</a>
     <div class="top-controls">
       <button id="lightModeBtn">🌙</button>
       <button id="settingsBtn">⚙️</button>
@@ -134,17 +142,17 @@
       <label>Keys to Include:</label>
       <div id="key-checkboxes">
         <label><input type="checkbox" value="C" checked> C</label>
-        <label><input type="checkbox" value="F"> F</label>
-        <label><input type="checkbox" value="Bb"> Bb</label>
-        <label><input type="checkbox" value="Eb"> Eb</label>
-        <label><input type="checkbox" value="Ab"> Ab</label>
-        <label><input type="checkbox" value="Db"> Db</label>
-        <label><input type="checkbox" value="Gb"> Gb</label>
-        <label><input type="checkbox" value="B"> B</label>
-        <label><input type="checkbox" value="E"> E</label>
-        <label><input type="checkbox" value="A"> A</label>
-        <label><input type="checkbox" value="D"> D</label>
-        <label><input type="checkbox" value="G"> G</label>
+        <label><input type="checkbox" value="F" checked> F</label>
+        <label><input type="checkbox" value="Bb" checked> Bb</label>
+        <label><input type="checkbox" value="Eb" checked> Eb</label>
+        <label><input type="checkbox" value="Ab" checked> Ab</label>
+        <label><input type="checkbox" value="Db" checked> Db</label>
+        <label><input type="checkbox" value="Gb" checked> Gb</label>
+        <label><input type="checkbox" value="B" checked> B</label>
+        <label><input type="checkbox" value="E" checked> E</label>
+        <label><input type="checkbox" value="A" checked> A</label>
+        <label><input type="checkbox" value="D" checked> D</label>
+        <label><input type="checkbox" value="G" checked> G</label>
       </div>
     </div>
     <div class="controls">
@@ -183,7 +191,354 @@
       return newArray;
     }
 
-    let selectedKeys = new Set(['C']);
+    // Initialize with all keys selected
+    let selectedKeys = new Set(circleOfFifths);
+    let filteredChords = chords.filter(chord => selectedKeys.has(chord.key));
+    let displayChords = [...filteredChords]; // Will be shuffled or ordered
+    let currentChordIndex = 0;
+    let isRunning = false;
+    let intervalTime = 5000;
+    let timer = null;
+    let isLightMode = false;
+    let isRandomMode = true; // Start in random mode
+
+    const chordDisplay = document.getElementById('chord');
+    const notesDisplay = document.getElementById('notes');
+    const startPauseBtn = document.getElementById('startPause');
+    const randomBtn = document.getElementById('randomBtn');
+    const inOrderBtn = document.getElementById('inOrderBtn');
+    const settingsBtn = document.getElementById('settingsBtn');
+    const lightModeBtn = document.getElementById('lightModeBtn');
+    const settingsPanel = document.getElementById('settings');
+    const intervalSelect = document.getElementById('interval');
+    const keyCheckboxes = document.getElementById('key-checkboxes');
+
+    function updateChord() {
+      if (filteredChords.length === 0) {
+        chordDisplay.textContent = 'No chords selected';
+        notesDisplay.textContent = '';
+        return;
+      }
+      const chordObj = displayChords[currentChordIndex];
+      chordDisplay.textContent = chordObj.chord;
+      notesDisplay.textContent = chordObj.notes.join(', ');
+    }
+
+    function nextChord() {
+      if (isRandomMode) {
+        // Random mode: shuffle when reaching the end
+        if (currentChordIndex + 1 >= displayChords.length) {
+          displayChords = shuffleArray(filteredChords);
+          currentChordIndex = 0;
+        } else {
+          currentChordIndex++;
+        }
+      } else {
+        // In-order mode: cycle through circle of fifths
+        currentChordIndex = (currentChordIndex + 1) % displayChords.length;
+      }
+      updateChord();
+    }
+
+    function startTimer() {
+      if (!isRunning && filteredChords.length > 0) {
+        isRunning = true;
+        startPauseBtn.textContent = 'Pause';
+        if (timer) clearInterval(timer);
+        timer = setInterval(nextChord, intervalTime);
+      }
+    }
+
+    function pauseTimer() {
+      if (isRunning) {
+        isRunning = false;
+        startPauseBtn.textContent = 'Start';
+        clearInterval(timer);
+      }
+    }
+
+    function updateFilteredChords() {
+      filteredChords = chords.filter(chord => selectedKeys.has(chord.key));
+      displayChords = isRandomMode ? shuffleArray(filteredChords) : filteredChords;
+      currentChordIndex = 0;
+      updateChord();
+      if (isRunning && filteredChords.length === 0) {
+        pauseTimer();
+      }
+    }
+
+    function toggleLightMode() {
+      isLightMode = !isLightMode;
+      document.body.classList.toggle('light-mode', isLightMode);
+      document.body.classList.toggle('dark-mode', !isLightMode);
+      lightModeBtn.textContent = isLightMode ? '🌞' : '🌙';
+    }
+
+    function toggleSettings(e) {
+      e.stopPropagation();
+      settingsPanel.classList.toggle('show');
+    }
+
+    function closeSettingsIfOutside(e) {
+      if (!settingsPanel.contains(e.target) && e.target !== settingsBtn) {
+        settingsPanel.classList.remove('show');
+      }
+    }
+
+    startPauseBtn.addEventListener('click', () => {
+      if (isRunning) pauseTimer();
+      else startTimer();
+    });
+
+    randomBtn.addEventListener('click', () => {
+      isRandomMode = true;
+      displayChords = shuffleArray(filteredChords);
+      currentChordIndex = 0;
+      updateChord();
+      randomBtn.style.background = '#2b6cb0';
+      inOrderBtn.style.background = '#3182ce';
+    });
+
+    inOrderBtn.addEventListener('click', () => {
+      isRandomMode = false;
+      displayChords = [...filteredChords];
+      currentChordIndex = 0;
+      updateChord();
+      inOrderBtn.style.background = '#2b6cb0';
+      randomBtn.style.background = '#3182ce';
+    });
+
+    settingsBtn.addEventListener('click', toggleSettings);
+
+    document.addEventListener('click', closeSettingsIfOutside);
+
+    lightModeBtn.addEventListener('click', toggleLightMode);
+
+    intervalSelect.addEventListener('change', (e) => {
+      intervalTime = Number(e.target.value);
+      if (isRunning) {
+        pauseTimer();
+        startTimer();
+      }
+    });
+
+    keyCheckboxes.addEventListener('change', (e) => {
+      if (e.target.type === 'checkbox') {
+        const key = e.target.value;
+        if (e.target.checked) {
+          selectedKeys.add(key);
+        } else {
+          selectedKeys.delete(key);
+        }
+        updateFilteredChords();
+      }
+    });
+
+    // Initial setup
+    randomBtn.style.background = '#2b6cb0'; // Highlight random mode by default
+    updateChord();
+
+    // Request fullscreen on load
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(err => console.log('Fullscreen failed:', err));
+    }
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Minor 9th Chord Flashcard Trainer</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      color: white;
+      overscroll-behavior: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .dark-mode {
+      background-color: #1a202c;
+      color: white;
+    }
+    .light-mode {
+      background-color: #f7fafc;
+      color: #1a202c;
+    }
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .chord-display {
+      font-size: 5rem;
+      font-weight: bold;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .notes-display {
+      font-size: 2rem;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .settings {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #4a5568;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      display: none;
+      max-height: 80vh;
+      overflow-y: auto;
+      z-index: 10;
+    }
+    .light-mode .settings {
+      background: #e2e8f0;
+    }
+    .settings.show {
+      display: block;
+    }
+    .top-controls {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .home-button {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+    }
+    .controls {
+      position: absolute;
+      bottom: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+    button, a.button {
+      padding: 0.5rem 1rem;
+      background: #3182ce;
+      color: white;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .light-mode button, .light-mode a.button {
+      background: #2b6cb0;
+    }
+    button:hover, a.button:hover {
+      background: #2b6cb0;
+    }
+    .light-mode button:hover, .light-mode a.button:hover {
+      background: #2c5282;
+    }
+    select {
+      margin: 0.25rem 0;
+      padding: 0.5rem;
+      background: #2d3748;
+      color: white;
+      border-radius: 0.25rem;
+    }
+    .light-mode select {
+      background: #edf2f7;
+      color: #1a202c;
+    }
+    label {
+      display: block;
+      margin: 0.5rem 0 0.25rem;
+    }
+    @media (max-width: 768px) {
+      .chord-display {
+        font-size: 3rem;
+      }
+      .notes-display {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="dark-mode">
+  <div class="main-content">
+    <div class="chord-display" id="chord">Cm9</div>
+    <div class="notes-display" id="notes">C, Eb, G, Bb, D</div>
+    <a href="index.html" class="button home-button">Home</a>
+    <div class="top-controls">
+      <button id="lightModeBtn">🌙</button>
+      <button id="settingsBtn">⚙️</button>
+    </div>
+    <div class="settings" id="settings">
+      <label for="interval">Interval (seconds):</label>
+      <select id="interval">
+        <option value="5000" selected>5</option>
+        <option value="10000">10</option>
+        <option value="15000">15</option>
+      </select>
+      <label>Keys to Include:</label>
+      <div id="key-checkboxes">
+        <label><input type="checkbox" value="C" checked> C</label>
+        <label><input type="checkbox" value="F" checked> F</label>
+        <label><input type="checkbox" value="Bb" checked> Bb</label>
+        <label><input type="checkbox" value="Eb" checked> Eb</label>
+        <label><input type="checkbox" value="Ab" checked> Ab</label>
+        <label><input type="checkbox" value="Db" checked> Db</label>
+        <label><input type="checkbox" value="Gb" checked> Gb</label>
+        <label><input type="checkbox" value="B" checked> B</label>
+        <label><input type="checkbox" value="E" checked> E</label>
+        <label><input type="checkbox" value="A" checked> A</label>
+        <label><input type="checkbox" value="D" checked> D</label>
+        <label><input type="checkbox" value="G" checked> G</label>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="startPause">Start</button>
+      <button id="randomBtn">Random</button>
+      <button id="inOrderBtn">In Order</button>
+    </div>
+  </div>
+  <script>
+    // Circle of fifths order for minor 9th chords
+    const circleOfFifths = ['C', 'F', 'Bb', 'Eb', 'Ab', 'Db', 'Gb', 'B', 'E', 'A', 'D', 'G'];
+    const noteNames = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+
+    // Generate minor 9th chords
+    const chords = circleOfFifths.map(root => {
+      const rootIndex = noteNames.indexOf(root);
+      return {
+        chord: `${root}m9`,
+        key: root,
+        notes: [
+          noteNames[rootIndex], // Root
+          noteNames[(rootIndex + 3) % 12], // Minor third
+          noteNames[(rootIndex + 7) % 12], // Perfect fifth
+          noteNames[(rootIndex + 10) % 12], // Minor seventh
+          noteNames[(rootIndex + 2) % 12]  // Major ninth
+        ]
+      };
+    });
+
+    function shuffleArray(array) {
+      const newArray = [...array];
+      for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+      }
+      return newArray;
+    }
+
+    // Initialize with all keys selected
+    let selectedKeys = new Set(circleOfFifths);
     let filteredChords = chords.filter(chord => selectedKeys.has(chord.key));
     let displayChords = [...filteredChords]; // Will be shuffled or ordered
     let currentChordIndex = 0;
