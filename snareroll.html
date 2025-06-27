@@ -17,37 +17,47 @@
         .slider {
             -webkit-appearance: none;
             width: 100%;
-            height: 15px;
+            height: 10px;
             border-radius: 5px;
-            background: #8B00FF;
+            background: linear-gradient(to right, #8B00FF, #C0C0C0);
             outline: none;
-            opacity: 0.7;
-            transition: opacity .2s;
+            opacity: 0.9;
+            transition: opacity 0.2s;
         }
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             background: #E6E6FA;
             cursor: pointer;
+            box-shadow: 0 0 5px #8B00FF;
         }
         .slider::-moz-range-thumb {
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             background: #E6E6FA;
             cursor: pointer;
+            box-shadow: 0 0 5px #8B00FF;
+        }
+        button {
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         button:hover {
             transform: scale(1.05);
-            transition: transform 0.2s;
+            box-shadow: 0 0 10px #8B00FF;
         }
         canvas {
             border: 2px solid #8B00FF;
             background-color: #2A1B3E;
             margin-top: 20px;
+            border-radius: 8px;
+        }
+        .error {
+            background-color: #4B1A2E;
+            padding: 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -56,23 +66,19 @@
         <h1 class="text-4xl font-bold accent mb-6">Snare Roll Generator</h1>
         <div class="grid grid-cols-1 gap-4">
             <div>
-                <label for="density" class="block">Density</label>
+                <label for="density" class="block text-lg">Density</label>
                 <input type="range" id="density" class="slider" min="1" max="10" value="5">
             </div>
             <div>
-                <label for="length" class="block">Length (bars)</label>
-                <input type="range" id="length" class="slider" min="0.25" max="1" step="0.25" value="0.5">
-            </div>
-            <div>
-                <label for="aggressiveness" class="block">Aggressiveness</label>
+                <label for="aggressiveness" class="block text-lg">Aggressiveness</label>
                 <input type="range" id="aggressiveness" class="slider" min="1" max="127" value="100">
             </div>
             <div>
-                <label for="pitchVariation" class="block">Pitch Variation (semitones)</label>
+                <label for="pitchVariation" class="block text-lg">Pitch Variation (semitones)</label>
                 <input type="range" id="pitchVariation" class="slider" min="0" max="12" value="0">
             </div>
             <div>
-                <label for="bpm" class="block">BPM</label>
+                <label for="bpm" class="block text-lg">BPM</label>
                 <input type="number" id="bpm" class="bg-gray-800 text-white p-2 rounded w-full" min="60" max="200" value="140">
             </div>
         </div>
@@ -81,7 +87,7 @@
             <button id="stopBtn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded">Stop</button>
             <button id="downloadMidi" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded">Download MIDI</button>
         </div>
-        <div id="error" class="mt-4 text-red-400 hidden"></div>
+        <div id="error" class="mt-4 text-red-400 error hidden"></div>
         <canvas id="midiPreview" width="600" height="100" class="mt-4"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.js"></script>
@@ -99,27 +105,33 @@
         async function loadAudio() {
             try {
                 await Tone.start();
-                console.log('Loading snare.wav...');
-                snarePlayer = await new Tone.Player(snareUrl).toDestination();
-                snarePlayer.autostart = false;
-                console.log('snare.wav loaded successfully');
+                console.log('Attempting to load /audio/snare.wav...');
+                snarePlayer = new Tone.Player({
+                    url: snareUrl,
+                    onload: () => console.log('snare.wav loaded successfully'),
+                    onerror: (err) => {
+                        throw new Error('Failed to load snare.wav: ' + err);
+                    }
+                }).toDestination();
+                await snarePlayer.load();
             } catch (err) {
-                errorDiv.textContent = 'Error loading /audio/snare.wav. Ensure it’s in the audio/ folder.';
+                errorDiv.textContent = 'Error loading /audio/snare.wav. Ensure it’s in the audio/ folder and is a valid WAV file.';
                 errorDiv.classList.remove('hidden');
                 console.error('Audio load error:', err);
+                snarePlayer = null;
             }
         }
 
-        // Initialize on first user interaction
+        // Initialize on first interaction
         document.addEventListener('click', async () => {
             if (!snarePlayer) await loadAudio();
         }, { once: true });
 
-        // Generate snare roll notes
-        function generateSnareRoll(density, length, aggressiveness, pitchVariation, bpm) {
+        // Generate snare roll notes (fixed 1 bar)
+        function generateSnareRoll(density, aggressiveness, pitchVariation, bpm) {
             const notes = [];
             const barDuration = (60 / bpm) * 4;
-            const rollDuration = length * barDuration;
+            const rollDuration = barDuration; // Fixed 1 bar
             const numHits = Math.floor(density * 10);
             const timeStep = rollDuration / numHits;
 
@@ -140,13 +152,16 @@
         function drawMidiPreview(notes, rollDuration) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#8B00FF';
-            const heightPerSemitone = canvas.height / 24; // Range for pitch variation (±12 semitones)
+            ctx.strokeStyle = '#E6E6FA';
+            ctx.lineWidth = 1;
+            const heightPerSemitone = canvas.height / 24;
             notes.forEach(note => {
                 const x = (note.time / rollDuration) * canvas.width;
                 const y = canvas.height / 2 - (note.midi - 38) * heightPerSemitone;
                 const width = Math.max(5, canvas.width / notes.length / 2);
                 const height = 10 * note.velocity;
                 ctx.fillRect(x, y - height / 2, width, height);
+                ctx.strokeRect(x, y - height / 2, width, height);
             });
         }
 
@@ -160,22 +175,21 @@
                 if (!snarePlayer) {
                     errorDiv.textContent = 'Cannot play: snare.wav failed to load.';
                     errorDiv.classList.remove('hidden');
+                    console.error('Play failed: No snarePlayer');
                     isPlaying = false;
                     return;
                 }
             }
 
             const density = parseInt(document.getElementById('density').value);
-            const length = parseFloat(document.getElementById('length').value);
             const aggressiveness = parseInt(document.getElementById('aggressiveness').value);
             const pitchVariation = parseInt(document.getElementById('pitchVariation').value);
             const bpm = parseInt(document.getElementById('bpm').value);
             Tone.Transport.bpm.value = bpm;
 
-            const notes = generateSnareRoll(density, length, aggressiveness, pitchVariation, bpm);
-            const rollDuration = length * (60 / bpm) * 4;
+            const notes = generateSnareRoll(density, aggressiveness, pitchVariation, bpm);
+            const rollDuration = (60 / bpm) * 4;
 
-            // Draw preview
             drawMidiPreview(notes, rollDuration);
 
             try {
@@ -183,9 +197,9 @@
                     snarePlayer.start(time, 0, '16n', 0, note.velocity);
                 }, notes, '16n').start(0);
                 Tone.Transport.start();
-                console.log('Playback started');
+                console.log('Playback started with', notes.length, 'notes');
             } catch (err) {
-                errorDiv.textContent = 'Error starting playback.';
+                errorDiv.textContent = 'Error starting playback. Check console for details.';
                 errorDiv.classList.remove('hidden');
                 console.error('Playback error:', err);
                 isPlaying = false;
@@ -208,12 +222,11 @@
         document.getElementById('downloadMidi').addEventListener('click', () => {
             try {
                 const density = parseInt(document.getElementById('density').value);
-                const length = parseFloat(document.getElementById('length').value);
                 const aggressiveness = parseInt(document.getElementById('aggressiveness').value);
                 const pitchVariation = parseInt(document.getElementById('pitchVariation').value);
                 const bpm = parseInt(document.getElementById('bpm').value);
 
-                const notes = generateSnareRoll(density, length, aggressiveness, pitchVariation, bpm);
+                const notes = generateSnareRoll(density, aggressiveness, pitchVariation, bpm);
                 const track = new MidiWriter.Track();
                 track.setTempo(bpm);
 
@@ -232,11 +245,11 @@
                 a.href = dataUri;
                 a.download = 'snare_roll.mid';
                 a.click();
-                console.log('MIDI downloaded');
+                console.log('MIDI file generated and downloaded');
             } catch (err) {
-                errorDiv.textContent = 'Error generating MIDI file.';
+                errorDiv.textContent = 'Error generating MIDI file. Check console for details.';
                 errorDiv.classList.remove('hidden');
-                console.error('MIDI error:', err);
+                console.error('MIDI generation error:', err);
             }
         });
     </script>
