@@ -44,6 +44,11 @@
             transform: scale(1.05);
             transition: transform 0.2s;
         }
+        canvas {
+            border: 2px solid #8B00FF;
+            background-color: #2A1B3E;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -77,32 +82,38 @@
             <button id="downloadMidi" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded">Download MIDI</button>
         </div>
         <div id="error" class="mt-4 text-red-400 hidden"></div>
+        <canvas id="midiPreview" width="600" height="100" class="mt-4"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/tone@14.7.77/build/Tone.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/midi-writer-js@2.0.0/build/index.min.js"></script>
     <script>
-        // Single snare audio file
         const snareUrl = '/audio/snare.wav';
         let snarePlayer;
         let isPlaying = false;
         let sequence;
         const errorDiv = document.getElementById('error');
+        const canvas = document.getElementById('midiPreview');
+        const ctx = canvas.getContext('2d');
 
-        // Pre-load audio for instant playback
+        // Pre-load audio
         async function loadAudio() {
             try {
-                await Tone.start(); // Initialize Web Audio context
+                await Tone.start();
+                console.log('Loading snare.wav...');
                 snarePlayer = await new Tone.Player(snareUrl).toDestination();
                 snarePlayer.autostart = false;
+                console.log('snare.wav loaded successfully');
             } catch (err) {
-                errorDiv.textContent = 'Error loading snare.wav. Ensure it’s in the audio/ folder.';
+                errorDiv.textContent = 'Error loading /audio/snare.wav. Ensure it’s in the audio/ folder.';
                 errorDiv.classList.remove('hidden');
-                console.error(err);
+                console.error('Audio load error:', err);
             }
         }
 
-        // Pre-load on page load
-        window.addEventListener('load', loadAudio);
+        // Initialize on first user interaction
+        document.addEventListener('click', async () => {
+            if (!snarePlayer) await loadAudio();
+        }, { once: true });
 
         // Generate snare roll notes
         function generateSnareRoll(density, length, aggressiveness, pitchVariation, bpm) {
@@ -125,15 +136,33 @@
             return notes;
         }
 
-        // Play button (instant playback)
+        // Draw MIDI preview
+        function drawMidiPreview(notes, rollDuration) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#8B00FF';
+            const heightPerSemitone = canvas.height / 24; // Range for pitch variation (±12 semitones)
+            notes.forEach(note => {
+                const x = (note.time / rollDuration) * canvas.width;
+                const y = canvas.height / 2 - (note.midi - 38) * heightPerSemitone;
+                const width = Math.max(5, canvas.width / notes.length / 2);
+                const height = 10 * note.velocity;
+                ctx.fillRect(x, y - height / 2, width, height);
+            });
+        }
+
+        // Play button
         document.getElementById('playBtn').addEventListener('click', async () => {
             if (isPlaying) return;
             isPlaying = true;
 
-            // Ensure audio is loaded
             if (!snarePlayer) {
                 await loadAudio();
-                if (!snarePlayer) return; // Exit if loading failed
+                if (!snarePlayer) {
+                    errorDiv.textContent = 'Cannot play: snare.wav failed to load.';
+                    errorDiv.classList.remove('hidden');
+                    isPlaying = false;
+                    return;
+                }
             }
 
             const density = parseInt(document.getElementById('density').value);
@@ -144,12 +173,23 @@
             Tone.Transport.bpm.value = bpm;
 
             const notes = generateSnareRoll(density, length, aggressiveness, pitchVariation, bpm);
+            const rollDuration = length * (60 / bpm) * 4;
 
-            sequence = new Tone.Sequence((time, note) => {
-                snarePlayer.start(time, 0, '16n', 0, note.velocity);
-            }, notes, '16n').start(0);
+            // Draw preview
+            drawMidiPreview(notes, rollDuration);
 
-            Tone.Transport.start();
+            try {
+                sequence = new Tone.Sequence((time, note) => {
+                    snarePlayer.start(time, 0, '16n', 0, note.velocity);
+                }, notes, '16n').start(0);
+                Tone.Transport.start();
+                console.log('Playback started');
+            } catch (err) {
+                errorDiv.textContent = 'Error starting playback.';
+                errorDiv.classList.remove('hidden');
+                console.error('Playback error:', err);
+                isPlaying = false;
+            }
         });
 
         // Stop button
@@ -161,35 +201,43 @@
                 sequence.stop();
                 sequence.dispose();
             }
+            console.log('Playback stopped');
         });
 
         // Download MIDI
         document.getElementById('downloadMidi').addEventListener('click', () => {
-            const density = parseInt(document.getElementById('density').value);
-            const length = parseFloat(document.getElementById('length').value);
-            const aggressiveness = parseInt(document.getElementById('aggressiveness').value);
-            const pitchVariation = parseInt(document.getElementById('pitchVariation').value);
-            const bpm = parseInt(document.getElementById('bpm').value);
+            try {
+                const density = parseInt(document.getElementById('density').value);
+                const length = parseFloat(document.getElementById('length').value);
+                const aggressiveness = parseInt(document.getElementById('aggressiveness').value);
+                const pitchVariation = parseInt(document.getElementById('pitchVariation').value);
+                const bpm = parseInt(document.getElementById('bpm').value);
 
-            const notes = generateSnareRoll(density, length, aggressiveness, pitchVariation, bpm);
-            const track = new MidiWriter.Track();
-            track.setTempo(bpm);
+                const notes = generateSnareRoll(density, length, aggressiveness, pitchVariation, bpm);
+                const track = new MidiWriter.Track();
+                track.setTempo(bpm);
 
-            notes.forEach(note => {
-                track.addEvent(new MidiWriter.NoteEvent({
-                    pitch: note.midi,
-                    duration: '16',
-                    velocity: Math.floor(note.velocity * 100),
-                    startTick: Math.floor(note.time * 960 / (60 / bpm))
-                }));
-            });
+                notes.forEach(note => {
+                    track.addEvent(new MidiWriter.NoteEvent({
+                        pitch: note.midi,
+                        duration: '16',
+                        velocity: Math.floor(note.velocity * 100),
+                        startTick: Math.floor(note.time * 960 / (60 / bpm))
+                    }));
+                });
 
-            const write = new MidiWriter.Writer([track]);
-            const dataUri = write.dataUri();
-            const a = document.createElement('a');
-            a.href = dataUri;
-            a.download = 'snare_roll.mid';
-            a.click();
+                const write = new MidiWriter.Writer([track]);
+                const dataUri = write.dataUri();
+                const a = document.createElement('a');
+                a.href = dataUri;
+                a.download = 'snare_roll.mid';
+                a.click();
+                console.log('MIDI downloaded');
+            } catch (err) {
+                errorDiv.textContent = 'Error generating MIDI file.';
+                errorDiv.classList.remove('hidden');
+                console.error('MIDI error:', err);
+            }
         });
     </script>
 </body>
