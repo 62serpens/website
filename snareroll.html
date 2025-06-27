@@ -82,7 +82,7 @@
     <script src="https://cdn.jsdelivr.net/npm/midi-writer-js@2.0.0/build/index.min.js"></script>
     <script>
         // Single snare audio file
-        const snareUrl = './audio/snare.wav';
+        const snareUrl = '/audio/snare.wav';
         let snarePlayer;
         let isPlaying = false;
         let sequence;
@@ -95,7 +95,7 @@
                 snarePlayer = await new Tone.Player(snareUrl).toDestination();
                 snarePlayer.autostart = false;
             } catch (err) {
-                errorDiv.textContent = 'Error loading snare.wav. Ensure it’s in snare-roll-generator/audio/.';
+                errorDiv.textContent = 'Error loading snare.wav. Ensure it’s in the audio/ folder.';
                 errorDiv.classList.remove('hidden');
                 console.error(err);
             }
