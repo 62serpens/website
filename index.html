@@ -19,7 +19,6 @@
     
     <style>
         :root {
-            /* UPDATED FONT: Standardized on Manrope */
             --font-body: 'Manrope', sans-serif;
             --font-signature: 'Manrope', sans-serif; 
             --text-primary: #222222;
@@ -38,7 +37,7 @@
         html { scroll-behavior: smooth; }
         body {
             font-family: var(--font-body);
-            font-weight: 400; /* Adjusted base weight for Manrope */
+            font-weight: 400;
             background-color: #EAEAEA;
             color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
@@ -73,7 +72,7 @@
             margin-left: 320px;
             padding: 40px;
             overflow-y: auto;
-            height: 100vh; /* Added for consistent scroll container behavior */
+            height: 100vh;
         }
         .content-sections { display: flex; flex-direction: column; gap: 24px; max-width: 720px; margin: 0 auto; }
 
@@ -108,7 +107,6 @@
             box-shadow: 0 10px 40px 0 var(--shadow-color);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            transition: all var(--transition-duration) ease-out;
         }
         .section-header {
             font-family: var(--font-signature); font-size: 2.2rem; font-weight: 700;
@@ -119,7 +117,7 @@
         }
         .opening-statement a { color: var(--text-primary); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 
-        /* Discography Styles */
+        /* Component Styles */
         .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
         .discography-item { text-align: center; }
         .discography-img {
@@ -133,7 +131,6 @@
         .discography-item p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 300; }
         .discography-item a.artist-link { font-size: 0.9rem; color: var(--text-primary); }
         
-        /* Contact Form */
         .contact-form { display: flex; flex-direction: column; gap: 16px; }
         .contact-form input, .contact-form select, .contact-form textarea {
             width: 100%; background: rgba(255, 255, 255, 0.6); border: 1px solid var(--border-color);
@@ -150,11 +147,41 @@
         }
         .contact-form button:hover { opacity: 0.85; }
 
-        /* Gallery & Modal */
         .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
         .gallery-img { width: 100%; border-radius: 10px; cursor: pointer; transition: transform var(--transition-duration) ease, opacity 0.3s ease; }
         .gallery-img:hover { transform: scale(1.03); opacity: 0.9; }
         
+        /* ADDED: Bonus Content Styles from your older file */
+        .bonus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .bonus-item {
+            display: block; text-decoration: none; color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 8px; padding: 12px;
+            border: 1px solid transparent;
+            transition: all var(--transition-duration) ease;
+        }
+        .bonus-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .bonus-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+        .bonus-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
+        .bonus-item-thumbnail img {
+            width: 100%; height: 100px; object-fit: cover; border-radius: 6px; margin-bottom: 8px;
+        }
+        button.bonus-item {
+            font-family: var(--font-body);
+            width: 100%;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        /* Modal Styles */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -173,45 +200,15 @@
         .modal-arrow.left { left: 15px; }
         .modal-arrow.right { right: 15px; }
 
-        /* NEW: Bonus Content Section */
-        .bonus-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-        .bonus-item {
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-        }
-        .bonus-item i {
-            font-size: 2.5rem;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-        }
-        .bonus-item h3 {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-        .bonus-item p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        /* IMPROVED: Footer Style */
         .site-footer {
             text-align: center;
-            color: rgba(255, 255, 255, 0.85); /* Softer white */
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* More subtle shadow */
+            color: rgba(255, 255, 255, 0.85);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
             padding: 20px 0;
             font-size: 0.9rem;
         }
 
-        /* MOBILE RESPONSIVE OVERHAUL */
+        /* Mobile Responsive */
         @media (max-width: 900px) {
             .left-pane {
                 transform: translateX(-100%);
@@ -220,9 +217,7 @@
                 box-shadow: 10px 0px 40px rgba(0,0,0,0.1);
             }
             .left-pane.open { transform: translateX(0); }
-            
             .right-pane { margin-left: 0; }
-
             .hamburger {
                 display: block; position: fixed; top: 20px; left: 20px; z-index: 2001;
                 font-size: 1.5rem; cursor: pointer; background: var(--bg-canvas);
@@ -231,19 +226,16 @@
                 border: 1px solid var(--border-color);
                 backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             }
-            
             .content-sections { max-width: 100%; }
             .right-pane { padding: 80px 16px 24px 16px; }
             .content-card { padding: 24px; }
             .section-header { font-size: 2rem; }
         }
-
     </style>
 </head>
 <body>
 
     <div class="site-wrapper">
-        
         <aside class="left-pane">
             <div class="identity">
                 <img src="images/default-avatar.png" alt="Default Avatar" class="profile-pic">
@@ -303,7 +295,7 @@
                 <section id="discography" class="content-card">
                     <h2 class="section-header">Discography</h2>
                     <div class="discography-grid">
-                         <div class="discography-item">
+                        <div class="discography-item">
                             <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
                                 <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img">
                             </a>
@@ -349,22 +341,39 @@
                 <section id="bonus" class="content-card">
                     <h2 class="section-header">Bonus</h2>
                     <div class="bonus-grid">
-                        <div class="bonus-item">
-                            <i class="fas fa-dice"></i>
-                            <h3>Blackjack Simulator</h3>
-                            <p>A simple game built to practice JavaScript logic. Coded with vanilla JS.</p>
-                        </div>
-                        <div class="bonus-item">
-                            <i class="fas fa-music"></i>
-                            <h3>Music Theory Tools</h3>
-                            <p>Interactive trainers for scales, chords, and intervals. Coming soon.</p>
-                        </div>
-                        <div class="bonus-item">
-                            <i class="fas fa-palette"></i>
-                            <h3>UI/UX Design</h3>
-                            <p>Examples of web design concepts and user interface mockups.</p>
-                        </div>
+                        <a href="b.html" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/blackjack.webp" alt="Blackjack Sim Preview"></div>
+                            <h4>Blackjack Sim</h4><p>Interactive Blackjack card game.</p>
+                        </a>
+                        <button type="button" id="audioToolsLink" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/audio_tools.webp" alt="Audio Tools Suite Preview"></div>
+                            <h4>Audio Tools Suite</h4><p>Tools for music producers (password required).</p>
+                        </button>
+                         <a href="251shells.html" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/251shells.webp" alt="251shells Preview"></div>
+                            <h4>ii-V-I Shells</h4><p>Training for 2-5-1 chord shells.</p>
+                        </a>
+                        <a href="circle.html" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/circle.webp" alt="Circle Preview"></div>
+                            <h4>Circle of Fifths</h4><p>Training for chords in all keys.</p>
+                        </a>
+                        <a href="9thchords.html" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/9thchords.webp" alt="9th Chords Preview"></div>
+                            <h4>9th Chords</h4><p>Practice 9th chord voicings.</p>
+                        </a>
                     </div>
+                    <h3 style="font-family: var(--font-signature); font-weight: 700; font-size: 1.5rem; margin-top: 24px; margin-bottom: 12px;">Alternate Realities</h3>
+                    <div class="bonus-grid">
+                         <a href="2000.html" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/retro.webp" alt="Retro Theme Preview"></div>
+                            <h4>Theme: 2000s</h4><p>Retro Geocities-inspired design.</p>
+                        </a>
+                        <a href="ai_theme.html" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/ai_theme.webp" alt="AI Theme Preview"></div>
+                            <h4>Theme: 2030</h4><p>Futuristic AI/Tech-themed interface.</p>
+                        </a>
+                    </div>
+                    <p id="passwordError" role="alert" style="display: none; color: red; text-align: center; margin-top: 16px;">Invalid access code.</p>
                 </section>
                 
                 <footer class="site-footer">
@@ -397,14 +406,13 @@
         const sections = document.querySelectorAll('.right-pane section');
         const navLinks = document.querySelectorAll('.main-nav a');
         
-        // --- Mobile Navigation ---
+        // Mobile Navigation
         if (hamburger && leftPane) {
             hamburger.addEventListener('click', (e) => {
                 e.stopPropagation();
                 leftPane.classList.toggle('open');
             });
             
-            // Close nav when clicking on the main content area
             rightPane.addEventListener('click', () => {
                 if (leftPane.classList.contains('open')) {
                     leftPane.classList.remove('open');
@@ -412,7 +420,7 @@
             });
         }
     
-        // --- FIXED: Combined Smooth Scroll & Nav Logic ---
+        // Combined Smooth Scroll & Nav Logic
         const allAnchorLinks = document.querySelectorAll('a[href^="#"]');
         allAnchorLinks.forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -421,24 +429,17 @@
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
-                    // Calculate scroll position (40px offset for padding)
                     const topPos = targetElement.offsetTop - 40;
-                    
-                    // Perform the smooth scroll on the correct container
-                    rightPane.scrollTo({
-                        top: topPos,
-                        behavior: 'smooth'
-                    });
+                    rightPane.scrollTo({ top: topPos, behavior: 'smooth' });
                 }
                 
-                // If on mobile, close the nav menu after clicking a link
                 if (leftPane.classList.contains('open')) {
                     leftPane.classList.remove('open');
                 }
             });
         });
 
-        // --- Active Nav Link on Scroll ---
+        // Active Nav Link on Scroll
         rightPane.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(section => {
@@ -455,9 +456,25 @@
             });
         });
 
-        // --- Image Modal Logic ---
+        // ADDED: Audio Tools Password Prompt Logic
+        const audioToolsLink = document.getElementById('audioToolsLink');
+        const passwordError = document.getElementById('passwordError');
+        if (audioToolsLink) {
+            audioToolsLink.addEventListener('click', () => {
+                const password = prompt('Enter access code for Audio Tools:');
+                if (password === 'serpens62') {
+                    window.location.href = 'audio_tools.html';
+                } else if (password) {
+                    passwordError.style.display = 'block';
+                    setTimeout(() => { passwordError.style.display = 'none'; }, 3000);
+                }
+            });
+        }
+
+        // Image Modal Logic
         const modal = document.getElementById('imageModal');
         if (modal) {
+            // This logic remains the same and should function correctly.
             const modalImg = document.getElementById("modalImage");
             const galleryImages = document.querySelectorAll(".gallery-img");
             let currentImageIndex;
@@ -465,7 +482,7 @@
             galleryImages.forEach((img, index) => {
                 img.addEventListener('click', function() {
                     currentImageIndex = index;
-                    modal.style.display = "flex"; // Use flex for centering
+                    modal.style.display = "flex";
                     modalImg.src = this.src;
                     modal.classList.add('active');
                 });
@@ -473,14 +490,12 @@
 
             const closeModal = () => {
                 modal.classList.remove('active');
-                setTimeout(() => { modal.style.display = "none"; }, 400); // Match CSS transition
+                setTimeout(() => { modal.style.display = "none"; }, 400);
             };
 
             document.getElementById('closeModal').onclick = closeModal;
             modal.addEventListener('click', (e) => {
-                if (e.target === modal) { // Close if clicking on the background
-                    closeModal();
-                }
+                if (e.target === modal) { closeModal(); }
             });
 
             const showImage = (index) => {
@@ -494,7 +509,7 @@
             document.getElementById('nextArrow').onclick = () => showImage(currentImageIndex + 1);
 
             document.addEventListener('keydown', (e) => {
-                if (modal.style.display === "flex") {
+                if (modal.classList.contains('active')) {
                     if (e.key === "ArrowRight") { showImage(currentImageIndex + 1); }
                     if (e.key === "ArrowLeft") { showImage(currentImageIndex - 1); }
                     if (e.key === "Escape") { closeModal(); }
