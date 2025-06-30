@@ -151,7 +151,6 @@
         .gallery-img { width: 100%; border-radius: 10px; cursor: pointer; transition: transform var(--transition-duration) ease, opacity 0.3s ease; }
         .gallery-img:hover { transform: scale(1.03); opacity: 0.9; }
         
-        /* ADDED: Bonus Content Styles from your older file */
         .bonus-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -181,7 +180,6 @@
             text-align: left;
         }
 
-        /* Modal Styles */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -203,7 +201,8 @@
         .site-footer {
             text-align: center;
             color: rgba(255, 255, 255, 0.85);
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            /* MODIFIED: Ugly text-shadow removed for a cleaner look */
+            text-shadow: none; 
             padding: 20px 0;
             font-size: 0.9rem;
         }
@@ -230,6 +229,11 @@
             .right-pane { padding: 80px 16px 24px 16px; }
             .content-card { padding: 24px; }
             .section-header { font-size: 2rem; }
+
+            /* ADDED: 2-column grid for bonus content on mobile */
+            .bonus-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
@@ -341,7 +345,7 @@
                 <section id="bonus" class="content-card">
                     <h2 class="section-header">Bonus</h2>
                     <div class="bonus-grid">
-                        <a href="b.html" class="bonus-item">
+                        <a href="b.html" class="bonus-item" style="display: none;">
                             <div class="bonus-item-thumbnail"><img src="images/blackjack.webp" alt="Blackjack Sim Preview"></div>
                             <h4>Blackjack Sim</h4><p>Interactive Blackjack card game.</p>
                         </a>
@@ -456,7 +460,7 @@
             });
         });
 
-        // ADDED: Audio Tools Password Prompt Logic
+        // Audio Tools Password Prompt Logic
         const audioToolsLink = document.getElementById('audioToolsLink');
         const passwordError = document.getElementById('passwordError');
         if (audioToolsLink) {
@@ -464,7 +468,7 @@
                 const password = prompt('Enter access code for Audio Tools:');
                 if (password === 'serpens62') {
                     window.location.href = 'audio_tools.html';
-                } else if (password) {
+                } else if (password !== null) { // Show error only if user entered something
                     passwordError.style.display = 'block';
                     setTimeout(() => { passwordError.style.display = 'none'; }, 3000);
                 }
@@ -474,7 +478,6 @@
         // Image Modal Logic
         const modal = document.getElementById('imageModal');
         if (modal) {
-            // This logic remains the same and should function correctly.
             const modalImg = document.getElementById("modalImage");
             const galleryImages = document.querySelectorAll(".gallery-img");
             let currentImageIndex;
