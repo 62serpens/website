@@ -14,30 +14,28 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <style>
         :root {
-            --font-body: 'Lato', sans-serif;
-            --font-signature: 'Playfair Display', serif;
-            --text-primary: #222222;
-            --text-secondary: #5a5a5a;
-            --bg-canvas: rgba(248, 248, 248, 0.85);
-            --bg-glass: rgba(255, 255, 255, 0.45); /* More transparent glass */
-            --border-color: rgba(200, 200, 200, 0.4);
-            --border-hover: rgba(50, 50, 50, 0.7);
-            --shadow-color: rgba(0, 0, 0, 0.08);
-            --transition-duration: 0.4s;
-            --border-radius: 16px; /* Softer radius */
+            --font-main: 'Manrope', sans-serif;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4d4d4d;
+            --bg-glass: rgba(255, 255, 255, 0.6);
+            --border-color: rgba(200, 200, 200, 0.3);
+            --shadow-color: rgba(0, 0, 0, 0.07);
+            --transition-duration: 0.3s;
+            --border-radius: 18px;
         }
 
-        /* Base & Reset */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
         html { scroll-behavior: smooth; }
+
         body {
-            font-family: var(--font-body);
-            font-weight: 300;
+            font-family: var(--font-main);
+            font-weight: 400;
             background-color: #EAEAEA;
             color: var(--text-primary);
             -webkit-font-smoothing: antialiased;
@@ -47,100 +45,69 @@
             background-position: center center;
             background-attachment: fixed;
         }
-        ::selection { background: rgba(180, 220, 255, 0.7); }
 
-        /* Main Layout: Split Pane */
-        .site-wrapper { display: flex; min-height: 100vh; }
-        .left-pane {
-            width: 320px;
-            flex-shrink: 0;
-            background-color: var(--bg-canvas);
-            border-right: 1px solid var(--border-color);
-            padding: 40px 32px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 120px 24px 40px 24px; /* Top padding for sticky header */
             display: flex;
             flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Header & Navigation */
+        .main-header {
             position: fixed;
             top: 0;
             left: 0;
-            height: 100%;
-            backdrop-filter: blur(22px); /* Enhanced blur */
-            -webkit-backdrop-filter: blur(22px);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 24px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .right-pane {
-            flex-grow: 1;
-            margin-left: 320px;
-            padding: 40px;
-            overflow-y: auto;
-        }
-        .content-sections { display: flex; flex-direction: column; gap: 24px; max-width: 720px; margin: 0 auto; }
-
-        /* Left Pane: Identity & Navigation */
-        .identity { text-align: center; margin-bottom: 40px; }
-        .profile-pic {
-            width: 110px; height: 110px; border-radius: 50%;
-            margin: 0 auto 20px; border: 1px solid var(--border-color); object-fit: cover;
-        }
-        .signature { font-family: var(--font-signature); font-size: 2.8rem; font-weight: 700; line-height: 1.1; }
-        .title { font-size: 1rem; color: var(--text-secondary); margin-top: 8px; letter-spacing: 0.5px; }
-        .social-links { margin-top: 16px; text-align: center; }
-        .social-icon { font-size: 1.1rem; color: #999; margin: 0 8px; transition: color var(--transition-duration) ease; }
-        .social-icon:hover { color: var(--text-primary); }
-
-        .main-nav { margin-top: auto; padding-bottom: 20px;}
-        .main-nav ul { list-style: none; }
+        .logo { font-size: 1.5rem; font-weight: 700; text-decoration: none; color: var(--text-primary); }
+        .main-nav { display: flex; gap: 8px; }
         .main-nav a {
-            display: block; padding: 12px; margin: 4px 0; border-radius: 8px;
-            text-decoration: none; color: var(--text-secondary); font-weight: 400;
-            font-size: 1.1rem; transition: all var(--transition-duration) ease;
+            text-decoration: none; color: var(--text-secondary); padding: 8px 12px;
+            border-radius: 8px; transition: all var(--transition-duration) ease;
         }
-        .main-nav a:hover, .main-nav a.active { background-color: rgba(0,0,0,0.04); color: var(--text-primary); }
-        .hamburger { display: none; } /* Hidden on desktop */
+        .main-nav a:hover, .main-nav a.active { background: rgba(0,0,0,0.05); color: var(--text-primary); }
+        .hamburger { display: none; }
 
-        /* Right Pane: Content Cards */
+        /* Hero Section */
+        .hero { text-align: center; padding-top: 40px; padding-bottom: 20px; }
+        .profile-pic { width: 120px; height: 120px; border-radius: 50%; margin: 0 auto 24px; }
+        .hero h1 { font-size: 3rem; font-weight: 700; }
+        .hero p { font-size: 1.1rem; color: var(--text-secondary); margin-top: 8px; }
+        .opening-statement { font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); max-width: 600px; margin: 24px auto 0 auto; }
+        .opening-statement a { color: var(--text-primary); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+        /* Content Card */
         .content-card {
             background: var(--bg-glass);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
             padding: 32px 40px;
-            box-shadow: 0 10px 40px 0 var(--shadow-color);
-            backdrop-filter: blur(25px); /* Enhanced blur */
-            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 8px 30px 0 var(--shadow-color);
             transition: all var(--transition-duration) ease-out;
         }
         .section-header {
-            font-family: var(--font-signature); font-size: 2.2rem; font-weight: 700;
-            margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);
+            font-size: 2rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
         }
-        .opening-statement {
-            font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); font-weight: 400;
-        }
-        .opening-statement a { color: var(--text-primary); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 
-        /* Component Styles */
-        .discography-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Smaller images */
-            gap: 20px;
-        }
-        .discography-item { text-align: center; }
-        .discography-img {
-            width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
-            border-radius: 10px; border: 1px solid var(--border-color);
-            transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
-            margin-bottom: 12px;
-        }
-        .discography-img:hover { transform: scale(1.05); box-shadow: 0 6px 25px var(--shadow-color); }
-        .discography-item h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
-        .discography-item p { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 300; }
-        .discography-item a.artist-link { font-size: 0.9rem; color: var(--text-primary); }
-        
         /* Contact Form */
         .contact-form { display: flex; flex-direction: column; gap: 16px; }
         .contact-form input, .contact-form select, .contact-form textarea {
             width: 100%; background: rgba(255, 255, 255, 0.6); border: 1px solid var(--border-color);
             border-radius: 8px; padding: 14px; color: var(--text-primary); font-size: 1rem;
-            font-family: var(--font-body); transition: all var(--transition-duration) ease; font-weight: 400;
+            font-family: var(--font-main); transition: all var(--transition-duration) ease;
         }
         .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus {
             outline: none; border-color: var(--text-primary); background: #fff;
@@ -152,256 +119,177 @@
         }
         .contact-form button:hover { opacity: 0.85; }
 
+        /* Discography */
+        .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; }
+        .discography-item { text-align: center; }
+        .discography-img {
+            width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+            border-radius: 12px; border: 1px solid var(--border-color);
+            transition: all var(--transition-duration) ease; margin-bottom: 12px;
+        }
+        .discography-img:hover { transform: scale(1.05); box-shadow: 0 6px 25px var(--shadow-color); }
+        .discography-item h3 { font-size: 1rem; font-weight: 500; margin-bottom: 4px; }
+        .discography-item p { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 300; }
+        .discography-item a.artist-link { font-size: 0.9rem; color: var(--text-primary); }
+
         /* Gallery & Modal */
         .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-        .gallery-img { width: 100%; border-radius: 10px; cursor: pointer; transition: transform var(--transition-duration) ease, opacity 0.3s ease; }
+        .gallery-img { width: 100%; border-radius: 12px; cursor: pointer; transition: all var(--transition-duration) ease; }
         .gallery-img:hover { transform: scale(1.03); opacity: 0.9; }
+
+        /* Bonus Content */
+        .bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .bonus-item {
+            display: block; text-decoration: none; color: inherit; background: rgba(255, 255, 255, 0.3);
+            border-radius: 12px; padding: 12px; border: 1px solid transparent;
+            transition: all var(--transition-duration) ease;
+        }
+        .bonus-item:hover { transform: translateY(-4px); border-color: var(--text-primary); background: rgba(255, 255, 255, 0.5); }
+        .bonus-item h4 { font-size: 1rem; font-weight: 500; }
+        .bonus-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; font-weight: 300; }
+        .bonus-item-thumbnail img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; margin-bottom: 8px; }
+
+        /* Footer */
+        .main-footer { text-align: center; padding: 40px 0 20px 0; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+        .footer-social-links a { color: #fff; margin: 0 12px; font-size: 1.5rem; transition: color 0.3s ease; }
+        .footer-social-links a:hover { color: #ccc; }
+        .copyright { margin-top: 16px; font-size: 0.9rem; }
         
-        .modal {
-            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            justify-content: center; align-items: center; opacity: 0; transition: opacity var(--transition-duration) ease;
-        }
-        .modal.active { display: flex; opacity: 1; }
-        .modal-content { position: relative; display: flex; justify-content: center; align-items: center; }
-        .modal-img { max-width: 90vw; max-height: 90vh; border-radius: var(--border-radius); }
-        .modal-arrow, .modal-close {
-            position: absolute; color: white; font-size: 2rem; cursor: pointer; user-select: none;
-            transition: color 0.3s ease;
-        }
-        .modal-arrow:hover, .modal-close:hover { color: #ccc; }
-        .modal-close { top: 20px; right: 30px; }
-        .modal-arrow { top: 50%; transform: translateY(-50%); padding: 16px; }
-        .modal-arrow.left { left: 15px; }
-        .modal-arrow.right { right: 15px; }
-
-
-        /* MOBILE RESPONSIVE OVERHAUL */
-        @media (max-width: 900px) {
-            .left-pane {
-                transform: translateX(-100%);
-                position: fixed;
-                z-index: 2000;
-                box-shadow: 10px 0px 40px rgba(0,0,0,0.1);
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 80px 16px 24px 16px; gap: 16px; }
+            .main-header { padding: 12px 16px; }
+            .main-nav {
+                display: none; position: absolute; top: 100%; right: 0;
+                background: var(--bg-glass); width: 100%; flex-direction: column;
+                padding: 16px; border-top: 1px solid var(--border-color);
             }
-            .left-pane.open { transform: translateX(0); }
-            
-            .right-pane { margin-left: 0; }
-
-            .hamburger {
-                display: block; position: fixed; top: 20px; left: 20px; z-index: 2001;
-                font-size: 1.5rem; cursor: pointer; background: var(--bg-canvas);
-                border-radius: 50%; width: 50px; height: 50px;
-                display: flex; align-items: center; justify-content: center;
-                border: 1px solid var(--border-color);
-                backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            }
-            
-            .content-sections { max-width: 100%; }
-            .right-pane { padding: 80px 16px 24px 16px; }
+            .main-nav.open { display: flex; }
+            .hamburger { display: block; font-size: 1.5rem; cursor: pointer; border: none; background: none; }
+            .hero { padding: 24px 0; }
+            .hero h1 { font-size: 2.5rem; }
             .content-card { padding: 24px; }
-            .section-header { font-size: 2rem; }
         }
-
     </style>
 </head>
 <body>
 
-    <div class="site-wrapper">
-        
-        <aside class="left-pane">
-            <div class="identity">
-                <img src="images/default-avatar.png" alt="Default Avatar" class="profile-pic">
-                <h1 class="signature">62serpens</h1>
-                <p class="title">Music Producer</p>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
-                    <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
-                </div>
-            </div>
-            
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#discography">Discography</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#bonus">Bonus</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <div class="hamburger">
+    <header class="main-header">
+        <a href="#home" class="logo">62serpens</a>
+        <nav class="main-nav">
+            <a href="#contact">Contact</a>
+            <a href="#discography">Discography</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#bonus">Bonus</a>
+        </nav>
+        <button class="hamburger" aria-label="Open menu">
             <i class="fas fa-bars"></i>
-        </div>
+        </button>
+    </header>
 
-        <main class="right-pane">
-            <div class="content-sections">
-                <section id="home" class="content-card">
-                    <p class="opening-statement">
-                        All 62serpens instrumentals are now offline. Please contact me via the <a href="#contact">form below</a>, <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer">Instagram</a>, or <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer">Discord</a> for beats or collabs.
-                    </p>
-                </section>
+    <div class="container">
+        
+        <section id="home" class="hero">
+            <img src="images/default-avatar.png" alt="Avatar" class="profile-pic">
+            <h1>62serpens</h1>
+            <p>Music Producer</p>
+            <p class="opening-statement">
+                All 62serpens instrumentals are now offline. Please contact me via the <a href="#contact">form below</a>, <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer">Instagram</a>, or <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer">Discord</a> for beats or collabs.
+            </p>
+        </section>
 
-                <section id="contact" class="content-card">
-                    <h2 class="section-header">Contact</h2>
-                    <form name="contact" method="POST" data-netlify="true" action="/success" class="contact-form">
-                        <input type="hidden" name="form-name" value="contact">
-                        <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
-                        <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
-                        <input type="text" name="social-links" placeholder="Relevant Social Media or Streaming Links" aria-label="Social Media Links">
-                        <select name="category" id="category" required aria-label="Service Category">
-                            <option value="" disabled selected>Select an Inquiry Type</option>
-                            <option value="production">Personalized Production</option>
-                            <option value="mixing">Recording & Engineering</option>
-                            <option value="tutoring">Production Tutoring</option>
-                            <option value="website">Website Design</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <textarea name="message" placeholder="Please provide details about your project." required aria-label="Your Inquiry" rows="5"></textarea>
-                        <button type="submit">Send Inquiry</button>
-                    </form>
-                </section>
+        <section id="contact" class="content-card">
+            <h2 class="section-header">Contact</h2>
+            <form name="contact" method="POST" data-netlify="true" action="/success" class="contact-form">
+                <input type="hidden" name="form-name" value="contact">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <input type="text" name="social-links" placeholder="Relevant Social Media or Streaming Links">
+                <select name="category" id="category" required>
+                    <option value="" disabled selected>Select an Inquiry Type</option>
+                    <option value="leasing">MP3/WAV Lease Inquiry</option>
+                    <option value="production">Personalized Production</option>
+                    <option value="mixing">Recording & Engineering</option>
+                    <option value="tutoring">Production Tutoring</option>
+                    <option value="website">Website Design</option>
+                    <option value="other">Other</option>
+                </select>
+                <textarea name="message" placeholder="Please provide details about your project." required rows="5"></textarea>
+                <button type="submit">Send Inquiry</button>
+            </form>
+        </section>
 
-                <section id="discography" class="content-card">
-                    <h2 class="section-header">Discography</h2>
-                    <div class="discography-grid">
-                         <div class="discography-item">
-                            <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
-                                <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img">
-                            </a>
-                            <h3>Onlybino - Down Bad</h3>
-                            <p>Original melody, full production, mixing</p>
-                            <a href="https://www.instagram.com/onlybino" target="_blank" class="artist-link"><i class="fab fa-instagram icon"></i> onlybino</a>
-                        </div>
-                        <div class="discography-item">
-                            <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" rel="noopener noreferrer">
-                                <img src="images/albumart_beatitup.jpg" alt="beat it up Album Art" class="discography-img">
-                            </a>
-                            <h3>Eddison - beat it up</h3>
-                            <p>Original melody, co-production</p>
-                            <a href="https://www.instagram.com/954.eddison" target="_blank" class="artist-link"><i class="fab fa-instagram icon"></i> 954.eddison</a>
-                        </div>
-                        <div class="discography-item">
-                            <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
-                                <img src="images/albumart_madaway.jpg" alt="MADAWAY Album Art" class="discography-img">
-                            </a>
-                            <h3>Tefflon - MADAWAY</h3>
-                            <p>Original melody, co-production</p>
-                            <a href="https://www.instagram.com/1tefflon" target="_blank" class="artist-link"><i class="fab fa-instagram icon"></i> 1tefflon</a>
-                        </div>
-                        <div class="discography-item">
-                            <a href="https://soundcloud.com/bigtaie/keep-it-real-prod-62serpens" target="_blank" rel="noopener noreferrer">
-                                <img src="images/albumart_keepitreal.jpg" alt="Keep It Real Album Art" class="discography-img">
-                            </a>
-                            <h3>Big Taie - Keep It Real</h3>
-                            <p>Original MIDI, co-production</p>
-                            <a href="https://www.instagram.com/bigtaie" target="_blank" class="artist-link"><i class="fab fa-instagram icon"></i> bigtaie</a>
-                        </div>
-                    </div>
-                </section>
+        <section id="discography" class="content-card">
+            <h2 class="section-header">Discography</h2>
+            <div class="discography-grid">
+                </div>
+        </section>
 
-                <section id="gallery" class="content-card">
-                    <h2 class="section-header">Gallery</h2>
-                    <div class="gallery-grid">
-                        <img src="images/img_015.jpg" alt="Studio Setup 3" class="gallery-img">
-                        <img src="images/img_017.jpg" alt="Studio Setup 5" class="gallery-img">
-                    </div>
-                </section>
-
-                <section id="bonus" class="content-card">
-                    <h2 class="section-header">Bonus</h2>
-                    </section>
-                
-                <footer style="text-align: center; color: #fff; text-shadow: 0 1px 3px #000; padding: 20px 0;">
-                    © <span id="year"></span> 62serpens. All rights reserved.
-                </footer>
+        <section id="gallery" class="content-card">
+            <h2 class="section-header">Gallery</h2>
+            <div class="gallery-grid">
+                <img src="images/img_015.jpg" alt="Studio Setup" class="gallery-img">
+                <img src="images/img_017.jpg" alt="Studio Setup" class="gallery-img">
             </div>
-        </main>
+        </section>
+
+        <section id="bonus" class="content-card">
+            <h2 class="section-header">Bonus</h2>
+            <div class="bonus-grid">
+                </div>
+        </section>
+
     </div>
+
+    <footer class="main-footer">
+        <div class="footer-social-links">
+            <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+            <a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+        </div>
+        <p class="copyright">© <span id="year"></span> 62serpens. All rights reserved.</p>
+    </footer>
 
     <form name="contact" data-netlify="true" hidden>
         <input type="text" name="name" /><input type="email" name="email" /><input type="text" name="social-links" /><select name="category"></select><textarea name="message"></textarea>
     </form>
 
-    <div id="imageModal" class="modal">
-        <span id="closeModal" class="modal-close">×</span>
-        <div class="modal-content">
-            <span id="prevArrow" class="modal-arrow left"><i class="fas fa-chevron-left"></i></span>
-            <img id="modalImage" class="modal-img" src="" alt="Expanded Image">
-            <span id="nextArrow" class="modal-arrow right"><i class="fas fa-chevron-right"></i></span>
-        </div>
-    </div>
-    
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('year').textContent = new Date().getFullYear();
-    
-        // Mobile Navigation (Slide-in Menu)
+
+        // Hamburger Menu Toggle
         const hamburger = document.querySelector('.hamburger');
-        const leftPane = document.querySelector('.left-pane');
-        const rightPane = document.querySelector('.right-pane');
-        
-        if (hamburger && leftPane) {
-            hamburger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                leftPane.classList.toggle('open');
-            });
-            
-            // Close nav when a link is clicked
-            leftPane.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => leftPane.classList.remove('open'));
-            });
-
-            // Close nav when clicking outside of it
-            rightPane.addEventListener('click', () => {
-                if (leftPane.classList.contains('open')) {
-                    leftPane.classList.remove('open');
-                }
-            });
-        }
-    
-        // Active Nav Link on Scroll
-        const sections = document.querySelectorAll('.right-pane section');
-        const navLinks = document.querySelectorAll('.main-nav a');
-
-        rightPane.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (rightPane.scrollTop >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').substring(1) === current) {
-                    link.classList.add('active');
-                }
-            });
+        const mainNav = document.querySelector('.main-nav');
+        hamburger.addEventListener('click', () => {
+            mainNav.classList.toggle('open');
         });
 
-        // Smooth Scroll for Nav Links
-        document.querySelectorAll('.main-nav a, .opening-statement a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+        // Smooth Scroll Logic
+        const header = document.querySelector('.main-header');
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    rightPane.scrollTo({
-                        top: targetElement.offsetTop - 40,
+                    const headerOffset = header.offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
                         behavior: 'smooth'
                     });
                 }
+                if (mainNav.classList.contains('open')) {
+                    mainNav.classList.remove('open');
+                }
             });
         });
-
-        // Image Modal Logic (remains largely the same)
-        const modal = document.getElementById('imageModal');
-        if (modal) {
-            // ... (modal script from previous version, which is correct)
-        }
     });
     </script>
+
 </body>
 </html>
