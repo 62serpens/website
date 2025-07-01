@@ -40,7 +40,7 @@
             --shadow-color: rgba(0, 0, 0, 0.08);
             --bonus-item-bg: rgba(255, 255, 255, 0.3);
             --bonus-item-hover-bg: rgba(255, 255, 255, 0.5);
-            --select-arrow-color: '%235a5a5a';
+            --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235a5a5a'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
             --image-bg-url: url('https://source.unsplash.com/1920x1080/?misty,forest,tasmania');
         }
 
@@ -59,7 +59,7 @@
             --shadow-color: rgba(0, 0, 0, 0.2);
             --bonus-item-bg: rgba(0, 0, 0, 0.15);
             --bonus-item-hover-bg: rgba(0, 0, 0, 0.3);
-            --select-arrow-color: '%23a0a0a0';
+            --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a0a0a0'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
             --image-bg-url: url('https://source.unsplash.com/1920x1080/?misty,forest,night');
         }
 
@@ -96,7 +96,11 @@
             flex-grow: 1; margin-left: 320px; padding: 40px;
             overflow-y: auto; height: 100vh;
         }
-        .content-sections { display: flex; flex-direction: column; gap: 24px; max-width: 720px; margin: 0 auto; }
+        /* MODIFIED: Flexbox layout for footer positioning */
+        .content-sections { 
+            display: flex; flex-direction: column; gap: 24px; 
+            max-width: 720px; margin: 0 auto; min-height: 100%;
+        }
 
         .identity { text-align: center; margin-bottom: 40px; }
         .profile-pic { width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 20px; border: 1px solid var(--border-color); object-fit: cover; }
@@ -145,7 +149,7 @@
         }
         .contact-form select {
             -webkit-appearance: none; -moz-appearance: none; appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='var(--select-arrow-color)'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+            background-image: var(--select-arrow-url);
             background-repeat: no-repeat;
             background-position: right 1rem center;
             background-size: 1.5em;
@@ -166,18 +170,22 @@
         .bonus-item-thumbnail img { width: 100%; height: 100px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; }
         button.bonus-item { font-family: var(--font-body); width: 100%; cursor: pointer; text-align: left; }
         
-        .site-footer { text-align: center; color: var(--text-secondary); text-shadow: none; padding: 20px 0; font-size: 0.9rem; }
+        /* MODIFIED: Footer positioning */
+        .site-footer { 
+            text-align: center; color: var(--text-secondary); 
+            text-shadow: none; padding: 20px 0; font-size: 0.9rem;
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
         
-        /* MODIFIED: Modal Arrow Positioning */
         .modal { 
             display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; 
             background-color: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); 
             justify-content: center; align-items: center; opacity: 0; 
             transition: opacity var(--transition-duration) ease;
-            position: relative; /* Set relative context for arrows */
+            position: relative;
         }
         .modal.active { display: flex; opacity: 1; }
-        .modal-content { display: flex; justify-content: center; align-items: center; } /* Removed position:relative */
+        .modal-content { display: flex; justify-content: center; align-items: center; }
         .modal-img { max-width: 90vw; max-height: 90vh; border-radius: var(--border-radius); }
         .modal-arrow, .modal-close { position: absolute; color: white; font-size: 2rem; cursor: pointer; user-select: none; transition: color 0.3s ease; }
         .modal-arrow:hover, .modal-close:hover { color: #ccc; }
@@ -199,12 +207,12 @@
             .left-pane.open { transform: translateX(0); }
             .right-pane { margin-left: 0; }
             .hamburger { display: block; position: fixed; top: 20px; left: 20px; z-index: 2001; font-size: 1.5rem; cursor: pointer; background: var(--bg-canvas-opaque); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
-            .content-sections { max-width: 100%; }
-            /* MODIFIED: Increased top padding for mobile */
-            .right-pane { padding: 100px 16px 24px 16px; }
+            .content-sections { max-width: 100%; padding-bottom: 0; } /* Ensure footer is at bottom */
+            .right-pane { padding: 100px 16px 0 16px; } /* Increased top padding, removed bottom */
             .content-card { padding: 24px; }
             .section-header { font-size: 2rem; }
             .bonus-grid { grid-template-columns: repeat(2, 1fr); }
+            .site-footer { padding-bottom: 24px; } /* Add padding back to footer on mobile */
         }
     </style>
 </head>
@@ -360,7 +368,7 @@
                 </section>
                 
                 <footer class="site-footer">
-                    © <span id="year"></span> 62serpens. All rights reserved.
+                    © <span id="year">2025</span> 62serpens. All rights reserved.
                 </footer>
             </div>
         </main>
@@ -398,10 +406,12 @@
         };
         if (currentTheme) {
             applyTheme(currentTheme);
+        } else {
+            applyTheme('light'); // Default to light theme
         }
         themeToggle.addEventListener('change', function() {
             const theme = this.checked ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', theme);
+            applyTheme(theme);
             localStorage.setItem('theme', theme);
         });
 
@@ -467,25 +477,27 @@
             });
         }
 
-        // --- FIXED: Image Modal Logic ---
+        // --- ROBUST IMAGE MODAL LOGIC ---
         const modal = document.getElementById('imageModal');
         if (modal) {
             const modalImg = document.getElementById("modalImage");
             const galleryImages = document.querySelectorAll(".gallery-img");
             let currentImageIndex;
 
+            const openModal = (index) => {
+                currentImageIndex = index;
+                modalImg.src = galleryImages[index].src;
+                modal.classList.add('active');
+            };
+
             galleryImages.forEach((img, index) => {
-                img.addEventListener('click', function() {
-                    currentImageIndex = index;
-                    modalImg.src = this.src; // Set image source first
-                    modal.classList.add('active'); // Then display the modal
-                });
+                img.addEventListener('click', () => openModal(index));
             });
             
             const closeModal = () => modal.classList.remove('active');
             
             document.getElementById('closeModal').onclick = closeModal;
-            modal.addEventListener('click', (e) => { if (e.target === modal) { closeModal(); } });
+            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
             
             const showImage = (offset) => {
                 currentImageIndex = (currentImageIndex + offset + galleryImages.length) % galleryImages.length;
