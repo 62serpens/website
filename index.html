@@ -28,7 +28,7 @@
 
             /* Light Theme (Default) */
             --text-primary: #222222;
-            --text-secondary: #5a5a5a;
+            --text-secondary: #333333; /* Updated for better contrast */
             --bg-body: #EAEAEA;
             --bg-canvas-opaque: #F8F8F8;
             --bg-glass: rgba(255, 255, 255, 0.45);
@@ -40,7 +40,7 @@
             --shadow-color: rgba(0, 0, 0, 0.08);
             --bonus-item-bg: rgba(255, 255, 255, 0.3);
             --bonus-item-hover-bg: rgba(255, 255, 255, 0.5);
-            --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235a5a5a'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+            --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333333'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
             --image-bg-url: url('https://source.unsplash.com/1920x1080/?misty,forest,tasmania');
         }
 
@@ -121,6 +121,15 @@
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             transition: all var(--transition-duration) cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .section-header { font-size: 2.2rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); letter-spacing: -0.02em; }
@@ -272,19 +281,19 @@
             </div>
         </aside>
 
-        <div class="hamburger">
+        <button class="hamburger" aria-label="Toggle Menu">
             <i class="fas fa-bars"></i>
-        </div>
+        </button>
 
         <main class="right-pane">
             <div class="content-sections">
-                <section id="home" class="content-card">
+                <section id="home" class="content-card fade-in">
                     <p class="opening-statement">
                         All 62serpens instrumentals are now offline. Please contact via the <a href="#contact">form below</a>, <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer">Instagram</a>, or <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer">Discord</a>
                     </p>
                 </section>
 
-                <section id="contact" class="content-card">
+                <section id="contact" class="content-card fade-in">
                     <h2 class="section-header">Contact</h2>
                     <form name="contact" method="POST" data-netlify="true" action="/success" class="contact-form">
                         <input type="hidden" name="form-name" value="contact">
@@ -305,12 +314,12 @@
                     </form>
                 </section>
 
-                <section id="discography" class="content-card">
+                <section id="discography" class="content-card fade-in">
                     <h2 class="section-header">Discography</h2>
                     <div class="discography-grid">
                         <div class="discography-item">
                             <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
-                                <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img">
+                                <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img" loading="lazy">
                             </a>
                             <h3>Onlybino - Down Bad</h3>
                             <p>Original melody, full production</p>
@@ -318,7 +327,7 @@
                         </div>
                         <div class="discography-item">
                             <a href="#" target="_blank" rel="noopener noreferrer">
-                                <img src="images/albumart_beatitup.jpg" alt="beat it up Album Art" class="discography-img">
+                                <img src="images/albumart_beatitup.jpg" alt="beat it up Album Art" class="discography-img" loading="lazy">
                             </a>
                             <h3>Eddison - beat it up</h3>
                             <p>Original melody, co-production</p>
@@ -326,7 +335,7 @@
                         </div>
                         <div class="discography-item">
                             <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
-                                <img src="images/albumart_madaway.jpg" alt="MADAWAY Album Art" class="discography-img">
+                                <img src="images/albumart_madaway.jpg" alt="MADAWAY Album Art" class="discography-img" loading="lazy">
                             </a>
                             <h3>Tefflon - MADAWAY</h3>
                             <p>Original melody, co-production</p>
@@ -334,7 +343,7 @@
                         </div>
                         <div class="discography-item">
                             <a href="https://soundcloud.com/bigtaie/keep-it-real-prod-62serpens" target="_blank" rel="noopener noreferrer">
-                                <img src="images/albumart_keepitreal.jpg" alt="Keep It Real Album Art" class="discography-img">
+                                <img src="images/albumart_keepitreal.jpg" alt="Keep It Real Album Art" class="discography-img" loading="lazy">
                             </a>
                             <h3>Big Taie - Keep It Real</h3>
                             <p>Original MIDI, co-production</p>
@@ -343,15 +352,15 @@
                     </div>
                 </section>
 
-                <section id="gallery" class="content-card">
+                <section id="gallery" class="content-card fade-in">
                     <h2 class="section-header">Gallery</h2>
                     <div class="gallery-grid">
-                        <img src="images/img_015.jpg" alt="Studio Setup 3" class="gallery-img">
-                        <img src="images/img_017.jpg" alt="Studio Setup 5" class="gallery-img">
+                        <img src="images/img_015.jpg" alt="Studio Setup 3" class="gallery-img" loading="lazy">
+                        <img src="images/img_017.jpg" alt="Studio Setup 5" class="gallery-img" loading="lazy">
                     </div>
                 </section>
 
-                <section id="bonus" class="content-card">
+                <section id="bonus" class="content-card fade-in">
                     <h2 class="section-header">Bonus</h2>
                     <div class="bonus-grid">
                         <a href="b.html" class="bonus-item" style="display: none;">
@@ -478,6 +487,21 @@
                     link.classList.add('active');
                 }
             });
+        });
+
+        // Fade-In Animation for Content Sections
+        const contentSections = document.querySelectorAll('.content-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        contentSections.forEach(section => {
+            section.classList.add('fade-in');
+            observer.observe(section);
         });
 
         // Audio Tools Password Prompt
