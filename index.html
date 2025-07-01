@@ -92,26 +92,20 @@
             height: 100vh;
             transition: transform 0.4s ease, box-shadow 0.4s ease, background-color var(--transition-duration), border-color var(--transition-duration);
         }
-        .right-pane {
-            flex-grow: 1; 
-            padding: 40px;
-        }
-        .content-sections { 
-            display: flex; flex-direction: column; gap: 24px; 
-            max-width: 720px; margin: 0 auto;
-        }
+        .right-pane { flex-grow: 1; padding: 40px; }
+        .content-sections { display: flex; flex-direction: column; gap: 24px; max-width: 720px; margin: 0 auto; }
 
         .identity { text-align: center; }
         .profile-pic { width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 20px; border: 1px solid var(--border-color); object-fit: cover; }
         .signature { font-size: 2.8rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
         .title { font-size: 1rem; color: var(--text-secondary); margin-top: 8px; letter-spacing: 0.5px; }
-        .social-links { margin-top: 24px; text-align: center; }
+        .social-links { margin-top: 16px; text-align: center; }
         .social-icon { font-size: 1.1rem; color: #999; margin: 0 8px; transition: color var(--transition-duration) ease; }
         .social-icon:hover { color: var(--text-primary); }
 
-        .main-nav { margin-top: auto; } /* Removed padding-bottom to group with toggle */
+        .sidebar-controls { margin-top: auto; padding-top: 20px; }
         .main-nav ul { list-style: none; }
-        .main-nav a { display: block; padding: 12px; margin: 4px 0; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-weight: 400; font-size: 1.1rem; transition: all 0.3s ease; }
+        .main-nav a { display: block; padding: 10px; margin: 2px 0; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-weight: 400; font-size: 1.1rem; transition: all 0.3s ease; }
         .main-nav a:hover, .main-nav a.active { background-color: var(--nav-hover-bg); color: var(--text-primary); }
         .hamburger { display: none; }
 
@@ -132,16 +126,12 @@
 
         .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
         .discography-item { display: flex; flex-direction: column; text-align: center; }
-        /* MODIFIED: Flexbox alignment for discography items */
         .discography-item h3 {
-            font-size: .95rem; font-weight: 700; margin-bottom: 4px;
-            height: 2.8rem; /* Set fixed height for 2 lines of text */
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: .95rem; line-height: 1.4; font-weight: 700; margin-bottom: 4px;
+            min-height: 2.8em; /* Force height for 2 lines */
+            display: flex; align-items: center; justify-content: center;
         }
         .discography-item p { flex-grow: 1; font-size: .85rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 300; }
-        
         .discography-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-color); transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease; margin-bottom: 12px; }
         .discography-img:hover { transform: scale(1.05); box-shadow: 0 6px 25px var(--shadow-color); }
         .discography-item a.artist-link { font-size: .9rem; color: var(--text-primary); text-decoration: none; }
@@ -172,10 +162,10 @@
         
         .bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
         .bonus-grid-alt { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-        .bonus-item { display: block; text-decoration: none; color: var(--text-primary); background: var(--bonus-item-bg); border-radius: 8px; padding: 12px; border: 1px solid var(--border-color); transition: all var(--transition-duration) ease; }
+        .bonus-item { display: flex; flex-direction: column; text-decoration: none; color: var(--text-primary); background: var(--bonus-item-bg); border-radius: 8px; padding: 12px; border: 1px solid var(--border-color); transition: all var(--transition-duration) ease; }
         .bonus-item:hover { transform: translateY(-4px); border-color: var(--text-primary); background: var(--bonus-item-hover-bg); }
         .bonus-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
-        .bonus-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
+        .bonus-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; flex-grow: 1; }
         .bonus-item-thumbnail img { width: 100%; height: 100px; object-fit: cover; border-radius: 12px; margin-bottom: 8px; }
         button.bonus-item { font-family: var(--font-body); width: 100%; cursor: pointer; text-align: left; }
         
@@ -192,7 +182,7 @@
         .modal-arrow.left { left: -50px; }
         .modal-arrow.right { right: -50px; }
 
-        .theme-switch-wrapper { display: flex; align-items: center; justify-content: center; padding: 20px 0; }
+        .theme-switch-wrapper { display: flex; align-items: center; justify-content: center; padding-top: 20px; }
         .theme-switch { display: inline-block; height: 26px; position: relative; width: 50px; }
         .theme-switch input { display: none; }
         .slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 26px; }
@@ -207,21 +197,20 @@
                 transform: translateX(-100%);
                 z-index: 2000;
                 box-shadow: 10px 0px 40px rgba(0,0,0,0.1);
+                padding-bottom: 20px; /* Buffer for nav */
             }
             .left-pane.open { transform: translateX(0); }
             .right-pane { width: 100%; padding: 100px 16px 24px 16px; margin-left: 0; }
             .hamburger { display: block; position: fixed; top: 20px; left: 20px; z-index: 2001; font-size: 1.5rem; cursor: pointer; background: var(--bg-canvas-opaque); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
             
-            /* MODIFIED: Mobile grid fixes */
-            .discography-grid, .bonus-grid-alt {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .bonus-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .bonus-item-thumbnail img {
-                height: 80px; /* Shorter previews on mobile */
-            }
+            .modal-arrow.left { left: 5px; padding: 10px; }
+            .modal-arrow.right { right: 5px; padding: 10px; }
+            .modal-close { top: 10px; right: 10px; }
+
+            .discography-grid { grid-template-columns: repeat(2, 1fr); }
+            .bonus-grid { grid-template-columns: repeat(2, 1fr); }
+            .bonus-grid-alt { grid-template-columns: repeat(2, 1fr); }
+            .bonus-item-thumbnail img { height: 80px; }
         }
     </style>
 </head>
@@ -239,15 +228,9 @@
                     <a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
                 </div>
-                <div class="theme-switch-wrapper">
-                    <label class="theme-switch" for="theme-toggle">
-                        <input type="checkbox" id="theme-toggle" aria-label="Toggle Dark Mode">
-                        <span class="slider"></span>
-                    </label>
-                </div>
             </div>
             
-            <div class="sidebar-footer">
+            <div class="sidebar-controls">
                 <nav class="main-nav">
                     <ul>
                         <li><a href="#contact">Contact</a></li>
@@ -256,6 +239,12 @@
                         <li><a href="#bonus">Bonus</a></li>
                     </ul>
                 </nav>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="theme-toggle">
+                        <input type="checkbox" id="theme-toggle" aria-label="Toggle Dark Mode">
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
         </aside>
 
@@ -347,7 +336,7 @@
                         </a>
                         <button type="button" id="audioToolsLink" class="bonus-item">
                             <div class="bonus-item-thumbnail"><img src="images/audio_tools.webp" alt="Audio Tools Suite Preview"></div>
-                            <h4>Audio Tools Suite</h4><p>Tools for music producers (password required).</p>
+                            <h4>Audio Tools Suite</h4><p>Tools for music producers.</p>
                         </button>
                          <a href="251shells.html" class="bonus-item">
                             <div class="bonus-item-thumbnail"><img src="images/251shells.webp" alt="251shells Preview"></div>
