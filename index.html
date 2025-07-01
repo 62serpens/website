@@ -23,7 +23,7 @@
         :root {
             --font-body: 'Manrope', sans-serif;
             --font-signature: 'Manrope', sans-serif; 
-            --transition-duration: 0.5s; /* Smoother animations */
+            --transition-duration: 0.5s;
             --border-radius: 18px;
 
             /* Light Theme (Default) */
@@ -103,7 +103,6 @@
         .social-icon { font-size: 1.1rem; color: #999; margin: 0 8px; transition: color var(--transition-duration) ease-in-out; }
         .social-icon:hover { color: var(--text-primary); }
         
-        /* ADJUSTED: Pushed nav to bottom, but will be offset by pane's padding */
         .sidebar-controls {
             margin-top: auto;
             padding-top: 20px;
@@ -179,13 +178,14 @@
         
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); justify-content: center; align-items: center; opacity: 0; transition: opacity var(--transition-duration) ease-in-out; }
         .modal.active { display: flex; opacity: 1; }
-        .modal-content { display: flex; justify-content: center; align-items: center; position: relative; }
+        /* FIXED: Removed position:relative so arrows are not bound to it */
+        .modal-content { display: flex; justify-content: center; align-items: center; }
         .modal-img { max-width: 90vw; max-height: 90vh; border-radius: var(--border-radius); }
         .modal-close { position: absolute; color: white; font-size: 2rem; cursor: pointer; user-select: none; transition: color 0.3s ease-in-out; z-index: 10; }
         .modal-close:hover { color: #ccc; }
         .modal-close { top: -40px; right: 0; }
         
-        /* FIXED: Changed arrows to be solid circles for cleaner appearance */
+        /* FIXED: Arrows are now positioned relative to the viewport */
         .modal-arrow {
             position: absolute;
             color: white;
@@ -205,8 +205,9 @@
         }
         .modal-arrow:hover { background-color: rgba(0, 0, 0, 0.5); }
         .modal-arrow i { font-size: 1.2rem; }
-        .modal-arrow.left { left: -60px; }
-        .modal-arrow.right { right: -60px; }
+        /* FIXED: New desktop position for arrows */
+        .modal-arrow.left { left: 20px; }
+        .modal-arrow.right { right: 20px; }
 
         .theme-switch-wrapper { display: flex; align-items: center; justify-content: center; }
         .theme-switch { display: inline-block; height: 26px; position: relative; width: 50px; }
@@ -223,13 +224,14 @@
                 transform: translateX(-100%);
                 z-index: 2000;
                 box-shadow: 10px 0px 40px rgba(0,0,0,0.1);
-                padding-bottom: 60px; /* ADJUSTED: Increased padding to push nav up from bottom edge */
+                /* FIXED: Increased padding to ensure nav isn't cut off */
+                padding-bottom: 80px; 
             }
             .left-pane.open { transform: translateX(0); }
             .right-pane { width: 100%; padding: 100px 16px 24px 16px; margin-left: 0; }
             .hamburger { display: block; position: fixed; top: 20px; left: 20px; z-index: 2001; font-size: 1.5rem; cursor: pointer; background: var(--bg-canvas-opaque); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
             
-            /* FIXED: Repositioned new solid arrows for mobile view */
+            /* Mobile arrow positions now work correctly */
             .modal-arrow.left { left: 10px; }
             .modal-arrow.right { right: 10px; }
             .modal-close { top: 10px; right: 10px; }
@@ -401,10 +403,10 @@
 
     <div id="imageModal" class="modal">
         <span id="closeModal" class="modal-close">×</span>
+        <span id="prevArrow" class="modal-arrow left"><i class="fas fa-chevron-left"></i></span>
+        <span id="nextArrow" class="modal-arrow right"><i class="fas fa-chevron-right"></i></span>
         <div class="modal-content">
-            <span id="prevArrow" class="modal-arrow left"><i class="fas fa-chevron-left"></i></span>
             <img id="modalImage" class="modal-img" src="" alt="Expanded Image">
-            <span id="nextArrow" class="modal-arrow right"><i class="fas fa-chevron-right"></i></span>
         </div>
     </div>
     
@@ -511,15 +513,26 @@
             const closeModal = () => modal.classList.remove('active');
             
             document.getElementById('closeModal').onclick = closeModal;
-            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            // This event listener needs to target the modal arrows too now they are outside modal-content
+            modal.addEventListener('click', (e) => { 
+                if (e.target.classList.contains('modal')) {
+                    closeModal();
+                }
+            });
             
             const showImage = (offset) => {
                 currentImageIndex = (currentImageIndex + offset + galleryImages.length) % galleryImages.length;
                 modalImg.src = galleryImages[currentImageIndex].src;
             };
 
-            document.getElementById('prevArrow').onclick = () => showImage(-1);
-            document.getElementById('nextArrow').onclick = () => showImage(1);
+            document.getElementById('prevArrow').onclick = (e) => {
+                e.stopPropagation(); // prevent modal from closing
+                showImage(-1);
+            }
+            document.getElementById('nextArrow').onclick = (e) => {
+                e.stopPropagation(); // prevent modal from closing
+                showImage(1);
+            }
 
             document.addEventListener('keydown', (e) => {
                 if (modal.classList.contains('active')) {
