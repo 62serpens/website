@@ -167,10 +167,17 @@
         button.bonus-item { font-family: var(--font-body); width: 100%; cursor: pointer; text-align: left; }
         
         .site-footer { text-align: center; color: var(--text-secondary); text-shadow: none; padding: 20px 0; font-size: 0.9rem; }
-
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); justify-content: center; align-items: center; opacity: 0; transition: opacity var(--transition-duration) ease; }
+        
+        /* MODIFIED: Modal Arrow Positioning */
+        .modal { 
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); 
+            justify-content: center; align-items: center; opacity: 0; 
+            transition: opacity var(--transition-duration) ease;
+            position: relative; /* Set relative context for arrows */
+        }
         .modal.active { display: flex; opacity: 1; }
-        .modal-content { position: relative; display: flex; justify-content: center; align-items: center; }
+        .modal-content { display: flex; justify-content: center; align-items: center; } /* Removed position:relative */
         .modal-img { max-width: 90vw; max-height: 90vh; border-radius: var(--border-radius); }
         .modal-arrow, .modal-close { position: absolute; color: white; font-size: 2rem; cursor: pointer; user-select: none; transition: color 0.3s ease; }
         .modal-arrow:hover, .modal-close:hover { color: #ccc; }
@@ -193,7 +200,8 @@
             .right-pane { margin-left: 0; }
             .hamburger { display: block; position: fixed; top: 20px; left: 20px; z-index: 2001; font-size: 1.5rem; cursor: pointer; background: var(--bg-canvas-opaque); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
             .content-sections { max-width: 100%; }
-            .right-pane { padding: 80px 16px 24px 16px; }
+            /* MODIFIED: Increased top padding for mobile */
+            .right-pane { padding: 100px 16px 24px 16px; }
             .content-card { padding: 24px; }
             .section-header { font-size: 2rem; }
             .bonus-grid { grid-template-columns: repeat(2, 1fr); }
@@ -469,8 +477,8 @@
             galleryImages.forEach((img, index) => {
                 img.addEventListener('click', function() {
                     currentImageIndex = index;
-                    modal.classList.add('active');
-                    modalImg.src = this.src;
+                    modalImg.src = this.src; // Set image source first
+                    modal.classList.add('active'); // Then display the modal
                 });
             });
             
