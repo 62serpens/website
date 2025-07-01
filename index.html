@@ -99,13 +99,14 @@
         .profile-pic { width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 20px; border: 1px solid var(--border-color); object-fit: cover; }
         .signature { font-size: 2.8rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
         .title { font-size: 1rem; color: var(--text-secondary); margin-top: 8px; letter-spacing: 0.5px; }
-        .social-links { margin-top: 16px; margin-bottom: 24px; text-align: center; } /* MOVED THEME TOGGLE, ADDED MARGIN */
+        .social-links { margin-top: 16px; margin-bottom: 24px; text-align: center; }
         .social-icon { font-size: 1.1rem; color: #999; margin: 0 8px; transition: color var(--transition-duration) ease-in-out; }
         .social-icon:hover { color: var(--text-primary); }
         
-        /* ADJUSTED: Removed margin-top: auto and padding-top to bring nav up */
+        /* ADJUSTED: Pushed nav to bottom, but will be offset by pane's padding */
         .sidebar-controls {
-            margin-top: 20px; /* Spacing between theme toggle and nav */
+            margin-top: auto;
+            padding-top: 20px;
         }
         .main-nav ul { list-style: none; }
         .main-nav a { display: block; padding: 10px; margin: 2px 0; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-weight: 400; font-size: 1.1rem; transition: all var(--transition-duration) ease-in-out; }
@@ -129,13 +130,12 @@
 
         .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
         .discography-item { display: flex; flex-direction: column; text-align: center; }
-        /* FIXED: Removed flex properties to fix title alignment */
         .discography-item h3 {
             font-size: .95rem; 
             line-height: 1.4; 
             font-weight: 700; 
             margin-bottom: 4px;
-            min-height: 2.8em; /* Force height for 2 lines, now text aligns top */
+            min-height: 2.8em;
         }
         .discography-item p { font-size: .85rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 300; }
         .discography-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-color); transition: transform var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out; margin-bottom: 12px; }
@@ -181,14 +181,34 @@
         .modal.active { display: flex; opacity: 1; }
         .modal-content { display: flex; justify-content: center; align-items: center; position: relative; }
         .modal-img { max-width: 90vw; max-height: 90vh; border-radius: var(--border-radius); }
-        .modal-arrow, .modal-close { position: absolute; color: white; font-size: 2rem; cursor: pointer; user-select: none; transition: color 0.3s ease-in-out; }
-        .modal-arrow:hover, .modal-close:hover { color: #ccc; }
+        .modal-close { position: absolute; color: white; font-size: 2rem; cursor: pointer; user-select: none; transition: color 0.3s ease-in-out; z-index: 10; }
+        .modal-close:hover { color: #ccc; }
         .modal-close { top: -40px; right: 0; }
-        .modal-arrow { top: 50%; transform: translateY(-50%); padding: 16px; }
-        .modal-arrow.left { left: -50px; }
-        .modal-arrow.right { right: -50px; }
+        
+        /* FIXED: Changed arrows to be solid circles for cleaner appearance */
+        .modal-arrow {
+            position: absolute;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s ease-in-out;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-arrow:hover { background-color: rgba(0, 0, 0, 0.5); }
+        .modal-arrow i { font-size: 1.2rem; }
+        .modal-arrow.left { left: -60px; }
+        .modal-arrow.right { right: -60px; }
 
-        .theme-switch-wrapper { display: flex; align-items: center; justify-content: center; } /* Removed padding-top */
+        .theme-switch-wrapper { display: flex; align-items: center; justify-content: center; }
         .theme-switch { display: inline-block; height: 26px; position: relative; width: 50px; }
         .theme-switch input { display: none; }
         .slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 26px; }
@@ -203,14 +223,15 @@
                 transform: translateX(-100%);
                 z-index: 2000;
                 box-shadow: 10px 0px 40px rgba(0,0,0,0.1);
-                padding-bottom: 20px; /* Buffer for nav */
+                padding-bottom: 60px; /* ADJUSTED: Increased padding to push nav up from bottom edge */
             }
             .left-pane.open { transform: translateX(0); }
             .right-pane { width: 100%; padding: 100px 16px 24px 16px; margin-left: 0; }
             .hamburger { display: block; position: fixed; top: 20px; left: 20px; z-index: 2001; font-size: 1.5rem; cursor: pointer; background: var(--bg-canvas-opaque); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
             
-            .modal-arrow.left { left: 5px; padding: 10px; }
-            .modal-arrow.right { right: 5px; padding: 10px; }
+            /* FIXED: Repositioned new solid arrows for mobile view */
+            .modal-arrow.left { left: 10px; }
+            .modal-arrow.right { right: 10px; }
             .modal-close { top: 10px; right: 10px; }
 
             .discography-grid { grid-template-columns: repeat(2, 1fr); }
