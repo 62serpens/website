@@ -28,108 +28,7 @@
 
             /* Light Theme (Default) */
             --text-primary: #222222;
-            --text-secondary: #333333;
-            --bg-body: #EAEAEA;
-            --bg-canvas-opaque: #F8F8F8;
-            --bg-glass: rgba(255, 255, 255, 0.45);
-            --border-color: rgba(200, 200, 200, 0.4);
-            --form-bg: rgba(255, 255, 255, 0.6);
-            --form-focus-bg: #fff;
-            --button-text-color: #fff;
-            --nav-hover-bg: rgba(0,0,0,0.04);
-            --shadow-color: rgba(0, 0, 0, 0.08);
-            --bonus-item-bg: rgba(255, 255, 255, 0.3);
-            --bonus-item-hover-bg: rgba(255, 255, 255, 0.5);
-            --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333333'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
-            --image-bg-url: url('https://source.unsplash.com/1920x1080/?misty,forest,tasmania');
-        }
-
-        [data-theme="dark"] {
-            /* Dark Theme */
-            --text-primary: #e5e5e5;
-            --text-secondary: #a0a0a0;
-            --bg-body: #121212;
-            --bg-canvas-opaque: #181818;
-            --bg-glass: rgba(35, 35, 35, 0.5);
-            --border-color: rgba(255, 255, 255, 0.15);
-            --form-bg: rgba(0, 0, 0, 0.2);
-            --form-focus-bg: rgba(0,0,0,0.3);
-            --button-text-color: #000;
-            --nav-hover-bg: rgba(255,255,255,0.08);
-            --shadow-color: rgba(0, 0, 0, 0.2);
-            --bonus-item-bg: rgba(0, 0, 0, 0.15);
-            --bonus-item-hover-bg: rgba(0, 0, 0, 0.3);
-            --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a0a0a0'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
-            --image-bg-url: url('https://source.unsplash.com/1920x1080/?misty,forest,night');
-        }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: var(--font-body);
-            font-weight: 400;
-            background-color: var(--bg-body);
-            color: var(--text-primary);
-            background-image: var(--image-bg-url);
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-            transition: background-color var(--transition-duration), color var(--transition-duration);
-        }
-        ::selection { background: rgba(180, 220, 255, 0.7); color: #000; }
-
-Unfortunately, I cannot assist further because the input was cut off. The provided HTML code snippet is incomplete, and I need the full context of the HTML file to accurately implement the requested changes. Specifically, I need the complete `<body>` section and the closing tags to ensure all elements (e.g., hamburger button, navigation, and JavaScript) are correctly updated.
-
-However, I can confirm the specific changes you requested and how they will be applied based on the previous code you provided:
-
-1. **Hamburger Icon Color**:
-   - The hamburger icon (`<i class="fas fa-bars"></i>`) inside the `<button class="hamburger">` will have its color changed from the default blue (likely MOre likely, this is a JavaScript issue. Please provide the complete HTML code or clarify the JavaScript code controlling the hamburger icon's appearance so I can implement the color change correctly. For now, I’ll assume it’s styled via CSS and provide a rule to set the icon color to `--text-primary` for theme-adaptive black (`#222222`) in light mode and white (`#e5e5e5`) in dark mode.
-   - **CSS Addition** (to be added to the `<style>` section):
-     ```css
-     .hamburger i {
-         color: var(--text-primary);
-     }
-     ```
-
-2. **Contact Button Scroll to Top**:
-   - The navigation link for "Contact" in the `<nav class="main-nav">` section will be updated to `<a href="#home">Contact</a>`. The existing JavaScript smooth scroll logic already handles scrolling to the `#home` section, so no JavaScript changes are needed.
-
-Please provide the full HTML code or the relevant JavaScript/CSS sections controlling the hamburger icon’s appearance, and I’ll generate the complete updated HTML file wrapped in an `<xaiArtifact>` tag. Alternatively, confirm if the hamburger icon’s color is controlled purely by CSS (as assumed) or if there’s JavaScript dynamically setting its color. This will ensure the changes are applied correctly without breaking existing functionality.
-
-Once you provide the complete code or clarification, I can deliver the exact HTML with your requested changes. For now, here’s a partial artifact with the specific updates, assuming the hamburger color is CSS-driven:
-
-<xaiArtifact artifact_id="45a544b1-eb0c-404a-a2a7-76b897a6b984" artifact_version_id="560eb6b3-6045-400f-b562-a9609b0e52dc" title="index.html" contentType="text/html">
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="62serpens - Music Producer">
-    <meta name="keywords" content="music production, music producer, sound design, 62serpens, mixing, engineering, manrope, liquid glass">
-    <meta name="author" content="62serpens">
-    <meta name="theme-color" content="#F4F4F4" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#101010" media="(prefers-color-scheme: dark)">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>62serpens</title>
-    
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FFFFFF'%3E%3C/rect%3E%3Ctext x='50' y='50' font-family='-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif' font-size='50' font-weight='600' fill='%231a1a1a' text-anchor='middle' dy='.3em'%3E62%3C/text%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <style>
-        :root {
-            --font-body: 'Manrope', sans-serif;
-            --font-signature: 'Manrope', sans-serif; 
-            --transition-duration: 0.5s;
-            --border-radius: 18px;
-
-            /* Light Theme (Default) */
-            --text-primary: #222222;
-            --text-secondary: #333333;
+            --text-secondary: #333333; /* Updated for better contrast */
             --bg-body: #EAEAEA;
             --bg-canvas-opaque: #F8F8F8;
             --bg-glass: rgba(255, 255, 255, 0.45);
@@ -212,7 +111,6 @@ Once you provide the complete code or clarification, I can deliver the exact HTM
         .main-nav a { display: block; padding: 10px; margin: 2px 0; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-weight: 400; font-size: 1.1rem; transition: all var(--transition-duration) ease-in-out; }
         .main-nav a:hover, .main-nav a.active { background-color: var(--nav-hover-bg); color: var(--text-primary); }
         .hamburger { display: none; }
-        .hamburger i { color: var(--text-primary); }
 
         .content-card {
             background: var(--bg-glass);
@@ -374,7 +272,7 @@ Once you provide the complete code or clarification, I can deliver the exact HTM
             <div class="sidebar-controls">
                 <nav class="main-nav">
                     <ul>
-                        <li><a href="#home">Contact</a></li>
+                        <li><a href="#contact">Contact</a></li>
                         <li><a href="#discography">Discography</a></li>
                         <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#bonus">Bonus</a></li>
@@ -519,7 +417,7 @@ Once you provide the complete code or clarification, I can deliver the exact HTM
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         
-        // Clean facebook/instagram tracking parameters from URL
+        // ADDED: Clean facebook/instagram tracking parameters from URL
         if (window.location.search && window.location.search.includes('fbclid')) {
             const cleanUrl = window.location.pathname + window.location.hash;
             history.replaceState(null, document.title, cleanUrl);
