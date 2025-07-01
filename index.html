@@ -163,7 +163,6 @@
         .bonus-item:hover { transform: translateY(-4px); border-color: var(--text-primary); background: var(--bonus-item-hover-bg); }
         .bonus-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
         .bonus-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
-        /* THIS RULE WAS ACCIDENTALLY DELETED. IT IS NOW RESTORED. */
         .bonus-item-thumbnail img { width: 100%; height: 100px; object-fit: cover; border-radius: 6px; margin-bottom: 8px; }
         button.bonus-item { font-family: var(--font-body); width: 100%; cursor: pointer; text-align: left; }
         
@@ -205,6 +204,10 @@
             .right-pane { width: 100%; padding: 100px 16px 24px 16px; margin-left: 0; }
             .hamburger { display: block; position: fixed; top: 20px; left: 20px; z-index: 2001; font-size: 1.5rem; cursor: pointer; background: var(--bg-canvas-opaque); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
             .modal-arrow { display: none; }
+            /* FIXED: Explicit 2-column grid for both sections on mobile */
+            .bonus-grid, .discography-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
@@ -378,7 +381,7 @@
         document.getElementById('year').textContent = new Date().getFullYear();
         const leftPane = document.querySelector('.left-pane');
         const hamburger = document.querySelector('.hamburger');
-        const sections = document.querySelectorAll('.right-pane section');
+        const sections = document.querySelectorAll('main section');
         const navLinks = document.querySelectorAll('.main-nav a');
 
         // THEME TOGGLE LOGIC
