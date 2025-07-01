@@ -101,7 +101,7 @@
             max-width: 720px; margin: 0 auto;
         }
 
-        .identity { text-align: center; margin-bottom: 40px; }
+        .identity { text-align: center; }
         .profile-pic { width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 20px; border: 1px solid var(--border-color); object-fit: cover; }
         .signature { font-size: 2.8rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
         .title { font-size: 1rem; color: var(--text-secondary); margin-top: 8px; letter-spacing: 0.5px; }
@@ -109,7 +109,7 @@
         .social-icon { font-size: 1.1rem; color: #999; margin: 0 8px; transition: color var(--transition-duration) ease; }
         .social-icon:hover { color: var(--text-primary); }
 
-        .main-nav { margin-top: auto; padding-bottom: 20px;}
+        .main-nav { margin-top: auto; } /* Removed padding-bottom to group with toggle */
         .main-nav ul { list-style: none; }
         .main-nav a { display: block; padding: 12px; margin: 4px 0; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-weight: 400; font-size: 1.1rem; transition: all 0.3s ease; }
         .main-nav a:hover, .main-nav a.active { background-color: var(--nav-hover-bg); color: var(--text-primary); }
@@ -131,14 +131,19 @@
         .opening-statement a { color: var(--text-primary); }
 
         .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-        /* MODIFIED: Flexbox alignment for discography items */
         .discography-item { display: flex; flex-direction: column; text-align: center; }
-        .discography-item p { flex-grow: 1; } /* This makes the description grow to fill space */
-
+        /* MODIFIED: Flexbox alignment for discography items */
+        .discography-item h3 {
+            font-size: .95rem; font-weight: 700; margin-bottom: 4px;
+            height: 2.8rem; /* Set fixed height for 2 lines of text */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .discography-item p { flex-grow: 1; font-size: .85rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 300; }
+        
         .discography-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-color); transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease; margin-bottom: 12px; }
         .discography-img:hover { transform: scale(1.05); box-shadow: 0 6px 25px var(--shadow-color); }
-        .discography-item h3 { font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
-        .discography-item p { font-size: .85rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 300; }
         .discography-item a.artist-link { font-size: .9rem; color: var(--text-primary); text-decoration: none; }
         .discography-item a.artist-link:hover { text-decoration: underline; }
         
@@ -167,26 +172,16 @@
         
         .bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
         .bonus-grid-alt { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-
         .bonus-item { display: block; text-decoration: none; color: var(--text-primary); background: var(--bonus-item-bg); border-radius: 8px; padding: 12px; border: 1px solid var(--border-color); transition: all var(--transition-duration) ease; }
         .bonus-item:hover { transform: translateY(-4px); border-color: var(--text-primary); background: var(--bonus-item-hover-bg); }
         .bonus-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
         .bonus-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
-        .bonus-item-thumbnail img { 
-            width: 100%; height: 100px; object-fit: cover; 
-            border-radius: 12px; 
-            margin-bottom: 8px; 
-        }
+        .bonus-item-thumbnail img { width: 100%; height: 100px; object-fit: cover; border-radius: 12px; margin-bottom: 8px; }
         button.bonus-item { font-family: var(--font-body); width: 100%; cursor: pointer; text-align: left; }
         
         .site-footer { text-align: center; color: var(--text-secondary); text-shadow: none; padding: 20px 0; font-size: 0.9rem; margin-top: 24px; }
         
-        .modal { 
-            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; 
-            background-color: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); 
-            justify-content: center; align-items: center; opacity: 0; 
-            transition: opacity var(--transition-duration) ease;
-        }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); justify-content: center; align-items: center; opacity: 0; transition: opacity var(--transition-duration) ease; }
         .modal.active { display: flex; opacity: 1; }
         .modal-content { display: flex; justify-content: center; align-items: center; position: relative; }
         .modal-img { max-width: 90vw; max-height: 90vh; border-radius: var(--border-radius); }
@@ -197,7 +192,7 @@
         .modal-arrow.left { left: -50px; }
         .modal-arrow.right { right: -50px; }
 
-        .theme-switch-wrapper { display: flex; align-items: center; justify-content: center; margin-top: 24px; }
+        .theme-switch-wrapper { display: flex; align-items: center; justify-content: center; padding: 20px 0; }
         .theme-switch { display: inline-block; height: 26px; position: relative; width: 50px; }
         .theme-switch input { display: none; }
         .slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 26px; }
@@ -221,8 +216,11 @@
             .discography-grid, .bonus-grid-alt {
                 grid-template-columns: repeat(2, 1fr);
             }
-            #bonus .bonus-grid:first-of-type {
-                grid-template-columns: repeat(3, 1fr);
+            .bonus-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .bonus-item-thumbnail img {
+                height: 80px; /* Shorter previews on mobile */
             }
         }
     </style>
@@ -249,14 +247,16 @@
                 </div>
             </div>
             
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#discography">Discography</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#bonus">Bonus</a></li>
-                </ul>
-            </nav>
+            <div class="sidebar-footer">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#discography">Discography</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#bonus">Bonus</a></li>
+                    </ul>
+                </nav>
+            </div>
         </aside>
 
         <div class="hamburger">
@@ -382,10 +382,6 @@
             </div>
         </main>
     </div>
-
-    <form name="contact" data-netlify="true" hidden>
-        <input type="text" name="name" /><input type="email" name="email" /><input type="text" name="social-links" /><select name="category"></select><textarea name="message"></textarea>
-    </form>
 
     <div id="imageModal" class="modal">
         <span id="closeModal" class="modal-close">×</span>
