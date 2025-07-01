@@ -28,7 +28,7 @@
 
             /* Light Theme (Default) */
             --text-primary: #222222;
-            --text-secondary: #333333; /* Updated for better contrast */
+            --text-secondary: #333333;
             --bg-body: #EAEAEA;
             --bg-canvas-opaque: #F8F8F8;
             --bg-glass: rgba(255, 255, 255, 0.45);
@@ -234,7 +234,23 @@
             }
             .left-pane.open { transform: translateX(0); }
             .right-pane { width: 100%; padding: 100px 16px 24px 16px; margin-left: 0; }
-            .hamburger { display: block; position: fixed; top: 20px; left: 20px; z-index: 2001; font-size: 1.5rem; cursor: pointer; background: var(--bg-canvas-opaque); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
+            .hamburger {
+                display: block;
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                z-index: 2001;
+                font-size: 1.5rem;
+                cursor: pointer;
+                background: var(--bg-glass);
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid var(--border-color);
+            }
             
             .modal-arrow.left { left: 10px; }
             .modal-arrow.right { right: 10px; }
@@ -461,10 +477,15 @@
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const topPos = targetElement.getBoundingClientRect().top + window.scrollY - 40;
-                    window.scrollTo({ top: topPos, behavior: 'smooth' });
+                if (targetId === '#contact') {
+                    // Scroll to top of page for contact link
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const topPos = targetElement.getBoundingClientRect().top + window.scrollY - 40;
+                        window.scrollTo({ top: topPos, behavior: 'smooth' });
+                    }
                 }
                 if (leftPane.classList.contains('open')) {
                     leftPane.classList.remove('open');
