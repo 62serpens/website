@@ -131,7 +131,10 @@
         .opening-statement a { color: var(--text-primary); }
 
         .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-        .discography-item { text-align: center; }
+        /* MODIFIED: Flexbox alignment for discography items */
+        .discography-item { display: flex; flex-direction: column; text-align: center; }
+        .discography-item p { flex-grow: 1; } /* This makes the description grow to fill space */
+
         .discography-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-color); transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease; margin-bottom: 12px; }
         .discography-img:hover { transform: scale(1.05); box-shadow: 0 6px 25px var(--shadow-color); }
         .discography-item h3 { font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
@@ -163,7 +166,6 @@
         .gallery-img:hover { transform: scale(1.03); opacity: 0.9; }
         
         .bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-        /* MODIFIED: New grid class for alternate layout */
         .bonus-grid-alt { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 
         .bonus-item { display: block; text-decoration: none; color: var(--text-primary); background: var(--bonus-item-bg); border-radius: 8px; padding: 12px; border: 1px solid var(--border-color); transition: all var(--transition-duration) ease; }
@@ -172,7 +174,6 @@
         .bonus-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
         .bonus-item-thumbnail img { 
             width: 100%; height: 100px; object-fit: cover; 
-            /* MODIFIED: Softer corners */
             border-radius: 12px; 
             margin-bottom: 8px; 
         }
@@ -215,9 +216,13 @@
             .left-pane.open { transform: translateX(0); }
             .right-pane { width: 100%; padding: 100px 16px 24px 16px; margin-left: 0; }
             .hamburger { display: block; position: fixed; top: 20px; left: 20px; z-index: 2001; font-size: 1.5rem; cursor: pointer; background: var(--bg-canvas-opaque); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
-            .modal-arrow { display: none; }
-            .bonus-grid, .discography-grid {
+            
+            /* MODIFIED: Mobile grid fixes */
+            .discography-grid, .bonus-grid-alt {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            #bonus .bonus-grid:first-of-type {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
     </style>
@@ -236,6 +241,12 @@
                     <a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
                 </div>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="theme-toggle">
+                        <input type="checkbox" id="theme-toggle" aria-label="Toggle Dark Mode">
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
             
             <nav class="main-nav">
@@ -246,12 +257,6 @@
                     <li><a href="#bonus">Bonus</a></li>
                 </ul>
             </nav>
-            <div class="theme-switch-wrapper">
-                <label class="theme-switch" for="theme-toggle">
-                    <input type="checkbox" id="theme-toggle" aria-label="Toggle Dark Mode">
-                    <span class="slider"></span>
-                </label>
-            </div>
         </aside>
 
         <div class="hamburger">
