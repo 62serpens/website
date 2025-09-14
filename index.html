@@ -1,1171 +1,548 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Professional music production services by 62serpens, specializing in instrumental leasing, creative production, recording, tutoring, and custom websites.">
-    <meta name="keywords" content="music production, instrumental leasing, recording, music producer, FL Studio tutoring, website design, 62serpens">
+    <meta name="description" content="62serpens - Music Producer">
+    <meta name="keywords" content="music production, music producer, sound design, 62serpens, mixing, engineering, manrope, liquid glass">
     <meta name="author" content="62serpens">
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#F4F4F4" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#101010" media="(prefers-color-scheme: dark)">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>62serpens.com</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height Grado de la imagen: grande height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000000'/%3E%3Cpath d='M16 6 C10.477 6 6 10.477 6 16 S 10.477 26 16 26 S 26 21.523 26 16 S 21.523 6 16 6 Z M16 24 C 11.582 24 8 20.418 8 16 S 11.582 8 16 8 S 24 11.582 24 16 S 20.418 24 16 24 Z' fill='%23bf00ff'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%23e066ff'/%3E%3C/svg%3E">
+    <title>62serpens</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FFFFFF'%3E%3C/rect%3E%3Ctext x='50' y='50' font-family='-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif' font-size='50' font-weight='600' fill='%231a1a1a' text-anchor='middle' dy='.3em'%3E62%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-primary: #000000;
-            --bg-secondary: #000000;
-            --bg-tertiary: #0a0015;
-            --text-primary: #f4f4f5;
-            --text-secondary: #E0E0E4;
-            --accent-primary: #bf00ff;
-            --accent-secondary: #e066ff;
-            --accent-tertiary: #150022;
-            --border-color: #3f3f46;
-            --shadow-color-light: rgba(255, 255, 255, 0.08);
-            --shadow-color-dark: rgba(0, 0, 0, 0.25);
-            --shadow-color-accent: rgba(191, 0, 255, 0.2);
-            --font-body: 'Inter', sans-serif;
-            --font-heading: 'Bebas Neue', sans-serif;
-            --transition-duration: 0.3s;
-            --border-radius-sm: 8px;
-            --border-radius-md: 12px;
-            --border-radius-btn: 10px;
+            --font-body: 'Manrope', sans-serif;
+            --font-signature: 'Manrope', sans-serif; 
+            --transition-duration: 0.5s;
+            --border-radius: 18px;
+
+            /* Light Theme (Default) */
+            --text-primary: #222222;
+            --text-secondary: #5a5a5a;
+            --bg-body: #EAEAEA;
+            --bg-canvas-opaque: #F8F8F8;
+            --bg-glass: rgba(255, 255, 255, 0.45);
+            --border-color: rgba(200, 200, 200, 0.4);
+            --form-bg: rgba(255, 255, 255, 0.6);
+            --form-focus-bg: #fff;
+            --button-text-color: #fff;
+            --nav-hover-bg: rgba(0,0,0,0.04);
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --bonus-item-bg: rgba(255, 255, 255, 0.3);
+            --bonus-item-hover-bg: rgba(255, 255, 255, 0.5);
+            --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235a5a5a'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+            --image-bg-url: url('https://source.unsplash.com/1920x1080/?misty,forest,tasmania');
         }
-    /* Reset and force background */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
 
-    html {
-        height: 100%;
-        background: linear-gradient(160deg, #0a0015 0%, #150022 50%, #0a0015 100%) !important;
-        background-color: #0a0015 !important; /* Fallback */
-        background-attachment: fixed !important;
-    }
-
-    body {
-        height: 100%;
-        background: linear-gradient(160deg, #0a0015 0%, #150022 50%, #0a0015 100%) !important;
-        background-color: #0a0015 !important; /* Fallback */
-        background-attachment: fixed !important;
-        font-family: var(--font-body);
-        font-size: 16px;
-        color: var(--text-primary);
-        padding: 12px max(calc(8px + env(safe-area-inset-left)), 12px) 12px max(calc(8px + env(safe-area-inset-right)), 12px);
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-rendering: optimizeLegibility;
-        scroll-behavior: smooth;
-    }
-
-    /* Ensure no Tailwind interference */
-    body:not([class*="bg-"]) {
-        background: linear-gradient(160deg, #0a0015 0%, #150022 50%, #0a0015 100%) !important;
-    }
-
-    a, button {
-        cursor: pointer;
-        outline: none;
-        color: inherit;
-        text-decoration: none;
-        transition: all var(--transition-duration) ease-in-out;
-    }
-
-    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-        outline: 2px solid var(--accent-secondary);
-        outline-offset: 2px;
-    }
-
-    .container {
-        max-width: 720px;
-        margin: 0 auto;
-        padding: 0 max(calc(8px + env(safe-area-inset-left)), 12px) 0 max(calc(8px + env(safe-area-inset-right)), 12px);
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        min-height: 100vh;
-    }
-
-    section {
-        padding-top: 64px;
-    }
-
-    .section-header {
-        font-family: var(--font-heading);
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--accent-secondary);
-        text-align: center;
-        margin: 0 auto 1rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        padding: 8px 16px 4px;
-        background: transparent;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6), 0 0 6px var(--shadow-color-accent);
-        border-bottom: 2px solid var(--text-primary);
-        max-width: 200px;
-    }
-
-    #bonus .section-header {
-        font-size: 1.75rem;
-        white-space: nowrap;
-    }
-
-    .card {
-        background: var(--bg-secondary);
-        padding: 1rem;
-        border-radius: var(--border-radius-md);
-        border: 1px solid var(--border-color);
-        box-shadow: 0 6px 16px var(--shadow-color-dark), inset 0 1px 0 var(--shadow-color-light), 0 0 10px var(--shadow-color-accent);
-    }
-
-    .service-card {
-        background: var(--bg-secondary);
-        padding: 12px 8px;
-        border-radius: var(--border-radius-md);
-        border: 1px solid var(--border-color);
-        box-shadow: 0 6px 16px var(--shadow-color-dark), inset 0 1px 0 var(--shadow-color-light);
-        min-height: 220px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        text-align: center;
-        transition: box-shadow var(--transition-duration) ease-in-out;
-    }
-
-    .service-card:hover {
-        box-shadow: 0 10px 28px var(--shadow-color-dark), 0 0 16px var(--shadow-color-accent);
-    }
-
-    .service-card h3 {
-        min-height: 48px;
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: var(--accent-secondary);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 0 0 8px;
-        line-height: 1.3;
-    }
-
-    .service-card p {
-        min-height: 56px;
-        color: var(--text-secondary);
-        font-size: 0.8rem;
-        line-height: 1.4;
-        margin: 0 0 8px;
-        headers: 1;
-    }
-
-    .service-card .link-button {
-        margin-top: auto;
-    }
-
-    .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        gap: 12px;
-    }
-
-    .nav-container {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-    }
-
-    .nav-row {
-        display: flex;
-        justify-content: center;
-        gap: 6px;
-    }
-
-    .nav-link {
-        font-family: var(--font-heading);
-        font-size: 1rem;
-        color: var(--text-primary);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        padding: 4px 10px;
-        border: 2px solid var(--border-color);
-        border-radius: var(--border-radius-sm);
-        transition: all var(--transition-duration) ease-in-out;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        line-height: 1;
-    }
-
-    .nav-link:hover {
-        color: var(--accent-secondary);
-        background: var(--bg-tertiary);
-        border-color: var(--accent-secondary);
-        transform: scale(1.05);
-        box-shadow: 0 0 16px var(--shadow-color-accent);
-    }
-
-    .nav-link.tapped {
-        color: var(--accent-secondary);
-        background: var(--bg-tertiary);
-        border-color: var(--accent-secondary);
-        transform: scale(1.05);
-        box-shadow: 0 0 16px var(--shadow-color-accent);
-    }
-
-    /* Disable hover on touch devices */
-    @media (pointer: coarse) {
-        .nav-link:hover {
-            color: var(--text-primary);
-            background: transparent;
-            border-color: var(--border-color);
-            transform: none;
-            box-shadow: none;
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --text-primary: #e5e5e5;
+            --text-secondary: #a0a0a0;
+            --bg-body: #121212;
+            --bg-canvas-opaque: #181818;
+            --bg-glass: rgba(35, 35, 35, 0.5);
+            --border-color: rgba(255, 255, 255, 0.15);
+            --form-bg: rgba(0, 0, 0, 0.2);
+            --form-focus-bg: rgba(0,0,0,0.3);
+            --button-text-color: #000;
+            --nav-hover-bg: rgba(255,255,255,0.08);
+            --shadow-color: rgba(0, 0, 0, 0.2);
+            --bonus-item-bg: rgba(0, 0, 0, 0.15);
+            --bonus-item-hover-bg: rgba(0, 0, 0, 0.3);
+            --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a0a0a0'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+            --image-bg-url: url('https://source.unsplash.com/1920x1080/?misty,forest,night');
         }
-    }
 
-    .link-button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 36px;
-        padding: 6px 8px;
-        font-size: 0.78rem;
-        font-weight: 500;
-        background: linear-gradient(145deg, var(--bg-secondary), var(--bg-tertiary));
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius-btn);
-        box-shadow: 0 4px 12px var(--shadow-color-dark), inset 0 1px 1px var(--shadow-color-light);
-        transition: all var(--transition-duration) ease-in-out;
-        white-space: nowrap;
-    }
-
-    .link-button:hover {
-        background: var(--bg-tertiary);
-        border-color: var(--accent-secondary);
-        box-shadow: 0 12px 28px var(--shadow-color-dark), 0 0 16px var(--shadow-color-accent);
-    }
-
-    /* Specific hover effect for buttons */
-    .beat-store-button:hover, .service-contact-button:hover, .form-submit-button:hover {
-        transform: translateY(-2px);
-    }
-
-    .link-button i.icon {
-        margin-right: 8px;
-        font-size: 0.9rem;
-        color: var(--text-primary);
-    }
-
-    .social-icons {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-        margin-top: 8px;
-    }
-
-    .social-icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: var(--bg-tertiary);
-        border-radius: 50%;
-        border: 1px solid var(--border-color);
-        font-size: 1.4rem;
-        line-height: 1;
-        box-sizing: border-box;
-        transition: all var(--transition-duration) ease-in-out;
-    }
-
-    .social-icon:hover {
-        transform: scale(1.1) rotate(5deg);
-        border-color: var(--accent-secondary);
-        box-shadow: 0 0 16px var(--shadow-color-accent);
-    }
-
-    .social-icon i {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    @media (max-width: 600px) {
-        .social-icon {
-            width: 36px;
-            height: 36px;
-            font-size: 1.2rem;
-        }
-    }
-
-    .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        justify-items: center;
-    }
-
-    .gallery-img {
-        width: 160px;
-        height: 160px;
-        object-fit: cover;
-        border: 2px solid var(--border-color);
-        border-radius: var(--border-radius-sm);
-        transition: transform var(--transition-duration) ease-in-out, border-color var(--transition-duration) ease-in-out;
-    }
-
-    .gallery-img:hover {
-        transform: scale(1.05);
-        border-color: var(--accent-secondary);
-        box-shadow: 0 0 12px var(--shadow-color-accent);
-    }
-
-    .discography-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .discography-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .discography-img {
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-        border: 2px solid var(--border-color);
-        border-radius: var(--border-radius-sm);
-        transition: transform var(--transition-duration) ease-in-out, border-color var(--transition-duration) ease-in-out;
-        margin: 0 auto 8px;
-    }
-
-    .discography-img:hover {
-        transform: scale(1.03);
-        border-color: var(--accent-secondary);
-        box-shadow: 0 0 12px var(--shadow-color-accent);
-    }
-
-    .discography-item h3 {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--accent-secondary);
-        margin: 0 0 4px;
-    }
-
-    .discography-item p {
-        font-size: 0.75rem;
-        color: var(--text-secondary);
-        margin: 0 0 4px;
-    }
-
-    .discography-item a {
-        font-size: 0.75rem;
-    }
-
-    .equalizer {
-        width: 48px;
-        height: 16px;
-        display: flex;
-        justify-content: space-between;
-        margin: 8px auto;
-    }
-
-    .equalizer-bar {
-        width: 6px;
-        background: var(--accent-secondary);
-        border-radius: 2px;
-        animation: equalize 1.2s infinite ease-in-out alternate;
-        will-change: height, opacity; /* Optimize for mobile performance */
-    }
-
-    .equalizer-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
-    .equalizer-bar:nth-child(2) { height: 14px; animation-delay: 0.2s; }
-    .equalizer-bar:nth-child(3) { height: 10px; animation-delay: 0.4s; }
-
-    @keyframes equalize {
-        0% { height: 4px; opacity: 0.5; }
-        100% { height: 100%; opacity: 0.8; }
-    }
-
-    .profile-pic-wrapper {
-        width: 100px;
-        height: 100px;
-        margin: 0 auto;
-    }
-
-    .profile-pic {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid var(--border-color);
-        box-shadow: 0 4px 12px var(--shadow-color-dark);
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.95);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        opacity: 0;
-        transition: opacity var(--transition-duration) ease-in-out;
-    }
-
-    .modal.active {
-        display: flex;
-        opacity: 1;
-    }
-
-    .modal-content {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-    }
-
-    .modal-img {
-        max-width: 90%;
-        max-height: 90vh;
-        object-fit: contain;
-        border-radius: var(--border-radius-sm);
-        border: 2px solid var(--border-color);
-        box-shadow: 0 0 16px var(--shadow-color-accent);
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        transition: opacity 0.2s ease-in-out;
-    }
-
-    .modal-close {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        color: var(--text-primary);
-        font-size: 2rem;
-        cursor: pointer;
-        transition: color var(--transition-duration) ease-in-out;
-        pointer-events: auto;
-        z-index: 1001;
-    }
-
-    .modal-close:hover {
-        color: var(--accent-secondary);
-    }
-
-    .modal-arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--text-primary);
-        font-size: 2rem;
-        cursor: pointer;
-        padding: 10px;
-        transition: color var(--transition-duration) ease-in-out;
-    }
-
-    .modal-arrow:hover {
-        color: var(--accent-secondary);
-    }
-
-    .modal-arrow.left {
-        left: 10px;
-    }
-
-    .modal-arrow.right {
-        right: 10px;
-    }
-
-    @media (max-width: 600px) {
-        .modal-arrow {
-            font-size: 1.5rem;
-            padding: 5px;
-        }
-        .modal-arrow.left {
-            left: 5px;
-        }
-        .modal-arrow.right {
-            right: 5px;
-        }
-    }
-
-    .fa-store, .fa-music, .fa-microphone, .fa-chalkboard-teacher, .fa-laptop-code {
-        color: var(--text-primary);
-    }
-    .fa-instagram { color: #e1306c; }
-    .fa-spotify { color: #1db954; }
-    .fa-soundcloud { color: #ff5500; }
-    .fa-youtube { color: #ff0000; }
-    .fa-discord { color: #5865f2; }
-
-    .bonus-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .bonus-item {
-        background: var(--bg-secondary);
-        padding: 8px;
-        border-radius: var(--border-radius-md);
-        border: 1px solid var(--border-color);
-        box-shadow: 0 6px 16px var(--shadow-color-dark);
-        transition: all var(--transition-duration) ease-in-out;
-    }
-
-    .bonus-item:hover {
-        transform: translateY(-4px);
-        border-color: var(--accent-secondary);
-        box-shadow: 0 10px 20px var(--shadow-color-dark), 0 0 16px var(--shadow-color-accent);
-    }
-
-    .bonus-item-thumbnail img {
-        width: 100%;
-        height: 100px;
-        object-fit: cover;
-        border-radius: var(--border-radius-sm);
-    }
-
-    .bonus-item-info h4 {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: var(--text-primary);
-    }
-
-    .bonus-item-info p {
-        font-size: 0.75rem;
-        color: var(--text-secondary);
-    }
-
-    nav {
-        backdrop-filter: blur(12px);
-        background: rgba(10, 10, 12, 0.9);
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius-sm);
-    }
-
-    footer {
-        margin-bottom: 24px;
-        color: var(--text-secondary);
-    }
-
-    /* Form Styles */
-    .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        padding: 16px;
-    }
-
-    .contact-form input,
-    .contact-form select,
-    .contact-form textarea {
-        width: 100%;
-        background: var(--bg-tertiary);
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius-sm);
-        padding: 10px;
-        color: var(--text-primary);
-        font-size: 0.9rem;
-        font-family: var(--font-body);
-        transition: border-color var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out;
-    }
-
-    .contact-form select {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        background: var(--bg-tertiary) url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA1NiAxNiI+PHBhdGggZmlsbD0iI2UwZTBlNCIgZD0iTTggMTFMMyA2aDEwbC01IDV6Ii8+PC9zdmc+") no-repeat right 10px center;
-        background-size: 12px;
-    }
-
-    .contact-form input::placeholder,
-    .contact-form textarea::placeholder {
-        color: var(--text-secondary);
-        opacity: 0.6;
-    }
-
-    .contact-form input:hover,
-    .contact-form select:hover,
-    .contact-form textarea:hover {
-        border-color: var(--accent-secondary);
-    }
-
-    .contact-form textarea {
-        min-height: 120px;
-        resize: vertical;
-    }
-
-    .form-submit-button {
-        background: linear-gradient(145deg, var(--bg-secondary), var(--bg-tertiary));
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius-btn);
-        padding: 10px;
-        color: var(--text-primary);
-        font-size: 0.78rem;
-        font-weight: 500;
-        font-family: var(--font-body);
-        text-transform: uppercase;
-        box-shadow: 0 4px 12px var(--shadow-color-dark), inset 0 1px 1px var(--shadow-color-light);
-        transition: all var(--transition-duration) ease-in-out;
-    }
-
-    .form-submit-button:hover {
-        background: var(--bg-tertiary);
-        border-color: var(--accent-secondary);
-        box-shadow: 0 12px 28px var(--shadow-color-dark), 0 0 16px var(--shadow-color-accent);
-    }
-
-    @media (max-width: 600px) {
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
-            font-size: 14px;
-            padding: 8px max(calc(8px + env(safe-area-inset-left)), 8px) 8px max(calc(8px + env(safe-area-inset-right)), 8px);
+            font-family: var(--font-body);
+            font-weight: 400;
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            background-image: var(--image-bg-url);
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            transition: background-color var(--transition-duration), color var(--transition-duration);
         }
-        .container {
-            padding: 0 max(calc(8px + env(safe-area-inset-left)), 8px) 0 max(calc(8px + env(safe-area-inset-ret)), 8px);
-            gap: 12px;
+        ::selection { background: rgba(180, 220, 255, 0.7); color: #000; }
+
+        .site-wrapper { display: flex; align-items: flex-start; }
+        .left-pane {
+            width: 320px;
+            flex-shrink: 0;
+            background-color: var(--bg-canvas-opaque);
+            border-right: 1px solid var(--border-color);
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color var(--transition-duration), border-color var(--transition-duration);
         }
-        .section-header {
-            font-size: 1.75rem;
+        .right-pane { flex-grow: 1; padding: 40px; }
+        .content-sections { display: flex; flex-direction: column; gap: 24px; max-width: 720px; margin: 0 auto; }
+
+        .identity { text-align: center; }
+        .profile-pic { width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 20px; border: 1px solid var(--border-color); object-fit: cover; }
+        .signature { font-size: 2.8rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+        .title { font-size: 1rem; color: var(--text-secondary); margin-top: 8px; letter-spacing: 0.5px; }
+        .social-links { margin-top: 16px; margin-bottom: 24px; text-align: center; }
+        .social-icon { font-size: 1.1rem; color: #999; margin: 0 8px; transition: color var(--transition-duration) ease-in-out; }
+        .social-icon:hover { color: var(--text-primary); }
+        
+        .sidebar-controls {
+            margin-top: auto;
+            padding-top: 20px;
         }
-        #bonus .section-header {
-            font-size: 1.5rem;
+        .main-nav ul { list-style: none; }
+        .main-nav a { display: block; padding: 10px; margin: 2px 0; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-weight: 400; font-size: 1.1rem; transition: all var(--transition-duration) ease-in-out; }
+        .main-nav a:hover, .main-nav a.active { background-color: var(--nav-hover-bg); color: var(--text-primary); }
+        .hamburger { display: none; }
+
+        .content-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 32px 40px;
+            box-shadow: 0 10px 40px 0 var(--shadow-color);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            transition: all var(--transition-duration) cubic-bezier(0.25, 1, 0.5, 1);
         }
-        .link-button {
-            height: 36px;
-            padding: 6px 8px;
-            font-size: 0.78rem;
+        
+        .section-header { font-size: 2.2rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); letter-spacing: -0.02em; }
+        .opening-statement { font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); }
+        .opening-statement a { color: var(--text-primary); }
+
+        .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+        .discography-item { display: flex; flex-direction: column; text-align: center; }
+        .discography-item h3 {
+            font-size: .95rem; 
+            line-height: 1.4; 
+            font-weight: 700; 
+            margin-bottom: 4px;
+            min-height: 2.8em;
         }
-        .link-button i.icon {
-            font-size: 0.9rem;
-        }
-        .gallery-img {
-            width: 120px;
-            height: 120px;
-        }
-        .discography-img {
-            width: 100px;
-            height: 100px;
-        }
-        .profile-pic-wrapper {
-            width: 80px;
-            height: 80px;
-        }
-        .service-card {
-            min-height: 200px;
-            padding: 10px 6px;
-        }
-        .service-card h3 {
-            min-height: 44px;
-            font-size: 0.9rem;
-        }
-        .service-card p {
-            min-height: 52px;
-            font-size: 0.78rem;
-        }
-        .services-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-        }
-        nav {
-            padding: 6px;
-        }
-        .nav-container {
-            gap: 4px;
-        }
-        .nav-row {
-            gap: 4px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .nav-link {
-            font-size: 0.75rem;
-            padding: 4px 5px;
-        }
-        .discography-grid, .bonus-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-        }
-        .home-heading {
-            font-size: 1.75rem;
-        }
-        .contact-form {
-            padding: 12px;
-        }
-        .contact-form input,
-        .contact-form select,
-        .contact-form textarea {
-            font-size: 0.85rem;
-            padding: 8px;
+        .discography-item p { font-size: .85rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 300; }
+        .discography-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border-color); transition: transform var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out; margin-bottom: 12px; }
+        .discography-img:hover { transform: scale(1.05); box-shadow: 0 6px 25px var(--shadow-color); }
+        .discography-item a.artist-link { font-size: .9rem; color: var(--text-primary); text-decoration: none; }
+        .discography-item a.artist-link:hover { text-decoration: underline; }
+        
+        .contact-form { display: flex; flex-direction: column; gap: 16px; }
+        .contact-form input, .contact-form select, .contact-form textarea { 
+            width: 100%; background: var(--form-bg); border: 1px solid var(--border-color); 
+            border-radius: 8px; padding: 14px; color: var(--text-primary); 
+            font-size: 1rem; font-family: var(--font-body); 
+            transition: all var(--transition-duration) ease-in-out; font-weight: 400;
+            min-height: 50px;
         }
         .contact-form select {
-            background: var(--bg-tertiary) url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCA1NiAxNiI+PHBhdGggZmlsbD0iI2UwZTBlNCIgZD0iTTggMTFMMyA2aDEwbC01IDV6Ii8+PC9zdmc+") no-repeat right 8px center;
-            background-size: 10px;
+            -webkit-appearance: none; -moz-appearance: none; appearance: none;
+            background-image: var(--select-arrow-url);
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.5em;
         }
-        .form-submit-button {
-            font-size: 0.75rem;
-            padding: 8px;
-        }
-    }
+        .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: none; border-color: var(--text-primary); background: var(--form-focus-bg); }
+        .contact-form button { background: var(--text-primary); color: var(--button-text-color); border: none; padding: 14px; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: opacity var(--transition-duration) ease-in-out; }
+        .contact-form button:hover { opacity: 0.85; }
 
-    @media (min-width: 601px) {
-        .discography-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-        .discography-img {
-            width: 120px;
-            height: 120px;
-        }
-        .bonus-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        .bonus-item {
-            padding: 6px;
-            max-width: 180px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        .bonus-item-thumbnail img {
-            width: 100%;
-            max-width: 180px;
-            height: 80px;
-            object-fit: cover;
-        }
-        .home-heading {
-            font-size: 2.5rem;
-        }
-        .nav-container {
-            flex-direction: row;
-            flex-wrap: wrap;
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .gallery-img { width: 100%; border-radius: 10px; cursor: pointer; transition: transform var(--transition-duration) ease-in-out, opacity 0.3s ease-in-out; }
+        .gallery-img:hover { transform: scale(1.03); opacity: 0.9; }
+        
+        .bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .bonus-grid-alt { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .bonus-item { display: flex; flex-direction: column; text-decoration: none; color: var(--text-primary); background: var(--bonus-item-bg); border-radius: 8px; padding: 12px; border: 1px solid var(--border-color); transition: all var(--transition-duration) ease-in-out; }
+        .bonus-item:hover { transform: translateY(-4px); border-color: var(--text-primary); background: var(--bonus-item-hover-bg); }
+        .bonus-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+        .bonus-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; flex-grow: 1; }
+        .bonus-item-thumbnail img { width: 100%; height: 100px; object-fit: cover; border-radius: 12px; margin-bottom: 8px; }
+        button.bonus-item { font-family: var(--font-body); width: 100%; cursor: pointer; text-align: left; }
+        
+        .site-footer { text-align: center; color: var(--text-secondary); text-shadow: none; padding: 20px 0; font-size: 0.9rem; margin-top: 24px; }
+        
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); justify-content: center; align-items: center; opacity: 0; transition: opacity var(--transition-duration) ease-in-out; }
+        .modal.active { display: flex; opacity: 1; }
+        /* FIXED: Removed position:relative so arrows are not bound to it */
+        .modal-content { display: flex; justify-content: center; align-items: center; }
+        .modal-img { max-width: 90vw; max-height: 90vh; border-radius: var(--border-radius); }
+        .modal-close { position: absolute; color: white; font-size: 2rem; cursor: pointer; user-select: none; transition: color 0.3s ease-in-out; z-index: 10; }
+        .modal-close:hover { color: #ccc; }
+        .modal-close { top: -40px; right: 0; }
+        
+        /* FIXED: Arrows are now positioned relative to the viewport */
+        .modal-arrow {
+            position: absolute;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s ease-in-out;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
             justify-content: center;
         }
-        .nav-row {
-            gap: 6px;
-        }
-        .nav-link {
-            font-size: 1rem;
-            padding: 4px 10px;
-        }
-    }
+        .modal-arrow:hover { background-color: rgba(0, 0, 0, 0.5); }
+        .modal-arrow i { font-size: 1.2rem; }
+        /* FIXED: New desktop position for arrows */
+        .modal-arrow.left { left: 20px; }
+        .modal-arrow.right { right: 20px; }
 
-    @media (prefers-reduced-motion) {
-        .equalizer-bar, .gallery-img, .discography-img, .link-button, .bonus-item, .nav-link, .service-card, .modal, .form-submit-button {
-            animation: none;
-            transition: none;
-        }
-    }
-</style>
+        .theme-switch-wrapper { display: flex; align-items: center; justify-content: center; }
+        .theme-switch { display: inline-block; height: 26px; position: relative; width: 50px; }
+        .theme-switch input { display: none; }
+        .slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 26px; }
+        .slider:before { background-color: #fff; bottom: 3px; content: ""; height: 20px; left: 3px; position: absolute; transition: .4s; width: 20px; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--text-primary); }
+        input:checked + .slider:before { transform: translateX(24px); }
 
+        @media (max-width: 900px) {
+            .site-wrapper { flex-direction: column; }
+            .left-pane { 
+                position: fixed;
+                transform: translateX(-100%);
+                z-index: 2000;
+                box-shadow: 10px 0px 40px rgba(0,0,0,0.1);
+                /* FIXED: Increased padding to ensure nav isn't cut off */
+                padding-bottom: 80px; 
+            }
+            .left-pane.open { transform: translateX(0); }
+            .right-pane { width: 100%; padding: 100px 16px 24px 16px; margin-left: 0; }
+            .hamburger { display: block; position: fixed; top: 20px; left: 20px; z-index: 2001; font-size: 1.5rem; cursor: pointer; background: var(--bg-canvas-opaque); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color); }
+            
+            /* Mobile arrow positions now work correctly */
+            .modal-arrow.left { left: 10px; }
+            .modal-arrow.right { right: 10px; }
+            .modal-close { top: 10px; right: 10px; }
+
+            .discography-grid { grid-template-columns: repeat(2, 1fr); }
+            .bonus-grid { grid-template-columns: repeat(2, 1fr); }
+            .bonus-grid-alt { grid-template-columns: repeat(2, 1fr); }
+            .bonus-item-thumbnail img { height: 80px; }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Hidden Form for Netlify Detection -->
-        <form name="contact" data-netlify="true" hidden>
-            <input type="text" name="name" />
-            <input type="email" name="email" />
-            <input type="text" name="social-links" />
-            <select name="category"></select>
-            <textarea name="message"></textarea>
-        </form>
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50">
-        <div class="nav-container flex flex-col items-center py-3 gap-2">
-            <div class="nav-row flex justify-center space-x-2">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#equipment" class="nav-link">Equipment</a>
-                <a href="#discography" class="nav-link">Discography</a>
-                <a href="#contact" class="nav-link">Contact</a>
+
+    <div class="site-wrapper">
+        <aside class="left-pane">
+            <div class="identity">
+                <img src="images/default-avatar.png" alt="Default Avatar" class="profile-pic">
+                <h1 class="signature">62serpens</h1>
+                <p class="title">Music Producer</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+                    <a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                </div>
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="theme-toggle">
+                        <input type="checkbox" id="theme-toggle" aria-label="Toggle Dark Mode">
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
-            <div class="nav-row flex justify-center space-x-2">
-                <a href="#gallery" class="nav-link">Gallery</a>
-                <a href="#bonus" class="nav-link">Bonus</a>
+            
+            <div class="sidebar-controls">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#discography">Discography</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#bonus">Bonus</a></li>
+                    </ul>
+                </nav>
             </div>
+        </aside>
+
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="card text-center py-10">
-        <div class="profile-pic-wrapper">
-            <img src="images/profile.webp" alt="62serpens Profile Picture" class="profile-pic">
-        </div>
-        <h1 class="home-heading text-5rem font-[Inter] font-bold mt-4 mb-2 mx-auto max-w-[80%] text-[var(--accent-secondary)]" style="letter-spacing: 0.1em; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);">62serpens</h1>
-        <p class="text-base text-[var(--text-secondary)] mb-4">Music Producer</p>
-        <div class="equalizer" aria-hidden="true">
-            <div class="equalizer-bar"></div>
-            <div class="equalizer-bar"></div>
-            <div class="equalizer-bar"></div>
-        </div>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://open.spotify.com/artist/7yHQHRjyPmSNxPFgAgsjkb?si=XAvcT-lVRoSXznyUbE8QaA" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
-            <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
-            <a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
-        </div>
-    </section>
+        <main class="right-pane">
+            <div class="content-sections">
+                <section id="home" class="content-card">
+                    <p class="opening-statement">
+                        All 62serpens instrumentals are now offline. Please contact via the <a href="#contact">form below</a>, <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer">Instagram</a>, or <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer">Discord</a>
+                    </p>
+                </section>
 
-    <!-- Services Section -->
-    <section id="services" class="card">
-        <h2 class="section-header">Services</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3 class="mb-2">Instrumental<br>Leasing</h3>
-                <p class="text-[var(--text-secondary)] mb-4">High quality instrumentals for lease via my BeatStars store.</p>
-                <a href="https://www.beatstars.com/62serpens/tracks" target="_blank" rel="noopener noreferrer" class="link-button beat-store-button"><i class="fas fa-store icon"></i>Visit Beat Store</a>
-            </div>
-            <div class="service-card">
-                <h3 class="mb-2">Personalized<br>Production</h3>
-                <p class="text-[var(--text-secondary)] mb-4">Collaborative production to realize your vision. With a portable setup, I can come to you.</p>
-                <a href="#contact?category=production" class="link-button service-contact-button"><i class="fas fa-music icon"></i>Inquire</a>
-            </div>
-            <div class="service-card">
-                <h3 class="mb-2">Recording &<br>Engineering</h3>
-                <p class="text-[var(--text-secondary)] mb-4">Recording mixing and master services for your music.</p>
-                <a href="#contact?category=mixing" class="link-button service-contact-button"><i class="fas fa-microphone icon"></i>Inquire</a>
-            </div>
-            <div class="service-card">
-                <h3 class="mb-2">Production<br>Tutoring</h3>
-                <p class="text-[var(--text-secondary)] mb-4">Personalized FL Studio tutoring with expert workflow guidance.</p>
-                <a href="#contact?category=tutoring" class="link-button service-contact-button"><i class="fas fa-chalkboard-teacher icon"></i>Inquire</a>
-            </div>
-            <div class="service-card">
-                <h3 class="mb-2">Website<br>Design</h3>
-                <p class="text-[var(--text-secondary)] mb-4">Custom websites to showcase your brand, like this one.</p>
-                <a href="#contact?category=website" class="link-button service-contact-button"><i class="fas fa-laptop-code icon"></i>Inquire</a>
-            </div>
-        </div>
-    </section>
+                <section id="contact" class="content-card">
+                    <h2 class="section-header">Contact</h2>
+                    <form name="contact" method="POST" data-netlify="true" action="/success" class="contact-form">
+                        <input type="hidden" name="form-name" value="contact">
+                        <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
+                        <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
+                        <input type="text" name="social-links" placeholder="Relevant Social Media or Streaming Links" aria-label="Social Media Links">
+                        <select name="category" id="category" required aria-label="Service Category">
+                            <option value="" disabled selected>Select Contact Type</option>
+                            <option value="production">Personalized Production</option>
+                            <option value="lease">MP3/WAV Lease</option>
+                            <option value="mixing">Recording & Engineering</option>
+                            <option value="tutoring">Production Tutoring</option>
+                            <option value="website">Website Design</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <textarea name="message" placeholder="Please provide details about your project." required aria-label="Your Inquiry" rows="5"></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </section>
 
-    <!-- Equipment Section -->
-    <section id="equipment" class="card">
-        <h2 class="section-header">Equipment</h2>
-        <p class="text-[var(--text-secondary)] text-sm text-center">My setup is portable, quick to assemble, and adaptable to any environment, ensuring no compromise in quality.</p>
-    </section>
+                <section id="discography" class="content-card">
+                    <h2 class="section-header">Discography</h2>
+                    <div class="discography-grid">
+                        <div class="discography-item">
+                            <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
+                                <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img">
+                            </a>
+                            <h3>Onlybino - Down Bad</h3>
+                            <p>Original melody, full production</p>
+                            <a href="https://www.instagram.com/onlybino" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> onlybino</a>
+                        </div>
+                        <div class="discography-item">
+                            <a href="#" target="_blank" rel="noopener noreferrer">
+                                <img src="images/albumart_beatitup.jpg" alt="beat it up Album Art" class="discography-img">
+                            </a>
+                            <h3>Eddison - beat it up</h3>
+                            <p>Original melody, co-production</p>
+                            <a href="https://www.instagram.com/954.eddison" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> 954.eddison</a>
+                        </div>
+                        <div class="discography-item">
+                            <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
+                                <img src="images/albumart_madaway.jpg" alt="MADAWAY Album Art" class="discography-img">
+                            </a>
+                            <h3>Tefflon - MADAWAY</h3>
+                            <p>Original melody, co-production</p>
+                            <a href="https://www.instagram.com/1tefflon" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> 1tefflon</a>
+                        </div>
+                        <div class="discography-item">
+                            <a href="https://soundcloud.com/bigtaie/keep-it-real-prod-62serpens" target="_blank" rel="noopener noreferrer">
+                                <img src="images/albumart_keepitreal.jpg" alt="Keep It Real Album Art" class="discography-img">
+                            </a>
+                            <h3>Big Taie - Keep It Real</h3>
+                            <p>Original MIDI, co-production</p>
+                            <a href="https://www.instagram.com/bigtaie" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> bigtaie</a>
+                        </div>
+                    </div>
+                </section>
 
-    <!-- Discography Section -->
-    <section id="discography" class="card">
-        <h2 class="section-header">Discography</h2>
-        <div class="discography-grid">
-            <div class="discography-item">
-                <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
-                    <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img" aria-label="View Down Bad track">
-                </a>
-                <h3 class="mb-2">Onlybino - Down Bad</h3>
-                <p class="text-[var(--text-secondary)] mb-2">Original melody, full production, mixing</p>
-                <a href="https://www.instagram.com/onlybino" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> onlybino</a>
+                <section id="gallery" class="content-card">
+                    <h2 class="section-header">Gallery</h2>
+                    <div class="gallery-grid">
+                        <img src="images/img_015.jpg" alt="Studio Setup 3" class="gallery-img">
+                        <img src="images/img_017.jpg" alt="Studio Setup 5" class="gallery-img">
+                    </div>
+                </section>
+
+                <section id="bonus" class="content-card">
+                    <h2 class="section-header">Bonus</h2>
+                    <div class="bonus-grid">
+                        <a href="b.html" class="bonus-item" style="display: none;">
+                            <div class="bonus-item-thumbnail"><img src="images/blackjack.webp" alt="Blackjack Sim Preview"></div>
+                            <h4>Blackjack Sim</h4><p>Interactive Blackjack card game.</p>
+                        </a>
+                        <button type="button" id="audioToolsLink" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/audio_tools.webp" alt="Audio Tools Suite Preview"></div>
+                            <h4>Audio Tools Suite</h4><p>Tools for music producers.</p>
+                        </button>
+                         <a href="251shells.html" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/251shells.webp" alt="251shells Preview"></div>
+                            <h4>ii-V-I Shells</h4><p>Training for 2-5-1 chord shells.</p>
+                        </a>
+                        <a href="circle.html" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/circle.webp" alt="Circle Preview"></div>
+                            <h4>Circle of Fifths</h4><p>Training for chords in all keys.</p>
+                        </a>
+                        <a href="9thchords.html" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/9thchords.webp" alt="9th Chords Preview"></div>
+                            <h4>9th Chords</h4><p>Practice 9th chord voicings.</p>
+                        </a>
+                    </div>
+                    <h3 style="font-family: var(--font-signature); font-weight: 700; font-size: 1.5rem; margin-top: 24px; margin-bottom: 12px;">Alternate Realities</h3>
+                    <div class="bonus-grid bonus-grid-alt">
+                         <a href="2000.html" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/retro.webp" alt="Retro Theme Preview"></div>
+                            <h4>Theme: 2000s</h4><p>Retro Geocities-inspired design.</p>
+                        </a>
+                        <a href="ai_theme.html" class="bonus-item">
+                            <div class="bonus-item-thumbnail"><img src="images/ai_theme.webp" alt="AI Theme Preview"></div>
+                            <h4>Theme: 2030</h4><p>Futuristic AI/Tech-themed interface.</p>
+                        </a>
+                    </div>
+                    <p id="passwordError" role="alert" style="display: none; color: #ff4d4d; text-align: center; margin-top: 16px;">Invalid access code.</p>
+                </section>
+                
+                <footer class="site-footer">
+                    © <span id="year">2025</span> 62serpens. All rights reserved.
+                </footer>
             </div>
-            <div class="discography-item">
-                <a href="https://open.spotify.com/track/2MVxKXecBu7Ls57KwFff26?si=05f9ad3b12f9472d" target="_blank" rel="noopener noreferrer">
-                    <img src="images/albumart_beatitup.jpg" alt="beat it up Album Art" class="discography-img" aria-label="View beat it up track">
-                </a>
-                <h3 class="mb-2">Eddison - beat it up</h3>
-                <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
-                <a href="https://www.instagram.com/954.eddison" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 954.eddison</a>
-            </div>
-            <div class="discography-item">
-                <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
-                    <img src="images/albumart_madaway.jpg" alt="MADAWAY Album Art" class="discography-img" aria-label="View MADAWAY track">
-                </a>
-                <h3 class="mb-2">Tefflon - MADAWAY</h3>
-                <p class="text-[var(--text-secondary)] mb-2">Original melody composition, co-production</p>
-                <a href="https://www.instagram.com/1tefflon" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> 1tefflon</a>
-            </div>
-            <div class="discography-item">
-                <a href="https://soundcloud.com/bigtaie/keep-it-real-prod-62serpens" target="_blank" rel="noopener noreferrer">
-                    <img src="images/albumart_keepitreal.jpg" alt="Keep It Real Album Art" class="discography-img" aria-label="View Keep It Real track">
-                </a>
-                <h3 class="mb-2">Big Taie - Keep It Real</h3>
-                <p class="text-[var(--text-secondary)] mb-2">Original MIDI composition, co-production</p>
-                <a href="https://www.instagram.com/bigtaie" target="_blank" class="text-[var(--accent-primary)] hover:text-[var(--accent-secondary)]"><i class="fab fa-instagram icon"></i> bigtaie</a>
-            </div>
-        </div>
-    </section>
+        </main>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contact" class="card">
-        <h2 class="section-header">Contact</h2>
-        <form name="contact" method="POST" data-netlify="true" action="/success" class="contact-form">
-            <input type="hidden" name="form-name" value="contact">
-            <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
-            <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
-            <input type="text" name="social-links" placeholder="Relevant Social Media or Streaming Links (Optional, Preferred)" aria-label="Social Media or Streaming Links">
-            <select name="category" id="category" required aria-label="Service Category">
-                <option value="" disabled selected>Select a Service</option>
-                <option value="leasing">Instrumental Leasing</option>
-                <option value="production">Personalized Production</option>
-                <option value="mixing">Recording & Engineering</option>
-                <option value="tutoring">Production Tutoring</option>
-                <option value="website">Website Design</option>
-                <option value="other">Other</option>
-            </select>
-            <textarea name="message" placeholder="Please provide as much detail as possible about your inquiry." required aria-label="Your Inquiry"></textarea>
-            <button type="submit" class="form-submit-button">Inquire</button>
-        </form>
-    </section>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="card">
-        <h2 class="section-header">Gallery</h2>
-        <div class="gallery-grid">
-            <img src="images/img_013.jpg" alt="Studio Setup 1" class="gallery-img" aria-label="Expand Studio Setup 1">
-            <img src="images/img_014.jpg" alt="Studio Setup 2" class="gallery-img" aria-label="Expand Studio Setup 2">
-            <img src="images/img_015.jpg" alt="Studio Setup 3" class="gallery-img" aria-label="Expand Studio Setup 3">
-            <img src="images/img_016.jpg" alt="Studio Setup 4" class="gallery-img" aria-label="Expand Studio Setup 4">
-            <img src="images/img_017.jpg" alt="Studio Setup 5" class="gallery-img" aria-label="Expand Studio Setup 5">
-            <img src="images/img_018.jpg" alt="Studio Setup 6" class="gallery-img" aria-label="Expand Studio Setup 6">
-        </div>
-    </section>
-
-    <!-- Bonus Content Section -->
-    <section id="bonus" class="card">
-        <h2 class="section-header">Bonus Content</h2>
-        <div class="bonus-grid">
-            <button type="button" id="audioToolsLink" class="bonus-item" aria-label="Audio Tools Suite (Coming Soon)">
-                <div class="bonus-item-thumbnail">
-                    <img src="images/audio_tools.webp" alt="Audio Tools Suite Preview">
-                </div>
-                <div class="bonus-item-info">
-                    <h4>Audio Tools Suite</h4>
-                    <p>Tools for music producers<br><span>Coming Soon</span></p>
-                </div>
-            </button>
-            <a href="b.html" class="bonus-item" aria-label="Blackjack Sim">
-                <div class="bonus-item-thumbnail">
-                    <img src="images/blackjack.webp" alt="Blackjack Sim Preview">
-                </div>
-                <div class="bonus-item-info">
-                    <h4>Blackjack Sim</h4>
-                    <p>Interactive Blackjack card game simulation</p>
-                </div>
-            </a>
-            <a href="2000.html" class="bonus-item" aria-label="Site Theme - 2000s">
-                <div class="bonus-item-thumbnail">
-                    <img src="images/retro.webp" alt="Retro Theme Preview">
-                </div>
-                <div class="bonus-item-info">
-                    <h4>Site Theme - 2000s</h4>
-                    <p>Retro Geocities-inspired design</p>
-                </div>
-            </a>
-            <a href="ai_theme.html" class="bonus-item" aria-label="Site Theme - 2030">
-                <div class="bonus-item-thumbnail">
-                    <img src="images/ai_theme.webp" alt="AI Theme Preview">
-                </div>
-                <div class="bonus-item-info">
-                    <h4>Site Theme - 2030</h4>
-                    <p>Futuristic AI/Tech-themed interface</p>
-                </div>
-            </a>
-            <a href="251shells.html" class="bonus-item" aria-label="251shells">
-                <div class="bonus-item-thumbnail">
-                    <img src="images/251shells.webp" alt="251shells Preview">
-                </div>
-                <div class="bonus-item-info">
-                    <h4>ii-V-I Shells Training</h4>
-                    <p>Flashcards to help you learn 2-5-1 open and closed shells in all major keys.</p>
-                </div>
-            </a>
-            <a href="circle.html" class="bonus-item" aria-label="Circle">
-                <div class="bonus-item-thumbnail">
-                    <img src="images/circle.webp" alt="Circle Preview">
-                </div>
-                <div class="bonus-item-info">
-                    <h4>Circle of Fifths Training</h4>
-                    <p>Circle of fifths training to help you learn the major and minor chords in all keys.</p>
-                </div>
-            </a>
-            <a href="9thchords.html" class="bonus-item" aria-label="9th Chords">
-                <div class="bonus-item-thumbnail">
-                    <img src="images/9thchords.webp" alt="9th Chords Preview">
-                </div>
-                <div class="bonus-item-info">
-                    <h4>9th Chords</h4>
-                    <p>Learn and practice 9th chord voicings around the circle of fifths.</p>
-                </div>
-            </a>
-        </div>
-        <p id="passwordError" role="alert" class="hidden text-red-400 text-sm text-center mt-4 bg-red-900/20 p-2 rounded-md">Invalid access code. Please try again.</p>
-    </section>
-
-    <!-- Footer -->
-    <footer class="text-center py-4 text-[var(--text-secondary)] text-sm">
-        © <span id="year"></span> 62serpens. All rights reserved.
-    </footer>
-
-    <!-- Image Modal -->
-    <div id="imageModal" class="modal" role="dialog" aria-label="Expanded Image">
-        <span id="closeModal" class="modal-close" aria-label="Close image modal">×</span>
+    <div id="imageModal" class="modal">
+        <span id="closeModal" class="modal-close">×</span>
+        <span id="prevArrow" class="modal-arrow left"><i class="fas fa-chevron-left"></i></span>
+        <span id="nextArrow" class="modal-arrow right"><i class="fas fa-chevron-right"></i></span>
         <div class="modal-content">
-            <span id="prevArrow" class="modal-arrow left" aria-label="Previous image"><i class="fas fa-chevron-left"></i></span>
-            <img id="modalImage" class="modal-img" src="" alt="Expanded Image" draggable="false">
-            <span id="nextArrow" class="modal-arrow right" aria-label="Next image"><i class="fas fa-chevron-right"></i></span>
+            <img id="modalImage" class="modal-img" src="" alt="Expanded Image">
         </div>
     </div>
-</div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const leftPane = document.querySelector('.left-pane');
+        const hamburger = document.querySelector('.hamburger');
+        const sections = document.querySelectorAll('main section');
+        const navLinks = document.querySelectorAll('.main-nav a');
 
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Audio Tools Password Prompt
-    const audioToolsLink = document.getElementById('audioToolsLink');
-    const passwordError = document.getElementById('passwordError');
-    if (audioToolsLink && passwordError) {
-        audioToolsLink.addEventListener('click', () => {
-            const password = prompt('Enter access code for Audio Tools:');
-            if (password === 'serpens62') {
-                window.location.href = 'audio_tools.html';
-            } else {
-                passwordError.classList.remove('hidden');
-                setTimeout(() => passwordError.classList.add('hidden'), 3000);
-            }
+        // THEME TOGGLE LOGIC
+        const themeToggle = document.getElementById('theme-toggle');
+        const applyTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            themeToggle.checked = theme === 'dark';
+        };
+        const savedTheme = localStorage.getItem('theme');
+        applyTheme(savedTheme || 'light');
+        themeToggle.addEventListener('change', function() {
+            const theme = this.checked ? 'dark' : 'light';
+            applyTheme(theme);
+            localStorage.setItem('theme', theme);
         });
-    }
 
-    // Smooth Scroll for Anchor Links and Clear Nav Highlight
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', e => {
-            e.preventDefault();
-            const href = anchor.getAttribute('href');
-            const targetId = href.split('?')[0];
-            const target = document.querySelector(targetId);
-            const navHeight = document.querySelector('nav').offsetHeight;
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-        });
-        anchor.addEventListener('touchstart', e => {
-            if (window.innerWidth <= 600) {
-                anchor.classList.add('tapped');
-            }
-        });
-        anchor.addEventListener('touchend', e => {
-            if (window.innerWidth <= 600) {
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('tapped');
-                    link.blur();
-                    link.style.background = '';
-                    link.style.borderColor = '';
-                    link.style.transform = '';
-                    link.style.boxShadow = '';
-                    link.style.color = '';
-                });
-            }
-        });
-    });
-
-    // Image Modal with Navigation (Arrows Only)
-    const modal = document.getElementById('imageModal');
-    const modalContent = document.querySelector('.modal-content');
-    const modalImage = document.getElementById('modalImage');
-    const closeModal = document.getElementById('closeModal');
-    const prevArrow = document.getElementById('prevArrow');
-    const nextArrow = document.getElementById('nextArrow');
-    const galleryImages = document.querySelectorAll('.gallery-img');
-    let currentImageIndex = 0;
-
-    function updateModalImage(index) {
-        currentImageIndex = index;
-        modalImage.style.opacity = '0'; // Fade out
-        setTimeout(() => {
-            modalImage.src = galleryImages[index].src;
-            modalImage.alt = galleryImages[index].alt;
-            modalImage.style.opacity = '1'; // Fade in
-        }, 200); // Match the CSS transition duration
-    }
-
-    galleryImages.forEach((img, index) => {
-        img.addEventListener('click', () => {
-            updateModalImage(index);
-            modal.classList.add('active');
-        });
-    });
-
-    prevArrow.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent click from bubbling to modal
-        currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
-        updateModalImage(currentImageIndex);
-    });
-
-    nextArrow.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent click from bubbling to modal
-        currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
-        updateModalImage(currentImageIndex);
-    });
-
-    closeModal.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent click from bubbling to modal
-        console.log('Close button clicked'); // Debug log
-        modal.classList.remove('active');
-    });
-
-    modal.addEventListener('click', e => {
-        if (e.target === modal || !modalContent.contains(e.target)) {
-            modal.classList.remove('active');
-        }
-    });
-
-    // Ensure Equalizer Animation Runs on Mobile
-    const equalizerBars = document.querySelectorAll('.equalizer-bar');
-    function checkAnimation() {
-        const bar = equalizerBars[0];
-        const style = window.getComputedStyle(bar);
-        const animation = style.getPropertyValue('animation-name') || style.getPropertyValue('-webkit-animation-name');
-        if (animation !== 'equalize') {
-            equalizerBars.forEach(bar => {
-                bar.style.animation = 'equalize 1.2s infinite ease-in-out alternate';
-                const index = Array.from(equalizerBars).indexOf(bar);
-                bar.style.animationDelay = `${index * 0.2}s`;
+        // Mobile Navigation
+        if (hamburger && leftPane) {
+            hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                leftPane.classList.toggle('open');
+            });
+            document.querySelector('main').addEventListener('click', () => {
+                if (leftPane.classList.contains('open')) {
+                    leftPane.classList.remove('open');
+                }
             });
         }
-    }
+    
+        // Smooth Scroll & Nav Logic
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const topPos = targetElement.getBoundingClientRect().top + window.scrollY - 40;
+                    window.scrollTo({ top: topPos, behavior: 'smooth' });
+                }
+                if (leftPane.classList.contains('open')) {
+                    leftPane.classList.remove('open');
+                }
+            });
+        });
 
-    document.addEventListener('DOMContentLoaded', () => {
-        checkAnimation();
-        window.addEventListener('scroll', checkAnimation); // Re-check on scroll for mobile
-    });
+        // Active Nav Link on Scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
 
-    // Auto-select category from query parameter
-    function setCategoryFromUrl() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const category = urlParams.get('category');
-        const categorySelect = document.getElementById('category');
-        const validCategories = ['leasing', 'production', 'mixing', 'tutoring', 'website', 'other'];
-        if (category && validCategories.includes(category)) {
-            categorySelect.value = category;
-            const event = new Event('change');
-            categorySelect.dispatchEvent(event);
+        // Audio Tools Password Prompt
+        const audioToolsLink = document.getElementById('audioToolsLink');
+        if (audioToolsLink) {
+            audioToolsLink.addEventListener('click', () => {
+                const password = prompt('Enter access code for Audio Tools:');
+                if (password === 'serpens62') {
+                    window.location.href = 'audio_tools.html';
+                } else if (password !== null) {
+                    const passwordError = document.getElementById('passwordError');
+                    passwordError.style.display = 'block';
+                    setTimeout(() => { passwordError.style.display = 'none'; }, 3000);
+                }
+            });
         }
-    }
 
-    document.addEventListener('DOMContentLoaded', setCategoryFromUrl);
-    window.addEventListener('hashchange', setCategoryFromUrl);
-    setTimeout(setCategoryFromUrl, 1000); // Re-check after smooth scroll
-</script>
+        // Image Modal Logic
+        const modal = document.getElementById('imageModal');
+        if (modal) {
+            const modalImg = document.getElementById("modalImage");
+            const galleryImages = document.querySelectorAll(".gallery-img");
+            let currentImageIndex;
 
+            const openModal = (index) => {
+                currentImageIndex = index;
+                modalImg.src = galleryImages[index].src;
+                modal.classList.add('active');
+            };
+
+            galleryImages.forEach((img, index) => {
+                img.addEventListener('click', () => openModal(index));
+            });
+            
+            const closeModal = () => modal.classList.remove('active');
+            
+            document.getElementById('closeModal').onclick = closeModal;
+            // This event listener needs to target the modal arrows too now they are outside modal-content
+            modal.addEventListener('click', (e) => { 
+                if (e.target.classList.contains('modal')) {
+                    closeModal();
+                }
+            });
+            
+            const showImage = (offset) => {
+                currentImageIndex = (currentImageIndex + offset + galleryImages.length) % galleryImages.length;
+                modalImg.src = galleryImages[currentImageIndex].src;
+            };
+
+            document.getElementById('prevArrow').onclick = (e) => {
+                e.stopPropagation(); // prevent modal from closing
+                showImage(-1);
+            }
+            document.getElementById('nextArrow').onclick = (e) => {
+                e.stopPropagation(); // prevent modal from closing
+                showImage(1);
+            }
+
+            document.addEventListener('keydown', (e) => {
+                if (modal.classList.contains('active')) {
+                    if (e.key === "ArrowRight") showImage(1);
+                    if (e.key === "ArrowLeft") showImage(-1);
+                    if (e.key === "Escape") closeModal();
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>
-
