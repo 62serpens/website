@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -223,6 +223,9 @@
         input:checked + .slider { background-color: var(--text-primary); }
         input:checked + .slider:before { transform: translateX(24px); }
 
+        .beatstore-button { background: var(--text-primary); color: var(--button-text-color); padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-block; transition: opacity var(--transition-duration) ease-in-out; font-size: 1.2rem; }
+        .beatstore-button:hover { opacity: 0.85; }
+
         @media (max-width: 900px) {
             .site-wrapper { flex-direction: column; }
             .left-pane { 
@@ -276,7 +279,7 @@
                     <a href="https://www.instagram.com/jacobfleming" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
                     <a href="https://www.youtube.com/@62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://www.tiktok.com/@jacob_fleming" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.tiktok.com/@62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                     <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
                 </div>
                 <div class="theme-switch-wrapper">
@@ -306,9 +309,8 @@
         <main class="right-pane">
             <div class="content-sections">
                 <section id="home" class="content-card fade-in">
-                    <p class="opening-statement">
-                        New beatstore at <a href="https://traktrain.com/jacobfleming" target="_blank" rel="noopener noreferrer">traktrain.com/jacobfleming</a>
-                    </p>
+                    <h2 class="section-header">New Beatstore</h2>
+                    <iframe src="https://traktrain.com/widget/270063" width="100%" height="790" frameborder="0"></iframe>
                 </section>
 
                 <section id="contact" class="content-card fade-in">
@@ -443,7 +445,7 @@
             themeToggle.checked = theme === 'dark';
         };
         const savedTheme = localStorage.getItem('theme');
-        applyTheme(savedTheme || 'light');
+        applyTheme(savedTheme || 'dark');
         themeToggle.addEventListener('change', function() {
             const theme = this.checked ? 'dark' : 'light';
             applyTheme(theme);
