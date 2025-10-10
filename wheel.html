@@ -23,20 +23,24 @@
             margin-bottom: 20px;
         }
         .image-long {
-            width: 628px;
-            height: 250px;
+            width: 100%;
+            max-width: 1280px;
+            height: auto;
+            max-height: 720px;
             object-fit: contain;
             margin: 20px 0;
             border: 2px solid #ff4d4d;
             border-radius: 5px;
+            cursor: pointer;
         }
         .image-square {
             width: 100%;
-            max-width: 400px;
+            max-width: 600px; /* Increased size for musicwheel.png */
             height: auto;
             margin: 20px 0;
             border: 2px solid #ff4d4d;
             border-radius: 5px;
+            cursor: pointer;
         }
         ul {
             list-style-type: square;
@@ -62,6 +66,29 @@
         .home-button:hover {
             background-color: #e63939;
         }
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border: 2px solid #ff4d4d;
+            border-radius: 5px;
+        }
+        .lightbox.active {
+            display: flex;
+        }
     </style>
 </head>
 <body>
@@ -74,12 +101,12 @@
             <li><strong>Use a Clock Face:</strong> Everyone understands a clock.</li>
             <li><strong>Unify Colour System That Makes Sense:</strong> We will use the established colours of a 12-coloured rainbow in the correct order. Putting red at the top makes a lot more sense. Easier to remember, more intuitive.</li>
         </ul>
-        <img src="/images/oldsystems.webp" alt="Circle of Fifths vs. Camelot Wheel vs. Open Key Notation" class="image-long">
+        <img src="/images/oldsystems.webp" alt="Circle of Fifths vs. Camelot Wheel vs. Open Key Notation" class="image-long" onclick="openLightbox(this.src)">
     </div>
     <div class="section">
         <h2>My Solution: The Music Wheel</h2>
         <p>Toss all that out and turn it into this. A system that combines the circle of fifths, a clock face, and a 12-color rainbow. C major at 12 o’clock, numbered 1-12, red at the top, and clear labels (A for major, B for minor). It’s intuitive, open-source, and built for DJs and musicians to actually understand music theory.</p>
-        <img src="/images/musicwheel.png" alt="The Music Wheel Diagram" class="image-square">
+        <img src="/images/musicwheel.png" alt="The Music Wheel Diagram" class="image-square" onclick="openLightbox(this.src)">
         <p class="credit">Invented by Jacob Fleming</p>
     </div>
     <div class="section">
@@ -90,5 +117,20 @@
         <h2>Potential Issues</h2>
         <p>I get the saying “if it ain’t broke, don’t fix it,” but this *is* broken. The current system makes music theory harder than it needs to be. A streamlined, open-source system like the Music Wheel would be better for music culture and education moving forward. Also, I’m not saying keys *sound* like rainbow colors—it’s just an easy way to remember and reference them. I know some folks with synesthesia might see it differently, and that’s cool. I also considered using the seven-color rainbow (red, orange, yellow, green, blue, indigo, violet) for simplicity, but a 12-color rainbow gives each key its own distinct color, which is cleaner than mushing them together. Oh, and I swapped A and B (A for major, B for minor) because it feels more intuitive—major as A just clicks better.</p>
     </div>
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-image" src="" alt="Enlarged Image">
+    </div>
+    <script>
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = src;
+            lightbox.classList.add('active');
+        }
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+        }
+    </script>
 </body>
 </html>
