@@ -134,6 +134,7 @@
         }
         .right-pane { flex-grow: 1; padding: 40px; }
         .content-sections { display: flex; flex-direction: column; gap: 24px; max-width: 720px; margin: 0 auto; }
+        .site-title { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; text-align: left; }
 
         .identity { text-align: center; }
         .profile-pic { width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 20px; border: 1px solid var(--border-color); object-fit: cover; }
@@ -173,10 +174,6 @@
         }
         
         .section-header { font-size: 2.2rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); letter-spacing: -0.02em; }
-        .opening-statement { font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 16px; }
-        .opening-statement a { color: var(--text-primary); }
-        .beatstore-button { background: var(--text-primary); color: var(--button-text-color); padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-block; transition: opacity var(--transition-duration) ease-in-out; font-size: 1.2rem; }
-        .beatstore-button:hover { opacity: 0.85; }
 
         .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
         .discography-item { display: flex; flex-direction: column; text-align: center; }
@@ -290,8 +287,8 @@
             text-align: left;
             transition: color var(--transition-duration);
         }
-        .toggle-button i { transition: transform 0.3s ease; }
         .toggle-button[aria-expanded="true"] i { transform: rotate(180deg); }
+        .toggle-button i { transition: transform 0.3s ease; }
 
         @media (max-width: 900px) {
             .site-wrapper { flex-direction: column; }
@@ -375,88 +372,100 @@
 
         <main class="right-pane">
             <div class="content-sections">
+                <div class="site-title">jacobfleming.me</div>
+                
                 <section id="home" class="content-card fade-in">
-                    <h2 class="section-header">New Beatstore</h2>
-                    <iframe src="https://traktrain.com/widget/270063" width="100%" height="555" frameborder="0"></iframe>
+                    <button class="toggle-button" aria-expanded="true" aria-controls="home-content">
+                        New Beatstore <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="home-content" class="collapsible-content">
+                        <iframe src="https://traktrain.com/widget/270063" width="100%" height="555" frameborder="0"></iframe>
+                    </div>
                 </section>
 
                 <section id="discography" class="content-card fade-in">
-                    <h2 class="section-header">Discography</h2>
-                    <div class="discography-grid">
-                        <div class="discography-item">
-                            <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
-                                <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img" loading="lazy">
-                            </a>
-                            <h3>Onlybino - Down Bad</h3>
-                            <p>Original melody, full production</p>
-                            <a href="https://www.instagram.com/onlybino" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> onlybino</a>
-                        </div>
-                        <div class="discography-item">
-                            <a href="#" target="_blank" rel="noopener noreferrer">
-                                <img src="images/albumart_beatitup.jpg" alt="beat it up Album Art" class="discography-img" loading="lazy">
-                            </a>
-                            <h3>Eddison - beat it up</h3>
-                            <p>Original melody, co-production</p>
-                            <a href="https://www.instagram.com/954.eddison" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> 954.eddison</a>
-                        </div>
-                        <div class="discography-item">
-                            <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
-                                <img src="images/albumart_madaway.jpg" alt="MADAWAY Album Art" class="discography-img" loading="lazy">
-                            </a>
-                            <h3>Tefflon - MADAWAY</h3>
-                            <p>Original melody, co-production</p>
-                            <a href="https://www.instagram.com/1tefflon" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> 1tefflon</a>
-                        </div>
-                        <div class="discography-item">
-                            <a href="https://soundcloud.com/bigtaie/keep-it-real-prod-62serpens" target="_blank" rel="noopener noreferrer">
-                                <img src="images/albumart_keepitreal.jpg" alt="Keep It Real Album Art" class="discography-img" loading="lazy">
-                            </a>
-                            <h3>Big Taie - Keep It Real</h3>
-                            <p>Original MIDI, co-production</p>
-                            <a href="https://www.instagram.com/bigtaie" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> bigtaie</a>
+                    <button class="toggle-button" aria-expanded="true" aria-controls="discography-content">
+                        Discography <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="discography-content" class="collapsible-content">
+                        <div class="discography-grid">
+                            <div class="discography-item">
+                                <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img" loading="lazy">
+                                </a>
+                                <h3>Onlybino - Down Bad</h3>
+                                <p>Original melody, full production</p>
+                                <a href="https://www.instagram.com/onlybino" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> onlybino</a>
+                            </div>
+                            <div class="discography-item">
+                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/albumart_beatitup.jpg" alt="beat it up Album Art" class="discography-img" loading="lazy">
+                                </a>
+                                <h3>Eddison - beat it up</h3>
+                                <p>Original melody, co-production</p>
+                                <a href="https://www.instagram.com/954.eddison" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> 954.eddison</a>
+                            </div>
+                            <div class="discography-item">
+                                <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/albumart_madaway.jpg" alt="MADAWAY Album Art" class="discography-img" loading="lazy">
+                                </a>
+                                <h3>Tefflon - MADAWAY</h3>
+                                <p>Original melody, co-production</p>
+                                <a href="https://www.instagram.com/1tefflon" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> 1tefflon</a>
+                            </div>
+                            <div class="discography-item">
+                                <a href="https://soundcloud.com/bigtaie/keep-it-real-prod-62serpens" target="_blank" rel="noopener noreferrer">
+                                    <img src="images/albumart_keepitreal.jpg" alt="Keep It Real Album Art" class="discography-img" loading="lazy">
+                                </a>
+                                <h3>Big Taie - Keep It Real</h3>
+                                <p>Original MIDI, co-production</p>
+                                <a href="https://www.instagram.com/bigtaie" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> bigtaie</a>
+                            </div>
                         </div>
                     </div>
                 </section>
 
                 <section id="museum" class="content-card fade-in">
-                    <h2 class="section-header">The Jacob Fleming Museum</h2>
-                    <p class="opening-statement">Explore my creative journey: music, games, AI, and ideas.</p>
-                    <a href="#home" class="beatstore-button">Listen Now</a>
-                    <div class="museum-grid">
-                        <a href="#home" class="museum-item">
-                            <div class="museum-item-thumbnail"><img src="images/albumart_downbad.jpg" alt="Music Portfolio Preview"></div>
-                            <h4>Music Portfolio</h4><p>My latest tracks and beats.</p>
-                        </a>
-                        <a href="2000.html" class="museum-item">
-                            <div class="museum-item-thumbnail"><img src="images/retro.webp" alt="Retro Arcade Preview"></div>
-                            <h4>Retro Arcade</h4><p>Classic games with a 2000s vibe.</p>
-                        </a>
-                        <a href="ai_theme.html" class="museum-item">
-                            <div class="museum-item-thumbnail"><img src="images/ai_theme.webp" alt="AI Lab Preview"></div>
-                            <h4>AI Lab</h4><p>Experiments in artificial intelligence.</p>
-                        </a>
-                        <a href="b.html" class="museum-item">
-                            <div class="museum-item-thumbnail"><img src="images/blackjack.webp" alt="Blackjack Sim Preview"></div>
-                            <h4>Blackjack Sim</h4><p>Interactive Blackjack card game.</p>
-                        </a>
-                        <button type="button" id="audioToolsLink" class="museum-item">
-                            <div class="museum-item-thumbnail"><img src="images/audio_tools.webp" alt="Audio Tools Suite Preview"></div>
-                            <h4>Audio Tools Suite</h4><p>Tools for music producers.</p>
-                        </button>
-                        <a href="251shells.html" class="museum-item">
-                            <div class="museum-item-thumbnail"><img src="images/251shells.webp" alt="251shells Preview"></div>
-                            <h4>ii-V-I Shells</h4><p>Training for 2-5-1 chord shells.</p>
-                        </a>
-                        <a href="circle.html" class="museum-item">
-                            <div class="museum-item-thumbnail"><img src="images/circle.webp" alt="Circle Preview"></div>
-                            <h4>Circle of Fifths</h4><p>Training for chords in all keys.</p>
-                        </a>
-                        <a href="9thchords.html" class="museum-item">
-                            <div class="museum-item-thumbnail"><img src="images/9thchords.webp" alt="9th Chords Preview"></div>
-                            <h4>9th Chords</h4><p>Practice 9th chord voicings.</p>
-                        </a>
+                    <button class="toggle-button" aria-expanded="true" aria-controls="museum-content">
+                        The Jacob Fleming Museum <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="museum-content" class="collapsible-content">
+                        <div class="museum-grid">
+                            <a href="Will.html" class="museum-item">
+                                <div class="museum-item-thumbnail"><img src="images/musicwheel.webp" alt="Music Wheel Preview"></div>
+                                <h4>Music Wheel</h4><p>Music wheel invention by Jacob Fleming</p>
+                            </a>
+                            <a href="2000.html" class="museum-item">
+                                <div class="museum-item-thumbnail"><img src="images/retro.webp" alt="Retro Theme Preview"></div>
+                                <h4>Retro Theme</h4><p>A 2000 themed retro version of my website</p>
+                            </a>
+                            <a href="ai_theme.html" class="museum-item">
+                                <div class="museum-item-thumbnail"><img src="images/ai_theme.webp" alt="AI Theme Preview"></div>
+                                <h4>AI Theme</h4><p>Futuristic high-tech theme of my website</p>
+                            </a>
+                            <a href="b.html" class="museum-item">
+                                <div class="museum-item-thumbnail"><img src="images/blackjack.webp" alt="Blackjack Sim Preview"></div>
+                                <h4>Blackjack Sim</h4><p>Interactive Blackjack card game</p>
+                            </a>
+                            <button type="button" id="audioToolsLink" class="museum-item">
+                                <div class="museum-item-thumbnail"><img src="images/audio_tools.webp" alt="Audio Tools Suite Preview"></div>
+                                <h4>Audio Tools Suite</h4><p>Tools for music producers</p>
+                            </button>
+                            <a href="251shells.html" class="museum-item">
+                                <div class="museum-item-thumbnail"><img src="images/251shells.webp" alt="251shells Preview"></div>
+                                <h4>ii-V-I Shells</h4><p>Training for 2-5-1 chord shells</p>
+                            </a>
+                            <a href="circle.html" class="museum-item">
+                                <div class="museum-item-thumbnail"><img src="images/circle.webp" alt="Circle Preview"></div>
+                                <h4>Circle of Fifths</h4><p>Training for chords in all keys</p>
+                            </a>
+                            <a href="9thchords.html" class="museum-item">
+                                <div class="museum-item-thumbnail"><img src="images/9thchords.webp" alt="9th Chords Preview"></div>
+                                <h4>9th Chords</h4><p>Practice 9th chord voicings</p>
+                            </a>
+                        </div>
+                        <p id="passwordError" role="alert" style="display: none; color: #ff4d4d; text-align: center; margin-top: 16px;">Invalid access code</p>
                     </div>
-                    <p id="passwordError" role="alert" style="display: none; color: #ff4d4d; text-align: center; margin-top: 16px;">Invalid access code.</p>
                 </section>
 
                 <section id="gallery" class="content-card fade-in">
@@ -490,7 +499,7 @@
                                 <option value="website">Website Design</option>
                                 <option value="other">Other</option>
                             </select>
-                            <textarea name="message" placeholder="Please provide details about your project." required aria-label="Your Inquiry" rows="5"></textarea>
+                            <textarea name="message" placeholder="Please provide details about your project" required aria-label="Your Inquiry" rows="5"></textarea>
                             <button type="submit">Send Message</button>
                         </form>
                     </div>
