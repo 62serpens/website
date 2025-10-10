@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Music Wheel: Fixing a Broken System</title>
+    <title>The Camelot Wheel: A Better Way</title>
     <style>
         body {
             font-family: 'Roboto', Arial, sans-serif;
@@ -22,31 +22,22 @@
         .section {
             margin-bottom: 20px;
         }
-        .image-placeholder {
-            background-color: #333;
-            height: 200px;
+        .image-long {
             width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: auto;
+            max-height: 150px;
+            object-fit: contain;
             margin: 20px 0;
             border: 2px solid #ff4d4d;
             border-radius: 5px;
         }
-        .image-placeholder-long {
-            background-color: #333;
-            height: 150px;
+        .image-square {
             width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            max-width: 400px;
+            height: auto;
             margin: 20px 0;
             border: 2px solid #ff4d4d;
             border-radius: 5px;
-        }
-        .image-placeholder p, .image-placeholder-long p {
-            color: #888;
-            font-style: italic;
         }
         ul {
             list-style-type: square;
@@ -62,7 +53,7 @@
     </style>
 </head>
 <body>
-    <h1>The Music Wheel: A Better Way</h1>
+    <h1>The Camelot Wheel: A Better Way</h1>
     <div class="section">
         <h2>Why the Current System Sucks</h2>
         <ul>
@@ -70,16 +61,12 @@
             <li><strong>Use a Clock Face:</strong> Everyone understands a clock.</li>
             <li><strong>Unify Colour System That Makes Sense:</strong> We will use the established colours of a 12-coloured rainbow in the correct order. Putting red at the top makes a lot more sense. Easier to remember, more intuitive.</li>
         </ul>
-        <div class="image-placeholder-long">
-            <p>[Insert Image: Circle of Fifths vs. Camelot Wheel vs. Open Key Notation]</p>
-        </div>
+        <img src="/images/oldsystems.webp" alt="Circle of Fifths vs. Camelot Wheel vs. Open Key Notation" class="image-long">
     </div>
     <div class="section">
         <h2>My Solution: The Music Wheel</h2>
         <p>Toss all that out and turn it into this. A system that combines the circle of fifths, a clock face, and a 12-color rainbow. C major at 12 o’clock, numbered 1-12, red at the top, and clear labels (A for major, B for minor). It’s intuitive, open-source, and built for DJs and musicians to actually understand music theory.</p>
-        <div class="image-placeholder">
-            <p>[Insert Image: The Music Wheel Diagram]</p>
-        </div>
+        <img src="/images/musicwheel.png" alt="The Music Wheel Diagram" class="image-square">
         <p class="credit">Invented by Jacob Fleming</p>
     </div>
     <div class="section">
