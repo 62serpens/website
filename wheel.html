@@ -41,7 +41,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .image-rainbow {
+        .image-rainbow, .image-clock {
             width: 100%;
             max-width: 200px;
             height: auto;
@@ -122,6 +122,7 @@
             <li><strong>A Clock Face</strong> - a clocks orientation is easily recognisable.</li>
             <li><strong>A 12-Colour Rainbow</strong> - starting with red at 12 o'clock, following the established order of the 12 colour rainbow.</li>
         </ul>
+        <img src="/images/clock.jpg" alt="Clock Face Diagram" class="image-clock" onclick="openLightbox(this.src)">
         <img src="/images/12colorrainbow.png" alt="12-Color Rainbow Diagram" class="image-rainbow" onclick="openLightbox(this.src)">
         <p>Clear labeling: <strong>A for major keys, B for minor keys.</strong></p>
         <p>This system is intuitive, easy to remember, and helps DJs learn actual music theory instead of working around a proprietary system. It is designed to be easily translatable.</p>
@@ -137,7 +138,6 @@
         The traditional Camelot system uses B for major and A for minor, which feels backwards. Major is more primary, so A makes more sense. Also, if there is any confusion around B/♭, the A/B could be swapped for something else, like X/Y. The current version does work well, it also teaches DJs how flats and sharps are communicated.</p>
         <p><strong>Apparently, 1 was put at the top of the Open Key Notation system, so when tracks are organized within a DJ software, it is ordered from 1-12</strong><br>
         This may be true; however, having uniformity with a clock face is far more important than this issue and should not be compromised. These softwares should find a workaround that doesn't involve changing the core communication foundation of the wheel itself.</p>
-       
     </div>
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <img id="lightbox-image" src="" alt="Enlarged Image">
