@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="jacobfleming - Music Producer">
+    <meta name="description" content="Jacob Fleming: Music Producer, Game Creator, AI Innovator, and Theorist">
     <meta name="keywords" content="music production, music producer, sound design, jacobfleming, mixing, engineering, manrope, liquid glass">
     <meta name="author" content="jacobfleming">
     <meta name="theme-color" content="#F4F4F4" media="(prefers-color-scheme: light)">
@@ -16,7 +16,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <style>
@@ -61,6 +61,46 @@
             --bonus-item-hover-bg: rgba(0, 0, 0, 0.3);
             --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a0a0a0'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
             --image-bg-url: url('https://source.unsplash.com/1920x1080/?misty,forest,night');
+        }
+
+        [data-theme="retro"] {
+            --font-body: 'Press Start 2P', sans-serif;
+            --font-signature: 'Press Start 2P', sans-serif;
+            --text-primary: #00ff00;
+            --text-secondary: #00cc00;
+            --bg-body: #000000;
+            --bg-canvas-opaque: #111111;
+            --bg-glass: rgba(0, 255, 0, 0.2);
+            --border-color: rgba(0, 255, 0, 0.4);
+            --form-bg: rgba(0, 255, 0, 0.15);
+            --form-focus-bg: rgba(0, 255, 0, 0.25);
+            --button-text-color: #000000;
+            --nav-hover-bg: rgba(0, 255, 0, 0.3);
+            --shadow-color: rgba(0, 255, 0, 0.2);
+            --bonus-item-bg: rgba(0, 255, 0, 0.15);
+            --bonus-item-hover-bg: rgba(0, 255, 0, 0.3);
+            --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300cc00'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+            --image-bg-url: url('https://source.unsplash.com/1920x1080/?retro,pixel');
+        }
+
+        [data-theme="ai"] {
+            --font-body: 'Orbitron', sans-serif;
+            --font-signature: 'Orbitron', sans-serif;
+            --text-primary: #00d4ff;
+            --text-secondary: #66ccff;
+            --bg-body: #0a0a23;
+            --bg-canvas-opaque: #1a1a3a;
+            --bg-glass: rgba(0, 212, 255, 0.2);
+            --border-color: rgba(0, 212, 255, 0.4);
+            --form-bg: rgba(0, 212, 255, 0.15);
+            --form-focus-bg: rgba(0, 212, 255, 0.25);
+            --button-text-color: #000000;
+            --nav-hover-bg: rgba(0, 212, 255, 0.3);
+            --shadow-color: rgba(0, 212, 255, 0.2);
+            --bonus-item-bg: rgba(0, 212, 255, 0.15);
+            --bonus-item-hover-bg: rgba(0, 212, 255, 0.3);
+            --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2366ccff'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+            --image-bg-url: url('https://source.unsplash.com/1920x1080/?futuristic,neon');
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -133,8 +173,10 @@
         }
         
         .section-header { font-size: 2.2rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); letter-spacing: -0.02em; }
-        .opening-statement { font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); }
+        .opening-statement { font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 16px; }
         .opening-statement a { color: var(--text-primary); }
+        .beatstore-button { background: var(--text-primary); color: var(--button-text-color); padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-block; transition: opacity var(--transition-duration) ease-in-out; font-size: 1.2rem; }
+        .beatstore-button:hover { opacity: 0.85; }
 
         .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
         .discography-item { display: flex; flex-direction: column; text-align: center; }
@@ -174,14 +216,13 @@
         .gallery-img { width: 100%; border-radius: 10px; cursor: pointer; transition: transform var(--transition-duration) ease-in-out, opacity 0.3s ease-in-out; }
         .gallery-img:hover { transform: scale(1.03); opacity: 0.9; }
         
-        .bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
-        .bonus-grid-alt { display: none; }
-        .bonus-item { display: flex; flex-direction: column; text-decoration: none; color: var(--text-primary); background: var(--bonus-item-bg); border-radius: 8px; padding: 12px; border: 1px solid var(--border-color); transition: all var(--transition-duration) ease-in-out; }
-        .bonus-item:hover { transform: translateY(-4px); border-color: var(--text-primary); background: var(--bonus-item-hover-bg); }
-        .bonus-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
-        .bonus-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; flex-grow: 1; }
-        .bonus-item-thumbnail img { width: 100%; height: 100px; object-fit: cover; border-radius: 12px; margin-bottom: 8px; }
-        button.bonus-item { font-family: var(--font-body); width: 100%; cursor: pointer; text-align: left; }
+        .museum-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .museum-item { display: flex; flex-direction: column; text-decoration: none; color: var(--text-primary); background: var(--bonus-item-bg); border-radius: 8px; padding: 12px; border: 1px solid var(--border-color); transition: all var(--transition-duration) ease-in-out; }
+        .museum-item:hover { transform: translateY(-4px); border-color: var(--text-primary); background: var(--bonus-item-hover-bg); }
+        .museum-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+        .museum-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; flex-grow: 1; }
+        .museum-item-thumbnail img { width: 100%; height: 100px; object-fit: cover; border-radius: 12px; margin-bottom: 8px; }
+        button.museum-item { font-family: var(--font-body); width: 100%; cursor: pointer; text-align: left; }
         
         .site-footer { text-align: center; color: var(--text-secondary); text-shadow: none; padding: 20px 0; font-size: 0.9rem; margin-top: 24px; }
         
@@ -223,8 +264,34 @@
         input:checked + .slider { background-color: var(--text-primary); }
         input:checked + .slider:before { transform: translateX(24px); }
 
-        .beatstore-button { background: var(--text-primary); color: var(--button-text-color); padding: 14px 28px; border-radius: 8px; font-weight: 700; text-decoration: none; display: inline-block; transition: opacity var(--transition-duration) ease-in-out; font-size: 1.2rem; }
-        .beatstore-button:hover { opacity: 0.85; }
+        /* Collapsible Section Styles */
+        .collapsible-content {
+            max-height: none;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .collapsible-content.collapsed {
+            max-height: 0;
+        }
+        .toggle-button {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 2.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            text-align: left;
+            transition: color var(--transition-duration);
+        }
+        .toggle-button i { transition: transform 0.3s ease; }
+        .toggle-button[aria-expanded="true"] i { transform: rotate(180deg); }
 
         @media (max-width: 900px) {
             .site-wrapper { flex-direction: column; }
@@ -261,9 +328,8 @@
             .modal-close { top: 10px; right: 10px; }
 
             .discography-grid { grid-template-columns: repeat(2, 1fr); }
-            .bonus-grid { grid-template-columns: repeat(2, 1fr); }
-            .bonus-grid-alt { display: none; }
-            .bonus-item-thumbnail img { height: 80px; }
+            .museum-grid { grid-template-columns: repeat(2, 1fr); }
+            .museum-item-thumbnail img { height: 80px; }
         }
     </style>
 </head>
@@ -293,10 +359,11 @@
             <div class="sidebar-controls">
                 <nav class="main-nav">
                     <ul>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#home">Home</a></li>
                         <li><a href="#discography">Discography</a></li>
+                        <li><a href="#museum">Museum</a></li>
                         <li><a href="#gallery">Gallery</a></li>
-                        <li><a href="#bonus">Bonus</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -311,27 +378,6 @@
                 <section id="home" class="content-card fade-in">
                     <h2 class="section-header">New Beatstore</h2>
                     <iframe src="https://traktrain.com/widget/270063" width="100%" height="555" frameborder="0"></iframe>
-                </section>
-
-                <section id="contact" class="content-card fade-in">
-                    <h2 class="section-header">Contact</h2>
-                    <form name="contact" method="POST" data-netlify="true" action="/success" class="contact-form">
-                        <input type="hidden" name="form-name" value="contact">
-                        <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
-                        <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
-                        <input type="text" name="social-links" placeholder="Relevant Social Media or Streaming Links" aria-label="Social Media Links">
-                        <select name="category" id="category" required aria-label="Service Category">
-                            <option value="" disabled selected>Select Contact Type</option>
-                            <option value="production">Personalized Production</option>
-                            <option value="lease">MP3/WAV Lease</option>
-                            <option value="mixing">Recording & Engineering</option>
-                            <option value="tutoring">Production Tutoring</option>
-                            <option value="website">Website Design</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <textarea name="message" placeholder="Please provide details about your project." required aria-label="Your Inquiry" rows="5"></textarea>
-                        <button type="submit">Send Message</button>
-                    </form>
                 </section>
 
                 <section id="discography" class="content-card fade-in">
@@ -372,39 +418,82 @@
                     </div>
                 </section>
 
-                <section id="gallery" class="content-card fade-in">
-                    <h2 class="section-header">Gallery</h2>
-                    <div class="gallery-grid">
-                        <img src="images/img_015.jpg" alt="Studio Setup 3" class="gallery-img" loading="lazy">
-                        <img src="images/img_017.jpg" alt="Studio Setup 5" class="gallery-img" loading="lazy">
-                    </div>
-                </section>
-
-                <section id="bonus" class="content-card fade-in">
-                    <h2 class="section-header">Bonus</h2>
-                    <div class="bonus-grid">
-                        <a href="b.html" class="bonus-item" style="display: none;">
-                            <div class="bonus-item-thumbnail"><img src="images/blackjack.webp" alt="Blackjack Sim Preview"></div>
+                <section id="museum" class="content-card fade-in">
+                    <h2 class="section-header">The Jacob Fleming Museum</h2>
+                    <p class="opening-statement">Explore my creative journey: music, games, AI, and ideas.</p>
+                    <a href="#home" class="beatstore-button">Listen Now</a>
+                    <div class="museum-grid">
+                        <a href="#home" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/albumart_downbad.jpg" alt="Music Portfolio Preview"></div>
+                            <h4>Music Portfolio</h4><p>My latest tracks and beats.</p>
+                        </a>
+                        <a href="2000.html" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/retro.webp" alt="Retro Arcade Preview"></div>
+                            <h4>Retro Arcade</h4><p>Classic games with a 2000s vibe.</p>
+                        </a>
+                        <a href="ai_theme.html" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/ai_theme.webp" alt="AI Lab Preview"></div>
+                            <h4>AI Lab</h4><p>Experiments in artificial intelligence.</p>
+                        </a>
+                        <a href="b.html" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/blackjack.webp" alt="Blackjack Sim Preview"></div>
                             <h4>Blackjack Sim</h4><p>Interactive Blackjack card game.</p>
                         </a>
-                        <button type="button" id="audioToolsLink" class="bonus-item">
-                            <div class="bonus-item-thumbnail"><img src="images/audio_tools.webp" alt="Audio Tools Suite Preview"></div>
+                        <button type="button" id="audioToolsLink" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/audio_tools.webp" alt="Audio Tools Suite Preview"></div>
                             <h4>Audio Tools Suite</h4><p>Tools for music producers.</p>
                         </button>
-                         <a href="251shells.html" class="bonus-item">
-                            <div class="bonus-item-thumbnail"><img src="images/251shells.webp" alt="251shells Preview"></div>
+                        <a href="251shells.html" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/251shells.webp" alt="251shells Preview"></div>
                             <h4>ii-V-I Shells</h4><p>Training for 2-5-1 chord shells.</p>
                         </a>
-                        <a href="circle.html" class="bonus-item">
-                            <div class="bonus-item-thumbnail"><img src="images/circle.webp" alt="Circle Preview"></div>
+                        <a href="circle.html" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/circle.webp" alt="Circle Preview"></div>
                             <h4>Circle of Fifths</h4><p>Training for chords in all keys.</p>
                         </a>
-                        <a href="9thchords.html" class="bonus-item">
-                            <div class="bonus-item-thumbnail"><img src="images/9thchords.webp" alt="9th Chords Preview"></div>
+                        <a href="9thchords.html" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/9thchords.webp" alt="9th Chords Preview"></div>
                             <h4>9th Chords</h4><p>Practice 9th chord voicings.</p>
                         </a>
                     </div>
                     <p id="passwordError" role="alert" style="display: none; color: #ff4d4d; text-align: center; margin-top: 16px;">Invalid access code.</p>
+                </section>
+
+                <section id="gallery" class="content-card fade-in">
+                    <button class="toggle-button" aria-expanded="false" aria-controls="gallery-content">
+                        Gallery <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="gallery-content" class="collapsible-content collapsed">
+                        <div class="gallery-grid">
+                            <img src="images/img_015.jpg" alt="Studio Setup 3" class="gallery-img" loading="lazy">
+                            <img src="images/img_017.jpg" alt="Studio Setup 5" class="gallery-img" loading="lazy">
+                        </div>
+                    </div>
+                </section>
+
+                <section id="contact" class="content-card fade-in">
+                    <button class="toggle-button" aria-expanded="false" aria-controls="contact-content">
+                        Contact <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="contact-content" class="collapsible-content collapsed">
+                        <form name="contact" method="POST" data-netlify="true" action="/success" class="contact-form">
+                            <input type="hidden" name="form-name" value="contact">
+                            <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
+                            <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
+                            <input type="text" name="social-links" placeholder="Relevant Social Media or Streaming Links" aria-label="Social Media Links">
+                            <select name="category" id="category" required aria-label="Service Category">
+                                <option value="" disabled selected>Select Contact Type</option>
+                                <option value="production">Personalized Production</option>
+                                <option value="lease">MP3/WAV Lease</option>
+                                <option value="mixing">Recording & Engineering</option>
+                                <option value="tutoring">Production Tutoring</option>
+                                <option value="website">Website Design</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <textarea name="message" placeholder="Please provide details about your project." required aria-label="Your Inquiry" rows="5"></textarea>
+                            <button type="submit">Send Message</button>
+                        </form>
+                    </div>
                 </section>
                 
                 <footer class="site-footer">
@@ -426,7 +515,7 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         
-        // ADDED: Clean facebook/instagram tracking parameters from URL
+        // Clean facebook/instagram tracking parameters from URL
         if (window.location.search && window.location.search.includes('fbclid')) {
             const cleanUrl = window.location.pathname + window.location.hash;
             history.replaceState(null, document.title, cleanUrl);
@@ -438,14 +527,19 @@
         const sections = document.querySelectorAll('main section');
         const navLinks = document.querySelectorAll('.main-nav a');
 
-        // THEME TOGGLE LOGIC
+        // Theme Toggle Logic
         const themeToggle = document.getElementById('theme-toggle');
         const applyTheme = (theme) => {
             document.documentElement.setAttribute('data-theme', theme);
-            themeToggle.checked = theme === 'dark';
+            themeToggle.checked = theme === 'dark' || theme === 'retro' || theme === 'ai';
         };
-        const savedTheme = localStorage.getItem('theme');
-        applyTheme(savedTheme || 'dark');
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlTheme = urlParams.get('theme');
+        const validThemes = ['light', 'dark', 'retro', 'ai'];
+        let theme = localStorage.getItem('theme') || urlTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (!validThemes.includes(theme)) theme = 'dark';
+        applyTheme(theme);
+        localStorage.setItem('theme', theme);
         themeToggle.addEventListener('change', function() {
             const theme = this.checked ? 'dark' : 'light';
             applyTheme(theme);
@@ -470,15 +564,10 @@
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
-                if (targetId === '#contact') {
-                    // Scroll to top of page for contact link
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        const topPos = targetElement.getBoundingClientRect().top + window.scrollY - 40;
-                        window.scrollTo({ top: topPos, behavior: 'smooth' });
-                    }
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const topPos = targetElement.getBoundingClientRect().top + window.scrollY - 40;
+                    window.scrollTo({ top: topPos, behavior: 'smooth' });
                 }
                 if (leftPane.classList.contains('open')) {
                     leftPane.classList.remove('open');
@@ -516,6 +605,18 @@
         contentSections.forEach(section => {
             section.classList.add('fade-in');
             observer.observe(section);
+        });
+
+        // Collapsible Section Logic
+        const toggleButtons = document.querySelectorAll('.toggle-button');
+        toggleButtons.forEach(button => {
+            const contentId = button.getAttribute('aria-controls');
+            const content = document.getElementById(contentId);
+            button.addEventListener('click', () => {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                button.setAttribute('aria-expanded', !isExpanded);
+                content.classList.toggle('collapsed', isExpanded);
+            });
         });
 
         // Audio Tools Password Prompt
