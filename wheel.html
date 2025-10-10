@@ -35,7 +35,7 @@
         }
         .image-square {
             width: 100%;
-            max-width: 600px; /* Increased size for musicwheel.png */
+            max-width: 600px;
             height: auto;
             margin: 20px 0;
             border: 2px solid #ff4d4d;
@@ -66,7 +66,6 @@
         .home-button:hover {
             background-color: #e63939;
         }
-        /* Lightbox styles */
         .lightbox {
             display: none;
             position: fixed;
@@ -93,29 +92,40 @@
 </head>
 <body>
     <a href="https://jacobfleming.me" class="home-button">Back to Home</a>
-    <h1>The Camelot Wheel: A Better Way</h1>
+    <h1>The Music Wheel: A Better System for DJs and Musicians</h1>
     <div class="section">
-        <h2>Why the Current System Sucks</h2>
-        <ul>
-            <li><strong>The Circle of Fifths:</strong> You keep that the circle of fifths is music’s backbone. C major should be at the top. It should not be spun around for any reason. It makes learning music confusing and unnecessarily difficult for DJs. The reason it was rotated was a business/copyright issue which will be explained below.</li>
-            <li><strong>Use a Clock Face:</strong> Everyone understands a clock.</li>
-            <li><strong>Unify Colour System That Makes Sense:</strong> We will use the established colours of a 12-coloured rainbow in the correct order. Putting red at the top makes a lot more sense. Easier to remember, more intuitive.</li>
-        </ul>
+        <h2>The Problem</h2>
+        <p>The Circle of Fifths is the backbone of music theory—it's been around for centuries and forms the foundation of how we understand key relationships. But current DJ systems like the Camelot Wheel have rotated and rebranded it, making music theory unnecessarily confusing for DJs and creating tension between DJs and traditionally trained musicians.</p>
+        <p><strong>Why was it changed?</strong> The Camelot Wheel was developed by Mixed In Key and rotated specifically so it could be copyrighted and included in their software. Since you can't copyright the Circle of Fifths itself, they altered it to make it "unique." The result: a confusing system with random color choices that makes learning harder than it needs to be.</p>
         <img src="/images/oldsystems.webp" alt="Circle of Fifths vs. Camelot Wheel vs. Open Key Notation" class="image-long" onclick="openLightbox(this.src)">
     </div>
     <div class="section">
-        <h2>My Solution: The Music Wheel</h2>
-        <p>Toss all that out and turn it into this. A system that combines the circle of fifths, a clock face, and a 12-color rainbow. C major at 12 o’clock, numbered 1-12, red at the top, and clear labels (A for major, B for minor). It’s intuitive, open-source, and built for DJs and musicians to actually understand music theory.</p>
+        <h2>The Solution: The Music Wheel</h2>
+        <p>A unified, open-source system that combines three things everyone already understands:</p>
+        <ul>
+            <li><strong>The Circle of Fifths</strong> - in its traditional orientation with C major at the top</li>
+            <li><strong>A Clock Face</strong> - numbered 1-12, because everyone knows how to read a clock</li>
+            <li><strong>A 12-Color Rainbow</strong> - starting with red at 12 o'clock, following the established order</li>
+        </ul>
+        <p>Clear labeling: <strong>A for major keys, B for minor keys</strong> (because major is primary—it just makes sense).</p>
+        <p>This system is intuitive, easy to remember, and helps DJs learn actual music theory instead of working around a proprietary system.</p>
         <img src="/images/musicwheel.png" alt="The Music Wheel Diagram" class="image-square" onclick="openLightbox(this.src)">
         <p class="credit">Invented by Jacob Fleming</p>
     </div>
     <div class="section">
-        <h2>Why the Camelot Wheel Is a Mess</h2>
-        <p>The Camelot Wheel was created by a staff member at Mixed In Key. They wanted to copyright it, but you can’t copyright the circle of fifths—it’s universal knowledge. So, they spun it around to make it “unique,” which just made it confusing for no reason. The color choices? Random and ugly. The whole thing’s a branded product when it should be open-source knowledge.</p>
+        <h2>Things to Consider</h2>
+        <p><strong>"If it ain't broke, don't fix it"</strong><br>
+        Fair point, but this <em>is</em> broken. The current system makes music theory harder than it should be. A streamlined, open-source approach benefits everyone long-term.</p>
+        <p><strong>About the colors and synesthesia</strong><br>
+        I'm not claiming keys <em>sound</em> like specific colors—musical colors are subjective. The rainbow is simply a reference point that's easy to remember. I considered using a traditional 7-color rainbow (red, orange, yellow, green, blue, indigo, violet), but the standardized 12-color rainbow gives each key its own distinct color, which is cleaner.</p>
+        <p><strong>Why A for major and B for minor?</strong><br>
+        The traditional Camelot system uses B for major and A for minor, which feels backwards. Major is more primary, so A makes intuitive sense. If the B/♭ confusion becomes an issue, these could be swapped for X/Y, but the current version works well.</p>
     </div>
     <div class="section">
-        <h2>Potential Issues</h2>
-        <p>I get the saying “if it ain’t broke, don’t fix it,” but this *is* broken. The current system makes music theory harder than it needs to be. A streamlined, open-source system like the Music Wheel would be better for music culture and education moving forward. Also, I’m not saying keys *sound* like rainbow colors—it’s just an easy way to remember and reference them. I know some folks with synesthesia might see it differently, and that’s cool. I also considered using the seven-color rainbow (red, orange, yellow, green, blue, indigo, violet) for simplicity, but a 12-color rainbow gives each key its own distinct color, which is cleaner than mushing them together. Oh, and I swapped A and B (A for major, B for minor) because it feels more intuitive—major as A just clicks better.</p>
+        <p class="credit"><strong>Invented by Jacob Fleming</strong><br>
+        Open-source. Intuitive. Built for the music community and future generations.</p>
+    </div>
+    <-community and future generations.</p>
     </div>
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <img id="lightbox-image" src="" alt="Enlarged Image">
