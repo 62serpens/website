@@ -175,19 +175,19 @@
     
     .section-header { font-size: 2.2rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); letter-spacing: -0.02em; }
 
-    .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); gap: 12px; }
+    .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); gap: 10px; }
     .discography-item { display: flex; flex-direction: column; text-align: center; }
     .discography-item h3 {
-        font-size: .7rem; 
+        font-size: .6rem; 
         line-height: 1.2; 
-        font-weight: 600; 
-        margin-bottom: 3px;
+        font-weight: 500; 
+        margin-bottom: 2px;
         min-height: 2.4em;
     }
-    .discography-item p { font-size: .65rem; color: var(--text-secondary); margin-bottom: 4px; font-weight: 300; }
-    .discography-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 6px; border: 1px solid var(--border-color); transition: transform var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out; margin-bottom: 6px; }
+    .discography-item p { font-size: .7rem; color: var(--text-secondary); margin-bottom: 4px; font-weight: 300; }
+    .discography-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-color); transition: transform var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out; margin-bottom: 4px; }
     .discography-img:hover { transform: scale(1.05); box-shadow: 0 6px 25px var(--shadow-color); }
-    .discography-item a.artist-link { font-size: .65rem; color: var(--text-primary); text-decoration: none; }
+    .discography-item a.artist-link { font-size: .7rem; color: var(--text-primary); text-decoration: none; }
     .discography-item a.artist-link:hover { text-decoration: underline; }
     
     .contact-form { display: flex; flex-direction: column; gap: 16px; }
@@ -500,14 +500,14 @@
                                     </button>
                                     <div id="jacob-performances" class="collapsible-content collapsed">
                                         <div class="performance-links">
-                                            <a href="https://www.youtube.com/watch?v=example1" target="_blank" rel="noopener noreferrer">
-                                                <i class="fab fa-youtube"></i> Piano Performance - Song Title 1
+                                            <a href="https://www.instagram.com/p/DRJ3EEeCcBi/" target="_blank" rel="noopener noreferrer">
+                                                <i class="fab fa-instagram"></i> Piano Performance - All Of Me Live Solo
                                             </a>
-                                            <a href="https://www.youtube.com/watch?v=example2" target="_blank" rel="noopener noreferrer">
-                                                <i class="fab fa-youtube"></i> Piano Performance - Song Title 2
+                                            <a href="https://youtu.be/L4p_94QDkis?si=UEAvTMFp1RejWhrL" target="_blank" rel="noopener noreferrer">
+                                                <i class="fab fa-youtube"></i> Piano Performance - All Of Me (at home)
                                             </a>
-                                            <a href="https://www.youtube.com/watch?v=example3" target="_blank" rel="noopener noreferrer">
-                                                <i class="fab fa-youtube"></i> Piano Performance - Song Title 3
+                                            <a href="https://www.tiktok.com/@1jacobfleming/video/7594760797910207762" target="_blank" rel="noopener noreferrer">
+                                                <i class="fab fa-tiktok"></i> Piano Performance - XXXTENTACION - NEVER
                                             </a>
                                         </div>
                                     </div>
@@ -599,10 +599,30 @@
                                 <!-- Theme Links -->
                                 <div class="roster-subsection">
                                     <div class="performance-links">
-                                        <a href="2000.html">Retro Theme Site</a>
-                                        <a href="ai_theme.html">AI Theme Site</a>
+                                        <a href="2000.html" style="display: flex; align-items: center; gap: 12px;">
+                                            <img src="images/retro.webp" alt="Retro Theme" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;">
+                                            <span>Retro Theme Site</span>
+                                        </a>
+                                        <a href="ai_theme.html" style="display: flex; align-items: center; gap: 12px;">
+                                            <img src="images/ai_theme.webp" alt="AI Theme" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;">
+                                            <span>AI Theme Site</span>
+                                        </a>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <!-- Coming Soon Member -->
+                        <div class="roster-item" style="opacity: 0.6;">
+                            <div class="roster-left">
+                                <img src="images/default-avatar.png" alt="coming soon" style="filter: blur(2px);">
+                                <div class="social-links">
+                                    <span class="social-icon" style="color: var(--text-secondary);"><i class="fas fa-question"></i></span>
+                                </div>
+                            </div>
+                            <div class="roster-right">
+                                <h3>coming soon...</h3>
+                                <p class="write-up">the next member of flow records is on the way. stay tuned for announcements.</p>
                             </div>
                         </div>
                     </div>
