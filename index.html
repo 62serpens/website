@@ -1,19 +1,3 @@
-Here’s your updated version of the site with all the requested changes applied:Key changes made:Apply/Contact section title → "Submit all Flow Records inquiries here"
-Welcome text simplified + rebranded lowercase + new description
-Discography properly moved under 62serpens only
-Removed Retro & AI theme links from Museum (they're now under 62serpens)
-Smaller discography images (reduced card size + image size)
-Roster layout improved: smaller square avatar on left, socials below it, short bio/description on right, then collapsible sections below
-Jacob Fleming now has Performances collapsible section (with placeholder links — replace with real ones)
-Added placeholder Beat Store collapsible section under Jacob (you can later embed beatstars widget there)
-Updated profile pictures:Flow Records → flowrecordslogo.png
-Jacob Fleming → jacobfleming.jpg
-62serpens → 62logo.jpg
-
-Various small visual tweaks for better spacing & softness
-
-html
-
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -22,374 +6,851 @@ html
     <meta name="description" content="Flow Records: Modern Record Label Supporting Artists">
     <meta name="keywords" content="music production, record label, flow records, jacob fleming, 62serpens">
     <meta name="author" content="flowrecords">
-    <title>flow records</title>
+    <meta name="theme-color" content="#F4F4F4" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#101010" media="(prefers-color-scheme: dark)">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Flow Records</title>
     
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FFFFFF'%3E%3C/rect%3E%3Ctext x='50' y='50' font-family='-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif' font-size='50' font-weight='600' fill='%231a1a1a' text-anchor='middle' dy='.3em'%3EFR%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FFFFFF'%3E%3C/rect%3E%3Ctext x='50' y='50' font-family='-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif' font-size='50' font-weight='600' fill='%231a1a1a' text-anchor='middle' dy='.3em'%3EFR%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+    :root {
+        --font-body: 'Manrope', sans-serif;
+        --font-signature: 'Manrope', sans-serif; 
+        --transition-duration: 0.5s;
+        --border-radius: 18px;
+
+        /* Light Theme (Default) */
+        --text-primary: #222222;
+        --text-secondary: #333333;
+        --bg-body: #EAEAEA;
+        --bg-canvas-opaque: #F8F8F8;
+        --bg-glass: rgba(255, 255, 255, 0.45);
+        --border-color: rgba(200, 200, 200, 0.4);
+        --form-bg: rgba(255, 255, 255, 0.6);
+        --form-focus-bg: #fff;
+        --button-text-color: #fff;
+        --nav-hover-bg: rgba(0,0,0,0.04);
+        --shadow-color: rgba(0, 0, 0, 0.08);
+        --bonus-item-bg: rgba(255, 255, 255, 0.3);
+        --bonus-item-hover-bg: rgba(255, 255, 255, 0.5);
+        --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333333'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+        --image-bg-url: url('https://source.unsplash.com/1920x1080/?misty,forest,tasmania');
+    }
+
+    [data-theme="dark"] {
+        /* Dark Theme */
+        --text-primary: #e5e5e5;
+        --text-secondary: #a0a0a0;
+        --bg-body: #121212;
+        --bg-canvas-opaque: #181818;
+        --bg-glass: rgba(35, 35, 35, 0.5);
+        --border-color: rgba(255, 255, 255, 0.15);
+        --form-bg: rgba(0, 0, 0, 0.2);
+        --form-focus-bg: rgba(0,0,0,0.3);
+        --button-text-color: #000;
+        --nav-hover-bg: rgba(255,255,255,0.08);
+        --shadow-color: rgba(0, 0, 0, 0.2);
+        --bonus-item-bg: rgba(0, 0, 0, 0.15);
+        --bonus-item-hover-bg: rgba(0, 0, 0, 0.3);
+        --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a0a0a0'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+        --image-bg-url: url('https://source.unsplash.com/1920x1080/?misty,forest,night');
+    }
+
+    [data-theme="retro"] {
+        --font-body: 'Press Start 2P', sans-serif;
+        --font-signature: 'Press Start 2P', sans-serif;
+        --text-primary: #00ff00;
+        --text-secondary: #00cc00;
+        --bg-body: #000000;
+        --bg-canvas-opaque: #111111;
+        --bg-glass: rgba(0, 255, 0, 0.2);
+        --border-color: rgba(0, 255, 0, 0.4);
+        --form-bg: rgba(0, 255, 0, 0.15);
+        --form-focus-bg: rgba(0, 255, 0, 0.25);
+        --button-text-color: #000000;
+        --nav-hover-bg: rgba(0, 255, 0, 0.3);
+        --shadow-color: rgba(0, 255, 0, 0.2);
+        --bonus-item-bg: rgba(0, 255, 0, 0.15);
+        --bonus-item-hover-bg: rgba(0, 255, 0, 0.3);
+        --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300cc00'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+        --image-bg-url: url('https://source.unsplash.com/1920x1080/?retro,pixel');
+    }
+
+    [data-theme="ai"] {
+        --font-body: 'Orbitron', sans-serif;
+        --font-signature: 'Orbitron', sans-serif;
+        --text-primary: #00d4ff;
+        --text-secondary: #66ccff;
+        --bg-body: #0a0a23;
+        --bg-canvas-opaque: #1a1a3a;
+        --bg-glass: rgba(0, 212, 255, 0.2);
+        --border-color: rgba(0, 212, 255, 0.4);
+        --form-bg: rgba(0, 212, 255, 0.15);
+        --form-focus-bg: rgba(0, 212, 255, 0.25);
+        --button-text-color: #000000;
+        --nav-hover-bg: rgba(0, 212, 255, 0.3);
+        --shadow-color: rgba(0, 212, 255, 0.2);
+        --bonus-item-bg: rgba(0, 212, 255, 0.15);
+        --bonus-item-hover-bg: rgba(0, 212, 255, 0.3);
+        --select-arrow-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2366ccff'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+        --image-bg-url: url('https://source.unsplash.com/1920x1080/?futuristic,neon');
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+        font-family: var(--font-body);
+        font-weight: 400;
+        background-color: var(--bg-body);
+        color: var(--text-primary);
+        background-image: var(--image-bg-url);
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        transition: background-color var(--transition-duration), color var(--transition-duration);
+    }
+    ::selection { background: rgba(180, 220, 255, 0.7); color: #000; }
+
+    .site-wrapper { display: flex; align-items: flex-start; }
+    .left-pane {
+        width: 320px;
+        flex-shrink: 0;
+        background-color: var(--bg-canvas-opaque);
+        border-right: 1px solid var(--border-color);
+        padding: 40px 32px;
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        transition: transform 0.4s ease, box-shadow 0.4s ease, background-color var(--transition-duration), border-color var(--transition-duration);
+    }
+    .right-pane { flex-grow: 1; padding: 40px; }
+    .content-sections { display: flex; flex-direction: column; gap: 24px; max-width: 720px; margin: 0 auto; }
+    .site-title { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 16px; text-align: left; }
+
+    .identity { text-align: center; }
+    .profile-pic { width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 20px; border: 1px solid var(--border-color); object-fit: cover; }
+    .signature { font-size: 2.4rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; }
+    .title { font-size: 1rem; color: var(--text-secondary); margin-top: 8px; letter-spacing: 0.5px; }
+    .social-links { margin-top: 16px; margin-bottom: 24px; text-align: center; }
+    .social-icon { font-size: 1.1rem; color: #999; margin: 0 8px; transition: color var(--transition-duration) ease-in-out; }
+    .social-icon:hover { color: var(--text-primary); }
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    .sidebar-controls {
+        margin-top: auto;
+        padding-top: 20px;
+    }
+    .main-nav ul { list-style: none; }
+    .main-nav a { display: block; padding: 10px; margin: 2px 0; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-weight: 400; font-size: 1.1rem; transition: all var(--transition-duration) ease-in-out; }
+    .main-nav a:hover, .main-nav a.active { background-color: var(--nav-hover-bg); color: var(--text-primary); }
+    .hamburger { display: none; }
+
+    .content-card {
+        background: var(--bg-glass);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        padding: 32px 40px;
+        box-shadow: 0 10px 40px 0 var(--shadow-color);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        transition: all var(--transition-duration) cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
     
-    <style>
-        :root {
-            --font-body: 'Manrope', sans-serif;
-            --transition-duration: 0.5s;
-            --border-radius: 16px;
-            --text-primary: #e5e5e5;
-            --text-secondary: #a0a0a0;
-            --bg-body: #121212;
-            --bg-canvas-opaque: #181818;
-            --bg-glass: rgba(35, 35, 35, 0.55);
-            --border-color: rgba(255, 255, 255, 0.14);
-            --shadow-color: rgba(0, 0, 0, 0.25);
+    .section-header { font-size: 2.2rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); letter-spacing: -0.02em; }
+
+    .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 16px; }
+    .discography-item { display: flex; flex-direction: column; text-align: center; }
+    .discography-item h3 {
+        font-size: .8rem; 
+        line-height: 1.3; 
+        font-weight: 600; 
+        margin-bottom: 4px;
+        min-height: 2.6em;
+    }
+    .discography-item p { font-size: .75rem; color: var(--text-secondary); margin-bottom: 6px; font-weight: 300; }
+    .discography-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-color); transition: transform var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out; margin-bottom: 8px; }
+    .discography-img:hover { transform: scale(1.05); box-shadow: 0 6px 25px var(--shadow-color); }
+    .discography-item a.artist-link { font-size: .75rem; color: var(--text-primary); text-decoration: none; }
+    .discography-item a.artist-link:hover { text-decoration: underline; }
+    
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-form input, .contact-form select, .contact-form textarea { 
+        width: 100%; background: var(--form-bg); border: 1px solid var(--border-color); 
+        border-radius: 8px; padding: 14px; color: var(--text-primary); 
+        font-size: 1rem; font-family: var(--font-body); 
+        transition: all var(--transition-duration) ease-in-out; font-weight: 400;
+        min-height: 50px;
+    }
+    .contact-form select {
+        -webkit-appearance: none; -moz-appearance: none; appearance: none;
+        background-image: var(--select-arrow-url);
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1.5em;
+    }
+    .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: none; border-color: var(--text-primary); background: var(--form-focus-bg); }
+    .contact-form button { background: var(--text-primary); color: var(--button-text-color); border: none; padding: 14px; border-radius: 8px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: opacity var(--transition-duration) ease-in-out; }
+    .contact-form button:hover { opacity: 0.85; }
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .gallery-img { width: 100%; border-radius: 10px; cursor: pointer; transition: transform var(--transition-duration) ease-in-out, opacity 0.3s ease-in-out; }
+    .gallery-img:hover { transform: scale(1.03); opacity: 0.9; }
+    
+    .museum-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .museum-item { display: flex; flex-direction: column; text-decoration: none; color: var(--text-primary); background: var(--bonus-item-bg); border-radius: 8px; padding: 12px; border: 1px solid var(--border-color); transition: all var(--transition-duration) ease-in-out; }
+    .museum-item:hover { transform: translateY(-4px); border-color: var(--text-primary); background: var(--bonus-item-hover-bg); }
+    .museum-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .museum-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; flex-grow: 1; }
+    .museum-item-thumbnail img { width: 100%; height: 100px; object-fit: cover; border-radius: 12px; margin-bottom: 8px; }
+    button.museum-item { font-family: var(--font-body); width: 100%; cursor: pointer; text-align: left; }
+    
+    .site-footer { text-align: center; color: var(--text-secondary); text-shadow: none; padding: 20px 0; font-size: 0.9rem; margin-top: 24px; }
+    
+    .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); justify-content: center; align-items: center; opacity: 0; transition: opacity var(--transition-duration) ease-in-out; }
+    .modal.active { display: flex; opacity: 1; }
+    .modal-content { display: flex; justify-content: center; align-items: center; }
+    .modal-img { max-width: 90vw; max-height: 90vh; border-radius: var(--border-radius); }
+    .modal-close { position: absolute; color: white; font-size: 2rem; cursor: pointer; user-select: none; transition: color 0.3s ease-in-out; z-index: 10; }
+    .modal-close:hover { color: #ccc; }
+    .modal-close { top: -40px; right: 0; }
+    
+    .modal-arrow {
+        position: absolute;
+        color: white;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 0.3s ease-in-out;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .modal-arrow:hover { background-color: rgba(0, 0, 0, 0.5); }
+    .modal-arrow i { font-size: 1.2rem; }
+    .modal-arrow.left { left: 20px; }
+    .modal-arrow.right { right: 20px; }
+
+    .theme-switch-wrapper { display: flex; align-items: center; justify-content: center; }
+    .theme-switch { display: inline-block; height: 26px; position: relative; width: 50px; }
+    .theme-switch input { display: none; }
+    .slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 26px; }
+    .slider:before { background-color: #fff; bottom: 3px; content: ""; height: 20px; left: 3px; position: absolute; transition: .4s; width: 20px; border-radius: 50%; }
+    input:checked + .slider { background-color: var(--text-primary); }
+    input:checked + .slider:before { transform: translateX(24px); }
+
+    /* Collapsible Section Styles */
+    .collapsible-content {
+        max-height: none;
+        overflow: hidden;
+        transition: max-height 0.5s ease-in-out;
+    }
+    .collapsible-content.collapsed {
+        max-height: 0;
+    }
+    .toggle-button {
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        font-size: 2.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 24px;
+        text-align: left;
+        transition: color var(--transition-duration);
+    }
+    .toggle-button[aria-expanded="true"] i { transform: rotate(180deg); }
+    .toggle-button i { transition: transform 0.3s ease; }
+
+    /* Roster Styles */
+    .roster-grid { display: flex; flex-direction: column; gap: 32px; }
+    .roster-item { 
+        background: var(--bonus-item-bg); 
+        border-radius: 12px; 
+        padding: 24px; 
+        border: 1px solid var(--border-color); 
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 20px;
+    }
+    .roster-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .roster-item img { 
+        width: 150px; 
+        height: 150px; 
+        object-fit: cover; 
+        border-radius: 12px; 
+        margin-bottom: 16px;
+        border: 1px solid var(--border-color);
+    }
+    .roster-left .social-links { 
+        margin: 0;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .roster-right {
+        display: flex;
+        flex-direction: column;
+    }
+    .roster-item h3 { font-size: 1.8rem; margin-bottom: 12px; }
+    .roster-item p.write-up { margin-bottom: 16px; line-height: 1.6; }
+    
+    .roster-subsection {
+        margin-top: 16px;
+    }
+    .roster-subsection .toggle-button {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+    }
+    
+    .performance-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .performance-links a {
+        color: var(--text-primary);
+        text-decoration: none;
+        padding: 8px 12px;
+        background: var(--form-bg);
+        border-radius: 6px;
+        transition: background var(--transition-duration);
+        font-size: 0.95rem;
+    }
+    .performance-links a:hover {
+        background: var(--form-focus-bg);
+        text-decoration: underline;
+    }
+    
+    .beatstore-widget {
+        margin-top: 12px;
+    }
+    .beatstore-widget iframe {
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+    }
+
+    @media (max-width: 900px) {
+        .site-wrapper { flex-direction: column; }
+        .left-pane { 
+            position: fixed;
+            transform: translateX(-100%);
+            z-index: 2000;
+            box-shadow: 10px 0px 40px rgba(0,0,0,0.1);
+            padding-bottom: 80px; 
         }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: var(--font-body);
-            background-color: var(--bg-body);
-            color: var(--text-primary);
-            background-image: url('https://source.unsplash.com/1920x1080/?misty,forest,night');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            line-height: 1.55;
-        }
-
-        .site-wrapper { display: flex; }
-        .left-pane {
-            width: 320px;
-            flex-shrink: 0;
-            background: var(--bg-canvas-opaque);
-            border-right: 1px solid var(--border-color);
-            padding: 40px 28px;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: auto;
-        }
-        .right-pane { flex-grow: 1; padding: 40px; }
-        .content-sections { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
-
-        .profile-pic { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-color); margin: 0 auto 18px; display: block; }
-        .signature { font-size: 2.6rem; font-weight: 700; text-align: center; letter-spacing: -0.02em; margin-bottom: 6px; }
-        .title { text-align: center; color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 20px; }
-
-        .social-links { text-align: center; margin: 16px 0 24px; }
-        .social-icon { font-size: 1.4rem; color: #777; margin: 0 10px; transition: color 0.3s; }
-        .social-icon:hover { color: #fff; }
-
-        .main-nav a {
+        .left-pane.open { transform: translateX(0); }
+        .right-pane { width: 100%; padding: 100px 16px 24px 16px; margin-left: 0; }
+        .hamburger {
             display: block;
-            padding: 12px 16px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            border-radius: 10px;
-            margin: 4px 0;
-            transition: all 0.3s;
-        }
-        .main-nav a:hover, .main-nav a.active { background: rgba(255,255,255,0.08); color: white; }
-
-        .content-card {
-            background: var(--bg-glass);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 32px;
-            backdrop-filter: blur(16px);
-            box-shadow: 0 12px 50px var(--shadow-color);
-        }
-
-        .section-header, .toggle-button {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 1.2rem;
-            border: none;
-            background: none;
-            color: inherit;
-            width: 100%;
-            text-align: left;
-            padding: 0;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 2001;
+            font-size: 1.5rem;
             cursor: pointer;
+            background: var(--text-primary);
+            color: var(--button-text-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
         }
-        .toggle-button i { transition: transform 0.3s; }
-        .toggle-button[aria-expanded="true"] i { transform: rotate(180deg); }
+        
+        .modal-arrow.left { left: 10px; }
+        .modal-arrow.right { right: 10px; }
+        .modal-close { top: 10px; right: 10px; }
 
-        .collapsible-content { overflow: hidden; transition: max-height 0.5s ease; }
-        .collapsible-content.collapsed { max-height: 0; }
-
-        /* Roster */
-        .roster-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+        .discography-grid { grid-template-columns: repeat(3, 1fr); }
+        .museum-grid { grid-template-columns: repeat(2, 1fr); }
+        .museum-item-thumbnail img { height: 80px; }
+        
         .roster-item {
-            display: grid;
-            grid-template-columns: 160px 1fr;
-            gap: 28px;
-            align-items: start;
+            grid-template-columns: 1fr;
         }
-        .roster-avatar-column { text-align: center; }
-        .roster-avatar { width: 140px; height: 140px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-color); }
-        .roster-bio-column { display: flex; flex-direction: column; gap: 14px; }
-        .roster-name { font-size: 1.8rem; font-weight: 600; margin-bottom: 4px; }
-        .roster-description { color: var(--text-secondary); font-size: 0.98rem; }
-
-        /* Smaller discography */
-        .discography-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        .roster-left {
+            flex-direction: row;
+            justify-content: flex-start;
             gap: 16px;
         }
-        .discography-item { text-align: center; }
-        .discography-img {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 8px;
-            transition: transform 0.3s;
+        .roster-item img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 0;
         }
-        .discography-img:hover { transform: scale(1.04); }
-        .discography-item h3 { font-size: 0.92rem; margin: 4px 0; }
-        .discography-item p { font-size: 0.8rem; color: var(--text-secondary); }
-
-        .performances-list, .beatstore-placeholder {
-            margin-top: 16px;
-            padding: 16px;
-            background: rgba(255,255,255,0.04);
-            border-radius: 10px;
-        }
-        .performances-list a {
-            display: block;
-            margin: 10px 0;
-            color: #88ccff;
-            text-decoration: none;
-        }
-        .performances-list a:hover { text-decoration: underline; }
-
-        .contact-form { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
-        .contact-form input, .contact-form select, .contact-form textarea {
-            padding: 14px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            background: rgba(255,255,255,0.05);
-            color: white;
-            font-family: inherit;
-        }
-        .contact-form button {
-            padding: 14px;
-            background: white;
-            color: black;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        @media (max-width: 900px) {
-            .site-wrapper { flex-direction: column; }
-            .left-pane {
-                position: fixed;
-                transform: translateX(-100%);
-                z-index: 100;
-                width: 280px;
-                height: 100%;
-            }
-            .left-pane.open { transform: translateX(0); }
-            .hamburger { display: block; position: fixed; top: 20px; left: 20px; z-index: 101; font-size: 1.6rem; background: rgba(0,0,0,0.6); padding: 12px; border-radius: 50%; }
-            .roster-item { grid-template-columns: 1fr; gap: 24px; text-align: center; }
-            .roster-avatar-column { margin: 0 auto; }
-        }
-    </style>
-</head>
+    }
+</style></head>
 <body>
 
 <div class="site-wrapper">
     <aside class="left-pane">
         <div class="identity">
-            <img src="flowrecordslogo.png" alt="Flow Records" class="profile-pic">
+            <img src="images/flowrecordslogo.png" alt="Flow Records Logo" class="profile-pic">
             <h1 class="signature">flow records</h1>
-            <p class="title">modern record label</p>
-
+            <p class="title">Record Label</p>
             <div class="social-links">
-                <a href="https://instagram.com/flowrecords" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="https://soundcloud.com/flowrecords" class="social-icon"><i class="fab fa-soundcloud"></i></a>
-                <!-- add more -->
+                <a href="https://www.instagram.com/flowrecords" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.soundcloud.com/flowrecords" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+                <a href="https://www.youtube.com/@flowrecords" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@flowrecords" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
+            </div>
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="theme-toggle">
+                    <input type="checkbox" id="theme-toggle" aria-label="Toggle Dark Mode">
+                    <span class="slider"></span>
+                </label>
             </div>
         </div>
-
-        <nav class="main-nav">
-            <a href="#home">Home</a>
-            <a href="#roster">Roster</a>
-            <a href="#museum">Museum</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#apply">Apply</a>
-        </nav>
+        
+        <div class="sidebar-controls">
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#roster">Roster</a></li>
+                    <li><a href="#museum">Museum</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#apply">Apply</a></li>
+                </ul>
+            </nav>
+        </div>
     </aside>
 
-    <button class="hamburger"><i class="fas fa-bars"></i></button>
+    <button class="hamburger" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+    </button>
 
     <main class="right-pane">
         <div class="content-sections">
-
-            <!-- Home -->
-            <section id="home" class="content-card">
-                <h2 class="section-header">flow records</h2>
-                <p>Hello — this is flow records.<br>We are a modern record label focused on innovation and abundance.</p>
-            </section>
-
-            <!-- Roster -->
-            <section id="roster" class="content-card">
-                <h2 class="section-header">roster</h2>
-                <div class="roster-grid">
-
-                    <!-- Jacob Fleming -->
-                    <div class="roster-item">
-                        <div class="roster-avatar-column">
-                            <img src="jacobfleming.jpg" alt="Jacob Fleming" class="roster-avatar">
-                            <div class="social-links" style="margin-top:16px;">
-                                <a href="https://instagram.com/jacobfleming" class="social-icon"><i class="fab fa-instagram"></i></a>
-                                <a href="https://soundcloud.com/jacobflemingprod" class="social-icon"><i class="fab fa-soundcloud"></i></a>
-                                <a href="https://youtube.com/@jacobflemingprod" class="social-icon"><i class="fab fa-youtube"></i></a>
-                            </div>
-                        </div>
-                        <div class="roster-bio-column">
-                            <h3 class="roster-name">Jacob Fleming</h3>
-                            <p class="roster-description">Musician, producer, innovator — focused on live performance, original compositions and forward-thinking production.</p>
-
-                            <button class="toggle-button" aria-expanded="false" aria-controls="jacob-performances">
-                                Performances <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div id="jacob-performances" class="collapsible-content collapsed">
-                                <div class="performances-list">
-                                    <a href="https://youtu.be/EXAMPLE1" target="_blank">Piano Live @ Venue 2024</a>
-                                    <a href="https://youtu.be/EXAMPLE2" target="_blank">Jazz Set Excerpt — Melbourne</a>
-                                    <a href="https://youtu.be/EXAMPLE3" target="_blank">Solo Improvisation 2025</a>
-                                </div>
-                            </div>
-
-                            <button class="toggle-button" aria-expanded="false" aria-controls="jacob-beatstore">
-                                Beat Store <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div id="jacob-beatstore" class="collapsible-content collapsed">
-                                <div class="beatstore-placeholder">
-                                    <p>Exclusive beats & leases available soon.<br>Premium WAV + stems coming 2026.</p>
-                                    <!-- You can embed beatstars / airbit widget here later -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 62serpens -->
-                    <div class="roster-item">
-                        <div class="roster-avatar-column">
-                            <img src="62logo.jpg" alt="62serpens" class="roster-avatar">
-                            <div class="social-links" style="margin-top:16px;">
-                                <a href="https://instagram.com/62serpens" class="social-icon"><i class="fab fa-instagram"></i></a>
-                                <a href="https://soundcloud.com/62serpens" class="social-icon"><i class="fab fa-soundcloud"></i></a>
-                            </div>
-                        </div>
-                        <div class="roster-bio-column">
-                            <h3 class="roster-name">62serpens</h3>
-                            <p class="roster-description">Creative producer & AI explorer — pushing boundaries with experimental sound design and new production techniques.</p>
-
-                            <button class="toggle-button" aria-expanded="true" aria-controls="serpens-discog">
-                                Discography <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div id="serpens-discog" class="collapsible-content">
-                                <div class="discography-grid">
-                                    <div class="discography-item">
-                                        <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank">
-                                            <img src="images/albumart_downbad.jpg" alt="Down Bad" class="discography-img">
-                                        </a>
-                                        <h3>Onlybino — Down Bad</h3>
-                                        <p>melody + prod</p>
-                                    </div>
-                                    <div class="discography-item">
-                                        <a href="#" target="_blank">
-                                            <img src="images/albumart_beatitup.jpg" alt="beat it up" class="discography-img">
-                                        </a>
-                                        <h3>Eddison — beat it up</h3>
-                                        <p>melody + co-prod</p>
-                                    </div>
-                                    <div class="discography-item">
-                                        <a href="https://soundcloud.com/oksixthree/tefflon-madaway-..." target="_blank">
-                                            <img src="images/albumart_madaway.jpg" alt="MADAWAY" class="discography-img">
-                                        </a>
-                                        <h3>Tefflon — MADAWAY</h3>
-                                        <p>melody + co-prod</p>
-                                    </div>
-                                    <div class="discography-item">
-                                        <a href="https://soundcloud.com/bigtaie/keep-it-real-prod-62serpens" target="_blank">
-                                            <img src="images/albumart_keepitreal.jpg" alt="Keep It Real" class="discography-img">
-                                        </a>
-                                        <h3>Big Taie — Keep It Real</h3>
-                                        <p>MIDI + co-prod</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style="margin-top:20px;">
-                                <a href="2000.html" style="color:#88ccff; margin-right:16px;">→ retro theme site</a>
-                                <a href="ai_theme.html" style="color:#88ccff;">→ ai theme site</a>
-                            </div>
-                        </div>
-                    </div>
-
+            <div class="site-title">flowrecords.me</div>
+            
+            <section id="home" class="content-card fade-in">
+                <button class="toggle-button" aria-expanded="true" aria-controls="home-content">
+                    flow records <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="home-content" class="collapsible-content">
+                    <p>hello - this is flow records. we are a modern record label focused on innovation and abundance.</p>
                 </div>
             </section>
 
-            <!-- Museum (removed retro & ai) -->
-            <section id="museum" class="content-card">
-                <h2 class="section-header">museum</h2>
-                <p style="margin-bottom:20px;">little experiments & tools</p>
-                <!-- keep your existing museum grid here, just without retro/ai -->
+            <section id="roster" class="content-card fade-in">
+                <button class="toggle-button" aria-expanded="true" aria-controls="roster-content">
+                    Roster <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="roster-content" class="collapsible-content">
+                    <div class="roster-grid">
+                        <!-- Jacob Fleming -->
+                        <div class="roster-item">
+                            <div class="roster-left">
+                                <img src="images/jacobfleming.jpg" alt="Jacob Fleming">
+                                <div class="social-links">
+                                    <a href="https://www.instagram.com/jacobfleming" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.soundcloud.com/jacobflemingprod" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+                                    <a href="https://www.youtube.com/@jacobflemingprod" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://www.tiktok.com/@jacobflemingprod" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                                </div>
+                            </div>
+                            <div class="roster-right">
+                                <h3>Jacob Fleming</h3>
+                                <p class="write-up">Jacob Fleming is a talented musician, producer, and innovator in the music industry.</p>
+                                
+                                <!-- Performances Section -->
+                                <div class="roster-subsection">
+                                    <button class="toggle-button" aria-expanded="false" aria-controls="jacob-performances">
+                                        Performances <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div id="jacob-performances" class="collapsible-content collapsed">
+                                        <div class="performance-links">
+                                            <a href="https://www.youtube.com/watch?v=example1" target="_blank" rel="noopener noreferrer">
+                                                <i class="fab fa-youtube"></i> Piano Performance - Song Title 1
+                                            </a>
+                                            <a href="https://www.youtube.com/watch?v=example2" target="_blank" rel="noopener noreferrer">
+                                                <i class="fab fa-youtube"></i> Piano Performance - Song Title 2
+                                            </a>
+                                            <a href="https://www.youtube.com/watch?v=example3" target="_blank" rel="noopener noreferrer">
+                                                <i class="fab fa-youtube"></i> Piano Performance - Song Title 3
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Beat Store Section -->
+                                <div class="roster-subsection">
+                                    <button class="toggle-button" aria-expanded="false" aria-controls="jacob-beatstore">
+                                        Beat Store <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div id="jacob-beatstore" class="collapsible-content collapsed">
+                                        <div class="beatstore-widget">
+                                            <iframe src="https://airbit.com/embed/profile/jacobfleming" width="100%" height="500" scrolling="yes" frameborder="0"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 62serpens -->
+                        <div class="roster-item">
+                            <div class="roster-left">
+                                <img src="images/62logo.jpg" alt="62serpens">
+                                <div class="social-links">
+                                    <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+                                </div>
+                            </div>
+                            <div class="roster-right">
+                                <h3>62serpens</h3>
+                                <p class="write-up">62serpens is a creative producer and AI innovator, known for experimental sounds and tech integrations.</p>
+                                
+                                <!-- Discography Section -->
+                                <div class="roster-subsection">
+                                    <button class="toggle-button" aria-expanded="false" aria-controls="serpens-discog">
+                                        Discography <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div id="serpens-discog" class="collapsible-content collapsed">
+                                        <div class="discography-grid">
+                                            <div class="discography-item">
+                                                <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
+                                                    <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img" loading="lazy">
+                                                </a>
+                                                <h3>Onlybino - Down Bad</h3>
+                                                <p>Original melody, full production</p>
+                                                <a href="https://www.instagram.com/onlybino" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> onlybino</a>
+                                            </div>
+                                            <div class="discography-item">
+                                                <a href="#" target="_blank" rel="noopener noreferrer">
+                                                    <img src="images/albumart_beatitup.jpg" alt="beat it up Album Art" class="discography-img" loading="lazy">
+                                                </a>
+                                                <h3>Eddison - beat it up</h3>
+                                                <p>Original melody, co-production</p>
+                                                <a href="https://www.instagram.com/954.eddison" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> 954.eddison</a>
+                                            </div>
+                                            <div class="discography-item">
+                                                <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
+                                                    <img src="images/albumart_madaway.jpg" alt="MADAWAY Album Art" class="discography-img" loading="lazy">
+                                                </a>
+                                                <h3>Tefflon - MADAWAY</h3>
+                                                <p>Original melody, co-production</p>
+                                                <a href="https://www.instagram.com/1tefflon" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> 1tefflon</a>
+                                            </div>
+                                            <div class="discography-item">
+                                                <a href="https://soundcloud.com/bigtaie/keep-it-real-prod-62serpens" target="_blank" rel="noopener noreferrer">
+                                                    <img src="images/albumart_keepitreal.jpg" alt="Keep It Real Album Art" class="discography-img" loading="lazy">
+                                                </a>
+                                                <h3>Big Taie - Keep It Real</h3>
+                                                <p>Original MIDI, co-production</p>
+                                                <a href="https://www.instagram.com/bigtaie" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> bigtaie</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Theme Links -->
+                                <div class="roster-subsection">
+                                    <div class="performance-links">
+                                        <a href="2000.html">Retro Theme Site</a>
+                                        <a href="ai_theme.html">AI Theme Site</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
-            <!-- Apply -->
-            <section id="apply" class="content-card">
-                <h2 class="section-header">submit all flow records inquiries here</h2>
-                <form name="contact" method="POST" data-netlify="true" class="contact-form">
-                    <input type="hidden" name="form-name" value="contact">
-                    <input type="text" name="name" placeholder="Name" required>
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="text" name="links" placeholder="Social / Streaming Links">
-                    <select name="type" required>
-                        <option value="" disabled selected>— select type —</option>
-                        <option value="submission">Artist Submission</option>
-                        <option value="production">Personalized Production</option>
-                        <option value="lease">Beat Lease</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <textarea name="message" placeholder="Your message..." rows="5" required></textarea>
-                    <button type="submit">Send</button>
-                </form>
+            <section id="museum" class="content-card fade-in">
+                <button class="toggle-button" aria-expanded="true" aria-controls="museum-content">
+                    The Flow Records Museum <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="museum-content" class="collapsible-content">
+                    <div class="museum-grid">
+                        <a href="wheel.html" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/musicwheel.webp" alt="Music Wheel Preview"></div>
+                            <h4>Music Wheel</h4><p>Music wheel invention by Jacob Fleming</p>
+                        </a>
+                        <button type="button" id="audioToolsLink" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/audio_tools.webp" alt="Audio Tools Suite Preview"></div>
+                            <h4>Audio Tools Suite</h4><p>Tools for music producers</p>
+                        </button>
+                        <a href="251shells.html" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/251shells.webp" alt="251shells Preview"></div>
+                            <h4>ii-V-I Shells</h4><p>Training for 2-5-1 chord shells</p>
+                        </a>
+                        <a href="circle.html" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/circle.webp" alt="Circle Preview"></div>
+                            <h4>Circle of Fifths</h4><p>Training for chords in all keys</p>
+                        </a>
+                        <a href="9thchords.html" class="museum-item">
+                            <div class="museum-item-thumbnail"><img src="images/9thchords.webp" alt="9th Chords Preview"></div>
+                            <h4>9th Chords</h4><p>Practice 9th chord voicings</p>
+                        </a>
+                    </div>
+                    <p id="passwordError" role="alert" style="display: none; color: #ff4d4d; text-align: center; margin-top: 16px;">Invalid access code</p>
+                </div>
             </section>
 
+            <section id="gallery" class="content-card fade-in">
+                <button class="toggle-button" aria-expanded="false" aria-controls="gallery-content">
+                    Gallery <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="gallery-content" class="collapsible-content collapsed">
+                    <div class="gallery-grid">
+                        <img src="images/img_015.jpg" alt="Studio Setup 3" class="gallery-img" loading="lazy">
+                        <img src="images/img_017.jpg" alt="Studio Setup 5" class="gallery-img" loading="lazy">
+                    </div>
+                </div>
+            </section>
+
+            <section id="apply" class="content-card fade-in">
+                <button class="toggle-button" aria-expanded="true" aria-controls="apply-content">
+                    Apply / Contact <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="apply-content" class="collapsible-content">
+                    <p>Submit all flow records inquiries here.</p>
+                    <form name="contact" method="POST" data-netlify="true" action="/success" class="contact-form">
+                        <input type="hidden" name="form-name" value="contact">
+                        <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
+                        <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
+                        <input type="text" name="social-links" placeholder="Relevant Social Media or Streaming Links" aria-label="Social Media Links">
+                        <select name="category" id="category" required aria-label="Service Category">
+                            <option value="" disabled selected>Select Contact Type</option>
+                            <option value="submission">Artist Submission</option>
+                            <option value="production">Personalized Production</option>
+                            <option value="lease">MP3/WAV Lease</option>
+                            <option value="mixing">Recording & Engineering</option>
+                            <option value="tutoring">Production Tutoring</option>
+                            <option value="website">Website Design</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <textarea name="message" placeholder="Please provide details about your project or submission" required aria-label="Your Inquiry" rows="5"></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </section>
+            
+            <footer class="site-footer">
+                © <span id="year">2025</span> Flow Records. All rights reserved.
+            </footer>
         </div>
     </main>
 </div>
 
+<div id="imageModal" class="modal">
+    <span id="closeModal" class="modal-close">×</span>
+    <span id="prevArrow" class="modal-arrow left"><i class="fas fa-chevron-left"></i></span>
+    <span id="nextArrow" class="modal-arrow right"><i class="fas fa-chevron-right"></i></span>
+    <div class="modal-content">
+        <img id="modalImage" class="modal-img" src="" alt="Expanded Image">
+    </div>
+</div>
+
 <script>
-// Hamburger + basic collapsible toggle (you can keep your previous full script)
-document.querySelector('.hamburger').addEventListener('click', () => {
-    document.querySelector('.left-pane').classList.toggle('open');
-});
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Clean facebook/instagram tracking parameters from URL
+    if (window.location.search && window.location.search.includes('fbclid')) {
+        const cleanUrl = window.location.pathname + window.location.hash;
+        history.replaceState(null, document.title, cleanUrl);
+    }
 
-document.querySelectorAll('.toggle-button').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', !expanded);
-        const content = document.getElementById(btn.getAttribute('aria-controls'));
-        content.classList.toggle('collapsed', expanded);
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const leftPane = document.querySelector('.left-pane');
+    const hamburger = document.querySelector('.hamburger');
+    const sections = document.querySelectorAll('main section');
+    const navLinks = document.querySelectorAll('.main-nav a');
+
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const applyTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        themeToggle.checked = theme === 'dark' || theme === 'retro' || theme === 'ai';
+    };
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlTheme = urlParams.get('theme');
+    const validThemes = ['light', 'dark', 'retro', 'ai'];
+    let theme = localStorage.getItem('theme') || urlTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (!validThemes.includes(theme)) theme = 'dark';
+    applyTheme(theme);
+    localStorage.setItem('theme', theme);
+    themeToggle.addEventListener('change', function() {
+        const theme = this.checked ? 'dark' : 'light';
+        applyTheme(theme);
+        localStorage.setItem('theme', theme);
     });
+
+    // Mobile Navigation
+    if (hamburger && leftPane) {
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            leftPane.classList.toggle('open');
+        });
+        document.querySelector('main').addEventListener('click', () => {
+            if (leftPane.classList.contains('open')) {
+                leftPane.classList.remove('open');
+            }
+        });
+    }
+
+    // Smooth Scroll & Nav Logic
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const topPos = targetElement.getBoundingClientRect().top + window.scrollY - 40;
+                window.scrollTo({ top: topPos, behavior: 'smooth' });
+            }
+            if (leftPane.classList.contains('open')) {
+                leftPane.classList.remove('open');
+            }
+        });
+    });
+
+    // Active Nav Link on Scroll
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (window.scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Fade-In Animation for Content Sections
+    const contentSections = document.querySelectorAll('.content-card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    contentSections.forEach(section => {
+        section.classList.add('fade-in');
+        observer.observe(section);
+    });
+
+    // Collapsible Section Logic
+    const toggleButtons = document.querySelectorAll('.toggle-button');
+    toggleButtons.forEach(button => {
+        const contentId = button.getAttribute('aria-controls');
+        const content = document.getElementById(contentId);
+        button.addEventListener('click', () => {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded', !isExpanded);
+            content.classList.toggle('collapsed', isExpanded);
+        });
+    });
+
+    // Audio Tools Password Prompt
+    const audioToolsLink = document.getElementById('audioToolsLink');
+    if (audioToolsLink) {
+        audioToolsLink.addEventListener('click', () => {
+            const password = prompt('Enter access code for Audio Tools:');
+            if (password === 'serpens62') {
+                window.location.href = 'audio_tools.html';
+            } else if (password !== null) {
+                const passwordError = document.getElementById('passwordError');
+                passwordError.style.display = 'block';
+                setTimeout(() => { passwordError.style.display = 'none'; }, 3000);
+            }
+        });
+    }
+
+    // Image Modal Logic
+    const modal = document.getElementById('imageModal');
+    if (modal) {
+        const modalImg = document.getElementById("modalImage");
+        const galleryImages = document.querySelectorAll(".gallery-img");
+        let currentImageIndex;
+
+        const openModal = (index) => {
+            currentImageIndex = index;
+            modalImg.src = galleryImages[index].src;
+            modal.classList.add('active');
+        };
+
+        galleryImages.forEach((img, index) => {
+            img.addEventListener('click', () => openModal(index));
+        });
+        
+        const closeModal = () => modal.classList.remove('active');
+        
+        document.getElementById('closeModal').onclick = closeModal;
+        modal.addEventListener('click', (e) => { 
+            if (e.target.classList.contains('modal')) {
+                closeModal();
+            }
+        });
+        
+        const showImage = (offset) => {
+            currentImageIndex = (currentImageIndex + offset + galleryImages.length) % galleryImages.length;
+            modalImg.src = galleryImages[currentImageIndex].src;
+        };
+
+        document.getElementById('prevArrow').onclick = (e) => {
+            e.stopPropagation();
+            showImage(-1);
+        }
+        document.getElementById('nextArrow').onclick = (e) => {
+            e.stopPropagation();
+            showImage(1);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (modal.classList.contains('active')) {
+                if (e.key === "ArrowRight") showImage(1);
+                if (e.key === "ArrowLeft") showImage(-1);
+                if (e.key === "Escape") closeModal();
+            }
+        });
+    }
 });
-</script>
-</body>
+</script></body>
 </html>
-
-Feel free to tell me what else needs adjusting — spacing, colors, more content, beatstore embed etc. 
-
