@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#F4F4F4" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#101010" media="(prefers-color-scheme: dark)">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Flow Records</title>
+    <title>flow records</title>
     
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FFFFFF'%3E%3C/rect%3E%3Ctext x='50' y='50' font-family='-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif' font-size='50' font-weight='600' fill='%231a1a1a' text-anchor='middle' dy='.3em'%3EFR%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -175,19 +175,45 @@
     
     .section-header { font-size: 2.2rem; font-weight: 700; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color); letter-spacing: -0.02em; }
 
-    .discography-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); gap: 10px; }
+    .discography-grid { 
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 12px; 
+        max-width: 300px;
+    }
     .discography-item { display: flex; flex-direction: column; text-align: center; }
     .discography-item h3 {
-        font-size: .6rem; 
-        line-height: 1.2; 
+        font-size: .55rem; 
+        line-height: 1.1; 
         font-weight: 500; 
         margin-bottom: 2px;
-        min-height: 2.4em;
+        min-height: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
-    .discography-item p { font-size: .7rem; color: var(--text-secondary); margin-bottom: 4px; font-weight: 300; }
-    .discography-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 4px; border: 1px solid var(--border-color); transition: transform var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out; margin-bottom: 4px; }
-    .discography-img:hover { transform: scale(1.05); box-shadow: 0 6px 25px var(--shadow-color); }
-    .discography-item a.artist-link { font-size: .7rem; color: var(--text-primary); text-decoration: none; }
+    .discography-item p { 
+        font-size: .6rem; 
+        color: var(--text-secondary); 
+        margin-bottom: 3px; 
+        font-weight: 300; 
+    }
+    .discography-img { 
+        width: 100%; 
+        aspect-ratio: 1 / 1; 
+        object-fit: cover; 
+        border-radius: 4px; 
+        border: 1px solid var(--border-color); 
+        transition: transform var(--transition-duration) ease-in-out, box-shadow var(--transition-duration) ease-in-out; 
+        margin-bottom: 4px; 
+    }
+    .discography-img:hover { transform: scale(1.05); box-shadow: 0 4px 15px var(--shadow-color); }
+    .discography-item a.artist-link { 
+        font-size: .6rem; 
+        color: var(--text-primary); 
+        text-decoration: none; 
+        display: block;
+        margin-top: 2px;
+    }
     .discography-item a.artist-link:hover { text-decoration: underline; }
     
     .contact-form { display: flex; flex-direction: column; gap: 16px; }
@@ -399,7 +425,7 @@
         .modal-arrow.right { right: 10px; }
         .modal-close { top: 10px; right: 10px; }
 
-        .discography-grid { grid-template-columns: repeat(3, 1fr); }
+        .discography-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
         .museum-grid { grid-template-columns: repeat(2, 1fr); }
         .museum-item-thumbnail img { height: 80px; }
         
@@ -491,7 +517,7 @@
                             </div>
                             <div class="roster-right">
                                 <h3>jacob fleming</h3>
-                                <p class="write-up">jacob fleming is a talented musician, producer, and innovator in the music industry.</p>
+                                <p class="write-up">a producer and piano playing producer from australia. he founded flow records in january 2026.</p>
                                 
                                 <!-- Performances Section -->
                                 <div class="roster-subsection">
@@ -519,6 +545,9 @@
                                         beat store <i class="fas fa-chevron-down"></i>
                                     </button>
                                     <div id="jacob-beatstore" class="collapsible-content collapsed">
+                                        <p style="margin-bottom: 12px; font-size: 0.9rem;">
+                                            <a href="https://traktrain.com/jacobfleming" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: underline;">visit beat store website →</a>
+                                        </p>
                                         <div class="beatstore-widget">
                                             <iframe src="https://traktrain.com/jacobfleming?embed=1" width="100%" height="500" scrolling="yes" frameborder="0" allowtransparency="true"></iframe>
                                         </div>
@@ -534,12 +563,12 @@
                                 <div class="social-links">
                                     <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                                     <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
-                                    <a href="https://www.beatstars.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="BeatStars"><i class="fas fa-music"></i></a>
+                                    <a href="https://www.youtube.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                                 </div>
                             </div>
                             <div class="roster-right">
                                 <h3>62serpens</h3>
-                                <p class="write-up">62serpens is a creative producer and AI innovator, known for experimental sounds and tech integrations.</p>
+                                <p class="write-up">a producer active 2019-2025 - specialising in dark and hard trap beats.</p>
                                 
                                 <!-- Discography Section -->
                                 <div class="roster-subsection">
@@ -590,6 +619,9 @@
                                         beat store <i class="fas fa-chevron-down"></i>
                                     </button>
                                     <div id="serpens-beatstore" class="collapsible-content collapsed">
+                                        <p style="margin-bottom: 12px; font-size: 0.9rem;">
+                                            <a href="https://www.beatstars.com/62serpens" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: underline;">visit beat store website →</a>
+                                        </p>
                                         <div class="beatstore-widget">
                                             <iframe src="https://www.beatstars.com/62serpens/feed" width="100%" height="500" scrolling="yes" frameborder="0"></iframe>
                                         </div>
