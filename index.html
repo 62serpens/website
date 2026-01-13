@@ -216,6 +216,108 @@
     }
     .discography-item a.artist-link:hover { text-decoration: underline; }
     
+    /* Releases Section Styles */
+    .releases-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        max-width: 400px;
+    }
+    .release-item {
+        background: var(--bonus-item-bg);
+        border-radius: 8px;
+        padding: 12px;
+        border: 1px solid var(--border-color);
+        transition: all var(--transition-duration) ease-in-out;
+        display: flex;
+        flex-direction: column;
+    }
+    .release-item:hover {
+        transform: translateY(-4px);
+        border-color: var(--text-primary);
+        background: var(--bonus-item-hover-bg);
+    }
+    .release-cover {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        margin-bottom: 8px;
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--form-bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .release-cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .coming-soon-badge {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        background: var(--text-primary);
+        color: var(--button-text-color);
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.6rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .release-info h3 {
+        font-size: 0.9rem;
+        margin-bottom: 2px;
+        font-weight: 700;
+    }
+    .release-artist {
+        font-size: 0.7rem;
+        color: var(--text-secondary);
+        margin-bottom: 4px;
+    }
+    .release-type {
+        font-size: 0.65rem;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .release-description {
+        font-size: 0.7rem;
+        line-height: 1.4;
+        margin-bottom: 6px;
+        color: var(--text-secondary);
+    }
+    .release-date {
+        font-size: 0.65rem;
+        color: var(--text-secondary);
+        margin-top: auto;
+    }
+    .release-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+    }
+    .release-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 8px;
+        background: var(--form-bg);
+        border-radius: 4px;
+        text-decoration: none;
+        color: var(--text-primary);
+        font-size: 0.7rem;
+        transition: background var(--transition-duration);
+    }
+    .release-links a:hover {
+        background: var(--form-focus-bg);
+    }
+    
     .contact-form { display: flex; flex-direction: column; gap: 16px; }
     .contact-form input, .contact-form select, .contact-form textarea { 
         width: 100%; background: var(--form-bg); border: 1px solid var(--border-color); 
@@ -426,6 +528,7 @@
         .modal-close { top: 10px; right: 10px; }
 
         .discography-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+        .releases-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
         .museum-grid { grid-template-columns: repeat(2, 1fr); }
         .museum-item-thumbnail img { height: 80px; }
         
@@ -451,7 +554,7 @@
         <div class="identity">
             <img src="images/flowrecordslogo.png" alt="Flow Records Logo" class="profile-pic">
             <h1 class="signature">flow records</h1>
-            <p class="title">record label</p>
+            <p class="title">Record Label</p>
             <div class="social-links">
                 <a href="https://www.instagram.com/flowrecords.xyz" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <a href="https://twitter.com/flowrecords_xyz" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -472,6 +575,7 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="#home">home</a></li>
+                    <li><a href="#releases">releases</a></li>
                     <li><a href="#roster">roster</a></li>
                     <li><a href="#museum">museum</a></li>
                     <li><a href="#apply">apply</a></li>
@@ -495,6 +599,45 @@
                 </button>
                 <div id="home-content" class="collapsible-content">
                     <p>hello - this is flow records. we are a modern record label focused on innovation and abundance.</p>
+                </div>
+            </section>
+
+            <section id="releases" class="content-card fade-in">
+                <button class="toggle-button" aria-expanded="true" aria-controls="releases-content">
+                    official releases <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="releases-content" class="collapsible-content">
+                    <div class="releases-grid">
+                        <!-- J - Beat Tape -->
+                        <div class="release-item">
+                            <div class="release-cover">
+                                <img src="images/default-avatar.png" alt="J Album Cover" style="filter: blur(1px); opacity: 0.7;">
+                                <div class="coming-soon-badge">coming soon</div>
+                            </div>
+                            <div class="release-info">
+                                <h3>J</h3>
+                                <p class="release-artist">jacob fleming</p>
+                                <p class="release-type">24 track instrumental album</p>
+                                <p class="release-description">all solo beats. no ai no samples no loops.</p>
+                                <p class="release-date">2026</p>
+                            </div>
+                        </div>
+
+                        <!-- Perfect - Single -->
+                        <div class="release-item">
+                            <div class="release-cover">
+                                <img src="images/default-avatar.png" alt="Perfect Single Cover" style="filter: blur(1px); opacity: 0.7;">
+                                <div class="coming-soon-badge">coming soon</div>
+                            </div>
+                            <div class="release-info">
+                                <h3>perfect</h3>
+                                <p class="release-artist">jacob fleming</p>
+                                <p class="release-type">single</p>
+                                <p class="release-description">consciousness ascension sexual wellness 7 minute long track solo by jacob fleming.</p>
+                                <p class="release-date">2026</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
