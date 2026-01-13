@@ -1,17 +1,19 @@
+html
+
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Jacob Fleming: Music Producer, Game Creator, AI Innovator, and Theorist">
-    <meta name="keywords" content="music production, music producer, sound design, jacobfleming, mixing, engineering, manrope, liquid glass">
-    <meta name="author" content="jacobfleming">
+    <meta name="description" content="Flow Records: Modern Record Label Supporting Artists">
+    <meta name="keywords" content="music production, record label, flow records, jacob fleming, 62serpens">
+    <meta name="author" content="flowrecords">
     <meta name="theme-color" content="#F4F4F4" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#101010" media="(prefers-color-scheme: dark)">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Jacob Fleming</title>
+    <title>Flow Records</title>
     
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FFFFFF'%3E%3C/rect%3E%3Ctext x='50' y='50' font-family='-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif' font-size='50' font-weight='600' fill='%231a1a1a' text-anchor='middle' dy='.3em'%3EJF%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23FFFFFF'%3E%3C/rect%3E%3Ctext x='50' y='50' font-family='-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif' font-size='50' font-weight='600' fill='%231a1a1a' text-anchor='middle' dy='.3em'%3EFR%3C/text%3E%3C/svg%3E">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -290,6 +292,18 @@
         .toggle-button[aria-expanded="true"] i { transform: rotate(180deg); }
         .toggle-button i { transition: transform 0.3s ease; }
 
+        /* Roster Styles */
+        .roster-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .roster-item { background: var(--bonus-item-bg); border-radius: 8px; padding: 16px; border: 1px solid var(--border-color); }
+        .roster-item img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
+        .roster-item h3 { font-size: 1.5rem; margin-bottom: 8px; }
+        .roster-item p.write-up { margin-bottom: 12px; }
+        .roster-item .social-links { margin-bottom: 12px; }
+        .roster-item .discography-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+        .roster-item .additional-links { margin-top: 12px; }
+        .roster-item .additional-links a { display: block; margin-bottom: 8px; color: var(--text-primary); text-decoration: none; }
+        .roster-item .additional-links a:hover { text-decoration: underline; }
+
         @media (max-width: 900px) {
             .site-wrapper { flex-direction: column; }
             .left-pane { 
@@ -327,6 +341,7 @@
             .discography-grid { grid-template-columns: repeat(2, 1fr); }
             .museum-grid { grid-template-columns: repeat(2, 1fr); }
             .museum-item-thumbnail img { height: 80px; }
+            .roster-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -335,14 +350,14 @@
     <div class="site-wrapper">
         <aside class="left-pane">
             <div class="identity">
-                <img src="images/default-avatar.png" alt="Default Avatar" class="profile-pic">
-                <h1 class="signature">Jacob Fleming</h1>
-                <p class="title">Musician</p>
+                <img src="images/default-avatar.png" alt="Flow Records Logo" class="profile-pic">
+                <h1 class="signature">Flow Records</h1>
+                <p class="title">Record Label</p>
                 <div class="social-links">
-                    <a href="https://www.instagram.com/jacobfleming" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.soundcloud.com/jacobflemingprod" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
-                    <a href="https://www.youtube.com/@jacobflemingprod" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="https://www.tiktok.com/@jacobflemingprod" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.instagram.com/flowrecords" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.soundcloud.com/flowrecords" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+                    <a href="https://www.youtube.com/@flowrecords" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.tiktok.com/@flowrecords" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
                     <a href="https://discord.gg/cCedfQgHVG" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
                 </div>
                 <div class="theme-switch-wrapper">
@@ -357,10 +372,10 @@
                 <nav class="main-nav">
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#discography">Discography</a></li>
+                        <li><a href="#roster">Roster</a></li>
                         <li><a href="#museum">Museum</a></li>
                         <li><a href="#gallery">Gallery</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#apply">Apply</a></li>
                     </ul>
                 </nav>
             </div>
@@ -372,18 +387,101 @@
 
         <main class="right-pane">
             <div class="content-sections">
-                <div class="site-title">jacobfleming.me</div>
+                <div class="site-title">flowrecords.me</div>
                 
                 <section id="home" class="content-card fade-in">
                     <button class="toggle-button" aria-expanded="true" aria-controls="home-content">
-                        New Beatstore <i class="fas fa-chevron-down"></i>
+                        Welcome to Flow Records <i class="fas fa-chevron-down"></i>
                     </button>
                     <div id="home-content" class="collapsible-content">
-                        <iframe src="https://traktrain.com/widget/270063" width="100%" height="555" frameborder="0"></iframe>
+                        <p>Hello! We are Flow Records, a modern record label dedicated to supporting abundance with artists, not extraction. We empower creators to thrive through collaboration, innovation, and shared success.</p>
                     </div>
                 </section>
 
-                <section id="discography" class="content-card fade-in">
+                <section id="roster" class="content-card fade-in">
+                    <button class="toggle-button" aria-expanded="true" aria-controls="roster-content">
+                        Roster <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="roster-content" class="collapsible-content">
+                        <div class="roster-grid">
+                            <div class="roster-item">
+                                <img src="images/default-avatar.png" alt="Jacob Fleming">
+                                <h3>Jacob Fleming</h3>
+                                <p class="write-up">Jacob Fleming is a talented musician, producer, and innovator in the music industry.</p>
+                                <div class="social-links">
+                                    <a href="https://www.instagram.com/jacobfleming" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.soundcloud.com/jacobflemingprod" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+                                    <a href="https://www.youtube.com/@jacobflemingprod" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://www.tiktok.com/@jacobflemingprod" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                                </div>
+                                <button class="toggle-button" aria-expanded="false" aria-controls="jacob-discog">
+                                    Discography <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div id="jacob-discog" class="collapsible-content collapsed">
+                                    <div class="discography-grid">
+                                        <div class="discography-item">
+                                            <a href="https://soundcloud.com/thewavguide/onlybino-down-bad-prod-62serpens" target="_blank" rel="noopener noreferrer">
+                                                <img src="images/albumart_downbad.jpg" alt="Down Bad Album Art" class="discography-img" loading="lazy">
+                                            </a>
+                                            <h3>Onlybino - Down Bad</h3>
+                                            <p>Original melody, full production</p>
+                                            <a href="https://www.instagram.com/onlybino" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> onlybino</a>
+                                        </div>
+                                        <div class="discography-item">
+                                            <a href="#" target="_blank" rel="noopener noreferrer">
+                                                <img src="images/albumart_beatitup.jpg" alt="beat it up Album Art" class="discography-img" loading="lazy">
+                                            </a>
+                                            <h3>Eddison - beat it up</h3>
+                                            <p>Original melody, co-production</p>
+                                            <a href="https://www.instagram.com/954.eddison" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> 954.eddison</a>
+                                        </div>
+                                        <div class="discography-item">
+                                            <a href="https://soundcloud.com/oksixthree/tefflon-madaway-63-saint-62serpens-dextersesh-hooli?in=62serpens/sets/prod-62serpens" target="_blank" rel="noopener noreferrer">
+                                                <img src="images/albumart_madaway.jpg" alt="MADAWAY Album Art" class="discography-img" loading="lazy">
+                                            </a>
+                                            <h3>Tefflon - MADAWAY</h3>
+                                            <p>Original melody, co-production</p>
+                                            <a href="https://www.instagram.com/1tefflon" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> 1tefflon</a>
+                                        </div>
+                                        <div class="discography-item">
+                                            <a href="https://soundcloud.com/bigtaie/keep-it-real-prod-62serpens" target="_blank" rel="noopener noreferrer">
+                                                <img src="images/albumart_keepitreal.jpg" alt="Keep It Real Album Art" class="discography-img" loading="lazy">
+                                            </a>
+                                            <h3>Big Taie - Keep It Real</h3>
+                                            <p>Original MIDI, co-production</p>
+                                            <a href="https://www.instagram.com/bigtaie" target="_blank" class="artist-link"><i class="fab fa-instagram"></i> bigtaie</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="roster-item">
+                                <img src="images/62serpens-avatar.png" alt="62serpens"> <!-- Assume an image; replace as needed -->
+                                <h3>62serpens</h3>
+                                <p class="write-up">62serpens is a creative producer and AI innovator, known for experimental sounds and tech integrations.</p>
+                                <div class="social-links">
+                                    <a href="https://www.instagram.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.soundcloud.com/62serpens" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
+                                    <!-- Add more socials as needed -->
+                                </div>
+                                <button class="toggle-button" aria-expanded="false" aria-controls="serpens-discog">
+                                    Discography <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div id="serpens-discog" class="collapsible-content collapsed">
+                                    <!-- Add 62serpens discography items here as needed -->
+                                    <p>Coming soon...</p>
+                                </div>
+                                <div class="additional-links">
+                                    <a href="2000.html">Retro Theme Site</a>
+                                    <a href="ai_theme.html">AI Theme Site</a>
+                                </div>
+                            </div>
+                            <!-- Add more roster-items here as the roster grows -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Hidden Discography Section (left in code but hidden) -->
+                <section id="discography" class="content-card fade-in" style="display: none;">
                     <button class="toggle-button" aria-expanded="true" aria-controls="discography-content">
                         Discography <i class="fas fa-chevron-down"></i>
                     </button>
@@ -427,7 +525,7 @@
 
                 <section id="museum" class="content-card fade-in">
                     <button class="toggle-button" aria-expanded="true" aria-controls="museum-content">
-                        The Jacob Fleming Museum <i class="fas fa-chevron-down"></i>
+                        The Flow Records Museum <i class="fas fa-chevron-down"></i>
                     </button>
                     <div id="museum-content" class="collapsible-content">
                         <div class="museum-grid">
@@ -442,10 +540,6 @@
                             <a href="ai_theme.html" class="museum-item">
                                 <div class="museum-item-thumbnail"><img src="images/ai_theme.webp" alt="AI Theme Preview"></div>
                                 <h4>AI Theme</h4><p>Futuristic high-tech theme of my website</p>
-                            </a>
-                            <a href="b.html" class="museum-item">
-                                <div class="museum-item-thumbnail"><img src="images/blackjack.webp" alt="Blackjack Sim Preview"></div>
-                                <h4>Blackjack Sim</h4><p>Interactive Blackjack card game</p>
                             </a>
                             <button type="button" id="audioToolsLink" class="museum-item">
                                 <div class="museum-item-thumbnail"><img src="images/audio_tools.webp" alt="Audio Tools Suite Preview"></div>
@@ -480,11 +574,12 @@
                     </div>
                 </section>
 
-                <section id="contact" class="content-card fade-in">
-                    <button class="toggle-button" aria-expanded="false" aria-controls="contact-content">
-                        Contact <i class="fas fa-chevron-down"></i>
+                <section id="apply" class="content-card fade-in">
+                    <button class="toggle-button" aria-expanded="true" aria-controls="apply-content">
+                        Apply / Contact <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div id="contact-content" class="collapsible-content collapsed">
+                    <div id="apply-content" class="collapsible-content">
+                        <p>Submit your music or inquire about joining Flow Records. We welcome submissions from talented artists!</p>
                         <form name="contact" method="POST" data-netlify="true" action="/success" class="contact-form">
                             <input type="hidden" name="form-name" value="contact">
                             <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
@@ -492,6 +587,7 @@
                             <input type="text" name="social-links" placeholder="Relevant Social Media or Streaming Links" aria-label="Social Media Links">
                             <select name="category" id="category" required aria-label="Service Category">
                                 <option value="" disabled selected>Select Contact Type</option>
+                                <option value="submission">Artist Submission</option>
                                 <option value="production">Personalized Production</option>
                                 <option value="lease">MP3/WAV Lease</option>
                                 <option value="mixing">Recording & Engineering</option>
@@ -499,14 +595,14 @@
                                 <option value="website">Website Design</option>
                                 <option value="other">Other</option>
                             </select>
-                            <textarea name="message" placeholder="Please provide details about your project" required aria-label="Your Inquiry" rows="5"></textarea>
+                            <textarea name="message" placeholder="Please provide details about your project or submission" required aria-label="Your Inquiry" rows="5"></textarea>
                             <button type="submit">Send Message</button>
                         </form>
                     </div>
                 </section>
                 
                 <footer class="site-footer">
-                    © <span id="year">2025</span> jacobfleming. All rights reserved.
+                    © <span id="year">2025</span> Flow Records. All rights reserved.
                 </footer>
             </div>
         </main>
@@ -695,3 +791,4 @@
     </script>
 </body>
 </html>
+
