@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Flow Records: Modern record label Supporting Artists">
-    <meta name="keywords" content="music production, record label, flow records, jacob fleming, 62serpens">
+    <meta name="keywords" content="music production, record label, flow records, chos, 62serpens">
     <meta name="author" content="flowrecords">
     <meta name="theme-color" content="#F4F4F4" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#101010" media="(prefers-color-scheme: dark)">
@@ -217,108 +217,6 @@
     }
     .discography-item a.artist-link:hover { text-decoration: underline; }
     
-    /* Releases Section Styles */
-    .releases-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-        max-width: 400px;
-    }
-    .release-item {
-        background: var(--bonus-item-bg);
-        border-radius: 8px;
-        padding: 12px;
-        border: 1px solid var(--border-color);
-        transition: all var(--transition-duration) ease-in-out;
-        display: flex;
-        flex-direction: column;
-    }
-    .release-item:hover {
-        transform: translateY(-4px);
-        border-color: var(--text-primary);
-        background: var(--bonus-item-hover-bg);
-    }
-    .release-cover {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        margin-bottom: 8px;
-        border-radius: 6px;
-        overflow: hidden;
-        background: var(--form-bg);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .release-cover img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .coming-soon-badge {
-        position: absolute;
-        top: 6px;
-        right: 6px;
-        background: var(--text-primary);
-        color: var(--button-text-color);
-        padding: 3px 8px;
-        border-radius: 4px;
-        font-size: 0.6rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    .release-info h3 {
-        font-size: 0.9rem;
-        margin-bottom: 2px;
-        font-weight: 700;
-    }
-    .release-artist {
-        font-size: 0.7rem;
-        color: var(--text-secondary);
-        margin-bottom: 4px;
-    }
-    .release-type {
-        font-size: 0.65rem;
-        color: var(--text-primary);
-        margin-bottom: 4px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    .release-description {
-        font-size: 0.7rem;
-        line-height: 1.4;
-        margin-bottom: 6px;
-        color: var(--text-secondary);
-    }
-    .release-date {
-        font-size: 0.65rem;
-        color: var(--text-secondary);
-        margin-top: auto;
-    }
-    .release-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-top: 8px;
-    }
-    .release-links a {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 4px 8px;
-        background: var(--form-bg);
-        border-radius: 4px;
-        text-decoration: none;
-        color: var(--text-primary);
-        font-size: 0.7rem;
-        transition: background var(--transition-duration);
-    }
-    .release-links a:hover {
-        background: var(--form-focus-bg);
-    }
-    
     .contact-form { display: flex; flex-direction: column; gap: 16px; }
     .contact-form input, .contact-form select, .contact-form textarea { 
         width: 100%; background: var(--form-bg); border: 1px solid var(--border-color); 
@@ -529,7 +427,6 @@
         .modal-close { top: 10px; right: 10px; }
 
         .discography-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
-        .releases-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
         .museum-grid { grid-template-columns: repeat(2, 1fr); }
         .museum-item-thumbnail img { height: 80px; }
         
@@ -576,7 +473,6 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="#home">home</a></li>
-                    <li><a href="#releases">releases</a></li>
                     <li><a href="#roster">roster</a></li>
                     <li><a href="#museum">museum</a></li>
                     <li><a href="#apply">apply</a></li>
@@ -603,106 +499,17 @@
                 </div>
             </section>
 
-            <section id="releases" class="content-card fade-in">
-                <button class="toggle-button" aria-expanded="true" aria-controls="releases-content">
-                    official releases <i class="fas fa-chevron-down"></i>
-                </button>
-                <div id="releases-content" class="collapsible-content">
-                    <div class="releases-grid">
-                        <!-- J - Beat Tape -->
-                        <div class="release-item">
-                            <div class="release-cover">
-                                <img src="images/default-avatar.png" alt="J Album Cover" style="filter: blur(1px); opacity: 0.7;">
-                                <div class="coming-soon-badge">coming soon</div>
-                            </div>
-                            <div class="release-info">
-                                <h3>J</h3>
-                                <p class="release-artist">jacob fleming</p>
-                                <p class="release-type">24 track instrumental album</p>
-                                <p class="release-description">all solo beats. no ai no samples no loops.</p>
-                                <p class="release-date">2026</p>
-                            </div>
-                        </div>
-
-                        <!-- Perfect - Single -->
-                        <div class="release-item">
-                            <div class="release-cover">
-                                <img src="images/default-avatar.png" alt="Perfect Single Cover" style="filter: blur(1px); opacity: 0.7;">
-                                <div class="coming-soon-badge">coming soon</div>
-                            </div>
-                            <div class="release-info">
-                                <h3>perfect</h3>
-                                <p class="release-artist">jacob fleming</p>
-                                <p class="release-type">single</p>
-                                <p class="release-description">consciousness ascension and wellness. 7 minutes of frequncies. solo by jacob fleming.</p>
-                                <p class="release-date">2026</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <section id="roster" class="content-card fade-in">
                 <button class="toggle-button" aria-expanded="true" aria-controls="roster-content">
                     roster <i class="fas fa-chevron-down"></i>
                 </button>
                 <div id="roster-content" class="collapsible-content">
                     <div class="roster-grid">
-                        <!-- Jacob Fleming -->
-                        <div class="roster-item">
-                            <div class="roster-left">
-                                <img src="images/jacobfleming.png" alt="jacob fleming">
-                                <div class="social-links">
-                                    <a href="https://www.instagram.com/jacobfleming" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                                    <a href="https://www.soundcloud.com/1jacobfleming" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
-                                    <a href="https://www.youtube.com/@1jacobfleming" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                                    <a href="https://www.tiktok.com/@1jacobfleming" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                                </div>
-                            </div>
-                            <div class="roster-right">
-                                <h3>jacob fleming</h3>
-                                <p class="write-up">a jazz piano playing producer from australia. he founded flow records in january 2026.</p>
-                                
-                                <!-- Performances Section -->
-                                <div class="roster-subsection">
-                                    <button class="toggle-button" aria-expanded="false" aria-controls="jacob-performances">
-                                        performances <i class="fas fa-chevron-down"></i>
-                                    </button>
-                                    <div id="jacob-performances" class="collapsible-content collapsed">
-                                        <div class="performance-links">
-                                            <a href="https://www.instagram.com/p/DRJ3EEeCcBi/" target="_blank" rel="noopener noreferrer">
-                                                <i class="fab fa-instagram"></i> Piano Performance - All Of Me Live Solo
-                                            </a>
-                                            <a href="https://youtu.be/L4p_94QDkis?si=UEAvTMFp1RejWhrL" target="_blank" rel="noopener noreferrer">
-                                                <i class="fab fa-youtube"></i> Piano Performance - All Of Me (at home)
-                                            </a>
-                                            <a href="https://www.tiktok.com/@1jacobfleming/video/7594760797910207762" target="_blank" rel="noopener noreferrer">
-                                                <i class="fab fa-tiktok"></i> Piano Performance - XXXTENTACION - NEVER
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <!-- Beat Store Section -->
-                                <div class="roster-subsection">
-                                    <button class="toggle-button" aria-expanded="false" aria-controls="jacob-beatstore">
-                                        beat store <i class="fas fa-chevron-down"></i>
-                                    </button>
-                                    <div id="jacob-beatstore" class="collapsible-content collapsed">
-                                        <p style="margin-bottom: 12px; font-size: 0.9rem;">
-                                            <a href="https://traktrain.com/jacobfleming" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: underline;">visit beat store (traktrain) →</a>
-                                        </p>
-                                        <div class="beatstore-widget">
-                                            <iframe src="https://traktrain.com/jacobfleming?embed=1" width="100%" height="500" scrolling="yes" frameborder="0" allowtransparency="true"></iframe>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                           <!-- choszenwun -->
+                        <!-- CHOS -->
                         <div class="roster-item">
                             <div class="roster-left">
-                                <img src="images/choszenwun.png" alt="choszenwun">
+                                <img src="images/choszenwun.png" alt="CHOS">
                                 <div class="social-links">
                                     <a href="https://www.instagram.com/choszenwun" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                                     <a href="https://www.soundcloud.com/choszenwun" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="SoundCloud"><i class="fab fa-soundcloud"></i></a>
@@ -712,15 +519,15 @@
                                 </div>
                             </div>
                             <div class="roster-right">
-                                <h3>choszenwun</h3>
-                                <p class="write-up">artist.</p>
+                                <h3>CHOS</h3>
+                                <p class="write-up">Artist, Producer, Engineer, Frequency Scientist.</p>
                                 
                                 <!-- SoundCloud Section -->
                                 <div class="roster-subsection">
-                                    <button class="toggle-button" aria-expanded="false" aria-controls="choszenwun-soundcloud">
+                                    <button class="toggle-button" aria-expanded="false" aria-controls="chos-soundcloud">
                                         soundcloud <i class="fas fa-chevron-down"></i>
                                     </button>
-                                    <div id="choszenwun-soundcloud" class="collapsible-content collapsed">
+                                    <div id="chos-soundcloud" class="collapsible-content collapsed">
                                         <p style="margin-bottom: 12px; font-size: 0.9rem;">
                                             <a href="https://www.soundcloud.com/choszenwun" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: underline;">visit soundcloud page →</a>
                                         </p>
@@ -744,7 +551,7 @@
                             </div>
                             <div class="roster-right">
                                 <h3>62serpens</h3>
-                                <p class="write-up">a producer active 2019-2025 - specialising in dark and hard trap beats.</p>
+                                <p class="write-up">a producer specialising in dark and hard trap beats. retired in 2025.</p>
                                 
                                 <!-- Discography Section -->
                                 <div class="roster-subsection">
